@@ -29,7 +29,7 @@ char g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
 char g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 // char LOGS[] = "chaos_logs.txt";
-bool g_ChaosLoggingEnabled = true;
+// bool g_ChaosLoggingEnabled = true;
 
 
 bool Chaos_Enabled = true; //todo as convar
@@ -613,7 +613,7 @@ void DoRandomTeleport(int client = -1){
 
 void StopTimer(Handle &timer){
 	if(timer != INVALID_HANDLE){
-		KillTimer(timer);!
+		KillTimer(timer);
 	}
 	timer = INVALID_HANDLE;
 }
