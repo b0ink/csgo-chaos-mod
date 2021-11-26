@@ -1233,6 +1233,7 @@ void ParseChaosEffects(){
 	if(!FileExists(filePath)){
 		Log("Configuration file: %s not found.", filePath);
 		LogError("Configuration file: %s not found.", filePath);
+		SetFailState("[CHAOS] Could not find configuration file: %s", filePath);
 		return;
 	}
 	KeyValues kvConfig = new KeyValues("Effects");
@@ -1240,6 +1241,7 @@ void ParseChaosEffects(){
 	if(!kvConfig.ImportFromFile(filePath)){
 		Log("Unable to parse Key Values file %s", filePath);
 		LogError("Unable to parse Key Values file %s", filePath);
+		SetFailState("Unable to parse Key Values file %s", filePath);
 		return;
 	}
 	// if(!kv.JumpToKey("Rifles")){
@@ -1248,6 +1250,7 @@ void ParseChaosEffects(){
 	if(!kvConfig.GotoFirstSubKey()){
 		Log("Unable to find 'Effects' Section in file %s", filePath);
 		LogError("Unable to find 'Effects' Section in file %s", filePath);
+		SetFailState("Unable to find 'Effects' Section in file %s", filePath);
 		return;
 	}
 	int  Chaos_Properties[2];
