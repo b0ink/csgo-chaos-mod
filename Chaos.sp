@@ -94,9 +94,6 @@ public void OnPluginStart(){
 		// RegAdminCmd("sm_enablechaos")
 		// RegAdminCmd("sm_disablechaos")
 
-	//TESTING PURPOSES REMOVE LATER
-	RegAdminCmd("sm_snoclip", Command_SNoClip, ADMFLAG_ROOT, "sm_snoclip <#userid|name>");
-
 
 	g_Offset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
@@ -110,32 +107,6 @@ public void OnConfigsExecuted(){
 	ParseChaosEffects();
 }
 
-
-
-
-
-
-//TODO REMOVE ME
-public Action Command_Aimbot(int client, int args){
-	g_DecidingChaos = true;
-	g_ClearChaos = false;
-	g_Chaos_Event_Count = 0;
-	g_CountingChaos = true;
-	g_RandomEvent = 1;
-	Chaos_LightsOff();
-
-	// Chaos_Aimbot();
-	return Plugin_Handled;
-}
-//todo remove from production
-public Action Command_SNoClip(int client, int args){
-	if(GetEntityMoveType(client) == MOVETYPE_WALK){
-		SetEntityMoveType(client, MOVETYPE_NOCLIP);
-	}else{
-		SetEntityMoveType(client, MOVETYPE_WALK);
-	}
-	return Plugin_Handled;
-}
 
 // public void Event_WeaponReload(Handle event, const char[] name, bool dontBroadcast ){
 // 	SDKHook(client, SDKHook_ReloadPost, OnReloadPost);
