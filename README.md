@@ -1,5 +1,5 @@
 # csgo-chaos-mod
-Chaos Mod for CS:GO
+Chaos Mod for CS:GO [102 EFFECTS]
 
 
 Known Issues
@@ -7,3 +7,6 @@ Known Issues
   Seems to be when the player dies at the SAME time as the reset.
   
 - Soccerball effect only works on Dust 2 (need to test precaching the soccerball on other maps);
+
+
+The list of effects can be found /configs/Chaos/Chaos_Effects.cfg. 
