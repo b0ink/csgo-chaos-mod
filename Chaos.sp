@@ -326,10 +326,7 @@ public Action Timer_ResetPlaySound(Handle timer){
 }
 public void RetryEvent(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
-	if(g_NewEvent_Timer != INVALID_HANDLE){
-		KillTimer(g_NewEvent_Timer);
-		g_NewEvent_Timer = INVALID_HANDLE;
-	}
+	StopTimer(g_NewEvent_Timer);
 	DecideEvent(INVALID_HANDLE);
 }
 
@@ -423,10 +420,7 @@ void Chaos_RewindTenSeconds(){
 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
 	if(g_ClearChaos){
 		g_rewind_logging_enabled = true;
-		if(g_Chaos_Rewind_Timer != INVALID_HANDLE){
-			KillTimer(g_Chaos_Rewind_Timer);
-			g_Chaos_Rewind_Timer = INVALID_HANDLE;
-		}
+		StopTimer(g_Chaos_Rewind_Timer);
 	}
 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
 	Log("[Chaos] Running: Chaos_RewindTenSeconds");
@@ -622,7 +616,7 @@ void DoRandomTeleport(int client = -1){
 
 void StopTimer(Handle &timer){
 	if(timer != INVALID_HANDLE){
-		KillTimer(timer);
+		KillTimer(timer);!
 	}
 	timer = INVALID_HANDLE;
 }
