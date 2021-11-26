@@ -64,7 +64,6 @@ bool g_rewind_logging_enabled = true;
 StringMap	Chaos_Effects;
 
 public void OnPluginStart(){
-	cvar("sv_forcepreload", "0");
 	
 	HookEvent("round_start", Event_RoundStart);
 	HookEvent("round_end", Event_RoundEnd);	
@@ -112,35 +111,7 @@ public void OnConfigsExecuted(){
 }
 
 
-public Action Rollback_Log(Handle Timer){
-	if(g_rewind_logging_enabled){
-		for(int client = 0; client <= MaxClients; client++){
-			if(ValidAndAlive(client)){
-				// PrintToChatAll("saving log for %N", client);
-				int count = 9;
-				while(count >= 1){
-					g_RollbackPositions[client][count] = g_RollbackPositions[client][count - 1];
-					g_RollbackAngles[client][count] = g_RollbackAngles[client][count - 1];
-					count--;
-				}
-				float location[3];
-				GetClientAbsOrigin(client, location);
-				float angles[3];
-				GetClientEyeAngles(client, angles);
-				// PrintToConsole(client, "LOGGING: setpos %f %f %f; setang %f %f %f",
-				// 	location[0],location[1],location[2],
-				// 	angles[0], angles[1], angles[2]);
-				g_RollbackPositions[client][0] = location;
-				g_RollbackAngles[client][0] = angles;
-				// PrintToConsole(client, "CONFIRM:setpos %f %f %f; setangs %f %f %f;", g_RollbackPositions[client][0][0], g_RollbackPositions[client][0][1], g_RollbackPositions[client][0][2], g_RollbackAngles[client][0][0], g_RollbackAngles[client][0][1],g_RollbackAngles[client][0][2]);
 
-				// PrintToChatAll("saving for: %N loc: %f %f %f, angles: %f %f %f", client, 
-				// 	location[0],location[1],location[2],
-				// 	angles[0], angles[1], angles[2]);
-			}
-		}
-	}
-}
 
 
 
@@ -203,8 +174,6 @@ public void OnMapStart(){
 	Log(string);
 	PrecacheSound(SOUND_BELL);
 	// PrecacheModel("props_c17/oildrum001_explosive.mdl");
-	ServerCommand("sm_rcon sv_forcepreload 0");
-	cvar("sv_forcepreload", "0");
 
 	for(int i = 0; i < sizeof(g_randomCache); i++) g_randomCache[i] = -1;
 	PrecacheTextures();
@@ -337,7 +306,6 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 
 }
 public Action ResetRoundChaos(Handle timer){
-	// AnnounceChaos("resetting chaos");
 	RemoveChickens(false);
 	AcceptEntityInput(FogIndex, "TurnOff");
 
@@ -414,6 +382,35 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 
 #include "Effects.sp"
 
+public Action Rollback_Log(Handle Timer){
+	if(g_rewind_logging_enabled){
+		for(int client = 0; client <= MaxClients; client++){
+			if(ValidAndAlive(client)){
+				// PrintToChatAll("saving log for %N", client);
+				int count = 9;
+				while(count >= 1){
+					g_RollbackPositions[client][count] = g_RollbackPositions[client][count - 1];
+					g_RollbackAngles[client][count] = g_RollbackAngles[client][count - 1];
+					count--;
+				}
+				float location[3];
+				GetClientAbsOrigin(client, location);
+				float angles[3];
+				GetClientEyeAngles(client, angles);
+				// PrintToConsole(client, "LOGGING: setpos %f %f %f; setang %f %f %f",
+				// 	location[0],location[1],location[2],
+				// 	angles[0], angles[1], angles[2]);
+				g_RollbackPositions[client][0] = location;
+				g_RollbackAngles[client][0] = angles;
+				// PrintToConsole(client, "CONFIRM:setpos %f %f %f; setangs %f %f %f;", g_RollbackPositions[client][0][0], g_RollbackPositions[client][0][1], g_RollbackPositions[client][0][2], g_RollbackAngles[client][0][0], g_RollbackAngles[client][0][1],g_RollbackAngles[client][0][2]);
+
+				// PrintToChatAll("saving for: %N loc: %f %f %f, angles: %f %f %f", client, 
+				// 	location[0],location[1],location[2],
+				// 	angles[0], angles[1], angles[2]);
+			}
+		}
+	}
+}
 
 Handle g_Chaos_Rewind_Timer = INVALID_HANDLE;
 void Chaos_RewindTenSeconds(){
