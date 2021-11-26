@@ -9,57 +9,12 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 }
 public void ResetTimerRemoveChickens(){
 	StopTimer(g_BombTimer);
-	// if(g_BombTimer != INVALID_HANDLE){
-	// 	KillTimer(g_BombTimer);
-	// 	g_BombTimer = INVALID_HANDLE;
-	// }
+
 }
 public Action Timer_ResizeChickens(Handle timer){
 	
 	g_BombTimer = INVALID_HANDLE;
-	// ResizeChickens();
-	// RemoveChickens(true);
-	// RemoveChickens(false);
-	// AcceptEntityInput(FogIndex, "TurnOff");
 
-
-	// CS_TerminateRound(5.0, CSRoundEnd_TerroristsPlanted);
-	// int score = GetTeamScore(CS_TEAM_T) + 1;
-	// SetTeamScore(CS_TEAM_T, score);
-	// int explosion;
-	// int c4 = FindEntityByClassname(c4, "planted_c4");
-	// float pos[3];
-	// if(c4 != -1){
-	// 	GetEntPropVector(c4, Prop_Data, "m_vecOrigin", pos);
-	// 	RemoveEdict(c4); //TEMPORARY
-	// 	if((explosion = CreateEntityByName("env_explosion")) != -1) {
-	// 		DispatchKeyValue(explosion, "classname", "env_explosion");
-	// 		DispatchKeyValue(explosion, "iMagnitude", "16000");
-		
-	// 		DispatchKeyValueVector(explosion, "Origin", pos);
-	// 		// TeleportEntity(explosion, pos, NULL_VECTOR, NULL_VECTOR);
-	// 		if(DispatchSpawn(explosion)) {
-	// 			ActivateEntity(explosion);
-
-	// 			AcceptEntityInput(explosion, "Explode");
-	// 			AcceptEntityInput(explosion, "Kill");
-	// 		}
-	// 	} 
-	// 	CreateParticle("explosion_c4_500", pos);
-	// 	CreateParticle("explosion_c4_500_fallback", pos);
-
-	// }
-
-
-	// if(g_c4Chicken){
-	// 	for(int i = 0; i <= MaxClients; i++){
-	// 		if(ValidAndAlive(i)){
-	// 			if(GetClientTeam(i) == CS_TEAM_CT){
-	// 				ForcePlayerSuicide(i);
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 
 
@@ -88,7 +43,6 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed)
 {
-	// SimonSays(client, &buttons, &iImpulse, fVel, fAngles, &iWeapon, &iSubType,  &iCmdNum, &iTickCount, &iSeed);
 	if(g_Simon_Active){
 		SimonSays(client, buttons, iImpulse, fVel, fAngles, iWeapon, iSubType,  iCmdNum, iTickCount, iSeed);
 	}
@@ -124,35 +78,11 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 			}
 		}
 	}
-	// bool strafing = true;
-	// if(buttons & IN_LEFT){
-	// 	strafing = true;
-	// }
-	// if(buttons & IN_RIGHT){
-	// 	strafing = true;
-	// }
-	// bool running = true;
-	// if(buttons & IN_LEFT){
-	// 	running = true;
-	// }
-	// if(buttons & IN_RIGHT){
-	// 	running = true;
-	// }
-	// SimonSays(client, strafing)
-	//if in chaos speed when attacking
 
-	// if(buttons && IN_ATTACK){
-	// 	PrintToChatAll("running");
-	// 	SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 2.0);
-	// }else if(buttons && !IN_ATTACK){
-	// 	PrintToChatAll("not runing");
-	// 	SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 1.0);
-	// }
 	Aimbot_OnPlayerRunCmd(client, buttons,  iImpulse,  fVel, fAngles, iWeapon, iSubType, iCmdNum, iTickCount, iSeed);
 	if(g_ForceCrouch) buttons |= IN_DUCK;
 
-	// buttons |= IN_FORWARD;
-	// return Plugin_Changed;
+
 	if(g_SpeedShooter == true && buttons & IN_ATTACK){
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 3.0);
 	}else if(g_SpeedShooter){
@@ -160,83 +90,25 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	}
 	float vec[3];
 	GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
-	// vec[2] = 0.0;
-	// float vecY = vec[2];
 	vec[0] = 0.0;
 	vec[1] = 0.0;
 	if(g_NoStrafe){
 		if(buttons & IN_MOVELEFT){
-			// return Plugin_Handled;
-			// PrintToChatAll("%f %f %f", vec[0], vec[1], vec[2]);
-			// SetEntPropVector(client, Prop_Data, "m_vecBaseVelocity", vec);
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
 		}
 		if(buttons & IN_MOVERIGHT){
-			// return Plugin_Handled;
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, {0.0, 0.0, 0.0});
 		}
 	}
 	if(g_NoForwardBack){
 		if(buttons & IN_FORWARD){
-			// return Plugin_Handled;
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-			// SetEntPropVector(client, Prop_Data, "m_vecBaseVelocity", vec);
-			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, {0.0, 0.0, vecY});
 		}
 		if(buttons & IN_BACK){
-			// return Plugin_Handled;
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-			// SetEntPropVector(client, Prop_Data, "m_vecBaseVelocity", vec);
-			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, {0.0, 0.0, 0.0});
 		}
 	}
 
-
-	// if(g_Jumping & FL_ONGROUND){
-	// 	float vec[3];
-	// 	GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
-	// 	vec[2] = vec[2] + 300;
-	// 	SetEntPropVector(client, Prop_Data, "m_vecBaseVelocity", vec);
-	// }
-	// if(g_AlwaysJumping) {
-	// 	// buttons &= ~IN_JUMP;
-	// 	// buttons |= IN_JUMP;
-	// }
-
-    // Check if the player is attacking (+attack)
-	// if ((iButtons & IN_ATTACK) == IN_ATTACK){
-    //     // If so, block their crouching (+duck)
-    //     buttons &= ~IN_DUCK;
-    // }
-
-	// if ((iButtons & IN_ATTACK) != IN_ATTACK)
-    // {
-    //     // If so, block their crouching (+duck)
-    //     // buttons &= ~IN_DUCK;
-	// 	iButtons |= IN_ATTACK;
-
-    // }
-	// if(!(iButtons & IN_ATTACK))
-	// {
-	// 	iButtons |= IN_ATTACK;
-	// 	return Plugin_Changed;
-	// }
-	// if (IsPlayerAlive(iClient))
-	// {
-	// 	if (iButtons & IN_FORWARD || iButtons & IN_BACK)
-	// 	{
-	// 	}
-
-	// }
-	// buttons |= IN_WALK;
-	// buttons |= IN_ATTACK;
-	// 	return Plugin_Changed;
-
-	// if(buttons & IN_FORWARD || buttons & IN_BACK || buttons & IN_LEFT || buttons & IN_RIGHT || buttons & IN_MOVELEFT || buttons & IN_MOVERIGHT || buttons & IN_RUN || buttons & IN_SPEED)
-	// {
-	// 	// return Plugin_Changed;
-	// }
 
 	return Plugin_Continue;
 }

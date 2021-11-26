@@ -18,7 +18,7 @@ public Plugin myinfo =
 	author = "BOINK",
 	description = "Every 15 seconds a random effect is played",
 	version = "1.0.0",
-	url = ""
+	url = "https://github.com/diddims/csgo-chaos-mod"
 };
 
 
@@ -502,7 +502,8 @@ public void Chaos_RandomInvisiblePlayer(){
 					SetEntityRenderColor(i, 255, 255, 255, 0);
 					// SetEntityRenderMode(target, RENDER_NONE);
 					// SetEntityRenderColor(target, 255, 255, 255, 0);
-					char chaosMsg[128];
+					//todo: shorten player names if its too high
+					char chaosMsg[256];
 					FormatEx(chaosMsg, sizeof(chaosMsg), "{orange}%N {default}has been made invisible!", target);
 					AnnounceChaos(chaosMsg);
 				}
@@ -554,27 +555,6 @@ public void Chaos_MEGACHAOS(){
 
 
 float g_AllPositions[MAXPLAYERS+1][3];
-
-
-// public void Chaos_Fog(){
-// 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
-// 	if(g_ClearChaos){	
-// 		cvar("sv_cheats", "0");
-// 	}
-// 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
-// 	Log("[Chaos] Running: Chaos_Fog");
-
-// 	cvar("sv_cheats", "1");
-// 	for(int i = 0; i <= MaxClients; i++){
-// 		if(IsValidClient(i)){
-// 			FakeClientCommand(i, "fog_override 1");
-// 			FakeClientCommand(i, "r_farz 1000");
-// 		}
-// 	}
-// 	AnnounceChaos("Where did everything go?");
-// }
-
-
 
 
 void DoRandomTeleport(int client = -1){
@@ -725,17 +705,17 @@ void ParseMapCoordinates() {
 	KeyValues kv = new KeyValues("Maps");
 
 	if(!kv.ImportFromFile(path)){
-		// SetFailState("Unable to parse Key Values from %s", path);
+		SetFailState("Unable to parse Key Values from %s", path);
 		return;
 	}
 	//jump to key of map name
 	if(!kv.JumpToKey(MapName)){
-		// SetFailState("Unable to find de_dust2 Key from %s", path);
+		SetFailState("Unable to find de_dust2 Key from %s", path);
 		return;
 	}
 
 	if(!kv.GotoFirstSubKey(false)){
-		// SetFailState("Unable to find sub keys %s", path);
+		SetFailState("Unable to find sub keys %s", path);
 		return;
 	}
 	g_MapCoordinates = CreateArray(3);
@@ -1161,57 +1141,9 @@ stock void PrintToConsoleAll(const char[] myString, any ...)
 
 
 
-// bool CreateParticle(int client, char []particle, bool parent)
-// {
-// 	//https://forums.alliedmods.net/showthread.php?t=322106
-// 	//clean particles
-// 	if(!IsPlayerAlive(client)){
-// 		return false;
-// 	}
-// 	int ent = EntRefToEntIndex(g_iParticleSystem[client]);
-// 	if(ent && ent != INVALID_ENT_REFERENCE)
-// 	{
-// 		AcceptEntityInput(ent, "Stop");
-// 		AcceptEntityInput(ent, "Kill");
-// 	}
-// 	ent = CreateEntityByName("info_particle_system");
-// 	float particleOrigin[3];
-// 	if(parent)
-// 		GetClientAbsOrigin(client, particleOrigin);
-// 	else
-// 		GetClientEyePosition(client, particleOrigin);
-
-// 	DispatchKeyValue(ent , "start_active", "0");
-// 	DispatchKeyValue(ent, "effect_name", particle);
-// 	DispatchSpawn(ent);
-// 	TeleportEntity(ent , particleOrigin, NULL_VECTOR,NULL_VECTOR);
-// 	if(parent)
-// 	{
-// 		SetVariantString("!activator");
-// 		AcceptEntityInput(ent, "SetParent", client, ent, 0);
-// 	}
-// 	ActivateEntity(ent);
-// 	AcceptEntityInput(ent, "Start");
-	
-// 	g_iParticleSystem[client] = EntIndexToEntRef(ent);
-// 	// PrintToChat(client, " \x04[CS:GO Particles] \x01Particle system created (\x03'%s'\x01)!", particle);
-
-// 	return true;
-// }
 
 
 
-
-// stock void Log(const char[] string, any...){
-// 	if(g_ChaosLoggingEnabled){
-// 		int len = strlen(string) + 255;
-// 		char[] myFormattedString = new char[len];
-// 		VFormat(myFormattedString, len, string, 2);
-// 		char sLogPath[PLATFORM_MAX_PATH];
-// 		BuildPath(Path_SM, sLogPath, sizeof(sLogPath), "logs/chaos_logs.txt");
-// 		LogToFile(sLogPath, string);
-// 	}
-// }
 stock void Log(const char[] format, any ...)
 {
 	char buffer[254];
@@ -1244,9 +1176,7 @@ void ParseChaosEffects(){
 		SetFailState("Unable to parse Key Values file %s", filePath);
 		return;
 	}
-	// if(!kv.JumpToKey("Rifles")){
 
-	// }
 	if(!kvConfig.GotoFirstSubKey()){
 		Log("Unable to find 'Effects' Section in file %s", filePath);
 		LogError("Unable to find 'Effects' Section in file %s", filePath);
