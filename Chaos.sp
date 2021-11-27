@@ -89,7 +89,7 @@ public void OnPluginStart(){
 	DRUGS_INIT();
 
 	RegAdminCmd("chaos_refreshconfig", Command_RefreshConfig, ADMFLAG_BAN);
-
+	RegAdminCmd("chaos_debug", Command_ChaosDebug, ADMFLAG_BAN);
 	//todo: commands to toggle chaos on/off => when turned off clear all chaos
 		// RegAdminCmd("sm_enablechaos")
 		// RegAdminCmd("sm_disablechaos")
@@ -100,6 +100,18 @@ public void OnPluginStart(){
 	CreateTimer(1.0, Rollback_Log, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
 
+}
+bool chaos_debug = false;
+public Action Command_ChaosDebug(int client, int args){
+	if(!chaos_debug){
+		cvar("mp_freezetime", "2");
+		cvar("mp_round_restart_delay", "2");
+	}else{
+		cvar("mp_freezetime", "15");
+		cvar("mp_round_restart_delay", "7");
+	}
+	chaos_debug = !chaos_debug;
+	return Plugin_Handled;
 }
 
 public void OnConfigsExecuted(){
@@ -162,8 +174,7 @@ public void OnMapStart(){
 	findLight();
 
 	//testing purposes
-	cvar("mp_freezetime", "2");
-	cvar("mp_round_restart_delay", "2");
+
 	cvar("sv_fade_player_visibility_farz", "1");
 
 	//fixes an issue with shields not working in comp gamemode
