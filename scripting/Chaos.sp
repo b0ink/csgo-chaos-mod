@@ -63,6 +63,8 @@ bool g_rewind_logging_enabled = true;
 
 StringMap	Chaos_Effects;
 
+int Chaos_Round_Count = 0;
+
 public void OnPluginStart(){
 	
 	HookEvent("round_start", Event_RoundStart);
@@ -195,6 +197,7 @@ public void OnClientDisconnect(int client){
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	if(!Chaos_Enabled) return Plugin_Continue;
+	Chaos_Round_Count = true;
 	// to use in chaos_resetspawns()
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -260,6 +263,7 @@ public Action DecideEvent(Handle timer){
 	g_CountingChaos = true;
 	g_NewEvent_Timer = CreateTimer(15.0, DecideEvent);
 	Chaos(); //run the chaos
+	Chaos_Round_Count++;
 	if(g_PlaySound_Debounce == false){
 		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
 		g_PlaySound_Debounce = true;
