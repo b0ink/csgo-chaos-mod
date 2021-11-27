@@ -63,7 +63,6 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_IncreasedRecoil"))  Chaos_IncreasedRecoil();
 	if(IsChaosEnabled("Chaos_ReversedRecoil"))  Chaos_ReversedRecoil();
 	if(IsChaosEnabled("Chaos_Bumpmines"))  Chaos_Bumpmines();
-	if(IsChaosEnabled("Chaos_RespawnTheDead"))  Chaos_RespawnTheDead();
 	if(IsChaosEnabled("Chaos_SlowSpeed"))  Chaos_SlowSpeed();
 	if(IsChaosEnabled("Chaos_FastSpeed"))  Chaos_FastSpeed();
 	if(IsChaosEnabled("Chaos_IgnitePlayer"))  Chaos_IgnitePlayer();
@@ -77,18 +76,15 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Jumping"))  Chaos_Jumping();
 	if(IsChaosEnabled("Chaos_DisableForwardBack"))  Chaos_DisableForwardBack();
 	if(IsChaosEnabled("Chaos_DisableStrafe"))  Chaos_DisableStrafe();
-	if(IsChaosEnabled("Chaos_ResetSpawns"))  Chaos_ResetSpawns();
 	if(IsChaosEnabled("Chaos_SpeedShooter"))  Chaos_SpeedShooter();
 	if(IsChaosEnabled("Chaos_ExplosiveBullets"))  Chaos_ExplosiveBullets();
 	if(IsChaosEnabled("Chaos_DiscoPlayers"))  Chaos_DiscoPlayers();
 	if(IsChaosEnabled("Chaos_SimonSays"))  Chaos_SimonSays();
-	if(IsChaosEnabled("Chaos_RewindTenSeconds"))  Chaos_RewindTenSeconds();
 	if(IsChaosEnabled("Chaos_BuyAnywhere"))  Chaos_BuyAnywhere();
 	if(IsChaosEnabled("Chaos_HealAllPlayers"))  Chaos_HealAllPlayers();
 	if(IsChaosEnabled("Chaos_Give100HP"))  Chaos_Give100HP();
 	if(IsChaosEnabled("Chaos_EnemyRadar"))  Chaos_EnemyRadar();
 	if(IsChaosEnabled("Chaos_Drugs"))  Chaos_Drugs();
-	if(IsChaosEnabled("Chaos_RespawnDead_LastLocation"))  Chaos_RespawnDead_LastLocation();
 	if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
 	if(IsChaosEnabled("Chaos_SuperJump"))  Chaos_SuperJump();
 	if(IsChaosEnabled("Chaos_SpawnFlashbangs"))  Chaos_SpawnFlashbangs();
@@ -96,17 +92,26 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_FakeCrash", 0))  Chaos_FakeCrash(); //risky.. lol
 	if(IsChaosEnabled("Chaos_Soccerballs"))  Chaos_Soccerballs();
 	if(IsChaosEnabled("Chaos_FakeTeleport"))  Chaos_FakeTeleport();
-	if(IsChaosEnabled("Chaos_RespawnTheDead_Randomly"))  Chaos_RespawnTheDead_Randomly();
 	if(IsChaosEnabled("Chaos_TeleportFewMeters"))  Chaos_TeleportFewMeters();
 	if(IsChaosEnabled("Chaos_ChickensIntoPlayers"))  Chaos_ChickensIntoPlayers();
 	if(IsChaosEnabled("Chaos_Juggernaut"))  Chaos_Juggernaut();
-	if(IsChaosEnabled("Chaos_BreakTime"))  Chaos_BreakTime();
 
 	if(IsChaosEnabled("Chaos_RapidFire"))  Chaos_RapidFire();
 	if(IsChaosEnabled("Chaos_DisableRadar")) Chaos_DisableRadar();
 	if(IsChaosEnabled("Chaos_InsaneAirSpeed")) Chaos_InsaneAirSpeed();
 	if(IsChaosEnabled("Chaos_DropCurrentWeapon")) Chaos_DropCurrentWeapon();
 	if(IsChaosEnabled("Chaos_DropPrimaryWeapon")) Chaos_DropPrimaryWeapon();
+
+	if(Chaos_Round_Count > 0){
+		if(IsChaosEnabled("Chaos_RespawnTheDead"))  Chaos_RespawnTheDead();
+		if(IsChaosEnabled("Chaos_ResetSpawns"))  Chaos_ResetSpawns();
+		if(IsChaosEnabled("Chaos_RespawnDead_LastLocation"))  Chaos_RespawnDead_LastLocation();
+		if(IsChaosEnabled("Chaos_RespawnTheDead_Randomly"))  Chaos_RespawnTheDead_Randomly();
+		if(IsChaosEnabled("Chaos_BreakTime"))  Chaos_BreakTime();
+		if(IsChaosEnabled("Chaos_RewindTenSeconds"))  Chaos_RewindTenSeconds();
+	}
+
+
 	g_ClearChaos = false;
 
 	// if(IsChaosEnabled("FUNCTION"))  Chaos_PropHunt(); //CRASHES
