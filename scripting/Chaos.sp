@@ -183,7 +183,9 @@ public void OnMapStart(){
 	CreateTimer(5.0, Timer_CreateHostage);
 
 }
-
+public void OnMapEnd(){
+	Log("Map has ended.");
+}
 //Todo; shields still dont work
 Action Timer_CreateHostage(Handle timer = null){
 	if (FindEntityByClassname(-1, "func_hostage_rescue") == -1){
