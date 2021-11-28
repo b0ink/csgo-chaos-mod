@@ -382,11 +382,11 @@ public Action ResetRoundChaos(Handle timer){
 ///////////////////////\////////////////////////////////////////////////////////////////////////////////////////////////
 
 // void Chaos_FakeDeath(){
-// 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
+// 	if(CountingCheckDecideChaos()) return;
 // 	if(g_ClearChaos){	
 
 // 	}
-// 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
+// 	if(DecidingChaos()) return;
 // 	for(int i = 0; i <= MaxClients; i++){
 // 		if(ValidAndAlive(i)){
 // 			// SetEntProp(i, Prop_Send, "m_lifeState", 1); 
@@ -401,7 +401,23 @@ public Action ResetRoundChaos(Handle timer){
 // 			SetEntProp(i, Prop_Send, "m_lifeState", 0); 
 // 		}
 // 	}
-// }
+// }y
+
+bool CountingCheckDecideChaos(){
+	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return true;  }}
+	return false;
+}
+
+bool DecidingChaos(){
+	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return true;
+	return false;
+}
+bool ClearChaos(bool EndChaos = false){
+	if(g_ClearChaos || EndChaos) return true;
+	return false;
+}
+
+
 
 bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 	if(g_ClearChaos) return true;
@@ -491,14 +507,14 @@ public Action Rollback_Log(Handle Timer){
 
 Handle g_Chaos_Rewind_Timer = INVALID_HANDLE;
 void Chaos_RewindTenSeconds(){
-	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
+	if(CountingCheckDecideChaos()) return;
 	if(g_ClearChaos){
 		g_rewind_logging_enabled = true;
 		StopTimer(g_Chaos_Rewind_Timer);
 	}
-	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
+	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_RewindTenSeconds");
-	// g_rewind_logging_enabled = false;
+	g_rewind_logging_enabled = false;
 	AnnounceChaos("Rewind 10 seconds");
 	int time = 0;
 	g_Chaos_Rewind_Timer = CreateTimer(0.1, Rewind_Timer, time, TIMER_FLAG_NO_MAPCHANGE);
@@ -533,11 +549,11 @@ public Action Rewind_Timer(Handle timer, int time){
 
 //todo: change to a repeating timer instead of a one off.. i was too lazy when doing this..
 void Chaos_DiscoPlayers(){
-	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
+	if(CountingCheckDecideChaos()) return;
 	if(g_ClearChaos){
 
 	}
-	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
+	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_DiscoPlayers");
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -561,10 +577,10 @@ void Chaos_DiscoPlayers(){
 
 //todo, doesnt always work?
 public void Chaos_RandomInvisiblePlayer(){
-	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }} 
+	if(CountingCheckDecideChaos()) return; 
 	if(g_ClearChaos){
 	}
-	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
+	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_RandomInvisiblePlayer");
 	int alivePlayers = GetAliveCTCount() + GetAliveTCount();
 	int target = GetRandomInt(0, alivePlayers);
@@ -598,11 +614,11 @@ public void Chaos_RandomInvisiblePlayer(){
 
 
 public void Chaos_MEGACHAOS(){
-	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }} 
+	if(CountingCheckDecideChaos()) return; 
 	if(g_ClearChaos){
 
 	}
-	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
+	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_MEGACHAOS");
 	
 	g_MegaChaos = true; 
@@ -680,9 +696,9 @@ void StopTimer(Handle &timer){
 
 
 // public void Chaos_BouncyAir(){ //? todo
-// 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
+// 	if(CountingCheckDecideChaos()) return;
 // 	// if(g_ClearChaos){}
-// 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
+// 	if(DecidingChaos()) return;
 // 	//every .1 second alternate the gravity
 // }
 
