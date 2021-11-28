@@ -12,7 +12,8 @@ If you encounter any errors please check your error files as well as the plugin'
 
 # Available Commands:
 ```
-(todo; add other commands)
+sm_startchaos       - Ban Flag Minimum - Spawns a new effect immediately and starts the effect timer.
+sm_stopchaos        - Ban Flag Minimum - Pauses the Chaos Effect timer and resets all the effects.
 chaos_refreshconfig - Ban Flag Minimum - Updates and re parses configs.
 ```
 
