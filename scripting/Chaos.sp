@@ -62,6 +62,7 @@ float g_PlayerDeathLocations[MAXPLAYERS+1][3];
 bool g_rewind_logging_enabled = true;
 
 StringMap	Chaos_Effects;
+StringMap	Chaos_Settings;
 
 int Chaos_Round_Count = 0;
 
@@ -119,6 +120,7 @@ public Action Command_ChaosDebug(int client, int args){
 public void OnConfigsExecuted(){
 	ParseMapCoordinates();
 	ParseChaosEffects();
+	ParseChaosSettings();
 }
 
 
@@ -263,18 +265,40 @@ public Action DecideEvent(Handle timer){
 	g_ClearChaos = false;
 	g_Chaos_Event_Count = 0;
 	g_CountingChaos = true;
-	g_NewEvent_Timer = CreateTimer(15.0, DecideEvent);
 	Chaos(); //run the chaos
-	Chaos_Round_Count++;
-	if(g_PlaySound_Debounce == false){
-		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
-		g_PlaySound_Debounce = true;
-		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i)){
-				EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
-			}
+	StopTimer(g_NewEvent_Timer);
+	int Chaos_Repeating = -1;
+	if(!Chaos_Settings.GetValue("Repeating", Chaos_Repeating)){
+		Log("Could not find 'Repeating' key in Chaos_Settings.cfg. Effects will repeat by default");
+		Chaos_Repeating = 1;
+	}
+	if(Chaos_Repeating != 0 && Chaos_Repeating != 1){
+		Log("Settings 'Repeating' Out Of Bounds. Defaulting to Enabled (1) - Chaos_Settings.cfg");
+		Chaos_Repeating = 1;
+	}
+	if(Chaos_Repeating == 1){
+		int Effect_Interval = -1;
+		if(!Chaos_Settings.GetValue("EffectInterval", Effect_Interval)){
+			Log("Could not find 'EffectInterval' key in Chaos_Settings.cfg. Effects will default to repeat every 15 seconds.");
+			Effect_Interval = 15;
 		}
-		CreateTimer(2.0, Timer_ResetPlaySound);
+		if(Effect_Interval > 60 || Effect_Interval < 5){
+			Log("Settings 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
+			Effect_Interval = 15;
+		}
+
+		g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent);
+		Chaos_Round_Count++;
+		if(g_PlaySound_Debounce == false){
+			//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
+			g_PlaySound_Debounce = true;
+			for(int i = 0; i <= MaxClients; i++){
+				if(IsValidClient(i)){
+					EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
+				}
+			}
+			CreateTimer(2.0, Timer_ResetPlaySound);
+		}
 	}
 }
 
@@ -356,14 +380,32 @@ bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 }
 
 float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
+	int OverwriteDuration = -1;
+	if(!Chaos_Settings.GetValue("OverwriteEffectDuration", OverwriteDuration)){
+		Log("Could not find 'OverwriteEffectDuration' key in Chaos_Settings.cfg. Effect duration will default to Chaos_Effects.cfg settings.");
+		OverwriteDuration = -1;
+	}
+	if(OverwriteDuration < -1){
+		Log("Settings 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
+		OverwriteDuration = -1;
+	}
+
 	int Chaos_Properties[2];
 	float expire = defaultTime;
 	if(Chaos_Effects.GetArray(EffectName, Chaos_Properties, 2)){
-		expire = float(Chaos_Properties[CONFIG_EXPIRE]);
+		if(OverwriteDuration == -1){
+			expire = float(Chaos_Properties[CONFIG_EXPIRE]);
+		}else{
+			expire = float(OverwriteDuration);
+		}
+		if(expire != SanitizeTime(expire)){
+			Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", EffectName, expire, SanitizeTime(expire));
+		}
 		expire = SanitizeTime(expire);
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
+
 	return expire;
 }
 
@@ -980,6 +1022,8 @@ stock int GetAliveCTCount(){
 
 
 float SanitizeTime(float time){
+	//todo: Log warnings when time doesnt get sanitized correctly, will require to pass effect name
+	//or if(sanititizetime(time) != time) issue warning cos they dont match
 	if(time <= 0) return 0.0;
 	if(time < 5) return 5.0;
 	if(time > 120) return 0.0;
@@ -1143,7 +1187,10 @@ stock void Log(const char[] format, any ...)
 
 public Action Command_RefreshConfig(int client, int args){
 	ParseChaosEffects();
+	ParseChaosSettings();
+	ParseMapCoordinates();
 }
+
 void ParseChaosEffects(){
 	Chaos_Effects.Clear();
 	char filePath[PLATFORM_MAX_PATH];
@@ -1177,8 +1224,6 @@ void ParseChaosEffects(){
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
-			// expires = SanitizeTime(expires);
-			//todo, figure out whether to sanitize time now or later
 			if(enabled != 0 && enabled != 1) enabled = 1;
 			
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
@@ -1189,4 +1234,43 @@ void ParseChaosEffects(){
 	} while(kvConfig.GotoNextKey());
 
 	Log("Parsed Chaos_Effects.cfg succesfully!");
+}
+
+void ParseChaosSettings(){
+	Chaos_Settings.Clear();
+	char filePath[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Settings.cfg");
+
+
+	if(!FileExists(filePath)){
+		Log("Configuration file: %s not found.", filePath);
+		LogError("Configuration file: %s not found.", filePath);
+		SetFailState("[CHAOS] Could not find configuration file: %s", filePath);
+		return;
+	}
+	KeyValues kvConfig = new KeyValues("Settings");
+
+	if(!kvConfig.ImportFromFile(filePath)){
+		Log("Unable to parse Key Values file %s", filePath);
+		LogError("Unable to parse Key Values file %s", filePath);
+		SetFailState("[CHAOS] Unable to parse Key Values file %s", filePath);
+		return;
+	}
+
+	if(!kvConfig.GotoFirstSubKey()){
+		Log("Unable to find 'Settings' Section in file %s", filePath);
+		LogError("Unable to find 'Settings' Section in file %s", filePath);
+		SetFailState("[CHAOS] Unable to find 'Settings' Section in file %s", filePath);
+		return;
+	}
+	
+	do{
+		char Chaos_Setting_Name[64];
+		if (kvConfig.GetSectionName(Chaos_Setting_Name, sizeof(Chaos_Setting_Name))){
+			int value = kvConfig.GetNum(NULL_STRING);
+			Chaos_Settings.SetValue(Chaos_Setting_Name, value);
+		}
+	} while(kvConfig.GotoNextKey());
+
+	Log("Parsed Chaos_Settings.cfg succesfully!");
 }
