@@ -1257,8 +1257,12 @@ void ParseChaosSettings(){
 		SetFailState("[CHAOS] Unable to parse Key Values file %s", filePath);
 		return;
 	}
-
-	if(!kvConfig.GotoFirstSubKey()){
+	if(!kvConfig.JumpToKey("Settings")){
+		Log("Unable to find 'Settings' Key from %s", filePath);
+		SetFailState("Unable to find 'Settings' Key from %s", filePath);
+		return;
+	}
+	if(!kvConfig.GotoFirstSubKey(false)){
 		Log("Unable to find 'Settings' Section in file %s", filePath);
 		LogError("Unable to find 'Settings' Section in file %s", filePath);
 		SetFailState("[CHAOS] Unable to find 'Settings' Section in file %s", filePath);
@@ -1269,9 +1273,10 @@ void ParseChaosSettings(){
 		char Chaos_Setting_Name[64];
 		if (kvConfig.GetSectionName(Chaos_Setting_Name, sizeof(Chaos_Setting_Name))){
 			int value = kvConfig.GetNum(NULL_STRING);
+			// PrintToChatAll("Found setting: %s with a value of %i", Chaos_Setting_Name, value);
 			Chaos_Settings.SetValue(Chaos_Setting_Name, value);
 		}
-	} while(kvConfig.GotoNextKey());
+	} while(kvConfig.GotoNextKey(false));
 
 	Log("Parsed Chaos_Settings.cfg succesfully!");
 }
