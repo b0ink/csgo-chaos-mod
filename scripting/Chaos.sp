@@ -94,6 +94,9 @@ public void OnPluginStart(){
 
 	RegAdminCmd("chaos_refreshconfig", Command_RefreshConfig, ADMFLAG_BAN);
 	RegAdminCmd("chaos_debug", Command_ChaosDebug, ADMFLAG_BAN);
+
+	RegAdminCmd("sm_startchaos", Command_StartChaos, ADMFLAG_BAN);
+	RegAdminCmd("sm_stopchaos", Command_StopChaos, ADMFLAG_BAN);
 	//todo: commands to toggle chaos on/off => when turned off clear all chaos
 		// RegAdminCmd("sm_enablechaos")
 		// RegAdminCmd("sm_disablechaos")
@@ -105,6 +108,31 @@ public void OnPluginStart(){
 
 
 }
+
+Handle g_NewEvent_Timer = INVALID_HANDLE;
+bool g_PlaySound_Debounce = false;
+
+
+public Action Command_StopChaos(int client, int args){
+	Chaos_Enabled = false;
+	StopTimer(g_NewEvent_Timer);
+	g_ClearChaos = true;
+	g_Chaos_Event_Count = 0;
+	g_DecidingChaos = false;
+	g_CountingChaos = true;
+	Chaos(); //count and reset all chaos
+	AnnounceChaos("Chaos is Disabled!", true);
+	return Plugin_Handled;
+}
+
+public Action Command_StartChaos(int client, int args){
+	Chaos_Enabled = true;
+	StopTimer(g_NewEvent_Timer);
+	CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	AnnounceChaos("Chaos is Enabled!");
+	return Plugin_Handled;
+}
+
 bool chaos_debug = false;
 public Action Command_ChaosDebug(int client, int args){
 	if(!chaos_debug){
@@ -200,8 +228,6 @@ public void OnClientDisconnect(int client){
 	ToggleAim(client, false);
 }
 
-Handle g_NewEvent_Timer = INVALID_HANDLE;
-bool g_PlaySound_Debounce = false;
 
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
@@ -1206,6 +1232,8 @@ public Action Command_RefreshConfig(int client, int args){
 	ParseChaosEffects();
 	ParseChaosSettings();
 	ParseMapCoordinates();
+
+	return Plugin_Handled;
 }
 
 void ParseChaosEffects(){

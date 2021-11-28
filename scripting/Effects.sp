@@ -2211,6 +2211,7 @@ void Chaos_RandomSkybox(){
 	if(g_ClearChaos){
 	}
 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
+	//todo: disable effect on dust2
 	Log("[Chaos] Running: Chaos_RandomSkybox");
 	int randomSkyboxIndex = GetRandomInt(0, sizeof(skyboxes)-1);
 	DispatchKeyValue(0, "skyname", skyboxes[randomSkyboxIndex]);
