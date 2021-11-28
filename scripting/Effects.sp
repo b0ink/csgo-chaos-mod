@@ -92,28 +92,24 @@ void Chaos_Soccerballs(){
 	Log("[Chaos] Running: Chaos_Soccerballs");
 	char MapName[128];
 	GetCurrentMap(MapName, sizeof(MapName));
-	if(StrContains(MapName, "dust2") != -1){
-		for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
-			if(GetRandomInt(0,100) <= 25){
-				int ent = CreateEntityByName("prop_physics_override"); 
-				SetEntityModel(ent, "models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl"); 
-				DispatchKeyValue(ent, "StartDisabled", "false"); 
-				DispatchKeyValue(ent, "Solid", "6"); 
-				DispatchKeyValue(ent, "spawnflags", "1026"); 
-				DispatchSpawn(ent); 
-				AcceptEntityInput(ent, "TurnOn", ent, ent, 0); 
-				AcceptEntityInput(ent, "EnableCollision"); 
-				SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5); 
-				float vec[3];
-				GetArrayArray(g_MapCoordinates, i, vec);
-				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
-			}
+	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
+		if(GetRandomInt(0,100) <= 25){
+			int ent = CreateEntityByName("prop_physics_override"); 
+			SetEntityModel(ent, "models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl"); 
+			DispatchKeyValue(ent, "StartDisabled", "false"); 
+			DispatchKeyValue(ent, "Solid", "6"); 
+			DispatchKeyValue(ent, "spawnflags", "1026"); 
+			DispatchSpawn(ent); 
+			AcceptEntityInput(ent, "TurnOn", ent, ent, 0); 
+			AcceptEntityInput(ent, "EnableCollision"); 
+			SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5); 
+			float vec[3];
+			GetArrayArray(g_MapCoordinates, i, vec);
+			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 		}
-		AnnounceChaos("Soccer balls");
-	}else{
-		Log("Not on dust2.. retrying event");
-		RetryEvent();
 	}
+	AnnounceChaos("Soccer balls");
+
 
 }
 

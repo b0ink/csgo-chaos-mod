@@ -104,8 +104,7 @@ public void PrecacheTextures(){
 	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.phy");
 	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.sw.vtx");
 	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.vvd");
-
-    
+	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
 }
 
 Handle TPos = INVALID_HANDLE;
