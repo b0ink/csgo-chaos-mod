@@ -81,7 +81,6 @@ public Action Timer_ResetFakeTeleport(Handle timer){
 	FakeTeleport_Timer = INVALID_HANDLE;
 }
 
-//todo: test soccerballs on maps other than dust2..?
 void Chaos_Soccerballs(){
 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
 	if(g_ClearChaos){
@@ -2207,16 +2206,22 @@ Action Chaos_ExtremeWhiteFog(Handle timer = null, bool EndChaos = false){
 	}
 }
 
+
 void Chaos_RandomSkybox(){
 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
 	if(g_ClearChaos){
 	}
 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
-	//todo: disable effect on dust2
-	Log("[Chaos] Running: Chaos_RandomSkybox");
-	int randomSkyboxIndex = GetRandomInt(0, sizeof(skyboxes)-1);
-	DispatchKeyValue(0, "skyname", skyboxes[randomSkyboxIndex]);
-	AnnounceChaos("Random Skybox");
+	char MapName[128];
+	GetCurrentMap(MapName, sizeof(MapName));
+	if(StrEqual(MapName, "de_dust2", false) == false){
+		Log("[Chaos] Running: Chaos_RandomSkybox");
+		int randomSkyboxIndex = GetRandomInt(0, sizeof(skyboxes)-1);
+		DispatchKeyValue(0, "skyname", skyboxes[randomSkyboxIndex]);
+		AnnounceChaos("Random Skybox");
+	}else{
+		RetryEvent();
+	}
 }
 
 float g_LowRender_Duration = 30.0;
