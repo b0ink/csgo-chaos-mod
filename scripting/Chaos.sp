@@ -313,6 +313,7 @@ public void RetryEvent(){ //Used if there's no map data found for the map that r
 }
 
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	Log("--ROUND ENDED--");
 	ResetTimerRemoveChickens();
 	StopTimer(g_NewEvent_Timer);
 	CreateTimer(1.0, ResetRoundChaos);
@@ -399,10 +400,19 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 		}else{
 			expire = float(OverwriteDuration);
 		}
-		if(expire != SanitizeTime(expire)){
-			Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", EffectName, expire, SanitizeTime(expire));
+		if(expire < 0){
+			//this should imply that per the config, it doesnt exist, lets provide it the plugins default time instead, just in case it does use it.
+			expire = defaultTime;
+			expire = SanitizeTime(expire);
+		}else{
+			if(expire != SanitizeTime(expire)){
+				Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", EffectName, expire, SanitizeTime(expire));
+				expire = SanitizeTime(expire);
+			}
 		}
-		expire = SanitizeTime(expire);
+	
+
+
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
