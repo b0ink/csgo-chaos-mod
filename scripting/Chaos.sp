@@ -244,7 +244,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	Log("---ROUND STARTED---");
 	StopTimer(g_NewEvent_Timer);
 	if(!Chaos_Enabled) return Plugin_Continue;
-	Chaos_Round_Count = true;
+	Chaos_Round_Count = 0;
 	// to use in chaos_resetspawns()
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -757,8 +757,8 @@ bool CreateParticle(char []particle, float[3] vec){
 	int ent = CreateEntityByName("info_particle_system");
 	DispatchKeyValue(ent , "start_active", "0");
 	DispatchKeyValue(ent, "effect_name", particle);
-	DispatchSpawn(ent);
 	TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+	DispatchSpawn(ent);
 	ActivateEntity(ent);
 	AcceptEntityInput(ent, "Start");
 	return true;
