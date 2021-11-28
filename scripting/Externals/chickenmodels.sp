@@ -26,7 +26,7 @@ void SetChicken(int client_index)
 }
 
 void DisableChicken(int client){
-	PrintToChatAll("THE PLAYER MODEL NAME IS: %s", playersModels[client]);
+	// PrintToChatAll("THE PLAYER MODEL NAME IS: %s", playersModels[client]);
 	if(playersModels[client][0]){
 		if(ValidAndAlive(client)){
 			SetEntityModel(client, playersModels[client]);

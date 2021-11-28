@@ -1661,7 +1661,7 @@ Action Chaos_ESP(Handle timer = null, bool EndChaos = false ){
 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
 	if(g_ClearChaos || EndChaos){	
 		StopTimer(g_ESP_Timer);
-		// cvar("sv_force_transmit_players", "0"); //todo is this the one that hides everyone?
+		cvar("sv_force_transmit_players", "0"); //todo is this the one that hides everyone?
 		destroyGlows();
 		if(EndChaos) AnnounceChaos("Wall Hacks", true);
 	}
@@ -2341,9 +2341,8 @@ Action Chaos_Invis(Handle timer = null, bool EndChaos = false){
 	if(g_ClearChaos || EndChaos){
 		for(int  client = 0;  client <= MaxClients;  client++){
 			if(IsValidClient(client)){
-				//todo: doesnt resest on rounbd end?
-				// SetEntityRenderMode(client , RENDER_NORMAL);
-				// SetEntityRenderColor(client, 255, 255, 255, 255);
+				SetEntityRenderMode(client , RENDER_NORMAL);
+				SetEntityRenderColor(client, 255, 255, 255, 255);
 			}
 		}
 		StopTimer(g_Invis_Timer);
