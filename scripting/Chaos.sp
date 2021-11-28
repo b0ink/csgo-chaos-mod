@@ -97,9 +97,6 @@ public void OnPluginStart(){
 
 	RegAdminCmd("sm_startchaos", Command_StartChaos, ADMFLAG_BAN);
 	RegAdminCmd("sm_stopchaos", Command_StopChaos, ADMFLAG_BAN);
-	//todo: commands to toggle chaos on/off => when turned off clear all chaos
-		// RegAdminCmd("sm_enablechaos")
-		// RegAdminCmd("sm_disablechaos")
 
 
 	g_Offset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
@@ -270,7 +267,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 }
 
 
-//todo; hold a cache of the last 10 (or more) events, and continue to randomise it 100 times until its one is found thats not inside the cache
+//done maybe; hold a cache of the last 10 (or more) events, and continue to randomise it 100 times until its one is found thats not inside the cache
 //during a round, each event can be saved to a cache
 	//so a 1:55 minute round is about 7 chaos events, those 7 chaos events get saved to a cache that can't be used in the next round.
 	//every few rounds reset the cache so the combinations can be re mixed
@@ -369,7 +366,6 @@ public Action ResetRoundChaos(Handle timer){
 	Chaos();
 }
 
-//todo when i make the config and parse all the timer lengths, i'll sanitize the time
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -702,7 +698,6 @@ void findLight(){
 	ent = FindEntityByClassname(-1, "env_fog_controller");
 	if (ent != -1) {
 		FogIndex = ent;
-		//todo test blending
 		DispatchKeyValue(FogIndex, "fogblend", "0");
 		DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
 		// DispatchKeyValue(FogIndex, "fogcolor", "255 0 0");
@@ -1075,8 +1070,6 @@ stock int GetAliveCTCount(){
 
 
 float SanitizeTime(float time){
-	//todo: Log warnings when time doesnt get sanitized correctly, will require to pass effect name
-	//or if(sanititizetime(time) != time) issue warning cos they dont match
 	if(time <= 0) return 0.0;
 	if(time < 5) return 5.0;
 	if(time > 120) return 0.0;
