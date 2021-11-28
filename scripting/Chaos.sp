@@ -469,7 +469,7 @@ void Chaos_RewindTenSeconds(){
 	// g_rewind_logging_enabled = false;
 	AnnounceChaos("Rewind 10 seconds");
 	int time = 0;
-	CreateTimer(0.1, Rewind_Timer, time, TIMER_FLAG_NO_MAPCHANGE);
+	g_Chaos_Rewind_Timer = CreateTimer(0.1, Rewind_Timer, time, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public Action Rewind_Timer(Handle timer, int time){
@@ -488,10 +488,12 @@ public Action Rewind_Timer(Handle timer, int time){
 
 	if(time <  9){
 		time++;
-		CreateTimer(0.3, Rewind_Timer, time, TIMER_FLAG_NO_MAPCHANGE);
+		StopTimer(g_Chaos_Rewind_Timer);
+		g_Chaos_Rewind_Timer = CreateTimer(0.3, Rewind_Timer, time, TIMER_FLAG_NO_MAPCHANGE);
 	}else{
 		TeleportPlayersToClosestLocation(); //fail safe todo: this is still bugged (the rewind part not this <<--)
 		g_rewind_logging_enabled = true;
+		StopTimer(g_Chaos_Rewind_Timer);
 	}
 }
 // g_RollbackPositions[client][count] = g_RollbackPositions[client][count - 1];
