@@ -200,7 +200,13 @@ public void OnClientDisconnect(int client){
 	ToggleAim(client, false);
 }
 
+Handle g_NewEvent_Timer = INVALID_HANDLE;
+bool g_PlaySound_Debounce = false;
+
+
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	Log("---ROUND STARTED---");
+	StopTimer(g_NewEvent_Timer);
 	if(!Chaos_Enabled) return Plugin_Continue;
 	Chaos_Round_Count = true;
 	// to use in chaos_resetspawns()
@@ -239,8 +245,6 @@ bool findInArray(int[] array, int target, int arraysize){
 	return false;
 }
 
-Handle g_NewEvent_Timer = INVALID_HANDLE;
-bool g_PlaySound_Debounce = false;
 public Action DecideEvent(Handle timer){
 	g_NewEvent_Timer = INVALID_HANDLE;
 	int index = sizeof(g_randomCache) - 1;
