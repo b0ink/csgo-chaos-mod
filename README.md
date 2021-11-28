@@ -4,9 +4,11 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 
 
 # INSTALLATION:
-- Copy over `Chaos.smx` from the `plugins` folder into your csgo/addons/sourcemod/plugins/ folder.
-- Copy over the `Chaos` folder from the `configs` folder into your csgo/addons/sourcemod/configs/ folder.
-- Restart your server or load the plugin.
+- Copy over `Chaos.smx` from the `/plugins/` folder into your csgo/addons/sourcemod/plugins/ folder.
+- Copy over the `Chaos` folder from the `/configs` folder into your csgo/addons/sourcemod/configs/ folder.
+- Restart your server/load the plugin.
+
+If you encounter any errors please check your error files as well as the plugin's generated `chaos_logs.log` file found in `/csgo/addons/sourcemod/logs`, and double check that the config files are in the correct location.
 
 # Available Commands:
 ```
