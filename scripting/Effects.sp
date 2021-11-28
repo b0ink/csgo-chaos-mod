@@ -55,11 +55,9 @@ float FakeTelport_loc[MAXPLAYERS+1][3];
 void Chaos_FakeTeleport(){
 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return;  }}
 	if(g_ClearChaos){
-
 		StopTimer(FakeTeleport_Timer);
 	}
 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return;
-	FakeTeleport_Expire = GetChaosTime("Chaos_FakeTeleport");
 	Log("[Chaos] Running: Fake Teleport");
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
