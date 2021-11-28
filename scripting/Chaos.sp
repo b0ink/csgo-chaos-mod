@@ -119,17 +119,27 @@ public Action Command_StopChaos(int client, int args){
 	g_ClearChaos = true;
 	g_Chaos_Event_Count = 0;
 	g_DecidingChaos = false;
-	g_CountingChaos = true;
+	g_CountingChaos = false;
 	Chaos(); //count and reset all chaos
 	AnnounceChaos("Chaos is Disabled!", true);
 	return Plugin_Handled;
 }
 
 public Action Command_StartChaos(int client, int args){
+
+	if(g_NewEvent_Timer == INVALID_HANDLE){
+		g_ClearChaos = true;
+		g_Chaos_Event_Count = 0;
+		g_DecidingChaos = false;
+		g_CountingChaos = true;
+		Chaos(); //count and reset all chaos
+		CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+		AnnounceChaos("Chaos is Enabled!");
+	}else{
+		PrintToChat(client, "Chaos is already running!");
+	}
 	Chaos_Enabled = true;
-	StopTimer(g_NewEvent_Timer);
-	CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
-	AnnounceChaos("Chaos is Enabled!");
+	// StopTimer(g_NewEvent_Timer);
 	return Plugin_Handled;
 }
 
