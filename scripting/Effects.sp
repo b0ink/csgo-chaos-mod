@@ -99,13 +99,14 @@ void Chaos_Soccerballs(){
 			DispatchKeyValue(ent, "StartDisabled", "false"); 
 			DispatchKeyValue(ent, "Solid", "6"); 
 			DispatchKeyValue(ent, "spawnflags", "1026"); 
+			float vec[3];
+			GetArrayArray(g_MapCoordinates, i, vec);
+			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 			DispatchSpawn(ent); 
 			AcceptEntityInput(ent, "TurnOn", ent, ent, 0); 
 			AcceptEntityInput(ent, "EnableCollision"); 
 			SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5); 
-			float vec[3];
-			GetArrayArray(g_MapCoordinates, i, vec);
-			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+		
 		}
 	}
 	AnnounceChaos("Soccer balls");
@@ -195,8 +196,8 @@ void Chaos_SpawnFlashbangs(){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec, sizeof(vec));
 			int flash = CreateEntityByName("flashbang_projectile");
-			DispatchSpawn(flash);
 			TeleportEntity(flash, vec, NULL_VECTOR, NULL_VECTOR);
+			DispatchSpawn(flash);
 		}
 	}
 	AnnounceChaos("Spawn Flashbangs");
@@ -283,8 +284,8 @@ void Chaos_SpawnExplodingBarrels(){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec, sizeof(vec));
 			int barrel = CreateEntityByName("prop_exploding_barrel");
-			DispatchSpawn(barrel);
 			TeleportEntity(barrel, vec, NULL_VECTOR, NULL_VECTOR);
+			DispatchSpawn(barrel);
 		}
 	}
 	AnnounceChaos("Exploding Barrels");
@@ -1033,13 +1034,13 @@ public void Chaos_ChickensIntoPlayers(){
 				float vec[3];
 				GetArrayArray(g_MapCoordinates, i, vec);
 				vec[2] = vec[2] + 50.0;
+				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 
 				DispatchSpawn(ent);
 				// SetEntProp(ent, Prop_Send, "m_fEffects", 0);
 				// SetEntProp(ent, Prop_Data, "m_flGroundSpeed", 1);
 				// CreateTimer(0.1, Timer_SetChickenModel, ent);
 				SetEntityModel(ent, playerModel_Path[randomSkin]);
-				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 				// SetEntPropFloat(ent, Prop_Send, "m_flSpeed", 2.0);
 				// SetVariantString("!activator");
 			}
@@ -1067,9 +1068,9 @@ public void Chaos_MamaChook(){
 			if(ent != -1){
 				float vec[3];
 				GetArrayArray(g_MapCoordinates, i, vec);
+				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(ent);
 				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 100.0);
-				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 			}
 			break;
 		}
@@ -1100,10 +1101,10 @@ public void Chaos_BigChooks(){
 			if(ent != -1){
 				float vec[3];
 				GetArrayArray(g_MapCoordinates, i, vec);
-				DispatchSpawn(ent);
-				float randomSize = GetRandomFloat(2.0, 15.0);
-				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", randomSize);
 				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+				float randomSize = GetRandomFloat(2.0, 15.0);
+				DispatchSpawn(ent);
+				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", randomSize);
 			}
 		}
 	
@@ -1132,10 +1133,10 @@ public void Chaos_LittleChooks(){
 			if(ent != -1){
 				float vec[3];
 				GetArrayArray(g_MapCoordinates, i, vec);
+				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(ent);
 				float randomSize = GetRandomFloat(0.4, 0.9);
 				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", randomSize);
-				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 			}
 		}
 	
@@ -1246,8 +1247,8 @@ void Chaos_MoneyRain(){
 			GetArrayArray(g_MapCoordinates, i, vec);
 			vec[2] = vec[2] + GetRandomInt(50, 200);
 			//todo; randomise the rotation of the cash for extra bounce?
-			DispatchSpawn(ent);
 			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+			DispatchSpawn(ent);
 		}
 	}
 	AnnounceChaos("Make it rain");
