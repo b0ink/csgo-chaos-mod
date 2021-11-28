@@ -228,7 +228,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 		g_CountingChaos = true;
 		Chaos(); //count and reset all chaos
 		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
-		CreateTimer(freezeTime, DecideEvent);
+		CreateTimer(freezeTime, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
 	return Plugin_Continue;
 }
@@ -292,7 +292,7 @@ public Action DecideEvent(Handle timer){
 			Effect_Interval = 15;
 		}
 
-		g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent);
+		g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 		Chaos_Round_Count++;
 		if(g_PlaySound_Debounce == false){
 			//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
