@@ -76,7 +76,9 @@ public void RemoveSkin(int client) {
 public void destroyGlows() {
     for(int client = 1; client <= MaxClients; client++) {
         if(IsClientInGame(client)) {
-            RemoveSkin(client);
+            if(ValidAndAlive(client)){
+                RemoveSkin(client);
+            }
         }
     }
 }
