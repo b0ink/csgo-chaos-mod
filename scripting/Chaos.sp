@@ -82,6 +82,7 @@ public void OnPluginStart(){
 	for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) OnClientPostAdminCheck(i);
 
 	Chaos_Effects = new StringMap();
+	Chaos_Settings = new StringMap();
 
 	ESP_INIT();
 	TEAMMATESWAP_INIT();
