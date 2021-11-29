@@ -1205,7 +1205,7 @@ public int getRandomAlivePlayer(){
 }
 
 
-stock int ScreenShake(int iClient, float fAmplitude = 100.0, float duration = 5.0){
+stock int ScreenShake(int iClient, float fAmplitude = 200.0, float duration = 5.0){
 	Handle hMessage = StartMessageOne("Shake", iClient, 1);
 	
 	PbSetInt(hMessage, "command", 0);
