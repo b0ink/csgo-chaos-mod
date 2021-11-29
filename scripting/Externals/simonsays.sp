@@ -105,7 +105,7 @@ void DamagePlayer(int client, int amount = 20){
 }
 
 void StartMessageTimer(){
-	msg_timer = CreateTimer(1.0, Timer_ShowAction, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
+	msg_timer = CreateTimer(1.0, Timer_ShowAction, TIMER_REPEAT);
 }
 
 public Action Timer_ShowAction(Handle timer){
@@ -144,8 +144,9 @@ public Action Timer_ShowAction(Handle timer){
 }
 
 void KillMessageTimer(){
-	if(msg_timer != INVALID_HANDLE){
-		KillTimer(msg_timer);
-		msg_timer = INVALID_HANDLE;
-	}
+	// if(msg_timer != INVALID_HANDLE){
+	// 	KillTimer(msg_timer);
+	// 	msg_timer = INVALID_HANDLE;
+	// }
+	StopTimer(msg_timer);
 }
