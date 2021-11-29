@@ -612,7 +612,7 @@ Action Chaos_DiscoFog(Handle timer = null, bool EndChaos = false){
 	AnnounceChaos("Disco Fog");
 	g_DiscoFog = true;
 	g_DiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
-	if(g_DiscoFog_Expire > 0.0) g_DiscoFog_Timer = CreateTimer(g_DiscoFog_Expire, Chaos_DiscoFog, true);
+	if(g_DiscoFog_Expire > 0) g_DiscoFog_Timer = CreateTimer(g_DiscoFog_Expire, Chaos_DiscoFog, true);
 
 }
 public Action Timer_NewFogColor(Handle timer){
@@ -736,23 +736,24 @@ Action Chaos_LockPlayersAim(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_LockPlayersAim");
 
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) GetClientEyeAngles(i, g_LockPlayersAim_Angles[i]);
-	g_LockPlayersAim_Timer_Enforce = CreateTimer(0.01, Timer_EnforcePlayerLock, _, TIMER_REPEAT);
+	// g_LockPlayersAim_Timer_Enforce = CreateTimer(0.01, Timer_EnforcePlayerLock, _, TIMER_REPEAT);
 	g_LockPlayersAim_Active  = true;
 	if(g_LockPlayersAim_Expire > 0) g_LockPlayersAim_Timer_Expire = CreateTimer(g_LockPlayersAim_Expire, Chaos_LockPlayersAim, true);
 	AnnounceChaos("Lock Mouse Movement");
 }
 //potentially to add in OnPlayerRunCmd?
-Action Timer_EnforcePlayerLock(Handle timer){
-	if(g_LockPlayersAim_Active){
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
-			}
-		}
-	}else{
-		StopTimer(g_LockPlayersAim_Timer_Enforce);
-	}
-}
+
+// Action Timer_EnforcePlayerLock(Handle timer){
+// 	if(g_LockPlayersAim_Active){
+// 		for(int i = 0; i <= MaxClients; i++){
+// 			if(ValidAndAlive(i)){
+// 				TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
+// 			}
+// 		}
+// 	}else{
+// 		StopTimer(g_LockPlayersAim_Timer_Enforce);
+// 	}
+// }
 
 float g_SlowSpeed_Expire = 20.0;
 Handle g_SlowSpeed_Timer = INVALID_HANDLE;
@@ -2407,3 +2408,7 @@ Action Timer_DiscoPlayers(Handle timer = null){
 		StopTimer(DiscoPlayers_TimerRepeat);
 	}
 }
+
+
+
+
