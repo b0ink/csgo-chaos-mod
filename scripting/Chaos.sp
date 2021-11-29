@@ -570,7 +570,7 @@ public void Chaos_RandomInvisiblePlayer(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_RandomInvisiblePlayer");
 	int alivePlayers = GetAliveCTCount() + GetAliveTCount();
-	int target = GetRandomInt(0, alivePlayers);
+	int target = GetRandomInt(0, alivePlayers - 1);
 	int count = -1;
 	bool setPlayer = false;
 	if(alivePlayers > 1){
@@ -580,10 +580,8 @@ public void Chaos_RandomInvisiblePlayer(){
 				if(count == target){
 					setPlayer = true;
 					target = i;
-					SetEntityRenderMode(i, RENDER_TRANSCOLOR);
-					SetEntityRenderColor(i, 255, 255, 255, 0);
-					// SetEntityRenderMode(target, RENDER_NONE);
-					// SetEntityRenderColor(target, 255, 255, 255, 0);
+					SetEntityRenderMode(target, RENDER_TRANSCOLOR);
+					SetEntityRenderColor(target, 255, 255, 255, 0);
 					//todo: shorten player names if its too high
 					char chaosMsg[256];
 					FormatEx(chaosMsg, sizeof(chaosMsg), "{orange}%N {default}has been made invisible!", target);
