@@ -33,7 +33,7 @@ char g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 
 bool Chaos_Enabled = true; //todo as convar
-
+bool CanSpawnEffect = true;
 #define SOUND_BELL "buttons/bell1.wav"
 
 #define CONFIG_ENABLED 0
@@ -95,6 +95,7 @@ public void OnPluginStart(){
 	RegAdminCmd("chaos_refreshconfig", Command_RefreshConfig, ADMFLAG_BAN);
 	RegAdminCmd("chaos_debug", Command_ChaosDebug, ADMFLAG_BAN);
 
+	RegAdminCmd("sm_chaos", Command_NewChaosEffect, ADMFLAG_BAN);
 	RegAdminCmd("sm_startchaos", Command_StartChaos, ADMFLAG_BAN);
 	RegAdminCmd("sm_stopchaos", Command_StopChaos, ADMFLAG_BAN);
 
@@ -109,6 +110,11 @@ public void OnPluginStart(){
 Handle g_NewEvent_Timer = INVALID_HANDLE;
 bool g_PlaySound_Debounce = false;
 
+public Action Command_NewChaosEffect(int client, int args){
+	//todo, run effect using a name.
+	DecideEvent(null, true);
+	return Plugin_Handled;
+}
 
 public Action Command_StopChaos(int client, int args){
 	Chaos_Enabled = false;
@@ -241,6 +247,7 @@ public void OnClientDisconnect(int client){
 
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	CanSpawnEffect = true;
 	Log("---ROUND STARTED---");
 	StopTimer(g_NewEvent_Timer);
 	if(!Chaos_Enabled) return Plugin_Continue;
@@ -281,7 +288,8 @@ bool findInArray(int[] array, int target, int arraysize){
 	return false;
 }
 
-public Action DecideEvent(Handle timer){
+Action DecideEvent(Handle timer, bool CustomRun = false){
+	if(!CanSpawnEffect) return;
 	g_NewEvent_Timer = INVALID_HANDLE;
 	int index = sizeof(g_randomCache) - 1;
 	while(index >= 1){
@@ -307,6 +315,19 @@ public Action DecideEvent(Handle timer){
 	g_Chaos_Event_Count = 0;
 	g_CountingChaos = true;
 	Chaos(); //run the chaos
+
+	if(g_PlaySound_Debounce == false){
+		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
+		g_PlaySound_Debounce = true;
+		for(int i = 0; i <= MaxClients; i++){
+			if(IsValidClient(i)){
+				EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
+			}
+		}
+		CreateTimer(2.0, Timer_ResetPlaySound);
+	}
+	if(CustomRun) return;
+
 	StopTimer(g_NewEvent_Timer);
 	int Chaos_Repeating = -1;
 	if(!Chaos_Settings.GetValue("Repeating", Chaos_Repeating)){
@@ -330,16 +351,7 @@ public Action DecideEvent(Handle timer){
 
 		g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 		Chaos_Round_Count++;
-		if(g_PlaySound_Debounce == false){
-			//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
-			g_PlaySound_Debounce = true;
-			for(int i = 0; i <= MaxClients; i++){
-				if(IsValidClient(i)){
-					EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
-				}
-			}
-			CreateTimer(2.0, Timer_ResetPlaySound);
-		}
+
 	}
 }
 
@@ -353,6 +365,7 @@ public void RetryEvent(){ //Used if there's no map data found for the map that r
 }
 
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	CanSpawnEffect = false;
 	Log("--ROUND ENDED--");
 	ResetTimerRemoveChickens();
 	StopTimer(g_NewEvent_Timer);
@@ -481,8 +494,20 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 }
 
 
+
 #include "Effects.sp"
 
+public void OnGameFrame(){
+	if(g_LockPlayersAim_Active){
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i)){
+				TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
+			}
+		}
+	}
+}
+
+//use gameframe for rollbacklog?
 public Action Rollback_Log(Handle Timer){
 	if(g_rewind_logging_enabled){
 		for(int client = 0; client <= MaxClients; client++){
