@@ -855,7 +855,7 @@ bool g_PortalGuns = false;
 float g_PortalGuns_Expire = 20.0; //config
 Handle g_PortalGuns_Timer = INVALID_HANDLE;
 Action Chaos_PortalGuns(Handle timer = null, bool EndChaos = false){
-	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos && timer == null) {  return;  }} 
+	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
 		if(EndChaos){
 			TeleportPlayersToClosestLocation();
@@ -2321,6 +2321,7 @@ void Chaos_DropPrimaryWeapon(){
 	
 	}
 	if(DecidingChaos()) return;
+	Log("[Chaos] Running: Chaos_DropPrimaryWeapon");
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			ClientCommand(i, "slot1; drop");
