@@ -2375,3 +2375,48 @@ Action Chaos_Invis(Handle timer = null, bool EndChaos = false){
 	AnnounceChaos("Where did everyone go?");
 	if(g_Invis_Expire > 0) g_Invis_Timer = CreateTimer(g_Invis_Expire, Chaos_Invis, true);
 }
+
+
+
+
+float DiscoPlayers_Duration = 30.0;
+Handle DiscoPlayers_Timer = INVALID_HANDLE;
+Handle DiscoPlayers_TimerRepeat = INVALID_HANDLE;
+bool DiscoPlayers = false;
+Action Chaos_DiscoPlayers(Handle timer = null, bool EndChaos = false){
+	if(CountingCheckDecideChaos()) return;
+	if(ClearChaos(EndChaos)){
+		DiscoPlayers = true;
+		StopTimer(DiscoPlayers_Timer);
+		StopTimer(DiscoPlayers_TimerRepeat);
+		if(EndChaos) AnnounceChaos("Disco Players", true);
+	}
+	if(DecidingChaos()) return;
+	DiscoPlayers_Duration = GetChaosTime("Chaos_DiscoPlayers", 30.0);
+	Log("[Chaos] Running: Chaos_DiscoPlayers");
+	StopTimer(DiscoPlayers_TimerRepeat);
+	DiscoPlayers = true;
+	Timer_DiscoPlayers();
+	if(DiscoPlayers_Duration > 0) DiscoPlayers_Timer = CreateTimer(DiscoPlayers_Duration, Chaos_DiscoPlayers, true);
+	DiscoPlayers_TimerRepeat = CreateTimer(1.0, Timer_DiscoPlayers, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
+	AnnounceChaos("Disco Players");
+}
+
+Action Timer_DiscoPlayers(Handle timer = null){
+	if(DiscoPlayers){
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i)){
+				SetEntityRenderMode(i, RENDER_TRANSCOLOR);
+				int color[3];
+				color[0] = GetRandomInt(0, 255);
+				color[1] = GetRandomInt(0, 255);
+				color[2] = GetRandomInt(0, 255);
+				int oldcolors[4];
+				GetEntityRenderColor(i, oldcolors[0],oldcolors[1],oldcolors[2],oldcolors[3]);
+				SetEntityRenderColor(i, color[0], color[1], color[2], oldcolors[3]);
+			}
+		}
+	}else{
+		StopTimer(DiscoPlayers_TimerRepeat);
+	}
+}

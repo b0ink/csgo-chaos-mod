@@ -547,31 +547,18 @@ public Action Rewind_Timer(Handle timer, int time){
 // g_RollbackPositions[client][count] = g_RollbackPositions[client][count - 1];
 				// g_RollbackAngles[client][count] = g_RollbackAngles[client][count - 1];
 
-//todo: change to a repeating timer instead of a one off.. i was too lazy when doing this..
-void Chaos_DiscoPlayers(){
-	if(CountingCheckDecideChaos()) return;
-	if(g_ClearChaos){
 
-	}
-	if(DecidingChaos()) return;
-	Log("[Chaos] Running: Chaos_DiscoPlayers");
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			SetEntityRenderMode(i, RENDER_TRANSCOLOR);
-			int color[3];
-			color[0] = GetRandomInt(0, 255);
-			color[1] = GetRandomInt(0, 255);
-			color[2] = GetRandomInt(0, 255);
-			int oldcolors[4];
-			GetEntityRenderColor(i, oldcolors[0],oldcolors[1],oldcolors[2],oldcolors[3]);
-			SetEntityRenderColor(i, color[0], color[1], color[2], oldcolors[3]);
-		}
-	}
+//todo: create reset timers in a function?
+// public void ResetChaosTimer(Handle &timer, Function &chaosfunction, float duration){
+//todo: this wont work just yet, but if i add custom effect player eg. "!chaos Chaos_DiscoPlayers",
+//		then i might be able to reset all the specific chaos by passing through a string function name isntead of the function itself.
+//		then a function to call chaos, passing through a clearchaos with the function name
 
-	AnnounceChaos("Random Player Colours");
-}
-
-
+// public void ResetChaosTimer(Handle &timer, any &chaosfunction, float duration){
+// 	if(duration > 0) timer = CreateTimer(duration, chaosfunction, true, TIMER_FLAG_NO_MAPCHANGE);
+// }
+//
+// ResetChaosTimer(DiscoPlayers_Timer, Chaos_DiscoPlayers, DiscoPlayers_Duration);
 
 
 
