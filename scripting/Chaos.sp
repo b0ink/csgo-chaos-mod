@@ -234,10 +234,12 @@ public void OnMapStart(){
 
 	//fixes an issue with shields not working in comp gamemode
 	CreateTimer(5.0, Timer_CreateHostage);
-
+	StopTimer(g_NewEvent_Timer);
+	g_NewEvent_Timer = INVALID_HANDLE;
 }
 public void OnMapEnd(){
 	Log("Map has ended.");
+	StopTimer(g_NewEvent_Timer);
 }
 //Todo; shields still dont work
 Action Timer_CreateHostage(Handle timer = null){
@@ -299,10 +301,10 @@ bool findInArray(int[] array, int target, int arraysize){
 }
 
 Action DecideEvent(Handle timer, bool CustomRun = false){
+	if(!CustomRun) g_NewEvent_Timer = INVALID_HANDLE;
 	if(!CanSpawnEffect) return;
 	CountChaos();
 	
-	g_NewEvent_Timer = INVALID_HANDLE;
 	int index = sizeof(g_randomCache) - 1;
 	while(index >= 1){
 		g_randomCache[index] = g_randomCache[index - 1];
@@ -361,7 +363,8 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 			Effect_Interval = 15;
 		}
 
-		g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+		g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent);
+		// g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent);
 		Chaos_Round_Count++;
 
 	}
@@ -563,7 +566,7 @@ void Chaos_RewindTenSeconds(){
 	g_rewind_logging_enabled = false;
 	AnnounceChaos("Rewind 10 seconds");
 	int time = 0;
-	g_Chaos_Rewind_Timer = CreateTimer(0.1, Rewind_Timer, time, TIMER_FLAG_NO_MAPCHANGE);
+	g_Chaos_Rewind_Timer = CreateTimer(0.1, Rewind_Timer, time);
 }
 
 public Action Rewind_Timer(Handle timer, int time){
@@ -583,7 +586,7 @@ public Action Rewind_Timer(Handle timer, int time){
 	if(time <  9){
 		time++;
 		StopTimer(g_Chaos_Rewind_Timer);
-		g_Chaos_Rewind_Timer = CreateTimer(0.3, Rewind_Timer, time, TIMER_FLAG_NO_MAPCHANGE);
+		g_Chaos_Rewind_Timer = CreateTimer(0.3, Rewind_Timer, time);
 	}else{
 		TeleportPlayersToClosestLocation(); //fail safe todo: this is still bugged (the rewind part not this <<--)
 		g_rewind_logging_enabled = true;
@@ -719,7 +722,7 @@ void  DoRandomTeleport(int client = -1){
 
 
 void StopTimer(Handle &timer){
-	if(timer != INVALID_HANDLE){
+	if(timer != null && timer != INVALID_HANDLE){
 		KillTimer(timer);
 	}
 	timer = INVALID_HANDLE;
