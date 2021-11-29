@@ -84,7 +84,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 
 
 	if(g_SpeedShooter == true && buttons & IN_ATTACK){
-		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 3.0);
+		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 5.0);
 	}else if(g_SpeedShooter){
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
