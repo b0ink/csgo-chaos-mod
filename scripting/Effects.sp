@@ -69,7 +69,10 @@ void Chaos_FakeTeleport(){
 			FakeTelport_loc[i] = vec;
 		}
 	}
-	DoRandomTeleport();
+	if(!DoRandomTeleport()){
+		RetryEvent();
+		return;
+	}
 	FakeTeleport_Timer = CreateTimer(FakeTeleport_Expire, Timer_ResetFakeTeleport, _, TIMER_FLAG_NO_MAPCHANGE);
 }
 public Action Timer_ResetFakeTeleport(Handle timer){
@@ -92,6 +95,12 @@ void Chaos_Soccerballs(){
 	if(DecidingChaos()) return;
 
 	Log("[Chaos] Running: Chaos_Soccerballs");
+
+	if(!ValidMapPoints()){
+		RetryEvent();
+		return;
+	}
+
 	char MapName[128];
 	GetCurrentMap(MapName, sizeof(MapName));
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
@@ -192,7 +201,10 @@ void Chaos_SpawnFlashbangs(){
 	if(DecidingChaos()) return;
 
 	Log("[Chaos] Running: Chaos_SpawnFlashbangs");
-
+	if(!ValidMapPoints()){
+		RetryEvent();
+		return;
+	}
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
@@ -281,6 +293,10 @@ void Chaos_SpawnExplodingBarrels(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_SpawnExplodingBarrels");
+	if(!ValidMapPoints()){
+		RetryEvent();
+		return;
+	}
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
@@ -817,6 +833,10 @@ void Chaos_RespawnTheDead_Randomly(){
 	if(g_ClearChaos){	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_RespawnTheDead_Randomly");
+	if(!ValidMapPoints()){
+		RetryEvent();
+		return;
+	}
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
 			if(!IsPlayerAlive(i)){
@@ -1063,7 +1083,7 @@ public void Chaos_ChickensIntoPlayers(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_ChickensIntoPlayers");
 
-	if(g_MapCoordinates == INVALID_HANDLE){
+	if(!ValidMapPoints()){
 		RetryEvent();
 		return;
 	}
@@ -1099,7 +1119,7 @@ public void Chaos_MamaChook(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_MamaChook");
-	if(g_MapCoordinates == INVALID_HANDLE || !g_CanSpawnChickens){
+	if(!ValidMapPoints() || !g_CanSpawnChickens){
 		RetryEvent();
 		return;
 	}
@@ -1132,7 +1152,7 @@ public void Chaos_BigChooks(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_BigChooks");
 
-	if(g_MapCoordinates == INVALID_HANDLE || !g_CanSpawnChickens){
+	if(!ValidMapPoints() || !g_CanSpawnChickens){
 		RetryEvent();
 		return;
 	}
@@ -1165,7 +1185,7 @@ public void Chaos_LittleChooks(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_LittleChooks");
 
-	if(g_MapCoordinates == INVALID_HANDLE || !g_CanSpawnChickens){
+	if(!ValidMapPoints() || !g_CanSpawnChickens){
 		RetryEvent();
 		return;
 	}
@@ -1279,7 +1299,7 @@ void Chaos_MoneyRain(){
 	Log("[Chaos] Running: Chaos_MoneyRain");
 
 	cvar("sv_dz_cash_bundle_size", "500");
-	if(g_MapCoordinates == INVALID_HANDLE){
+	if(!ValidMapPoints()){
 		RetryEvent();
 		return;
 	}
@@ -1821,7 +1841,10 @@ void Chaos_RandomTeleport(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_RandomTeleport");
 
-	DoRandomTeleport();
+	if(!DoRandomTeleport()){
+		RetryEvent();
+		return;
+	}
 
 	AnnounceChaos("Random Teleport");
 }
@@ -1834,7 +1857,10 @@ void Chaos_LavaFloor(){
 	if(DecidingChaos()) return;
 
 	Log("[Chaos] Running: Chaos_LavaFloor");
-
+	if(!ValidMapPoints()){
+		RetryEvent();
+		return;
+	}
 	for(int i = 0; i <=  GetArraySize(g_MapCoordinates)-1; i++){
 		int spawnChance = GetRandomInt(0,100);
 		if(spawnChance <= 25){
@@ -2322,7 +2348,7 @@ void Chaos_SmokeMap(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_SmokeMap");
-	if(g_MapCoordinates == INVALID_HANDLE){
+	if(!ValidMapPoints()){
 		RetryEvent();
 		return;
 	}
