@@ -784,17 +784,20 @@ void ParseMapCoordinates() {
 	KeyValues kv = new KeyValues("Maps");
 
 	if(!kv.ImportFromFile(path)){
-		SetFailState("Unable to parse Key Values from %s", path);
+		Log("Unable to parse Key Values from %s", path);
+		// SetFailState("Unable to parse Key Values from %s", path);
 		return;
 	}
 	//jump to key of map name
 	if(!kv.JumpToKey(MapName)){
-		SetFailState("Unable to find de_dust2 Key from %s", path);
+		Log("Unable to find %s Key from %s", MapName, path);
+		// SetFailState("Unable to find %s Key from %s", MapName, path);
 		return;
 	}
 
 	if(!kv.GotoFirstSubKey(false)){
-		SetFailState("Unable to find sub keys %s", path);
+		Log("Unable to find sub keys %s", path);
+		// SetFailState("Unable to find sub keys %s", path);
 		return;
 	}
 	g_MapCoordinates = CreateArray(3);
