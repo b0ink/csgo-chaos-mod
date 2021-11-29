@@ -12,7 +12,7 @@ If you encounter any errors please check your error files as well as the plugin'
 
 # Available Commands:
 ```
-sm_chaos			- Ban Flag - Run a new random effect.
+sm_chaos            - Ban Flag - Run a new random effect.
 sm_startchaos       - Ban Flag - Spawns a new effect immediately and starts the effect timer.
 sm_stopchaos        - Ban Flag - Pauses the Chaos Effect timer and resets all the effects.
 chaos_refreshconfig - Ban Flag - Updates and re parses configs.
