@@ -403,6 +403,11 @@ public Action ResetRoundChaos(Handle timer){
 // 	}
 // }y
 
+bool ValidMapPoints(){
+	if(g_MapCoordinates == INVALID_HANDLE) return false;
+	return true;
+}
+
 bool CountingCheckDecideChaos(){
 	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return true;  }}
 	return false;
@@ -637,8 +642,10 @@ public void Chaos_MEGACHAOS(){
 float g_AllPositions[MAXPLAYERS+1][3];
 
 
-void DoRandomTeleport(int client = -1){
+bool DoRandomTeleport(int client = -1){
 	Log("[Chaos] Running: DoRandomTeleport (function, not chaos event)");
+
+	if(g_MapCoordinates == INVALID_HANDLE) return false;
 
 	ClearArray(g_UnusedCoordinates);
 
@@ -659,6 +666,7 @@ void DoRandomTeleport(int client = -1){
 				RemoveFromArray(g_UnusedCoordinates, randomCoord);
 			}
 		}
+		return true;
 	}else{
 		int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
 		float vec[3];
@@ -666,8 +674,8 @@ void DoRandomTeleport(int client = -1){
 		TeleportEntity(client, vec, NULL_VECTOR, NULL_VECTOR);
 		PrintToConsole(client, "%N to %f %f %f", client, vec[0], vec[1], vec[2]);
 		RemoveFromArray(g_UnusedCoordinates, randomCoord);
+		return true;
 	}
-
 }
 
 
