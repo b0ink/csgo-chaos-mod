@@ -34,7 +34,8 @@ public void HookOnDecoySpawn(int iGrenade) {
 		int nadeslot = GetPlayerWeaponSlot(client, 3);
 		if (nadeslot > 0) {
 			RemovePlayerItem(client, nadeslot);
-			RemoveEdict(nadeslot);
+			// RemoveEdict(nadeslot);
+			RemoveEntity(nadeslot);
 		}
 		GivePlayerItem(client, "weapon_decoy");
 	}

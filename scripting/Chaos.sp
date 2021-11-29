@@ -1057,12 +1057,13 @@ void RemoveChickens(bool removec4Chicken = false){
 			
 				if(removec4Chicken){
 					if(i == g_c4chickenEnt){
-						RemoveEdict(i);
+						// RemoveEdict(i);
+						RemoveEntity(i);
 					}
 				}else{
 					if(i != g_c4chickenEnt){
 						SetEntPropFloat(i, Prop_Data, "m_flModelScale", 1.0);
-						RemoveEdict(i);
+						RemoveEntity(i);
 					}
 				}
 
@@ -1254,18 +1255,18 @@ stock int ScreenShake(int iClient, float fAmplitude = 200.0, float duration = 5.
 
 
 
-stock void PrintToConsoleAll(const char[] myString, any ...)
-{
-	int len = strlen(myString) + 255;
-	char[] myFormattedString = new char[len];
-	VFormat(myFormattedString, len, myString, 2);
+// stock void PrintToConsoleAll(const char[] myString, any ...)
+// {
+// 	int len = strlen(myString) + 255;
+// 	char[] myFormattedString = new char[len];
+// 	VFormat(myFormattedString, len, myString, 2);
  
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
-			PrintToConsole(i, myFormattedString);
-		}
-	}
-}
+// 	for(int i = 0; i <= MaxClients; i++){
+// 		if(IsValidClient(i)){
+// 			PrintToConsole(i, myFormattedString);
+// 		}
+// 	}
+// }
 
 
 

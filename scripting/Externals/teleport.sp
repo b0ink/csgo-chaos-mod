@@ -87,5 +87,5 @@ public void PerformTeleport(int target, float pos[3])
 
 public bool TraceEntityFilterPlayer(int entity, int contentsMask)
 {
-	return entity > GetMaxClients() || !entity;
+	return entity > MaxClients || !entity;
 } 
