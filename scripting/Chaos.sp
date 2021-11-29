@@ -113,13 +113,13 @@ bool g_PlaySound_Debounce = false;
 bool g_DisableRetryEvent = false;
 public Action Command_NewChaosEffect(int client, int args){
 	//todo, run effect using a name.
-	g_DisableRetryEvent = false;
+	g_DisableRetryEvent = true;
 	DecideEvent(null, true);
 	CreateTimer(1.0, Command_ReEnableRetries);
 	return Plugin_Handled;
 }
 public Action Command_ReEnableRetries(Handle timer){
-	g_DisableRetryEvent = true;
+	g_DisableRetryEvent = false;
 }
 
 public Action Command_StopChaos(int client, int args){
@@ -372,7 +372,7 @@ public Action Timer_ResetPlaySound(Handle timer){
 }
 public void RetryEvent(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
-	if(!g_DisableRetryEvent) return;
+	if(g_DisableRetryEvent) return;
 	StopTimer(g_NewEvent_Timer);
 	DecideEvent(INVALID_HANDLE);
 }
@@ -654,6 +654,7 @@ public void Chaos_MEGACHAOS(){
 	
 	g_MegaChaos = true; 
 	AnnounceChaos("MEGA CHAOS", true, true);
+	g_DisableRetryEvent = false;
 	for(int i = 1; i <= 5; i++) RetryEvent();
 	AnnounceChaos("MEGA CHAOS", true, true);
 	g_MegaChaos = false; 
