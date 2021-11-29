@@ -1,4 +1,4 @@
-# Chaos Mod for CS:GO [102 EFFECTS]
+# Chaos Mod for CS:GO [101 EFFECTS]
 
 Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 100+ unique effects into competitive or casual play such as **Portal Guns, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more!
 
