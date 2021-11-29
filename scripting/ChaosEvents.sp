@@ -109,10 +109,12 @@ public void Chaos(){
 	}
 
 	if(ValidMapPoints()){
-		if(IsChaosEnabled("Chaos_LittleChooks"))  Chaos_LittleChooks();
-		if(IsChaosEnabled("Chaos_BigChooks"))  Chaos_BigChooks();
+		if(g_CanSpawnChickens){
+			if(IsChaosEnabled("Chaos_LittleChooks"))  Chaos_LittleChooks();
+			if(IsChaosEnabled("Chaos_BigChooks"))  Chaos_BigChooks();
+			if(IsChaosEnabled("Chaos_MamaChook"))  Chaos_MamaChook();
+		}
 		if(IsChaosEnabled("Chaos_MoneyRain"))  Chaos_MoneyRain();
-		if(IsChaosEnabled("Chaos_MamaChook"))  Chaos_MamaChook();
 		if(IsChaosEnabled("Chaos_RandomTeleport"))  Chaos_RandomTeleport();
 		if(IsChaosEnabled("Chaos_LavaFloor"))  Chaos_LavaFloor();
 		if(IsChaosEnabled("Chaos_SmokeMap"))  Chaos_SmokeMap();
