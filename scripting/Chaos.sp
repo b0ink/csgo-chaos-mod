@@ -180,7 +180,6 @@ public void OnClientPutInServer(int client){
 }
 
 
-#include "ChaosEvents.sp"
 
 
 //TODO move these into functions in another script that can be called on map start
@@ -188,6 +187,10 @@ int FogIndex = -1;
 int g_randomCache[18];
 
 float g_OriginalSpawnVec[MAXPLAYERS+1][3];
+
+
+#include "ChaosEvents.sp"
+
 
 public void OnMapStart(){
 	char mapName[64];
@@ -602,7 +605,7 @@ public void Chaos_RandomInvisiblePlayer(){
 
 
 
-
+//todo, delay each mega effect by half a second rather than blindly spawn it in 5 at a time
 public void Chaos_MEGACHAOS(){
 	if(CountingCheckDecideChaos()) return; 
 	if(g_ClearChaos){
@@ -642,10 +645,10 @@ public void Chaos_MEGACHAOS(){
 float g_AllPositions[MAXPLAYERS+1][3];
 
 
-bool DoRandomTeleport(int client = -1){
+void  DoRandomTeleport(int client = -1){
 	Log("[Chaos] Running: DoRandomTeleport (function, not chaos event)");
 
-	if(g_MapCoordinates == INVALID_HANDLE) return false;
+	// if(g_MapCoordinates == INVALID_HANDLE) return false;
 
 	ClearArray(g_UnusedCoordinates);
 
@@ -654,7 +657,6 @@ bool DoRandomTeleport(int client = -1){
 		GetArrayArray(g_MapCoordinates, i, vec);
 		PushArrayArray(g_UnusedCoordinates, vec);
 	}
-	// g_UnusedCoordinates = CloneArray(g_MapCoordinates);
 	if(client == -1){
 		for(int i = 0; i <= MaxClients; i++){
 			if(IsValidClient(i) && IsPlayerAlive(i) && GetArraySize(g_UnusedCoordinates) > 0){
@@ -666,7 +668,6 @@ bool DoRandomTeleport(int client = -1){
 				RemoveFromArray(g_UnusedCoordinates, randomCoord);
 			}
 		}
-		return true;
 	}else{
 		int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
 		float vec[3];
@@ -674,7 +675,6 @@ bool DoRandomTeleport(int client = -1){
 		TeleportEntity(client, vec, NULL_VECTOR, NULL_VECTOR);
 		PrintToConsole(client, "%N to %f %f %f", client, vec[0], vec[1], vec[2]);
 		RemoveFromArray(g_UnusedCoordinates, randomCoord);
-		return true;
 	}
 }
 

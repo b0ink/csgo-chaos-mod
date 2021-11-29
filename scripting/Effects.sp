@@ -69,10 +69,7 @@ void Chaos_FakeTeleport(){
 			FakeTelport_loc[i] = vec;
 		}
 	}
-	if(!DoRandomTeleport()){
-		RetryEvent();
-		return;
-	}
+	DoRandomTeleport();
 	FakeTeleport_Timer = CreateTimer(FakeTeleport_Expire, Timer_ResetFakeTeleport, _, TIMER_FLAG_NO_MAPCHANGE);
 }
 public Action Timer_ResetFakeTeleport(Handle timer){
@@ -96,10 +93,7 @@ void Chaos_Soccerballs(){
 
 	Log("[Chaos] Running: Chaos_Soccerballs");
 
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 
 	char MapName[128];
 	GetCurrentMap(MapName, sizeof(MapName));
@@ -159,17 +153,12 @@ void Chaos_FakeCrash(){
 	if(g_ClearChaos){    }
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_FakeCrash");
-	if(GetRandomInt(0, 100) <= 25){
-		AnnounceChaos("Fake Crash");
-		lag = true;
-		CreateTimer(1.0, Timer_nolag);
-		while(lag){
-			if(!lag) break;
-		}
-	}else{
-		RetryEvent();
+	AnnounceChaos("Fake Crash");
+	lag = true;
+	CreateTimer(1.0, Timer_nolag);
+	while(lag){
+		if(!lag) break;
 	}
-
 }
 public Action Timer_nolag(Handle timer){
 	lag = false;
@@ -201,10 +190,7 @@ void Chaos_SpawnFlashbangs(){
 	if(DecidingChaos()) return;
 
 	Log("[Chaos] Running: Chaos_SpawnFlashbangs");
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
@@ -293,10 +279,7 @@ void Chaos_SpawnExplodingBarrels(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_SpawnExplodingBarrels");
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
@@ -618,22 +601,19 @@ Action Chaos_DiscoFog(Handle timer = null, bool EndChaos = false){
 	g_DiscoFog_Expire = GetChaosTime("Chaos_DiscoFog", 25.0);
 	Log("[Chaos] Running: Chaos_DiscoFog");
 	
-	if(FogIndex != -1){
-		char color[32];
-		FormatEx(color, sizeof(color), "%i %i %i", GetRandomInt(0,255), GetRandomInt(0,255), GetRandomInt(0,255));
-		DispatchKeyValue(FogIndex, "fogcolor", color);
-		// DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
-		DispatchKeyValueFloat(FogIndex, "fogend", 800.0);
-		DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.92);
-		// DispatchKeyValueFloat(FogIndex, "farz", -1.0);
-		AcceptEntityInput(FogIndex, "TurnOn");
-		AnnounceChaos("Disco Fog");
-		g_DiscoFog = true;
-		g_DiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
-		if(g_DiscoFog_Expire > 0.0) g_DiscoFog_Timer = CreateTimer(g_DiscoFog_Expire, Chaos_DiscoFog, true);
-	}else{
-		RetryEvent();
-	}
+	char color[32];
+	FormatEx(color, sizeof(color), "%i %i %i", GetRandomInt(0,255), GetRandomInt(0,255), GetRandomInt(0,255));
+	DispatchKeyValue(FogIndex, "fogcolor", color);
+	// DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
+	DispatchKeyValueFloat(FogIndex, "fogend", 800.0);
+	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.92);
+	// DispatchKeyValueFloat(FogIndex, "farz", -1.0);
+	AcceptEntityInput(FogIndex, "TurnOn");
+	AnnounceChaos("Disco Fog");
+	g_DiscoFog = true;
+	g_DiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+	if(g_DiscoFog_Expire > 0.0) g_DiscoFog_Timer = CreateTimer(g_DiscoFog_Expire, Chaos_DiscoFog, true);
+
 }
 public Action Timer_NewFogColor(Handle timer){
 	if(g_DiscoFog){
@@ -833,10 +813,7 @@ void Chaos_RespawnTheDead_Randomly(){
 	if(g_ClearChaos){	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_RespawnTheDead_Randomly");
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
 			if(!IsPlayerAlive(i)){
@@ -1083,10 +1060,7 @@ public void Chaos_ChickensIntoPlayers(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_ChickensIntoPlayers");
 
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 	//todo: chickens get stuck, saw a video somewhere that its possible for them to move around like normal
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
@@ -1119,10 +1093,7 @@ public void Chaos_MamaChook(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_MamaChook");
-	if(!ValidMapPoints() || !g_CanSpawnChickens){
-		RetryEvent();
-		return;
-	}
+
 
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
@@ -1152,10 +1123,6 @@ public void Chaos_BigChooks(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_BigChooks");
 
-	if(!ValidMapPoints() || !g_CanSpawnChickens){
-		RetryEvent();
-		return;
-	}
 
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
@@ -1185,10 +1152,7 @@ public void Chaos_LittleChooks(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_LittleChooks");
 
-	if(!ValidMapPoints() || !g_CanSpawnChickens){
-		RetryEvent();
-		return;
-	}
+
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
 		if(chance <= 25){ //too many chickens is a no no
@@ -1299,10 +1263,7 @@ void Chaos_MoneyRain(){
 	Log("[Chaos] Running: Chaos_MoneyRain");
 
 	cvar("sv_dz_cash_bundle_size", "500");
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int ent = CreateEntityByName("item_cash");
 		if(ent != -1){
@@ -1347,10 +1308,7 @@ void Chaos_C4Chicken(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_C4Chicken");
-	if(g_c4Chicken){
-		RetryEvent();
-		return;
-	}
+
 	g_c4Chicken = true;
 	C4Chicken(); //convert any planted c4's to chicken
 	AnnounceChaos("C4 Chicken");
@@ -1840,11 +1798,7 @@ void Chaos_RandomTeleport(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_RandomTeleport");
-
-	if(!DoRandomTeleport()){
-		RetryEvent();
-		return;
-	}
+	DoRandomTeleport();
 
 	AnnounceChaos("Random Teleport");
 }
@@ -1857,10 +1811,7 @@ void Chaos_LavaFloor(){
 	if(DecidingChaos()) return;
 
 	Log("[Chaos] Running: Chaos_LavaFloor");
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 	for(int i = 0; i <=  GetArraySize(g_MapCoordinates)-1; i++){
 		int spawnChance = GetRandomInt(0,100);
 		if(spawnChance <= 25){
@@ -2074,14 +2025,9 @@ void Chaos_SlayRandomPlayer(){
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_SlayRandomPlayer");
 
-	int aliveT = 0;
-	int aliveCT = 0;
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
-			if(GetClientTeam(i) == CS_TEAM_CT) aliveCT++;
-			if(GetClientTeam(i) == CS_TEAM_T) aliveT++;
-		}
-	}
+
+	int aliveCT = GetAliveCTCount();
+	int aliveT = GetAliveTCount();
 	int RandomTSlay = GetRandomInt(1, aliveT);
 	int RandomCTSlay = GetRandomInt(1, aliveCT);
 
@@ -2113,11 +2059,8 @@ void Chaos_SlayRandomPlayer(){
 			}
 		}
 	}
-	if(aliveCT < 2 && aliveT < 2){
-		RetryEvent();
-	}else{
-		AnnounceChaos("Slay Random Player On Each Team");
-	}
+
+	AnnounceChaos("Slay Random Player On Each Team");
 }
 
 
@@ -2185,23 +2128,18 @@ Action Chaos_LightsOff(Handle timer = null, bool EndChaos = false){
 	}
 	if(DecidingChaos()) return;
 
-	if(FogIndex != -1){
-		g_LightsOff_Duration = GetChaosTime("Chaos_LightsOff", 30.0);
-		Log("[Chaos] Running: Chaos_LightsOff");
-		DispatchKeyValue(FogIndex, "fogcolor", "0 0 0");
-		DispatchKeyValueFloat(FogIndex, "fogend", 0.0);
-		DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.9989);
-		// DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.998);
-		DispatchKeyValueFloat(FogIndex, "farz", -1.0);
-		AnnounceChaos("Who turned the lights off?");
-		AcceptEntityInput(FogIndex, "TurnOn");
-		if(g_LightsOff_Duration  > 0) g_LightsOff_Timer = CreateTimer(g_LightsOff_Duration, Chaos_LightsOff, true);
-		//Random chance for night vision? or separate chaos
+	g_LightsOff_Duration = GetChaosTime("Chaos_LightsOff", 30.0);
+	Log("[Chaos] Running: Chaos_LightsOff");
+	DispatchKeyValue(FogIndex, "fogcolor", "0 0 0");
+	DispatchKeyValueFloat(FogIndex, "fogend", 0.0);
+	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.9989);
+	// DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.998);
+	DispatchKeyValueFloat(FogIndex, "farz", -1.0);
+	AnnounceChaos("Who turned the lights off?");
+	AcceptEntityInput(FogIndex, "TurnOn");
+	if(g_LightsOff_Duration  > 0) g_LightsOff_Timer = CreateTimer(g_LightsOff_Duration, Chaos_LightsOff, true);
+	//Random chance for night vision? or separate chaos
 
-	}else{
-		Log("[Chaos] Couldn't find fog index");
-		RetryEvent();
-	}
 }
 
 void Chaos_NightVision(){
@@ -2237,18 +2175,14 @@ Action Chaos_NormalWhiteFog(Handle timer = null, bool EndChaos = false){
 	g_NormalWhiteFog_Duration = GetChaosTime("Chaos_NormalWhiteFog", 45.0);
 	Log("[Chaos] Running: Chaos_NormalWhiteFog");
 
-	if(FogIndex != -1){
-		DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
-		DispatchKeyValueFloat(FogIndex, "fogend", 800.0);
-		DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.8);
-		DispatchKeyValueFloat(FogIndex, "farz", -1.0);
-		AcceptEntityInput(FogIndex, "TurnOn");
-		AnnounceChaos("Fog");
-		if(g_NormalWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_NormalWhiteFog_Duration, Chaos_NormalWhiteFog, true);
-	}else{
-		Log("[Chaos] Couldn't find fog index");
-		RetryEvent();
-	}
+	DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
+	DispatchKeyValueFloat(FogIndex, "fogend", 800.0);
+	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.8);
+	DispatchKeyValueFloat(FogIndex, "farz", -1.0);
+	AcceptEntityInput(FogIndex, "TurnOn");
+	AnnounceChaos("Fog");
+	if(g_NormalWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_NormalWhiteFog_Duration, Chaos_NormalWhiteFog, true);
+
 }
 
 float g_ExtremeWhiteFog_Duration = 45.0;
@@ -2263,18 +2197,14 @@ Action Chaos_ExtremeWhiteFog(Handle timer = null, bool EndChaos = false){
 	g_ExtremeWhiteFog_Duration = GetChaosTime("Chaos_NormalWhiteFog", 45.0);
 	Log("[Chaos] Running: Chaos_NormalWhiteFog");
 
-	if(FogIndex != -1){
-		DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
-		DispatchKeyValueFloat(FogIndex, "fogend", 400.0);
-		DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 1.0);
-		DispatchKeyValueFloat(FogIndex, "farz", -1.0);
-		AcceptEntityInput(FogIndex, "TurnOn");
-		AnnounceChaos("Fog");
-		if(g_ExtremeWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_ExtremeWhiteFog_Duration, Chaos_ExtremeWhiteFog, true);
-	}else{
-		Log("[Chaos] Couldn't find fog index");
-		RetryEvent();
-	}
+	DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
+	DispatchKeyValueFloat(FogIndex, "fogend", 400.0);
+	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 1.0);
+	DispatchKeyValueFloat(FogIndex, "farz", -1.0);
+	AcceptEntityInput(FogIndex, "TurnOn");
+	AnnounceChaos("Fog");
+	if(g_ExtremeWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_ExtremeWhiteFog_Duration, Chaos_ExtremeWhiteFog, true);
+
 }
 
 
@@ -2283,16 +2213,12 @@ void Chaos_RandomSkybox(){
 	if(g_ClearChaos){
 	}
 	if(DecidingChaos()) return;
-	char MapName[128];
-	GetCurrentMap(MapName, sizeof(MapName));
-	if(StrEqual(MapName, "de_dust2", false) == false){
-		Log("[Chaos] Running: Chaos_RandomSkybox");
-		int randomSkyboxIndex = GetRandomInt(0, sizeof(skyboxes)-1);
-		DispatchKeyValue(0, "skyname", skyboxes[randomSkyboxIndex]);
-		AnnounceChaos("Random Skybox");
-	}else{
-		RetryEvent();
-	}
+	
+	Log("[Chaos] Running: Chaos_RandomSkybox");
+	int randomSkyboxIndex = GetRandomInt(0, sizeof(skyboxes)-1);
+	DispatchKeyValue(0, "skyname", skyboxes[randomSkyboxIndex]);
+	AnnounceChaos("Random Skybox");
+
 }
 
 float g_LowRender_Duration = 30.0;
@@ -2306,14 +2232,10 @@ Action Chaos_LowRenderDistance(Handle timer = null, bool EndChaos = false){
 	if(DecidingChaos()) return;
 	g_LowRender_Duration = GetChaosTime("Chaos_LowRenderDistance", 30.0);
 	Log("[Chaos] Running: Chaos_LowRenderDistance");
-	if(FogIndex != -1){
-		DispatchKeyValueFloat(FogIndex, "farz", 450.0);
-		AnnounceChaos("Low Render Distance");
-		if(g_LowRender_Duration > 0 ) g_LowRender_Timer = CreateTimer(g_LowRender_Duration, Chaos_LowRenderDistance, true);
-	}else{
-		Log("[Chaos] Couldn't find fog index");
-		RetryEvent();
-	}
+	DispatchKeyValueFloat(FogIndex, "farz", 450.0);
+	AnnounceChaos("Low Render Distance");
+	if(g_LowRender_Duration > 0 ) g_LowRender_Timer = CreateTimer(g_LowRender_Duration, Chaos_LowRenderDistance, true);
+
 }
 
 
@@ -2348,10 +2270,7 @@ void Chaos_SmokeMap(){
 	}
 	if(DecidingChaos()) return;
 	Log("[Chaos] Running: Chaos_SmokeMap");
-	if(!ValidMapPoints()){
-		RetryEvent();
-		return;
-	}
+
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
