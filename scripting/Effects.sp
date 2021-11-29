@@ -1351,7 +1351,8 @@ Action Chaos_DecoyDodgeball(Handle timer = null, bool EndChaos = false){
 				if(ValidAndAlive(i)){
 					StripPlayer(i, true, true, true); //strip grenades only
 					SetEntityHealth(i, 100);
-					FakeClientCommand(i, "use weapon_knife");
+					ClientCommand(i, "slot1");
+					// FakeClientCommand(i, "use weapon_knife");
 				}
 			}
 		}
