@@ -80,6 +80,7 @@ public void AutoPlantRoundEnd(){
     if(g_BombPlanted){
         g_BombPlanted = false;
         GameRules_SetProp("m_bBombPlanted", 0);
+        g_PlantedSite = -1;
     }
 }
 
@@ -111,7 +112,7 @@ public Action PlantBomb(Handle timer, int client)
     } 
     else
     {
-        CS_TerminateRound(1.0, CSRoundEnd_Draw); // todo; ??
+        // CS_TerminateRound(1.0, CSRoundEnd_Draw); // todo; ??
     }
 }
 
