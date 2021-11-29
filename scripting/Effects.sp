@@ -998,7 +998,48 @@ void Chaos_AutoPlantC4(){
 	Log("[Chaos] Running: Chaos_AutoPlantC4");
 
 	if(g_BombPlanted){
-		//todo: teleport the bomb to another bomb site? haha
+		//todo make this a little cleaner
+		float newBombPosition[3];
+		char newBombSiteName[64];
+		if(g_PlantedSite == BOMBSITE_A && bombSiteB != INVALID_HANDLE){
+			int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
+			GetArrayArray(bombSiteB, randomCoord, newBombPosition);
+			newBombSiteName = "Bombsite B";
+			g_PlantedSite = BOMBSITE_B;
+		}else if(g_PlantedSite == BOMBSITE_B && bombSiteA != INVALID_HANDLE){
+			int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
+			GetArrayArray(bombSiteA, randomCoord, newBombPosition);
+			newBombSiteName = "Bombsite A";
+			g_PlantedSite = BOMBSITE_A;
+		}else if(g_PlantedSite == -1 && bombSiteA != INVALID_HANDLE && bombSiteB != INVALID_HANDLE){
+			if(GetRandomInt(0,100) <= 50){
+				int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
+				GetArrayArray(bombSiteA, randomCoord, newBombPosition);
+				newBombSiteName = "Bombsite A";
+				g_PlantedSite = BOMBSITE_A;
+			}else{
+				int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
+				GetArrayArray(bombSiteB, randomCoord, newBombPosition);
+				newBombSiteName = "Bombsite B";
+				g_PlantedSite = BOMBSITE_B;
+			}
+		}else{
+			RetryEvent();
+			return;
+		}
+		int bombEnt = FindEntityByClassname(-1, "planted_c4");
+		if(g_c4chickenEnt != -1) bombEnt = g_c4chickenEnt;
+		newBombPosition[2] = newBombPosition[2] - 64;
+		if(bombEnt != -1){
+			TeleportEntity(bombEnt, newBombPosition, NULL_VECTOR, NULL_VECTOR);
+			char AnnounceMessage[128];
+			FormatEx(AnnounceMessage, sizeof(AnnounceMessage), "Teleport bomb to %s", newBombSiteName);
+			AnnounceChaos(AnnounceMessage);
+			return;
+		}else{
+			g_PlantedSite = -1; //fooked up
+		}
+
 		RetryEvent();
 		return;
 	}
@@ -1010,7 +1051,7 @@ void Chaos_AutoPlantC4(){
 	}else{
 		AnnounceChaos("Auto Plant C4");
 	}
-	g_PlantedSite = -1;
+	// g_PlantedSite = -1;
 }
 
 public void Chaos_ChickensIntoPlayers(){
