@@ -110,10 +110,16 @@ public void OnPluginStart(){
 Handle g_NewEvent_Timer = INVALID_HANDLE;
 bool g_PlaySound_Debounce = false;
 
+bool g_DisableRetryEvent = false;
 public Action Command_NewChaosEffect(int client, int args){
 	//todo, run effect using a name.
+	g_DisableRetryEvent = false;
 	DecideEvent(null, true);
+	CreateTimer(1.0, Command_ReEnableRetries);
 	return Plugin_Handled;
+}
+public Action Command_ReEnableRetries(Handle timer){
+	g_DisableRetryEvent = true;
 }
 
 public Action Command_StopChaos(int client, int args){
@@ -265,15 +271,19 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 	SetRandomSeed(GetTime());
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
-		g_ClearChaos = true;
-		g_Chaos_Event_Count = 0;
-		g_DecidingChaos = false;
-		g_CountingChaos = true;
-		Chaos(); //count and reset all chaos
+		CountChaos(true);
 		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
 		CreateTimer(freezeTime, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
 	return Plugin_Continue;
+}
+
+void CountChaos(bool Reset = false){
+	if(Reset) g_ClearChaos = true;
+	g_Chaos_Event_Count = 0;
+	g_DecidingChaos = false;
+	g_CountingChaos = true;
+	Chaos();
 }
 
 
@@ -290,6 +300,8 @@ bool findInArray(int[] array, int target, int arraysize){
 
 Action DecideEvent(Handle timer, bool CustomRun = false){
 	if(!CanSpawnEffect) return;
+	CountChaos();
+	
 	g_NewEvent_Timer = INVALID_HANDLE;
 	int index = sizeof(g_randomCache) - 1;
 	while(index >= 1){
@@ -324,7 +336,7 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 				EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
 			}
 		}
-		CreateTimer(2.0, Timer_ResetPlaySound);
+		CreateTimer(0.5, Timer_ResetPlaySound);
 	}
 	if(CustomRun) return;
 
@@ -360,6 +372,7 @@ public Action Timer_ResetPlaySound(Handle timer){
 }
 public void RetryEvent(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
+	if(!g_DisableRetryEvent) return;
 	StopTimer(g_NewEvent_Timer);
 	DecideEvent(INVALID_HANDLE);
 }
