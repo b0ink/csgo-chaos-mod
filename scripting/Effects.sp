@@ -1322,19 +1322,21 @@ Handle g_DecoyDodgeball_CheckDecoyTimer = INVALID_HANDLE;
 Action Chaos_DecoyDodgeball(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
-		StopTimer(g_DecoyDodgeballTimer);
-		StopTimer(g_DecoyDodgeball_CheckDecoyTimer);
 		if(g_DecoyDodgeball){
 			for(int i = 0; i <= MaxClients; i++){
 				if(ValidAndAlive(i)){
 					StripPlayer(i, true, true, true); //strip grenades only
 					SetEntityHealth(i, 100);
+					ClientCommand(i, "slot2");
 					ClientCommand(i, "slot1");
 					// FakeClientCommand(i, "use weapon_knife");
 				}
 			}
 		}
 		g_DecoyDodgeball = false;
+		StopTimer(g_DecoyDodgeballTimer);
+		delete g_DecoyDodgeball_CheckDecoyTimer;
+
 	}
 	if(DecidingChaos("Chaos_DecoyDodgeball")) return;
 	g_DecoyDoge_Expire = GetChaosTime("Chaos_DecoyDodgeball", 20.0);
@@ -1350,26 +1352,28 @@ Action Chaos_DecoyDodgeball(Handle timer = null, bool EndChaos = false){
 	}
 	AnnounceChaos("Decoy Dodgeball");
 	if(g_DecoyDoge_Expire > 0) g_DecoyDodgeballTimer = CreateTimer(g_DecoyDoge_Expire, Chaos_DecoyDodgeball, true);
-	g_DecoyDodgeball_CheckDecoyTimer = CreateTimer(5.0, Timer_CheckDecoys, TIMER_REPEAT);
+	g_DecoyDodgeball_CheckDecoyTimer = CreateTimer(5.0, Timer_CheckDecoys, _, TIMER_REPEAT);
 }
 Action Timer_CheckDecoys(Handle timer){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			bool hasDecoy = false;
-			int wepID = -1;
-			for(int slot = 0; slot < 7; slot++){
-				if((wepID = GetPlayerWeaponSlot(i, slot)) != -1){
-					char ClientWeaponName[64];
-					GetWeaponClassname(wepID, ClientWeaponName, 64);
-					if(IsValidEntity(wepID)){
-						if(StrContains(ClientWeaponName, "weapon_decoy") != -1){
-							hasDecoy = true;
-						}
-					} 
+	if(g_DecoyDodgeball){
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i)){
+				bool hasDecoy = false;
+				int wepID = -1;
+				for(int slot = 0; slot < 7; slot++){
+					if((wepID = GetPlayerWeaponSlot(i, slot)) != -1){
+						char ClientWeaponName[64];
+						GetWeaponClassname(wepID, ClientWeaponName, 64);
+						if(IsValidEntity(wepID)){
+							if(StrContains(ClientWeaponName, "weapon_decoy") != -1){
+								hasDecoy = true;
+							}
+						} 
+					}
 				}
-			}
-			if(!hasDecoy){
-				GivePlayerItem(i, "weapon_decoy");
+				if(!hasDecoy){
+					GivePlayerItem(i, "weapon_decoy");
+				}
 			}
 		}
 	}
@@ -1599,7 +1603,7 @@ Action Chaos_RandomWeapons(Handle timer = null, bool EndChaos = false){
 	// g_RandomWeaponRound = true;
 	g_PlayersCanDropWeapon = false;
 	Timer_GiveRandomWeapon();
-	g_Chaos_RandomWeapons_Timer = CreateTimer(g_Chaos_RandomWeapons_Interval, Timer_GiveRandomWeapon, TIMER_REPEAT);
+	g_Chaos_RandomWeapons_Timer = CreateTimer(g_Chaos_RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
 	if(g_RandWep_Expire > 0) g_RandWep_Timer = CreateTimer(g_RandWep_Expire, Chaos_RandomWeapons, true);
 	AnnounceChaos("Random Weapons!");
 }
@@ -2376,17 +2380,18 @@ Action Chaos_DiscoPlayers(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		DiscoPlayers = true;
 		StopTimer(DiscoPlayers_Timer);
-		StopTimer(DiscoPlayers_TimerRepeat);
+		delete DiscoPlayers_TimerRepeat;
 		if(EndChaos) AnnounceChaos("Disco Players", true);
 	}
 	if(DecidingChaos("Chaos_DiscoPlayers")) return;
 	DiscoPlayers_Duration = GetChaosTime("Chaos_DiscoPlayers", 30.0);
 	Log("[Chaos] Running: Chaos_DiscoPlayers");
-	StopTimer(DiscoPlayers_TimerRepeat);
+	// StopTimer(DiscoPlayers_TimerRepeat);
+	delete DiscoPlayers_TimerRepeat;
 	DiscoPlayers = true;
 	Timer_DiscoPlayers();
 	if(DiscoPlayers_Duration > 0) DiscoPlayers_Timer = CreateTimer(DiscoPlayers_Duration, Chaos_DiscoPlayers, true);
-	DiscoPlayers_TimerRepeat = CreateTimer(1.0, Timer_DiscoPlayers, TIMER_REPEAT);
+	DiscoPlayers_TimerRepeat = CreateTimer(1.0, Timer_DiscoPlayers, _, TIMER_REPEAT);
 	AnnounceChaos("Disco Players");
 }
 
