@@ -722,10 +722,10 @@ void  DoRandomTeleport(int client = -1){
 
 
 void StopTimer(Handle &timer){
-	if(timer != null && timer != INVALID_HANDLE){
+	if(timer != INVALID_HANDLE){
 		KillTimer(timer);
+		timer = INVALID_HANDLE;
 	}
-	timer = INVALID_HANDLE;
 }
 
 
