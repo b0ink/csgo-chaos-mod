@@ -72,6 +72,7 @@ char skyboxes[][] = {
 //no touchy
 bool g_MegaChaos = false;
 int g_Chaos_Event_Count = 0;
+char g_SelectedChaosEffect[64] = "";
 // int g_Previous_Chaos_Event = -1;
 bool g_BombPlanted = false;
 bool g_PlayersCanDropWeapon = true;
