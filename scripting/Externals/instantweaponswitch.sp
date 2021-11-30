@@ -8,7 +8,7 @@ public void GiveAndSwitchWeapon(int client, char[] weaponName){
 	char playersWeapon[64];
 	GetClientWeapon(client, playersWeapon, sizeof(playersWeapon));
 
-	StripPlayer(client); //keeps bomb and knives
+	StripPlayer(client, true, true, false, true); //keeps bomb and knives
 	int weapon = GivePlayerItem(client, weaponName);
 
 	//if player has their knife or bomb out, don't switch to new weapon
