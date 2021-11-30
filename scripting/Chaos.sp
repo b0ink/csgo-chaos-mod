@@ -120,25 +120,26 @@ public Action Command_NewChaosEffect(int client, int args){
 	GetCmdArg(1, effectName, sizeof(effectName));
 
 	g_DisableRetryEvent = true;
-
-	if(args == 1){
-		if(strlen(effectName) >=3){
-			if(CanSpawnEffect){
-				g_SelectedChaosEffect = effectName;
-				g_DecidingChaos = true;
-				g_ClearChaos = false;
-				Chaos();
+	if(CanSpawnEffect){
+		if(args == 1){
+			if(strlen(effectName) >=3){
+					g_SelectedChaosEffect = effectName;
+					g_DecidingChaos = true;
+					g_ClearChaos = false;
+					Chaos();
+				
 			}else{
-				ReplyToCommand(client, "You can't spawn new effects right now, please wait until the round starts.");
+				ReplyToCommand(client, "Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
+				return Plugin_Handled;
 			}
 		}else{
-			ReplyToCommand(client, "Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
+			DecideEvent(null, true);
 		}
 	}else{
-		DecideEvent(null, true);
+		ReplyToCommand(client, "You can't spawn new effects right now, please wait until the round starts.");
+		return Plugin_Handled;
 	}
 
-	
 	CreateTimer(1.0, Command_ReEnableRetries);
 	g_SelectedChaosEffect = "";
 	return Plugin_Handled;
