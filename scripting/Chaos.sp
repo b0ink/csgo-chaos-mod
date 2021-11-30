@@ -923,7 +923,7 @@ public void cvar(char[] cvarname, char[] value){
 	if (hndl != null) hndl.SetString(value, true);
 }
 
-void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false)
+void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false)
 {
 	if (IsValidClient(client) && IsPlayerAlive(client))
 	{
@@ -936,13 +936,14 @@ void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool strip
 						continue;
 					if(j == 4 && keepBomb) //keep bomb
 						continue;
+					if(j == 3 && KeepGrenades) continue;
 					if (IsValidEntity(iTempWeapon))
 						RemovePlayerItem(client, iTempWeapon);
-				}else{
+				}
+				if(stripGrenadesOnly && !KeepGrenades){
 					if(j==3)
 						RemovePlayerItem(client, iTempWeapon);
 				}
-				
 			}
 		// if(knife) ClientCommand(client, "slot3");// zmienia bro� na n�	
 	}
