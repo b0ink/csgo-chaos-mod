@@ -95,16 +95,16 @@ bool g_CountingChaos = false;
 
 
 public void PrecacheTextures(){
-	PrecacheModel("props_c17/oildrum001_explosive.mdl", true);
-	AddFileToDownloadsTable("materials/models/props_c17/oil_drum001a_normal.vtf");
-	AddFileToDownloadsTable("materials/models/props_c17/oil_drum001h.vmt");
-	AddFileToDownloadsTable("materials/models/props_c17/oil_drum001h.vtf");
-	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.dx80.vtx");
-	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.dx90.vtx");
-	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.mdl");
-	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.phy");
-	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.sw.vtx");
-	AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.vvd");
+	// PrecacheModel("props_c17/oildrum001_explosive.mdl", true);
+	// AddFileToDownloadsTable("materials/models/props_c17/oil_drum001a_normal.vtf");
+	// AddFileToDownloadsTable("materials/models/props_c17/oil_drum001h.vmt");
+	// AddFileToDownloadsTable("materials/models/props_c17/oil_drum001h.vtf");
+	// AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.dx80.vtx");
+	// AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.dx90.vtx");
+	// AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.mdl");
+	// AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.phy");
+	// AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.sw.vtx");
+	// AddFileToDownloadsTable("models/props_c17/oildrum001_explosive.vvd");
 	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
 }
 
