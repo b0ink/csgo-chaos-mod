@@ -959,7 +959,7 @@ stock bool IsValidClient(int client, bool nobots = true)
     return IsClientInGame(client);
 }
 stock bool ValidAndAlive(int client){
-	return (IsValidClient(client) && IsPlayerAlive(client));
+	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
 
 void DisplayCenterTextToAll(const char[] message)
