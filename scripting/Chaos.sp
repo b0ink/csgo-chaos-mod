@@ -945,7 +945,6 @@ void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool strip
 						RemovePlayerItem(client, iTempWeapon);
 				}
 			}
-		// if(knife) ClientCommand(client, "slot3");// zmienia bro� na n�	
 	}
 }
 
