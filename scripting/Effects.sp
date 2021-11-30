@@ -1475,7 +1475,7 @@ Action Chaos_RandomSlap(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_RandomSlap");
 	StopTimer(Chaos_RandomSlap_Timer);
 	cvar("sv_falldamage_scale", "0");
-	Chaos_RandomSlap_Timer = CreateTimer(g_Chaos_RandomSlap_Interval, Timer_RandomSlap, TIMER_REPEAT);
+	Chaos_RandomSlap_Timer = CreateTimer(g_Chaos_RandomSlap_Interval, Timer_RandomSlap, _,TIMER_REPEAT);
 	if(g_RandomSlap_Expire > 0) g_RandomSlapDuration_Timer = CreateTimer(g_RandomSlap_Expire, Chaos_RandomSlap, true);
 	AnnounceChaos("Ghost Slaps");
 }
