@@ -1653,7 +1653,7 @@ public void Chaos_RandomMolotovSpawn(){
 	Log("[Chaos] Running: Chaos_RandomMolotovSpawn");
 	
 	cvar("inferno_flame_lifetime", "4");
-	Chaos_MolotovSpawn_Timer = CreateTimer(g_Chaos_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, TIMER_REPEAT);
+	Chaos_MolotovSpawn_Timer = CreateTimer(g_Chaos_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT);
 	AnnounceChaos("Raining Fire!");
 }
 
@@ -2194,8 +2194,8 @@ Handle g_ExtremeWhiteFog_Timer = INVALID_HANDLE;
 Action Chaos_ExtremeWhiteFog(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
-		StopTimer(g_ExtremeWhiteFog_Timer);
 		AcceptEntityInput(FogIndex, "TurnOff");
+		StopTimer(g_ExtremeWhiteFog_Timer);
 	}
 	if(DecidingChaos("Chaos_ExtremeWhiteFog")) return;
 	g_ExtremeWhiteFog_Duration = GetChaosTime("Chaos_NormalWhiteFog", 45.0);
