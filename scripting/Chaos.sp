@@ -167,7 +167,7 @@ public Action Command_StartChaos(int client, int args){
 		g_Chaos_Event_Count = 0;
 		g_DecidingChaos = false;
 		g_CountingChaos = true;
-		Chaos(); //count and reset all chaos
+		Chaos();
 		CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 		AnnounceChaos("Chaos is Enabled!");
 	}else{
