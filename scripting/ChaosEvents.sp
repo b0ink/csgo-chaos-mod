@@ -9,7 +9,10 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Aimbot"))  Chaos_Aimbot();
 	if(IsChaosEnabled("Chaos_InfiniteAmmo"))  Chaos_InfiniteAmmo();
 	if(IsChaosEnabled("Chaos_DecoyDodgeball"))  Chaos_DecoyDodgeball();
-	if(!g_MegaChaos) if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
+	if(!g_MegaChaos){
+		if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
+		if(GetRandomInt(0, 100) <= 50) if(IsChaosEnabled("Chaos_FakeCrash", 0))  Chaos_FakeCrash(); //risky.. lol
+	}
 	if(IsChaosEnabled("Chaos_RandomInvisiblePlayer"))  Chaos_RandomInvisiblePlayer();
 	if(IsChaosEnabled("Chaos_Bankrupt"))  Chaos_Bankrupt();
 	if(IsChaosEnabled("Chaos_Shields"))  Chaos_Shields();
@@ -80,7 +83,6 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Drugs"))  Chaos_Drugs();
 	if(IsChaosEnabled("Chaos_SuperJump"))  Chaos_SuperJump();
 	if(IsChaosEnabled("Chaos_NoCrosshair"))  Chaos_NoCrosshair();
-	if(GetRandomInt(0, 100) <= 25) if(IsChaosEnabled("Chaos_FakeCrash", 0))  Chaos_FakeCrash(); //risky.. lol
 	if(IsChaosEnabled("Chaos_ChickensIntoPlayers"))  Chaos_ChickensIntoPlayers();
 	if(IsChaosEnabled("Chaos_Juggernaut"))  Chaos_Juggernaut();
 
