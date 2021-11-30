@@ -112,10 +112,35 @@ bool g_PlaySound_Debounce = false;
 
 bool g_DisableRetryEvent = false;
 public Action Command_NewChaosEffect(int client, int args){
-	//todo, run effect using a name.
+	if(args > 1){
+		ReplyToCommand(client, "Usage: sm_chaos <Effect Name (optional)>");
+		return Plugin_Handled;
+	}
+	char effectName[64];
+	GetCmdArg(1, effectName, sizeof(effectName));
+
 	g_DisableRetryEvent = true;
-	DecideEvent(null, true);
+
+	if(args == 1){
+		if(strlen(effectName) >=3){
+			if(CanSpawnEffect){
+				g_SelectedChaosEffect = effectName;
+				g_DecidingChaos = true;
+				g_ClearChaos = false;
+				Chaos();
+			}else{
+				ReplyToCommand(client, "You can't spawn new effects right now, please wait until the round starts.");
+			}
+		}else{
+			ReplyToCommand(client, "Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
+		}
+	}else{
+		DecideEvent(null, true);
+	}
+
+	
 	CreateTimer(1.0, Command_ReEnableRetries);
+	g_SelectedChaosEffect = "";
 	return Plugin_Handled;
 }
 public Action Command_ReEnableRetries(Handle timer){
@@ -322,7 +347,7 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 	// g_Previous_Chaos_Event = g_RandomEvent; //redundant, scheduled to be removed;
 	g_randomCache[0] = g_RandomEvent;
 	// PrintToChatAll("The chaos event count is %i",g_Chaos_Event_Count);
-	PrintToConsoleAll("The chaos event count is %i",g_Chaos_Event_Count);
+	// PrintToConsoleAll("The chaos event count is %i",g_Chaos_Event_Count);
 	// CPrintToChatAll("Event was %i", g_RandomEvent);
 	g_DecidingChaos = true;
 	g_ClearChaos = false;
@@ -413,6 +438,14 @@ public Action ResetRoundChaos(Handle timer){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////\////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+//todo: dealing with players who joing after the round starts.
+/*
+	- this would affect the resetspawn chaos, where their initial spawn doesnt save.
+
+
+*/
+
 // void Chaos_FakeDeath(){
 // 	if(CountingCheckDecideChaos()) return;
 // 	if(g_ClearChaos){	
@@ -445,7 +478,18 @@ bool CountingCheckDecideChaos(){
 	return false;
 }
 
-bool DecidingChaos(){
+bool DecidingChaos(char[] EffectName = ""){
+	//if effectname was provided manually, 
+	if(EffectName[0] && g_SelectedChaosEffect[0]){
+		if(!g_DecidingChaos
+					|| ((StrContains(g_SelectedChaosEffect, EffectName, false) == -1) 
+					&& (StrContains(EffectName, g_SelectedChaosEffect, false) == -1))){
+						 return true;
+					}else{
+						g_SelectedChaosEffect = "";
+						return false;
+					}
+	}
 	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return true;
 	return false;
 }
@@ -561,7 +605,7 @@ void Chaos_RewindTenSeconds(){
 		g_rewind_logging_enabled = true;
 		StopTimer(g_Chaos_Rewind_Timer);
 	}
-	if(DecidingChaos()) return;
+	if(DecidingChaos("Chaos_RewindTenSeconds")) return;
 	Log("[Chaos] Running: Chaos_RewindTenSeconds");
 	g_rewind_logging_enabled = false;
 	AnnounceChaos("Rewind 10 seconds");
@@ -616,7 +660,7 @@ public void Chaos_RandomInvisiblePlayer(){
 	if(CountingCheckDecideChaos()) return; 
 	if(g_ClearChaos){
 	}
-	if(DecidingChaos()) return;
+	if(DecidingChaos("Chaos_RandomInvisiblePlayer")) return;
 	Log("[Chaos] Running: Chaos_RandomInvisiblePlayer");
 	int alivePlayers = GetAliveCTCount() + GetAliveTCount();
 	int target = GetRandomInt(0, alivePlayers - 1);
@@ -652,7 +696,7 @@ public void Chaos_MEGACHAOS(){
 	if(g_ClearChaos){
 
 	}
-	if(DecidingChaos()) return;
+	if(DecidingChaos("Chaos_MEGACHAOS")) return;
 	Log("[Chaos] Running: Chaos_MEGACHAOS");
 	
 	g_MegaChaos = true; 
