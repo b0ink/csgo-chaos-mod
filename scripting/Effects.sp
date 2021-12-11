@@ -1734,11 +1734,11 @@ void Chaos_TeammateSwap(){
 	ClearArray(ctIndex);
 
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && GetClientTeam(i) == CS_TEAM_T){
+		if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_T){
 			float vec[3];
 			GetClientAbsOrigin(i, vec);
 			PushArrayArray(TPos, vec);
-		}else if(IsValidClient(i) && GetClientTeam(i) == CS_TEAM_CT){
+		}else if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_CT){
 			float vec[3];
 			GetClientAbsOrigin(i, vec);
 			PushArrayArray(CTPos, vec);
@@ -1746,9 +1746,9 @@ void Chaos_TeammateSwap(){
 	}
 
 	for(int i = MaxClients; i >= 0; i--){
-		if(IsValidClient(i) && GetClientTeam(i) == CS_TEAM_T){
+		if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_T){
 			PushArrayCell(tIndex, i);
-		}else if(IsValidClient(i) && GetClientTeam(i) == CS_TEAM_CT){
+		}else if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_CT){
 			PushArrayCell(ctIndex, i);
 		}
 	}
