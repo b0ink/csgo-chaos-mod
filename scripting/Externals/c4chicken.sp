@@ -8,8 +8,8 @@
 	url = "http://snbx.info/"
 */
 //CHICKEN c4
-bool g_c4Chicken = false;
-bool visibleChicken = true;
+bool g_bg_c4Chicken = false;
+bool g_bvisibleChicken = true;
 public void C4Chicken(){
 	if(!g_c4Chicken) return;
 	int c4 = -1;

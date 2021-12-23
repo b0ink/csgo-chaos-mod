@@ -26,7 +26,7 @@ public void GiveAndSwitchWeapon(int client, char[] weaponName){
     }
 }
 
-public void InstantSwitch(int client, int weapon, bool knifeAttack){	
+public void InstantSwitch(int client, int weapon, bool g_bknifeAttack){	
     float GameTime = GetGameTime();
     // if(!knifeAttack) 
     SetEntPropFloat(client, Prop_Send, "m_flNextAttack", GameTime);

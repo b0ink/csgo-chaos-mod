@@ -1,4 +1,4 @@
-bool g_TaserRound = false;
+bool g_bg_TaserRound = false;
 
 /* CREDIT TO:
     name        = "Weapon Jump",
@@ -18,7 +18,7 @@ bool g_TaserRound = false;
 #define C_WEAPON_PROPERTY_MAXIMUM       (3)
 
 /* Players weapon jump                                                       */
-bool      gl_bPlayerWeaponJump        [MAXPLAYERS + 1];
+bool g_b     gl_bPlayerWeaponJump        [MAXPLAYERS + 1];
 /* Players weapon jump velocity                                              */
 float     gl_vPlayerWeaponJumpVelocity[MAXPLAYERS + 1][3];
 
@@ -39,7 +39,7 @@ public void WeaponJumpConnect_Handler(int iClient){
 }
 
 
-// public void OnWeaponFirePost(Event hEvent, const char[] szName, bool bDontBroadcast)
+// public void OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast)
 public void weaponJump(int client, char[] szWeaponName)
 {
 	int iPlayer = client;
@@ -57,7 +57,7 @@ public void weaponJump(int client, char[] szWeaponName)
 				 // Convert the weapon properties
                     // float flKnockback = view_as<float>(arrWeaponProperty[C_WEAPON_PROPERTY_KNOCKBACK]);
                     // float flVelocity  = view_as<float>(arrWeaponProperty[C_WEAPON_PROPERTY_VELOCITY]);
-                    // bool  bGround     = view_as<bool> (arrWeaponProperty[C_WEAPON_PROPERTY_GROUND]);
+                    // bool g_b bGround     = view_as<bool> (arrWeaponProperty[C_WEAPON_PROPERTY_GROUND]);
 					// The available properties are:
 					//
 					//    "knockback" - Required: Set the weapon knockback value.
@@ -73,7 +73,7 @@ public void weaponJump(int client, char[] szWeaponName)
 					float flKnockback = g_TaserKnockback;
 					// float flKnockback = -750.0;
 					float flVelocity = 0.0;
-					bool bGround = true;
+					bool g_bbGround = true;
                     // Check if the player can weapon jump on ground
 					if (!(GetEntityFlags(iPlayer) & FL_ONGROUND) || bGround){
 						float vPlayerVelocity[3];
