@@ -1,8 +1,8 @@
 
 Handle g_BombTimer = INVALID_HANDLE;
-public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+public Action Event_BombPlanted(Handle event, char[] name, bool g_bdontBroadcast){
 	g_CanSpawnChickens = false;
-	g_BombPlanted = true;
+	BombPlanted = true;
 	C4Chicken();
 	g_BombTimer = CreateTimer(40.5, Timer_ResizeChickens); //todo get c4 timer value
 	return Plugin_Continue;
@@ -118,7 +118,7 @@ public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
 	GiveAndSwitchWeapon(client, weapons[GetRandomInt(0, sizeof(weapons))]);
 }
 
-public void OnWeaponFirePost(Event hEvent, const char[] szName, bool bDontBroadcast){
+public void OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
 
 
 
@@ -166,7 +166,7 @@ public void OnWeaponFirePost(Event hEvent, const char[] szName, bool bDontBroadc
 }
 
 
-public Action Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
+public Action Event_BulletImpact(Event event, const char[] name, bool g_bdontBroadcast){
 	Explosive_Event_BulletImpact(event, name, dontBroadcast);
 }
 
@@ -175,7 +175,7 @@ public Action Hook_BulletShot(const char[] te_name, const int[] Players, int num
 }
 
 
-public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
+public Action Event_PlayerDeath(Event event, const char[] name, bool g_bdontBroadcast){
 	// if (event.GetBool("headshot"))
 	// {
 	//     return Plugin_Handled;

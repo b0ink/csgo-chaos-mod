@@ -7,7 +7,7 @@
 // 	url = "https://github.com/xcalvinsz/explosivebullets"
 // };
 
-bool g_ExplosiveBullets = false;
+bool g_bg_ExplosiveBullets = false;
 
 #define DISTORTION "explosion_child_distort01b"
 #define FLASH "explosion_child_core04b"
@@ -23,7 +23,7 @@ public void EXPLOSIVEBULLETS_INIT(){
 	PrecacheParticleEffect(DIRT);
 	PrecacheSound(SOUND);
 }
-public Action Explosive_Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
+public Action Explosive_Event_BulletImpact(Event event, const char[] name, bool g_bdontBroadcast){
 	if (!g_ExplosiveBullets)
 		return Plugin_Continue;
 		
@@ -67,7 +67,7 @@ public Action Explosive_Hook_BulletShot(const char[] te_name, const int[] Player
 }
 
 
-public bool TR_DontHitSelf(int target, int mask, int client)
+public bool g_bTR_DontHitSelf(int target, int mask, int client)
 {
 	return target != client;
 }
@@ -118,7 +118,7 @@ void PrecacheParticleEffect(const char[] sEffectName)
 	if (table == INVALID_STRING_TABLE)
 		table = FindStringTable("ParticleEffectNames");
 		
-	bool save = LockStringTables(false);
+	bool g_bsave = LockStringTables(false);
 	AddToStringTable(table, sEffectName);
 	LockStringTables(save);
 }
@@ -145,7 +145,7 @@ void PrecacheEffect(const char[] sEffectName)
 	if (table == INVALID_STRING_TABLE)
 		table = FindStringTable("EffectDispatch");
 		
-	bool save = LockStringTables(false);
+	bool g_bsave = LockStringTables(false);
 	AddToStringTable(table, sEffectName);
 	LockStringTables(save);
 }
