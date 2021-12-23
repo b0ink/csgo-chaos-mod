@@ -11,8 +11,8 @@
 
 */
 
-bool g_Simon_Active = false;
-bool g_Simon_Says = false; // whether to say simon says or not
+bool g_bg_Simon_Active = false;
+bool g_bg_Simon_Says = false; // whether to say simon says or not
 int g_Simon_Says_Action = -1;
 char g_Simon_ActionText[64];
 int g_time = -1;
@@ -46,16 +46,16 @@ void GenerateSimonOrder(){
 
 }
 
-bool playersToDamage[MAXPLAYERS+1];
+bool g_bplayersToDamage[MAXPLAYERS+1];
 void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.0, 0.0}, float fAngles[3] = {0.0, 0.0, 0.0}, int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-// void SimonSays(int client, bool strafing, bool running){
+// void SimonSays(int client, bool g_bstrafing, bool g_brunning){
 	// if(!g_Simon_Active) return
 	// playersToDamage[client] = false;
 	if(fVel[0] || fAngles[0]){
 		//remove warnings!
 	}
 	if(g_Simon_Says_Action == 1){
-		bool strafing = false;
+		bool g_bstrafing = false;
 		if(buttons & IN_MOVELEFT) strafing = true;
 		if(buttons & IN_MOVERIGHT) strafing = true;
 		if(strafing){
@@ -66,7 +66,7 @@ void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.
 	}
 	
 	if(g_Simon_Says_Action == 2){
-		bool running = false;
+		bool g_brunning = false;
 		if(buttons & IN_FORWARD) running = true;
 		if(buttons & IN_BACK) running = true;
 		if(running){
@@ -77,7 +77,7 @@ void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.
 	}
 
 	if(g_Simon_Says_Action == 3){
-		bool jumping = false;
+		bool g_bjumping = false;
 		if(buttons & IN_JUMP) jumping = true;
 		if(jumping){
 			if(g_Simon_Says) playersToDamage[client] = true;
@@ -85,7 +85,7 @@ void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.
 	}
 		
 	if(g_Simon_Says_Action == 4){
-		bool crouching = false;
+		bool g_bcrouching = false;
 		if(buttons & IN_DUCK) crouching = true;
 		if(crouching){
 			if(!g_Simon_Says) playersToDamage[client] = true;

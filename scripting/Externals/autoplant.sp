@@ -4,7 +4,7 @@
 int bomber;
 int bombsite;
 
-bool hasBombBeenDeleted;
+bool g_bhasBombBeenDeleted;
 float bombPosition[3];
 // Handle bombTimer;
 int bombTicking;
@@ -48,7 +48,7 @@ public void AutoPlantC4(){
 
         //determine closest bombsite, and tp them to bombsite
         // float vec[3];
-        // bool locationSaved = false;
+        // bool g_blocationSaved = false;
         bombsite = GetNearestBombsite(bomber);
         g_PlantedSite = bombsite;
         if(bombsite == BOMBSITE_A && bombSiteA != INVALID_HANDLE){
@@ -77,8 +77,8 @@ public void AutoPlantC4(){
 }
 
 public void AutoPlantRoundEnd(){
-    if(g_BombPlanted){
-        g_BombPlanted = false;
+    if(BombPlanted){
+        BombPlanted = false;
         GameRules_SetProp("m_bBombPlanted", 0);
         g_PlantedSite = -1;
     }
@@ -105,7 +105,7 @@ public Action PlantBomb(Handle timer, int client)
 				TeleportEntity(bombEntity, bombPosition, NULL_VECTOR, NULL_VECTOR);
 
 				GroundEntity(bombEntity);
-				g_BombPlanted = true;
+				BombPlanted = true;
 
             }
         }
@@ -128,7 +128,7 @@ public void SendBombPlanted(int client)
     }
 }
 
-stock bool SafeRemoveWeapon(int client, int weapon)
+stock bool g_bSafeRemoveWeapon(int client, int weapon)
 {
     if (!IsValidEntity(weapon) || !IsValidEdict(weapon) || !HasEntProp(weapon, Prop_Send, "m_hOwnerEntity"))
     {
@@ -173,13 +173,13 @@ stock int GetBomber()
     return -1;
 }
 
-stock bool HasBomb(int client)
+stock bool g_bHasBomb(int client)
 {
     return GetPlayerWeaponSlot(client, 4) != -1;
 }
 
 
-stock bool IsWarmup()
+stock bool g_bIsWarmup()
 {
     return GameRules_GetProp("m_bWarmupPeriod") == 1;
 }
@@ -235,7 +235,7 @@ void GroundEntity(int entity)
     }
 }
 
-public bool TraceFilterIgnorePlayers(int entity, int contentsMask, int client)
+public bool g_bTraceFilterIgnorePlayers(int entity, int contentsMask, int client)
 {
     if (entity >= 1 && entity <= MaxClients) return false;
     return true;
