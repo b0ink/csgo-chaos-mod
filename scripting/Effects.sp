@@ -99,7 +99,7 @@ void Chaos_Soccerballs(){
 	GetCurrentMap(MapName, sizeof(MapName));
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
-			int ent = CreateEntityByName("prop_physics_override"); 
+			int ent = CreateEntityByName("prop_physics_multiplayer"); 
 			SetEntityModel(ent, "models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl"); 
 			DispatchKeyValue(ent, "StartDisabled", "false"); 
 			DispatchKeyValue(ent, "Solid", "6"); 
@@ -111,7 +111,7 @@ void Chaos_Soccerballs(){
 			AcceptEntityInput(ent, "TurnOn", ent, ent, 0); 
 			AcceptEntityInput(ent, "EnableCollision"); 
 			SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5); 
-		
+			SetEntityMoveType(ent, MOVETYPE_VPHYSICS);   
 		}
 	}
 	AnnounceChaos("Soccer balls");
