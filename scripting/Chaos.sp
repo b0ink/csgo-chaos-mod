@@ -70,8 +70,18 @@ StringMap	Chaos_Settings;
 
 int Chaos_Round_Count = 0;
 
+ConVar g_cvChaosEnabled;
+ConVar g_cvChaosEffectInterval;
+ConVar g_cvChaosRepeating;
+ConVar g_cvChaosOverwriteDuration;
+
 public void OnPluginStart(){
 	
+	g_cvChaosEnabled = CreateConVar("chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
+	g_cvChaosEffectInterval = CreateConVar("chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
+	g_cvChaosRepeating = CreateConVar("chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
+	g_cvChaosOverwriteDuration = CreateConVar("chaos_overwrite_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations", _, true, -1.0, true, 120.0);
+
 	HookEvent("round_start", Event_RoundStart);
 	HookEvent("round_end", Event_RoundEnd);	
 	HookEvent("player_death", Event_PlayerDeath);	
