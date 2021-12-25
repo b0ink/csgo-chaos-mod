@@ -70,14 +70,14 @@ char skyboxes[][] = {
 
 
 //no touchy
-bool g_bg_MegaChaos = false;
+bool g_bMegaChaos = false;
 int g_Chaos_Event_Count = 0;
 char g_SelectedChaosEffect[64] = "";
 // int g_Previous_Chaos_Event = -1;
 bool g_bBombPlanted = false;
-bool g_bg_PlayersCanDropWeapon = true;
-bool g_bg_CanSpawnChickens = true;
-int g_c4chickenEnt = -1;
+bool g_bPlayersCanDropWeapon = true;
+bool g_bCanSpawnChickens = true;
+int g_bC4ChickenEnt = -1;
 Handle g_MapCoordinates = INVALID_HANDLE;
 Handle g_UnusedCoordinates = INVALID_HANDLE;
 Handle bombSiteA = INVALID_HANDLE;
@@ -88,10 +88,10 @@ void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 
 
 
-bool g_bg_ClearChaos = false;
-bool g_bg_DecidingChaos = false;
+bool g_bClearChaos = false;
+bool g_bDecidingChaos = false;
 int g_RandomEvent = 0;
-bool g_bg_CountingChaos = false;
+// bool g_bCountingChaos = false;
 
 
 public void PrecacheTextures(){

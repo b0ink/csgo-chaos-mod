@@ -11,8 +11,8 @@
 
 */
 
-bool g_bg_Simon_Active = false;
-bool g_bg_Simon_Says = false; // whether to say simon says or not
+bool g_bSimon_Active = false;
+bool g_bSimon_Says = false; // whether to say simon says or not
 int g_Simon_Says_Action = -1;
 char g_Simon_ActionText[64];
 int g_time = -1;
@@ -23,9 +23,9 @@ float g_SimonSays_Duration = 10.0;
 
 void GenerateSimonOrder(){
 	g_Simon_Says_Action = GetRandomInt(1,4);
-	g_Simon_Says = true;
+	g_bSimon_Says = true;
 	if(GetRandomInt(0, 100) <= 50){
-		g_Simon_Says = false;
+		g_bSimon_Says = false;
 	}
 	if(g_Simon_Says_Action == 1){
 		g_Simon_ActionText = "Strafe.";
@@ -35,7 +35,7 @@ void GenerateSimonOrder(){
 	}
 	if(g_Simon_Says_Action == 3){
 		g_Simon_ActionText = "Don't Jump.";
-		g_Simon_Says = true;
+		g_bSimon_Says = true;
 	}
 	if(g_Simon_Says_Action == 4){
 		g_Simon_ActionText = "Crouch.";
@@ -46,51 +46,51 @@ void GenerateSimonOrder(){
 
 }
 
-bool g_bplayersToDamage[MAXPLAYERS+1];
+bool g_bPlayersToDamage[MAXPLAYERS+1];
 void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.0, 0.0}, float fAngles[3] = {0.0, 0.0, 0.0}, int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 // void SimonSays(int client, bool g_bstrafing, bool g_brunning){
-	// if(!g_Simon_Active) return
-	// playersToDamage[client] = false;
+	// if(!g_bSimon_Active) return
+	// g_bPlayersToDamage[client] = false;
 	if(fVel[0] || fAngles[0]){
 		//remove warnings!
 	}
 	if(g_Simon_Says_Action == 1){
-		bool g_bstrafing = false;
+		bool strafing = false;
 		if(buttons & IN_MOVELEFT) strafing = true;
 		if(buttons & IN_MOVERIGHT) strafing = true;
 		if(strafing){
-			if(!g_Simon_Says) playersToDamage[client] = true;
+			if(!g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}else{
-			if(g_Simon_Says) playersToDamage[client] = true;
+			if(g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}
 	}
 	
 	if(g_Simon_Says_Action == 2){
-		bool g_brunning = false;
+		bool running = false;
 		if(buttons & IN_FORWARD) running = true;
 		if(buttons & IN_BACK) running = true;
 		if(running){
-			if(!g_Simon_Says) playersToDamage[client] = true;
+			if(!g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}else{
-			if(g_Simon_Says) playersToDamage[client] = true;
+			if(g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}
 	}
 
 	if(g_Simon_Says_Action == 3){
-		bool g_bjumping = false;
+		bool jumping = false;
 		if(buttons & IN_JUMP) jumping = true;
 		if(jumping){
-			if(g_Simon_Says) playersToDamage[client] = true;
+			if(g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}
 	}
 		
 	if(g_Simon_Says_Action == 4){
-		bool g_bcrouching = false;
+		bool crouching = false;
 		if(buttons & IN_DUCK) crouching = true;
 		if(crouching){
-			if(!g_Simon_Says) playersToDamage[client] = true;
+			if(!g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}else{
-			if(g_Simon_Says) playersToDamage[client] = true;
+			if(g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}
 	}
 
@@ -120,20 +120,20 @@ public Action Timer_ShowAction(Handle timer){
 		if(g_time >= 0){
 			for(int i = 0; i <= MaxClients; i++){
 				if(IsValidClient(i)){
-					if(playersToDamage[i]){
+					if(g_bPlayersToDamage[i]){
 						DamagePlayer(i);
-						playersToDamage[i] = false;
+						g_bPlayersToDamage[i] = false;
 					}
 				}
 			}
 			FormatEx(message, sizeof(message), "<< SIMON SAYS >>\n\n");
-			if(g_Simon_Says){
+			if(g_bSimon_Says){
 				Format(message, sizeof(message), "%sSimon Says ", message);
 			}
 			Format(message, sizeof(message), "%s%s (%i)", message, g_Simon_ActionText, g_time);
 			DisplayCenterTextToAll(message);
 		}else{
-			g_Simon_Active = false;
+			g_bSimon_Active = false;
 			KillMessageTimer();
 		}
 	}

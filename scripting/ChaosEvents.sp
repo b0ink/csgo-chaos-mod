@@ -9,7 +9,7 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Aimbot"))  Chaos_Aimbot();
 	if(IsChaosEnabled("Chaos_InfiniteAmmo"))  Chaos_InfiniteAmmo();
 	if(IsChaosEnabled("Chaos_DecoyDodgeball"))  Chaos_DecoyDodgeball();
-	if(!g_MegaChaos){
+	if(!g_bMegaChaos){
 		if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
 		if(GetRandomInt(0, 100) <= 50) if(IsChaosEnabled("Chaos_FakeCrash", 0))  Chaos_FakeCrash(); //risky.. lol
 	}
@@ -26,7 +26,7 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Flying"))  Chaos_Flying();
 	if(IsChaosEnabled("Chaos_OneBulletMag"))  Chaos_OneBulletMag();
 	if(IsChaosEnabled("Chaos_Thirdperson"))  Chaos_Thirdperson();
-	if(!g_c4Chicken) if(IsChaosEnabled("Chaos_C4Chicken"))  Chaos_C4Chicken();
+	if(!g_bC4Chicken) if(IsChaosEnabled("Chaos_C4Chicken"))  Chaos_C4Chicken();
 	if(IsChaosEnabled("Chaos_AlienModelKnife"))  Chaos_AlienModelKnife();
 	if(IsChaosEnabled("Chaos_IsThisMexico"))  Chaos_IsThisMexico();
 	if(IsChaosEnabled("Chaos_HeadshotOnly"))  Chaos_HeadshotOnly();
@@ -111,7 +111,7 @@ public void Chaos(){
 	}
 
 	if(ValidMapPoints()){
-		if(g_CanSpawnChickens){
+		if(g_bCanSpawnChickens){
 			if(IsChaosEnabled("Chaos_LittleChooks"))  Chaos_LittleChooks();
 			if(IsChaosEnabled("Chaos_BigChooks"))  Chaos_BigChooks();
 			if(IsChaosEnabled("Chaos_MamaChook"))  Chaos_MamaChook();
@@ -127,7 +127,7 @@ public void Chaos(){
 		if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
 	}
 
-	g_ClearChaos = false;
+	g_bClearChaos = false;
 
 	// if(IsChaosEnabled("FUNCTION"))  Chaos_PropHunt(); //CRASHES
 

@@ -8,10 +8,10 @@
 	url = "http://snbx.info/"
 */
 //CHICKEN c4
-bool g_bg_c4Chicken = false;
-bool g_bvisibleChicken = true;
+bool g_bC4Chicken = false;
+bool g_bVisibleChicken = true;
 public void C4Chicken(){
-	if(!g_c4Chicken) return;
+	if(!g_bC4Chicken) return;
 	int c4 = -1;
 	c4 = FindEntityByClassname(c4, "planted_c4");
 	if(c4 != -1) {
@@ -36,8 +36,8 @@ public void C4Chicken(){
 			TeleportEntity(c4, pos, origin, NULL_VECTOR);
 			SetVariantString("!activator");
 			AcceptEntityInput(c4, "SetParent", chicken, c4, 0);
-			g_c4chickenEnt = chicken;
-			if(visibleChicken) {
+			g_bC4ChickenEnt = chicken;
+			if(g_bVisibleChicken) {
 				// pos[2] += 15.0;
 				TeleportEntity(chicken, NULL_VECTOR, NULL_VECTOR, NULL_VECTOR);
 			} else {

@@ -142,8 +142,8 @@ int g_cvAimbotAutoAim = 1;
 int g_cvRecoilMode = 1;
 float g_cvFov = 20.0;
 float g_cvDistance = 8000.0;
-bool g_bg_cvFlashbang = true;
-// bool g_bg_cvShowText = true;
+bool g_bCvFlashbang = true;
+// bool g_bcvShowText = true;
 
 // public Plugin myinfo = 
 // {
@@ -202,10 +202,10 @@ bool g_bg_cvFlashbang = true;
 
 // ToggleAim(iClient2, bEnable);
 
-stock void ToggleAim(int iClient, bool g_bbEnabled = false)
+stock void ToggleAim(int iClient, bool bEnabled = false)
 {
 	// Toggle aimbot.
-	Aimbot[iClient] = bEnabled;
+	g_bAimbot[iClient] = bEnabled;
 	
 	// Ignore bots or clients that are not ingame from here.
 	if (IsFakeClient(iClient) || !IsClientInGame(iClient))
@@ -224,55 +224,55 @@ stock void ToggleAim(int iClient, bool g_bbEnabled = false)
 	
 	if (g_cvPredictionConVars[0] != null)
 	{
-		IntToString(((Aimbot[iClient] && g_cvRecoilMode == 1)) ? 1 : g_cvPredictionConVars[0].IntValue, chValues, 10);
+		IntToString(((g_bAimbot[iClient] && g_cvRecoilMode == 1)) ? 1 : g_cvPredictionConVars[0].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[0], chValues);
 	}
 	
 	if (g_cvPredictionConVars[1] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[1].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[1].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[1], chValues);
 	}
 	
 	if (g_cvPredictionConVars[2] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[2].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[2].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[2], chValues);
 	}
 	
 	if (g_cvPredictionConVars[3] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[3].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[3].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[3], chValues);
 	}
 	
 	if (g_cvPredictionConVars[4] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[4].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[4].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[4], chValues);
 	}
 	
 	if (g_cvPredictionConVars[5] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[5].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[5].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[5], chValues);
 	}
 	
 	if (g_cvPredictionConVars[6] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 500 : g_cvPredictionConVars[6].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 500 : g_cvPredictionConVars[6].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[6], chValues);
 	}
 	
 	if (g_cvPredictionConVars[7] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[7].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[7].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[7], chValues);
 	}
 	
 	if (g_cvPredictionConVars[8] != null)
 	{
-		IntToString((Aimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[8].IntValue, chValues, 10);
+		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[8].IntValue, chValues, 10);
 		SendConVarValue(iClient, g_cvPredictionConVars[8], chValues);
 	}
 }
@@ -281,7 +281,7 @@ public Action Aimbot_Event_WeaponFire(Event hEvent, const char[] chName, bool g_
 {
 	int iClient = GetClientOfUserId(hEvent.GetInt("userid"));
 	
-	if (!Aimbot[iClient])
+	if (!g_bAimbot[iClient])
 	{
 		return Plugin_Continue;
 	}
@@ -298,7 +298,7 @@ public Action Aimbot_Event_WeaponFire(Event hEvent, const char[] chName, bool g_
 
 public void Aimbot_OnClientThink(int iClient)
 {
-	if (!Aimbot[iClient] || !IsPlayerAlive(iClient))
+	if (!g_bAimbot[iClient] || !IsPlayerAlive(iClient))
 	{
 		return;
 	}
@@ -335,7 +335,7 @@ public void Aimbot_OnClientThink(int iClient)
 // public Action OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed)
 public Action Aimbot_OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed)
 {
-	if (!IsValidClient(iClient) || !Aimbot[iClient] || !IsPlayerAlive(iClient))
+	if (!IsValidClient(iClient) || !g_bAimbot[iClient] || !IsPlayerAlive(iClient))
 	{
 		return Plugin_Continue;
 	}
@@ -468,7 +468,8 @@ stock int GetClosestClient(int iClient)
 				continue;
 			}
 			
-			if (g_cvFlashbang && Flashed[iClient])
+			if (g_bCvFlashbang && g_bFlashed
+			[iClient])
 			{
 				continue;
 			}
@@ -481,7 +482,7 @@ stock int GetClosestClient(int iClient)
 	return iClosestTarget;
 }
 
-stock bool g_bClientCanSeeTarget(int iClient, int iTarget, float fDistance = 0.0, float fHeight = 50.0)
+stock bool ClientCanSeeTarget(int iClient, int iTarget, float fDistance = 0.0, float fHeight = 50.0)
 {
 	float fClientPosition[3]; float fTargetPosition[3];
 	
@@ -507,14 +508,14 @@ stock bool g_bClientCanSeeTarget(int iClient, int iTarget, float fDistance = 0.0
 	return false;
 }
 
-public bool g_bBase_TraceFilter(int iEntity, int iContentsMask, int iData)
+public bool Base_TraceFilter(int iEntity, int iContentsMask, int iData)
 {
 	return iEntity == iData;
 }
 
 public Action SMAC_OnCheatDetected(int iClient, const char[] chModule, DetectionType dType)
 {
-	if (!Aimbot[iClient])
+	if (!g_bAimbot[iClient])
 	{
 		return Plugin_Continue;
 	}
@@ -527,7 +528,7 @@ public Action SMAC_OnCheatDetected(int iClient, const char[] chModule, Detection
 	return Plugin_Continue;
 }
 
-// stock bool g_bIsValidClient(int client, bool g_bbAllowBots = true, bool g_bbAllowDead = false)
+// stock bool IsValidClient(int client, bool g_bbAllowBots = true, bool g_bbAllowDead = false)
 // {
 // 	if(!(1 <= client <= MaxClients) || !IsClientInGame(client) || (IsFakeClient(client) && !bAllowBots) || IsClientSourceTV(client) || IsClientReplay(client) || (!bAllowDead && !IsPlayerAlive(client)))
 // 	{
@@ -536,7 +537,7 @@ public Action SMAC_OnCheatDetected(int iClient, const char[] chModule, Detection
 // 	return true;
 // }
 
-stock bool g_bIsTargetInSightRange(int client, int target, float angle = 90.0, float distance = 0.0, bool g_bheightcheck = true, bool g_bnegativeangle = false)
+stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, float distance = 0.0, bool heightcheck = true, bool negativeangle = false)
 {
 	if (angle > 360.0)
 		angle = 360.0;
@@ -587,7 +588,7 @@ stock bool g_bIsTargetInSightRange(int client, int target, float angle = 90.0, f
 	return false;
 }
 
-public Action Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool g_bdontBroadcast)
+public Action Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool dontBroadcast)
 {
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
 	
@@ -596,7 +597,7 @@ public Action Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool g_b
 		float duration = GetEntPropFloat(client, Prop_Send, "m_flFlashDuration");
 		if (duration >= 1.5)
 		{
-			Flashed[client] = true;
+			g_bFlashed[client] = true;
 			CreateTimer(duration, UnFlashed_Timer, client);
 		}
 	}
@@ -604,5 +605,5 @@ public Action Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool g_b
 
 public Action UnFlashed_Timer(Handle timer, int client)
 {
-	Flashed[client] = false;
+	g_bFlashed[client] = false;
 }

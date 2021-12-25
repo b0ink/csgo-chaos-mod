@@ -104,7 +104,7 @@ public void createGlows() {
     }
 }
 
-public int CreatePlayerModelProp(int client, char[] sModel, char[] attachment, bool g_bbonemerge, float scale) {
+public int CreatePlayerModelProp(int client, char[] sModel, char[] attachment, bool bonemerge, float scale) {
     RemoveSkin(client);
     int skin = CreateEntityByName("prop_dynamic_glow");
     DispatchKeyValue(skin, "model", sModel);

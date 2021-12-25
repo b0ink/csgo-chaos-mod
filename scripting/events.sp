@@ -1,8 +1,8 @@
 
 Handle g_BombTimer = INVALID_HANDLE;
-public Action Event_BombPlanted(Handle event, char[] name, bool g_bdontBroadcast){
-	g_CanSpawnChickens = false;
-	BombPlanted = true;
+public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+	g_bCanSpawnChickens = false;
+	g_bBombPlanted = true;
 	C4Chicken();
 	g_BombTimer = CreateTimer(40.5, Timer_ResizeChickens); //todo get c4 timer value
 	return Plugin_Continue;
@@ -20,7 +20,7 @@ public Action Timer_ResizeChickens(Handle timer){
 
 //DECOY DOGEBALL
 public void OnEntityCreated(int ent, const char[] classname){
-	if (g_DecoyDodgeball) {
+	if (g_bDecoyDodgeball) {
 		if (StrContains(classname, "decoy_projectile") != -1) {
 			SDKHook(ent, SDKHook_SpawnPost, HookOnDecoySpawn);
 		}
@@ -44,7 +44,7 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed)
 {
-	if(g_Simon_Active){
+	if(g_bSimon_Active){
 		SimonSays(client, buttons, iImpulse, fVel, fAngles, iWeapon, iSubType,  iCmdNum, iTickCount, iSeed);
 	}
 	//https://forums.alliedmods.net/showthread.php?t=175636 thankyou!
@@ -58,7 +58,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 			url = ""
 		}
 	*/
-	if(g_RapidFire){
+	if(g_bRapidFire){
 		if (buttons & IN_ATTACK){
 			int ent = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 			if (IsValidEntity(ent)){
@@ -81,19 +81,19 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	}
 
 	Aimbot_OnPlayerRunCmd(client, buttons,  iImpulse,  fVel, fAngles, iWeapon, iSubType, iCmdNum, iTickCount, iSeed);
-	if(g_ForceCrouch) buttons |= IN_DUCK;
+	if(g_bForceCrouch) buttons |= IN_DUCK;
 
 
-	if(g_SpeedShooter == true && buttons & IN_ATTACK){
+	if(g_bSpeedShooter == true && buttons & IN_ATTACK){
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 5.0);
-	}else if(g_SpeedShooter){
+	}else if(g_bSpeedShooter){
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
 	float vec[3];
 	GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
 	vec[0] = 0.0;
 	vec[1] = 0.0;
-	if(g_NoStrafe){
+	if(g_bNoStrafe){
 		if(buttons & IN_MOVELEFT){
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
 		}
@@ -101,7 +101,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
 		}
 	}
-	if(g_NoForwardBack){
+	if(g_bNoForwardBack){
 		if(buttons & IN_FORWARD){
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
 		}
@@ -128,14 +128,14 @@ public void OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBro
 	weaponJump(client, szWeaponName);
 
 
-	if(g_OneBulletOneGun){
+	if(g_bOneBulletOneGun){
 		if( StrContains(szWeaponName, "weapon_knife") == -1){
 			CreateTimer(0.1, Timer_GiveRandomWeapon_OneShotOneGun, client);
 		}
 	}
 
 	//One bullet magazine handler
-	if(g_OneBulletMag){
+	if(g_bOneBulletMag){
 		if(ValidAndAlive(client)){
 			for (int j = 0; j < 2; j++){
 				int iTempWeapon = -1;
@@ -144,7 +144,7 @@ public void OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBro
 		}
 	}
 
-	if(g_PortalGuns){
+	if(g_bPortalGuns){
 		//todo; if player is further thatn x units away from the closest marked location, tp them back
 		//todo; deal with stuck players
 
@@ -166,7 +166,7 @@ public void OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBro
 }
 
 
-public Action Event_BulletImpact(Event event, const char[] name, bool g_bdontBroadcast){
+public Action Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
 	Explosive_Event_BulletImpact(event, name, dontBroadcast);
 }
 
@@ -175,7 +175,7 @@ public Action Hook_BulletShot(const char[] te_name, const int[] Players, int num
 }
 
 
-public Action Event_PlayerDeath(Event event, const char[] name, bool g_bdontBroadcast){
+public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	// if (event.GetBool("headshot"))
 	// {
 	//     return Plugin_Handled;

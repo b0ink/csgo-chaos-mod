@@ -4,6 +4,10 @@
 #include <multicolors>
 #include <cstrike>
 
+
+//BOOLS ARE ALL FUCKED SO THEY NEED TO BE FIXED.
+
+
 // Protection for SMAC users (aimbot).
 #undef REQUIRE_PLUGIN
 #include <smac>
@@ -29,7 +33,7 @@ char g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
 char g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 // char LOGS[] = "chaos_logs.txt";
-// bool g_bg_ChaosLoggingEnabled = true;
+// bool g_bChaosLoggingEnabled = true;
 
 
 bool g_bChaos_Enabled = true; //todo as convar
@@ -59,7 +63,7 @@ float g_RollbackAngles[MAXPLAYERS+1][10][3];
 
 float g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
-bool g_bg_rewind_logging_enabled = true;
+bool g_bRewind_logging_enabled = true;
 
 StringMap	Chaos_Effects;
 StringMap	Chaos_Settings;
@@ -108,9 +112,9 @@ public void OnPluginStart(){
 }
 
 Handle g_NewEvent_Timer = INVALID_HANDLE;
-bool g_bg_PlaySound_Debounce = false;
+bool g_bPlaySound_Debounce = false;
 
-bool g_bg_DisableRetryEvent = false;
+bool g_bDisableRetryEvent = false;
 public Action Command_NewChaosEffect(int client, int args){
 	if(args > 1){
 		ReplyToCommand(client, "Usage: sm_chaos <Effect Name (optional)>");
@@ -119,13 +123,13 @@ public Action Command_NewChaosEffect(int client, int args){
 	char effectName[64];
 	GetCmdArg(1, effectName, sizeof(effectName));
 
-	g_DisableRetryEvent = true;
-	if(CanSpawnEffect){
+	g_bDisableRetryEvent = true;
+	if(g_bCanSpawnEffect){
 		if(args == 1){
 			if(strlen(effectName) >=3){
 					g_SelectedChaosEffect = effectName;
-					g_DecidingChaos = true;
-					g_ClearChaos = false;
+					g_bDecidingChaos = true;
+					g_bClearChaos = false;
 					Chaos();
 				
 			}else{
@@ -145,16 +149,16 @@ public Action Command_NewChaosEffect(int client, int args){
 	return Plugin_Handled;
 }
 public Action Command_ReEnableRetries(Handle timer){
-	g_DisableRetryEvent = false;
+	g_bDisableRetryEvent = false;
 }
 
 public Action Command_StopChaos(int client, int args){
-	Chaos_Enabled = false;
+	g_bChaos_Enabled = false;
 	StopTimer(g_NewEvent_Timer);
-	g_ClearChaos = true;
+	g_bClearChaos = true;
 	g_Chaos_Event_Count = 0;
-	g_DecidingChaos = false;
-	g_CountingChaos = false;
+	g_bDecidingChaos = false;
+	g_bDecidingChaos = false;
 	Chaos(); //count and reset all chaos
 	AnnounceChaos("Chaos is Disabled!", true);
 	return Plugin_Handled;
@@ -163,31 +167,31 @@ public Action Command_StopChaos(int client, int args){
 public Action Command_StartChaos(int client, int args){
 
 	if(g_NewEvent_Timer == INVALID_HANDLE){
-		g_ClearChaos = true;
+		g_bClearChaos = true;
 		g_Chaos_Event_Count = 0;
-		g_DecidingChaos = false;
-		g_CountingChaos = true;
+		g_bDecidingChaos = false;
+		g_bDecidingChaos = true;
 		Chaos();
 		CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 		AnnounceChaos("Chaos is Enabled!");
 	}else{
 		PrintToChat(client, "Chaos is already running!");
 	}
-	Chaos_Enabled = true;
+	g_bChaos_Enabled = true;
 	// StopTimer(g_NewEvent_Timer);
 	return Plugin_Handled;
 }
 
-bool g_bchaos_debug = false;
+bool g_bChaos_Debug = false;
 public Action Command_ChaosDebug(int client, int args){
-	if(!chaos_debug){
+	if(!g_bChaos_Debug){
 		cvar("mp_freezetime", "2");
 		cvar("mp_round_restart_delay", "2");
 	}else{
 		cvar("mp_freezetime", "15");
 		cvar("mp_round_restart_delay", "7");
 	}
-	chaos_debug = !chaos_debug;
+	g_bChaos_Debug = !g_bChaos_Debug;
 	return Plugin_Handled;
 }
 
@@ -198,7 +202,7 @@ public void OnConfigsExecuted(){
 }
 
 
-// public void Event_WeaponReload(Handle event, const char[] name, bool g_bdontBroadcast ){
+// public void Event_WeaponReload(Handle event, const char[] name, bool dontBroadcast ){
 // 	SDKHook(client, SDKHook_ReloadPost, OnReloadPost);
 // } 
 
@@ -280,11 +284,11 @@ public void OnClientDisconnect(int client){
 
 
 
-public Action Event_RoundStart(Event event, char[] name, bool g_bdontBroadcast){
-	CanSpawnEffect = true;
+public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	g_bCanSpawnEffect = true;
 	Log("---ROUND STARTED---");
 	StopTimer(g_NewEvent_Timer);
-	if(!Chaos_Enabled) return Plugin_Continue;
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	Chaos_Round_Count = 0;
 	// to use in chaos_resetspawns()
 	for(int i = 0; i <= MaxClients; i++){
@@ -306,11 +310,11 @@ public Action Event_RoundStart(Event event, char[] name, bool g_bdontBroadcast){
 	return Plugin_Continue;
 }
 
-void CountChaos(bool g_bReset = false){
-	if(Reset) g_ClearChaos = true;
+void CountChaos(bool Reset = false){
+	if(Reset) g_bClearChaos = true;
 	g_Chaos_Event_Count = 0;
-	g_DecidingChaos = false;
-	g_CountingChaos = true;
+	g_bDecidingChaos = false;
+	g_bDecidingChaos = true;
 	Chaos();
 }
 
@@ -319,16 +323,16 @@ void CountChaos(bool g_bReset = false){
 //during a round, each event can be saved to a cache
 	//so a 1:55 minute round is about 7 chaos events, those 7 chaos events get saved to a cache that can't be used in the next round.
 	//every few rounds reset the cache so the combinations can be re mixed
-bool g_bfindInArray(int[] array, int target, int arraysize){
-	bool g_bfound = false;
+bool findInArray(int[] array, int target, int arraysize){
+	bool found = false;
 	for(int i = 0; i < arraysize; i++) if(array[i] == target) found = true;
 	if(found) return true;
 	return false;
 }
 
-Action DecideEvent(Handle timer, bool g_bCustomRun = false){
+Action DecideEvent(Handle timer, bool CustomRun = false){
 	if(!CustomRun) g_NewEvent_Timer = INVALID_HANDLE;
-	if(!CanSpawnEffect) return;
+	if(!g_bCanSpawnEffect) return;
 	CountChaos();
 	
 	int index = sizeof(g_randomCache) - 1;
@@ -350,15 +354,15 @@ Action DecideEvent(Handle timer, bool g_bCustomRun = false){
 	// PrintToChatAll("The chaos event count is %i",g_Chaos_Event_Count);
 	// PrintToConsoleAll("The chaos event count is %i",g_Chaos_Event_Count);
 	// CPrintToChatAll("Event was %i", g_RandomEvent);
-	g_DecidingChaos = true;
-	g_ClearChaos = false;
+	g_bDecidingChaos = true;
+	g_bClearChaos = false;
 	g_Chaos_Event_Count = 0;
-	g_CountingChaos = true;
+	g_bDecidingChaos = true;
 	Chaos(); //run the chaos
 
-	if(g_PlaySound_Debounce == false){
+	if(g_bPlaySound_Debounce == false){
 		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
-		g_PlaySound_Debounce = true;
+		g_bPlaySound_Debounce = true;
 		for(int i = 0; i <= MaxClients; i++){
 			if(IsValidClient(i)){
 				EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
@@ -397,17 +401,17 @@ Action DecideEvent(Handle timer, bool g_bCustomRun = false){
 }
 
 public Action Timer_ResetPlaySound(Handle timer){
-	g_PlaySound_Debounce = false;
+	g_bPlaySound_Debounce = false;
 }
 public void RetryEvent(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
-	if(g_DisableRetryEvent) return;
+	if(g_bDisableRetryEvent) return;
 	StopTimer(g_NewEvent_Timer);
 	DecideEvent(INVALID_HANDLE);
 }
 
-public Action Event_RoundEnd(Event event, char[] name, bool g_bdontBroadcast){
-	CanSpawnEffect = false;
+public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	g_bCanSpawnEffect = false;
 	Log("--ROUND ENDED--");
 	ResetTimerRemoveChickens();
 	StopTimer(g_NewEvent_Timer);
@@ -418,9 +422,9 @@ public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
 	AcceptEntityInput(FogIndex, "TurnOff");
 
-	g_ClearChaos = true;
-	g_DecidingChaos = false;
-	g_CountingChaos = false;
+	g_bClearChaos = true;
+	g_bDecidingChaos = false;
+	g_bDecidingChaos = false;
 	Chaos();
 }
 
@@ -449,7 +453,7 @@ public Action ResetRoundChaos(Handle timer){
 
 // void Chaos_FakeDeath(){
 // 	if(CountingCheckDecideChaos()) return;
-// 	if(g_ClearChaos){	
+// 	if(g_bClearChaos){	
 
 // 	}
 // 	if(DecidingChaos()) return;
@@ -469,20 +473,20 @@ public Action ResetRoundChaos(Handle timer){
 // 	}
 // }y
 
-bool g_bValidMapPoints(){
+bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
 	return true;
 }
 
-bool g_bCountingCheckDecideChaos(){
-	if(g_CountingChaos) {	g_Chaos_Event_Count++;	if(!g_DecidingChaos) {  return true;  }}
+bool CountingCheckDecideChaos(){
+	if(g_bDecidingChaos) {	g_Chaos_Event_Count++;	if(!g_bDecidingChaos) {  return true;  }}
 	return false;
 }
 
-bool g_bDecidingChaos(char[] EffectName = ""){
+bool DecidingChaos(char[] EffectName = ""){
 	//if effectname was provided manually, 
 	if(EffectName[0] && g_SelectedChaosEffect[0]){
-		if(!g_DecidingChaos
+		if(!g_bDecidingChaos
 					|| ((StrContains(g_SelectedChaosEffect, EffectName, false) == -1) 
 					&& (StrContains(EffectName, g_SelectedChaosEffect, false) == -1))){
 						 return true;
@@ -491,18 +495,18 @@ bool g_bDecidingChaos(char[] EffectName = ""){
 						return false;
 					}
 	}
-	if(g_ClearChaos || !g_DecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return true;
+	if(g_bClearChaos || !g_bDecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return true;
 	return false;
 }
-bool g_bClearChaos(bool g_bEndChaos = false){
-	if(g_ClearChaos || EndChaos) return true;
+bool ClearChaos(bool EndChaos = false){
+	if(g_bClearChaos || EndChaos) return true;
 	return false;
 }
 
 
 
-bool g_bIsChaosEnabled(char[] EffectName, int defaultEnable = 1){
-	if(g_ClearChaos) return true;
+bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
+	if(g_bClearChaos) return true;
 	int Chaos_Properties[2];
 	int enabled = 0;
 	if(Chaos_Effects.GetArray(EffectName, Chaos_Properties, 2)){
@@ -559,7 +563,7 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 #include "Effects.sp"
 
 public void OnGameFrame(){
-	if(g_LockPlayersAim_Active){
+	if(g_bLockPlayersAim_Active){
 		for(int i = 0; i <= MaxClients; i++){
 			if(ValidAndAlive(i)){
 				TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
@@ -570,7 +574,7 @@ public void OnGameFrame(){
 
 //use gameframe for rollbacklog?
 public Action Rollback_Log(Handle Timer){
-	if(g_rewind_logging_enabled){
+	if(g_bRewind_logging_enabled){
 		for(int client = 0; client <= MaxClients; client++){
 			if(ValidAndAlive(client)){
 				// PrintToChatAll("saving log for %N", client);
@@ -602,13 +606,13 @@ public Action Rollback_Log(Handle Timer){
 Handle g_Chaos_Rewind_Timer = INVALID_HANDLE;
 void Chaos_RewindTenSeconds(){
 	if(CountingCheckDecideChaos()) return;
-	if(g_ClearChaos){
-		g_rewind_logging_enabled = true;
+	if(g_bClearChaos){
+		g_bRewind_logging_enabled = true;
 		StopTimer(g_Chaos_Rewind_Timer);
 	}
 	if(DecidingChaos("Chaos_RewindTenSeconds")) return;
 	Log("[Chaos] Running: Chaos_RewindTenSeconds");
-	g_rewind_logging_enabled = false;
+	g_bRewind_logging_enabled = false;
 	AnnounceChaos("Rewind 10 seconds");
 	int time = 0;
 	g_Chaos_Rewind_Timer = CreateTimer(0.1, Rewind_Timer, time);
@@ -634,7 +638,7 @@ public Action Rewind_Timer(Handle timer, int time){
 		g_Chaos_Rewind_Timer = CreateTimer(0.3, Rewind_Timer, time);
 	}else{
 		TeleportPlayersToClosestLocation(); //fail safe todo: this is still bugged (the rewind part not this <<--)
-		g_rewind_logging_enabled = true;
+		g_bRewind_logging_enabled = true;
 		StopTimer(g_Chaos_Rewind_Timer);
 	}
 }
@@ -659,14 +663,14 @@ public Action Rewind_Timer(Handle timer, int time){
 //todo, doesnt always work?
 public void Chaos_RandomInvisiblePlayer(){
 	if(CountingCheckDecideChaos()) return; 
-	if(g_ClearChaos){
+	if(g_bClearChaos){
 	}
 	if(DecidingChaos("Chaos_RandomInvisiblePlayer")) return;
 	Log("[Chaos] Running: Chaos_RandomInvisiblePlayer");
 	int alivePlayers = GetAliveCTCount() + GetAliveTCount();
 	int target = GetRandomInt(0, alivePlayers - 1);
 	int count = -1;
-	bool g_bsetPlayer = false;
+	bool setPlayer = false;
 	if(alivePlayers > 1){
 		for(int i = 0; i <= MaxClients; i++){
 			if(ValidAndAlive(i) && !setPlayer){
@@ -694,18 +698,18 @@ public void Chaos_RandomInvisiblePlayer(){
 //todo, delay each mega effect by half a second rather than blindly spawn it in 5 at a time
 public void Chaos_MEGACHAOS(){
 	if(CountingCheckDecideChaos()) return; 
-	if(g_ClearChaos){
+	if(g_bClearChaos){
 
 	}
 	if(DecidingChaos("Chaos_MEGACHAOS")) return;
 	Log("[Chaos] Running: Chaos_MEGACHAOS");
 	
-	g_MegaChaos = true; 
+	g_bMegaChaos = true; 
 	AnnounceChaos("MEGA CHAOS", true, true);
-	g_DisableRetryEvent = false;
+	g_bDisableRetryEvent = false;
 	for(int i = 1; i <= 5; i++) RetryEvent();
 	AnnounceChaos("MEGA CHAOS", true, true);
-	g_MegaChaos = false; 
+	g_bMegaChaos = false; 
 }
 
 
@@ -777,7 +781,7 @@ void StopTimer(Handle &timer){
 
 // public void Chaos_BouncyAir(){ //? todo
 // 	if(CountingCheckDecideChaos()) return;
-// 	// if(g_ClearChaos){}
+// 	// if(g_bClearChaos){}
 // 	if(DecidingChaos()) return;
 // 	//every .1 second alternate the gravity
 // }
@@ -844,7 +848,7 @@ void findLight(){
 
 
 
-bool g_bCreateParticle(char []particle, float[3] vec){
+bool CreateParticle(char []particle, float[3] vec){
 	int ent = CreateEntityByName("info_particle_system");
 	DispatchKeyValue(ent , "start_active", "0");
 	DispatchKeyValue(ent, "effect_name", particle);
@@ -923,7 +927,7 @@ public void cvar(char[] cvarname, char[] value){
 	if (hndl != null) hndl.SetString(value, true);
 }
 
-void StripPlayer(int client, bool g_bknife = true, bool g_bkeepBomb = true, bool g_bstripGrenadesOnly = false, bool g_bKeepGrenades = false)
+void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false)
 {
 	if (IsValidClient(client) && IsPlayerAlive(client))
 	{
@@ -950,14 +954,14 @@ void StripPlayer(int client, bool g_bknife = true, bool g_bkeepBomb = true, bool
 
 
 //stocks
-stock bool g_bIsValidClient(int client, bool g_bnobots = true)
+stock bool IsValidClient(int client, bool nobots = true)
 {
     if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client))) {
         return false;
     }
     return IsClientInGame(client);
 }
-stock bool g_bValidAndAlive(int client){
+stock bool ValidAndAlive(int client){
 	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
 
@@ -996,7 +1000,7 @@ void DisplayCenterTextToAll(const char[] message)
 	}
 }
 
-void AnnounceChaos(char[] message, bool g_bendingChaos = false, bool g_bmegaChaos = false){
+void AnnounceChaos(char[] message, bool endingChaos = false, bool megaChaos = false){
 	char announcingMessage[128];
 	if(megaChaos){
 		DisplayCenterTextToAll(message);
@@ -1061,7 +1065,7 @@ void PerformBlind(int target, int amount)
 }
 
 
-stock bool g_bSetClientMoney(int client, int money, bool g_babsolute = false)
+stock bool SetClientMoney(int client, int money, bool absolute = false)
 {
 	//https://forums.alliedmods.net/showthread.php?t=291218
 	if(IsValidClient(client)){
@@ -1088,11 +1092,11 @@ stock bool g_bSetClientMoney(int client, int money, bool g_babsolute = false)
 	}
 } 
 
-bool g_bremovechicken_debounce = false;
-void RemoveChickens(bool g_bremovec4Chicken = false){
-	if(!removechicken_debounce){
+bool g_bRemovechicken_debounce = false;
+void RemoveChickens(bool removec4Chicken = false){
+	if(!g_bRemovechicken_debounce){
 		Log("[Chaos] > Removing Chickens");
-		removechicken_debounce = true;
+		g_bRemovechicken_debounce = true;
 		int iMaxEnts = GetMaxEntities();
 		char sClassName[64];
 		for(int i=MaxClients;i<iMaxEnts;i++){
@@ -1105,12 +1109,12 @@ void RemoveChickens(bool g_bremovec4Chicken = false){
 			{
 			
 				if(removec4Chicken){
-					if(i == g_c4chickenEnt){
+					if(i == g_bC4ChickenEnt){
 						// RemoveEdict(i);
 						RemoveEntity(i);
 					}
 				}else{
-					if(i != g_c4chickenEnt){
+					if(i != g_bC4ChickenEnt){
 						SetEntPropFloat(i, Prop_Data, "m_flModelScale", 1.0);
 						RemoveEntity(i);
 					}
@@ -1124,7 +1128,7 @@ void RemoveChickens(bool g_bremovec4Chicken = false){
 }  
 
 public Action timer_resetchickendebounce(Handle timer){
-	removechicken_debounce = false;
+	g_bRemovechicken_debounce = false;
 }
 public void ResizeChickens(){
     int iMaxEnts = GetMaxEntities();

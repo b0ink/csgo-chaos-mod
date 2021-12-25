@@ -1,4 +1,4 @@
-bool g_bg_TaserRound = false;
+bool g_bTaserRound = false;
 
 /* CREDIT TO:
     name        = "Weapon Jump",
@@ -18,7 +18,7 @@ bool g_bg_TaserRound = false;
 #define C_WEAPON_PROPERTY_MAXIMUM       (3)
 
 /* Players weapon jump                                                       */
-bool g_b     gl_bPlayerWeaponJump        [MAXPLAYERS + 1];
+bool gl_bPlayerWeaponJump        [MAXPLAYERS + 1];
 /* Players weapon jump velocity                                              */
 float     gl_vPlayerWeaponJumpVelocity[MAXPLAYERS + 1][3];
 
@@ -53,7 +53,7 @@ public void weaponJump(int client, char[] szWeaponName)
 			// Get the weapon name
 			// hEvent.GetString("weapon", szWeaponName, sizeof(szWeaponName));
 			//TODO: 
-			if(StrContains(szWeaponName, "taser") != -1 && g_TaserRound){
+			if(StrContains(szWeaponName, "taser") != -1 && g_bTaserRound){
 				 // Convert the weapon properties
                     // float flKnockback = view_as<float>(arrWeaponProperty[C_WEAPON_PROPERTY_KNOCKBACK]);
                     // float flVelocity  = view_as<float>(arrWeaponProperty[C_WEAPON_PROPERTY_VELOCITY]);
@@ -73,9 +73,9 @@ public void weaponJump(int client, char[] szWeaponName)
 					float flKnockback = g_TaserKnockback;
 					// float flKnockback = -750.0;
 					float flVelocity = 0.0;
-					bool g_bbGround = true;
+					bool g_bGround = true;
                     // Check if the player can weapon jump on ground
-					if (!(GetEntityFlags(iPlayer) & FL_ONGROUND) || bGround){
+					if (!(GetEntityFlags(iPlayer) & FL_ONGROUND) || g_bGround){
 						float vPlayerVelocity[3];
 						float vPlayerEyeAngles[3];
 						float vPlayerForward[3];
