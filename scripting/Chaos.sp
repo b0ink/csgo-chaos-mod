@@ -208,7 +208,6 @@ public Action Command_ChaosDebug(int client, int args){
 public void OnConfigsExecuted(){
 	ParseMapCoordinates();
 	ParseChaosEffects();
-	ParseChaosSettings();
 }
 
 
@@ -1352,7 +1351,6 @@ stock void Log(const char[] format, any ...)
 
 public Action Command_RefreshConfig(int client, int args){
 	ParseChaosEffects();
-	ParseChaosSettings();
 	ParseMapCoordinates();
 
 	return Plugin_Handled;
@@ -1401,48 +1399,4 @@ void ParseChaosEffects(){
 	} while(kvConfig.GotoNextKey());
 
 	Log("Parsed Chaos_Effects.cfg succesfully!");
-}
-
-void ParseChaosSettings(){
-	Chaos_Settings.Clear();
-	char filePath[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Settings.cfg");
-
-
-	if(!FileExists(filePath)){
-		Log("Configuration file: %s not found.", filePath);
-		LogError("Configuration file: %s not found.", filePath);
-		SetFailState("[CHAOS] Could not find configuration file: %s", filePath);
-		return;
-	}
-	KeyValues kvConfig = new KeyValues("Settings");
-
-	if(!kvConfig.ImportFromFile(filePath)){
-		Log("Unable to parse Key Values file %s", filePath);
-		LogError("Unable to parse Key Values file %s", filePath);
-		SetFailState("[CHAOS] Unable to parse Key Values file %s", filePath);
-		return;
-	}
-	if(!kvConfig.JumpToKey("Settings")){
-		Log("Unable to find 'Settings' Key from %s", filePath);
-		SetFailState("Unable to find 'Settings' Key from %s", filePath);
-		return;
-	}
-	if(!kvConfig.GotoFirstSubKey(false)){
-		Log("Unable to find 'Settings' Section in file %s", filePath);
-		LogError("Unable to find 'Settings' Section in file %s", filePath);
-		SetFailState("[CHAOS] Unable to find 'Settings' Section in file %s", filePath);
-		return;
-	}
-	
-	do{
-		char Chaos_Setting_Name[64];
-		if (kvConfig.GetSectionName(Chaos_Setting_Name, sizeof(Chaos_Setting_Name))){
-			int value = kvConfig.GetNum(NULL_STRING);
-			// PrintToChatAll("Found setting: %s with a value of %i", Chaos_Setting_Name, value);
-			Chaos_Settings.SetValue(Chaos_Setting_Name, value);
-		}
-	} while(kvConfig.GotoNextKey(false));
-
-	Log("Parsed Chaos_Settings.cfg succesfully!");
 }
