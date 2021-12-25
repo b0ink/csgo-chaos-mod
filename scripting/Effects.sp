@@ -705,8 +705,8 @@ void Chaos_IgnitePlayer(bool forceAllPlayers = false){
 		AnnounceChaos("Ignite All Players");
 	}else{
 		int player = getRandomAlivePlayer();
-		if(player != -1){
-			IgniteEntity(player, 10.0);
+		if(player != -1 && ValidAndAlive(player)){
+			IgniteEntity(i, 10.0);
 			char msg[128];
 			FormatEx(msg, sizeof(msg), "Ignite {orange}%N", player);
 			AnnounceChaos(msg);
