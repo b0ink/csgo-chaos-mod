@@ -158,7 +158,7 @@ public Action Command_StopChaos(int client, int args){
 	g_bClearChaos = true;
 	g_Chaos_Event_Count = 0;
 	g_bDecidingChaos = false;
-	g_bDecidingChaos = false;
+	g_bCountingChaos = false;
 	Chaos(); //count and reset all chaos
 	AnnounceChaos("Chaos is Disabled!", true);
 	return Plugin_Handled;
@@ -170,7 +170,7 @@ public Action Command_StartChaos(int client, int args){
 		g_bClearChaos = true;
 		g_Chaos_Event_Count = 0;
 		g_bDecidingChaos = false;
-		g_bDecidingChaos = true;
+		g_bCountingChaos = true;
 		Chaos();
 		CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 		AnnounceChaos("Chaos is Enabled!");
@@ -314,7 +314,7 @@ void CountChaos(bool Reset = false){
 	if(Reset) g_bClearChaos = true;
 	g_Chaos_Event_Count = 0;
 	g_bDecidingChaos = false;
-	g_bDecidingChaos = true;
+	g_bCountingChaos = true;
 	Chaos();
 }
 
@@ -357,7 +357,7 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
 	g_Chaos_Event_Count = 0;
-	g_bDecidingChaos = true;
+	g_bCountingChaos = true;
 	Chaos(); //run the chaos
 
 	if(g_bPlaySound_Debounce == false){
@@ -424,7 +424,7 @@ public Action ResetRoundChaos(Handle timer){
 
 	g_bClearChaos = true;
 	g_bDecidingChaos = false;
-	g_bDecidingChaos = false;
+	g_bCountingChaos = false;
 	Chaos();
 }
 
@@ -479,7 +479,7 @@ bool ValidMapPoints(){
 }
 
 bool CountingCheckDecideChaos(){
-	if(g_bDecidingChaos) {	g_Chaos_Event_Count++;	if(!g_bDecidingChaos) {  return true;  }}
+	if(g_bCountingChaos) {	g_Chaos_Event_Count++;	if(!g_bDecidingChaos) {  return true;  }}
 	return false;
 }
 
@@ -664,6 +664,7 @@ public Action Rewind_Timer(Handle timer, int time){
 public void Chaos_RandomInvisiblePlayer(){
 	if(CountingCheckDecideChaos()) return; 
 	if(g_bClearChaos){
+
 	}
 	if(DecidingChaos("Chaos_RandomInvisiblePlayer")) return;
 	Log("[Chaos] Running: Chaos_RandomInvisiblePlayer");
