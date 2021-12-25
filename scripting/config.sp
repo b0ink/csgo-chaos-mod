@@ -91,7 +91,7 @@ void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 bool g_bClearChaos = false;
 bool g_bDecidingChaos = false;
 int g_RandomEvent = 0;
-// bool g_bCountingChaos = false;
+bool g_bCountingChaos = false;
 
 
 public void PrecacheTextures(){

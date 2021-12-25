@@ -79,7 +79,7 @@ public void AutoPlantC4(){
 public void AutoPlantRoundEnd(){
     if(g_bBombPlanted){
         g_bBombPlanted = false;
-        GameRules_SetProp("m_bg_bBombPlanted", 0);
+        GameRules_SetProp("m_BombPlanted", 0);
         g_PlantedSite = -1;
     }
 }
