@@ -499,14 +499,18 @@ bool DecidingChaos(char[] EffectName = ""){
 		if(!g_bDecidingChaos
 					|| ((StrContains(g_SelectedChaosEffect, EffectName, false) == -1) 
 					&& (StrContains(EffectName, g_SelectedChaosEffect, false) == -1))){
-						 return true;
+						return true;
 					}else{
-						g_SelectedChaosEffect = "";
+						CreateTimer(0.5, Timer_ResetCustomChaosSelection);
 						return false;
 					}
 	}
 	if(g_bClearChaos || !g_bDecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return true;
 	return false;
+}
+//currently a hotfix but there is a bool value somewhere that handles the custom selection just fine.. todo for another time.
+public Action Timer_ResetCustomChaosSelection(Handle timer){
+	g_SelectedChaosEffect = "";
 }
 bool ClearChaos(bool EndChaos = false){
 	if(g_bClearChaos || EndChaos) return true;
