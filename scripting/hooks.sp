@@ -1,7 +1,7 @@
 public Action Event_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
-	if(g_TaserRound){
+	if(g_bTaserRound){
 		//if any other weapon than a taser or a knife, bring out taser
 		if(	StrContains(WeaponName, "taser") == -1 && 
 			StrContains(WeaponName, "knife") == -1 &&
@@ -13,7 +13,7 @@ public Action Event_WeaponSwitch(int client, int weapon){
 			return Plugin_Continue;
 		}
 	}
-	if(g_KnifeFight){
+	if(g_bKnifeFight){
 		if(StrContains(WeaponName, "knife") == -1 &&
 			StrContains(WeaponName, "c4") == -1){
 				FakeClientCommand(client, "use weapon_knife");
@@ -22,7 +22,7 @@ public Action Event_WeaponSwitch(int client, int weapon){
 			return Plugin_Continue;
 		}
 	}
-	if(g_DecoyDodgeball){
+	if(g_bDecoyDodgeball){
 		if(StrContains(WeaponName, "decoy") == -1 &&
 			StrContains(WeaponName, "c4") == -1 &&
 			StrContains(WeaponName, "flashbang") == -1){
@@ -42,7 +42,7 @@ public Action Event_WeaponDrop(int client,int weapon){
 	// PrintToChatAll("trying preventing drop.");
 	// if(g_RandomWeaponRound){
 	if(weapon != -1){ //it happens
-		if(!g_PlayersCanDropWeapon){
+		if(!g_bPlayersCanDropWeapon){
 			// PrintToChatAll("preventing drop.");
 			char WeaponName[32];
 			GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
@@ -74,7 +74,7 @@ public void NOSCOPE_INIT(){
 }
 
 stock void SetNoScope(int weapon){
-	if (IsValidEdict(weapon) && g_NoscopeOnly){
+	if (IsValidEdict(weapon) && g_bNoscopeOnly){
 		char classname[MAX_NAME_LENGTH];
 		GetEdictClassname(weapon, classname, sizeof(classname));
 		
@@ -85,7 +85,7 @@ stock void SetNoScope(int weapon){
 
 //allow players to take damage during noclip
 public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype) {
-	if(g_VampireRound){
+	if(g_bVampireRound){
 		if(IsValidClient(victim) && IsValidClient(inflictor)){
 			//todo; fix this its not working
 			if(GetClientTeam(victim) != GetClientTeam(inflictor)){ //ensure opposite teams
@@ -97,10 +97,10 @@ public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &dam
 		}
 	}
 
-	if (IsValidClient(victim) && g_ActiveNoclip) SetEntityMoveType(victim, MOVETYPE_WALK);
+	if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_WALK);
 
 	return Plugin_Continue;
 }
 public Action OnTakeDamagePost(int victim, int attacker){
-    if (IsValidClient(victim) && g_ActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
+    if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
 }
