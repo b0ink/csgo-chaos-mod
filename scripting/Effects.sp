@@ -1725,7 +1725,7 @@ Action Chaos_ReversedMovement(Handle timer = null, bool EndChaos = false){
 		// cvar("sv_airaccelerate", "12");
 
 		StopTimer(g_ReversedMovementTimer);
-		if(EndChaos) AnnounceChaos("Reversed Movement");
+		if(EndChaos) AnnounceChaos("Reversed Movement", true);
 	}
 	if(DecidingChaos("Chaos_ReversedMovement")) return;
 	g_ReversedMovement_Duration = GetChaosTime("Chaos_ReversedMovement", 20.0);
