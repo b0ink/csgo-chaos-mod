@@ -95,7 +95,7 @@ public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
 	GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons))]);
 }
 
-public void OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
+public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
 	char szWeaponName[32];
 	hEvent.GetString("weapon", szWeaponName, sizeof(szWeaponName));
 	int client = GetClientOfUserId(hEvent.GetInt("userid"));
@@ -149,4 +149,40 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
 	return Plugin_Continue;
+}
+
+
+public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	g_bCanSpawnEffect = true;
+	Log("---ROUND STARTED---");
+	StopTimer(g_NewEvent_Timer);
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+	Chaos_Round_Count = 0;
+	// to use in chaos_resetspawns()
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			float vec[3];
+			GetClientAbsOrigin(i, vec);
+			g_OriginalSpawnVec[i] = vec;
+		}
+	}
+
+
+
+	SetRandomSeed(GetTime());
+	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
+		CountChaos(true);
+		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
+		CreateTimer(freezeTime, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	}
+	return Plugin_Continue;
+}
+
+public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	g_bCanSpawnEffect = false;
+	Log("--ROUND ENDED--");
+	ResetTimerRemoveChickens();
+	StopTimer(g_NewEvent_Timer);
+	CreateTimer(1.0, ResetRoundChaos);
+
 }
