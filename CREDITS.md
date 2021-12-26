@@ -1,6 +1,6 @@
 # Credits
 
-[Rapid Fire](https:forums.alliedmods.net/showthread.php?t=175636) by "FlaminSarge (orig by EHG)".\
+[Rapid Fire](https://forums.alliedmods.net/showthread.php?t=175636) by "FlaminSarge (orig by EHG)".\
 [Chicken C4](https://forums.alliedmods.net/showthread.php?p=2243945) by "Mitch".\
 [ESP](https://forums.alliedmods.net/showthread.php?t=291374) by "Mitch".\
 [No Scope](https://forums.alliedmods.net/showthread.php?p=2095697) by "Bara".\
