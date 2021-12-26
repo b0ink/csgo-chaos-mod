@@ -4,11 +4,7 @@
 #include <multicolors>
 #include <cstrike>
 
-
-//BOOLS ARE ALL FUCKED SO THEY NEED TO BE FIXED.
-
-
-// Protection for SMAC users (aimbot).
+// Protection for SMAC users (aimbotfu).
 #undef REQUIRE_PLUGIN
 #include <smac>
 
@@ -16,7 +12,7 @@
 #pragma semicolon 1
 
 #define PLUGIN_NAME "CSGO Chaos Mod"
-#define PLUGIN_DESCRIPTION "Every 15 seconds a random effect is played"
+#define PLUGIN_DESCRIPTION ""
 #define PLUGIN_VERSION "1.8.1"
 
 
@@ -152,7 +148,7 @@ char playerModel_Path[][] = {
 #include "Externals/instantweaponswitch.sp"
 #include "Externals/weaponjump.sp"
 #include "Externals/esp.sp"
-#include "Externals/aimbotfull.sp"
+#include "Externals/aimbot.sp"
 #include "Externals/autoplant.sp"
 #include "Externals/teleport.sp"
 #include "Externals/chickenmodels.sp"
@@ -202,7 +198,7 @@ void UpdateCvars(){
 //future todo: 	int iEntity = EntRefToEntIndex(iRef); EntIndexToEntRef for all entities
 public void OnPluginStart(){
 
-	CreateConVar("sm_chaos_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
+	CreateConVar("sm_chaos_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
 
 	g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
 	g_cvChaosEffectInterval = CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
