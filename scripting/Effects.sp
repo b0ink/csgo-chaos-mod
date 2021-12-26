@@ -2206,7 +2206,7 @@ Action Chaos_ExtremeWhiteFog(Handle timer = null, bool EndChaos = false){
 	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 1.0);
 	DispatchKeyValueFloat(FogIndex, "farz", -1.0);
 	AcceptEntityInput(FogIndex, "TurnOn");
-	AnnounceChaos("Fog");
+	AnnounceChaos("Extreme Fog");
 	if(g_ExtremeWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_ExtremeWhiteFog_Duration, Chaos_ExtremeWhiteFog, true);
 
 }
