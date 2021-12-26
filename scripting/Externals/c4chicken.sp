@@ -1,17 +1,7 @@
-
-
-/*
-	name = "Chicken C4",
-	author = "Mitch.",
-	description = "CHICKEN C4 WAT.",
-	version = PLUGIN_VERSION,
-	url = "http://snbx.info/"
-*/
-//CHICKEN c4
 int g_iC4ChickenEnt = -1;
-
 bool g_bC4Chicken = false;
 bool g_bVisibleChicken = true;
+
 public void C4Chicken(){
 	if(!g_bC4Chicken) return;
 	int c4 = -1;
@@ -19,19 +9,14 @@ public void C4Chicken(){
 	if(c4 != -1) {
 		int chicken = CreateEntityByName("chicken");
 		if(chicken != -1) {
-			// int player = GetClientOfUserId(GetEventInt(event, "userid"));
 			float pos[3];
-			// GetEntPropVector(player, Prop_Data, "m_vecOrigin", pos);
-
 			GetEntPropVector(c4, Prop_Data, "m_vecOrigin", pos);
 			
-			TeleportEntity(chicken, pos, NULL_VECTOR, NULL_VECTOR); //NOW MOVED HERE FOR TESTING
+			TeleportEntity(chicken, pos, NULL_VECTOR, NULL_VECTOR);
 			DispatchSpawn(chicken);
 			SetEntProp(chicken, Prop_Data, "m_takedamage", 0);
 			SetEntProp(chicken, Prop_Send, "m_fEffects", 0);
-		
 
-			// TeleportEntity(chicken, pos, NULL_VECTOR, NULL_VECTOR); //USED TO BE HERE
 			// pos[2] -= 15.0;
 			float origin[3] = {0.0, 0.0, 0.0};
 			pos[2] += 15.0;
