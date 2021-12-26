@@ -278,6 +278,8 @@ public bool Base_TraceFilter(int iEntity, int iContentsMask, int iData){
 public Action SMAC_OnCheatDetected(int iClient, const char[] chModule, DetectionType dType){
 	if (!g_bAimbot[iClient]) return Plugin_Continue;
 	if (dType == Detection_Aimbot || dType == Detection_Eyeangles) return Plugin_Handled;
+	return Plugin_Continue;
+
 }
 
 stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, float distance = 0.0, bool heightcheck = true, bool negativeangle = false){
