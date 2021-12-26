@@ -28,7 +28,6 @@ public Action Event_WeaponSwitch(int client, int weapon){
 			StrContains(WeaponName, "flashbang") == -1){
 			//this works without forcing the weapon
 			// FakeClientCommand(client, "use weapon_decoy");
-
 			return Plugin_Handled;
 		}else{
 			return Plugin_Continue;
@@ -39,15 +38,11 @@ public Action Event_WeaponSwitch(int client, int weapon){
 
 //DISABLE WEAPON DROP DURING RANDOM WEAPON EVENT
 public Action Event_WeaponDrop(int client,int weapon){
-	// PrintToChatAll("trying preventing drop.");
-	// if(g_RandomWeaponRound){
-	if(weapon != -1){ //it happens
+	if(weapon != -1 && IsValidEntity(weapon)){
 		if(!g_bPlayersCanDropWeapon){
-			// PrintToChatAll("preventing drop.");
 			char WeaponName[32];
 			GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
 			if(StrContains(WeaponName, "c4") == -1){ //allow c4 drops
-				// PrintToChatAll("prevented drop.");
 				return Plugin_Handled; 
 			}
 		}
@@ -55,14 +50,7 @@ public Action Event_WeaponDrop(int client,int weapon){
 	return Plugin_Continue;
 } 
 
-
-/*
-	name = "NoScope", 
-	author = "Bara", 
-	description = "", 
-	version = NOSCOPE_VERSION, 
-	url = "www.bara.in"
-*/
+//NoScope
 public Action OnPreThink(int client){
 	int iWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 	SetNoScope(iWeapon);
