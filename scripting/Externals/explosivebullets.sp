@@ -1,11 +1,3 @@
-// public Plugin myinfo = 
-// {
-// 	name = "[CS:GO] Explosive Bullets",
-// 	author = "Tak (Chaosxk)",
-// 	description = "Your bullets will explode on impact.",
-// 	version = PLUGIN_VERSION,
-// 	url = "https://github.com/xcalvinsz/explosivebullets"
-// };
 
 bool g_bExplosiveBullets = false;
 

@@ -1,8 +1,5 @@
 Handle g_Chaos_RandomWeapons_Timer = INVALID_HANDLE;
 
-
-
-
 public void GiveAndSwitchWeapon(int client, char[] weaponName){
 	
 	char playersWeapon[64];
@@ -28,7 +25,6 @@ public void GiveAndSwitchWeapon(int client, char[] weaponName){
 
 public void InstantSwitch(int client, int weapon, bool g_bknifeAttack){	
     float GameTime = GetGameTime();
-    // if(!knifeAttack) 
     SetEntPropFloat(client, Prop_Send, "m_flNextAttack", GameTime);
     int ViewModel = GetEntPropEnt(client, Prop_Send, "m_hViewModel");
     SetEntProp(ViewModel, Prop_Send, "m_nSequence", 0);
