@@ -36,7 +36,6 @@ char g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 // bool g_bChaosLoggingEnabled = true;
 
 
-bool g_bChaos_Enabled = true; //todo as convar
 bool g_bCanSpawnEffect = true;
 #define SOUND_BELL "buttons/bell1.wav"
 
@@ -66,21 +65,36 @@ float g_PlayerDeathLocations[MAXPLAYERS+1][3];
 bool g_bRewind_logging_enabled = true;
 
 StringMap	Chaos_Effects;
-StringMap	Chaos_Settings;
+// StringMap	Chaos_Settings;
 
 int Chaos_Round_Count = 0;
 
-ConVar g_cvChaosEnabled;
-ConVar g_cvChaosEffectInterval;
-ConVar g_cvChaosRepeating;
-ConVar g_cvChaosOverwriteDuration;
+ConVar g_cvChaosEnabled; bool g_bChaos_Enabled = true;
+ConVar g_cvChaosEffectInterval; float g_fChaos_EffectInterval = 15.0;
+ConVar g_cvChaosRepeating; bool g_bChaos_Repeating = true;
+ConVar g_cvChaosOverwriteDuration; float g_fChaos_OverwriteDuration = -1.0;
 
+void UpdateCvars(){
+	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
+	g_fChaos_EffectInterval = g_cvChaosEffectInterval.FloatValue;
+	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
+	g_fChaos_OverwriteDuration = g_cvChaosOverwriteDuration.FloatValue;
+}
+
+//future todo: 	int iEntity = EntRefToEntIndex(iRef); EntIndexToEntRef for all entities
 public void OnPluginStart(){
 	
 	g_cvChaosEnabled = CreateConVar("chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
 	g_cvChaosEffectInterval = CreateConVar("chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
 	g_cvChaosRepeating = CreateConVar("chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
-	g_cvChaosOverwriteDuration = CreateConVar("chaos_overwrite_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations", _, true, -1.0, true, 120.0);
+	g_cvChaosOverwriteDuration = CreateConVar("chaos_overwrite_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
+
+	UpdateCvars();
+	
+	HookConVarChange(g_cvChaosEnabled, ConVarChanged);
+	HookConVarChange(g_cvChaosEffectInterval, ConVarChanged);
+	HookConVarChange(g_cvChaosRepeating, ConVarChanged);
+	HookConVarChange(g_cvChaosOverwriteDuration, ConVarChanged);
 
 	HookEvent("round_start", Event_RoundStart);
 	HookEvent("round_end", Event_RoundEnd);	
@@ -96,7 +110,7 @@ public void OnPluginStart(){
 	for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) OnClientPostAdminCheck(i);
 
 	Chaos_Effects = new StringMap();
-	Chaos_Settings = new StringMap();
+	// Chaos_Settings = new StringMap();
 
 	ESP_INIT();
 	TEAMMATESWAP_INIT();
@@ -121,10 +135,40 @@ public void OnPluginStart(){
 
 }
 
+
+
+
 Handle g_NewEvent_Timer = INVALID_HANDLE;
 bool g_bPlaySound_Debounce = false;
-
 bool g_bDisableRetryEvent = false;
+
+public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
+	if(convar == g_cvChaosEnabled){
+		if(StringToInt(oldValue) == 0 && StringToInt(newValue) == 1){
+			g_bChaos_Enabled = true;
+			DecideEvent(null);
+		}else if(StringToInt(newValue) == 0){
+			g_bChaos_Enabled = false;
+			StopTimer(g_NewEvent_Timer);
+		}
+	}else if(convar == g_cvChaosEffectInterval){
+		g_fChaos_EffectInterval = StringToFloat(newValue);
+		if(g_fChaos_EffectInterval < 5.0){
+			PrintToChatAll("[SM] Convar \"chaos_interval\" Out Of Bounds. Min. 5.0.");
+		}
+	}else if(convar == g_cvChaosRepeating){
+		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
+			g_bChaos_Repeating = false;
+			StopTimer(g_NewEvent_Timer);
+		}else if(StringToInt(newValue) == 1){
+			g_bChaos_Repeating = true;
+		}
+	} else if(convar == g_cvChaosOverwriteDuration){
+		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
+	}
+}
+
+
 public Action Command_NewChaosEffect(int client, int args){
 	if(args > 1){
 		ReplyToCommand(client, "Usage: sm_chaos <Effect Name (optional)>");
@@ -244,6 +288,9 @@ float g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 
 public void OnMapStart(){
+
+	UpdateCvars();
+
 	char mapName[64];
 	GetCurrentMap(mapName, sizeof(mapName));
 	char string[128];
@@ -342,6 +389,7 @@ bool findInArray(int[] array, int target, int arraysize){
 Action DecideEvent(Handle timer, bool CustomRun = false){
 	if(!CustomRun) g_NewEvent_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
+	if(!g_bChaos_Enabled && !CustomRun) return;
 	CountChaos();
 	
 	int index = sizeof(g_randomCache) - 1;
@@ -382,30 +430,18 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 	if(CustomRun) return;
 
 	StopTimer(g_NewEvent_Timer);
-	int Chaos_Repeating = -1;
-	if(!Chaos_Settings.GetValue("Repeating", Chaos_Repeating)){
-		Log("Could not find 'Repeating' key in Chaos_Settings.cfg. Effects will repeat by default");
-		Chaos_Repeating = 1;
-	}
-	if(Chaos_Repeating != 0 && Chaos_Repeating != 1){
-		Log("Settings 'Repeating' Out Of Bounds. Defaulting to Enabled (1) - Chaos_Settings.cfg");
-		Chaos_Repeating = 1;
-	}
-	if(Chaos_Repeating == 1){
-		int Effect_Interval = -1;
-		if(!Chaos_Settings.GetValue("EffectInterval", Effect_Interval)){
-			Log("Could not find 'EffectInterval' key in Chaos_Settings.cfg. Effects will default to repeat every 15 seconds.");
-			Effect_Interval = 15;
-		}
+	bool Chaos_Repeating = g_bChaos_Repeating;
+
+	if(Chaos_Repeating){
+		float Effect_Interval = g_fChaos_EffectInterval;
 		if(Effect_Interval > 60 || Effect_Interval < 5){
-			Log("Settings 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
-			Effect_Interval = 15;
+			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
+			Effect_Interval = 15.0;
 		}
 
-		g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent);
+		g_NewEvent_Timer = CreateTimer(Effect_Interval, DecideEvent);
 		// g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent);
 		Chaos_Round_Count++;
-
 	}
 }
 
@@ -533,23 +569,19 @@ bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 }
 
 float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
-	int OverwriteDuration = -1;
-	if(!Chaos_Settings.GetValue("OverwriteEffectDuration", OverwriteDuration)){
-		Log("Could not find 'OverwriteEffectDuration' key in Chaos_Settings.cfg. Effect duration will default to Chaos_Effects.cfg settings.");
-		OverwriteDuration = -1;
-	}
-	if(OverwriteDuration < -1){
-		Log("Settings 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
-		OverwriteDuration = -1;
+	float OverwriteDuration = g_fChaos_OverwriteDuration;
+	if(OverwriteDuration < -1.0){
+		Log("Cvar 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
+		OverwriteDuration = - 1.0;
 	}
 
 	int Chaos_Properties[2];
 	float expire = defaultTime;
 	if(Chaos_Effects.GetArray(EffectName, Chaos_Properties, 2)){
-		if(OverwriteDuration == -1){
+		if(OverwriteDuration == -1.0){
 			expire = float(Chaos_Properties[CONFIG_EXPIRE]);
 		}else{
-			expire = float(OverwriteDuration);
+			expire = OverwriteDuration;
 		}
 		if(expire < 0){
 			//this should imply that per the config, it doesnt exist, lets provide it the plugins default time instead, just in case it does use it.
