@@ -154,6 +154,7 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_bCanSpawnEffect = true;
+	g_bRewind_logging_enabled = true;
 	Log("---ROUND STARTED---");
 	StopTimer(g_NewEvent_Timer);
 	if(!g_bChaos_Enabled) return Plugin_Continue;
@@ -166,6 +167,8 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 			g_OriginalSpawnVec[i] = vec;
 		}
 	}
+	
+	CreateTimer(5.0, Timer_CreateHostage);
 
 
 

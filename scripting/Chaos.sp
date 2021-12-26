@@ -25,12 +25,9 @@ public Plugin myinfo = {
 
 
 char g_Prefix[] = ">>{lime}C H A O S{default}<<";
-// char g_Prefix_EndChaos[] = "<<{darkred}C H A O S{default}>>";
-// char g_Prefix_EndChaos[] = "<<{darkred}Expired{default}>>";
 char g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
 char g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
-// char LOGS[] = "chaos_logs.txt";
 // bool g_bChaosLoggingEnabled = true;
 
 
@@ -330,7 +327,6 @@ public Action Command_StopChaos(int client, int args){
 }
 
 public Action Command_StartChaos(int client, int args){
-
 	if(g_NewEvent_Timer == INVALID_HANDLE){
 		g_bClearChaos = true;
 		g_iChaos_Event_Count = 0;
@@ -366,9 +362,6 @@ public void OnConfigsExecuted(){
 }
 
 
-
-//TODO weapon jump disocnnect?
-
 public void OnClientPutInServer(int client){
 	WeaponJumpConnect_Handler(client);
 
@@ -394,9 +387,7 @@ float g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 #include "EffectsHandler.sp"
 
-
 public void OnMapStart(){
-
 	UpdateCvars();
 
 	char mapName[64];
@@ -405,8 +396,7 @@ public void OnMapStart(){
 	FormatEx(string, sizeof(string), "New Map/Plugin Restart - Map: %s", mapName);
 	Log(string);
 	PrecacheSound(SOUND_BELL);
-	// PrecacheModel("props_c17/oildrum001_explosive.mdl");
-
+	//todo precache player models?
 	for(int i = 0; i < sizeof(g_randomCache); i++) g_randomCache[i] = -1;
 	PrecacheTextures();
 	if(g_MapCoordinates != INVALID_HANDLE) ClearArray(g_MapCoordinates);
@@ -417,12 +407,8 @@ public void OnMapStart(){
 	bombSiteA = INVALID_HANDLE;
 	bombSiteB = INVALID_HANDLE;
 
-	
 
-	//mamybe some chaos can have a g_mapstart shit to keep it all together
 	findLight();
-
-	//testing purposes
 
 	cvar("sv_fade_player_visibility_farz", "1");
 
@@ -435,16 +421,12 @@ public void OnMapEnd(){
 	Log("Map has ended.");
 	StopTimer(g_NewEvent_Timer);
 }
-//Todo; shields still dont work
+//Todo; shields still dont work lol
 Action Timer_CreateHostage(Handle timer = null){
 	if (FindEntityByClassname(-1, "func_hostage_rescue") == -1){
 		CreateEntityByName("func_hostage_rescue");
     }
 }
-
-
-
-
 
 void CountChaos(bool Reset = false){
 	if(Reset) g_bClearChaos = true;
@@ -490,9 +472,6 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 	}
 	// g_Previous_Chaos_Event = g_iRandomEvent; //redundant, scheduled to be removed;
 	g_randomCache[0] = g_iRandomEvent;
-	// PrintToChatAll("The chaos event count is %i",g_iChaos_Event_Count);
-	// PrintToConsoleAll("The chaos event count is %i",g_iChaos_Event_Count);
-	// CPrintToChatAll("Event was %i", g_iRandomEvent);
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
 	g_iChaos_Event_Count = 0;
@@ -520,9 +499,7 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
 			Effect_Interval = 15.0;
 		}
-
 		g_NewEvent_Timer = CreateTimer(Effect_Interval, DecideEvent);
-		// g_NewEvent_Timer = CreateTimer(float(Effect_Interval), DecideEvent);
 		Chaos_Round_Count++;
 	}
 }
@@ -584,16 +561,16 @@ bool DecidingChaos(char[] EffectName = ""){
 	if(g_bClearChaos || !g_bDecidingChaos || (g_iChaos_Event_Count != g_iRandomEvent)) return true;
 	return false;
 }
+
 //currently a hotfix but there is a bool value somewhere that handles the custom selection just fine.. todo for another time.
 public Action Timer_ResetCustomChaosSelection(Handle timer){
 	g_sSelectedChaosEffect = "";
 }
+
 bool ClearChaos(bool EndChaos = false){
 	if(g_bClearChaos || EndChaos) return true;
 	return false;
 }
-
-
 
 bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 	if(g_bClearChaos) return true;
@@ -654,7 +631,6 @@ public void OnGameFrame(){
 	}
 }
 
-//use gameframe for rollbacklog?
 public Action Rollback_Log(Handle Timer){
 	if(g_bRewind_logging_enabled){
 		for(int client = 0; client <= MaxClients; client++){
@@ -740,34 +716,10 @@ public Action Rewind_Timer(Handle timer, int time){
 //
 // ResetChaosTimer(DiscoPlayers_Timer, Chaos_DiscoPlayers, DiscoPlayers_Duration);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//todo move sdkhooks into their own file
-
-
-
-
-
-
-
-
 float g_AllPositions[MAXPLAYERS+1][3];
 
 
-void  DoRandomTeleport(int client = -1){
+void DoRandomTeleport(int client = -1){
 	Log("[Chaos] Running: DoRandomTeleport (function, not chaos event)");
 
 	// if(g_MapCoordinates == INVALID_HANDLE) return false;
@@ -809,17 +761,6 @@ void StopTimer(Handle &timer){
 }
 
 
-
-// public void Chaos_BouncyAir(){ //? todo
-// 	if(CountingCheckDecideChaos()) return;
-// 	// if(g_bClearChaos){}
-// 	if(DecidingChaos()) return;
-// 	//every .1 second alternate the gravity
-// }
-
-
-
-
 float mapFogStart = 0.0;
 float mapFogEnd = 0.0;
 // float mapFogEnd = 175.0;
@@ -845,28 +786,6 @@ void findLight(){
 }
 
 
-
-
-
-
-
-
-// void DoFog(){
-//     if(FogIndex != -1){
-//         // DispatchKeyValue(FogIndex, "fogblend", "0");
-//         // DispatchKeyValue(FogIndex, "fogcolor", "0 0 0");
-//         // DispatchKeyValue(FogIndex, "fogcolor2", "0 0 0");
-//         // DispatchKeyValueFloat(FogIndex, "fogstart", mapFogStart);
-//         // DispatchKeyValueFloat(FogIndex, "fogend", mapFogEnd);
-//         // DispatchKeyValueFloat(FogIndex, "fogmaxdensity", mapFogDensity);
-//         DispatchKeyValueFloat(FogIndex, "farz", 250.0);
-//     }
-// }
-
-
-
-
-
 bool CreateParticle(char []particle, float[3] vec){
 	int ent = CreateEntityByName("info_particle_system");
 	DispatchKeyValue(ent , "start_active", "0");
@@ -880,16 +799,12 @@ bool CreateParticle(char []particle, float[3] vec){
 
 
 
-
-
 #include "Hooks.sp"
 #include "Events.sp"
 
 
 
-
-
-///stuff
+//config
 void ParseMapCoordinates() {
 	char path[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Locations.cfg");
@@ -936,8 +851,6 @@ void ParseMapCoordinates() {
 
 	delete kv;
 }
-
-
 
 
 //HELPERS
