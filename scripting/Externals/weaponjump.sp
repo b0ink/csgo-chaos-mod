@@ -1,4 +1,5 @@
 bool g_bTaserRound = false;
+float g_fTaserKnockback = -1000.0; 
 
 /* CREDIT TO:
     name        = "Weapon Jump",
@@ -70,7 +71,7 @@ public void weaponJump(int client, char[] szWeaponName)
 					//                  > Minimum value: 0
 					//                  > Maximum value: 1
 					// --------------------------------------------
-					float flKnockback = g_TaserKnockback;
+					float flKnockback = g_fTaserKnockback;
 					// float flKnockback = -750.0;
 					float flVelocity = 0.0;
 					bool g_bGround = true;
