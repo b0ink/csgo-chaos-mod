@@ -398,7 +398,7 @@ int g_randomCache[18];
 float g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 
-#include "ChaosEvents.sp"
+#include "EffectsHandler.sp"
 
 
 public void OnMapStart(){
@@ -1013,8 +1013,8 @@ bool CreateParticle(char []particle, float[3] vec){
 
 
 
-#include "hooks.sp"
-#include "events.sp"
+#include "Hooks.sp"
+#include "Events.sp"
 
 
 
