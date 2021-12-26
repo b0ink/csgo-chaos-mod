@@ -18,6 +18,14 @@ sm_stopchaos                   - Pauses the Chaos Effect timer and resets all th
 chaos_refreshconfig            - Updates and re-parses configs.
 ```
 
+# Available ConVars:
+```
+sm_chaos_enabled			| Sets whether the Chaos plugin is enabled. | Def. 1.0 | Min. 0.0 | Max. 1.0
+sm_chaos_interval			| Sets the interval for new Chaos effects to run at. | Def. 15.0 | Min. 5.0 | Max. 60.0
+sm_chaos_repeating			| Sets whether effects will continue to spawn after the first one of the round. | Def. 1.0 | Min. 0.0 | Max. 1.0
+sm_chaos_overwrite_duration	| Sets the duration for ALL effects, use -1.0 to use Chaos_Effects.cfg durations, use 0.0 for no expiration. | Def. -1.0 | Min. 0.0 | Max. 1.0
+```
+
 <!-- # Known Issues -->
 
 The list of effects can be found /configs/Chaos/Chaos_Effects.cfg.
