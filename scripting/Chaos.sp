@@ -15,13 +15,17 @@
 #pragma newdecls required
 #pragma semicolon 1
 
+#define PLUGIN_NAME "CSGO Chaos Mod"
+#define PLUGIN_DESCRIPTION "Every 15 seconds a random effect is played"
+#define PLUGIN_VERSION "1.8.1"
+
 
 public Plugin myinfo =
 {
-	name = "CSGO Chaos Mod",
+	name = PLUGIN_NAME,
 	author = "BOINK",
-	description = "Every 15 seconds a random effect is played",
-	version = "1.0.0",
+	description = PLUGIN_DESCRIPTION,
+	version = PLUGIN_VERSION,
 	url = "https://github.com/diddims/csgo-chaos-mod"
 };
 
@@ -197,7 +201,9 @@ void UpdateCvars(){
 
 //future todo: 	int iEntity = EntRefToEntIndex(iRef); EntIndexToEntRef for all entities
 public void OnPluginStart(){
-	
+
+	CreateConVar("sm_chaos_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
+
 	g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
 	g_cvChaosEffectInterval = CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
 	g_cvChaosRepeating = CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
@@ -280,7 +286,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	}
 }
 
-
+//todo: multple effects still spawn if you do !chaos aut, (funky, autoplant et, juggernaut)
 public Action Command_NewChaosEffect(int client, int args){
 	if(args > 1){
 		ReplyToCommand(client, "Usage: sm_chaos <Effect Name (optional)>");
@@ -947,14 +953,11 @@ public void cvar(char[] cvarname, char[] value){
 	if (hndl != null) hndl.SetString(value, true);
 }
 
-void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false)
-{
-	if (IsValidClient(client) && IsPlayerAlive(client))
-	{
+void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false){
+	if (IsValidClient(client) && IsPlayerAlive(client)){
 		int iTempWeapon = -1;
 		for (int j = 0; j < 5; j++)
-			if ((iTempWeapon = GetPlayerWeaponSlot(client, j)) != -1)
-			{
+			if ((iTempWeapon = GetPlayerWeaponSlot(client, j)) != -1){
 				if(!stripGrenadesOnly){
 					if (j == 2 && knife) //keep knife
 						continue;
@@ -965,8 +968,7 @@ void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool strip
 						RemovePlayerItem(client, iTempWeapon);
 				}
 				if(stripGrenadesOnly && !KeepGrenades){
-					if(j==3)
-						RemovePlayerItem(client, iTempWeapon);
+					if(j==3) RemovePlayerItem(client, iTempWeapon);
 				}
 			}
 	}
@@ -974,13 +976,13 @@ void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool strip
 
 
 //stocks
-stock bool IsValidClient(int client, bool nobots = true)
-{
+stock bool IsValidClient(int client, bool nobots = true){
     if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client))) {
         return false;
     }
     return IsClientInGame(client);
 }
+
 stock bool ValidAndAlive(int client){
 	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
@@ -1085,8 +1087,7 @@ void PerformBlind(int target, int amount)
 }
 
 
-stock bool SetClientMoney(int client, int money, bool absolute = false)
-{
+stock bool SetClientMoney(int client, int money, bool absolute = false){
 	//https://forums.alliedmods.net/showthread.php?t=291218
 	if(IsValidClient(client)){
 		if(absolute){
@@ -1290,51 +1291,6 @@ public int getRandomAlivePlayer(){
 	}	
 	return id;
 }
-
-
-
-//custom model
-// stock void spawnBarrel(float vec[3]) {
-// 	PrintToChatAll("spawning barrel");
-// 	int ent = CreateEntityByName("prop_physics_multiplayer") ;
-
-// 	TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR) ;
-
-// 	//new random = GetRandomInt(0, 0) ;
-
-// 	DispatchKeyValue(ent, "model", "models/props_c17/oildrum001_explosive.mdl");
-// 	DispatchKeyValue(ent, "Damagetype", "8") ;
-// 	DispatchKeyValue(ent, "minhealthdmg", "0") ;
-// 	DispatchKeyValue(ent, "ExplodeDamage", "0") ;
-// 	DispatchKeyValue(ent, "dmg", "0") ;
-// 	DispatchKeyValue(ent, "physdamagescale", "0") ;
-
-// 	DispatchSpawn(ent);
-
-// 	IgniteEntity(ent, 10.0) ;
-// }
-
-
-
-
-
-// stock void PrintToConsoleAll(const char[] myString, any ...)
-// {
-// 	int len = strlen(myString) + 255;
-// 	char[] myFormattedString = new char[len];
-// 	VFormat(myFormattedString, len, myString, 2);
- 
-// 	for(int i = 0; i <= MaxClients; i++){
-// 		if(IsValidClient(i)){
-// 			PrintToConsole(i, myFormattedString);
-// 		}
-// 	}
-// }
-
-
-
-
-
 
 stock void Log(const char[] format, any ...)
 {
