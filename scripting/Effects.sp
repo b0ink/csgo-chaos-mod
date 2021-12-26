@@ -2427,5 +2427,62 @@ Action Timer_DiscoPlayers(Handle timer = null){
 }
 
 
+//todo, doesnt always work?
+public void Chaos_RandomInvisiblePlayer(){
+	if(CountingCheckDecideChaos()) return; 
+	if(g_bClearChaos){
+
+	}
+	if(DecidingChaos("Chaos_RandomInvisiblePlayer")) return;
+	Log("[Chaos] Running: Chaos_RandomInvisiblePlayer");
+	int alivePlayers = GetAliveCTCount() + GetAliveTCount();
+	int target = GetRandomInt(0, alivePlayers - 1);
+	int count = -1;
+	bool setPlayer = false;
+	if(alivePlayers > 1){
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i) && !setPlayer){
+				count++;
+				if(count == target){
+					setPlayer = true;
+					target = i;
+					SetEntityRenderMode(target, RENDER_TRANSCOLOR);
+					SetEntityRenderColor(target, 255, 255, 255, 0);
+					//todo: shorten player names if its too high
+					char chaosMsg[256];
+					FormatEx(chaosMsg, sizeof(chaosMsg), "{orange}%N {default}has been made invisible!", target);
+					AnnounceChaos(chaosMsg);
+				}
+			}
+		}
+	}else{
+		RetryEvent();
+	}
+}
 
 
+
+//todo, delay each mega effect by half a second rather than blindly spawn it in 5 at a time
+public void Chaos_MEGACHAOS(){
+	if(CountingCheckDecideChaos()) return; 
+	if(g_bClearChaos){
+
+	}
+	if(DecidingChaos("Chaos_MEGACHAOS")) return;
+	Log("[Chaos] Running: Chaos_MEGACHAOS");
+	
+	g_bMegaChaos = true; 
+	AnnounceChaos("MEGA CHAOS", true, true);
+	g_bDisableRetryEvent = false;
+	CreateTimer(0.0, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(0.5, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(1.0, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(1.5, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(2.0, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(2.5, Timer_CompleteMegaChaos);
+
+}
+public Action Timer_CompleteMegaChaos(Handle timer){
+	AnnounceChaos("MEGA CHAOS", true, true);
+	g_bMegaChaos = false; 
+}

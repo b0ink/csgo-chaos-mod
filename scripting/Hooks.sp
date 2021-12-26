@@ -1,4 +1,4 @@
-public Action Event_WeaponSwitch(int client, int weapon){
+public Action Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
 	if(g_bTaserRound){
@@ -37,7 +37,7 @@ public Action Event_WeaponSwitch(int client, int weapon){
 }
 
 //DISABLE WEAPON DROP DURING RANDOM WEAPON EVENT
-public Action Event_WeaponDrop(int client,int weapon){
+public Action Hook_WeaponDrop(int client,int weapon){
 	if(weapon != -1 && IsValidEntity(weapon)){
 		if(!g_bPlayersCanDropWeapon){
 			char WeaponName[32];
@@ -51,7 +51,7 @@ public Action Event_WeaponDrop(int client,int weapon){
 } 
 
 //NoScope
-public Action OnPreThink(int client){
+public Action Hook_OnPreThink(int client){
 	int iWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
 	SetNoScope(iWeapon);
 	return Plugin_Continue;
@@ -72,7 +72,7 @@ stock void SetNoScope(int weapon){
 }
 
 //allow players to take damage during noclip
-public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype) {
+public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype) {
 	if(g_bVampireRound){
 		if(IsValidClient(victim) && IsValidClient(inflictor)){
 			//todo; fix this its not working
@@ -89,6 +89,6 @@ public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &dam
 
 	return Plugin_Continue;
 }
-public Action OnTakeDamagePost(int victim, int attacker){
+public Action Hook_OnTakeDamagePost(int victim, int attacker){
     if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
 }

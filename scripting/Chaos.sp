@@ -210,21 +210,22 @@ public void OnPluginStart(){
 	HookConVarChange(g_cvChaosRepeating, ConVarChanged);
 	HookConVarChange(g_cvChaosOverwriteDuration, ConVarChanged);
 
-	HookEvent("round_start", Event_RoundStart);
-	HookEvent("round_end", Event_RoundEnd);	
-	HookEvent("player_death", Event_PlayerDeath);	
-	HookEvent("weapon_fire", OnWeaponFirePost, EventHookMode_Post);
-	HookEvent("bomb_planted", Event_BombPlanted);
+	HookEvent("round_start", 	Event_RoundStart);
+	HookEvent("round_end", 		Event_RoundEnd);	
+	HookEvent("player_death", 	Event_PlayerDeath);	
+	HookEvent("weapon_fire", 	Event_OnWeaponFirePost, EventHookMode_Post);
+	HookEvent("bomb_planted", 	Event_BombPlanted);
+	HookEvent("bullet_impact", 	Event_BulletImpact);
 
-	HookEvent("bullet_impact", Event_BulletImpact);
 	AddTempEntHook("Shotgun Shot", Hook_BulletShot);
 
-	// HookEvent("weapon_reload", Event_WeaponReload);
-	for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) OnClientPutInServer(i);
-	for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) OnClientPostAdminCheck(i);
+	for(int i = 0; i <= MaxClients; i++){
+		if(IsValidClient(i)){
+			OnClientPutInServer(i);
+		}
+	}
 
 	Chaos_Effects = new StringMap();
-	// Chaos_Settings = new StringMap();
 
 	ESP_INIT();
 	TEAMMATESWAP_INIT();
@@ -246,10 +247,7 @@ public void OnPluginStart(){
 
 	CreateTimer(1.0, Rollback_Log, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
-
 }
-
-
 
 
 Handle g_NewEvent_Timer = INVALID_HANDLE;
@@ -369,26 +367,23 @@ public void OnConfigsExecuted(){
 }
 
 
-// public void Event_WeaponReload(Handle event, const char[] name, bool dontBroadcast ){
-// 	SDKHook(client, SDKHook_ReloadPost, OnReloadPost);
-// } 
 
-public void OnClientPostAdminCheck(int client){
-	//DONE: hook them as the event occurs, unhook them on clear.
-	// Aimbot_SDKHOOKS(client);
-}
 //TODO weapon jump disocnnect?
-//DONE merge put in sever and post admin check together
+
 public void OnClientPutInServer(int client){
 	WeaponJumpConnect_Handler(client);
-	SDKHook(client, SDKHook_WeaponDrop, Event_WeaponDrop);
-	SDKHook(client, SDKHook_WeaponSwitch, Event_WeaponSwitch);
-	SDKHook(client, SDKHook_PreThink, OnPreThink);
-	SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
-	SDKHook(client, SDKHook_OnTakeDamagePost, OnTakeDamagePost);
+
+	SDKHook(client, SDKHook_WeaponDrop, 		Hook_WeaponDrop);
+	SDKHook(client, SDKHook_WeaponSwitch, 		Hook_WeaponSwitch);
+	SDKHook(client, SDKHook_PreThink, 			Hook_OnPreThink);
+	SDKHook(client, SDKHook_OnTakeDamage, 		Hook_OnTakeDamage);
+	SDKHook(client, SDKHook_OnTakeDamagePost, 	Hook_OnTakeDamagePost);
 }
 
-
+public void OnClientDisconnect(int client){
+	ToggleAim(client, false);
+	WeaponJumpDisconnect_Handler(client);
+}
 
 
 //TODO move these into functions in another script that can be called on map start
@@ -448,37 +443,9 @@ Action Timer_CreateHostage(Handle timer = null){
     }
 }
 
-public void OnClientDisconnect(int client){
-	ToggleAim(client, false);
-}
 
 
 
-public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
-	g_bCanSpawnEffect = true;
-	Log("---ROUND STARTED---");
-	StopTimer(g_NewEvent_Timer);
-	if(!g_bChaos_Enabled) return Plugin_Continue;
-	Chaos_Round_Count = 0;
-	// to use in chaos_resetspawns()
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			float vec[3];
-			GetClientAbsOrigin(i, vec);
-			g_OriginalSpawnVec[i] = vec;
-		}
-	}
-
-
-
-	SetRandomSeed(GetTime());
-	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
-		CountChaos(true);
-		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
-		CreateTimer(freezeTime, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
-	}
-	return Plugin_Continue;
-}
 
 void CountChaos(bool Reset = false){
 	if(Reset) g_bClearChaos = true;
@@ -541,7 +508,7 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 				EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
 			}
 		}
-		CreateTimer(0.5, Timer_ResetPlaySound);
+		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
 	if(CustomRun) return;
 
@@ -564,6 +531,7 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 public Action Timer_ResetPlaySound(Handle timer){
 	g_bPlaySound_Debounce = false;
 }
+
 public void RetryEvent(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
 	if(g_bDisableRetryEvent) return;
@@ -571,14 +539,7 @@ public void RetryEvent(){ //Used if there's no map data found for the map that r
 	DecideEvent(INVALID_HANDLE);
 }
 
-public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
-	g_bCanSpawnEffect = false;
-	Log("--ROUND ENDED--");
-	ResetTimerRemoveChickens();
-	StopTimer(g_NewEvent_Timer);
-	CreateTimer(1.0, ResetRoundChaos);
 
-}
 public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
 	AcceptEntityInput(FogIndex, "TurnOff");
@@ -590,20 +551,6 @@ public Action ResetRoundChaos(Handle timer){
 }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//   #####   #     #     #     #######   #####       #######  #     #  #######  #     #  #######   #####    ///////////
-//  #     #  #     #    # #    #     #  #     #      #        #     #  #        ##    #     #     #     #  ////////////
-//  #        #     #   #   #   #     #  #            #        #     #  #        # #   #     #     #         ///////////
-//  #        #######  #     #  #     #   #####       #####    #     #  #####    #  #  #     #      #####    ///////////
-//  #        #     #  #######  #     #        #      #         #   #   #        #   # #     #           #   ///////////
-//  #     #  #     #  #     #  #     #  #     #      #          # #    #        #    ##     #     #     #   ///////////
-//   #####   #     #  #     #  #######   #####       #######     #     #######  #     #     #      #####   ////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////\////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 //todo: dealing with players who joing after the round starts.
 /*
@@ -612,27 +559,6 @@ public Action ResetRoundChaos(Handle timer){
 
 */
 
-// void Chaos_FakeDeath(){
-// 	if(CountingCheckDecideChaos()) return;
-// 	if(g_bClearChaos){	
-
-// 	}
-// 	if(DecidingChaos()) return;
-// 	for(int i = 0; i <= MaxClients; i++){
-// 		if(ValidAndAlive(i)){
-// 			// SetEntProp(i, Prop_Send, "m_lifeState", 1); 
-// 		}
-// 	}
-// 	// CreateTimer(5.0, Test_Death);
-// 	AnnounceChaos("Fake Death");
-// }
-// Action Test_Death(Handle timer){
-// 	for(int i = 0; i <= MaxClients; i++){
-// 		if(ValidAndAlive(i)){
-// 			SetEntProp(i, Prop_Send, "m_lifeState", 0); 
-// 		}
-// 	}
-// }y
 
 bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
@@ -710,16 +636,12 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 			}
 		}
 	
-
-
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
 
 	return expire;
 }
-
-
 
 #include "Effects.sp"
 
@@ -821,58 +743,6 @@ public Action Rewind_Timer(Handle timer, int time){
 
 
 
-//todo, doesnt always work?
-public void Chaos_RandomInvisiblePlayer(){
-	if(CountingCheckDecideChaos()) return; 
-	if(g_bClearChaos){
-
-	}
-	if(DecidingChaos("Chaos_RandomInvisiblePlayer")) return;
-	Log("[Chaos] Running: Chaos_RandomInvisiblePlayer");
-	int alivePlayers = GetAliveCTCount() + GetAliveTCount();
-	int target = GetRandomInt(0, alivePlayers - 1);
-	int count = -1;
-	bool setPlayer = false;
-	if(alivePlayers > 1){
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i) && !setPlayer){
-				count++;
-				if(count == target){
-					setPlayer = true;
-					target = i;
-					SetEntityRenderMode(target, RENDER_TRANSCOLOR);
-					SetEntityRenderColor(target, 255, 255, 255, 0);
-					//todo: shorten player names if its too high
-					char chaosMsg[256];
-					FormatEx(chaosMsg, sizeof(chaosMsg), "{orange}%N {default}has been made invisible!", target);
-					AnnounceChaos(chaosMsg);
-				}
-			}
-		}
-	}else{
-		RetryEvent();
-	}
-}
-
-
-
-
-//todo, delay each mega effect by half a second rather than blindly spawn it in 5 at a time
-public void Chaos_MEGACHAOS(){
-	if(CountingCheckDecideChaos()) return; 
-	if(g_bClearChaos){
-
-	}
-	if(DecidingChaos("Chaos_MEGACHAOS")) return;
-	Log("[Chaos] Running: Chaos_MEGACHAOS");
-	
-	g_bMegaChaos = true; 
-	AnnounceChaos("MEGA CHAOS", true, true);
-	g_bDisableRetryEvent = false;
-	for(int i = 1; i <= 5; i++) RetryEvent();
-	AnnounceChaos("MEGA CHAOS", true, true);
-	g_bMegaChaos = false; 
-}
 
 
 
