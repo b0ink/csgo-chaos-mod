@@ -11,13 +11,11 @@
 #pragma newdecls required
 #pragma semicolon 1
 
-#define PLUGIN_NAME "CSGO Chaos Mod"
-#define PLUGIN_DESCRIPTION ""
-#define PLUGIN_VERSION "1.8.1"
+#define PLUGIN_NAME "CS:GO Chaos Mod"
+#define PLUGIN_DESCRIPTION "Spawn random effects from over 100+ effects every 15 seconds."
+#define PLUGIN_VERSION "0.0.1"
 
-
-public Plugin myinfo =
-{
+public Plugin myinfo = {
 	name = PLUGIN_NAME,
 	author = "BOINK",
 	description = PLUGIN_DESCRIPTION,
@@ -244,11 +242,9 @@ public void OnPluginStart(){
 	RegAdminCmd("sm_startchaos", Command_StartChaos, ADMFLAG_BAN);
 	RegAdminCmd("sm_stopchaos", Command_StopChaos, ADMFLAG_BAN);
 
-
 	g_Offset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
 	CreateTimer(1.0, Rollback_Log, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
-
 }
 
 
@@ -267,9 +263,10 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		}
 	}else if(convar == g_cvChaosEffectInterval){
 		g_fChaos_EffectInterval = StringToFloat(newValue);
-		if(g_fChaos_EffectInterval < 5.0){
-			PrintToChatAll("[SM] Convar \"chaos_interval\" Out Of Bounds. Min. 5.0.");
-		}
+		//oldvalue is updated convar. to min
+		// if(StringToFloat(newValue) < 5.0){
+		// 	PrintToChatAll("[SM] Convar \"chaos_interval\" Out Of Bounds. Min. 5.0.");
+		// }
 	}else if(convar == g_cvChaosRepeating){
 		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
 			g_bChaos_Repeating = false;
@@ -1084,7 +1081,6 @@ void PerformBlind(int target, int amount)
 
 
 stock bool SetClientMoney(int client, int money, bool absolute = false){
-	//https://forums.alliedmods.net/showthread.php?t=291218
 	if(IsValidClient(client)){
 		if(absolute){
 			SetEntProp(client, Prop_Send, "m_iAccount", money);
