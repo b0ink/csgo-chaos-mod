@@ -645,7 +645,7 @@ Action Chaos_OneBulletOneGun(Handle timer = null, bool EndChaos = false){
 	if(g_bOneBulletOneGun_Expire > 0.0) g_OneBuilletOneGun_Timer = CreateTimer(g_bOneBulletOneGun_Expire, Chaos_OneBulletOneGun, true);
 }
 
-float g_Earthquake_Duration = 5.0;
+float g_Earthquake_Duration = 7.0;
 void Chaos_Earthquake(){
 	if(CountingCheckDecideChaos()) return; 
 	if(g_bClearChaos){    }
@@ -656,10 +656,21 @@ void Chaos_Earthquake(){
 	
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
-			ScreenShake(i, g_Earthquake_Duration);
+			ScreenShake(i, _, g_Earthquake_Duration);
 		}
 	}
 	AnnounceChaos("Earthquake");
+}
+
+stock int ScreenShake(int iClient, float fAmplitude = 50.0, float duration = 7.0){
+	Handle hMessage = StartMessageOne("Shake", iClient, 1);
+	
+	PbSetInt(hMessage, "command", 0);
+	PbSetFloat(hMessage, "local_amplitude", fAmplitude);
+	PbSetFloat(hMessage, "frequency", 255.0);
+	PbSetFloat(hMessage, "duration", duration);
+	
+	EndMessage();
 }
 
 

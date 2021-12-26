@@ -79,7 +79,7 @@ public void AutoPlantC4(){
 public void AutoPlantRoundEnd(){
     if(g_bBombPlanted){
         g_bBombPlanted = false;
-        GameRules_SetProp("m_BombPlanted", 0);
+        GameRules_SetProp("m_bBombPlanted", 0);
         g_PlantedSite = -1;
     }
 }
@@ -95,7 +95,7 @@ public Action PlantBomb(Handle timer, int client)
         {
             int bombEntity = CreateEntityByName("planted_c4");
 
-            GameRules_SetProp("m_bg_bBombPlanted", 1);
+            GameRules_SetProp("m_bBombPlanted", 1);
             SetEntData(bombEntity, bombTicking, 1, 1, true);
             Sendg_bBombPlanted(client);
 

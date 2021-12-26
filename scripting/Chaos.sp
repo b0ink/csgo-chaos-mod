@@ -1292,16 +1292,6 @@ public int getRandomAlivePlayer(){
 }
 
 
-stock int ScreenShake(int iClient, float fAmplitude = 200.0, float duration = 5.0){
-	Handle hMessage = StartMessageOne("Shake", iClient, 1);
-	
-	PbSetInt(hMessage, "command", 0);
-	PbSetFloat(hMessage, "local_amplitude", fAmplitude);
-	PbSetFloat(hMessage, "frequency", 255.0);
-	PbSetFloat(hMessage, "duration", duration);
-	
-	EndMessage();
-}
 
 //custom model
 // stock void spawnBarrel(float vec[3]) {
