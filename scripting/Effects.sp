@@ -1558,7 +1558,11 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_bKnifeFight_Timer);
 		g_bKnifeFight = false;
-		if(EndChaos) AnnounceChaos("Knife Fight", true);
+		
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "slot1");
+			AnnounceChaos("Knife Fight", true);
+		}
 	}
 	if(DecidingChaos("Chaos_KnifeFight")) return;
 	g_bKnifeFight_Expire = GetChaosTime("Chaos_KnifeFight", 15.0);
