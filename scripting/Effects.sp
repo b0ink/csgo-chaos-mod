@@ -92,8 +92,8 @@ void Chaos_Soccerballs(){
 	if(DecidingChaos("Chaos_Soccerballs")) return;
 
 	Log("[Chaos] Running: Chaos_Soccerballs");
-
-
+	
+	cvar("sv_turbophysics", "100");
 
 	char MapName[128];
 	GetCurrentMap(MapName, sizeof(MapName));
