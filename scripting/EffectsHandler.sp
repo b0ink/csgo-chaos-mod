@@ -1,7 +1,3 @@
-//todo; any instances of a retryevent should be handled inside this function
-//		running the function then retrying it is doomed for endless loops, and is simply inefficient ??
-//todo: go through each one to see what crashes.
-//test to see if its the removechickens function
 public void Chaos(){
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
 	if(IsChaosEnabled("Chaos_NoScopeOnly"))  Chaos_NoScopeOnly();
@@ -31,7 +27,6 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_IsThisMexico"))  Chaos_IsThisMexico();
 	if(IsChaosEnabled("Chaos_HeadshotOnly"))  Chaos_HeadshotOnly();
 	if(IsChaosEnabled("Chaos_RandomMolotovSpawn"))  Chaos_RandomMolotovSpawn();
-
 	if(IsChaosEnabled("Chaos_CrabPeople"))  Chaos_CrabPeople();
 	if(IsChaosEnabled("Chaos_Spin180"))  Chaos_Spin180();
 	if(IsChaosEnabled("Chaos_OneWeaponOnly"))  Chaos_OneWeaponOnly();
@@ -85,20 +80,17 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_NoCrosshair"))  Chaos_NoCrosshair();
 	if(IsChaosEnabled("Chaos_ChickensIntoPlayers"))  Chaos_ChickensIntoPlayers();
 	if(IsChaosEnabled("Chaos_Juggernaut"))  Chaos_Juggernaut();
-
 	if(IsChaosEnabled("Chaos_RapidFire"))  Chaos_RapidFire();
 	if(IsChaosEnabled("Chaos_DisableRadar")) Chaos_DisableRadar();
 	if(IsChaosEnabled("Chaos_InsaneAirSpeed")) Chaos_InsaneAirSpeed();
 	if(IsChaosEnabled("Chaos_DropCurrentWeapon")) Chaos_DropCurrentWeapon();
 	if(IsChaosEnabled("Chaos_DropPrimaryWeapon")) Chaos_DropPrimaryWeapon();
-
 	//anything BUT dust2 (underwhelming effect due to dust2's 3d skybox :[ )
 	char MapName[128];
 	GetCurrentMap(MapName, sizeof(MapName));
 	if(StrEqual(MapName, "de_dust2", false) == false){
 		if(IsChaosEnabled("Chaos_RandomSkybox"))  Chaos_RandomSkybox();
 	}
-
 	if(Chaos_Round_Count > 0){
 		if(IsChaosEnabled("Chaos_RespawnTheDead"))  Chaos_RespawnTheDead();
 		if(IsChaosEnabled("Chaos_ResetSpawns"))  Chaos_ResetSpawns();
@@ -109,7 +101,6 @@ public void Chaos(){
 			if(IsChaosEnabled("Chaos_RespawnTheDead_Randomly"))  Chaos_RespawnTheDead_Randomly();
 		}
 	}
-
 	if(ValidMapPoints()){
 		if(g_bCanSpawnChickens){
 			if(IsChaosEnabled("Chaos_LittleChooks"))  Chaos_LittleChooks();
@@ -126,10 +117,7 @@ public void Chaos(){
 		if(IsChaosEnabled("Chaos_SpawnFlashbangs"))  Chaos_SpawnFlashbangs();
 		if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
 	}
-
 	g_bClearChaos = false;
-
-	// if(IsChaosEnabled("FUNCTION"))  Chaos_PropHunt(); //CRASHES
-
-	//todo; if full version (prop hunts), include a separate chaos file that goes in here
 }
+
+//todo; if full version (prop hunts), include a separate chaos file that goes in here
