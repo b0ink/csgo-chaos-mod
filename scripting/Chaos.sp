@@ -42,7 +42,109 @@ bool g_bCanSpawnEffect = true;
 #define CONFIG_ENABLED 0
 #define CONFIG_EXPIRE 1
 
-#include "config.sp"
+
+Handle g_MapCoordinates = INVALID_HANDLE;
+Handle g_UnusedCoordinates = INVALID_HANDLE;
+Handle bombSiteA = INVALID_HANDLE;
+Handle bombSiteB = INVALID_HANDLE;
+bool g_bBombPlanted = false;
+
+void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
+
+bool g_bCanSpawnChickens = true;
+
+char g_sWeapons[][64] = {
+	"weapon_glock",
+    "weapon_p250",
+    "weapon_fiveseven",
+    "weapon_deagle",
+    "weapon_elite",
+    "weapon_hkp2000",
+    "weapon_tec9",
+
+    "weapon_nova",
+    "weapon_xm1014",
+    "weapon_sawedoff",
+
+    "weapon_m249",
+    "weapon_negev",
+    "weapon_mag7",
+
+    "weapon_mp7",
+    "weapon_ump45",
+    "weapon_p90",
+    "weapon_bizon",
+    "weapon_mp9",
+    "weapon_mac10",
+
+    "weapon_famas",
+    "weapon_m4a1",
+    "weapon_aug",
+    "weapon_galilar",
+    "weapon_ak47",
+    "weapon_sg556",
+
+    "weapon_ssg08",
+    "weapon_awp",
+    "weapon_scar20",
+    "weapon_g3sg1",
+
+    // "weapon_taser",
+    // "weapon_molotov",
+    // "weapon_hegrenade"
+};
+
+
+char g_sSkyboxes[][] = {
+	"cs_baggage_skybox_",
+	"cs_tibet",
+	"embassy",
+	"italy",
+	"jungle",
+	"office",
+	"sky_cs15_daylight01_hdr",
+	"sky_cs15_daylight02_hdr",
+	"sky_cs15_daylight03_hdr",
+	"sky_cs15_daylight04_hdr",
+	"sky_day02_05",
+	"nukeblank",
+	"sky_venice",
+	"sky_csgo_cloudy01",
+	"sky_csgo_night02",
+	"sky_csgo_night02b",
+	"vertigo",
+	"vertigoblue_hdr",
+	"sky_dust",
+	"vietnam"
+};
+
+
+char playerModel_Path[][] = {
+	"models/player/custom_player/legacy/tm_leet_varianti.mdl",
+	"models/player/custom_player/legacy/tm_leet_variantg.mdl",
+	"models/player/custom_player/legacy/tm_leet_variantg.mdl",
+	"models/player/custom_player/legacy/tm_leet_varianth.mdl",
+	"models/player/custom_player/legacy/tm_leet_varianti.mdl",
+	"models/player/custom_player/legacy/tm_leet_variantf.mdl",
+	"models/player/custom_player/legacy/tm_leet_variantj.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_varianta.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_variantb.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_variantc.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_variantd.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_variante.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_variantf.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_variantb2.mdl",
+	"models/player/custom_player/legacy/tm_jungle_raider_variantf2.mdl",
+	"models/player/custom_player/legacy/tm_phoenix_varianth.mdl",
+	"models/player/custom_player/legacy/tm_phoenix_variantf.mdl",
+	"models/player/custom_player/legacy/tm_phoenix_variantg.mdl",
+	"models/player/custom_player/legacy/tm_phoenix_varianti.mdl",
+	"models/player/custom_player/legacy/tm_professional_varf.mdl",
+	"models/player/custom_player/legacy/tm_professional_varg.mdl",
+	"models/player/custom_player/legacy/tm_professional_varh.mdl",
+	"models/player/custom_player/legacy/tm_professional_varj.mdl"
+};
+
 #include "Externals/instantweaponswitch.sp"
 #include "Externals/weaponjump.sp"
 #include "Externals/esp.sp"
@@ -55,6 +157,11 @@ bool g_bCanSpawnEffect = true;
 #include "Externals/drugs.sp"
 #include "Externals/c4chicken.sp"
 
+
+
+bool g_bPlayersCanDropWeapon = true;
+
+
 int g_Offset_Clip1 = -1;
 
 float g_RollbackPositions[MAXPLAYERS+1][10][3];
@@ -65,9 +172,16 @@ float g_PlayerDeathLocations[MAXPLAYERS+1][3];
 bool g_bRewind_logging_enabled = true;
 
 StringMap	Chaos_Effects;
-// StringMap	Chaos_Settings;
 
 int Chaos_Round_Count = 0;
+bool g_bMegaChaos = false;
+int g_iChaos_Event_Count = 0;
+char g_sSelectedChaosEffect[64] = "";
+
+bool g_bClearChaos = false;
+bool g_bDecidingChaos = false;
+int g_iRandomEvent = 0;
+bool g_bCountingChaos = false;
 
 ConVar g_cvChaosEnabled; bool g_bChaos_Enabled = true;
 ConVar g_cvChaosEffectInterval; float g_fChaos_EffectInterval = 15.0;
@@ -181,7 +295,7 @@ public Action Command_NewChaosEffect(int client, int args){
 	if(g_bCanSpawnEffect){
 		if(args == 1){
 			if(strlen(effectName) >=3){
-					g_SelectedChaosEffect = effectName;
+					g_sSelectedChaosEffect = effectName;
 					g_bDecidingChaos = true;
 					g_bClearChaos = false;
 					Chaos();
@@ -199,7 +313,7 @@ public Action Command_NewChaosEffect(int client, int args){
 	}
 
 	CreateTimer(1.0, Command_ReEnableRetries);
-	g_SelectedChaosEffect = "";
+	g_sSelectedChaosEffect = "";
 	return Plugin_Handled;
 }
 public Action Command_ReEnableRetries(Handle timer){
@@ -210,7 +324,7 @@ public Action Command_StopChaos(int client, int args){
 	g_bChaos_Enabled = false;
 	StopTimer(g_NewEvent_Timer);
 	g_bClearChaos = true;
-	g_Chaos_Event_Count = 0;
+	g_iChaos_Event_Count = 0;
 	g_bDecidingChaos = false;
 	g_bCountingChaos = false;
 	Chaos(); //count and reset all chaos
@@ -222,7 +336,7 @@ public Action Command_StartChaos(int client, int args){
 
 	if(g_NewEvent_Timer == INVALID_HANDLE){
 		g_bClearChaos = true;
-		g_Chaos_Event_Count = 0;
+		g_iChaos_Event_Count = 0;
 		g_bDecidingChaos = false;
 		g_bCountingChaos = true;
 		Chaos();
@@ -368,7 +482,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 void CountChaos(bool Reset = false){
 	if(Reset) g_bClearChaos = true;
-	g_Chaos_Event_Count = 0;
+	g_iChaos_Event_Count = 0;
 	g_bDecidingChaos = false;
 	g_bCountingChaos = true;
 	Chaos();
@@ -386,6 +500,8 @@ bool findInArray(int[] array, int target, int arraysize){
 	return false;
 }
 
+
+
 Action DecideEvent(Handle timer, bool CustomRun = false){
 	if(!CustomRun) g_NewEvent_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
@@ -399,21 +515,21 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 	}
 
 
-	g_RandomEvent = GetRandomInt(1, g_Chaos_Event_Count);
-	if(g_Chaos_Event_Count > sizeof(g_randomCache)-1){
-		// while(g_RandomEvent == g_Previous_Chaos_Event && findInArray(g_randomCache, g_RandomEvent, sizeof(g_randomCache))){
-		while(findInArray(g_randomCache, g_RandomEvent, sizeof(g_randomCache))){
-			g_RandomEvent = GetRandomInt(1,g_Chaos_Event_Count);
+	g_iRandomEvent = GetRandomInt(1, g_iChaos_Event_Count);
+	if(g_iChaos_Event_Count > sizeof(g_randomCache)-1){
+		// while(g_iRandomEvent == g_Previous_Chaos_Event && findInArray(g_randomCache, g_iRandomEvent, sizeof(g_randomCache))){
+		while(findInArray(g_randomCache, g_iRandomEvent, sizeof(g_randomCache))){
+			g_iRandomEvent = GetRandomInt(1,g_iChaos_Event_Count);
 		}
 	}
-	// g_Previous_Chaos_Event = g_RandomEvent; //redundant, scheduled to be removed;
-	g_randomCache[0] = g_RandomEvent;
-	// PrintToChatAll("The chaos event count is %i",g_Chaos_Event_Count);
-	// PrintToConsoleAll("The chaos event count is %i",g_Chaos_Event_Count);
-	// CPrintToChatAll("Event was %i", g_RandomEvent);
+	// g_Previous_Chaos_Event = g_iRandomEvent; //redundant, scheduled to be removed;
+	g_randomCache[0] = g_iRandomEvent;
+	// PrintToChatAll("The chaos event count is %i",g_iChaos_Event_Count);
+	// PrintToConsoleAll("The chaos event count is %i",g_iChaos_Event_Count);
+	// CPrintToChatAll("Event was %i", g_iRandomEvent);
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
-	g_Chaos_Event_Count = 0;
+	g_iChaos_Event_Count = 0;
 	g_bCountingChaos = true;
 	Chaos(); //run the chaos
 
@@ -524,28 +640,28 @@ bool ValidMapPoints(){
 }
 
 bool CountingCheckDecideChaos(){
-	if(g_bCountingChaos) {	g_Chaos_Event_Count++;	if(!g_bDecidingChaos) {  return true;  }}
+	if(g_bCountingChaos) {	g_iChaos_Event_Count++;	if(!g_bDecidingChaos) {  return true;  }}
 	return false;
 }
 
 bool DecidingChaos(char[] EffectName = ""){
 	//if effectname was provided manually, 
-	if(EffectName[0] && g_SelectedChaosEffect[0]){
+	if(EffectName[0] && g_sSelectedChaosEffect[0]){
 		if(!g_bDecidingChaos
-					|| ((StrContains(g_SelectedChaosEffect, EffectName, false) == -1) 
-					&& (StrContains(EffectName, g_SelectedChaosEffect, false) == -1))){
+					|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
+					&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
 						return true;
 					}else{
 						CreateTimer(0.5, Timer_ResetCustomChaosSelection);
 						return false;
 					}
 	}
-	if(g_bClearChaos || !g_bDecidingChaos || (g_Chaos_Event_Count != g_RandomEvent)) return true;
+	if(g_bClearChaos || !g_bDecidingChaos || (g_iChaos_Event_Count != g_iRandomEvent)) return true;
 	return false;
 }
 //currently a hotfix but there is a bool value somewhere that handles the custom selection just fine.. todo for another time.
 public Action Timer_ResetCustomChaosSelection(Handle timer){
-	g_SelectedChaosEffect = "";
+	g_sSelectedChaosEffect = "";
 }
 bool ClearChaos(bool EndChaos = false){
 	if(g_bClearChaos || EndChaos) return true;
@@ -865,18 +981,6 @@ void findLight(){
 
 
 
-// char skyboxes[][] = {
-// 	"cs_baggage_skybox_",
-// 	"cs_tibet",
-// 	"vietnam",
-// 	"vertigo",
-// 	"sky_lunacy",
-// 	"jungle"
-// };
-
-
-
-
 
 // void DoFog(){
 //     if(FogIndex != -1){
@@ -1155,12 +1259,12 @@ void RemoveChickens(bool removec4Chicken = false){
 			{
 			
 				if(removec4Chicken){
-					if(i == g_bC4ChickenEnt){
+					if(i == g_iC4ChickenEnt){
 						// RemoveEdict(i);
 						RemoveEntity(i);
 					}
 				}else{
-					if(i != g_bC4ChickenEnt){
+					if(i != g_iC4ChickenEnt){
 						SetEntPropFloat(i, Prop_Data, "m_flModelScale", 1.0);
 						RemoveEntity(i);
 					}
@@ -1432,3 +1536,9 @@ void ParseChaosEffects(){
 
 	Log("Parsed Chaos_Effects.cfg succesfully!");
 }
+
+
+public void PrecacheTextures(){
+	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
+}
+

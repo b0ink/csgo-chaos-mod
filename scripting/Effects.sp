@@ -968,8 +968,8 @@ Action Chaos_OneWeaponOnly(Handle timer = null, bool EndChaos = false){
 	//todo; might have to handle weapon pickups?.. (players can still buy)
 	g_bPlayersCanDropWeapon = false;
 	char randomWeapon[64];
-	int randomIndex = GetRandomInt(0, sizeof(weapons)-1);
-	randomWeapon = weapons[randomIndex];
+	int randomIndex = GetRandomInt(0, sizeof(g_sWeapons)-1);
+	randomWeapon = g_sWeapons[randomIndex];
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			StripPlayer(i);
@@ -1025,7 +1025,7 @@ void Chaos_AutoPlantC4(){
 			return;
 		}
 		int bombEnt = FindEntityByClassname(-1, "planted_c4");
-		if(g_bC4ChickenEnt != -1) bombEnt = g_bC4ChickenEnt;
+		if(g_iC4ChickenEnt != -1) bombEnt = g_iC4ChickenEnt;
 		newBombPosition[2] = newBombPosition[2] - 64;
 		if(bombEnt != -1){
 			TeleportEntity(bombEnt, newBombPosition, NULL_VECTOR, NULL_VECTOR);
@@ -1304,7 +1304,7 @@ void Chaos_C4Chicken(){
 	if(g_bClearChaos){
 		g_bC4Chicken = false;
 		RemoveChickens();
-		g_bC4ChickenEnt = -1;
+		g_iC4ChickenEnt = -1;
 	}
 	if(DecidingChaos("Chaos_C4Chicken")) return;
 	Log("[Chaos] Running: Chaos_C4Chicken");
@@ -1585,6 +1585,8 @@ Action Chaos_Funky(Handle timer = null, bool EndChaos = false){
 // bool g_bRandomWeaponRound = false;
 float g_RandWep_Expire = 30.0;
 Handle g_RandWep_Timer = INVALID_HANDLE;
+float g_fChaos_RandomWeapons_Interval = 5.0; //5+ recommended for bomb plants
+
 Action Chaos_RandomWeapons(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
@@ -1603,15 +1605,15 @@ Action Chaos_RandomWeapons(Handle timer = null, bool EndChaos = false){
 	// g_RandomWeaponRound = true;
 	g_bPlayersCanDropWeapon = false;
 	Timer_GiveRandomWeapon();
-	g_Chaos_RandomWeapons_Timer = CreateTimer(g_Chaos_RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
+	g_Chaos_RandomWeapons_Timer = CreateTimer(g_fChaos_RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
 	if(g_RandWep_Expire > 0) g_RandWep_Timer = CreateTimer(g_RandWep_Expire, Chaos_RandomWeapons, true);
 	AnnounceChaos("Random Weapons!");
 }
 Action Timer_GiveRandomWeapon(Handle timer = null){
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i) && IsPlayerAlive(i)){
-			int randomWeaponIndex = GetRandomInt(0,sizeof(weapons)-1);	
-			GiveAndSwitchWeapon(i, weapons[randomWeaponIndex]);
+			int randomWeaponIndex = GetRandomInt(0,sizeof(g_sWeapons)-1);	
+			GiveAndSwitchWeapon(i, g_sWeapons[randomWeaponIndex]);
 		}
 	}
 }
@@ -1719,6 +1721,16 @@ Action Chaos_ReversedMovement(Handle timer = null, bool EndChaos = false){
 	AnnounceChaos("Reversed Movement");
 }
 
+Handle TPos = INVALID_HANDLE;
+Handle CTPos = INVALID_HANDLE;
+Handle tIndex = INVALID_HANDLE;
+Handle ctIndex = INVALID_HANDLE;
+public void TEAMMATESWAP_INIT(){
+	TPos = CreateArray(3);
+	CTPos = CreateArray(3);
+	tIndex = CreateArray(1);
+	ctIndex = CreateArray(1);
+}
 
 void Chaos_TeammateSwap(){
 	if(CountingCheckDecideChaos()) return;
@@ -2219,8 +2231,8 @@ void Chaos_RandomSkybox(){
 	if(DecidingChaos("Chaos_RandomSkybox")) return;
 	
 	Log("[Chaos] Running: Chaos_RandomSkybox");
-	int randomSkyboxIndex = GetRandomInt(0, sizeof(skyboxes)-1);
-	DispatchKeyValue(0, "skyname", skyboxes[randomSkyboxIndex]);
+	int randomSkyboxIndex = GetRandomInt(0, sizeof(g_sSkyboxes)-1);
+	DispatchKeyValue(0, "skyname", g_sSkyboxes[randomSkyboxIndex]);
 	AnnounceChaos("Random Skybox");
 
 }
