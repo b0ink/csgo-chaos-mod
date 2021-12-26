@@ -1047,11 +1047,15 @@ void Chaos_AutoPlantC4(){
 		}else{
 			g_PlantedSite = -1; //fooked up
 		}
-
 		RetryEvent();
 		return;
 	}
 	AutoPlantC4();
+	CreateTimer(0.6, Timer_EnsureSpawnedAutoPlant);
+
+}
+
+public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
 	if(g_PlantedSite == BOMBSITE_A){
 		AnnounceChaos("Auto Plant C4 at Bombsite A");
 	}else if(g_PlantedSite == BOMBSITE_B){
@@ -1059,7 +1063,6 @@ void Chaos_AutoPlantC4(){
 	}else{
 		AnnounceChaos("Auto Plant C4");
 	}
-	// g_PlantedSite = -1;
 }
 
 public void Chaos_ChickensIntoPlayers(){
@@ -2485,11 +2488,11 @@ public void Chaos_MEGACHAOS(){
 	g_bMegaChaos = true; 
 	AnnounceChaos("MEGA CHAOS", true, true);
 	g_bDisableRetryEvent = false;
-	CreateTimer(0.0, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(0.5, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(1.0, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(1.5, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(2.0, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(0.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(0.5, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(1.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(1.5, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(2.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(2.5, Timer_CompleteMegaChaos);
 
 }

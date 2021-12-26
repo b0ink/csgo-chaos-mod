@@ -34,46 +34,49 @@ public void AUTOPLANT_INIT(){
     // HookEvent("round_end", OnRoundEnd, EventHookMode_PostNoCopy);
 }
 
-//todo;
-//telepot player to nearest bomb site, auto plant, reset location
 int g_PlantedSite = -1;
-public void AutoPlantC4(){
+void AutoPlantC4(bool ForcedRetry = false){
     g_bHasBombBeenDeleted = false;
     bomber = GetBomber();
     
     if (IsValidClient(bomber)){
-        //save players location
-        // float originalPosition[3];
-        // GetClientAbsOrigin(bomber, originalPosition);
-
-        //determine closest bombsite, and tp them to bombsite
-        // float vec[3];
-        // bool g_blocationSaved = false;
         bombsite = GetNearestBombsite(bomber);
         g_PlantedSite = bombsite;
         if(bombsite == BOMBSITE_A && bombSiteA != INVALID_HANDLE){
             int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
             GetArrayArray(bombSiteA, randomCoord, bombPosition);
-            // locationSaved = true;
         }
         if(bombsite == BOMBSITE_B && bombSiteB != INVALID_HANDLE){
             int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
             GetArrayArray(bombSiteB, randomCoord, bombPosition);
-            // locationSaved = true;
         }
-        // if(!locationSaved) vec = originalPosition;
-
-        // TeleportEntity(bomber, vec, NULL_VECTOR, NULL_VECTOR);
 
         int bomb = GetPlayerWeaponSlot(bomber, 4);
         g_bHasBombBeenDeleted = SafeRemoveWeapon(bomber, bomb);
-        // GetClientAbsOrigin(bomber, bombPosition);
         PlantBomb(INVALID_HANDLE, bomber);
-        // TeleportEntity(bomber, originalPosition, NULL_VECTOR, NULL_VECTOR);
 
-
-
+    }else if(!ForcedRetry){
+        int iMaxEnts = GetMaxEntities();
+        char sClassName[64];
+        for(int i=MaxClients;i<iMaxEnts;i++){
+            if(IsValidEntity(i) && IsValidEdict(i) && GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
+            StrEqual(sClassName, "weapon_c4")
+            && GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
+                RemoveEntity(i);
+            }
+        }
+        for(int i = 0; i <= MaxClients; i++){
+            if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_T){
+                GivePlayerItem(i, "weapon_c4");
+                CreateTimer(0.5, Timer_RetryAutoPlant);
+                break;
+            }
+        }
     }
+}
+
+public Action Timer_RetryAutoPlant(Handle timer){
+    AutoPlantC4(true);
 }
 
 public void AutoPlantRoundEnd(){
@@ -85,22 +88,18 @@ public void AutoPlantRoundEnd(){
 }
 
 
-public Action PlantBomb(Handle timer, int client)
-{
+public Action PlantBomb(Handle timer, int client){
     // bombTimer = INVALID_HANDLE;
 
-    if (IsValidClient(client) || !g_bHasBombBeenDeleted)
-    {
-        if (g_bHasBombBeenDeleted)
-        {
+    if (IsValidClient(client) || !g_bHasBombBeenDeleted){
+        if (g_bHasBombBeenDeleted){
             int bombEntity = CreateEntityByName("planted_c4");
 
             GameRules_SetProp("m_bBombPlanted", 1);
             SetEntData(bombEntity, bombTicking, 1, 1, true);
             Sendg_bBombPlanted(client);
 
-            if (DispatchSpawn(bombEntity))
-            {
+            if (DispatchSpawn(bombEntity)){
 				ActivateEntity(bombEntity);
 				TeleportEntity(bombEntity, bombPosition, NULL_VECTOR, NULL_VECTOR);
 
@@ -112,62 +111,42 @@ public Action PlantBomb(Handle timer, int client)
     } 
     else
     {
+        PrintToChatAll("something weird happened");
         // CS_TerminateRound(1.0, CSRoundEnd_Draw); // todo; ??
     }
 }
 
-public void Sendg_bBombPlanted(int client)
-{
+public void Sendg_bBombPlanted(int client){
     Event event = CreateEvent("bomb_planted");
 
-    if (event != null)
-    {
+    if (event != null){
         event.SetInt("userid", GetClientUserId(client));
         event.SetInt("site", bombsite);
         event.Fire();
     }
 }
 
-stock bool SafeRemoveWeapon(int client, int weapon)
-{
-    if (!IsValidEntity(weapon) || !IsValidEdict(weapon) || !HasEntProp(weapon, Prop_Send, "m_hOwnerEntity"))
-    {
-        return false;
-    }
+stock bool SafeRemoveWeapon(int client, int weapon){
+    if (!IsValidEntity(weapon) || !IsValidEdict(weapon) || !HasEntProp(weapon, Prop_Send, "m_hOwnerEntity")) return false;
 
     int ownerEntity = GetEntPropEnt(weapon, Prop_Send, "m_hOwnerEntity");
-
-    if (ownerEntity != client)
-    {
-        SetEntPropEnt(weapon, Prop_Send, "m_hOwnerEntity", client);
-    }
+    if (ownerEntity != client) SetEntPropEnt(weapon, Prop_Send, "m_hOwnerEntity", client);
 
     SDKHooks_DropWeapon(client, weapon, NULL_VECTOR, NULL_VECTOR);
 
-    if (HasEntProp(weapon, Prop_Send, "m_hWeaponWorldModel"))
-    {
+    if (HasEntProp(weapon, Prop_Send, "m_hWeaponWorldModel")){
         int worldModel = GetEntPropEnt(weapon, Prop_Send, "m_hWeaponWorldModel");
-
-        if (IsValidEdict(worldModel) && IsValidEntity(worldModel))
-        {
-            if (!AcceptEntityInput(worldModel, "Kill"))
-            {
-                return false;
-            }
+        if (IsValidEdict(worldModel) && IsValidEntity(worldModel)){
+            if (!AcceptEntityInput(worldModel, "Kill")) return false;
         }
     }
     
     return AcceptEntityInput(weapon, "Kill");
 }
 
-stock int GetBomber()
-{
-    for (int i = 1; i <= MaxClients; i++)
-    {
-        if (IsValidClient(i) && HasBomb(i))
-        {
-            return i;
-        }
+stock int GetBomber(){
+    for (int i = 1; i <= MaxClients; i++){
+        if (IsValidClient(i) && HasBomb(i)) return i;
     }
     
     return -1;
