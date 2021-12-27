@@ -1,21 +1,11 @@
 int playerModels[MAXPLAYERS+1] = {INVALID_ENT_REFERENCE,...};
 int playerModelsIndex[MAXPLAYERS+1] = {-1,...};
-//add all players to is using
 
 #define EF_BONEMERGE                (1 << 0)
 #define EF_NOSHADOW                 (1 << 4)
 #define EF_NORECEIVESHADOW          (1 << 6)
-//refresh?
-//checkGlows();
 
-// destoryGlows();
-// #define HEADPROP "models/player/holiday/facemasks/facemask_tf2_spy_model.mdl"
-
-// PrecacheModel(HEADPROP);
-// resetPlayerVars(0); //isUsingESP to 0
-
-
-public void checkGlows() {
+public void checkGlows(){
 	destroyGlows();
 	createGlows();
 }
@@ -52,17 +42,11 @@ public void SetupGlow(int entity, int color[4]) {
     }
 }
 
-
-
-
 public void setGlowTeam(int skin, int team) {
     if(team >= 2) {
         SetupGlow(skin, colors[team-2]);
     }
 }
-
-
-
 
 public void RemoveSkin(int client) {
     int index = EntRefToEntIndex(playerModels[client]);
@@ -95,7 +79,6 @@ public void createGlows() {
         int team = GetClientTeam(client);
         if(team <= 1) continue;
         //Create Skin
-		//Create Skin
         GetClientModel(client, model, sizeof(model));
         skin = CreatePlayerModelProp(client, model, attachment, true, 1.0);
         if(skin > MaxClients) {

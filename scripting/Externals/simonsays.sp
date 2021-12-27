@@ -1,16 +1,3 @@
-/*
-	if simon says is active
-		> repeat the hint text of what the command is
-	
-
-	simon says ideas
-	=if it says simon says, and 
-	> Simon says  ...
-		> Don't strafe > Strafe
-
-
-*/
-
 bool g_bSimon_Active = false;
 bool g_bSimon_Says = false; // whether to say simon says or not
 int g_Simon_Says_Action = -1;
@@ -43,14 +30,10 @@ void GenerateSimonOrder(){
 	// g_time = 13;
 	g_time = RoundToFloor(g_SimonSays_Duration) + 3;
 
-
 }
 
 bool g_bPlayersToDamage[MAXPLAYERS+1];
 void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.0, 0.0}, float fAngles[3] = {0.0, 0.0, 0.0}, int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-// void SimonSays(int client, bool g_bstrafing, bool g_brunning){
-	// if(!g_bSimon_Active) return
-	// g_bPlayersToDamage[client] = false;
 	if(fVel[0] || fAngles[0]){
 		//remove warnings!
 	}
@@ -114,7 +97,6 @@ public Action Timer_ShowAction(Handle timer){
 	if(g_time > 10){
 		int countdown = g_time - 10;
 		FormatEx(message, sizeof(message), "Simon says starting in %i...", countdown);
-		// DisplayCenterTextToAll("Simon says starting in %i...", countdown);
 		DisplayCenterTextToAll(message);
 	}else{
 		if(g_time >= 0){
@@ -137,8 +119,6 @@ public Action Timer_ShowAction(Handle timer){
 			KillMessageTimer();
 		}
 	}
-
-
 }
 
 void KillMessageTimer(){
@@ -146,5 +126,4 @@ void KillMessageTimer(){
 		KillTimer(msg_timer);
 		msg_timer = INVALID_HANDLE;
 	}
-	// StopTimer(msg_timer);
 }
