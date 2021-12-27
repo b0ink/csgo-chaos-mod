@@ -1525,7 +1525,12 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 		cvar("sv_party_mode", "0");
 		g_bTaserRound = false;
 		StopTimer(g_TaserParty_Timer);
-		if(EndChaos) AnnounceChaos("Taser Party", true);
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++){
+				if(ValidAndAlive(i)) ClientCommand(i, "slot2;slot1");
+			}
+			AnnounceChaos("Taser Party", true);
+		}
 	}
 	if(DecidingChaos("Chaos_TaserParty")) return;
 

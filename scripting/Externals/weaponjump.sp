@@ -69,7 +69,6 @@ public void weaponJump(int client, char[] szWeaponName){
                 }
 			}
 		}
-
 }
 
 public void OnPlayerPostThinkPost(int iPlayer){
