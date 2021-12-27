@@ -29,9 +29,6 @@ enum //Bombsites
 
 public void AUTOPLANT_INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");
-    
-    // HookEvent("round_start", OnRoundStart, EventHookMode_PostNoCopy);
-    // HookEvent("round_end", OnRoundEnd, EventHookMode_PostNoCopy);
 }
 
 int g_PlantedSite = -1;
@@ -89,8 +86,6 @@ public void AutoPlantRoundEnd(){
 
 
 public Action PlantBomb(Handle timer, int client){
-    // bombTimer = INVALID_HANDLE;
-
     if (IsValidClient(client) || !g_bHasBombBeenDeleted){
         if (g_bHasBombBeenDeleted){
             int bombEntity = CreateEntityByName("planted_c4");
@@ -102,15 +97,11 @@ public Action PlantBomb(Handle timer, int client){
             if (DispatchSpawn(bombEntity)){
 				ActivateEntity(bombEntity);
 				TeleportEntity(bombEntity, bombPosition, NULL_VECTOR, NULL_VECTOR);
-
 				GroundEntity(bombEntity);
 				g_bBombPlanted = true;
-
             }
         }
-    } 
-    else
-    {
+    }else{
         PrintToChatAll("something weird happened");
         // CS_TerminateRound(1.0, CSRoundEnd_Draw); // todo; ??
     }
@@ -118,7 +109,6 @@ public Action PlantBomb(Handle timer, int client){
 
 public void Sendg_bBombPlanted(int client){
     Event event = CreateEvent("bomb_planted");
-
     if (event != null){
         event.SetInt("userid", GetClientUserId(client));
         event.SetInt("site", bombsite);
@@ -145,34 +135,25 @@ stock bool SafeRemoveWeapon(int client, int weapon){
 }
 
 stock int GetBomber(){
-    for (int i = 1; i <= MaxClients; i++){
-        if (IsValidClient(i) && HasBomb(i)) return i;
-    }
-    
+    for (int i = 1; i <= MaxClients; i++) if (IsValidClient(i) && HasBomb(i)) return i;
     return -1;
 }
 
-stock bool HasBomb(int client)
-{
+stock bool HasBomb(int client){
     return GetPlayerWeaponSlot(client, 4) != -1;
 }
 
 
-stock bool IsWarmup()
-{
+stock bool IsWarmup(){
     return GameRules_GetProp("m_bWarmupPeriod") == 1;
 }
 
-stock int GetNearestBombsite(int client)
-{
+stock int GetNearestBombsite(int client){
     float pos[3];
     GetClientAbsOrigin(client, pos);
     
     int playerResource = GetPlayerResourceEntity();
-    if (playerResource == -1)
-    {
-        return BOMBSITE_INVALID;
-    }
+    if (playerResource == -1) return BOMBSITE_INVALID;
     
     float aCenter[3], bCenter[3];
     GetEntPropVector(playerResource, Prop_Send, "m_bombsiteCenterA", aCenter);
@@ -181,10 +162,7 @@ stock int GetNearestBombsite(int client)
     float aDist = GetVectorDistance(aCenter, pos, true);
     float bDist = GetVectorDistance(bCenter, pos, true);
     
-    if (aDist < bDist)
-    {
-        return BOMBSITE_A;
-    }
+    if (aDist < bDist) return BOMBSITE_A;
     
     return BOMBSITE_B;
 }
@@ -192,8 +170,7 @@ stock int GetNearestBombsite(int client)
 /**
  * https://forums.alliedmods.net/showpost.php?p=2239502&postcount=2
  */
-void GroundEntity(int entity)
-{
+void GroundEntity(int entity){
     float flPos[3], flAng[3];
     
     GetEntPropVector(entity, Prop_Send, "m_vecOrigin", flPos);
@@ -201,21 +178,17 @@ void GroundEntity(int entity)
     flAng[1] = 0.0;
     flAng[2] = 0.0;
     Handle hTrace = TR_TraceRayFilterEx(flPos, flAng, MASK_SHOT, RayType_Infinite, TraceFilterIgnorePlayers, entity);
-    if (hTrace != INVALID_HANDLE && TR_DidHit(hTrace))
-    {
+    if (hTrace != INVALID_HANDLE && TR_DidHit(hTrace)){
         float endPos[3];
         TR_GetEndPosition(endPos, hTrace);
         CloseHandle(hTrace);
         TeleportEntity(entity, endPos, NULL_VECTOR, NULL_VECTOR);
-    }
-    else
-    {
+    }else{
         PrintToServer("Attempted to put entity on ground, but no end point found!");
     }
 }
 
-public bool TraceFilterIgnorePlayers(int entity, int contentsMask, int client)
-{
+public bool TraceFilterIgnorePlayers(int entity, int contentsMask, int client){
     if (entity >= 1 && entity <= MaxClients) return false;
     return true;
 } 

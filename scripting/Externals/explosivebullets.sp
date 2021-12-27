@@ -16,8 +16,7 @@ public void EXPLOSIVEBULLETS_INIT(){
 	PrecacheSound(SOUND);
 }
 public Action Explosive_Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
-	if (!g_bExplosiveBullets)
-		return Plugin_Continue;
+	if (!g_bExplosiveBullets) return Plugin_Continue;
 		
 	int client = GetClientOfUserId(event.GetInt("userid"));
 		
@@ -32,10 +31,8 @@ public Action Explosive_Event_BulletImpact(Event event, const char[] name, bool 
 	return Plugin_Continue;
 }
 
-public Action Explosive_Hook_BulletShot(const char[] te_name, const int[] Players, int numClients, float delay)
-{
-	if (!g_bExplosiveBullets)
-		return Plugin_Continue;
+public Action Explosive_Hook_BulletShot(const char[] te_name, const int[] Players, int numClients, float delay){
+	if (!g_bExplosiveBullets) return Plugin_Continue;
 		
 	int client = TE_ReadNum("m_iPlayer") + 1;
 	
@@ -48,8 +45,7 @@ public Action Explosive_Hook_BulletShot(const char[] te_name, const int[] Player
     
 	float endpos[3];
 	Handle trace = TR_TraceRayFilterEx(pos, angles, MASK_SHOT, RayType_Infinite, TR_DontHitSelf, client);
-	if (TR_DidHit(trace))
-	{
+	if (TR_DidHit(trace)){
 		TR_GetEndPosition(endpos, trace);
 	}
 	delete trace;
@@ -59,13 +55,11 @@ public Action Explosive_Hook_BulletShot(const char[] te_name, const int[] Player
 }
 
 
-public bool TR_DontHitSelf(int target, int mask, int client)
-{
+public bool TR_DontHitSelf(int target, int mask, int client){
 	return target != client;
 }
 
-void CS_CreateExplosion(int attacker, int weapon, float damage, float radius, float pos[3])
-{
+void CS_CreateExplosion(int attacker, int weapon, float damage, float radius, float pos[3]){
 	//Create temp entity particle explosion effects
 	TE_DispatchEffect(DISTORTION, pos);
 	TE_DispatchEffect(FLASH, pos);
@@ -73,18 +67,15 @@ void CS_CreateExplosion(int attacker, int weapon, float damage, float radius, fl
 	TE_DispatchEffect(DIRT, pos);
 	
 	//Hurt the players in the area of explosion
-	for (int victim = 1; victim <= MaxClients; victim++)
-	{
-		if (!IsClientInGame(victim) || !IsPlayerAlive(victim))
-			continue;
+	for (int victim = 1; victim <= MaxClients; victim++){
+		if (!IsClientInGame(victim) || !IsPlayerAlive(victim)) continue;
 		
 		float victim_pos[3];
 		GetClientAbsOrigin(victim, victim_pos);
 		
 		float distance = GetVectorDistance(pos, victim_pos);
 		
-		if (distance <= radius)
-		{
+		if(distance <= radius){
 			//Calculate damage based of distance
 			float result = Sine(((radius - distance) / radius) * (3.14159 / 2)) * damage;
 			SDKHooks_TakeDamage(victim, attacker, attacker, result, DMG_BLAST, weapon, NULL_VECTOR, pos);
@@ -92,8 +83,7 @@ void CS_CreateExplosion(int attacker, int weapon, float damage, float radius, fl
 	}
 }
 
-void TE_DispatchEffect(const char[] particle, float pos[3])
-{
+void TE_DispatchEffect(const char[] particle, float pos[3]){
 	TE_Start("EffectDispatch");
 	TE_WriteFloatArray("m_vOrigin.x", pos, 3);
 	TE_WriteFloatArray("m_vStart.x", pos, 3);
@@ -103,56 +93,43 @@ void TE_DispatchEffect(const char[] particle, float pos[3])
 	TE_SendToAll();
 }
 
-void PrecacheParticleEffect(const char[] sEffectName)
-{
+void PrecacheParticleEffect(const char[] sEffectName){
 	static int table = INVALID_STRING_TABLE;
 	
-	if (table == INVALID_STRING_TABLE)
-		table = FindStringTable("ParticleEffectNames");
+	if (table == INVALID_STRING_TABLE) table = FindStringTable("ParticleEffectNames");
 		
 	bool save = LockStringTables(false);
 	AddToStringTable(table, sEffectName);
 	LockStringTables(save);
 }
 
-int GetParticleEffectIndex(const char[] sEffectName)
-{
+int GetParticleEffectIndex(const char[] sEffectName){
 	static int table = INVALID_STRING_TABLE;
-
-	if (table == INVALID_STRING_TABLE)
-		table = FindStringTable("ParticleEffectNames");
+	if (table == INVALID_STRING_TABLE) table = FindStringTable("ParticleEffectNames");
 
 	int iIndex = FindStringIndex(table, sEffectName);
-
-	if (iIndex != INVALID_STRING_INDEX)
-		return iIndex;
+	if (iIndex != INVALID_STRING_INDEX) return iIndex;
 
 	return 0;
 }
 
-void PrecacheEffect(const char[] sEffectName)
-{
+void PrecacheEffect(const char[] sEffectName){
 	static int table = INVALID_STRING_TABLE;
 	
-	if (table == INVALID_STRING_TABLE)
-		table = FindStringTable("EffectDispatch");
+	if (table == INVALID_STRING_TABLE) table = FindStringTable("EffectDispatch");
 		
 	bool save = LockStringTables(false);
 	AddToStringTable(table, sEffectName);
 	LockStringTables(save);
 }
 
-int GetEffectIndex(const char[] sEffectName)
-{
+int GetEffectIndex(const char[] sEffectName){
 	static int table = INVALID_STRING_TABLE;
 
-	if (table == INVALID_STRING_TABLE)
-		table = FindStringTable("EffectDispatch");
+	if (table == INVALID_STRING_TABLE) table = FindStringTable("EffectDispatch");
 
 	int iIndex = FindStringIndex(table, sEffectName);
-
-	if (iIndex != INVALID_STRING_INDEX)
-		return iIndex;
+	if (iIndex != INVALID_STRING_INDEX) return iIndex;
 
 	return 0;
 }

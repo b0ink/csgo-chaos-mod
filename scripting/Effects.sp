@@ -1,7 +1,3 @@
-
-
-
-
 float g_RapidFire_Expire = 25.0;
 Handle g_RapidFire_Timer = INVALID_HANDLE;
 bool g_bRapidFire = false;
@@ -115,7 +111,6 @@ void Chaos_Soccerballs(){
 		}
 	}
 	AnnounceChaos("Soccer balls");
-
 
 }
 

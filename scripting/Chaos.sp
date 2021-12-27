@@ -968,16 +968,13 @@ void PerformBlind(int target, int amount)
 	
 	// Handle message = StartMessageEx(g_FadeUserMsgId, targets, 1);
 	Handle message = StartMessageEx(g_FadeUserMsgId, targets, 1);
-	if (GetUserMessageType() == UM_Protobuf)
-	{
+	if (GetUserMessageType() == UM_Protobuf){
 		Protobuf pb = UserMessageToProtobuf(message);
 		pb.SetInt("duration", duration);
 		pb.SetInt("hold_time", holdtime);
 		pb.SetInt("flags", flags);
 		pb.SetColor("clr", color);
-	}
-	else
-	{
+	}else{
 		BfWrite bf = UserMessageToBfWrite(message);
 		bf.WriteShort(duration);
 		bf.WriteShort(holdtime);
@@ -1030,13 +1027,9 @@ void RemoveChickens(bool removec4Chicken = false){
 			IsValidEdict(i) && 
 			GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
 			StrEqual(sClassName, "chicken")
-			&& GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1
-			)
-			{
-			
+			&& GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
 				if(removec4Chicken){
 					if(i == g_iC4ChickenEnt){
-						// RemoveEdict(i);
 						RemoveEntity(i);
 					}
 				}else{
@@ -1050,12 +1043,12 @@ void RemoveChickens(bool removec4Chicken = false){
 		}
 		CreateTimer(5.0, timer_resetchickendebounce);
 	}
-
 }  
 
 public Action timer_resetchickendebounce(Handle timer){
 	g_bRemovechicken_debounce = false;
 }
+
 public void ResizeChickens(){
     int iMaxEnts = GetMaxEntities();
     char sClassName[64];
@@ -1064,8 +1057,7 @@ public void ResizeChickens(){
            IsValidEdict(i) && 
            GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
            StrEqual(sClassName, "chicken") &&
-           GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1)
-        {
+           GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
 			SetEntPropFloat(i, Prop_Data, "m_flModelScale", 1.0);
         }
     }
