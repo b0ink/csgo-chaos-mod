@@ -460,13 +460,15 @@ Action Chaos_SpeedShooter(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_bSpeedShooter_Timer);
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++){
+				if(ValidAndAlive(i)){
+					SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+				}
 			}
+			AnnounceChaos("Speed Shooter", true);
 		}
 		g_bSpeedShooter = false;
-		if(EndChaos) AnnounceChaos("Speed Shooter", true);
 	}
 	if(DecidingChaos("Chaos_SpeedShooter")) return;
 
@@ -675,10 +677,8 @@ Action Chaos_ChickenPlayers(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_ChickenPlayers_Timer);
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				DisableChicken(i);
-			}
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) DisableChicken(i);
 		}
 	}
 	if(DecidingChaos("Chaos_ChickenPlayers")) return;
@@ -686,11 +686,7 @@ Action Chaos_ChickenPlayers(Handle timer = null, bool EndChaos = false){
 	g_ChickenPlayers_Expire = GetChaosTime("Chaos_ChickenPlayers", 20.0);
 	Log("[Chaos] Running: Chaos_ChickenPlayers");
 
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			SetChicken(i);
-		}
-	}
+	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetChicken(i);
 	if(g_ChickenPlayers_Expire > 0) g_ChickenPlayers_Timer = CreateTimer(g_ChickenPlayers_Expire, Chaos_ChickenPlayers, true);
 	AnnounceChaos("Make all players a chicken");
 }
@@ -765,8 +761,10 @@ Handle g_SlowSpeed_Timer = INVALID_HANDLE;
 Action Chaos_SlowSpeed(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
-		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-		if(EndChaos) AnnounceChaos("Normal Movement Speed", true);
+		if(EndChaos) {
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+			AnnounceChaos("Normal Movement Speed", true);
+		}
 		StopTimer(g_SlowSpeed_Timer);
 	}
 	if(DecidingChaos("Chaos_SlowSpeed")) return;
@@ -784,8 +782,10 @@ Handle g_FastSpeed_Timer = INVALID_HANDLE;
 Action Chaos_FastSpeed(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
-		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-		if(EndChaos) AnnounceChaos("Normal Movement Speed", true);
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+			AnnounceChaos("Normal Movement Speed", true);
+		}
 		StopTimer(g_FastSpeed_Timer);
 	}
 	if(DecidingChaos("Chaos_FastSpeed")) return;
@@ -993,7 +993,7 @@ Action Chaos_OneWeaponOnly(Handle timer = null, bool EndChaos = false){
 
 void Chaos_AutoPlantC4(){
 	if(CountingCheckDecideChaos()) return; 
-	if(g_bClearChaos){
+	if(ClearChaos()){
 		AutoPlantRoundEnd();
 	}
 	if(DecidingChaos("Chaos_AutoPlantC4")) return;
@@ -1331,7 +1331,7 @@ Handle g_bDecoyDodgeball_CheckDecoyTimer = INVALID_HANDLE;
 Action Chaos_DecoyDodgeball(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
-		if(g_bDecoyDodgeball){
+		if(g_bDecoyDodgeball && EndChaos){
 			for(int i = 0; i <= MaxClients; i++){
 				if(ValidAndAlive(i)){
 					StripPlayer(i, true, true, true); //strip grenades only
@@ -1388,20 +1388,17 @@ Action Timer_CheckDecoys(Handle timer){
 	}
 }
 
-bool g_bHeadshotOnly = false;
 float g_bHeadshotOnly_Expire = 20.0;
 Handle g_bHeadshotOnly_Timer = INVALID_HANDLE;
 Action Chaos_HeadshotOnly(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_bHeadshotOnly_Timer);
-		if(g_bHeadshotOnly) g_bHeadshotOnly = false;
 		cvar("mp_damage_headshot_only", "0");
 	}
 	if(DecidingChaos("Chaos_HeadshotOnly")) return;
 	g_bHeadshotOnly_Expire = GetChaosTime("Chaos_HeadshotOnly", 20.0);
 	Log("[Chaos] Running: Chaos_HeadshotOnly");
-	g_bHeadshotOnly = true;
 	cvar("mp_damage_headshot_only", "1");
 	AnnounceChaos("Headshots Only");
 	if(g_bHeadshotOnly_Expire > 0) g_bHeadshotOnly_Timer = CreateTimer(g_bHeadshotOnly_Expire, Chaos_HeadshotOnly, true);
@@ -1412,9 +1409,11 @@ Handle g_ohko_Timer = INVALID_HANDLE;
 Action Chaos_OHKO(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; //TODO return this info in another function
 	if(ClearChaos(EndChaos)){
-		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityHealth(i, 100);
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityHealth(i, 100);
+			AnnounceChaos("1 HP", true);
+		}
 		StopTimer(g_ohko_Timer);
-		if(EndChaos) AnnounceChaos("1 HP", true);
 	}
 	if(DecidingChaos("Chaos_OHKO")) return;
 	g_ohko_Expire = GetChaosTime("Chaos_OHKO", 15.0);
@@ -1501,7 +1500,7 @@ Action Timer_RandomSlap(Handle timer){
 	// 	Chaos_RandomSlap_Timer = INVALID_HANDLE;
 	// }
 	for(int  client = 0;  client <= MaxClients;  client++){
-		if(IsValidClient(client) && IsPlayerAlive(client)){
+		if(ValidAndAlive(client)){
 			float vec[3];
 			GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
 			float x = GetRandomFloat(g_minRange,g_maxRange) * GetRandomFloat(-100.0, -1.0);
@@ -1526,9 +1525,7 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 		g_bTaserRound = false;
 		StopTimer(g_TaserParty_Timer);
 		if(EndChaos){
-			for(int i = 0; i <= MaxClients; i++){
-				if(ValidAndAlive(i)) ClientCommand(i, "slot2;slot1");
-			}
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "slot2;slot1");
 			AnnounceChaos("Taser Party", true);
 		}
 	}
@@ -1541,7 +1538,7 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 	cvar("mp_taser_recharge_time", ".5");
 	cvar("sv_party_mode", "1");
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			GivePlayerItem(i, "weapon_taser");
 			FakeClientCommand(i, "use weapon_taser");
 		}
@@ -1569,7 +1566,7 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_KnifeFight");
 	g_bKnifeFight = true;
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			FakeClientCommand(i, "use weapon_knife");
 		}
 	}
@@ -1629,7 +1626,7 @@ Action Chaos_RandomWeapons(Handle timer = null, bool EndChaos = false){
 }
 Action Timer_GiveRandomWeapon(Handle timer = null){
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			int randomWeaponIndex = GetRandomInt(0,sizeof(g_sWeapons)-1);	
 			GiveAndSwitchWeapon(i, g_sWeapons[randomWeaponIndex]);
 		}
@@ -1687,7 +1684,7 @@ public Action Timer_SpawnMolotov(Handle timer){
 	}
 	g_MolotovSpawn_Count++;
 	for(int client = 0; client <= MaxClients; client++){
-		if(IsValidClient(client) && IsPlayerAlive(client)){
+		if(ValidAndAlive(client)){
 			float vec[3];
 			GetClientAbsOrigin(client, vec);
 			vec[2] = vec[2] + 100; //anything bigger and things like vents or ct spawn will spawn molotov in other areas of the map
@@ -1807,10 +1804,12 @@ Action Chaos_Flying(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
 	
-		for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) SetEntityMoveType(i, MOVETYPE_WALK);
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) SetEntityMoveType(i, MOVETYPE_WALK);
+			TeleportPlayersToClosestLocation();
+			AnnounceChaos("Flying", true);
+		}
 		cvar("sv_noclipspeed", "5");
-		if(EndChaos) AnnounceChaos("Flying", true);
-		if(EndChaos) TeleportPlayersToClosestLocation();
 		g_bActiveNoclip = false;	
 		StopTimer(g_ResetNoclipTimer);
 	}
@@ -1900,7 +1899,7 @@ Action Chaos_Binoculars(Handle timer = null, bool EndChaos = false){
 
 void SetPlayersFOV(int fov){
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			SetEntProp(i, Prop_Send, "m_iFOV", fov);
 			SetEntProp(i, Prop_Send, "m_iDefaultFOV", fov);
 		}
@@ -1954,6 +1953,7 @@ Action Chaos_Aimbot(Handle timer = null, bool EndChaos = false){
 				ToggleAim(i, false);
 			}
 		}
+		if(EndChaos) AnnounceChaos("Aimbot", true);
 	}
 	
 	if(DecidingChaos("Chaos_Aimbot")) return;
@@ -2068,7 +2068,7 @@ void Chaos_SlayRandomPlayer(){
 	if(aliveT > 1){
 		aliveT = 0;
 		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i) && IsPlayerAlive(i)){
+			if(ValidAndAlive(i)){
 				if(GetClientTeam(i) == CS_TEAM_T){
 					aliveT++;
 					if(aliveT == RandomTSlay){
@@ -2081,7 +2081,7 @@ void Chaos_SlayRandomPlayer(){
 	if(aliveCT > 1){
 		aliveCT = 0;
 		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i) && IsPlayerAlive(i)){
+			if(ValidAndAlive(i)){
 				if(GetClientTeam(i) == CS_TEAM_CT){
 					aliveCT++;
 					if(aliveCT == RandomCTSlay){
@@ -2104,7 +2104,7 @@ void Chaos_Healthshot(){
 	Log("[Chaos] Running: Chaos_Healthshot");
 	int amount = GetRandomInt(1,3);
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			for(int j = 1; j <= amount; j++){
 				GivePlayerItem(i, "weapon_healthshot");
 			}
@@ -2121,12 +2121,14 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_AlienKnifeFightTimer);
 		g_bKnifeFight = false;
-		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i)){
-				SetEntPropFloat(i, Prop_Send, "m_flModelScale", 1.0);
-				SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
-				SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-			}
+		if(EndChaos){
+			for(int i = 0; i <= MaxClients; i++){
+				if(IsValidClient(i)){
+					SetEntPropFloat(i, Prop_Send, "m_flModelScale", 1.0);
+					SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
+					SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+				}
+			}	
 		}
 		if(EndChaos) AnnounceChaos("Alien Knife Fight", true);
 	}
@@ -2135,7 +2137,7 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_AlienModelKnife");
 	//hitboxes are tiny, but knives work fine
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			SetEntPropFloat(i, Prop_Send, "m_flModelScale", 0.5);
 			// SetEntProp(i, Prop_Send, "m_ScaleType", 5); //TODO EXPERIEMNT WITH
 			SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0*0.55);
@@ -2144,7 +2146,7 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 	if(g_AlienKnifeFight_Expire > 0) g_AlienKnifeFightTimer = CreateTimer(g_AlienKnifeFight_Expire, Chaos_AlienModelKnife, true);
 	g_bKnifeFight = true;
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 2.0);
 			FakeClientCommand(i, "use weapon_knife");
 		}
@@ -2180,7 +2182,7 @@ void Chaos_NightVision(){
 	if(CountingCheckDecideChaos()) return;
 	if(g_bClearChaos){
 		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i) && IsPlayerAlive(i)){
+			if(ValidAndAlive(i)){
 				SetEntProp(i, Prop_Send, "m_bNightVisionOn", 0);
 			}
 		}
@@ -2188,7 +2190,7 @@ void Chaos_NightVision(){
 	if(DecidingChaos("Chaos_NightVision")) return;
 	Log("[Chaos] Running: Chaos_NightVision");
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			GivePlayerItem(i, "item_nvgs");
 			FakeClientCommand(i, "nightvision");
 		}
@@ -2410,7 +2412,7 @@ Action Chaos_DiscoPlayers(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		g_bDiscoPlayers = true;
 		StopTimer(DiscoPlayers_Timer);
-		delete DiscoPlayers_TimerRepeat;
+		delete DiscoPlayers_TimerRepeat; //todo? wtf stray delete
 		if(EndChaos) AnnounceChaos("Disco Players", true);
 	}
 	if(DecidingChaos("Chaos_DiscoPlayers")) return;
