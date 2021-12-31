@@ -159,7 +159,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	Log("---ROUND STARTED---");
 	StopTimer(g_NewEvent_Timer);
 	if(!g_bChaos_Enabled) return Plugin_Continue;
-	Chaos_Round_Count = 0;
+	g_iChaos_Round_Count = 0;
 	// to use in chaos_resetspawns()
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -187,4 +187,15 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	StopTimer(g_NewEvent_Timer);
 	CreateTimer(1.0, ResetRoundChaos);
 
+}
+
+
+public void OnGameFrame(){
+	if(g_bLockPlayersAim_Active){
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i)){
+				TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
+			}
+		}
+	}
 }
