@@ -58,7 +58,7 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Earthquake"))  Chaos_Earthquake();
 	if(IsChaosEnabled("Chaos_LockPlayersAim"))  Chaos_LockPlayersAim();
 	if(IsChaosEnabled("Chaos_OneBulletOneGun"))  Chaos_OneBulletOneGun();
-	if(FogIndex != -1){
+	if(g_iFog != -1){
 		if(IsChaosEnabled("Chaos_LowRenderDistance"))  Chaos_LowRenderDistance();
 		if(IsChaosEnabled("Chaos_ExtremeWhiteFog"))  Chaos_ExtremeWhiteFog();
 		if(IsChaosEnabled("Chaos_NormalWhiteFog"))  Chaos_NormalWhiteFog();
@@ -92,7 +92,7 @@ public void Chaos(){
 	if(StrEqual(MapName, "de_dust2", false) == false){
 		if(IsChaosEnabled("Chaos_RandomSkybox"))  Chaos_RandomSkybox();
 	}
-	if(Chaos_Round_Count > 0){
+	if(g_iChaos_Round_Count > 0){
 		if(IsChaosEnabled("Chaos_RespawnTheDead"))  Chaos_RespawnTheDead();
 		if(IsChaosEnabled("Chaos_ResetSpawns"))  Chaos_ResetSpawns();
 		if(IsChaosEnabled("Chaos_RespawnDead_LastLocation"))  Chaos_RespawnDead_LastLocation();

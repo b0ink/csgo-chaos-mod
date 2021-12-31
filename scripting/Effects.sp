@@ -590,7 +590,7 @@ Action Chaos_DiscoFog(Handle timer = null, bool EndChaos = false){
 		StopTimer(g_bDiscoFog_Timer_Repeat);
 		StopTimer(g_bDiscoFog_Timer);
 		g_bDiscoFog = false;
-		AcceptEntityInput(FogIndex, "TurnOff");
+		AcceptEntityInput(g_iFog, "TurnOff");
 	}
 	if(DecidingChaos("Chaos_DiscoFog")) return;
 
@@ -599,12 +599,12 @@ Action Chaos_DiscoFog(Handle timer = null, bool EndChaos = false){
 	
 	char color[32];
 	FormatEx(color, sizeof(color), "%i %i %i", GetRandomInt(0,255), GetRandomInt(0,255), GetRandomInt(0,255));
-	DispatchKeyValue(FogIndex, "fogcolor", color);
-	// DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
-	DispatchKeyValueFloat(FogIndex, "fogend", 800.0);
-	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.92);
-	// DispatchKeyValueFloat(FogIndex, "farz", -1.0);
-	AcceptEntityInput(FogIndex, "TurnOn");
+	DispatchKeyValue(g_iFog, "fogcolor", color);
+	// DispatchKeyValue(g_iFog, "fogcolor", "255 255 255");
+	DispatchKeyValueFloat(g_iFog, "fogend", 800.0);
+	DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.92);
+	// DispatchKeyValueFloat(g_iFog, "farz", -1.0);
+	AcceptEntityInput(g_iFog, "TurnOn");
 	AnnounceChaos("Disco Fog");
 	g_bDiscoFog = true;
 	g_bDiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT);
@@ -615,7 +615,7 @@ public Action Timer_NewFogColor(Handle timer){
 	if(g_bDiscoFog){
 		char color[32];
 		FormatEx(color, sizeof(color), "%i %i %i", GetRandomInt(0,255), GetRandomInt(0,255), GetRandomInt(0,255));
-		DispatchKeyValue(FogIndex, "fogcolor", color);
+		DispatchKeyValue(g_iFog, "fogcolor", color);
 	}else{
 		StopTimer(g_bDiscoFog_Timer_Repeat);
 	}
@@ -939,7 +939,7 @@ Handle g_IsThisMexico_Timer = INVALID_HANDLE;
 Action Chaos_IsThisMexico(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
-		AcceptEntityInput(FogIndex, "TurnOff");
+		AcceptEntityInput(g_iFog, "TurnOff");
 		if(EndChaos) AnnounceChaos("Is This What Mexico Looks Like?", true);
 		StopTimer(g_IsThisMexico_Timer);
 	}
@@ -947,12 +947,12 @@ Action Chaos_IsThisMexico(Handle timer = null, bool EndChaos = false){
 	g_IsThisMexico_Expire = GetChaosTime("Chaos_IsThisMexico", 30.0);
 	Log("[Chaos] Running: Chaos_IsThisMexico");
 
-	DispatchKeyValue(FogIndex, "fogcolor", "138 86 22");
-	DispatchKeyValueFloat(FogIndex, "fogend", 0.0);
-	// DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.9989);
-	// DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.75);
-	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.85);
-	AcceptEntityInput(FogIndex, "TurnOn");
+	DispatchKeyValue(g_iFog, "fogcolor", "138 86 22");
+	DispatchKeyValueFloat(g_iFog, "fogend", 0.0);
+	// DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.9989);
+	// DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.75);
+	DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.85);
+	AcceptEntityInput(g_iFog, "TurnOn");
 	AnnounceChaos("Is This What Mexico Looks Like?");
 	if(g_IsThisMexico_Expire > 0) g_IsThisMexico_Timer = CreateTimer(g_IsThisMexico_Expire, Chaos_IsThisMexico, true);
 }
@@ -2160,19 +2160,19 @@ Action Chaos_LightsOff(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_LightsOff_Timer);
-		AcceptEntityInput(FogIndex, "TurnOff");
+		AcceptEntityInput(g_iFog, "TurnOff");
 	}
 	if(DecidingChaos("Chaos_LightsOff")) return;
 
 	g_LightsOff_Duration = GetChaosTime("Chaos_LightsOff", 30.0);
 	Log("[Chaos] Running: Chaos_LightsOff");
-	DispatchKeyValue(FogIndex, "fogcolor", "0 0 0");
-	DispatchKeyValueFloat(FogIndex, "fogend", 0.0);
-	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.9989);
-	// DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.998);
-	DispatchKeyValueFloat(FogIndex, "farz", -1.0);
+	DispatchKeyValue(g_iFog, "fogcolor", "0 0 0");
+	DispatchKeyValueFloat(g_iFog, "fogend", 0.0);
+	DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.9989);
+	// DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.998);
+	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
 	AnnounceChaos("Who turned the lights off?");
-	AcceptEntityInput(FogIndex, "TurnOn");
+	AcceptEntityInput(g_iFog, "TurnOn");
 	if(g_LightsOff_Duration  > 0) g_LightsOff_Timer = CreateTimer(g_LightsOff_Duration, Chaos_LightsOff, true);
 	//Random chance for night vision? or separate chaos
 
@@ -2205,17 +2205,17 @@ Action Chaos_NormalWhiteFog(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_NormalWhiteFog_Timer);
-		AcceptEntityInput(FogIndex, "TurnOff");
+		AcceptEntityInput(g_iFog, "TurnOff");
 	}
 	if(DecidingChaos("Chaos_NormalWhiteFog")) return;
 	g_NormalWhiteFog_Duration = GetChaosTime("Chaos_NormalWhiteFog", 45.0);
 	Log("[Chaos] Running: Chaos_NormalWhiteFog");
 
-	DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
-	DispatchKeyValueFloat(FogIndex, "fogend", 800.0);
-	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 0.8);
-	DispatchKeyValueFloat(FogIndex, "farz", -1.0);
-	AcceptEntityInput(FogIndex, "TurnOn");
+	DispatchKeyValue(g_iFog, "fogcolor", "255 255 255");
+	DispatchKeyValueFloat(g_iFog, "fogend", 800.0);
+	DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.8);
+	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
+	AcceptEntityInput(g_iFog, "TurnOn");
 	AnnounceChaos("Fog");
 	if(g_NormalWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_NormalWhiteFog_Duration, Chaos_NormalWhiteFog, true);
 
@@ -2226,18 +2226,18 @@ Handle g_ExtremeWhiteFog_Timer = INVALID_HANDLE;
 Action Chaos_ExtremeWhiteFog(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
-		AcceptEntityInput(FogIndex, "TurnOff");
+		AcceptEntityInput(g_iFog, "TurnOff");
 		StopTimer(g_ExtremeWhiteFog_Timer);
 	}
 	if(DecidingChaos("Chaos_ExtremeWhiteFog")) return;
 	g_ExtremeWhiteFog_Duration = GetChaosTime("Chaos_NormalWhiteFog", 45.0);
 	Log("[Chaos] Running: Chaos_NormalWhiteFog");
 
-	DispatchKeyValue(FogIndex, "fogcolor", "255 255 255");
-	DispatchKeyValueFloat(FogIndex, "fogend", 400.0);
-	DispatchKeyValueFloat(FogIndex, "fogmaxdensity", 1.0);
-	DispatchKeyValueFloat(FogIndex, "farz", -1.0);
-	AcceptEntityInput(FogIndex, "TurnOn");
+	DispatchKeyValue(g_iFog, "fogcolor", "255 255 255");
+	DispatchKeyValueFloat(g_iFog, "fogend", 400.0);
+	DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 1.0);
+	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
+	AcceptEntityInput(g_iFog, "TurnOn");
 	AnnounceChaos("Extreme Fog");
 	if(g_ExtremeWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_ExtremeWhiteFog_Duration, Chaos_ExtremeWhiteFog, true);
 
@@ -2263,12 +2263,12 @@ Action Chaos_LowRenderDistance(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_LowRender_Timer);
-		DispatchKeyValueFloat(FogIndex, "farz", -1.0);
+		DispatchKeyValueFloat(g_iFog, "farz", -1.0);
 	}
 	if(DecidingChaos("Chaos_LowRenderDistance")) return;
 	g_LowRender_Duration = GetChaosTime("Chaos_LowRenderDistance", 30.0);
 	Log("[Chaos] Running: Chaos_LowRenderDistance");
-	DispatchKeyValueFloat(FogIndex, "farz", 450.0);
+	DispatchKeyValueFloat(g_iFog, "farz", 450.0);
 	AnnounceChaos("Low Render Distance");
 	if(g_LowRender_Duration > 0 ) g_LowRender_Timer = CreateTimer(g_LowRender_Duration, Chaos_LowRenderDistance, true);
 
