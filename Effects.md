@@ -1,11 +1,11 @@
-#List of Effects
+# List of Effects
 
 
-#Meta
+# Meta
 Mega Chaos				Spawns 5 effects at once.
 
 
-#Effects
+# Effects
 Nothing					Nothing...
 Where did everyone go?	All players are almost invisible, (barely visible if expire = 0, otherwise full invis if event expires)
 One Bullet Mags			Changes your weapon every time you shoot.
