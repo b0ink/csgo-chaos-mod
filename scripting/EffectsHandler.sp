@@ -7,6 +7,7 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_DecoyDodgeball"))  Chaos_DecoyDodgeball();
 	if(!g_bMegaChaos){
 		if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
+		//todo: ensure that core.cfg "SlowScriptTimeout" is not set to 0, default set to 8.
 		if(GetRandomInt(0, 100) <= 50) if(IsChaosEnabled("Chaos_FakeCrash", 0))  Chaos_FakeCrash(); //risky.. lol
 	}
 	if(IsChaosEnabled("Chaos_RandomInvisiblePlayer"))  Chaos_RandomInvisiblePlayer();
