@@ -2123,7 +2123,8 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 		g_bKnifeFight = false;
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++){
-				if(IsValidClient(i)){
+				if(ValidAndAlive(i)){
+					ClientCommand(i, "slot1");
 					SetEntPropFloat(i, Prop_Send, "m_flModelScale", 1.0);
 					SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
 					SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
