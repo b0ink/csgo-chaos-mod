@@ -1,5 +1,5 @@
 
-//todo: multple effects still spawn if you do !chaos aut, (funky, autoplant et, juggernaut)
+//todo: multple effects still spawn if you do "!chaos aut", (funky, autoplant et, juggernaut)
 public Action Command_NewChaosEffect(int client, int args){
 	if(args > 1){
 		ReplyToCommand(client, "Usage: sm_chaos <Effect Name (optional)>");
