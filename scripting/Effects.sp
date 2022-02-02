@@ -460,6 +460,7 @@ Action Chaos_SpeedShooter(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_bSpeedShooter_Timer);
+		g_bSpeedShooter = false;
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++){
 				if(ValidAndAlive(i)){
@@ -468,7 +469,6 @@ Action Chaos_SpeedShooter(Handle timer = null, bool EndChaos = false){
 			}
 			AnnounceChaos("Speed Shooter", true);
 		}
-		g_bSpeedShooter = false;
 	}
 	if(DecidingChaos("Chaos_SpeedShooter")) return;
 
@@ -1668,7 +1668,7 @@ public void Chaos_RandomMolotovSpawn(){
 	if(DecidingChaos("Chaos_RandomMolotovSpawn")) return;
 	g_MolotovSpawn_Count = RoundToFloor(GetChaosTime("Chaos_RandomMolotovSpawn", 5.0));
 	Log("[Chaos] Running: Chaos_RandomMolotovSpawn");
-	
+	g_MolotovSpawn_Count = 0;
 	cvar("inferno_flame_lifetime", "4");
 	Chaos_MolotovSpawn_Timer = CreateTimer(g_Chaos_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT);
 	AnnounceChaos("Raining Fire!");
