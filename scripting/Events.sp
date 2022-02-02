@@ -201,5 +201,11 @@ public void OnGameFrame(){
 		}
 	}
 	Rollback_Log();
-	
+
+}
+
+
+public Action Event_Cvar(Event event, const char[] name, bool dontBroadcast){
+	if (!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+	return Plugin_Handled;
 }
