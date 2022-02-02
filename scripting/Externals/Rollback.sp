@@ -46,6 +46,7 @@ public void Rollback_Log(){
 					
 					if(loc[0] != 0.0 || loc[1] != 0.0 || loc[2] != 0.0){
 						if(angles[0] != 0.0 || angles[1] != 0.0 || angles[2] != 0.0){
+							SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 0.0);
 							TeleportEntity(i, loc, angles, NULL_VECTOR);
 						}
 					}
@@ -74,6 +75,11 @@ void Chaos_RewindTenSeconds(bool EndChaos = false){
 		g_bRewind_logging_enabled = true;
 		g_Rewinding = true;
 		StopTimer(g_Chaos_Rewind_Timer);
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i)){
+				SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+			}
+		}
 	}
 	if(DecidingChaos("Chaos_RewindTenSeconds")) return;
 	Log("[Chaos] Running: Chaos_RewindTenSeconds");

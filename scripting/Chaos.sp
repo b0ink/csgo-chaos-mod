@@ -115,7 +115,7 @@ public void OnPluginStart(){
 	HookEvent("weapon_fire", 	Event_OnWeaponFirePost, EventHookMode_Post);
 	HookEvent("bomb_planted", 	Event_BombPlanted);
 	HookEvent("bullet_impact", 	Event_BulletImpact);
-	HookEvent("server_cvar", 	Event_Cvar, EventHookMode_Pre);
+	HookEvent("server_cvar", 	Event_Cvar, 			EventHookMode_Pre);
 	AddTempEntHook("Shotgun Shot", Hook_BulletShot);
 
 	for(int i = 0; i <= MaxClients; i++){

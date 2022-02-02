@@ -2109,16 +2109,16 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_AlienKnifeFightTimer);
 		g_bKnifeFight = false;
-		if(EndChaos){
-			for(int i = 0; i <= MaxClients; i++){
-				if(ValidAndAlive(i)){
-					ClientCommand(i, "slot1");
-					SetEntPropFloat(i, Prop_Send, "m_flModelScale", 1.0);
-					SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
-					SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-				}
-			}	
-		}
+		// if(EndChaos){
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i)){
+				ClientCommand(i, "slot1");
+				SetEntPropFloat(i, Prop_Send, "m_flModelScale", 1.0);
+				SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
+				SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+			}
+		}	
+		// }
 		if(EndChaos) AnnounceChaos("Alien Knife Fight", true);
 	}
 	if(DecidingChaos("Chaos_AlienModelKnife")) return;
