@@ -1,3 +1,5 @@
+//todo: move all effects into their own .sp files inside of /scripting/Externals, modularise it a bit more
+
 
 Handle g_BombTimer = INVALID_HANDLE;
 //this was originally coded cos i believe chickens were crashing the game on bomb explosion, i figured out the issue that was unrelated to this. Could potentially be removed in future.
@@ -147,7 +149,7 @@ public Action Hook_BulletShot(const char[] te_name, const int[] Players, int num
 
 public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
+	if(ValidAndAlive(client)) GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
 	return Plugin_Continue;
 }
 
@@ -198,4 +200,6 @@ public void OnGameFrame(){
 			}
 		}
 	}
+	Rollback_Log();
+	
 }
