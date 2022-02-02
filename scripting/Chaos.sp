@@ -84,6 +84,7 @@ bool g_bDisableRetryEvent = false;
 #include "Externals/drugs.sp"
 #include "Externals/c4chicken.sp"
 #include "Externals/Rollback.sp"
+#include "Externals/Fog.sp"
 
 #include "Commands.sp"
 #include "EffectsHandler.sp"
@@ -290,8 +291,7 @@ public void RetryEvent(){ //Used if there's no map data found for the map that r
 
 public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
-	AcceptEntityInput(g_iFog, "TurnOff");
-
+	Fog_OFF();
 	g_bClearChaos = true;
 	g_bDecidingChaos = false;
 	g_bCountingChaos = false;
