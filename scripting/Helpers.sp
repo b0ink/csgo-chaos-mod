@@ -459,29 +459,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 }
 
 
-float mapFogStart = 0.0;
-float mapFogEnd = 0.0;
-// float mapFogEnd = 175.0;
-float mapFogDensity = 0.995;
-void findLight(){
-	int ent;
-	ent = FindEntityByClassname(-1, "env_fog_controller");
-	if (ent != -1) {
-		g_iFog = ent;
-		DispatchKeyValue(g_iFog, "fogblend", "0");
-		DispatchKeyValue(g_iFog, "fogcolor", "255 255 255");
-		// DispatchKeyValue(g_iFog, "fogcolor", "255 0 0");
-		DispatchKeyValue(g_iFog, "fogcolor2", "0 0 0");
-		DispatchKeyValueFloat(g_iFog, "fogstart", mapFogStart);
-		DispatchKeyValueFloat(g_iFog, "fogend", mapFogEnd);
-		DispatchKeyValueFloat(g_iFog, "fogmaxdensity", mapFogDensity);
-		AcceptEntityInput(g_iFog, "TurnOff");
-    }
-	else{
-        g_iFog = CreateEntityByName("env_fog_controller");
-        DispatchSpawn(g_iFog);
-    }
-}
+
 
 
 bool CreateParticle(char []particle, float[3] vec){
