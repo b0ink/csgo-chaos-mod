@@ -2240,7 +2240,7 @@ Action Chaos_ExtremeWhiteFog(Handle timer = null, bool EndChaos = false){
 	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
 	AcceptEntityInput(g_iFog, "TurnOn");
 	AnnounceChaos("Extreme Fog");
-	if(g_ExtremeWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_ExtremeWhiteFog_Duration, Chaos_ExtremeWhiteFog, true);
+	if(g_ExtremeWhiteFog_Duration > 0) g_ExtremeWhiteFog_Timer = CreateTimer(g_ExtremeWhiteFog_Duration, Chaos_ExtremeWhiteFog, true);
 
 }
 
