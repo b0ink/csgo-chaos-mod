@@ -142,7 +142,6 @@ public void OnPluginStart(){
 
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
-	CreateTimer(1.0, Rollback_Log, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 }
 
 public void OnMapStart(){
