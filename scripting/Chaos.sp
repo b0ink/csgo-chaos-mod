@@ -95,7 +95,7 @@ int g_iEffectsHistory[18];
 float g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 public void OnPluginStart(){
-	CreateConVar("sm_chaos_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
+	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
 
 	g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
 	g_cvChaosEffectInterval = CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
@@ -115,7 +115,7 @@ public void OnPluginStart(){
 	HookEvent("weapon_fire", 	Event_OnWeaponFirePost, EventHookMode_Post);
 	HookEvent("bomb_planted", 	Event_BombPlanted);
 	HookEvent("bullet_impact", 	Event_BulletImpact);
-
+	HookEvent("server_cvar", 	Event_Cvar, EventHookMode_Pre);
 	AddTempEntHook("Shotgun Shot", Hook_BulletShot);
 
 	for(int i = 0; i <= MaxClients; i++){
@@ -138,6 +138,7 @@ public void OnPluginStart(){
 	RegAdminCmd("chaos_debug", Command_ChaosDebug, ADMFLAG_BAN);
 
 	RegAdminCmd("sm_chaos", Command_NewChaosEffect, ADMFLAG_BAN);
+	RegAdminCmd("sm_chaoshelp", Command_NewChaosEffect, ADMFLAG_BAN);
 	RegAdminCmd("sm_startchaos", Command_StartChaos, ADMFLAG_BAN);
 	RegAdminCmd("sm_stopchaos", Command_StopChaos, ADMFLAG_BAN);
 
