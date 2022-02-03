@@ -91,7 +91,7 @@ bool 	g_bDisableRetryEvent = false;
 #include "EffectsHandler.sp"
 #include "Configs.sp"
 
-int g_iEffectsHistory[18];
+int	g_iEffectsHistory[18];
 
 float g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
