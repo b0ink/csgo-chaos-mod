@@ -123,42 +123,44 @@ stock bool ValidAndAlive(int client){
 	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
 
-void DisplayCenterTextToAll(const char[] message)
-{
-	char finalMess[128];
-	
+char[] RemoveMulticolors(char[] message){
+	char finalMess[256];
 	Format(finalMess, sizeof(finalMess), "%s", message);
-	
-	for (int i = 1; i <= MaxClients; i++)
-	{
-		if (!IsClientInGame(i) || IsFakeClient(i))
-		{
-			continue;
+
+	ReplaceString(finalMess, sizeof(finalMess),"{lightred}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{lightblue}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{lightgreen}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{olive}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{grey}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{yellow}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{bluegrey}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{orchid}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{lightred2}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{purple}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{lime}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{orange}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{red}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{blue}","", false); 
+	ReplaceString(finalMess, sizeof(finalMess),"{darkred}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{darkblue}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{default}","", false);
+	ReplaceString(finalMess, sizeof(finalMess),"{green}","", false);
+
+	return finalMess;
+}
+
+void DisplayCenterTextToAll(char[] message){
+	char finalMess[256];
+	Format(finalMess, sizeof(finalMess), "%s", RemoveMulticolors(message));
+
+	for (int i = 1; i <= MaxClients; i++){
+		if(IsValidClient(i)){
+			PrintCenterText(i, "%s", finalMess);
 		}
-		ReplaceString(finalMess, sizeof(finalMess),"{lightred}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{lightblue}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{lightgreen}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{olive}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{grey}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{yellow}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{bluegrey}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{orchid}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{lightred2}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{purple}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{lime}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{orange}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{red}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{blue}","", false); 
-		ReplaceString(finalMess, sizeof(finalMess),"{darkred}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{darkblue}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{default}","", false);
-		ReplaceString(finalMess, sizeof(finalMess),"{green}","", false);
-		
-		PrintCenterText(i, "%s", finalMess);
 	}
 }
 
-void AnnounceChaos(char[] message, bool endingChaos = false, bool megaChaos = false){
+void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, bool megaChaos = false){
 	char announcingMessage[128];
 	if(megaChaos){
 		DisplayCenterTextToAll(message);
@@ -170,6 +172,12 @@ void AnnounceChaos(char[] message, bool endingChaos = false, bool megaChaos = fa
 		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix, message);
 	}
 	CPrintToChatAll(announcingMessage);
+
+	char EffectName[256];
+	FormatEx(EffectName, sizeof(EffectName), "%s", RemoveMulticolors(message));
+	if(!endingChaos && EffectTime > -2.0){
+		if(g_DynamicChannel) AddEffectToHud(EffectName, EffectTime);
+	}
 }
 
 

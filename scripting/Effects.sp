@@ -10,7 +10,7 @@ Action Chaos_RapidFire(Handle timer = null, bool EndChaos = false){
 		g_bRapidFire = false;
 
 		StopTimer(g_RapidFire_Timer);
-		if(EndChaos) AnnounceChaos("Rapid Fire", true);
+		if(EndChaos) AnnounceChaos("Rapid Fire", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_RapidFire")) return;
 	
@@ -21,7 +21,7 @@ Action Chaos_RapidFire(Handle timer = null, bool EndChaos = false){
 	g_bRapidFire = true;
 	cvar("weapon_accuracy_nospread", "1");
 	cvar("weapon_recoil_scale", "0");
-	AnnounceChaos("Rapid Fire");
+	AnnounceChaos("Rapid Fire", g_RapidFire_Expire);
 }
 
 float g_BreakTime_Expire = 10.0;
@@ -33,7 +33,7 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 		cvar("sv_airaccelerate", "12");
 
 		StopTimer(g_BreakTime_Timer);
-		if(EndChaos) AnnounceChaos("Break Over", true);
+		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
 	}
 	if(DecidingChaos("Chaos_BreakTime")) return;
 
@@ -45,7 +45,7 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	cvar("sv_airaccelerate", "0");
 	
 	//todo set m_movement to 0 so no one can do anything, potentially stop shooting?
-	AnnounceChaos("Break Time!");
+	AnnounceChaos("Break Time!", g_BreakTime_Expire);
 }
 
 float FakeTeleport_Expire = 3.0;
@@ -76,7 +76,7 @@ public Action Timer_ResetFakeTeleport(Handle timer){
 			TeleportEntity(i, vec, NULL_VECTOR, NULL_VECTOR);
 		}
 	}
-	AnnounceChaos("Fake Teleport");
+	AnnounceChaos("Fake Teleport", -1.0);
 	FakeTeleport_Timer = INVALID_HANDLE;
 }
 
@@ -110,7 +110,7 @@ void Chaos_Soccerballs(){
 			SetEntityMoveType(ent, MOVETYPE_VPHYSICS);   
 		}
 	}
-	AnnounceChaos("Soccer balls");
+	AnnounceChaos("Soccer balls", -1.0);
 
 }
 
@@ -126,7 +126,7 @@ Action Chaos_NoCrosshair(Handle timer = null, bool EndChaos = false){
 				SetEntProp(i, Prop_Send, "m_iHideHUD", 0);
 			}
 		}
-		if(EndChaos) AnnounceChaos("No Crosshair", true);
+		if(EndChaos) AnnounceChaos("No Crosshair", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_NoCrosshair")) return;
 
@@ -138,8 +138,8 @@ Action Chaos_NoCrosshair(Handle timer = null, bool EndChaos = false){
 			SetEntProp(i, Prop_Send, "m_iHideHUD", HIDEHUD_CROSSHAIR);
 		}
 	}
-	AnnounceChaos("No Crosshair");
 	if(g_NoCrosshair_Expire > 0.0) g_NoCrossHair_Timer = CreateTimer(g_NoCrosshair_Expire, Chaos_NoCrosshair, true);
+	AnnounceChaos("No Crosshair", g_NoCrosshair_Expire);
 }
 
 bool g_bLag = true;
@@ -148,7 +148,7 @@ void Chaos_FakeCrash(){
 	if(g_bClearChaos){    }
 	if(DecidingChaos("Chaos_FakeCrash")) return;
 	Log("[Chaos] Running: Chaos_FakeCrash");
-	AnnounceChaos("Fake Crash");
+	AnnounceChaos("Fake Crash", -1.0);
 	g_bLag = true;
 	CreateTimer(1.0, Timer_nolag);
 	while(g_bLag){
@@ -176,7 +176,7 @@ Action Chaos_DisableRadar(Handle timer = null, bool EndChaos = false){
 
 	cvar("sv_disable_radar", "1");
 	if(g_DisableRadar_Expire > 0.0) g_DisableRadar_Timer = CreateTimer(g_DisableRadar_Expire, Chaos_DisableRadar, true);
-	AnnounceChaos("No Radar");
+	AnnounceChaos("No Radar", g_DisableRadar_Expire);
 }
 
 void Chaos_SpawnFlashbangs(){
@@ -195,7 +195,7 @@ void Chaos_SpawnFlashbangs(){
 			DispatchSpawn(flash);
 		}
 	}
-	AnnounceChaos("Spawn Flashbangs");
+	AnnounceChaos("Spawn Flashbangs", -1.0);
 }
 
 float g_SuperJump_Expire = 20.0;
@@ -214,7 +214,7 @@ Action Chaos_SuperJump(Handle timer = null, bool EndChaos = false){
 	
 	cvar("sv_jump_impulse", "590");
 	if(g_SuperJump_Expire > 0.0) g_SuperJump_Timer = CreateTimer(g_SuperJump_Expire, Chaos_SuperJump, true);
-	AnnounceChaos("Super Jump");
+	AnnounceChaos("Super Jump", g_SuperJump_Expire);
 }
 
 
@@ -263,7 +263,7 @@ Action Chaos_Juggernaut(Handle timer = null, bool EndChaos = false){
 		}
 	}
 	if(g_Juggernaut_Expire > 0.0) g_Juggernaut_Timer = CreateTimer(g_Juggernaut_Expire, Chaos_Juggernaut, true);
-	AnnounceChaos("Juggernauts");
+	AnnounceChaos("Juggernauts", g_Juggernaut_Expire);
 }
 
 
@@ -284,7 +284,7 @@ void Chaos_SpawnExplodingBarrels(){
 			DispatchSpawn(barrel);
 		}
 	}
-	AnnounceChaos("Exploding Barrels");
+	AnnounceChaos("Exploding Barrels", -1.0);
 }
 
 
@@ -304,8 +304,8 @@ Action Chaos_InsaneAirSpeed(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_InsaneAirSpeed");
 	cvar("sv_air_max_wishspeed", "2000");
 	cvar("sv_airaccelerate", "2000");
-	AnnounceChaos("Extreme Strafe Acceleration");
 	if(g_InsaneStrafe_Expire > 0.0) g_InsaneStrafe_Timer = CreateTimer(g_InsaneStrafe_Expire, Chaos_InsaneAirSpeed, true);
+	AnnounceChaos("Extreme Strafe Acceleration", g_InsaneStrafe_Expire);
 }
 
 void Chaos_RespawnDead_LastLocation(){
@@ -319,7 +319,7 @@ void Chaos_RespawnDead_LastLocation(){
 			TeleportEntity(i, g_PlayerDeathLocations[i], NULL_VECTOR, NULL_VECTOR);
 		}
 	}
-	AnnounceChaos("Resurrect players where they died");
+	AnnounceChaos("Resurrect players where they died", -1.0);
 }
 
 float g_Drugs_Expire = 10.0;
@@ -335,13 +335,13 @@ Action Chaos_Drugs(Handle timer = null, bool EndChaos = false){
 	g_Drugs_Expire = GetChaosTime("Chaos_Drugs", 10.0);
 	Log("[Chaos] Running: Chaos_Drugs");
 
-	if(g_Drugs_Expire > 0.0) g_Drugs_Timer = CreateTimer(g_Drugs_Expire, Chaos_Drugs, true);
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			CreateDrug(i);
 		}
 	}
-	AnnounceChaos("Drugs");
+	if(g_Drugs_Expire > 0.0) g_Drugs_Timer = CreateTimer(g_Drugs_Expire, Chaos_Drugs, true);
+	AnnounceChaos("Drugs", g_Drugs_Expire);
 }
 
 
@@ -360,7 +360,7 @@ Action Chaos_EnemyRadar(Handle timer = null, bool EndChaos = false){
 	
 	if(g_EnemyRadar_Expire > 0.0) g_EnemyRadar_Timer = CreateTimer(g_EnemyRadar_Expire, Chaos_EnemyRadar, true);
 	cvar("mp_radar_showall", "1");
-	AnnounceChaos("Enemy Radar");
+	AnnounceChaos("Enemy Radar", g_EnemyRadar_Expire);
 }
 
 void Chaos_Give100HP(){
@@ -378,7 +378,7 @@ void Chaos_Give100HP(){
 			SetEntityHealth(i, currenthealth + 100);
 		}
 	}
-	AnnounceChaos("Give all players +100 HP");
+	AnnounceChaos("Give all players +100 HP", -1.0);
 }
 
 
@@ -396,7 +396,7 @@ void Chaos_HealAllPlayers(){
 			SetEntityHealth(i, 100);
 		}
 	}
-	AnnounceChaos("Set all players health to 100");
+	AnnounceChaos("Set all players health to 100", -1.0);
 }
 
 float g_BuyAnywhere_Expire = 20.0;
@@ -416,7 +416,7 @@ Action Chaos_BuyAnywhere(Handle timer = null, bool EndChaos = false){
 	
 	cvar("mp_buy_anywhere", "1");
 	cvar("mp_buytime", "999");
-	AnnounceChaos("Buy Anywhere Enabled!");
+	AnnounceChaos("Buy Anywhere Enabled!", g_BuyAnywhere_Expire);
 	if(g_BuyAnywhere_Expire > 0.0) g_BuyAnywhere_Timer = CreateTimer(g_BuyAnywhere_Expire, Chaos_BuyAnywhere, true);
 }
 
@@ -448,7 +448,7 @@ Action Chaos_ExplosiveBullets(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_ExplosiveBullets");
 	g_bExplosiveBullets = true;
 	if(g_ExplosBullets_Duration > 0.0) g_ExplosBullets_Timer = CreateTimer(g_ExplosBullets_Duration, Chaos_ExplosiveBullets, true);
-	AnnounceChaos("Explosive Bullets");
+	AnnounceChaos("Explosive Bullets", g_ExplosBullets_Duration);
 }
 
 bool g_bSpeedShooter = false;
@@ -467,7 +467,7 @@ Action Chaos_SpeedShooter(Handle timer = null, bool EndChaos = false){
 					SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
 				}
 			}
-			AnnounceChaos("Speed Shooter", true);
+			AnnounceChaos("Speed Shooter", -1.0, true);
 		}
 	}
 	if(DecidingChaos("Chaos_SpeedShooter")) return;
@@ -476,7 +476,7 @@ Action Chaos_SpeedShooter(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_SpeedShooter");
 
 	g_bSpeedShooter = true;
-	AnnounceChaos("Speed Shooter");
+	AnnounceChaos("Speed Shooter", g_bSpeedShooter_Expire);
 	if(g_bSpeedShooter_Expire > 0.0) g_bSpeedShooter_Timer = CreateTimer(g_bSpeedShooter_Expire, Chaos_SpeedShooter, true);
 }
 
@@ -495,30 +495,30 @@ void Chaos_ResetSpawns(){
 		}
 	}
 	
-	AnnounceChaos("Teleport all players back to spawn");
+	AnnounceChaos("Teleport all players back to spawn", -1.0);
 }
 
 bool g_bNoStrafe = false;
-float g_bNoStrafe_Expire = 20.0;
-Handle g_bNoStrafe_Timer = INVALID_HANDLE;
+float g_fNoStrafe_Expire = 20.0;
+Handle g_NoStrafe_Timer = INVALID_HANDLE;
 Action Chaos_DisableStrafe(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
 	if(ClearChaos(EndChaos)){
 		g_bNoStrafe = false;
 
-		StopTimer(g_bNoStrafe_Timer);
-		if(EndChaos) AnnounceChaos("Normal Left/Right Movement", true);
+		StopTimer(g_NoStrafe_Timer);
+		if(EndChaos) AnnounceChaos("Normal Left/Right Movement", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_DisableStrafe")) return;
-	g_bNoStrafe_Expire = GetChaosTime("Chaos_DisableStrafe", 20.0);
+	g_fNoStrafe_Expire = GetChaosTime("Chaos_DisableStrafe", 20.0);
 	Log("[Chaos] Running: Chaos_DisableStrafe");
 	g_bNoStrafe = true;
-	if(g_bNoStrafe_Expire > 0.0) g_bNoStrafe_Timer = CreateTimer(g_bNoStrafe_Expire, Chaos_DisableStrafe, true);
-	AnnounceChaos("Disable Left/Right Movement");
+	if(g_fNoStrafe_Expire > 0.0) g_NoStrafe_Timer = CreateTimer(g_fNoStrafe_Expire, Chaos_DisableStrafe, true);
+	AnnounceChaos("Disable Left/Right Movement", g_fNoStrafe_Expire);
 }
 
 bool g_bNoForwardBack = false;
-float g_bNoForwardBack_Expire = 20.0;
+float g_fNoForwardBack_Expire = 20.0;
 Handle g_bNoForwardBack_Timer = INVALID_HANDLE;
 Action Chaos_DisableForwardBack(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
@@ -526,14 +526,14 @@ Action Chaos_DisableForwardBack(Handle timer = null, bool EndChaos = false){
 		g_bNoForwardBack = false;
 
 		StopTimer(g_bNoForwardBack_Timer);
-		if(EndChaos) AnnounceChaos("Normal Forward/Backward Movement", true);
+		if(EndChaos) AnnounceChaos("Normal Forward/Backward Movement", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_DisableForwardBack")) return;
-	g_bNoForwardBack_Expire = GetChaosTime("Chaos_DisableForwardBack", 20.0);
+	g_fNoForwardBack_Expire = GetChaosTime("Chaos_DisableForwardBack", 20.0);
 	Log("[Chaos] Running: Chaos_DisableForwardBack");
 	g_bNoForwardBack = true;
-	if(g_bNoForwardBack_Expire > 0.0) g_bNoForwardBack_Timer = CreateTimer(g_bNoForwardBack_Expire, Chaos_DisableForwardBack, true);
-	AnnounceChaos("Disable Forward/Backward Movement");
+	if(g_fNoForwardBack_Expire > 0.0) g_bNoForwardBack_Timer = CreateTimer(g_fNoForwardBack_Expire, Chaos_DisableForwardBack, true);
+	AnnounceChaos("Disable Forward/Backward Movement", g_fNoForwardBack_Expire);
 }
 
 bool g_bJumping = false;
@@ -558,7 +558,7 @@ Action Chaos_Jumping(Handle timer = null, bool EndChaos = false){
 	g_bJumping = true;
 	g_bJumping_Timer_Repeat = CreateTimer(0.3, Timer_ForceJump, _,TIMER_REPEAT);
 	if(g_bJumping_Expire > 0.0) g_bJumping_Time = CreateTimer(g_bJumping_Expire, Chaos_Jumping, true);
-	AnnounceChaos("Jumping!");
+	AnnounceChaos("Jumping!", g_bJumping_Expire);
 }
 public Action Timer_ForceJump(Handle timer){
 	if(g_bJumping){
@@ -582,7 +582,7 @@ public Action Timer_ForceJump(Handle timer){
 
 bool g_bDiscoFog = false;
 Handle g_bDiscoFog_Timer_Repeat = INVALID_HANDLE;
-float g_bDiscoFog_Expire = 25.0;
+float g_fDiscoFog_Expire = 25.0;
 Handle g_bDiscoFog_Timer = INVALID_HANDLE;
 Action Chaos_DiscoFog(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return;
@@ -594,15 +594,15 @@ Action Chaos_DiscoFog(Handle timer = null, bool EndChaos = false){
 	}
 	if(DecidingChaos("Chaos_DiscoFog")) return;
 
-	g_bDiscoFog_Expire = GetChaosTime("Chaos_DiscoFog", 25.0);
+	g_fDiscoFog_Expire = GetChaosTime("Chaos_DiscoFog", 25.0);
 	Log("[Chaos] Running: Chaos_DiscoFog");
 	
 	DiscoFog();
 
-	AnnounceChaos("Disco Fog");
+	AnnounceChaos("Disco Fog", g_fDiscoFog_Expire);
 	g_bDiscoFog = true;
 	g_bDiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT);
-	if(g_bDiscoFog_Expire > 0) g_bDiscoFog_Timer = CreateTimer(g_bDiscoFog_Expire, Chaos_DiscoFog, true);
+	if(g_fDiscoFog_Expire > 0) g_bDiscoFog_Timer = CreateTimer(g_fDiscoFog_Expire, Chaos_DiscoFog, true);
 }
 
 public Action Timer_NewFogColor(Handle timer){
@@ -624,7 +624,7 @@ Action Chaos_OneBulletOneGun(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		g_bOneBulletOneGun = false;
 		StopTimer(g_OneBuilletOneGun_Timer);
-		if(EndChaos) AnnounceChaos("One Bullet One Gun", true);
+		if(EndChaos) AnnounceChaos("One Bullet One Gun", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_OneBulletOneGun")) return;
 
@@ -632,7 +632,7 @@ Action Chaos_OneBulletOneGun(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_OneBulletOneGun");
 
 	g_bOneBulletOneGun = true; //handled somehwere in events.sp
-	AnnounceChaos("One Bullet One Gun");
+	AnnounceChaos("One Bullet One Gun", g_bOneBulletOneGun_Expire);
 	if(g_bOneBulletOneGun_Expire > 0.0) g_OneBuilletOneGun_Timer = CreateTimer(g_bOneBulletOneGun_Expire, Chaos_OneBulletOneGun, true);
 }
 
@@ -650,7 +650,7 @@ void Chaos_Earthquake(){
 			ScreenShake(i, _, g_Earthquake_Duration);
 		}
 	}
-	AnnounceChaos("Earthquake");
+	AnnounceChaos("Earthquake", -1.0);
 }
 
 stock int ScreenShake(int iClient, float fAmplitude = 50.0, float duration = 7.0){
@@ -682,7 +682,7 @@ Action Chaos_ChickenPlayers(Handle timer = null, bool EndChaos = false){
 
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetChicken(i);
 	if(g_ChickenPlayers_Expire > 0) g_ChickenPlayers_Timer = CreateTimer(g_ChickenPlayers_Expire, Chaos_ChickenPlayers, true);
-	AnnounceChaos("Make all players a chicken");
+	AnnounceChaos("Make all players a chicken", g_ChickenPlayers_Expire);
 }
 
 
@@ -698,14 +698,14 @@ void Chaos_IgnitePlayer(bool forceAllPlayers = false){
 				IgniteEntity(i, 10.0);
 			}
 		}
-		AnnounceChaos("Ignite All Players");
+		AnnounceChaos("Ignite All Players", -1.0);
 	}else{
 		int player = getRandomAlivePlayer();
 		if(player != -1 && ValidAndAlive(player)){
 			IgniteEntity(player, 10.0);
 			char msg[128];
 			FormatEx(msg, sizeof(msg), "Ignite {orange}%N", player);
-			AnnounceChaos(msg);
+			AnnounceChaos(msg, -1.0);
 		}else{
 			Chaos_IgnitePlayer(true);
 		}
@@ -723,7 +723,7 @@ Action Chaos_LockPlayersAim(Handle timer = null, bool EndChaos = false){
 		g_bLockPlayersAim_Active = false;
 		StopTimer(g_LockPlayersAim_Timer_Expire);
 		StopTimer(g_LockPlayersAim_Timer_Enforce);
-		if(EndChaos) AnnounceChaos("Lock Mouse Movement", true);
+		if(EndChaos) AnnounceChaos("Lock Mouse Movement", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_LockPlayersAim")) return;
 
@@ -734,7 +734,7 @@ Action Chaos_LockPlayersAim(Handle timer = null, bool EndChaos = false){
 	// g_LockPlayersAim_Timer_Enforce = CreateTimer(0.01, Timer_EnforcePlayerLock, _, TIMER_REPEAT);
 	g_bLockPlayersAim_Active  = true;
 	if(g_LockPlayersAim_Expire > 0) g_LockPlayersAim_Timer_Expire = CreateTimer(g_LockPlayersAim_Expire, Chaos_LockPlayersAim, true);
-	AnnounceChaos("Lock Mouse Movement");
+	AnnounceChaos("Lock Mouse Movement", g_LockPlayersAim_Expire);
 }
 //potentially to add in OnPlayerRunCmd?
 
@@ -757,7 +757,7 @@ Action Chaos_SlowSpeed(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		if(EndChaos) {
 			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-			AnnounceChaos("Normal Movement Speed", true);
+			AnnounceChaos("Normal Movement Speed", -1.0, true);
 		}
 		StopTimer(g_SlowSpeed_Timer);
 	}
@@ -767,7 +767,7 @@ Action Chaos_SlowSpeed(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_SlowSpeed");
 
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 0.5);
-	AnnounceChaos("0.5x Movement Speed");
+	AnnounceChaos("0.5x Movement Speed", g_SlowSpeed_Expire);
 	if(g_SlowSpeed_Expire > 0) g_SlowSpeed_Timer = CreateTimer(g_SlowSpeed_Expire, Chaos_SlowSpeed, true);
 }
 
@@ -778,7 +778,7 @@ Action Chaos_FastSpeed(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-			AnnounceChaos("Normal Movement Speed", true);
+			AnnounceChaos("Normal Movement Speed", -1.0, true);
 		}
 		StopTimer(g_FastSpeed_Timer);
 	}
@@ -788,7 +788,7 @@ Action Chaos_FastSpeed(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_FastSpeed");
 	
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 3.0);
-	AnnounceChaos("3x Movement Speed");
+	AnnounceChaos("3x Movement Speed", g_FastSpeed_Expire);
 	if(g_FastSpeed_Expire > 0) g_FastSpeed_Timer = CreateTimer(g_FastSpeed_Expire, Chaos_FastSpeed, true);
 }
 
@@ -805,7 +805,7 @@ void Chaos_RespawnTheDead(){
 		}
 	}
 	// AnnounceChaos("The Dead Have Awaken");
-	AnnounceChaos("Resurrect dead players");
+	AnnounceChaos("Resurrect dead players", -1.0);
 }
 
 void Chaos_RespawnTheDead_Randomly(){
@@ -822,7 +822,7 @@ void Chaos_RespawnTheDead_Randomly(){
 			}
 		}
 	}
-	AnnounceChaos("Resurrect dead players in random locations");
+	AnnounceChaos("Resurrect dead players in random locations", -1.0);
 }
 
 void Chaos_Bumpmines(){
@@ -831,7 +831,7 @@ void Chaos_Bumpmines(){
 	if(DecidingChaos("Chaos_Bumpmines")) return;
 	Log("[Chaos] Running: Chaos_Bumpmines");
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) GivePlayerItem(i, "weapon_bumpmine");
-	AnnounceChaos("Bumpmines");
+	AnnounceChaos("Bumpmines", -1.0);
 }
 
 Action Chaos_Spin180(){
@@ -847,31 +847,31 @@ Action Chaos_Spin180(){
 			TeleportEntity(i, NULL_VECTOR, angs, NULL_VECTOR);
 		}
 	}
-	AnnounceChaos("180 Spin");
+	AnnounceChaos("180 Spin", -1.0);
 }
 
 bool g_bPortalGuns = false;
-float g_bPortalGuns_Expire = 20.0; //config
+float g_fPortalGuns_Expire = 20.0; //config
 Handle g_bPortalGuns_Timer = INVALID_HANDLE;
 Action Chaos_PortalGuns(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
 		if(EndChaos){
 			TeleportPlayersToClosestLocation();
-			AnnounceChaos("Portal Guns", true);
+			AnnounceChaos("Portal Guns", -1.0, true);
 		}
 		g_bPortalGuns = false;
 		StopTimer(g_bPortalGuns_Timer);
 	}
 	if(DecidingChaos("Chaos_PortalGuns")) return;
 
-	g_bPortalGuns_Expire = GetChaosTime("Chaos_PortalGuns", 20.0);
+	g_fPortalGuns_Expire = GetChaosTime("Chaos_PortalGuns", 20.0);
 	Log("[Chaos] Running: Chaos_PortalGuns");
 	
 	g_bPortalGuns = true;
-	AnnounceChaos("Portal Guns");
+	AnnounceChaos("Portal Guns", g_fPortalGuns_Expire);
 	SavePlayersLocations();
-	if(g_bPortalGuns_Expire > 0) g_bPortalGuns_Timer = CreateTimer(g_bPortalGuns_Expire, Chaos_PortalGuns, true);
+	if(g_fPortalGuns_Expire > 0) g_bPortalGuns_Timer = CreateTimer(g_fPortalGuns_Expire, Chaos_PortalGuns, true);
 }
 
 
@@ -885,7 +885,7 @@ void Chaos_TeleportFewMeters(){
 	
 	SavePlayersLocations();
 	TeleportPlayersToClosestLocation(-1, 250); //250 units of minimum teleport distance
-	AnnounceChaos("Teleport Players A Few Meters");
+	AnnounceChaos("Teleport Players A Few Meters", -1.0);
 }
 
 
@@ -897,7 +897,7 @@ Action Chaos_InfiniteGrenades(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_InfiniteGrenade_Timer);
 		cvar("sv_infinite_ammo", "0");
-		if(EndChaos) AnnounceChaos("Infinite Grenades", true);
+		if(EndChaos) AnnounceChaos("Infinite Grenades", -1.0,  true);
 	}
 	if(DecidingChaos("Chaos_InfiniteGrenades")) return;
 	
@@ -913,7 +913,7 @@ Action Chaos_InfiniteGrenades(Handle timer = null, bool EndChaos = false){
 			GivePlayerItem(i, "weapon_flashbang");
 		}
 	}
-	AnnounceChaos("Infinite Grenades");
+	AnnounceChaos("Infinite Grenades", g_InfiniteGrenades_Expire);
 	if(g_InfiniteGrenades_Expire > 0) g_InfiniteGrenade_Timer = CreateTimer(g_InfiniteGrenades_Expire, Chaos_InfiniteGrenades, true);
 }
 
@@ -924,7 +924,7 @@ void Chaos_Shields(){
 	Log("[Chaos] Running: Chaos_Shields");
 	Timer_CreateHostage();
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) GivePlayerItem(i, "weapon_shield");
-	AnnounceChaos("Shields");
+	AnnounceChaos("Shields", -1.0);
 }
 
 
@@ -934,14 +934,14 @@ Action Chaos_IsThisMexico(Handle timer = null, bool EndChaos = false){
 	if(CountingCheckDecideChaos()) return; 
 	if(ClearChaos(EndChaos)){
 		Fog_OFF();
-		if(EndChaos) AnnounceChaos("Is This What Mexico Looks Like?", true);
+		if(EndChaos) AnnounceChaos("Is This What Mexico Looks Like?", -1.0, true);
 		StopTimer(g_IsThisMexico_Timer);
 	}
 	if(DecidingChaos("Chaos_IsThisMexico")) return;
 	g_IsThisMexico_Expire = GetChaosTime("Chaos_IsThisMexico", 30.0);
 	Log("[Chaos] Running: Chaos_IsThisMexico");
 	Mexico();
-	AnnounceChaos("Is This What Mexico Looks Like?");
+	AnnounceChaos("Is This What Mexico Looks Like?", g_IsThisMexico_Expire);
 	if(g_IsThisMexico_Expire > 0) g_IsThisMexico_Timer = CreateTimer(g_IsThisMexico_Expire, Chaos_IsThisMexico, true);
 }
 
@@ -953,7 +953,7 @@ Action Chaos_OneWeaponOnly(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_OneWeaponOnly_Timer);
 		g_bPlayersCanDropWeapon = true;
-		if(EndChaos) AnnounceChaos("Weapon Drop Re-enabled", true);
+		if(EndChaos) AnnounceChaos("Weapon Drop Re-enabled", -1.0,  true);
 	}
 	if(DecidingChaos("Chaos_OneWeaponOnly")) return;
 
@@ -975,7 +975,7 @@ Action Chaos_OneWeaponOnly(Handle timer = null, bool EndChaos = false){
 	char chaosMsg[128];
 	FormatEx(chaosMsg, sizeof(chaosMsg), "%s's Only!", randomWeapon[7]); //strip weapon_ from name;
 	// chaosMsg[0] = CharToUpper(chaosMsg[0]);
-	AnnounceChaos(chaosMsg);
+	AnnounceChaos(chaosMsg, g_OneWeaponOnly_Expire);
 	if(g_OneWeaponOnly_Expire > 0) g_OneWeaponOnly_Timer = CreateTimer(g_OneWeaponOnly_Expire, Chaos_OneWeaponOnly, true);
 }
 
@@ -1025,7 +1025,7 @@ void Chaos_AutoPlantC4(){
 			TeleportEntity(bombEnt, newBombPosition, NULL_VECTOR, NULL_VECTOR);
 			char AnnounceMessage[128];
 			FormatEx(AnnounceMessage, sizeof(AnnounceMessage), "Teleport bomb to %s", newBombSiteName);
-			AnnounceChaos(AnnounceMessage);
+			AnnounceChaos(AnnounceMessage, -1.0);
 			return;
 		}else{
 			g_PlantedSite = -1; //fooked up
@@ -1040,11 +1040,11 @@ void Chaos_AutoPlantC4(){
 
 public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
 	if(g_PlantedSite == BOMBSITE_A){
-		AnnounceChaos("Auto Plant C4 at Bombsite A");
+		AnnounceChaos("Auto Plant C4 at Bombsite A", -1.0);
 	}else if(g_PlantedSite == BOMBSITE_B){
-		AnnounceChaos("Auto Plant C4 at Bombsite B");
+		AnnounceChaos("Auto Plant C4 at Bombsite B", -1.0);
 	}else{
-		AnnounceChaos("Auto Plant C4");
+		AnnounceChaos("Auto Plant C4", -1.0);
 	}
 }
 
@@ -1059,7 +1059,7 @@ public void Chaos_Impostors(){
 
 	SpawnImpostors();
 
-	AnnounceChaos("Impostors");
+	AnnounceChaos("Impostors", -1.0);
 }
 
 public void Chaos_MamaChook(){
@@ -1087,7 +1087,7 @@ public void Chaos_MamaChook(){
 	
 	}
 
-	AnnounceChaos("Mama Chook");
+	AnnounceChaos("Mama Chook", -1.0);
 }
 
 public void Chaos_BigChooks(){
@@ -1115,7 +1115,7 @@ public void Chaos_BigChooks(){
 		}
 	
 	}
-	AnnounceChaos("Big Chooks");
+	AnnounceChaos("Big Chooks", -1.0);
 }
 
 public void Chaos_LittleChooks(){
@@ -1144,7 +1144,7 @@ public void Chaos_LittleChooks(){
 		}
 	
 	}
-	AnnounceChaos("Lil' Chooks");
+	AnnounceChaos("Lil' Chooks", -1.0);
 }
 
 
@@ -1174,7 +1174,7 @@ Action Chaos_OneBulletMag(Handle timer = null, bool EndChaos = false){
 					FakeClientCommand(i, "use %s", currentWeapon); //swap back to original weapon
 				}
 			}
-			AnnounceChaos("One Bullet Mags", true);
+			AnnounceChaos("One Bullet Mags", -1.0, true);
 		}
 
 		StopTimer(g_bOneBulletMagTimer);
@@ -1193,7 +1193,7 @@ Action Chaos_OneBulletMag(Handle timer = null, bool EndChaos = false){
 	}
 	g_bOneBulletMag = true;
 	if(g_OneBuilletMag_Expire > 0) g_bOneBulletMagTimer = CreateTimer(g_OneBuilletMag_Expire, Chaos_OneBulletMag, true);
-	AnnounceChaos("One Bullet Mags");
+	AnnounceChaos("One Bullet Mags", g_OneBuilletMag_Expire);
 }
 
 float g_CrabPeople_Expire = 15.0;
@@ -1204,13 +1204,13 @@ Action Chaos_CrabPeople(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		g_bForceCrouch = false;
 		StopTimer(g_CrabPeopleTimer);
-		if(EndChaos) AnnounceChaos("Crab People", true);
+		if(EndChaos) AnnounceChaos("Crab People", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_CrabPeople")) return;
 	g_CrabPeople_Expire = GetChaosTime("Chaos_CrabPeople", 15.0);
 	Log("[Chaos] Running: Chaos_CrabPeople");
 	g_bForceCrouch = true;
-	AnnounceChaos("Crab People");
+	AnnounceChaos("Crab People", g_CrabPeople_Expire);
 	if(g_CrabPeople_Expire > 0) g_CrabPeopleTimer = CreateTimer(g_CrabPeople_Expire, Chaos_CrabPeople, true);
 }
 
@@ -1222,14 +1222,14 @@ Action Chaos_NoScopeOnly(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_bNoscopeOnly_Timer);
 		g_bNoscopeOnly = false;
-		if(EndChaos) AnnounceChaos("You can now scope again", true);
+		if(EndChaos) AnnounceChaos("You can now scope again", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_NoScopeOnly")) return;
 	g_bNoscopeOnly_Expire = GetChaosTime("Chaos_NoScopeOnly", 20.0);
 	Log("[Chaos] Running: Chaos_NoScopeOnly");
 	g_bNoscopeOnly = true;
 	if(g_bNoscopeOnly_Expire > 0) g_bNoscopeOnly_Timer = CreateTimer(g_bNoscopeOnly_Expire, Chaos_NoScopeOnly, true);
-	AnnounceChaos("No scopes only");
+	AnnounceChaos("No scopes only", g_bNoscopeOnly_Expire);
 }
 
 void Chaos_MoneyRain(){
@@ -1251,7 +1251,7 @@ void Chaos_MoneyRain(){
 			DispatchSpawn(ent);
 		}
 	}
-	AnnounceChaos("Make it rain");
+	AnnounceChaos("Make it rain", -1.0);
 }
 
 bool g_bVampireRound = false;
@@ -1262,7 +1262,7 @@ Action Chaos_VampireHeal(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_Vampire_Timer);
 		g_bVampireRound = false;
-		if(EndChaos) AnnounceChaos("Vampires", true);
+		if(EndChaos) AnnounceChaos("Vampires", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_VampireHeal")) return;
 
@@ -1270,7 +1270,7 @@ Action Chaos_VampireHeal(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_VampireHeal");
 
 	g_bVampireRound = true;
-	AnnounceChaos("Vampires");
+	AnnounceChaos("Vampires", g_Vampire_Expire);
 	if(g_Vampire_Expire > 0) g_Vampire_Timer = CreateTimer(g_Vampire_Expire, Chaos_VampireHeal, true);
 }
 
@@ -1287,7 +1287,7 @@ void Chaos_C4Chicken(){
 
 	g_bC4Chicken = true;
 	C4Chicken(); //convert any planted c4's to chicken
-	AnnounceChaos("C4 Chicken");
+	AnnounceChaos("C4 Chicken", -1.0);
 }
 
 //tood; buggy if you still have other nades?
@@ -1326,7 +1326,7 @@ Action Chaos_DecoyDodgeball(Handle timer = null, bool EndChaos = false){
 			SetEntityHealth(i, 1);
 		}
 	}
-	AnnounceChaos("Decoy Dodgeball");
+	AnnounceChaos("Decoy Dodgeball", g_DecoyDoge_Expire);
 	if(g_DecoyDoge_Expire > 0) g_bDecoyDodgeballTimer = CreateTimer(g_DecoyDoge_Expire, Chaos_DecoyDodgeball, true);
 	g_bDecoyDodgeball_CheckDecoyTimer = CreateTimer(5.0, Timer_CheckDecoys, _, TIMER_REPEAT);
 }
@@ -1367,7 +1367,7 @@ Action Chaos_HeadshotOnly(Handle timer = null, bool EndChaos = false){
 	g_bHeadshotOnly_Expire = GetChaosTime("Chaos_HeadshotOnly", 20.0);
 	Log("[Chaos] Running: Chaos_HeadshotOnly");
 	cvar("mp_damage_headshot_only", "1");
-	AnnounceChaos("Headshots Only");
+	AnnounceChaos("Headshots Only", g_bHeadshotOnly_Expire);
 	if(g_bHeadshotOnly_Expire > 0) g_bHeadshotOnly_Timer = CreateTimer(g_bHeadshotOnly_Expire, Chaos_HeadshotOnly, true);
 }
 
@@ -1378,7 +1378,7 @@ Action Chaos_OHKO(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityHealth(i, 100);
-			AnnounceChaos("1 HP", true);
+			AnnounceChaos("1 HP", -1.0, true);
 		}
 		StopTimer(g_ohko_Timer);
 	}
@@ -1386,7 +1386,7 @@ Action Chaos_OHKO(Handle timer = null, bool EndChaos = false){
 	g_ohko_Expire = GetChaosTime("Chaos_OHKO", 15.0);
 	Log("[Chaos] Running: Chaos_OHKO");
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityHealth(i, 1);
-	AnnounceChaos("1 HP");
+	AnnounceChaos("1 HP", g_ohko_Expire);
 	if(g_ohko_Expire > 0) g_ohko_Timer = CreateTimer(g_ohko_Expire, Chaos_OHKO, true);
 }
 
@@ -1398,7 +1398,7 @@ Action Chaos_InsaneGravity(Handle timer = null, bool EndChaos = false){
 		StopTimer(g_InsaneGravityTimer);
 		cvar("sv_gravity", "800");
 		ServerCommand("sv_falldamage_scale 1");
-		if(EndChaos) AnnounceChaos("Insane Gravity", true);
+		if(EndChaos) AnnounceChaos("Insane Gravity", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_InsaneGravity")) return;
 	g_InsaneGravity_Expire = GetChaosTime("Chaos_InsaneGravity", 20.0);
@@ -1406,14 +1406,14 @@ Action Chaos_InsaneGravity(Handle timer = null, bool EndChaos = false){
 	cvar("sv_gravity", "3000");
 	ServerCommand("sv_falldamage_scale 0");
 	if(g_InsaneGravity_Expire > 0) g_InsaneGravityTimer = CreateTimer(g_InsaneGravity_Expire, Chaos_InsaneGravity, true);
-	AnnounceChaos("Insane Gravity");
+	AnnounceChaos("Insane Gravity", g_InsaneGravity_Expire);
 }
 
 void Chaos_Nothing(){
 	if(CountingCheckDecideChaos()) return;
 	if(DecidingChaos("Chaos_Nothing")) return;
 	Log("[Chaos] Running: Chaos_Nothing");
-	AnnounceChaos("Nothing");
+	AnnounceChaos("Nothing", -1.0);
 }
 
 Handle g_IceySurface_Timer = INVALID_HANDLE;
@@ -1423,13 +1423,13 @@ Action Chaos_IceySurface(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_IceySurface_Timer);
 		cvar("sv_friction", "5.2");
-		if(EndChaos) AnnounceChaos("Icey Ground", true);
+		if(EndChaos) AnnounceChaos("Icey Ground", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_IceySurface")) return;
 	g_IceySurface_Expire = GetChaosTime("Chaos_IceySurface", 20.0);
 	Log("[Chaos] Running: Chaos_IceySurface");
 	cvar("sv_friction", "0");
-	AnnounceChaos("Icey Ground");
+	AnnounceChaos("Icey Ground", g_IceySurface_Expire);
 	if(g_IceySurface_Expire > 0) g_IceySurface_Timer = CreateTimer(g_IceySurface_Expire, Chaos_IceySurface, true);
 }
 
@@ -1443,7 +1443,7 @@ Action Chaos_RandomSlap(Handle timer = null, bool EndChaos = false){
 		StopTimer(Chaos_RandomSlap_Timer);
 		StopTimer(g_RandomSlapDuration_Timer);
 		cvar("sv_falldamage_scale", "1");
-		if(EndChaos) AnnounceChaos("Ghost Slaps", true);
+		if(EndChaos) AnnounceChaos("Ghost Slaps", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_RandomSlap")) return;
 	g_RandomSlap_Expire = GetChaosTime("Chaos_RandomSlap", 30.0);
@@ -1452,7 +1452,7 @@ Action Chaos_RandomSlap(Handle timer = null, bool EndChaos = false){
 	cvar("sv_falldamage_scale", "0");
 	Chaos_RandomSlap_Timer = CreateTimer(g_Chaos_RandomSlap_Interval, Timer_RandomSlap, _,TIMER_REPEAT);
 	if(g_RandomSlap_Expire > 0) g_RandomSlapDuration_Timer = CreateTimer(g_RandomSlap_Expire, Chaos_RandomSlap, true);
-	AnnounceChaos("Ghost Slaps");
+	AnnounceChaos("Ghost Slaps", g_RandomSlap_Expire);
 }
 
 float g_maxRange = 750.0;
@@ -1493,7 +1493,7 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 		StopTimer(g_TaserParty_Timer);
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "slot2;slot1");
-			AnnounceChaos("Taser Party", true);
+			AnnounceChaos("Taser Party", -1.0, true);
 		}
 	}
 	if(DecidingChaos("Chaos_TaserParty")) return;
@@ -1511,7 +1511,7 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 		}
 	}
 	if(g_TaserParty_Expire > 0) g_TaserParty_Timer = CreateTimer(g_TaserParty_Expire, Chaos_TaserParty, true);
-	AnnounceChaos("Taser Party!");
+	AnnounceChaos("Taser Party!", g_TaserParty_Expire);
 }
 
 bool g_bKnifeFight = false;
@@ -1525,7 +1525,7 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 		
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "slot1");
-			AnnounceChaos("Knife Fight", true);
+			AnnounceChaos("Knife Fight", -1.0, true);
 		}
 	}
 	if(DecidingChaos("Chaos_KnifeFight")) return;
@@ -1538,7 +1538,7 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 		}
 	}
 	if(g_bKnifeFight_Expire > 0) g_bKnifeFight_Timer = CreateTimer(g_bKnifeFight_Expire, Chaos_KnifeFight, true);
-	AnnounceChaos("Knife Fight!");
+	AnnounceChaos("Knife Fight!", g_bKnifeFight_Expire);
 }
 
 float g_Funky_Expire = 30.0;
@@ -1550,7 +1550,7 @@ Action Chaos_Funky(Handle timer = null, bool EndChaos = false){
 		cvar("sv_autobunnyhopping", "0");
 		cvar("sv_airaccelerate", "12");
 		StopTimer(g_Funky_Timer);
-		if(EndChaos) AnnounceChaos("No more {orchid}funky{default}?", true);
+		if(EndChaos) AnnounceChaos("No more {orchid}funky{default}?", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_Funky.autobhop.bhop")) return;
 
@@ -1561,7 +1561,7 @@ Action Chaos_Funky(Handle timer = null, bool EndChaos = false){
 	cvar("sv_enablebunnyhopping", "1");
 	cvar("sv_autobunnyhopping", "1");
 	if(g_Funky_Expire > 0) g_Funky_Timer = CreateTimer(g_Funky_Expire, Chaos_Funky, true);
-	AnnounceChaos("Are you feeling {orchid}funky{default}?");
+	AnnounceChaos("Are you feeling {orchid}funky{default}?", g_Funky_Expire);
 }
 
 // bool g_bRandomWeaponRound = false;
@@ -1589,7 +1589,7 @@ Action Chaos_RandomWeapons(Handle timer = null, bool EndChaos = false){
 	Timer_GiveRandomWeapon();
 	g_Chaos_RandomWeapons_Timer = CreateTimer(g_fChaos_RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
 	if(g_RandWep_Expire > 0) g_RandWep_Timer = CreateTimer(g_RandWep_Expire, Chaos_RandomWeapons, true);
-	AnnounceChaos("Random Weapons!");
+	AnnounceChaos("Random Weapons!", g_RandWep_Expire);
 }
 Action Timer_GiveRandomWeapon(Handle timer = null){
 	for(int i = 0; i <= MaxClients; i++){
@@ -1607,7 +1607,7 @@ Action Chaos_MoonGravity(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_MoonGravity_Timer);
 		cvar("sv_gravity", "800");
-		if(EndChaos) AnnounceChaos("Moon Gravity", true);
+		if(EndChaos) AnnounceChaos("Moon Gravity", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_MoonGravity")) return;
 
@@ -1616,7 +1616,7 @@ Action Chaos_MoonGravity(Handle timer = null, bool EndChaos = false){
 	//TODO fluctuating gravity thoughout the round?
 	cvar("sv_gravity", "300");
 	if(g_MoonGravity_Duration > 0) g_MoonGravity_Timer = CreateTimer(g_MoonGravity_Duration, Chaos_MoonGravity, true);
-	AnnounceChaos("Moon Gravity");
+	AnnounceChaos("Moon Gravity", g_MoonGravity_Duration);
 }
 
 
@@ -1638,7 +1638,7 @@ public void Chaos_RandomMolotovSpawn(){
 	g_MolotovSpawn_Count = 0;
 	cvar("inferno_flame_lifetime", "4");
 	Chaos_MolotovSpawn_Timer = CreateTimer(g_Chaos_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT);
-	AnnounceChaos("Raining Fire!");
+	AnnounceChaos("Raining Fire!", 25.0);
 }
 
 public Action Timer_SpawnMolotov(Handle timer){
@@ -1646,7 +1646,7 @@ public Action Timer_SpawnMolotov(Handle timer){
 		g_MolotovSpawn_Count = 0;
 		StopTimer(Chaos_MolotovSpawn_Timer);
 		Chaos_MolotovSpawn_Timer = INVALID_HANDLE;
-		AnnounceChaos("Raining Fire Ended", true);
+		AnnounceChaos("Raining Fire Ended", -1.0, true);
 		return;
 	}
 	g_MolotovSpawn_Count++;
@@ -1673,14 +1673,14 @@ Action Chaos_ESP(Handle timer = null, bool EndChaos = false ){
 		StopTimer(g_ESP_Timer);
 		cvar("sv_force_transmit_players", "0");
 		destroyGlows();
-		if(EndChaos) AnnounceChaos("Wall Hacks", true);
+		if(EndChaos) AnnounceChaos("Wall Hacks", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_ESP.WallHacks")) return; //todo test if works
 	g_ESP_Duration = GetChaosTime("Chaos_ESP", 30.0);
 	Log("[Chaos] Running: Chaos_ESP");
 	cvar("sv_force_transmit_players", "1");
 	createGlows();
-	AnnounceChaos("Wall Hacks");
+	AnnounceChaos("Wall Hacks", g_ESP_Duration);
 	if(g_ESP_Duration > 0) g_ESP_Timer = CreateTimer(g_ESP_Duration, Chaos_ESP, true);
 }
 
@@ -1693,14 +1693,14 @@ Action Chaos_ReversedMovement(Handle timer = null, bool EndChaos = false){
 		// cvar("sv_airaccelerate", "12");
 
 		StopTimer(g_ReversedMovementTimer);
-		if(EndChaos) AnnounceChaos("Reversed Movement", true);
+		if(EndChaos) AnnounceChaos("Reversed Movement", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_ReversedMovement")) return;
 	g_ReversedMovement_Duration = GetChaosTime("Chaos_ReversedMovement", 20.0);
 	Log("[Chaos] Running: Chaos_ReversedMovement");
 	cvar("sv_accelerate", "-5.5");
 	if(g_ReversedMovement_Duration > 0) g_ReversedMovementTimer = CreateTimer(g_ReversedMovement_Duration, Chaos_ReversedMovement, true);
-	AnnounceChaos("Reversed Movement");
+	AnnounceChaos("Reversed Movement", g_ReversedMovement_Duration);
 }
 
 Handle TPos = INVALID_HANDLE;
@@ -1759,7 +1759,7 @@ void Chaos_TeammateSwap(){
 		TeleportEntity(GetArrayCell(tIndex, i), vec, NULL_VECTOR, NULL_VECTOR);
 	}
 
-	AnnounceChaos("Teammate Swap!");
+	AnnounceChaos("Teammate Swap!", -1.0);
 }
 
 //Allows nowclippers to take damage
@@ -1774,7 +1774,7 @@ Action Chaos_Flying(Handle timer = null, bool EndChaos = false){
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) SetEntityMoveType(i, MOVETYPE_WALK);
 			TeleportPlayersToClosestLocation();
-			AnnounceChaos("Flying", true);
+			AnnounceChaos("Flying", -1.0, true);
 		}
 		cvar("sv_noclipspeed", "5");
 		g_bActiveNoclip = false;	
@@ -1788,7 +1788,7 @@ Action Chaos_Flying(Handle timer = null, bool EndChaos = false){
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityMoveType(i, MOVETYPE_NOCLIP);
 	cvar("sv_noclipspeed", "2");
 	if(g_Flying_Expire > 0) g_ResetNoclipTimer = CreateTimer(g_Flying_Expire, Chaos_Flying, true);
-	AnnounceChaos("Flying");
+	AnnounceChaos("Flying", g_Flying_Expire);
 }
 
 void Chaos_RandomTeleport(){
@@ -1800,7 +1800,7 @@ void Chaos_RandomTeleport(){
 	Log("[Chaos] Running: Chaos_RandomTeleport");
 	DoRandomTeleport();
 
-	AnnounceChaos("Random Teleport");
+	AnnounceChaos("Random Teleport", -1.0);
 }
 
 void Chaos_LavaFloor(){
@@ -1826,7 +1826,7 @@ void Chaos_LavaFloor(){
 		}
 	}
 	
-	AnnounceChaos("The Floor Is Lava");
+	AnnounceChaos("The Floor Is Lava", -1.0);
 
 }
 
@@ -1844,7 +1844,7 @@ Action Chaos_QuakeFOV(Handle timer = null, bool EndChaos = false){
 	int RandomFOV = GetRandomInt(110,160);
 	SetPlayersFOV(RandomFOV);
 	if(g_Quake_Duration > 0) g_Quake_Timer = CreateTimer(g_Quake_Duration, Chaos_QuakeFOV, true);
-	AnnounceChaos("Quake FOV");
+	AnnounceChaos("Quake FOV", g_Quake_Duration);
 }
 
 float g_Binoculars_Duration = 25.0;
@@ -1861,7 +1861,7 @@ Action Chaos_Binoculars(Handle timer = null, bool EndChaos = false){
 	int RandomFOV = GetRandomInt(20,50);
 	SetPlayersFOV(RandomFOV);
 	if(g_Binoculars_Duration > 0) g_Binoculars_Timer = CreateTimer(g_Binoculars_Duration, Chaos_Binoculars, true);
-	AnnounceChaos("Binoculars");
+	AnnounceChaos("Binoculars", g_Binoculars_Duration);
 }
 
 void SetPlayersFOV(int fov){
@@ -1905,7 +1905,7 @@ Action Chaos_BlindPlayers(Handle timer = null, bool EndChaos = false){
 		}
 	}
 	g_BlindPlayers_Timer = CreateTimer(g_Chaos_BlindLength, Chaos_BlindPlayers, true);
-	AnnounceChaos("Blind");
+	AnnounceChaos("Blind", g_Chaos_BlindLength);
 }
 
 float g_Aimbot_Duration = 30.0;
@@ -1920,7 +1920,7 @@ Action Chaos_Aimbot(Handle timer = null, bool EndChaos = false){
 				ToggleAim(i, false);
 			}
 		}
-		if(EndChaos) AnnounceChaos("Aimbot", true);
+		if(EndChaos) AnnounceChaos("Aimbot", -1.0, true);
 	}
 	
 	if(DecidingChaos("Chaos_Aimbot")) return;
@@ -1935,7 +1935,7 @@ Action Chaos_Aimbot(Handle timer = null, bool EndChaos = false){
 		}
 	}
 	if(g_Aimbot_Duration > 0) g_Aimbot_Timer = CreateTimer(g_Aimbot_Duration, Chaos_Aimbot, true);
-	AnnounceChaos("Aimbot");
+	AnnounceChaos("Aimbot", g_Aimbot_Duration);
 }
 
 float g_NoSpread_Duration = 25.0;
@@ -1947,7 +1947,7 @@ Action Chaos_NoSpread(Handle timer = null, bool EndChaos = false){
 		StopTimer(g_NoSpread_Timer);
 		cvar("weapon_accuracy_nospread", "0");
 		cvar("weapon_recoil_scale", "2");
-		if(EndChaos) AnnounceChaos("100\% Weapon Accuracy", true);
+		if(EndChaos) AnnounceChaos("100\% Weapon Accuracy", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_NoSpread")) return;
 
@@ -1956,7 +1956,7 @@ Action Chaos_NoSpread(Handle timer = null, bool EndChaos = false){
 	
 	cvar("weapon_accuracy_nospread", "1");
 	cvar("weapon_recoil_scale", "0");
-	AnnounceChaos("100\% Weapon Accuracy");
+	AnnounceChaos("100\% Weapon Accuracy", g_NoSpread_Duration);
 	if(g_NoSpread_Duration > 0) g_NoSpread_Timer = CreateTimer(g_NoSpread_Duration, Chaos_NoSpread, true);
 
 	// weapon_accuracy_nospread "1";
@@ -1976,12 +1976,12 @@ Action Chaos_IncreasedRecoil(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){	
 		StopTimer(g_IncRecoil_Timer);
 		cvar("weapon_recoil_scale", "2");
-		if(EndChaos) AnnounceChaos("Increased Recoil", true);
+		if(EndChaos) AnnounceChaos("Increased Recoil", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_IncreasedRecoil")) return;
 	Log("[Chaos] Running: Chaos_IncreasedRecoil");
 	cvar("weapon_recoil_scale", "10");
-	AnnounceChaos("Increased Recoil");
+	AnnounceChaos("Increased Recoil", g_IncRecoil_Duration);
 	if(g_IncRecoil_Duration > 0) g_IncRecoil_Timer = CreateTimer(g_IncRecoil_Duration, Chaos_IncreasedRecoil, true);
 }
 
@@ -1992,12 +1992,12 @@ Action Chaos_ReversedRecoil(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){	
 		StopTimer(g_ReverseRecoil_Timer);
 		cvar("weapon_recoil_scale", "2");
-		if(EndChaos) AnnounceChaos("Reversed Recoil", true);
+		if(EndChaos) AnnounceChaos("Reversed Recoil", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_ReversedRecoil")) return;
 	Log("[Chaos] Running: Chaos_ReversedRecoil");
 	cvar("weapon_recoil_scale", "-5");
-	AnnounceChaos("Reversed Recoil");
+	AnnounceChaos("Reversed Recoil", g_ReverseRecoil_Duration);
 	if(g_ReverseRecoil_Duration > 0) g_ReverseRecoil_Timer = CreateTimer(g_ReverseRecoil_Duration, Chaos_ReversedRecoil, true);
 }
 
@@ -2007,7 +2007,7 @@ void Chaos_Jackpot(){
 	if(DecidingChaos("Chaos_Jackpot")) return;
 	for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) SetClientMoney(i, 16000);
 	Log("[Chaos] Running: Chaos_Jackpot");
-	AnnounceChaos("Jackpot");
+	AnnounceChaos("Jackpot", -1.0);
 }
 
 void Chaos_Bankrupt(){
@@ -2016,7 +2016,7 @@ void Chaos_Bankrupt(){
 	if(DecidingChaos("Chaos_Bankrupt")) return;
 	for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) SetClientMoney(i, 0, true);
 	Log("[Chaos] Running: Chaos_Bankrupt");
-	AnnounceChaos("Bankrupt");
+	AnnounceChaos("Bankrupt", -1.0);
 }
 
 //TODO: chnage to a giverandomplayer function so i can ignite random player or something
@@ -2061,7 +2061,7 @@ void Chaos_SlayRandomPlayer(){
 		}
 	}
 
-	AnnounceChaos("Slay Random Player On Each Team");
+	AnnounceChaos("Slay Random Player On Each Team", -1.0);
 }
 
 
@@ -2077,7 +2077,7 @@ void Chaos_Healthshot(){
 			}
 		}
 	}
-	AnnounceChaos("Healthshots");
+	AnnounceChaos("Healthshots", -1.0);
 }
 
 
@@ -2098,7 +2098,7 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 			}
 		}	
 		// }
-		if(EndChaos) AnnounceChaos("Alien Knife Fight", true);
+		if(EndChaos) AnnounceChaos("Alien Knife Fight", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_AlienModelKnife")) return;
 	g_AlienKnifeFight_Expire = GetChaosTime("Chaos_AlienModelKnife", 15.0);
@@ -2119,7 +2119,7 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 			FakeClientCommand(i, "use weapon_knife");
 		}
 	}
-	AnnounceChaos("Alien Knife Fight");
+	AnnounceChaos("Alien Knife Fight", g_AlienKnifeFight_Expire);
 }
 
 float g_LightsOff_Duration = 30.0;
@@ -2135,7 +2135,7 @@ Action Chaos_LightsOff(Handle timer = null, bool EndChaos = false){
 	g_LightsOff_Duration = GetChaosTime("Chaos_LightsOff", 30.0);
 	Log("[Chaos] Running: Chaos_LightsOff");
 	LightsOff();
-	AnnounceChaos("Who turned the lights off?");
+	AnnounceChaos("Who turned the lights off?", g_LightsOff_Duration);
 	if(g_LightsOff_Duration  > 0) g_LightsOff_Timer = CreateTimer(g_LightsOff_Duration, Chaos_LightsOff, true);
 	//Random chance for night vision? or separate chaos
 
@@ -2158,7 +2158,7 @@ void Chaos_NightVision(){
 			FakeClientCommand(i, "nightvision");
 		}
 	}
-	AnnounceChaos("Night Vision");
+	AnnounceChaos("Night Vision", -1.0);
 }
 
 
@@ -2175,7 +2175,7 @@ Action Chaos_NormalWhiteFog(Handle timer = null, bool EndChaos = false){
 	Log("[Chaos] Running: Chaos_NormalWhiteFog");
 	NormalWhiteFog();
 
-	AnnounceChaos("Fog");
+	AnnounceChaos("Fog", g_NormalWhiteFog_Duration);
 	if(g_NormalWhiteFog_Duration > 0) g_NormalWhiteFog_Timer = CreateTimer(g_NormalWhiteFog_Duration, Chaos_NormalWhiteFog, true);
 
 }
@@ -2192,7 +2192,7 @@ Action Chaos_ExtremeWhiteFog(Handle timer = null, bool EndChaos = false){
 	g_ExtremeWhiteFog_Duration = GetChaosTime("Chaos_NormalWhiteFog", 45.0);
 	Log("[Chaos] Running: Chaos_NormalWhiteFog");
 	ExtremeWhiteFog();
-	AnnounceChaos("Extreme Fog");
+	AnnounceChaos("Extreme Fog", g_ExtremeWhiteFog_Duration);
 	if(g_ExtremeWhiteFog_Duration > 0) g_ExtremeWhiteFog_Timer = CreateTimer(g_ExtremeWhiteFog_Duration, Chaos_ExtremeWhiteFog, true);
 
 }
@@ -2207,7 +2207,7 @@ void Chaos_RandomSkybox(){
 	Log("[Chaos] Running: Chaos_RandomSkybox");
 	int randomSkyboxIndex = GetRandomInt(0, sizeof(g_sSkyboxes)-1);
 	DispatchKeyValue(0, "skyname", g_sSkyboxes[randomSkyboxIndex]);
-	AnnounceChaos("Random Skybox");
+	AnnounceChaos("Random Skybox", -1.0);
 
 }
 
@@ -2223,7 +2223,7 @@ Action Chaos_LowRenderDistance(Handle timer = null, bool EndChaos = false){
 	g_LowRender_Duration = GetChaosTime("Chaos_LowRenderDistance", 30.0);
 	Log("[Chaos] Running: Chaos_LowRenderDistance");
 	LowRenderDistance();
-	AnnounceChaos("Low Render Distance");
+	AnnounceChaos("Low Render Distance", g_LowRender_Duration);
 	if(g_LowRender_Duration > 0 ) g_LowRender_Timer = CreateTimer(g_LowRender_Duration, Chaos_LowRenderDistance, true);
 
 }
@@ -2237,7 +2237,7 @@ Action Chaos_Thirdperson(Handle timer = null, bool EndChaos = false){
 		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "firstperson");
 		cvar("sv_allow_thirdperson", "0");
 		StopTimer(g_Thirdperson_Timer);
-		if(EndChaos) AnnounceChaos("Firstperson");
+		if(EndChaos) AnnounceChaos("Firstperson", -1.0);
 	}
 	if(DecidingChaos("Chaos_Thirdperson")) return;
 	g_Thirdperson_Expire = GetChaosTime("Chaos_Thirdperson", 15.0);
@@ -2250,7 +2250,7 @@ Action Chaos_Thirdperson(Handle timer = null, bool EndChaos = false){
 		}
 	}
 	if(g_Thirdperson_Expire > 0) g_Thirdperson_Timer = CreateTimer(20.0, Chaos_Thirdperson, true);
-	AnnounceChaos("Thirdperson");
+	AnnounceChaos("Thirdperson", g_Thirdperson_Expire);
 }
 
 void Chaos_SmokeMap(){
@@ -2269,7 +2269,7 @@ void Chaos_SmokeMap(){
 			CreateParticle("explosion_smokegrenade_fallback", vec);
 		}
 	}
-	AnnounceChaos("Smoke Strat");
+	AnnounceChaos("Smoke Strat", -1.0);
 }
 
 float g_InfiniteAmmo_Expire = 20.0;
@@ -2279,14 +2279,14 @@ Action Chaos_InfiniteAmmo(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		cvar("sv_infinite_ammo", "0");
 		StopTimer(g_ChaosInfiniteAmmoTimer);
-		if(EndChaos) AnnounceChaos("Limited Ammo", true);
+		if(EndChaos) AnnounceChaos("Limited Ammo", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_InfiniteAmmo")) return;
 	g_InfiniteAmmo_Expire = GetChaosTime("Chaos_InfiniteAmmo", 20.0);
 	Log("[Chaos] Running: Chaos_InfiniteAmmo");
 	cvar("sv_infinite_ammo", "1");
 	if(g_InfiniteAmmo_Expire > 0) g_ChaosInfiniteAmmoTimer = CreateTimer(g_InfiniteAmmo_Expire, Chaos_InfiniteAmmo, true);
-	AnnounceChaos("Infinite Ammo");
+	AnnounceChaos("Infinite Ammo", g_InfiniteAmmo_Expire);
 }
 
 
@@ -2301,7 +2301,7 @@ void Chaos_DropCurrentWeapon(){
 			ClientCommand(i, "drop");
 		}
 	}
-	AnnounceChaos("Drop Current Weapon");
+	AnnounceChaos("Drop Current Weapon", -1.0);
 }
 
 void Chaos_DropPrimaryWeapon(){
@@ -2313,10 +2313,10 @@ void Chaos_DropPrimaryWeapon(){
 	Log("[Chaos] Running: Chaos_DropPrimaryWeapon");
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
-			ClientCommand(i, "slot1; drop"); //todo drop their pisol if no primary available
+			ClientCommand(i, "slot2;slot1; drop"); //todo drop their pisol if no primary available
 		}
 	}
-	AnnounceChaos("Drop Primary Weapon");
+	AnnounceChaos("Drop Primary Weapon", -1.0);
 }
 
 
@@ -2334,7 +2334,7 @@ Action Chaos_Invis(Handle timer = null, bool EndChaos = false){
 			}
 		}
 		StopTimer(g_Invis_Timer);
-		if(EndChaos) AnnounceChaos("Where did everyone go?", true);
+		if(EndChaos) AnnounceChaos("Where did everyone go?", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_Invis")) return;
 	g_Invis_Expire = GetChaosTime("Chaos_Invis", 15.0);
@@ -2350,7 +2350,7 @@ Action Chaos_Invis(Handle timer = null, bool EndChaos = false){
 	}
 	//Perhaps it can fade in and out, full invis for 5 seconds, then transition to visible for 10 seconds, back to invis, etc.
 	//Various timers that slowly increase or giveaway positions.
-	AnnounceChaos("Where did everyone go?");
+	AnnounceChaos("Where did everyone go?", g_Invis_Expire);
 	if(g_Invis_Expire > 0) g_Invis_Timer = CreateTimer(g_Invis_Expire, Chaos_Invis, true);
 }
 
@@ -2367,7 +2367,7 @@ Action Chaos_DiscoPlayers(Handle timer = null, bool EndChaos = false){
 		g_bDiscoPlayers = true;
 		StopTimer(DiscoPlayers_Timer);
 		delete DiscoPlayers_TimerRepeat; //todo? wtf stray delete
-		if(EndChaos) AnnounceChaos("Disco Players", true);
+		if(EndChaos) AnnounceChaos("Disco Players", -1.0, true);
 	}
 	if(DecidingChaos("Chaos_DiscoPlayers")) return;
 	DiscoPlayers_Duration = GetChaosTime("Chaos_DiscoPlayers", 30.0);
@@ -2378,7 +2378,7 @@ Action Chaos_DiscoPlayers(Handle timer = null, bool EndChaos = false){
 	Timer_DiscoPlayers();
 	if(DiscoPlayers_Duration > 0) DiscoPlayers_Timer = CreateTimer(DiscoPlayers_Duration, Chaos_DiscoPlayers, true);
 	DiscoPlayers_TimerRepeat = CreateTimer(1.0, Timer_DiscoPlayers, _, TIMER_REPEAT);
-	AnnounceChaos("Disco Players");
+	AnnounceChaos("Disco Players", DiscoPlayers_Duration);
 }
 
 Action Timer_DiscoPlayers(Handle timer = null){
@@ -2425,7 +2425,7 @@ public void Chaos_RandomInvisiblePlayer(){
 					//todo: shorten player names if its too high
 					char chaosMsg[256];
 					FormatEx(chaosMsg, sizeof(chaosMsg), "{orange}%N {default}has been made invisible!", target);
-					AnnounceChaos(chaosMsg);
+					AnnounceChaos(chaosMsg, -1.0);
 				}
 			}
 		}
@@ -2446,7 +2446,7 @@ public void Chaos_MEGACHAOS(){
 	Log("[Chaos] Running: Chaos_MEGACHAOS");
 	
 	g_bMegaChaos = true; 
-	AnnounceChaos("MEGA CHAOS", true, true);
+	AnnounceChaos("MEGA CHAOS", -1.0, true, true);
 	g_bDisableRetryEvent = false;
 	CreateTimer(0.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(0.5, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
@@ -2457,6 +2457,6 @@ public void Chaos_MEGACHAOS(){
 
 }
 public Action Timer_CompleteMegaChaos(Handle timer){
-	AnnounceChaos("MEGA CHAOS", true, true);
+	AnnounceChaos("MEGA CHAOS", -1.0, true, true);
 	g_bMegaChaos = false; 
 }

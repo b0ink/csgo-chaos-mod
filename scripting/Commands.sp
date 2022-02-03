@@ -45,7 +45,7 @@ public Action Command_StopChaos(int client, int args){
 	g_bDecidingChaos = false;
 	g_bCountingChaos = false;
 	Chaos(); //count and reset all chaos
-	AnnounceChaos("Chaos is Disabled!", true);
+	AnnounceChaos("Chaos is Disabled!", -2.0, true);
 	return Plugin_Handled;
 }
 
@@ -57,7 +57,7 @@ public Action Command_StartChaos(int client, int args){
 		g_bCountingChaos = true;
 		Chaos();
 		CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
-		AnnounceChaos("Chaos is Enabled!");
+		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{
 		PrintToChat(client, "Chaos is already running!");
 	}
@@ -91,5 +91,3 @@ public Action Command_ChaosHelp(int client, int args){
 	PrintToConsole(client, "todo...");
 	return Plugin_Handled;
 }
-
-

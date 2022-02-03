@@ -86,7 +86,7 @@ void Chaos_RewindTenSeconds(bool EndChaos = false){
 	g_bRewind_logging_enabled = false;
 	g_Rewinding = true;
 	g_RewindTime = 0;
-	AnnounceChaos("Rewind 10 seconds");
+	AnnounceChaos("Rewind 10 seconds", -1.0);
 	// int time = 0;
 	// g_Chaos_Rewind_Timer = CreateTimer(0.1, Rewind_Timer, time);
 }
