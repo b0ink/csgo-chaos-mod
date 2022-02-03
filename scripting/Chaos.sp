@@ -4,6 +4,10 @@
 #include <multicolors>
 #include <cstrike>
 
+#undef REQUIRE_PLUGIN
+#include <DynamicChannels>
+#define REQUIRE_PLUGIN
+
 // Protection for SMAC users (SM Aimbot).
 #undef REQUIRE_PLUGIN
 #include <smac>
@@ -13,14 +17,14 @@
 
 #define PLUGIN_NAME "CS:GO Chaos Mod"
 #define PLUGIN_DESCRIPTION "Spawn random effects from over 100+ effects every 15 seconds."
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 
 public Plugin myinfo = {
 	name = PLUGIN_NAME,
 	author = "BOINK",
 	description = PLUGIN_DESCRIPTION,
 	version = PLUGIN_VERSION,
-	url = "https://github.com/diddims/csgo-chaos-mod"
+	url = "https://github.com/b0ink/csgo-chaos-mod"
 };
 
 
@@ -88,6 +92,7 @@ bool 	g_bDisableRetryEvent = false;
 #include "Externals/Impostors.sp"
 
 #include "Commands.sp"
+#include "Hud.sp"
 #include "EffectsHandler.sp"
 #include "Configs.sp"
 
@@ -126,6 +131,8 @@ public void OnPluginStart(){
 	}
 
 	Chaos_Effects = new StringMap();
+
+	HUD_INIT();
 
 	ESP_INIT();
 	TEAMMATESWAP_INIT();
@@ -180,6 +187,32 @@ public void OnMapStart(){
 public void OnMapEnd(){
 	Log("Map has ended.");
 	StopTimer(g_NewEvent_Timer);
+}
+
+bool g_DynamicChannel = false;
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max){
+    MarkNativeAsOptional("GetDynamicChannel");
+    return APLRes_Success;
+}
+
+public void OnAllPluginsLoaded(){
+	g_DynamicChannel = LibraryExists("DynamicChannels");
+	if(!g_DynamicChannel){
+		Log("Could not find plugin 'DynamicChannels.smx'. To enable HUD text for Chaos effects and timers, install the 'DynamicChannels.smx' plugin from https://github.com/Vauff/DynamicChannels");
+	}
+}
+ 
+public void OnLibraryRemoved(const char[] name){
+    if (StrEqual(name, "DynamicChannels")){
+        g_DynamicChannel = false;
+    }
+}
+ 
+public void OnLibraryAdded(const char[] name){
+    if (StrEqual(name, "DynamicChannels")){
+        g_DynamicChannel = true;
+    }
 }
 
 public void OnClientPutInServer(int client){
@@ -275,6 +308,8 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 			Effect_Interval = 15.0;
 		}
 		g_NewEvent_Timer = CreateTimer(Effect_Interval, DecideEvent);
+		if(g_DynamicChannel) Timer_Display(null, RoundToFloor(Effect_Interval));
+
 		g_iChaos_Round_Count++;
 	}
 }

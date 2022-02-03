@@ -183,8 +183,10 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 }
 
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
-	g_bCanSpawnEffect = false;
 	Log("--ROUND ENDED--");
+	
+	g_bCanSpawnEffect = false;
+	HUD_ROUNDEND();
 	ResetTimerRemoveChickens();
 	StopTimer(g_NewEvent_Timer);
 	CreateTimer(1.0, ResetRoundChaos);
