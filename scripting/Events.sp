@@ -149,7 +149,7 @@ public Action Hook_BulletShot(const char[] te_name, const int[] Players, int num
 
 public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	if(ValidAndAlive(client)) GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
+	if(IsValidClient(client)) GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
 	return Plugin_Continue;
 }
 
