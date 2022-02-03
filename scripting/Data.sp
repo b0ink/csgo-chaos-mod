@@ -64,28 +64,28 @@ char g_sSkyboxes[][] = {
 };
 
 
-char playerModel_Path[][] = {
-	"models/player/custom_player/legacy/tm_leet_varianti.mdl",
-	"models/player/custom_player/legacy/tm_leet_variantg.mdl",
-	"models/player/custom_player/legacy/tm_leet_variantg.mdl",
-	"models/player/custom_player/legacy/tm_leet_varianth.mdl",
-	"models/player/custom_player/legacy/tm_leet_varianti.mdl",
-	"models/player/custom_player/legacy/tm_leet_variantf.mdl",
-	"models/player/custom_player/legacy/tm_leet_variantj.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_varianta.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_variantb.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_variantc.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_variantd.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_variante.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_variantf.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_variantb2.mdl",
-	"models/player/custom_player/legacy/tm_jungle_raider_variantf2.mdl",
-	"models/player/custom_player/legacy/tm_phoenix_varianth.mdl",
-	"models/player/custom_player/legacy/tm_phoenix_variantf.mdl",
-	"models/player/custom_player/legacy/tm_phoenix_variantg.mdl",
-	"models/player/custom_player/legacy/tm_phoenix_varianti.mdl",
-	"models/player/custom_player/legacy/tm_professional_varf.mdl",
-	"models/player/custom_player/legacy/tm_professional_varg.mdl",
-	"models/player/custom_player/legacy/tm_professional_varh.mdl",
-	"models/player/custom_player/legacy/tm_professional_varj.mdl"
-};
+// char playerModel_Path[][] = {
+// 	"models/player/custom_player/legacy/tm_leet_varianti.mdl",
+// 	"models/player/custom_player/legacy/tm_leet_variantg.mdl",
+// 	"models/player/custom_player/legacy/tm_leet_variantg.mdl",
+// 	"models/player/custom_player/legacy/tm_leet_varianth.mdl",
+// 	"models/player/custom_player/legacy/tm_leet_varianti.mdl",
+// 	"models/player/custom_player/legacy/tm_leet_variantf.mdl",
+// 	"models/player/custom_player/legacy/tm_leet_variantj.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_varianta.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_variantb.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_variantc.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_variantd.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_variante.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_variantf.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_variantb2.mdl",
+// 	"models/player/custom_player/legacy/tm_jungle_raider_variantf2.mdl",
+// 	"models/player/custom_player/legacy/tm_phoenix_varianth.mdl",
+// 	"models/player/custom_player/legacy/tm_phoenix_variantf.mdl",
+// 	"models/player/custom_player/legacy/tm_phoenix_variantg.mdl",
+// 	"models/player/custom_player/legacy/tm_phoenix_varianti.mdl",
+// 	"models/player/custom_player/legacy/tm_professional_varf.mdl",
+// 	"models/player/custom_player/legacy/tm_professional_varg.mdl",
+// 	"models/player/custom_player/legacy/tm_professional_varh.mdl",
+// 	"models/player/custom_player/legacy/tm_professional_varj.mdl"
+// };
