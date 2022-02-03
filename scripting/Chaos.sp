@@ -24,9 +24,9 @@ public Plugin myinfo = {
 };
 
 
-char g_Prefix[] = ">>{lime}C H A O S{default}<<";
-char g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
-char g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
+char 	g_Prefix[] = ">>{lime}C H A O S{default}<<";
+char 	g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
+char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 StringMap	Chaos_Effects;
 
@@ -34,42 +34,42 @@ StringMap	Chaos_Effects;
 
 #include "Data.sp"
 
-Handle g_MapCoordinates = INVALID_HANDLE;
-Handle g_UnusedCoordinates = INVALID_HANDLE;
-Handle bombSiteA = INVALID_HANDLE;
-Handle bombSiteB = INVALID_HANDLE;
-bool g_bBombPlanted = false;
+Handle 	g_MapCoordinates = INVALID_HANDLE;
+Handle 	g_UnusedCoordinates = INVALID_HANDLE;
+Handle 	bombSiteA = INVALID_HANDLE;
+Handle 	bombSiteB = INVALID_HANDLE;
+bool 	g_bBombPlanted = false;
 
 void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 
-bool g_bCanSpawnChickens = true;
-bool g_bPlayersCanDropWeapon = true;
+bool 	g_bCanSpawnChickens = true;
+bool 	g_bPlayersCanDropWeapon = true;
 
-int g_iOffset_Clip1 = -1;
-int g_iFog = -1;
+int 	g_iOffset_Clip1 = -1;
+int 	g_iFog = -1;
 
-float g_PlayerDeathLocations[MAXPLAYERS+1][3];
+float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
-bool g_bCanSpawnEffect = true;
-int g_iChaos_Round_Count = 0;
-bool g_bMegaChaos = false;
-int g_iChaos_Event_Count = 0;
-char g_sSelectedChaosEffect[64] = "";
+bool 	g_bCanSpawnEffect = true;
+int 	g_iChaos_Round_Count = 0;
+bool 	g_bMegaChaos = false;
+int 	g_iChaos_Event_Count = 0;
+char 	g_sSelectedChaosEffect[64] = "";
 
-bool g_bClearChaos = false;
-bool g_bDecidingChaos = false;
-int g_iRandomEvent = 0;
-bool g_bCountingChaos = false;
+bool 	g_bClearChaos = false;
+bool 	g_bDecidingChaos = false;
+int 	g_iRandomEvent = 0;
+bool 	g_bCountingChaos = false;
 
-ConVar g_cvChaosEnabled; bool g_bChaos_Enabled = true;
-ConVar g_cvChaosEffectInterval; float g_fChaos_EffectInterval = 15.0;
-ConVar g_cvChaosRepeating; bool g_bChaos_Repeating = true;
-ConVar g_cvChaosOverwriteDuration; float g_fChaos_OverwriteDuration = -1.0;
+ConVar 	g_cvChaosEnabled; bool g_bChaos_Enabled = true;
+ConVar 	g_cvChaosEffectInterval; float g_fChaos_EffectInterval = 15.0;
+ConVar 	g_cvChaosRepeating; bool g_bChaos_Repeating = true;
+ConVar 	g_cvChaosOverwriteDuration; float g_fChaos_OverwriteDuration = -1.0;
 
 
-Handle g_NewEvent_Timer = INVALID_HANDLE;
-bool g_bPlaySound_Debounce = false;
-bool g_bDisableRetryEvent = false;
+Handle 	g_NewEvent_Timer = INVALID_HANDLE;
+bool 	g_bPlaySound_Debounce = false;
+bool 	g_bDisableRetryEvent = false;
 
 
 #include "Externals/instantweaponswitch.sp"
