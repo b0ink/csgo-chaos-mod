@@ -79,7 +79,6 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Drugs"))  Chaos_Drugs();
 	if(IsChaosEnabled("Chaos_SuperJump"))  Chaos_SuperJump();
 	if(IsChaosEnabled("Chaos_NoCrosshair"))  Chaos_NoCrosshair();
-	if(IsChaosEnabled("Chaos_ChickensIntoPlayers"))  Chaos_ChickensIntoPlayers();
 	if(IsChaosEnabled("Chaos_Juggernaut"))  Chaos_Juggernaut();
 	if(IsChaosEnabled("Chaos_RapidFire"))  Chaos_RapidFire();
 	if(IsChaosEnabled("Chaos_DisableRadar")) Chaos_DisableRadar();
@@ -108,6 +107,7 @@ public void Chaos(){
 			if(IsChaosEnabled("Chaos_BigChooks"))  Chaos_BigChooks();
 			if(IsChaosEnabled("Chaos_MamaChook"))  Chaos_MamaChook();
 		}
+		if(IsChaosEnabled("Chaos_Impostors"))  Chaos_Impostors();
 		if(IsChaosEnabled("Chaos_MoneyRain"))  Chaos_MoneyRain();
 		if(IsChaosEnabled("Chaos_RandomTeleport"))  Chaos_RandomTeleport();
 		if(IsChaosEnabled("Chaos_LavaFloor"))  Chaos_LavaFloor();

@@ -88,8 +88,7 @@ public Action Command_RefreshConfig(int client, int args){
 
 
 public Action Command_ChaosHelp(int client, int args){
-	PrintToConsole("todo...");
-
+	PrintToConsole(client, "todo...");
 	return Plugin_Handled;
 }
 

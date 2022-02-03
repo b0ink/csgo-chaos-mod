@@ -1048,38 +1048,17 @@ public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
 	}
 }
 
-public void Chaos_ChickensIntoPlayers(){
+public void Chaos_Impostors(){
 	//not to be confused with players into chickesn..
 	if(CountingCheckDecideChaos()) return; 
 	if(g_bClearChaos){
 		RemoveChickens();
 	}
-	if(DecidingChaos("Chaos_ChickensIntoPlayers")) return;
-	Log("[Chaos] Running: Chaos_ChickensIntoPlayers");
+	if(DecidingChaos("Chaos_Impostors")) return;
+	Log("[Chaos] Running: Chaos_Impostors");
 
+	SpawnImpostors();
 
-	//todo: chickens get stuck, saw a video somewhere that its possible for them to move around like normal
-	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
-		int chance = GetRandomInt(0,100);
-		if(chance <= 25){
-			int ent = CreateEntityByName("chicken");
-			if(ent != -1){
-				int randomSkin = GetRandomInt(0, 23 - 1);
-				float vec[3];
-				GetArrayArray(g_MapCoordinates, i, vec);
-				vec[2] = vec[2] + 50.0;
-				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
-
-				DispatchSpawn(ent);
-				// SetEntProp(ent, Prop_Send, "m_fEffects", 0);
-				// SetEntProp(ent, Prop_Data, "m_flGroundSpeed", 1);
-				// CreateTimer(0.1, Timer_SetChickenModel, ent);
-				SetEntityModel(ent, playerModel_Path[randomSkin]);
-				// SetEntPropFloat(ent, Prop_Send, "m_flSpeed", 2.0);
-				// SetVariantString("!activator");
-			}
-		}
-	}
 	AnnounceChaos("Impostors");
 }
 

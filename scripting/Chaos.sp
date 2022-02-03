@@ -85,6 +85,7 @@ bool g_bDisableRetryEvent = false;
 #include "Externals/c4chicken.sp"
 #include "Externals/Rollback.sp"
 #include "Externals/Fog.sp"
+#include "Externals/Impostors.sp"
 
 #include "Commands.sp"
 #include "EffectsHandler.sp"
