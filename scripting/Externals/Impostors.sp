@@ -17,14 +17,17 @@ void SpawnImpostors(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
 		if(chance <= 25){
-			int ent = CreateEntityByName("chicken");
-			if(ent != -1){
+			int chicken = CreateEntityByName("chicken");
+			int fakePlayer = CreateEntityByName("chicken");
+			if(chicken != -1 && fakePlayer != -1){
 				float vec[3];
 				GetArrayArray(g_MapCoordinates, i, vec);
-				vec[2] = vec[2] + 50.0;
-				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+				// vec[2] = vec[2] + 25.0;
+				TeleportEntity(chicken, vec, NULL_VECTOR, NULL_VECTOR);
+				DispatchSpawn(chicken);
 
-				DispatchSpawn(ent);
+				// SetEntityRenderMode(chicken , RENDER_NONE);
+				SetEntityRenderColor(chicken, 255, 255, 255, 0);
 				// SetEntProp(ent, Prop_Send, "m_fEffects", 0);
 				// SetEntProp(ent, Prop_Data, "m_flGroundSpeed", 1);
 				// CreateTimer(0.1, Timer_SetChickenModel, ent);
@@ -33,7 +36,20 @@ void SpawnImpostors(){
 				int randomSkin = GetRandomInt(0, GetArraySize(OriginalPlayerModels) - 1);
 				GetArrayString(OriginalPlayerModels, randomSkin, ImpostorModel, sizeof(ImpostorModel));
 
-				SetEntityModel(ent, ImpostorModel);
+				vec[2] = vec[2] - 2.0;
+
+				TeleportEntity(fakePlayer, vec, NULL_VECTOR, NULL_VECTOR);
+				DispatchSpawn(fakePlayer);
+
+				SetVariantString("!activator");
+				AcceptEntityInput(fakePlayer, "SetParent", chicken, fakePlayer, 0);
+				AcceptEntityInput(fakePlayer, "SetParentAttachmentMaintainOffset", fakePlayer, fakePlayer, 0);    
+
+
+				SetEntityMoveType(fakePlayer, MOVETYPE_NOCLIP);   
+
+
+				SetEntityModel(fakePlayer, ImpostorModel);
 				// SetEntPropFloat(ent, Prop_Send, "m_flSpeed", 2.0);
 				// SetVariantString("!activator");
 			}
