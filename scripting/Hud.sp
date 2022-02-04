@@ -2,6 +2,7 @@ Handle EffectHud_Name = INVALID_HANDLE;
 Handle EffectHud_Time = INVALID_HANDLE;
 Handle EffectHud_NoDuration = INVALID_HANDLE;
 
+int g_HudTime = -1;
 void HUD_INIT(){
 	EffectHud_Name = 		CreateArray(256);
 	EffectHud_Time = 		CreateArray(1);
@@ -25,6 +26,7 @@ void AddEffectToHud(char[] message, float time = -1.0){
 		PushArrayCell(EffectHud_NoDuration, 0);
 		PushArrayCell(EffectHud_Time, RoundToFloor(time));	
 	}
+	PrintTimer(g_HudTime);
 }
 
 void PrintTimer(int time){
@@ -74,6 +76,7 @@ void PrintTimer(int time){
 
 
 Action Timer_Display(Handle timer = null, int time){
+	g_HudTime = time;
 	PrintTimer(time);
 	if(time > 1 && g_bChaos_Enabled && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time-1);
 	for(int i = 0; i < GetArraySize(EffectHud_Name); i++){
