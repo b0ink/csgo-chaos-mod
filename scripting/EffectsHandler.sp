@@ -14,7 +14,9 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Bankrupt"))  Chaos_Bankrupt();
 	if(IsChaosEnabled("Chaos_Shields"))  Chaos_Shields();
 	if(IsChaosEnabled("Chaos_BlindPlayers"))  Chaos_BlindPlayers();
-	if(IsChaosEnabled("Chaos_AutoPlantC4"))  Chaos_AutoPlantC4();
+	if(ValidBombSpawns()){
+		if(IsChaosEnabled("Chaos_AutoPlantC4"))  Chaos_AutoPlantC4();
+	}
 	if(IsChaosEnabled("Chaos_InfiniteGrenades"))  Chaos_InfiniteGrenades();
 	if(IsChaosEnabled("Chaos_KnifeFight"))  Chaos_KnifeFight();
 	if(IsChaosEnabled("Chaos_RandomWeapons"))  Chaos_RandomWeapons();
