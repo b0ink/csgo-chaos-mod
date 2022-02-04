@@ -10,8 +10,12 @@ bool findInArray(int[] array, int target, int arraysize){
 
 
 bool ValidMapPoints(){
-	
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
+	return true;
+}
+
+bool ValidBombSpawns(){
+	if(GetArraySize(bombSiteA) == 0 || GetArraySize(bombSiteB) == 0) return false;
 	return true;
 }
 
