@@ -933,8 +933,10 @@ void Chaos_Shields(){
 				PrintToChatAll("the weapon is %s", playerWeapon);
 				if(StrContains(playerWeapon, "knife", false) != -1){
 					FakeClientCommand(i, "use weapon_knife");
+					InstantSwitch(i, -1);
 				}else{
 					FakeClientCommand(i, "use %s", playerWeapon);
+					InstantSwitch(i, -1);
 				}
 			}
 		}

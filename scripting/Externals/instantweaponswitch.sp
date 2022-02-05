@@ -12,14 +12,14 @@ public void GiveAndSwitchWeapon(int client, char[] weaponName){
 	if(StrContains(playersWeapon, "c4") != -1 || StrContains(playersWeapon, "knife") != -1){
         if(StrContains(playersWeapon, "knife") != -1){
             FakeClientCommand(client, "use %s", "weapon_knife"); //ignored by weapon_knife_karambit etc.
-            InstantSwitch(client, weapon, true);
+            InstantSwitch(client, weapon);
         }else{
             FakeClientCommand(client, "use %s", playersWeapon);
-            InstantSwitch(client, weapon, false);
+            InstantSwitch(client, weapon);
         }
 	}else{
         FakeClientCommand(client, "use %s", weaponName);
-        InstantSwitch(client, weapon, false);
+        InstantSwitch(client, weapon);
     }
 }
 
