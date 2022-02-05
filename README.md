@@ -28,7 +28,7 @@ chaos_refreshconfig            - Updates and re-parses configs.
 sm_chaos_enabled "1.0"				| Sets whether the Chaos plugin is enabled. | Min. 0.0 | Max. 1.0
 sm_chaos_interval "15.0"			| Sets the interval for new Chaos effects to run at. | Min. 5.0 | Max. 60.0
 sm_chaos_repeating "1.0"			| Sets whether effects will continue to spawn after the first one of the round. | Min. 0.0 | Max. 1.0
-sm_chaos_overwrite_duration "-1.0"		| Sets the duration for ALL effects, use -1.0 to use Chaos_Effects.cfg durations, use 0.0 for no expiration. | Min. 0.0 | Max. 1.0
+sm_chaos_overwrite_duration "-1.0"		| Sets the duration for ALL effects, use -1.0 to use Chaos_Effects.cfg durations, use 0.0 for no expiration. | Min. 0.0 | Max. 120.0
 ```
 
 <!-- # Known Issues -->
