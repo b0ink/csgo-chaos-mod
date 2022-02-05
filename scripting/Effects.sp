@@ -1035,7 +1035,7 @@ void Chaos_AutoPlantC4(){
 		}
 		int bombEnt = FindEntityByClassname(-1, "planted_c4");
 		if(g_iC4ChickenEnt != -1) bombEnt = g_iC4ChickenEnt;
-		newBombPosition[2] = newBombPosition[2] - 64;
+		// newBombPosition[2] = newBombPosition[2] - 64;
 		if(bombEnt != -1){
 			TeleportEntity(bombEnt, newBombPosition, NULL_VECTOR, NULL_VECTOR);
 			char AnnounceMessage[128];
