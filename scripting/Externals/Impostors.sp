@@ -26,7 +26,7 @@ void SpawnImpostors(){
 				TeleportEntity(chicken, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(chicken);
 
-				// SetEntityRenderMode(chicken , RENDER_NONE);
+				SetEntityRenderMode(chicken , RENDER_NONE);
 				SetEntityRenderColor(chicken, 255, 255, 255, 0);
 				// SetEntProp(ent, Prop_Send, "m_fEffects", 0);
 				// SetEntProp(ent, Prop_Data, "m_flGroundSpeed", 1);
