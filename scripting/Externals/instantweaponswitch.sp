@@ -23,7 +23,7 @@ public void GiveAndSwitchWeapon(int client, char[] weaponName){
     }
 }
 
-public void InstantSwitch(int client, int weapon, bool g_bknifeAttack){	
+public void InstantSwitch(int client, int weapon){	
     float GameTime = GetGameTime();
     SetEntPropFloat(client, Prop_Send, "m_flNextAttack", GameTime);
     int ViewModel = GetEntPropEnt(client, Prop_Send, "m_hViewModel");
