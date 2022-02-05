@@ -539,3 +539,25 @@ void UpdateCvars(){
 }
 
 
+stock void CreateHostageRescue(){
+    int iEntity = -1;
+    if((iEntity = FindEntityByClassname(iEntity, "func_hostage_rescue")) == -1) {
+        int iHostageRescueEnt = CreateEntityByName("func_hostage_rescue");
+        DispatchKeyValue(iHostageRescueEnt, "targetname", "fake_hostage_rescue");
+        DispatchKeyValue(iHostageRescueEnt, "origin", "-3141 -5926 -5358");
+        DispatchSpawn(iHostageRescueEnt);
+    }
+}
+
+stock int GetSlotByWeaponName (int client, const char[] szName){
+	char szClassname[36];
+	int entity = -1;
+	for (int i; i <= 20; i++){
+		// if ((entity = GetPlayerWeaponSlot(client, i)) <= MaxClients || !IsValidEntity(entity)) continue;
+		entity = GetPlayerWeaponSlot(client, i);
+		if(!IsValidEntity(entity)) continue;
+		GetEntityClassname(entity, szClassname, sizeof szClassname);
+		if (strcmp(szName, szClassname) == 0)return i;
+	}
+	return -1;
+}

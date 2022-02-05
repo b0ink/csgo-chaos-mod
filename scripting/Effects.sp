@@ -922,8 +922,23 @@ void Chaos_Shields(){
 	if(g_bClearChaos){	}
 	if(DecidingChaos("Chaos_Shields")) return;
 	Log("[Chaos] Running: Chaos_Shields");
-	Timer_CreateHostage();
-	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) GivePlayerItem(i, "weapon_shield");
+	char playerWeapon[62];
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			GetClientWeapon(i, playerWeapon, sizeof(playerWeapon));
+			int entity = CreateEntityByName("weapon_shield");
+			if (entity > 0) {
+				EquipPlayerWeapon(i, entity);
+				SetEntPropEnt(i, Prop_Data, "m_hActiveWeapon" , entity);
+				PrintToChatAll("the weapon is %s", playerWeapon);
+				if(StrContains(playerWeapon, "knife", false) != -1){
+					FakeClientCommand(i, "use weapon_knife");
+				}else{
+					FakeClientCommand(i, "use %s", playerWeapon);
+				}
+			}
+		}
+	}
 	AnnounceChaos("Shields", -1.0);
 }
 

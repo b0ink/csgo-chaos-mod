@@ -179,7 +179,6 @@ public void OnMapStart(){
 	cvar("sv_fade_player_visibility_farz", "1");
 
 	//fixes an issue with shields not working in comp gamemode
-	CreateTimer(5.0, Timer_CreateHostage);
 	StopTimer(g_NewEvent_Timer);
 	g_NewEvent_Timer = INVALID_HANDLE;
 }
@@ -253,11 +252,8 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	}
 }
 
-//Todo; shields still dont work lol
-Action Timer_CreateHostage(Handle timer = null){
-	if (FindEntityByClassname(-1, "func_hostage_rescue") == -1){
-		CreateEntityByName("func_hostage_rescue");
-    }
+public Action Timer_CreateHostage(Handle timer){
+	CreateHostageRescue();
 }
 
 Action DecideEvent(Handle timer, bool CustomRun = false){
