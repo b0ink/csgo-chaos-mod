@@ -1640,20 +1640,26 @@ Handle Chaos_MolotovSpawn_Timer = INVALID_HANDLE;
 float g_Chaos_RandomMolotovSpawn_Interval = 5.0; //5+ recommended for bomb plants
 
 int g_MolotovSpawn_Count = 0;
-
+bool g_bRainingFireEnabled = false;
 public void Chaos_RandomMolotovSpawn(){
 	if(CountingCheckDecideChaos()) return;
 	if(g_bClearChaos){
 		cvar("inferno_flame_lifetime", "7");
 		StopTimer(Chaos_MolotovSpawn_Timer);
+		g_bRainingFireEnabled = false;
 	}		
 	if(DecidingChaos("Chaos_RandomMolotovSpawn")) return;
-	g_MolotovSpawn_Count = RoundToFloor(GetChaosTime("Chaos_RandomMolotovSpawn", 5.0));
-	Log("[Chaos] Running: Chaos_RandomMolotovSpawn");
-	g_MolotovSpawn_Count = 0;
-	cvar("inferno_flame_lifetime", "4");
-	Chaos_MolotovSpawn_Timer = CreateTimer(g_Chaos_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT);
-	AnnounceChaos("Raining Fire!", 25.0);
+	if(!g_bRainingFireEnabled){
+		g_bRainingFireEnabled = true;
+		g_MolotovSpawn_Count = RoundToFloor(GetChaosTime("Chaos_RandomMolotovSpawn", 5.0));
+		Log("[Chaos] Running: Chaos_RandomMolotovSpawn");
+		g_MolotovSpawn_Count = 0;
+		cvar("inferno_flame_lifetime", "4");
+		Chaos_MolotovSpawn_Timer = CreateTimer(g_Chaos_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT);
+		AnnounceChaos("Raining Fire!", 25.0);
+	}else{
+		RetryEvent();
+	}
 }
 
 public Action Timer_SpawnMolotov(Handle timer){
