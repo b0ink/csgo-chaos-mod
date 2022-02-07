@@ -564,7 +564,7 @@ stock int GetSlotByWeaponName (int client, const char[] szName){
 
 //returns the units between vec[3] and the closest player
 int DistanceToClosestPlayer(float vec[3]){
-	int dist = 999999;
+	float dist = 999999.0;
 	float playerVec[3];
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -574,5 +574,5 @@ int DistanceToClosestPlayer(float vec[3]){
 			}
 		}
 	}
-	return dist;
+	return RoundToFloor(dist);
 }
