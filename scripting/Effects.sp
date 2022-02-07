@@ -95,19 +95,22 @@ void Chaos_Soccerballs(){
 	GetCurrentMap(MapName, sizeof(MapName));
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
-			int ent = CreateEntityByName("prop_physics_multiplayer"); 
-			SetEntityModel(ent, "models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl"); 
-			DispatchKeyValue(ent, "StartDisabled", "false"); 
-			DispatchKeyValue(ent, "Solid", "6"); 
-			DispatchKeyValue(ent, "spawnflags", "1026"); 
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec);
-			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
-			DispatchSpawn(ent); 
-			AcceptEntityInput(ent, "TurnOn", ent, ent, 0); 
-			AcceptEntityInput(ent, "EnableCollision"); 
-			SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5); 
-			SetEntityMoveType(ent, MOVETYPE_VPHYSICS);   
+			if(DistanceToClosestPlayer(vec) > 50){
+				int ent = CreateEntityByName("prop_physics_multiplayer");
+				SetEntityModel(ent, "models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl");
+				DispatchKeyValue(ent, "StartDisabled", "false");
+				DispatchKeyValue(ent, "Solid", "6");
+				DispatchKeyValue(ent, "spawnflags", "1026");
+				
+				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+				DispatchSpawn(ent);
+				AcceptEntityInput(ent, "TurnOn", ent, ent, 0);
+				AcceptEntityInput(ent, "EnableCollision");
+				SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5);
+				SetEntityMoveType(ent, MOVETYPE_VPHYSICS);
+			}
 		}
 	}
 	AnnounceChaos("Soccer balls", -1.0);
@@ -190,9 +193,11 @@ void Chaos_SpawnFlashbangs(){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec, sizeof(vec));
-			int flash = CreateEntityByName("flashbang_projectile");
-			TeleportEntity(flash, vec, NULL_VECTOR, NULL_VECTOR);
-			DispatchSpawn(flash);
+			if(DistanceToClosestPlayer(vec) > 25){
+				int flash = CreateEntityByName("flashbang_projectile");
+				TeleportEntity(flash, vec, NULL_VECTOR, NULL_VECTOR);
+				DispatchSpawn(flash);
+			}
 		}
 	}
 	AnnounceChaos("Spawn Flashbangs", -1.0);
@@ -279,9 +284,11 @@ void Chaos_SpawnExplodingBarrels(){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec, sizeof(vec));
-			int barrel = CreateEntityByName("prop_exploding_barrel");
-			TeleportEntity(barrel, vec, NULL_VECTOR, NULL_VECTOR);
-			DispatchSpawn(barrel);
+			if(DistanceToClosestPlayer(vec) > 50){
+				int barrel = CreateEntityByName("prop_exploding_barrel");
+				TeleportEntity(barrel, vec, NULL_VECTOR, NULL_VECTOR);
+				DispatchSpawn(barrel);
+			}
 		}
 	}
 	AnnounceChaos("Exploding Barrels", -1.0);
