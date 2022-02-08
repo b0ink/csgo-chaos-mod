@@ -30,6 +30,7 @@ bool DecidingChaos(char[] EffectName = ""){
 		if(!g_bDecidingChaos
 					|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
 					&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
+						//todo: set deciding chaos to false or something
 						return true;
 					}else{
 						CreateTimer(0.5, Timer_ResetCustomChaosSelection);
@@ -104,7 +105,7 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
-
+	// PrintToChatAll("%s duration is %f", EffectName, expire);
 	return expire;
 }
 
@@ -180,7 +181,13 @@ void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, b
 	char EffectName[256];
 	FormatEx(EffectName, sizeof(EffectName), "%s", RemoveMulticolors(message));
 	if(!endingChaos && EffectTime > -2.0){
-		if(g_DynamicChannel) AddEffectToHud(EffectName, EffectTime);
+		if(g_DynamicChannel){
+			if(EffectTime == 0.0){
+				AddEffectToHud(EffectName, 9999.0);
+			}else{
+				AddEffectToHud(EffectName, EffectTime);
+			}
+		}
 	}
 }
 

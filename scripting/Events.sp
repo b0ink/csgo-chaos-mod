@@ -155,6 +155,9 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+
+	if(g_DynamicChannel) Timer_Display(null, RoundToFloor(g_fChaos_EffectInterval));
+	
 	g_bC4Chicken = false;
 	g_bCanSpawnEffect = true;
 	g_bRewind_logging_enabled = true;

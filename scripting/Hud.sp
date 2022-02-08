@@ -41,13 +41,18 @@ void PrintTimer(int time){
 			for(int effect = 0; effect < GetArraySize(EffectHud_Name); effect++){
 				GetArrayString(EffectHud_Name, effect, EffectName, sizeof(EffectName));
 				EffectTime = GetArrayCell(EffectHud_Time, effect);
+				int originalTime = EffectTime;
 				int noDuration = GetArrayCell(EffectHud_NoDuration, effect);
 				if(EffectTime > 20) EffectTime = 20;
 				Format(chunk, sizeof(chunk), "%s\n%s ", chunk, EffectName);
 				int blocks = EffectTime / 3;
 				if(noDuration == 0){
-					for(int g = 1; g <= blocks; g++){
-						Format(chunk, sizeof(chunk), "%s▓", chunk);
+					if(originalTime > 120){
+						Format(chunk, sizeof(chunk), "%s ∞", chunk);
+					}else{
+						for(int g = 1; g <= blocks; g++){
+							Format(chunk, sizeof(chunk), "%s▓", chunk);
+						}
 					}
 				}
 			}
@@ -78,7 +83,7 @@ void PrintTimer(int time){
 Action Timer_Display(Handle timer = null, int time){
 	g_HudTime = time;
 	PrintTimer(time);
-	if(time > 1 && g_bChaos_Enabled && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time-1);
+	if(time > 1 && g_bChaos_Enabled && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
 	for(int i = 0; i < GetArraySize(EffectHud_Name); i++){
 		SetArrayCell(EffectHud_Time, i, GetArrayCell(EffectHud_Time, i) - 1);
 	}
