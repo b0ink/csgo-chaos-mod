@@ -160,7 +160,12 @@ void DisplayCenterTextToAll(char[] message){
 
 	for (int i = 1; i <= MaxClients; i++){
 		if(IsValidClient(i)){
-			PrintCenterText(i, "%s", finalMess);
+			if(g_DynamicChannel){
+				SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
+				ShowHudText(i, GetDynamicChannel(3), "%s", finalMess);
+			}else{
+				PrintCenterText(i, "%s", finalMess);
+			}
 		}
 	}
 }
@@ -504,6 +509,7 @@ void StopTimer(Handle &timer){
 bool CurrentlyActive(Handle timer){
 	if(timer != INVALID_HANDLE){
 		RetryEvent();
+		return true;
 	}
 	return false;
 }
