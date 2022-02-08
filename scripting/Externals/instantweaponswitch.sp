@@ -1,4 +1,4 @@
-Handle g_Chaos_RandomWeapons_Timer = INVALID_HANDLE;
+Handle g_RandomWeapons_Timer_Repeat = INVALID_HANDLE;
 
 public void GiveAndSwitchWeapon(int client, char[] weaponName){
 	
