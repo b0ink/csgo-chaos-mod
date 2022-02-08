@@ -304,9 +304,12 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 			Effect_Interval = 15.0;
 		}
 		g_NewEvent_Timer = CreateTimer(Effect_Interval, DecideEvent);
+		//todo: make the hud timer more efficient so that effects can be shown whether the countdown timer is running or not 
 		if(g_DynamicChannel) Timer_Display(null, RoundToFloor(Effect_Interval));
-
+		
 		g_iChaos_Round_Count++;
+	}else{
+
 	}
 }
 
