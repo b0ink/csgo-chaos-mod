@@ -494,6 +494,12 @@ void StopTimer(Handle &timer){
 	}
 }
 
+bool CurrentlyActive(Handle timer){
+	if(timer != INVALID_HANDLE){
+		RetryEvent();
+	}
+	return false;
+}
 
 
 
@@ -575,4 +581,15 @@ int DistanceToClosestPlayer(float vec[3]){
 		}
 	}
 	return RoundToFloor(dist);
+}
+
+stock int ScreenShake(int iClient, float fAmplitude = 50.0, float duration = 7.0){
+	Handle hMessage = StartMessageOne("Shake", iClient, 1);
+	
+	PbSetInt(hMessage, "command", 0);
+	PbSetFloat(hMessage, "local_amplitude", fAmplitude);
+	PbSetFloat(hMessage, "frequency", 255.0);
+	PbSetFloat(hMessage, "duration", duration);
+	
+	EndMessage();
 }

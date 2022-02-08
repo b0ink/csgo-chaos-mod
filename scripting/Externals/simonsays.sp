@@ -1,14 +1,14 @@
-bool g_bSimon_Active = false;
-bool g_bSimon_Says = false; // whether to say simon says or not
-int g_Simon_Says_Action = -1;
-char g_Simon_ActionText[64];
-int g_time = -1;
-Handle msg_timer = INVALID_HANDLE;
-float g_SimonSays_Duration = 10.0;
+Handle 	g_SimonSays_Timer = INVALID_HANDLE;
+bool 	g_bSimon_Active = false;
+bool 	g_bSimon_Says = false; // whether to say simon says or not
+int 	g_Simon_Says_Action = -1;
+char 	g_Simon_ActionText[64];
+int 	g_time = -1;
+
 #define SS_STRAFE 1;
 #define SS_CROUCH 2;
 
-void GenerateSimonOrder(){
+void GenerateSimonOrder(float duration){
 	g_Simon_Says_Action = GetRandomInt(1,4);
 	g_bSimon_Says = true;
 	if(GetRandomInt(0, 100) <= 50){
@@ -28,7 +28,7 @@ void GenerateSimonOrder(){
 		g_Simon_ActionText = "Crouch.";
 	}
 	// g_time = 13;
-	g_time = RoundToFloor(g_SimonSays_Duration) + 3;
+	g_time = RoundToFloor(duration) + 3;
 
 }
 
@@ -88,7 +88,7 @@ void DamagePlayer(int client, int amount = 20){
 }
 
 void StartMessageTimer(){
-	msg_timer = CreateTimer(1.0, Timer_ShowAction, _,TIMER_REPEAT);
+	g_SimonSays_Timer = CreateTimer(1.0, Timer_ShowAction, _,TIMER_REPEAT);
 }
 
 public Action Timer_ShowAction(Handle timer){
@@ -122,8 +122,8 @@ public Action Timer_ShowAction(Handle timer){
 }
 
 void KillMessageTimer(){
-	if(msg_timer != INVALID_HANDLE){
-		KillTimer(msg_timer);
-		msg_timer = INVALID_HANDLE;
+	if(g_SimonSays_Timer != INVALID_HANDLE){
+		KillTimer(g_SimonSays_Timer);
+		g_SimonSays_Timer = INVALID_HANDLE;
 	}
 }
