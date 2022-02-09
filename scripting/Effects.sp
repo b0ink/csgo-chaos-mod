@@ -543,7 +543,7 @@ Action Chaos_DisableStrafe(Handle timer = null, bool EndChaos = false){
 	float duration = GetChaosTime("Chaos_DisableStrafe", 20.0);
 	if(duration > 0.0) g_NoStrafe_Timer = CreateTimer(duration, Chaos_DisableStrafe, true);
 	
-	AnnounceChaos("Disable Left/Right Movement", duration);
+	AnnounceChaos("Disable S / D Keys", duration);
 }
 
 bool g_bNoForwardBack = false;
