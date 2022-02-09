@@ -508,7 +508,7 @@ void StopTimer(Handle &timer){
 
 bool CurrentlyActive(Handle timer){
 	if(timer != INVALID_HANDLE){
-		RetryEvent();
+		RetryEffect();
 		return true;
 	}
 	return false;
