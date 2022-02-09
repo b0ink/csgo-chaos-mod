@@ -73,7 +73,7 @@ ConVar 	g_cvChaosOverwriteDuration; float g_fChaos_OverwriteDuration = -1.0;
 
 Handle 	g_NewEvent_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
-bool 	g_bDisableRetryEvent = false;
+bool 	g_bDisableRetryEffect = false;
 
 
 #include "Externals/instantweaponswitch.sp"
@@ -317,9 +317,9 @@ public Action Timer_ResetPlaySound(Handle timer){
 	g_bPlaySound_Debounce = false;
 }
 
-public void RetryEvent(){ //Used if there's no map data found for the map that renders the event useless
+public void RetryEffect(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
-	if(g_bDisableRetryEvent) return;
+	if(g_bDisableRetryEffect) return;
 	StopTimer(g_NewEvent_Timer);
 	DecideEvent(INVALID_HANDLE);
 }

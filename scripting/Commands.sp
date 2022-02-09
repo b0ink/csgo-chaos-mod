@@ -8,7 +8,7 @@ public Action Command_NewChaosEffect(int client, int args){
 	char effectName[64];
 	GetCmdArg(1, effectName, sizeof(effectName));
 
-	g_bDisableRetryEvent = true;
+	g_bDisableRetryEffect = true;
 	if(g_bCanSpawnEffect){
 		if(args == 1){
 			if(strlen(effectName) >=3){
@@ -34,7 +34,7 @@ public Action Command_NewChaosEffect(int client, int args){
 	return Plugin_Handled;
 }
 public Action Timer_ReEnableRetries(Handle timer){
-	g_bDisableRetryEvent = false;
+	g_bDisableRetryEffect = false;
 }
 
 public Action Command_StopChaos(int client, int args){

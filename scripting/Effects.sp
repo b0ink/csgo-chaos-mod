@@ -1059,7 +1059,7 @@ void Chaos_AutoPlantC4(){
 				g_PlantedSite = BOMBSITE_B;
 			}
 		}else{
-			RetryEvent();
+			RetryEffect();
 			return;
 		}
 		int bombEnt = FindEntityByClassname(-1, "planted_c4");
@@ -1074,7 +1074,7 @@ void Chaos_AutoPlantC4(){
 		}else{
 			g_PlantedSite = -1; //fooked up
 		}
-		RetryEvent();
+		RetryEffect();
 		return;
 	}
 	AutoPlantC4();
@@ -2558,7 +2558,7 @@ public void Chaos_RandomInvisiblePlayer(){
 			}
 		}
 	}else{
-		RetryEvent();
+		RetryEffect();
 	}
 }
 
@@ -2575,7 +2575,7 @@ public void Chaos_MEGACHAOS(){
 	
 	g_bMegaChaos = true; 
 	AnnounceChaos("MEGA CHAOS", -1.0, true, true);
-	g_bDisableRetryEvent = false;
+	g_bDisableRetryEffect = false;
 	CreateTimer(0.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(0.5, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(1.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);

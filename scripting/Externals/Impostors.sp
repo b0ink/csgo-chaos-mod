@@ -44,13 +44,13 @@ void SpawnImpostors(){
 
 				// SetEntProp(fakePlayer, Prop_Send, "m_CollisionGroup", COLLISION_GROUP_DEBRIS);
 				SetEntProp(fakePlayer, Prop_Send, "m_usSolidFlags", 0x0008);
-                SetEntProp(fakePlayer, Prop_Data, "m_nSolidType", 6);
-                SetEntProp(fakePlayer, Prop_Send, "m_CollisionGroup", 0); 
+				SetEntProp(fakePlayer, Prop_Data, "m_nSolidType", 6);
+				SetEntProp(fakePlayer, Prop_Send, "m_CollisionGroup", 0); 
 
 				// SetEntProp(chicken, Prop_Send, "m_usSolidFlags", 0x0008);
-                // SetEntProp(chicken, Prop_Data, "m_nSolidType", 0);
-                // SetEntProp(chicken, Prop_Send, "m_CollisionGroup", 0); 
-				
+				// SetEntProp(chicken, Prop_Data, "m_nSolidType", 0);
+				// SetEntProp(chicken, Prop_Send, "m_CollisionGroup", 0); 
+
 				SetVariantString("!activator");
 				AcceptEntityInput(fakePlayer, "SetParent", chicken, fakePlayer, 0);
 				AcceptEntityInput(fakePlayer, "SetParentAttachmentMaintainOffset", fakePlayer, fakePlayer, 0);    
