@@ -26,8 +26,9 @@ void SpawnImpostors(){
 				TeleportEntity(chicken, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(chicken);
 
-				SetEntityRenderMode(chicken , RENDER_NONE);
-				SetEntityRenderColor(chicken, 255, 255, 255, 0);
+				// SetEntityRenderMode(chicken , RENDER_NONE);
+				// SetEntityRenderColor(chicken, 255, 255, 255, 0);
+
 				// SetEntProp(ent, Prop_Send, "m_fEffects", 0);
 				// SetEntProp(ent, Prop_Data, "m_flGroundSpeed", 1);
 				// CreateTimer(0.1, Timer_SetChickenModel, ent);
@@ -41,6 +42,15 @@ void SpawnImpostors(){
 				TeleportEntity(fakePlayer, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(fakePlayer);
 
+				// SetEntProp(fakePlayer, Prop_Send, "m_CollisionGroup", COLLISION_GROUP_DEBRIS);
+				SetEntProp(fakePlayer, Prop_Send, "m_usSolidFlags", 0x0008);
+                SetEntProp(fakePlayer, Prop_Data, "m_nSolidType", 6);
+                SetEntProp(fakePlayer, Prop_Send, "m_CollisionGroup", 0); 
+
+				// SetEntProp(chicken, Prop_Send, "m_usSolidFlags", 0x0008);
+                // SetEntProp(chicken, Prop_Data, "m_nSolidType", 0);
+                // SetEntProp(chicken, Prop_Send, "m_CollisionGroup", 0); 
+				
 				SetVariantString("!activator");
 				AcceptEntityInput(fakePlayer, "SetParent", chicken, fakePlayer, 0);
 				AcceptEntityInput(fakePlayer, "SetParentAttachmentMaintainOffset", fakePlayer, fakePlayer, 0);    
