@@ -3,8 +3,19 @@ float mapFogEnd = 0.0;
 // float mapFogEnd = 175.0;
 float mapFogDensity = 0.995;
 void findLight(){
-	int ent;
-	ent = FindEntityByClassname(-1, "env_fog_controller");
+	int iMaxEnts = GetMaxEntities();
+	char sClassName[64];
+	for(int i=MaxClients;i<iMaxEnts;i++){
+		if(IsValidEntity(i) && 
+		IsValidEdict(i) && 
+		GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
+		StrEqual(sClassName, "env_fog_controller")){
+			RemoveEntity(i);
+		}
+	}
+
+	
+	int ent = CreateEntityByName("env_fog_controller");
 	if (ent != -1) {
 		g_iFog = ent;
 		DispatchKeyValue(g_iFog, "fogblend", "0");
@@ -15,10 +26,6 @@ void findLight(){
 		DispatchKeyValueFloat(g_iFog, "fogend", mapFogEnd);
 		DispatchKeyValueFloat(g_iFog, "fogmaxdensity", mapFogDensity);
 		AcceptEntityInput(g_iFog, "TurnOff");
-    }
-	else{
-        g_iFog = CreateEntityByName("env_fog_controller");
-        DispatchSpawn(g_iFog);
     }
 }
 

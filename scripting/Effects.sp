@@ -2010,7 +2010,7 @@ Action Chaos_LightsOff(Handle timer = null, bool EndChaos = false){
 		StopTimer(g_LightsOff_Timer);
 		Fog_OFF();
 	}
-	if(DecidingChaos("Chaos_LightsOff")) return;
+	if(DecidingChaos("Chaos_LightsOff.dark")) return;
 	if(CurrentlyActive(g_LightsOff_Timer)) return;
 
 	LightsOff();
