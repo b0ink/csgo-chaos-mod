@@ -236,7 +236,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	if(convar == g_cvChaosEnabled){
 		if(StringToInt(oldValue) == 0 && StringToInt(newValue) == 1){
 			g_bChaos_Enabled = true;
-			DecideEvent(null);
+			ChooseEffect(null);
 		}else if(StringToInt(newValue) == 0){
 			g_bChaos_Enabled = false;
 			StopTimer(g_NewEvent_Timer);
@@ -263,11 +263,11 @@ public Action Timer_CreateHostage(Handle timer){
 
 
 
-Action DecideEvent(Handle timer, bool CustomRun = false){
+Action ChooseEffect(Handle timer, bool CustomRun = false){
 	if(!CustomRun) g_NewEvent_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
-
+	
 	// int index = sizeof(g_iEffectsHistory) - 1;
 	// while(index >= 1){
 	// 	g_iEffectsHistory[index] = g_iEffectsHistory[index - 1];
@@ -310,7 +310,7 @@ Action DecideEvent(Handle timer, bool CustomRun = false){
 			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
 			Effect_Interval = 15.0;
 		}
-		g_NewEvent_Timer = CreateTimer(Effect_Interval, DecideEvent);
+		g_NewEvent_Timer = CreateTimer(Effect_Interval, ChooseEffect);
 		//todo: make the hud timer more efficient so that effects can be shown whether the countdown timer is running or not 
 		if(g_DynamicChannel) Timer_Display(null, RoundToFloor(Effect_Interval));
 		
@@ -328,7 +328,7 @@ public void RetryEffect(){ //Used if there's no map data found for the map that 
 	Log("RETRYING EVENT..");
 	if(g_bDisableRetryEffect) return;
 	StopTimer(g_NewEvent_Timer);
-	DecideEvent(INVALID_HANDLE);
+	ChooseEffect(INVALID_HANDLE);
 }
 
 

@@ -2307,11 +2307,11 @@ public void Chaos_MEGACHAOS(){
 	g_bMegaChaos = true; 
 	AnnounceChaos("MEGA CHAOS", -1.0, true, true);
 	g_bDisableRetryEffect = false;
-	CreateTimer(0.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(0.5, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(1.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(1.5, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(2.0, DecideEvent, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(0.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(0.5, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(1.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(1.5, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(2.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(2.5, Timer_CompleteMegaChaos);
 }
 

@@ -22,7 +22,7 @@ public Action Command_NewChaosEffect(int client, int args){
 				return Plugin_Handled;
 			}
 		}else{
-			DecideEvent(null, true);
+			ChooseEffect(null, true);
 		}
 	}else{
 		ReplyToCommand(client, "You can't spawn new effects right now, please wait until the round starts.");
@@ -52,7 +52,7 @@ public Action Command_StartChaos(int client, int args){
 		g_bClearChaos = true;
 		g_bDecidingChaos = false;
 		Chaos();
-		CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
+		CreateTimer(0.1, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{
 		PrintToChat(client, "Chaos is already running!");
