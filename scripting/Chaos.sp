@@ -268,21 +268,22 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
 	
-	// int index = sizeof(g_iEffectsHistory) - 1;
-	// while(index >= 1){
-	// 	g_iEffectsHistory[index] = g_iEffectsHistory[index - 1];
-	// 	index--;
-	// }
-
 	// PrintToChatAll("random effect: %s. global : %s",Random_Effect,  g_sSelectedChaosEffect);
 	char Random_Effect[64];
 	int randomEffect = -1;
-	while(FindStringInArray(Effect_History, Random_Effect) != -1){
+	if(!CustomRun){
+		while(FindStringInArray(Effect_History, Random_Effect) != -1){
+			randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
+			GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
+		}
+		PushArrayString(Effect_History, Random_Effect);
+		if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
+	}else{
+		//ignore history if run customly
 		randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
 		GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
 	}
-	PushArrayString(Effect_History, Random_Effect);
-	if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
+
 	g_sSelectedChaosEffect = Random_Effect;
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
@@ -299,6 +300,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 		}
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
+
 	if(CustomRun) return;
 
 	StopTimer(g_NewEvent_Timer);
