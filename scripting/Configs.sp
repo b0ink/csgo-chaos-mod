@@ -1,8 +1,16 @@
 #define CONFIG_ENABLED 0
 #define CONFIG_EXPIRE 1
 
+Handle EnabledEffects = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){
+
+	if(EnabledEffects != INVALID_HANDLE){
+		ClearArray(EnabledEffects);
+	}else{
+		EnabledEffects = CreateArray(64);
+	}
+	
 	ParseMapCoordinates();
 	ParseChaosEffects();
 }
@@ -49,6 +57,9 @@ void ParseChaosEffects(){
 			
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
+			if(enabled == 1){
+				PushArrayString(EnabledEffects, Chaos_Function_Name);
+			}
 			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
 			// PrintToChatAll("%s: on: %i, dur: %i", Chaos_Function_Name, enabled, expires);
 		}

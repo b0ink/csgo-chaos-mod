@@ -1,12 +1,12 @@
 float g_AllPositions[MAXPLAYERS+1][3];
 
 
-bool findInArray(int[] array, int target, int arraysize){
-	bool found = false;
-	for(int i = 0; i < arraysize; i++) if(array[i] == target) found = true;
-	if(found) return true;
-	return false;
-}
+// bool findInArray(int[] array, int target, int arraysize){
+// 	bool found = false;
+// 	for(int i = 0; i < arraysize; i++) if(array[i] == target) found = true;
+// 	if(found) return true;
+// 	return false;
+// }
 
 
 bool ValidMapPoints(){
@@ -19,43 +19,32 @@ bool ValidBombSpawns(){
 	return true;
 }
 
-bool CountingCheckDecideChaos(){
-	if(g_bCountingChaos) {	g_iChaos_Event_Count++;	if(!g_bDecidingChaos) {  return true;  }}
-	return false;
-}
-
 bool DecidingChaos(char[] EffectName = ""){
 	//if effectname was provided manually, 
+	if(!g_bDecidingChaos) return true;
+	if(!g_sSelectedChaosEffect[0]) return true;
 	if(EffectName[0] && g_sSelectedChaosEffect[0]){
 		if(!g_bDecidingChaos
-					|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
-					&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
-						//todo: set deciding chaos to false or something
-						return true;
-					}else{
-						CreateTimer(0.5, Timer_ResetCustomChaosSelection);
-						return false;
-					}
+		|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
+		&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
+	
+			return true;
+		}else{
+			//this function is confusing
+			//todo: set deciding chaos to false or something
+			//this should prevent from another chaos running
+			Log("[Chaos] Running Effect: %s", EffectName);
+			// strcopy(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), EffectName);
+			g_sSelectedChaosEffect = "";
+			g_bDecidingChaos = false;
+			// CreateTimer(0.5, Timer_ResetCustomChaosSelection);
+			return false;
+		}
 	}
-	if(g_bClearChaos || !g_bDecidingChaos || (g_iChaos_Event_Count != g_iRandomEvent)) return true;
 	return false;
 }
 
 
-void CountChaos(bool Reset = false){
-	if(Reset) g_bClearChaos = true;
-	g_iChaos_Event_Count = 0;
-	g_bDecidingChaos = false;
-	g_bCountingChaos = true;
-	Chaos();
-}
-
-
-
-//currently a hotfix but there is a bool value somewhere that handles the custom selection just fine.. todo for another time.
-public Action Timer_ResetCustomChaosSelection(Handle timer){
-	g_sSelectedChaosEffect = "";
-}
 
 bool ClearChaos(bool EndChaos = false){
 	if(g_bClearChaos || EndChaos) return true;
@@ -508,6 +497,7 @@ void StopTimer(Handle &timer){
 
 bool CurrentlyActive(Handle timer){
 	if(timer != INVALID_HANDLE){
+		Log("Effect is already currently running, trying new effect.");
 		RetryEffect();
 		return true;
 	}

@@ -41,9 +41,7 @@ public Action Command_StopChaos(int client, int args){
 	g_bChaos_Enabled = false;
 	StopTimer(g_NewEvent_Timer);
 	g_bClearChaos = true;
-	g_iChaos_Event_Count = 0;
 	g_bDecidingChaos = false;
-	g_bCountingChaos = false;
 	Chaos(); //count and reset all chaos
 	AnnounceChaos("Chaos is Disabled!", -2.0, true);
 	return Plugin_Handled;
@@ -52,9 +50,7 @@ public Action Command_StopChaos(int client, int args){
 public Action Command_StartChaos(int client, int args){
 	if(g_NewEvent_Timer == INVALID_HANDLE){
 		g_bClearChaos = true;
-		g_iChaos_Event_Count = 0;
 		g_bDecidingChaos = false;
-		g_bCountingChaos = true;
 		Chaos();
 		CreateTimer(0.1, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 		AnnounceChaos("Chaos is Enabled!", -2.0);

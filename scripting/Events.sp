@@ -174,7 +174,6 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	CreateTimer(5.0, Timer_CreateHostage);
 	SetRandomSeed(GetTime());
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
-		CountChaos(true);
 		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
 		CreateTimer(freezeTime, DecideEvent, _, TIMER_FLAG_NO_MAPCHANGE);
 	}

@@ -70,7 +70,7 @@ public void Rollback_Log(){
 
 Handle g_Chaos_Rewind_Timer = INVALID_HANDLE;
 void Chaos_RewindTenSeconds(bool EndChaos = false){
-	if(CountingCheckDecideChaos()) return;
+	// if(CountingCheckDecideChaos()) return;
 	if(g_bClearChaos || EndChaos){
 		g_bRewind_logging_enabled = true;
 		g_Rewinding = true;

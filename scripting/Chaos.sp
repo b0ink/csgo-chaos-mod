@@ -57,13 +57,10 @@ float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 bool 	g_bCanSpawnEffect = true;
 int 	g_iChaos_Round_Count = 0;
 bool 	g_bMegaChaos = false;
-int 	g_iChaos_Event_Count = 0;
 char 	g_sSelectedChaosEffect[64] = "";
 
 bool 	g_bClearChaos = false;
 bool 	g_bDecidingChaos = false;
-int 	g_iRandomEvent = 0;
-bool 	g_bCountingChaos = false;
 
 ConVar 	g_cvChaosEnabled; bool g_bChaos_Enabled = true;
 ConVar 	g_cvChaosEffectInterval; float g_fChaos_EffectInterval = 15.0;
@@ -75,6 +72,7 @@ Handle 	g_NewEvent_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
 bool 	g_bDisableRetryEffect = false;
 
+Handle Effect_History = INVALID_HANDLE;
 
 #include "Externals/instantweaponswitch.sp"
 #include "Externals/weaponjump.sp"
@@ -152,9 +150,14 @@ public void OnPluginStart(){
 
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
+	Effect_History = CreateArray(64);
+	
 }
 
 public void OnMapStart(){
+
+	if(Effect_History != INVALID_HANDLE) ClearArray(Effect_History);
+	
 	UpdateCvars();
 
 	char mapName[64];
@@ -256,32 +259,36 @@ public Action Timer_CreateHostage(Handle timer){
 	CreateHostageRescue();
 }
 
+
+
+
+
 Action DecideEvent(Handle timer, bool CustomRun = false){
 	if(!CustomRun) g_NewEvent_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
-	CountChaos();
-	
-	int index = sizeof(g_iEffectsHistory) - 1;
-	while(index >= 1){
-		g_iEffectsHistory[index] = g_iEffectsHistory[index - 1];
-		index--;
-	}
 
+	// int index = sizeof(g_iEffectsHistory) - 1;
+	// while(index >= 1){
+	// 	g_iEffectsHistory[index] = g_iEffectsHistory[index - 1];
+	// 	index--;
+	// }
 
-	g_iRandomEvent = GetRandomInt(1, g_iChaos_Event_Count);
-	if(g_iChaos_Event_Count > sizeof(g_iEffectsHistory)-1){
-		while(findInArray(g_iEffectsHistory, g_iRandomEvent, sizeof(g_iEffectsHistory))){
-			g_iRandomEvent = GetRandomInt(1,g_iChaos_Event_Count);
-		}
+	// PrintToChatAll("random effect: %s. global : %s",Random_Effect,  g_sSelectedChaosEffect);
+	char Random_Effect[64];
+	int randomEffect = -1;
+	while(FindStringInArray(Effect_History, Random_Effect) != -1){
+		randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
+		GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
 	}
-	g_iEffectsHistory[0] = g_iRandomEvent;
+	PushArrayString(Effect_History, Random_Effect);
+	if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
+	g_sSelectedChaosEffect = Random_Effect;
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
-	g_iChaos_Event_Count = 0;
-	g_bCountingChaos = true;
 	Chaos(); //run the chaos
 
+	
 	if(g_bPlaySound_Debounce == false){
 		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
 		g_bPlaySound_Debounce = true;
@@ -330,7 +337,6 @@ public Action ResetRoundChaos(Handle timer){
 	Fog_OFF();
 	g_bClearChaos = true;
 	g_bDecidingChaos = false;
-	g_bCountingChaos = false;
 	Chaos();
 }
 
