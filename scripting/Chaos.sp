@@ -94,7 +94,6 @@ Handle Effect_History = INVALID_HANDLE;
 #include "EffectsHandler.sp"
 #include "Configs.sp"
 
-int	g_iEffectsHistory[18];
 
 float g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
@@ -165,8 +164,6 @@ public void OnMapStart(){
 	Log("New Map/Plugin Restart - Map: %s", mapName);
 	
 	PrecacheSound(SOUND_BELL);
-
-	for(int i = 0; i < sizeof(g_iEffectsHistory); i++) g_iEffectsHistory[i] = -1;
 
 	PrecacheTextures();
 
