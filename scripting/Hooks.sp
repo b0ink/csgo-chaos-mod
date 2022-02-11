@@ -92,3 +92,8 @@ public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float
 public Action Hook_OnTakeDamagePost(int victim, int attacker){
     if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
 }
+
+
+public void Hook_PreThinkPost(int client){
+	SetAccelerate(client);
+}

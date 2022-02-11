@@ -45,13 +45,9 @@ void FindConVars(){
     g_ConVar_AirAccelerate = FindConVar("sv_airaccelerate");
 }
 
-void HookAcc(int client){
-    SDKHook( client, SDKHook_PreThinkPost, Event_PreThinkPost_Client );
-}
 
-
-public void Event_PreThinkPost_Client( int client ){
-	if(g_bNoStrafe || g_bNoForwardBack){
+void SetAccelerate(int client){
+    if(g_bNoStrafe || g_bNoForwardBack){
 	    SetConVarFloat( g_ConVar_Accelerate, accelerations[client] );
 	    SetConVarFloat( g_ConVar_AirAccelerate, air_accelerations[client] );
 	}
