@@ -77,19 +77,25 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	}else if(g_bSpeedShooter){
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
+
 	float vec[3];
 	GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
 	vec[0] = 0.0;
 	vec[1] = 0.0;
 	if(g_bNoStrafe){
-		if(buttons & IN_MOVELEFT) 	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-		if(buttons & IN_MOVERIGHT) 	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
+		if(buttons & IN_MOVELEFT){
+			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
+			ApplyBoost(client, -100.0);
+		} 	
+		if(buttons & IN_MOVERIGHT){
+			ApplyBoost(client, -100.0);
+			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
+		} 
 	}
 	if(g_bNoForwardBack){
 		if(buttons & IN_FORWARD) 	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
 		if(buttons & IN_BACK) 		TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
 	}
-
 	return Plugin_Continue;
 }
 
@@ -214,6 +220,18 @@ public void OnGameFrame(){
 
 }
 
+
+void ApplyBoost(int client, float amount){
+    float direction[3], vel[3];
+    GetEntPropVector(client, Prop_Data, "m_vecVelocity", vel);
+    NormalizeVector(vel, direction);
+    ScaleVector(direction, amount);
+    AddVectors(vel, direction, vel);
+	// vel[0] = 0.0;
+	// vel[1] = 0.0;
+	vel[2] = 0.0;
+    TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vel);
+} 
 
 public Action Event_Cvar(Event event, const char[] name, bool dontBroadcast){
 	if (!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
