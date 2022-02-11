@@ -107,10 +107,10 @@ public void OnPluginStart(){
 
 	UpdateCvars();
 	
-	HookConVarChange(g_cvChaosEnabled, ConVarChanged);
-	HookConVarChange(g_cvChaosEffectInterval, ConVarChanged);
-	HookConVarChange(g_cvChaosRepeating, ConVarChanged);
-	HookConVarChange(g_cvChaosOverwriteDuration, ConVarChanged);
+	HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
+	HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
+	HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
+	HookConVarChange(g_cvChaosOverwriteDuration, 	ConVarChanged);
 
 	HookEvent("round_start", 	Event_RoundStart);
 	HookEvent("round_end", 		Event_RoundEnd);	

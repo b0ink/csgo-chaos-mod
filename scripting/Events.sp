@@ -155,15 +155,18 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	Log("---ROUND STARTED---");
 	//todo: end timers.
+
 	g_bC4Chicken = false;
 	g_bCanSpawnEffect = true;
 	g_bRewind_logging_enabled = true;
-	Log("---ROUND STARTED---");
-	StopTimer(g_NewEvent_Timer);
+
+	ResetChaos();
+
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_iChaos_Round_Count = 0;
-	// to use in chaos_resetspawns()
+	
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			float vec[3];
@@ -173,25 +176,31 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	}
 
 	CreateTimer(5.0, Timer_CreateHostage);
+	
 	SetRandomSeed(GetTime());
+	
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
 		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
 		CreateTimer(freezeTime, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
+
 	return Plugin_Continue;
 }
 
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	Log("--ROUND ENDED--");
-	
+	ResetChaos();
 	g_bCanSpawnEffect = false;
+
+	return Plugin_Continue;
+}
+
+void ResetChaos(){
 	HUD_ROUNDEND();
 	ResetTimerRemoveChickens();
 	StopTimer(g_NewEvent_Timer);
 	CreateTimer(1.0, ResetRoundChaos);
-
 }
-
 
 public void OnGameFrame(){
 	if(g_bLockPlayersAim_Active){
