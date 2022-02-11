@@ -57,7 +57,7 @@ void ParseChaosEffects(){
 			
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
-			if(enabled == 1){
+			if(enabled == 1 && Chaos_Function_Name[0]){
 				PushArrayString(EnabledEffects, Chaos_Function_Name);
 			}
 			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
