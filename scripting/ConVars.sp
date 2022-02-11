@@ -11,12 +11,11 @@ ConVar 	g_cvChaosOverwriteDuration;
 float       g_fChaos_OverwriteDuration = -1.0;
 
 
-void UpdateCvars(){
-	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
-	g_fChaos_EffectInterval = g_cvChaosEffectInterval.FloatValue;
-	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
-	g_fChaos_OverwriteDuration = g_cvChaosOverwriteDuration.FloatValue;
-}
+ConVar g_ConVar_Accelerate;
+ConVar g_ConVar_AirAccelerate;
+
+float Client_Accelerations[MAXPLAYERS+1]= {5.5, ...};
+float Client_AirAccelerations[MAXPLAYERS+1]= {12.0, ...};
 
 void CreateConVars(){
     CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
@@ -30,15 +29,14 @@ void CreateConVars(){
     HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
     HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
     HookConVarChange(g_cvChaosOverwriteDuration, 	ConVarChanged);
-    
 }
 
-ConVar g_ConVar_Accelerate;
-ConVar g_ConVar_AirAccelerate;
-
-float accelerations[MAXPLAYERS+1]= {5.5, ...};
-float air_accelerations[MAXPLAYERS+1]= {12.0, ...};
-
+void UpdateCvars(){
+	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
+	g_fChaos_EffectInterval = g_cvChaosEffectInterval.FloatValue;
+	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
+	g_fChaos_OverwriteDuration = g_cvChaosOverwriteDuration.FloatValue;
+}
 
 void FindConVars(){
     g_ConVar_Accelerate = FindConVar("sv_accelerate");
@@ -48,11 +46,10 @@ void FindConVars(){
 
 void SetAccelerate(int client){
     if(g_bNoStrafe || g_bNoForwardBack){
-	    SetConVarFloat( g_ConVar_Accelerate, accelerations[client] );
-	    SetConVarFloat( g_ConVar_AirAccelerate, air_accelerations[client] );
+	    SetConVarFloat( g_ConVar_Accelerate, Client_Accelerations[client] );
+	    SetConVarFloat( g_ConVar_AirAccelerate, Client_AirAccelerations[client] );
 	}
 }
-
 
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
