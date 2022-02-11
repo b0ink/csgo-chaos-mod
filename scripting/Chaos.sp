@@ -273,6 +273,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 		if(g_sLastPlayedEffect[0] || attempts > 9999) break;
 	}
 
+	PrintEffects();
 	
 	if(g_bPlaySound_Debounce == false){
 		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
