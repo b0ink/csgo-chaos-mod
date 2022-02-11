@@ -141,12 +141,12 @@ public void OnPluginStart(){
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
 	Effect_History = CreateArray(64);
-	
+
 }
 
 public void OnMapStart(){
-	if(Effect_History != INVALID_HANDLE) ClearArray(Effect_History);
-	
+	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
+
 	UpdateCvars();
 
 	char mapName[64];
@@ -171,6 +171,8 @@ public void OnMapStart(){
 
 	StopTimer(g_NewEffect_Timer);
 	g_NewEffect_Timer = INVALID_HANDLE;
+
+	if(Effect_History != INVALID_HANDLE) ClearArray(Effect_History);
 }
 
 public void OnMapEnd(){
