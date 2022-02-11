@@ -24,16 +24,19 @@ Action Chaos_RapidFire(Handle timer = null, bool EndChaos = false){
 }
 
 Handle g_BreakTime_Timer = INVALID_HANDLE;
+bool g_BreakTime = false;
 Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		cvar("sv_accelerate", "5.5");
 		cvar("sv_airaccelerate", "12");
 		StopTimer(g_BreakTime_Timer);
+		g_BreakTime = false;
 		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
 	}
 	if(DecidingChaos("Chaos_BreakTime")) return;
 	if(CurrentlyActive(g_BreakTime_Timer)) return;
-
+	
+	g_BreakTime = true;
 	cvar("sv_accelerate", "0");
 	cvar("sv_airaccelerate", "0");
 

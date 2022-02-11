@@ -1,3 +1,4 @@
+//todo: bypass checks with custom runs
 public void Chaos(){
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
 	if(IsChaosEnabled("Chaos_NoScopeOnly"))  Chaos_NoScopeOnly();
