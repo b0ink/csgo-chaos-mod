@@ -77,37 +77,38 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
 
-	float vec[3];
-	GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
-	vec[0] = 0.0;
-	vec[1] = 0.0;
+	// float vec[3];
+	// GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
+	// vec[0] = 0.0;
+	// vec[1] = 0.0;
 	if(g_bNoStrafe){
 		if(buttons & IN_MOVELEFT){
-			accelerations[client] = 0.0;
-			air_accelerations[client] = 0.0;
+			Client_Accelerations[client] = 		0.0;
+			Client_AirAccelerations[client] = 	0.0;
 			// SendConVarValue( client, g_ConVar_Accelerate, "0.0" );
 
-
-			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-			// ApplyBoost(client, -100.0);
 		}else if(buttons & IN_MOVERIGHT){
-			accelerations[client] = 0.0;
-			air_accelerations[client] = 0.0;
-
+			Client_Accelerations[client] = 		0.0;
+			Client_AirAccelerations[client] = 	0.0;
 		    // SendConVarValue( client, g_ConVar_Accelerate, "0" );
-
-			// ApplyBoost(client, -100.0);
-			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
 		}else{
-			accelerations[client] = 5.5;
-			air_accelerations[client] = 12.0;
+			Client_Accelerations[client] = 		5.5;
+			Client_AirAccelerations[client] = 	12.0;
 			//todo just grab sm_rcon sv_accelerate value
 			// SendConVarValue( client, g_ConVar_Accelerate, "0.0" );
 		}
 	}
 	if(g_bNoForwardBack){
-		if(buttons & IN_FORWARD) 	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-		if(buttons & IN_BACK) 		TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
+		if(buttons & IN_FORWARD){
+			Client_Accelerations[client] = 		0.0;
+			Client_AirAccelerations[client] = 	0.0;
+		}else if(buttons & IN_BACK){
+			Client_Accelerations[client] = 		0.0;
+			Client_AirAccelerations[client] = 	0.0;
+		}else{
+			Client_Accelerations[client] = 		5.5;
+			Client_AirAccelerations[client] = 	12.0;
+		}
 	}
 	return Plugin_Continue;
 }
