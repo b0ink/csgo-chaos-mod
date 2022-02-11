@@ -35,13 +35,14 @@ bool DecidingChaos(char[] EffectName = ""){
 			//this should prevent from another chaos running
 			Log("[Chaos] Running Effect: %s", EffectName);
 			// strcopy(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), EffectName);
+			strcopy(g_sLastPlayedEffect, sizeof(g_sLastPlayedEffect), EffectName);
 			g_sSelectedChaosEffect = "";
 			g_bDecidingChaos = false;
 			// CreateTimer(0.5, Timer_ResetCustomChaosSelection);
 			return false;
 		}
 	}
-	return false;
+	return true;
 }
 
 
