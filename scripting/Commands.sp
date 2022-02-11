@@ -39,7 +39,7 @@ public Action Timer_ReEnableRetries(Handle timer){
 
 public Action Command_StopChaos(int client, int args){
 	g_bChaos_Enabled = false;
-	StopTimer(g_NewEvent_Timer);
+	StopTimer(g_NewEffect_Timer);
 	g_bClearChaos = true;
 	g_bDecidingChaos = false;
 	Chaos(); //count and reset all chaos
@@ -48,7 +48,7 @@ public Action Command_StopChaos(int client, int args){
 }
 
 public Action Command_StartChaos(int client, int args){
-	if(g_NewEvent_Timer == INVALID_HANDLE){
+	if(g_NewEffect_Timer == INVALID_HANDLE){
 		g_bClearChaos = true;
 		g_bDecidingChaos = false;
 		Chaos();
@@ -58,7 +58,7 @@ public Action Command_StartChaos(int client, int args){
 		PrintToChat(client, "Chaos is already running!");
 	}
 	g_bChaos_Enabled = true;
-	// StopTimer(g_NewEvent_Timer);
+	// StopTimer(g_NewEffect_Timer);
 	return Plugin_Handled;
 }
 

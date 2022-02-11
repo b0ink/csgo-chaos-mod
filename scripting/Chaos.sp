@@ -68,7 +68,7 @@ ConVar 	g_cvChaosRepeating; bool g_bChaos_Repeating = true;
 ConVar 	g_cvChaosOverwriteDuration; float g_fChaos_OverwriteDuration = -1.0;
 
 
-Handle 	g_NewEvent_Timer = INVALID_HANDLE;
+Handle 	g_NewEffect_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
 bool 	g_bDisableRetryEffect = false;
 
@@ -179,13 +179,13 @@ public void OnMapStart(){
 
 	cvar("sv_fade_player_visibility_farz", "1");
 
-	StopTimer(g_NewEvent_Timer);
-	g_NewEvent_Timer = INVALID_HANDLE;
+	StopTimer(g_NewEffect_Timer);
+	g_NewEffect_Timer = INVALID_HANDLE;
 }
 
 public void OnMapEnd(){
 	Log("Map has ended.");
-	StopTimer(g_NewEvent_Timer);
+	StopTimer(g_NewEffect_Timer);
 }
 
 bool g_DynamicChannel = false;
@@ -236,14 +236,14 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 			ChooseEffect(null);
 		}else if(StringToInt(newValue) == 0){
 			g_bChaos_Enabled = false;
-			StopTimer(g_NewEvent_Timer);
+			StopTimer(g_NewEffect_Timer);
 		}
 	}else if(convar == g_cvChaosEffectInterval){
 		g_fChaos_EffectInterval = StringToFloat(newValue);
 	}else if(convar == g_cvChaosRepeating){
 		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
 			g_bChaos_Repeating = false;
-			StopTimer(g_NewEvent_Timer);
+			StopTimer(g_NewEffect_Timer);
 		}else if(StringToInt(newValue) == 1){
 			g_bChaos_Repeating = true;
 		}
@@ -261,7 +261,7 @@ public Action Timer_CreateHostage(Handle timer){
 
 
 Action ChooseEffect(Handle timer, bool CustomRun = false){
-	if(!CustomRun) g_NewEvent_Timer = INVALID_HANDLE;
+	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
 	
@@ -300,7 +300,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 
 	if(CustomRun) return;
 
-	StopTimer(g_NewEvent_Timer);
+	StopTimer(g_NewEffect_Timer);
 	bool Chaos_Repeating = g_bChaos_Repeating;
 
 	if(Chaos_Repeating){
@@ -309,7 +309,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
 			Effect_Interval = 15.0;
 		}
-		g_NewEvent_Timer = CreateTimer(Effect_Interval, ChooseEffect);
+		g_NewEffect_Timer = CreateTimer(Effect_Interval, ChooseEffect);
 		//todo: make the hud timer more efficient so that effects can be shown whether the countdown timer is running or not 
 		if(g_DynamicChannel) Timer_Display(null, RoundToFloor(Effect_Interval));
 		
@@ -326,7 +326,7 @@ public Action Timer_ResetPlaySound(Handle timer){
 public void RetryEffect(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
 	if(g_bDisableRetryEffect) return;
-	StopTimer(g_NewEvent_Timer);
+	StopTimer(g_NewEffect_Timer);
 	ChooseEffect(INVALID_HANDLE);
 }
 
