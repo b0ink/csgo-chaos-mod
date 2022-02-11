@@ -205,7 +205,6 @@ public void OnLibraryAdded(const char[] name){
 }
 
 public void OnClientPutInServer(int client){
-	HookAcc(client);
 	WeaponJumpConnect_Handler(client);
 
 	SDKHook(client, SDKHook_WeaponDrop, 		Hook_WeaponDrop);
@@ -213,6 +212,8 @@ public void OnClientPutInServer(int client){
 	SDKHook(client, SDKHook_PreThink, 			Hook_OnPreThink);
 	SDKHook(client, SDKHook_OnTakeDamage, 		Hook_OnTakeDamage);
 	SDKHook(client, SDKHook_OnTakeDamagePost, 	Hook_OnTakeDamagePost);
+
+	SDKHook(client, SDKHook_PreThinkPost, 		Hook_PreThinkPost);
 }
 
 public void OnClientDisconnect(int client){
