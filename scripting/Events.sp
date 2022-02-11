@@ -198,7 +198,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 void ResetChaos(){
 	HUD_ROUNDEND();
 	ResetTimerRemoveChickens();
-	StopTimer(g_NewEvent_Timer);
+	StopTimer(g_NewEffect_Timer);
 	CreateTimer(1.0, ResetRoundChaos);
 }
 
