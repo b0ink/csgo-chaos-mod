@@ -29,12 +29,9 @@ void AddEffectToHud(char[] message, float time = -1.0){
 	PrintTimer(g_HudTime);
 }
 
-void PrintTimer(int time){
+void PrintEffects(){
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
-			SetHudTextParams(-1.0, 0.06, 1.0, 200, 0, 220, 0, 0, 1.0, 0.0, 0.0);
-			ShowHudText(i, GetDynamicChannel(0), "%i", time);
-
 			char chunk[2048];
 			int EffectTime = -1;
 			char EffectName[256];
@@ -60,7 +57,6 @@ void PrintTimer(int time){
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
 		}
 	}
-
 	bool removedAny = false;
 	while(!removedAny){
 		removedAny = false;
@@ -76,15 +72,28 @@ void PrintTimer(int time){
 		}
 		if(!removedAny) break;
 	}
-
 }
 
+
+
+void PrintTimer(int time){
+	for(int i = 0; i <= MaxClients; i++){
+		if(IsValidClient(i)){
+			SetHudTextParams(-1.0, 0.06, 1.0, 200, 0, 220, 0, 0, 1.0, 0.0, 0.0);
+			ShowHudText(i, GetDynamicChannel(0), "%i", time);
+		}
+	}
+}
+
+Action Timer_DisplayEffects(Handle timer){
+	for(int i = 0; i < GetArraySize(EffectHud_Name); i++){
+		SetArrayCell(EffectHud_Time, i, GetArrayCell(EffectHud_Time, i) - 1);
+	}
+	PrintEffects();
+}
 
 Action Timer_Display(Handle timer = null, int time){
 	g_HudTime = time;
 	PrintTimer(time);
 	if(time > 1 && g_bChaos_Enabled && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
-	for(int i = 0; i < GetArraySize(EffectHud_Name); i++){
-		SetArrayCell(EffectHud_Time, i, GetArrayCell(EffectHud_Time, i) - 1);
-	}
 }
