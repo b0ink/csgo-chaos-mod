@@ -362,7 +362,7 @@ public void cvar(char[] cvarname, char[] value){
 }
 
 void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false){
-	if (IsValidClient(client) && IsPlayerAlive(client)){
+	if (ValidAndAlive(client)){
 		int iTempWeapon = -1;
 		for (int j = 0; j < 5; j++)
 			if ((iTempWeapon = GetPlayerWeaponSlot(client, j)) != -1){
@@ -405,7 +405,7 @@ void GetWeaponClassname(int weapon, char[] buffer, int size) {
 
 void SavePlayersLocations(){
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && IsPlayerAlive(i)){
+		if(ValidAndAlive(i)){
 			GetClientAbsOrigin(i, g_AllPositions[i]);
 		}
 	}
@@ -425,7 +425,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 		}
 
 		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i) && IsPlayerAlive(i)){
+			if(ValidAndAlive(i)){
 				if(client != -1 && client != i) continue; //only set specific player
 				int CoordinateIndex = -1;
 				float DistanceToBeat = 99999.0;
@@ -521,7 +521,7 @@ void DoRandomTeleport(int client = -1){
 	}
 	if(client == -1){
 		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i) && IsPlayerAlive(i) && GetArraySize(g_UnusedCoordinates) > 0){
+			if(ValidAndAlive(i) && GetArraySize(g_UnusedCoordinates) > 0){
 				int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
 				float vec[3];
 				GetArrayArray(g_UnusedCoordinates, randomCoord, vec);
