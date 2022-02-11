@@ -219,7 +219,7 @@ void ResetChaos(){
 	HUD_ROUNDEND();
 	ResetTimerRemoveChickens();
 	StopTimer(g_NewEffect_Timer);
-	CreateTimer(1.0, ResetRoundChaos);
+	CreateTimer(0.1, ResetRoundChaos);
 }
 
 public void OnGameFrame(){
