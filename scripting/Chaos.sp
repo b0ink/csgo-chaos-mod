@@ -242,27 +242,35 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 	// PrintToChatAll("random effect: %s. global : %s",Random_Effect,  g_sSelectedChaosEffect);
 	char Random_Effect[64] = "-";
 	int randomEffect = -1;
-	if(!CustomRun){
-		do{
-			randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
-			GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
-		}while(FindStringInArray(Effect_History, Random_Effect) != -1);
+	int attempts = 0;
+	g_sLastPlayedEffect = "";
 
-		PushArrayString(Effect_History, Random_Effect);
-		if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
-	}else{
-		//ignore history if run customly
-		randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
-		GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
-	}
-
-	g_sSelectedChaosEffect = Random_Effect;
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
-	g_sLastPlayedEffect = "";
+	
 	while(!g_sLastPlayedEffect[0]){
+		if(!CustomRun){
+			do{
+				randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
+				GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
+			}while(FindStringInArray(Effect_History, Random_Effect) != -1);
+
+			PushArrayString(Effect_History, Random_Effect);
+			if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
+		}else{
+			//ignore history if run customly
+			randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
+			GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
+		}
+
+		g_sSelectedChaosEffect = Random_Effect;
+	
+		attempts++;
 		Chaos(); //run the chaos
-		if(g_sLastPlayedEffect[0]) break;
+		if(attempts > 9999){
+			Log("you really fucked up %s - %s", g_sSelectedChaosEffect, Random_Effect);
+		}
+		if(g_sLastPlayedEffect[0] || attempts > 9999) break;
 	}
 
 	
@@ -311,6 +319,11 @@ public void RetryEffect(){ //Used if there's no map data found for the map that 
 
 
 public Action ResetRoundChaos(Handle timer){
+	//todo use reset checks within effectshandler.sp
+	g_bCanSpawnChickens = true;
+	g_iChaos_Round_Count = 999;
+	g_bC4Chicken = false;
+	
 	RemoveChickens(false);
 	Fog_OFF();
 	g_bClearChaos = true;
