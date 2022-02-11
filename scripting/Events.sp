@@ -30,7 +30,7 @@ public void OnEntityCreated(int ent, const char[] classname){
 
 public void HookOnDecoySpawn(int iGrenade) {
 	int client = GetEntPropEnt(iGrenade, Prop_Send, "m_hOwnerEntity");
-	if (IsClientInGame(client) && IsPlayerAlive(client) && !IsFakeClient(client)) {
+	if (ValidAndAlive(client)) {
 		int nadeslot = GetPlayerWeaponSlot(client, 3);
 		if (nadeslot > 0) {
 			RemovePlayerItem(client, nadeslot);
