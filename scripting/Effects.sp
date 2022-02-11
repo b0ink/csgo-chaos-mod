@@ -2299,9 +2299,6 @@ public void Chaos_RandomInvisiblePlayer(){
 	}
 }
 
-
-
-//todo, delay each mega effect by half a second rather than blindly spawn it in 5 at a time
 public void Chaos_MEGACHAOS(){
 	if(ClearChaos()){	}
 	if(DecidingChaos("Chaos_MEGACHAOS")) return;
