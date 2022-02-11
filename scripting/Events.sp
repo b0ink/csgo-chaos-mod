@@ -40,7 +40,6 @@ public void HookOnDecoySpawn(int iGrenade) {
 	}
 }
 
-
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
 	if(g_bSimon_Active) SimonSays(client, buttons, iImpulse, fVel, fAngles, iWeapon, iSubType,  iCmdNum, iTickCount, iSeed);
@@ -84,13 +83,27 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	vec[1] = 0.0;
 	if(g_bNoStrafe){
 		if(buttons & IN_MOVELEFT){
+			accelerations[client] = 0.0;
+			air_accelerations[client] = 0.0;
+			// SendConVarValue( client, g_ConVar_Accelerate, "0.0" );
+
+
 			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-			ApplyBoost(client, -100.0);
-		} 	
-		if(buttons & IN_MOVERIGHT){
-			ApplyBoost(client, -100.0);
+			// ApplyBoost(client, -100.0);
+		}else if(buttons & IN_MOVERIGHT){
+			accelerations[client] = 0.0;
+			air_accelerations[client] = 0.0;
+
+		    // SendConVarValue( client, g_ConVar_Accelerate, "0" );
+
+			// ApplyBoost(client, -100.0);
 			// TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
-		} 
+		}else{
+			accelerations[client] = 5.5;
+			air_accelerations[client] = 12.0;
+			//todo just grab sm_rcon sv_accelerate value
+			// SendConVarValue( client, g_ConVar_Accelerate, "0.0" );
+		}
 	}
 	if(g_bNoForwardBack){
 		if(buttons & IN_FORWARD) 	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec);
@@ -220,18 +233,6 @@ public void OnGameFrame(){
 
 }
 
-
-void ApplyBoost(int client, float amount){
-    float direction[3], vel[3];
-    GetEntPropVector(client, Prop_Data, "m_vecVelocity", vel);
-    NormalizeVector(vel, direction);
-    ScaleVector(direction, amount);
-    AddVectors(vel, direction, vel);
-	// vel[0] = 0.0;
-	// vel[1] = 0.0;
-	vel[2] = 0.0;
-    TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vel);
-} 
 
 public Action Event_Cvar(Event event, const char[] name, bool dontBroadcast){
 	if (!g_cvChaosEnabled.BoolValue) return Plugin_Continue;

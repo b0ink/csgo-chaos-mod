@@ -34,7 +34,6 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	if(DecidingChaos("Chaos_BreakTime")) return;
 	if(CurrentlyActive(g_BreakTime_Timer)) return;
 
-	
 	cvar("sv_accelerate", "0");
 	cvar("sv_airaccelerate", "0");
 

@@ -540,12 +540,7 @@ void DoRandomTeleport(int client = -1){
 	}
 }
 
-void UpdateCvars(){
-	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
-	g_fChaos_EffectInterval = g_cvChaosEffectInterval.FloatValue;
-	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
-	g_fChaos_OverwriteDuration = g_cvChaosOverwriteDuration.FloatValue;
-}
+
 
 
 stock void CreateHostageRescue(){

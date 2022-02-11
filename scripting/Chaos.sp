@@ -62,17 +62,16 @@ char 	g_sSelectedChaosEffect[64] = "";
 bool 	g_bClearChaos = false;
 bool 	g_bDecidingChaos = false;
 
-ConVar 	g_cvChaosEnabled; bool g_bChaos_Enabled = true;
-ConVar 	g_cvChaosEffectInterval; float g_fChaos_EffectInterval = 15.0;
-ConVar 	g_cvChaosRepeating; bool g_bChaos_Repeating = true;
-ConVar 	g_cvChaosOverwriteDuration; float g_fChaos_OverwriteDuration = -1.0;
+
 
 
 Handle 	g_NewEffect_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
 bool 	g_bDisableRetryEffect = false;
 
-Handle Effect_History = INVALID_HANDLE;
+Handle 	Effect_History = INVALID_HANDLE;
+float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
+
 
 #include "Externals/InstantWeaponSwitch.sp"
 #include "Externals/WeaponJump.sp"
@@ -89,28 +88,20 @@ Handle Effect_History = INVALID_HANDLE;
 #include "Externals/Fog.sp"
 #include "Externals/Impostors.sp"
 
+#include "Effects.sp"
+
+#include "ConVars.sp"
 #include "Commands.sp"
 #include "Hud.sp"
 #include "EffectsHandler.sp"
 #include "Configs.sp"
 
 
-float g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 public void OnPluginStart(){
-	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
-
-	g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
-	g_cvChaosEffectInterval = CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
-	g_cvChaosRepeating = CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
-	g_cvChaosOverwriteDuration = CreateConVar("sm_chaos_overwrite_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
-
+	CreateConVars();
+	FindConVars();
 	UpdateCvars();
-	
-	HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
-	HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
-	HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
-	HookConVarChange(g_cvChaosOverwriteDuration, 	ConVarChanged);
 
 	HookEvent("round_start", 	Event_RoundStart);
 	HookEvent("round_end", 		Event_RoundEnd);	
@@ -154,7 +145,6 @@ public void OnPluginStart(){
 }
 
 public void OnMapStart(){
-
 	if(Effect_History != INVALID_HANDLE) ClearArray(Effect_History);
 	
 	UpdateCvars();
@@ -215,6 +205,7 @@ public void OnLibraryAdded(const char[] name){
 }
 
 public void OnClientPutInServer(int client){
+	HookAcc(client);
 	WeaponJumpConnect_Handler(client);
 
 	SDKHook(client, SDKHook_WeaponDrop, 		Hook_WeaponDrop);
@@ -229,28 +220,7 @@ public void OnClientDisconnect(int client){
 	WeaponJumpDisconnect_Handler(client);
 }
 
-public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
-	if(convar == g_cvChaosEnabled){
-		if(StringToInt(oldValue) == 0 && StringToInt(newValue) == 1){
-			g_bChaos_Enabled = true;
-			ChooseEffect(null);
-		}else if(StringToInt(newValue) == 0){
-			g_bChaos_Enabled = false;
-			StopTimer(g_NewEffect_Timer);
-		}
-	}else if(convar == g_cvChaosEffectInterval){
-		g_fChaos_EffectInterval = StringToFloat(newValue);
-	}else if(convar == g_cvChaosRepeating){
-		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
-			g_bChaos_Repeating = false;
-			StopTimer(g_NewEffect_Timer);
-		}else if(StringToInt(newValue) == 1){
-			g_bChaos_Repeating = true;
-		}
-	} else if(convar == g_cvChaosOverwriteDuration){
-		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
-	}
-}
+
 
 public Action Timer_CreateHostage(Handle timer){
 	CreateHostageRescue();
@@ -340,7 +310,6 @@ public Action ResetRoundChaos(Handle timer){
 }
 
 
-#include "Effects.sp"
 #include "Hooks.sp"
 #include "Events.sp"
 #include "Helpers.sp"
