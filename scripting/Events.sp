@@ -111,7 +111,6 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 				Client_Accelerations[client] = 		5.5;
 				Client_AirAccelerations[client] = 	12.0;
 			}
-
 		}
 	}
 	return Plugin_Continue;
