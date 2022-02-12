@@ -6,11 +6,8 @@
 
 #undef REQUIRE_PLUGIN
 #include <DynamicChannels>
+#include <smac> // Protection for SMAC users (SM Aimbot).
 #define REQUIRE_PLUGIN
-
-// Protection for SMAC users (SM Aimbot).
-#undef REQUIRE_PLUGIN
-#include <smac>
 
 #pragma newdecls required
 #pragma semicolon 1
