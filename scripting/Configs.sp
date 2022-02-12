@@ -117,6 +117,13 @@ void ParseMapCoordinates() {
 	delete kv;
 }
 
+/*
+	ParseScore() is used to figure out the value of 'SlowScriptTimeout' found in addons/sourcemod/configs/core.cfg
+	Chaos_FakeCrash relies on SourceMod disabling the script when it times out (infinite loop) for 8 seconds.
+
+	In the rare case SlowScriptTimeout is disabled (value of 0) or 10+ seconds, we check that to prevent Chaos_Fakecrash from running
+ */
+
 int g_SlowScriptTimeout = -1;
 void ParseCore(){
 	char path[PLATFORM_MAX_PATH];
@@ -137,6 +144,12 @@ void ParseCore(){
 		if(StrContains(line, "\"SlowScriptTimeout\"", false) != -1){
 			int len = strlen(line);
 			g_SlowScriptTimeout = StringToInt(line[len-2]);
+			//check if its a two digit number eg. 10+
+			int doubleDigit = StringToInt(line[len-3]);
+			if(doubleDigit != 0){
+				doubleDigit = doubleDigit * 10;
+				g_SlowScriptTimeout = doubleDigit + g_SlowScriptTimeout;
+			}
 		}
 	}
 
