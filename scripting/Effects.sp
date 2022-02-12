@@ -2046,12 +2046,12 @@ Action Chaos_NormalWhiteFog(Handle timer = null, bool EndChaos = false){
 		StopTimer(g_NormalWhiteFog_Timer);
 		AcceptEntityInput(g_iFog, "TurnOff");
 	}
-	if(NotDecidingChaos("Chaos_NormalWhiteFog")) return;
+	if(NotDecidingChaos("Chaos_NormalWhiteFog.NormalFog")) return;
 	if(CurrentlyActive(g_NormalWhiteFog_Timer)) return;
 
 	NormalWhiteFog();
 
-	float duration = GetChaosTime("Chaos_NormalWhiteFog.NormalFog", 45.0);
+	float duration = GetChaosTime("Chaos_NormalWhiteFog", 45.0);
 	if(duration > 0) g_NormalWhiteFog_Timer = CreateTimer(duration, Chaos_NormalWhiteFog, true);
 	
 	AnnounceChaos("Fog", duration);
