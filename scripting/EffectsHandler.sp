@@ -1,12 +1,11 @@
-//todo: bypass checks with custom runs
-public void Chaos(){
+void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
 	if(IsChaosEnabled("Chaos_NoScopeOnly"))  Chaos_NoScopeOnly();
 	if(IsChaosEnabled("Chaos_PortalGuns"))  Chaos_PortalGuns();
 	if(IsChaosEnabled("Chaos_Aimbot"))  Chaos_Aimbot();
 	if(IsChaosEnabled("Chaos_InfiniteAmmo"))  Chaos_InfiniteAmmo();
 	if(IsChaosEnabled("Chaos_DecoyDodgeball"))  Chaos_DecoyDodgeball();
-	if(!g_bMegaChaos){
+	if(!g_bMegaChaos || reset){
 		if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
 		//todo: ensure that core.cfg "SlowScriptTimeout" is not set to 0, default set to 8.
 		if(GetRandomInt(0, 100) <= 50) if(IsChaosEnabled("Chaos_FakeCrash", 0))  Chaos_FakeCrash(); //risky.. lol
@@ -15,7 +14,7 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Bankrupt"))  Chaos_Bankrupt();
 	if(IsChaosEnabled("Chaos_Shields"))  Chaos_Shields();
 	if(IsChaosEnabled("Chaos_BlindPlayers"))  Chaos_BlindPlayers();
-	if(ValidBombSpawns()){
+	if(ValidBombSpawns() || reset){
 		if(IsChaosEnabled("Chaos_AutoPlantC4"))  Chaos_AutoPlantC4();
 	}
 	if(IsChaosEnabled("Chaos_InfiniteGrenades"))  Chaos_InfiniteGrenades();
@@ -26,7 +25,7 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_Flying"))  Chaos_Flying();
 	if(IsChaosEnabled("Chaos_OneBulletMag"))  Chaos_OneBulletMag();
 	if(IsChaosEnabled("Chaos_Thirdperson"))  Chaos_Thirdperson();
-	if(!g_bC4Chicken) if(IsChaosEnabled("Chaos_C4Chicken"))  Chaos_C4Chicken();
+	if(!g_bC4Chicken || reset) if(IsChaosEnabled("Chaos_C4Chicken"))  Chaos_C4Chicken();
 	if(IsChaosEnabled("Chaos_AlienModelKnife"))  Chaos_AlienModelKnife();
 	if(IsChaosEnabled("Chaos_IsThisMexico"))  Chaos_IsThisMexico();
 	if(IsChaosEnabled("Chaos_HeadshotOnly"))  Chaos_HeadshotOnly();
@@ -37,7 +36,7 @@ public void Chaos(){
 	if(IsChaosEnabled("Chaos_NoSpread"))  Chaos_NoSpread();
 	if(IsChaosEnabled("Chaos_Invis"))  Chaos_Invis();
 	if(IsChaosEnabled("Chaos_MoonGravity"))  Chaos_MoonGravity();
-	if(GetAliveCTCount() >= 2 && GetAliveTCount() >= 2) if(IsChaosEnabled("Chaos_SlayRandomPlayer"))  Chaos_SlayRandomPlayer();
+	if((GetAliveCTCount() >= 2 && GetAliveTCount() >= 2) || reset) if(IsChaosEnabled("Chaos_SlayRandomPlayer"))  Chaos_SlayRandomPlayer();
 	if(IsChaosEnabled("Chaos_TaserParty"))  Chaos_TaserParty();
 	if(IsChaosEnabled("Chaos_InsaneGravity"))  Chaos_InsaneGravity();
 	if(IsChaosEnabled("Chaos_ESP"))  Chaos_ESP();
@@ -94,7 +93,7 @@ public void Chaos(){
 	if(StrEqual(MapName, "de_dust2", false) == false){
 		if(IsChaosEnabled("Chaos_RandomSkybox"))  Chaos_RandomSkybox();
 	}
-	if(g_iChaos_Round_Count > 0){
+	if(g_iChaos_Round_Count > 0 || reset){
 		if(IsChaosEnabled("Chaos_RespawnTheDead"))  Chaos_RespawnTheDead();
 		if(IsChaosEnabled("Chaos_ResetSpawns"))  Chaos_ResetSpawns();
 		if(IsChaosEnabled("Chaos_RespawnDead_LastLocation"))  Chaos_RespawnDead_LastLocation();
@@ -105,7 +104,7 @@ public void Chaos(){
 		}
 	}
 	if(ValidMapPoints()){
-		if(g_bCanSpawnChickens){
+		if(g_bCanSpawnChickens || reset){
 			if(IsChaosEnabled("Chaos_LittleChooks"))  Chaos_LittleChooks();
 			if(IsChaosEnabled("Chaos_BigChooks"))  Chaos_BigChooks();
 			if(IsChaosEnabled("Chaos_MamaChook"))  Chaos_MamaChook();

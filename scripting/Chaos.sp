@@ -311,6 +311,7 @@ public Action Timer_ResetPlaySound(Handle timer){
 	g_bPlaySound_Debounce = false;
 }
 
+//todo, does ChooseEffect already handle retries now
 public void RetryEffect(){ //Used if there's no map data found for the map that renders the event useless
 	Log("RETRYING EVENT..");
 	if(g_bDisableRetryEffect) return;
@@ -329,7 +330,7 @@ public Action ResetRoundChaos(Handle timer){
 	Fog_OFF();
 	g_bClearChaos = true;
 	g_bDecidingChaos = false;
-	Chaos();
+	Chaos(true);
 }
 
 

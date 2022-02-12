@@ -42,7 +42,7 @@ public Action Command_StopChaos(int client, int args){
 	StopTimer(g_NewEffect_Timer);
 	g_bClearChaos = true;
 	g_bDecidingChaos = false;
-	Chaos(); //count and reset all chaos
+	Chaos(true); //count and reset all chaos
 	AnnounceChaos("Chaos is Disabled!", -2.0, true);
 	return Plugin_Handled;
 }

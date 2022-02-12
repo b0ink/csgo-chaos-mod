@@ -1586,7 +1586,7 @@ Action Chaos_ESP(Handle timer = null, bool EndChaos = false ){
 		destroyGlows();
 		if(EndChaos) AnnounceChaos("Wall Hacks", -1.0, true);
 	}
-	if(DecidingChaos("Chaos_ESP.WallHacks")) return; //todo test if works
+	if(DecidingChaos("Chaos_ESP.WallHacks")) return;
 	if(CurrentlyActive(g_ESP_Timer)) return;
 
 	cvar("sv_force_transmit_players", "1");

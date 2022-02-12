@@ -59,7 +59,7 @@ public void Rollback_Log(){
 			// g_Chaos_Rewind_Timer = INVALID_HANDLE;
 			// g_Chaos_Rewind_Timer = CreateTimer(0.3, Rewind_Timer, time);
 		}else{
-			TeleportPlayersToClosestLocation(); //fail safe todo: this is still bugged (the rewind part not this <<--)
+			// TeleportPlayersToClosestLocation(); //fail safe: this is still bugged (the rewind part not this <<--)
 			g_bRewind_logging_enabled = true;
 			g_Rewinding = false;
 			Chaos_RewindTenSeconds(true);
