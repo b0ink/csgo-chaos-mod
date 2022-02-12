@@ -92,7 +92,7 @@ public Action PlantBomb(Handle timer, int client){
 
             GameRules_SetProp("m_bBombPlanted", 1);
             SetEntData(bombEntity, bombTicking, 1, 1, true);
-            Sendg_bBombPlanted(client);
+            SendBombPlanted(client);
 
             if (DispatchSpawn(bombEntity)){
 				ActivateEntity(bombEntity);
@@ -101,13 +101,10 @@ public Action PlantBomb(Handle timer, int client){
 				g_bBombPlanted = true;
             }
         }
-    }else{
-        PrintToChatAll("something weird happened");
-        // CS_TerminateRound(1.0, CSRoundEnd_Draw); // todo; ??
     }
 }
 
-public void Sendg_bBombPlanted(int client){
+public void SendBombPlanted(int client){
     Event event = CreateEvent("bomb_planted");
     if (event != null){
         event.SetInt("userid", GetClientUserId(client));
