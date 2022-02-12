@@ -53,8 +53,8 @@ void PrintEffects(){
 					}
 				}
 			}
-
-			SetHudTextParams(0.01, 0.37, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
+			//.37 y;
+			SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
 		}
 	}
