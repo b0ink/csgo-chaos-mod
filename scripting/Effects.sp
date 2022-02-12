@@ -2184,10 +2184,18 @@ void Chaos_DropPrimaryWeapon(){
 
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
-			ClientCommand(i, "slot2;slot1; drop"); //todo drop their pisol if no primary available
+			ClientCommand(i, "slot2;slot1;drop");
 		}
 	}
+	CreateTimer(0.1, Timer_DropPrimary);
 	AnnounceChaos("Drop Primary Weapon", -1.0);
+}
+public Action Timer_DropPrimary(Handle timer){
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			ClientCommand(i, "drop");
+		}
+	}
 }
 
 
