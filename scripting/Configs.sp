@@ -135,7 +135,6 @@ void ParseCore(){
 		}
 		TrimString(line); 
 		if(StrContains(line, "\"SlowScriptTimeout\"", false) != -1){
-			PrintToChatAll(line);
 			int len = strlen(line);
 			g_SlowScriptTimeout = StringToInt(line[len-2]);
 		}
