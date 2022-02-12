@@ -1293,7 +1293,6 @@ Action Chaos_HeadshotOnly(Handle timer = null, bool EndChaos = false){
 
 Handle g_ohko_Timer = INVALID_HANDLE;
 Action Chaos_OHKO(Handle timer = null, bool EndChaos = false){
-	//TODO return this info in another function
 	if(ClearChaos(EndChaos)){
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityHealth(i, 100);

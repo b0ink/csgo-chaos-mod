@@ -127,4 +127,3 @@ void Chaos(bool reset = false){
 	}
 	g_bClearChaos = false;
 }
-//todo; if full version (prop hunts), include a separate chaos file that goes in here
