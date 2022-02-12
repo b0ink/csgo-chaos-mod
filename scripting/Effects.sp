@@ -472,8 +472,8 @@ Action Chaos_DisableStrafe(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		g_bNoStrafe = false;
 		//todo should NOT handle it this way, figure out some override and refactor
-		cvar("sv_accelerate 5.5");
-		cvar("sv_airaccelrate 12")
+		cvar("sv_accelerate", "5.5");
+		cvar("sv_airaccelrate", "12");
 		StopTimer(g_NoStrafe_Timer);
 		if(EndChaos) AnnounceChaos("Normal Left/Right Movement", -1.0, true);
 	}
@@ -493,8 +493,8 @@ Handle g_NoForwardBack_Timer = INVALID_HANDLE;
 Action Chaos_DisableForwardBack(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		g_bNoForwardBack = false;
-		cvar("sv_accelerate 5.5");
-		cvar("sv_airaccelrate 12")
+		cvar("sv_accelerate", "5.5");
+		cvar("sv_airaccelrate", "12");
 		StopTimer(g_NoForwardBack_Timer);
 		if(EndChaos) AnnounceChaos("Normal Forward/Backward Movement", -1.0, true);
 	}
@@ -846,7 +846,6 @@ void Chaos_Shields(){
 			if (entity > 0) {
 				EquipPlayerWeapon(i, entity);
 				SetEntPropEnt(i, Prop_Data, "m_hActiveWeapon" , entity);
-				PrintToChatAll("the weapon is %s", playerWeapon);
 				if(StrContains(playerWeapon, "knife", false) != -1){
 					FakeClientCommand(i, "use weapon_knife");
 					InstantSwitch(i, -1);
