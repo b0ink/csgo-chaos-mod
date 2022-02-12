@@ -19,7 +19,7 @@ bool ValidBombSpawns(){
 	return true;
 }
 
-bool DecidingChaos(char[] EffectName = ""){
+bool NotDecidingChaos(char[] EffectName = ""){
 	//if effectname was provided manually, 
 	if(!g_bDecidingChaos) return true;
 	if(!g_sSelectedChaosEffect[0]) return true;
@@ -27,18 +27,13 @@ bool DecidingChaos(char[] EffectName = ""){
 		if(!g_bDecidingChaos
 		|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
 		&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
-	
+			
 			return true;
 		}else{
-			//this function is confusing
-			//todo: set deciding chaos to false or something
-			//this should prevent from another chaos running
 			Log("[Chaos] Running Effect: %s", EffectName);
-			// strcopy(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), EffectName);
 			strcopy(g_sLastPlayedEffect, sizeof(g_sLastPlayedEffect), EffectName);
 			g_sSelectedChaosEffect = "";
 			g_bDecidingChaos = false;
-			// CreateTimer(0.5, Timer_ResetCustomChaosSelection);
 			return false;
 		}
 	}

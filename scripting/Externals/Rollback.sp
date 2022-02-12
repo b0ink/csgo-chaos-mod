@@ -81,7 +81,7 @@ void Chaos_RewindTenSeconds(bool EndChaos = false){
 			}
 		}
 	}
-	if(DecidingChaos("Chaos_RewindTenSeconds")) return;
+	if(NotDecidingChaos("Chaos_RewindTenSeconds")) return;
 	Log("[Chaos] Running: Chaos_RewindTenSeconds");
 	g_bRewind_logging_enabled = false;
 	g_Rewinding = true;
