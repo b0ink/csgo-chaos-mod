@@ -23,29 +23,6 @@ Action Chaos_RapidFire(Handle timer = null, bool EndChaos = false){
 	AnnounceChaos("Rapid Fire", duration);
 }
 
-Handle g_BreakTime_Timer = INVALID_HANDLE;
-bool g_BreakTime = false;
-Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
-	if(ClearChaos(EndChaos)){
-		cvar("sv_accelerate", "5.5");
-		cvar("sv_airaccelerate", "12");
-		StopTimer(g_BreakTime_Timer);
-		g_BreakTime = false;
-		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
-	}
-	if(NotDecidingChaos("Chaos_BreakTime")) return;
-	if(CurrentlyActive(g_BreakTime_Timer)) return;
-	
-	g_BreakTime = true;
-	cvar("sv_accelerate", "0");
-	cvar("sv_airaccelerate", "0");
-
-	float duration = GetChaosTime("Chaos_BreakTime", 10.0);
-	if(duration > 0) g_BreakTime_Timer = CreateTimer(duration, Chaos_BreakTime, true);
-	
-	//todo set m_movement to 0 so no one can do anything, potentially stop shooting?
-	AnnounceChaos("Break Time!", duration);
-}
 
 Handle FakeTeleport_Timer = INVALID_HANDLE;
 float FakeTelport_loc[MAXPLAYERS+1][3];
@@ -2299,6 +2276,37 @@ public void Chaos_RandomInvisiblePlayer(){
 	}else{
 		RetryEffect();
 	}
+}
+
+Handle g_BreakTime_Timer = INVALID_HANDLE;
+bool g_BreakTime = false;
+/**
+todo!:
+	for variables like g_bKnifeFight, convert it to an INT, when used by an effect, add +1, when resetting it, add -1
+	if above 1, activate whatever its supposed to do
+	this should reduce clashing with global variables
+ */
+Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
+	if(ClearChaos(EndChaos)){
+		cvar("sv_accelerate", "5.5");
+		cvar("sv_airaccelerate", "12");
+		StopTimer(g_BreakTime_Timer);
+		g_BreakTime = false;
+		g_bKnifeFight = false;
+		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
+	}
+	if(NotDecidingChaos("Chaos_BreakTime")) return;
+	if(CurrentlyActive(g_BreakTime_Timer)) return;
+	
+	g_BreakTime = true;
+	g_bKnifeFight = true;
+	cvar("sv_accelerate", "0");
+	cvar("sv_airaccelerate", "0");
+
+	float duration = GetChaosTime("Chaos_BreakTime", 10.0);
+	if(duration > 0) g_BreakTime_Timer = CreateTimer(duration, Chaos_BreakTime, true);
+	
+	AnnounceChaos("Break Time!", duration);
 }
 
 public void Chaos_MEGACHAOS(){
