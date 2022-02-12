@@ -1,3 +1,12 @@
+void RegisterCommands(){
+	RegAdminCmd("chaos_refreshconfig", 	Command_RefreshConfig, 	ADMFLAG_GENERIC);
+	RegAdminCmd("chaos_debug", 			Command_ChaosDebug, 	ADMFLAG_GENERIC);
+	RegAdminCmd("chaos_help", 			Command_ChaosHelp, 		ADMFLAG_GENERIC);
+
+	RegAdminCmd("sm_chaos", 			Command_NewChaosEffect,	ADMFLAG_GENERIC);
+	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
+	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
+}
 
 //todo: multple effects still spawn if you do "!chaos aut", (funky, autoplant et, juggernaut)
 public Action Command_NewChaosEffect(int client, int args){

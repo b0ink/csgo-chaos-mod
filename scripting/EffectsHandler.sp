@@ -7,8 +7,13 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_DecoyDodgeball"))  Chaos_DecoyDodgeball();
 	if(!g_bMegaChaos || reset){
 		if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
-		//todo: ensure that core.cfg "SlowScriptTimeout" is not set to 0, default set to 8.
-		if(GetRandomInt(0, 100) <= 50) if(IsChaosEnabled("Chaos_FakeCrash", 0))  Chaos_FakeCrash(); //risky.. lol
+		if(GetRandomInt(0, 100) <= 50){
+			if(GetSlowScriptTimeout() > 0 && GetSlowScriptTimeout() <= 8){
+				if(IsChaosEnabled("Chaos_FakeCrash", 0)){
+					Chaos_FakeCrash();
+				}
+			} 
+		}
 	}
 	if(IsChaosEnabled("Chaos_RandomInvisiblePlayer"))  Chaos_RandomInvisiblePlayer();
 	if(IsChaosEnabled("Chaos_Bankrupt"))  Chaos_Bankrupt();

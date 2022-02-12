@@ -13,6 +13,7 @@ public void OnConfigsExecuted(){
 	
 	ParseMapCoordinates();
 	ParseChaosEffects();
+	ParseCore();
 }
 
 public void PrecacheTextures(){
@@ -116,5 +117,44 @@ void ParseMapCoordinates() {
 	delete kv;
 }
 
+int g_SlowScriptTimeout = -1;
+void ParseCore(){
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "configs/core.cfg");
+	
+	if(!FileExists(path)) return;
 
+	File file = OpenFile(path, "r"); 
+	if (file == null) return;
 
+	char line[256];
+
+	while (file.ReadLine(line, sizeof(line))) {
+		if (strlen(line) > 0 && line[strlen(line) - 1] == '\n') {
+			line[strlen(line) - 1] = '\0';
+		}
+		TrimString(line); 
+		if(StrContains(line, "\"SlowScriptTimeout\"", false) != -1){
+			PrintToChatAll(line);
+			int len = strlen(line);
+			g_SlowScriptTimeout = StringToInt(line[len-2]);
+		}
+	}
+
+	delete file;
+	file.Close();
+
+	Log("[DEBUG] SlowScriptTimeout is set to %i", g_SlowScriptTimeout);
+
+	if(g_SlowScriptTimeout == -1){
+		Log("Error parsing configs/core.cfg, could not read 'SlowScriptTimeout' Value. Chaos_FakeCrash will be disabled.");
+	}else if(g_SlowScriptTimeout == 0){
+		Log("Chaos_FakeCrash will be disabled due to configs/core.cfg value 'SlowScriptTimeout' set to 0.");
+	}else if(g_SlowScriptTimeout > 8){
+		Log("Chaos_FakeCrash will be disabled due to configs/core.cfg value 'SlowScriptTimeout' set higher than 8 seconds.");
+	}
+}
+
+int GetSlowScriptTimeout(){
+	return g_SlowScriptTimeout;
+}

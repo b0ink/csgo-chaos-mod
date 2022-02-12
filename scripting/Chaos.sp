@@ -103,6 +103,8 @@ public void OnPluginStart(){
 	CreateConVars();
 	FindConVars();
 	UpdateCvars();
+	
+	RegisterCommands();
 
 	HookEvent("round_start", 	Event_RoundStart);
 	HookEvent("round_end", 		Event_RoundEnd);	
@@ -131,13 +133,6 @@ public void OnPluginStart(){
 	EXPLOSIVEBULLETS_INIT();
 	DRUGS_INIT();
 
-	RegAdminCmd("chaos_refreshconfig", 	Command_RefreshConfig, 	ADMFLAG_GENERIC);
-	RegAdminCmd("chaos_debug", 			Command_ChaosDebug, 	ADMFLAG_GENERIC);
-	RegAdminCmd("chaos_help", 			Command_ChaosHelp, 		ADMFLAG_GENERIC);
-
-	RegAdminCmd("sm_chaos", 			Command_NewChaosEffect,	ADMFLAG_GENERIC);
-	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
-	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
 
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
