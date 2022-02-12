@@ -117,7 +117,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 }
 
 public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
-	GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons))]);
+	GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons) - 1)]);
 }
 
 public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
