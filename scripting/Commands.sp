@@ -8,7 +8,12 @@ void RegisterCommands(){
 	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
 }
 
-//todo: multple effects still spawn if you do "!chaos aut", (funky, autoplant et, juggernaut)
+//: multple effects still spawn if you do "!chaos aut", (funky, autoplant et, juggernaut)
+/**
+	^ No longer runs multiple effects, but another todo will be to add all effects that match the criteria to an array
+	then show a menu of the array is more than 1, so make a global variable like g_SearchingChaos to find it but not run it.
+	it'll only need to be edited within NotDecidingChaos();
+ */
 public Action Command_NewChaosEffect(int client, int args){
 	if(args > 1){
 		ReplyToCommand(client, "Usage: sm_chaos <Effect Name (optional)>");
