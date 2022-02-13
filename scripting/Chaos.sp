@@ -260,7 +260,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 		attempts++;
 		Chaos(); //run the chaos
 		if(attempts > 9999){
-			Log("you really fucked up %s - %s", g_sSelectedChaosEffect, Random_Effect);
+			Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 		}
 		if(g_sLastPlayedEffect[0] || attempts > 9999) break;
 	}
