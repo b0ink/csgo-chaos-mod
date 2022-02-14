@@ -313,11 +313,6 @@ public void RetryEffect(){ //Used if there's no map data found for the map that 
 
 
 public Action ResetRoundChaos(Handle timer){
-	//todo use reset checks within effectshandler.sp
-	g_bCanSpawnChickens = true;
-	g_iChaos_Round_Count = 999;
-	g_bC4Chicken = false;
-	
 	RemoveChickens(false);
 	Fog_OFF();
 	g_bClearChaos = true;
