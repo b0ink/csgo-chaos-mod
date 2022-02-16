@@ -19,6 +19,7 @@ bool ValidBombSpawns(){
 	return true;
 }
 
+
 bool NotDecidingChaos(char[] EffectName = ""){
 	//if effectname was provided manually, 
 	if(!g_bDecidingChaos) return true;
@@ -30,11 +31,16 @@ bool NotDecidingChaos(char[] EffectName = ""){
 			
 			return true;
 		}else{
-			Log("[Chaos] Running Effect: %s", EffectName);
-			strcopy(g_sLastPlayedEffect, sizeof(g_sLastPlayedEffect), EffectName);
-			g_sSelectedChaosEffect = "";
-			g_bDecidingChaos = false;
-			return false;
+			if(g_bFindingPotentialEffects){
+				PushArrayString(Possible_Chaos_Effects, EffectName);
+				return true;
+			}else{
+				Log("[Chaos] Running Effect: %s", EffectName);
+				strcopy(g_sLastPlayedEffect, sizeof(g_sLastPlayedEffect), EffectName);
+				g_sSelectedChaosEffect = "";
+				g_bDecidingChaos = false;
+				return false;
+			}
 		}
 	}
 	return true;

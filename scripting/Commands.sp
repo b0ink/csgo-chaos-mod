@@ -14,6 +14,9 @@ void RegisterCommands(){
 	then show a menu of the array is more than 1, so make a global variable like g_SearchingChaos to find it but not run it.
 	it'll only need to be edited within NotDecidingChaos();
  */
+
+Handle Possible_Chaos_Effects = INVALID_HANDLE;
+bool g_bFindingPotentialEffects = false;
 public Action Command_NewChaosEffect(int client, int args){
 	if(args > 1){
 		ReplyToCommand(client, "Usage: sm_chaos <Effect Name (optional)>");
@@ -22,6 +25,8 @@ public Action Command_NewChaosEffect(int client, int args){
 	char effectName[64];
 	GetCmdArg(1, effectName, sizeof(effectName));
 
+	ClearArray(Possible_Chaos_Effects);
+	
 	g_bDisableRetryEffect = true;
 	if(g_bCanSpawnEffect){
 		if(args == 1){
@@ -29,17 +34,29 @@ public Action Command_NewChaosEffect(int client, int args){
 					g_sSelectedChaosEffect = effectName;
 					g_bDecidingChaos = true;
 					g_bClearChaos = false;
+					g_bFindingPotentialEffects = true;
 					Chaos();
+					g_bFindingPotentialEffects = false;
+					if(GetArraySize(Possible_Chaos_Effects) <= 0){
+						ReplyToCommand(client, "[Chaos] No effects found.");
+						return Plugin_Handled;
+					}else if(GetArraySize(Possible_Chaos_Effects) == 1){
+						Chaos();
+					}else{
+						//todo show menu of array
+						ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
+						ShowMenu(client);
+					}
 				
 			}else{
-				ReplyToCommand(client, "Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
+				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
 				return Plugin_Handled;
 			}
 		}else{
 			ChooseEffect(null, true);
 		}
 	}else{
-		ReplyToCommand(client, "You can't spawn new effects right now, please wait until the round starts.");
+		ReplyToCommand(client, "[Chaos] You can't spawn new effects right now, please wait until the round starts.");
 		return Plugin_Handled;
 	}
 
@@ -47,6 +64,44 @@ public Action Command_NewChaosEffect(int client, int args){
 	g_sSelectedChaosEffect = "";
 	return Plugin_Handled;
 }
+
+void ShowMenu(int client){
+	Menu menu = new Menu(Effect_Selection);
+	menu.SetTitle("Select Chaos Effect");
+	char title[64];
+	for(int i = 0; i < GetArraySize(Possible_Chaos_Effects); i++){
+		GetArrayString(Possible_Chaos_Effects, i, title, sizeof(title));
+		menu.AddItem(title, title);
+	}
+	menu.ExitButton = true;
+	menu.Display(client, 20);
+}
+
+public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2)
+{
+    /* If an option was selected, tell the client about the item. */
+    if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		PrintToConsole(param1, "You selected item: %d (found? %d info: %s)", param2, found, info);
+		if(found){
+			g_sSelectedChaosEffect = info;
+			g_bDecidingChaos = true;
+			g_bClearChaos = false;
+			Chaos();
+		}
+    }else if (action == MenuAction_Cancel){
+        // PrintToServer("Client %d's menu was cancelled.  Reason: %d", param1, param2);
+    }else if (action == MenuAction_End){
+        delete menu;
+    }
+}
+
+
+
+
+
+
 public Action Timer_ReEnableRetries(Handle timer){
 	g_bDisableRetryEffect = false;
 }

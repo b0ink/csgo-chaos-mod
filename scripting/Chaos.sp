@@ -134,7 +134,7 @@ public void OnPluginStart(){
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
 	Effect_History = CreateArray(64);
-
+	Possible_Chaos_Effects = CreateArray(64);
 }
 
 public void OnMapStart(){
