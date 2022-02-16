@@ -88,14 +88,15 @@ void ShowMenu(int client, bool AllowRandom = false){
 	char title[64];
 	char title2[64];
 	char title3[1][64];
+	char final_title[128];
 	if(AllowRandom) menu.AddItem("", "Random Effect"); //KEEP ID BLANK
 
-	//todo, the function names suck, make something thatlll grab the name from the config
 	for(int i = 0; i < GetArraySize(Possible_Chaos_Effects); i++){
 		GetArrayString(Possible_Chaos_Effects, i, title, sizeof(title));
 		FormatEx(title2, sizeof(title2), "%s", title[6]); //remove Chaos_ Prefix
 		ExplodeString(title2, ".", title3, sizeof(title3), sizeof(title3[]), false);
-		menu.AddItem(title, title3[0]);
+		FormatEx(final_title, sizeof(final_title), "%s", GetChaosTitle(title3[0]));
+		menu.AddItem(title, final_title);
 	}
 	menu.ExitButton = true;
 	menu.Display(client, 0);

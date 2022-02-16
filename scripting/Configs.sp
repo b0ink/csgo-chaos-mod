@@ -1,14 +1,18 @@
 #define CONFIG_ENABLED 0
 #define CONFIG_EXPIRE 1
 
+//todo: rename these
 Handle EnabledEffects = INVALID_HANDLE;
+Handle EffectTitles = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){
 
 	if(EnabledEffects != INVALID_HANDLE){
 		ClearArray(EnabledEffects);
+		ClearArray(EffectTitles);
 	}else{
 		EnabledEffects = CreateArray(64);
+		EffectTitles = CreateArray(128);
 	}
 	
 	ParseMapCoordinates();
@@ -51,17 +55,21 @@ void ParseChaosEffects(){
 	int  Chaos_Properties[2];
 	do{
 		char Chaos_Function_Name[64];
+		char Chaos_Function_Title[128];
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
+			kvConfig.GetString("name", Chaos_Function_Title, sizeof(Chaos_Function_Title), Chaos_Function_Name);
 			if(enabled != 0 && enabled != 1) enabled = 1;
 			
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
 			if(enabled == 1 && Chaos_Function_Name[0]){
 				PushArrayString(EnabledEffects, Chaos_Function_Name);
+				PushArrayString(EffectTitles, 	Chaos_Function_Title);
 			}
 			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
+
 			// PrintToChatAll("%s: on: %i, dur: %i", Chaos_Function_Name, enabled, expires);
 		}
 	} while(kvConfig.GotoNextKey());
