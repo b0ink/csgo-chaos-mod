@@ -6,18 +6,11 @@ void RegisterCommands(){
 	RegAdminCmd("sm_chaos", 			Command_MainMenu,		ADMFLAG_GENERIC);
 	RegAdminCmd("sm_effect", 			Command_NewChaosEffect,	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
-	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 	ADMFLAG_GENERIC);
+	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
 }
 
-//: multple effects still spawn if you do "!chaos aut", (funky, autoplant et, juggernaut)
-/**
-	^ No longer runs multiple effects, but another todo will be to add all effects that match the criteria to an array
-	then show a menu of the array is more than 1, so make a global variable like g_SearchingChaos to find it but not run it.
-	it'll only need to be edited within NotDecidingChaos();
- */
 Handle Possible_Chaos_Effects = INVALID_HANDLE;
 bool g_bFindingPotentialEffects = false;
-
 
 public Action Command_MainMenu(int client, int args){
 	ShowMenu_Main(client);
