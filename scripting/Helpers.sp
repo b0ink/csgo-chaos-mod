@@ -115,6 +115,19 @@ char[] GetChaosTitle(char[] function_name){
 
 
 
+bool PoolChaosEffects(char[] effectName = ""){
+	ClearArray(Possible_Chaos_Effects);
+	if(effectName[0]){
+		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", effectName);
+	}else{
+		g_sSelectedChaosEffect = "Chaos_";
+	}
+	g_bDecidingChaos = true;
+	g_bClearChaos = false;
+	g_bFindingPotentialEffects = true;
+	Chaos();
+	g_bFindingPotentialEffects = false;
+}
 
 
 
