@@ -47,7 +47,6 @@ bool NotDecidingChaos(char[] EffectName = ""){
 }
 
 
-
 bool ClearChaos(bool EndChaos = false){
 	if(g_bClearChaos || EndChaos) return true;
 	return false;
@@ -101,6 +100,18 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 }
 
 
+char[] GetChaosTitle(char[] function_name){
+	char return_string[128];
+	char temp_title[128];
+	for(int i = 0; i < GetArraySize(EnabledEffects); i++){
+		GetArrayString(EnabledEffects, i, temp_title, sizeof(temp_title));
+		if(StrContains(temp_title, function_name, false) != -1){
+			GetArrayString(EffectTitles, i, return_string, sizeof(return_string));
+			break;
+		}
+	}
+	return return_string;
+}
 
 
 
