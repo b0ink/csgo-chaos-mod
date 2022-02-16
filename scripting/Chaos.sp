@@ -88,15 +88,19 @@ bool g_DynamicChannel = false;
 #include "Externals/Fog.sp"
 #include "Externals/Impostors.sp"
 
+
 #include "Effects.sp"
+
+
 
 #include "ConVars.sp"
 #include "Commands.sp"
 #include "Hud.sp"
 #include "EffectsHandler.sp"
+
 #include "Configs.sp"
 
-
+#include "Menu.sp"
 
 public void OnPluginStart(){
 	CreateConVars();

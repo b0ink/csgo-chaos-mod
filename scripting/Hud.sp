@@ -15,6 +15,13 @@ void HUD_ROUNDEND(){
 	ClearArray(EffectHud_NoDuration);
 }
 
+bool g_HideHud[MAXPLAYERS+1] = {false, ...};
+
+void ResetHud(){
+	for(int i = 0; i <= MaxClients; i++){
+		g_HideHud[i] = false;
+	}
+}
 //15 seconds for all times with -1 (healthshots, etc.)
 
 void AddEffectToHud(char[] message, float time = -1.0){
