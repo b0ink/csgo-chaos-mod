@@ -38,7 +38,7 @@ void ToggleChaos(int client = -1){
 }
 
 public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
-	if(IsValidClient(param1)) g_HideHud[param1] = true;
+	if(IsValidClient(param1)) g_HideHud[param1] = false;
 
 	/* If an option was selected, tell the client about the item. */
 	if (action == MenuAction_Select){
