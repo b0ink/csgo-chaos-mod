@@ -17,10 +17,12 @@ If you encounter any errors please check your error files as well as the plugin'
 
 ## Available Commands:
 ```
-sm_chaos <Effect Name>         - Runs a new random effect if no argument provided, otherwise finds the effect using the argument.
-sm_startchaos                  - Spawns a new effect immediately and starts the effect timer.
-sm_stopchaos                   - Pauses the Chaos Effect timer and resets all the effects.
-chaos_refreshconfig            - Updates and re-parses configs.
+sm_chaos         				- Shows a Menu to control Chaos options.
+sm_effect <Effect Name>			- Runs the effect if it matches with the argument.
+sm_startchaos                  	- Spawns a new effect immediately and starts the effect timer.
+sm_stopchaos                   	- Pauses the Chaos Effect timer and resets all the effects.
+
+chaos_refreshconfig            	- Updates and re-parses configs.
 ```
 
 ## Available ConVars:
