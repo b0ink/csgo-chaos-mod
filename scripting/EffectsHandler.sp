@@ -32,7 +32,6 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_Thirdperson"))  Chaos_Thirdperson();
 	if(!g_bC4Chicken || reset) if(IsChaosEnabled("Chaos_C4Chicken"))  Chaos_C4Chicken();
 	if(IsChaosEnabled("Chaos_AlienModelKnife"))  Chaos_AlienModelKnife();
-	if(IsChaosEnabled("Chaos_IsThisMexico"))  Chaos_IsThisMexico();
 	if(IsChaosEnabled("Chaos_HeadshotOnly"))  Chaos_HeadshotOnly();
 	if(IsChaosEnabled("Chaos_RandomMolotovSpawn"))  Chaos_RandomMolotovSpawn();
 	if(IsChaosEnabled("Chaos_CrabPeople"))  Chaos_CrabPeople();
@@ -71,6 +70,7 @@ void Chaos(bool reset = false){
 		if(IsChaosEnabled("Chaos_NormalWhiteFog"))  Chaos_NormalWhiteFog();
 		if(IsChaosEnabled("Chaos_LightsOff"))  Chaos_LightsOff();
 		if(IsChaosEnabled("Chaos_DiscoFog"))  Chaos_DiscoFog();
+		if(IsChaosEnabled("Chaos_IsThisMexico"))  Chaos_IsThisMexico();
 	}
 	if(IsChaosEnabled("Chaos_Jumping"))  Chaos_Jumping();
 	if(IsChaosEnabled("Chaos_DisableForwardBack"))  Chaos_DisableForwardBack();
