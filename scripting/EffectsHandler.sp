@@ -1,3 +1,4 @@
+//todo, on a per-map basis, log errors if there arent any valid spawns or bomb spawns, or fog index etc.
 void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
 	if(IsChaosEnabled("Chaos_NoScopeOnly"))  Chaos_NoScopeOnly();

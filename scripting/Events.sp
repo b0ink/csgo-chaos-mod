@@ -184,6 +184,8 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_bCanSpawnEffect = true;
 	g_bRewind_logging_enabled = true;
 
+	ResetHud();
+	
 	ResetChaos();
 
 	if(!g_bChaos_Enabled) return Plugin_Continue;

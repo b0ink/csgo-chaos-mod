@@ -31,7 +31,7 @@ void AddEffectToHud(char[] message, float time = -1.0){
 
 void PrintEffects(){
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
+		if(IsValidClient(i) && !g_HideHud[i]){
 			char chunk[2048];
 			int EffectTime = -1;
 			char EffectName[256];
@@ -54,7 +54,7 @@ void PrintEffects(){
 				}
 			}
 			//.37 y;
-			SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
+			SetHudTextParams(0.01, 0.42, 1.0, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
 		}
 	}

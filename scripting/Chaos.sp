@@ -70,6 +70,8 @@ bool 	g_bDisableRetryEffect = false;
 Handle 	Effect_History = INVALID_HANDLE;
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
+bool g_DynamicChannel = false;
+
 
 #include "Externals/InstantWeaponSwitch.sp"
 #include "Externals/WeaponJump.sp"
@@ -173,7 +175,6 @@ public void OnMapEnd(){
 	StopTimer(g_NewEffect_Timer);
 }
 
-bool g_DynamicChannel = false;
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max){
     MarkNativeAsOptional("GetDynamicChannel");
@@ -239,7 +240,10 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
-	
+
+
+	//todo: do what command.sp !chaos does, loop through all the chaos effects, add it to possible effects array, get random int from there.
+	//remove the gross while loop for every time it fails
 	while(!g_sLastPlayedEffect[0]){
 		if(!CustomRun){
 			do{
