@@ -72,7 +72,6 @@ public Action Command_StopChaos(int client, int args){
 	Chaos(true);
 
 	HUD_ROUNDEND();
-	
 
 	AnnounceChaos("Chaos is Disabled!", -2.0, true);
 	return Plugin_Handled;

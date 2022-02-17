@@ -66,7 +66,9 @@ bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 	return false;
 }
 
-float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
+float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false){
+
+	
 	float OverwriteDuration = g_fChaos_OverwriteDuration;
 	if(OverwriteDuration < -1.0){
 		Log("Cvar 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
@@ -76,11 +78,13 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 	int Chaos_Properties[2];
 	float expire = defaultTime;
 	if(Chaos_Effects.GetArray(EffectName, Chaos_Properties, 2)){
-		if(OverwriteDuration == -1.0){
-			expire = float(Chaos_Properties[CONFIG_EXPIRE]);
-		}else{
-			expire = OverwriteDuration;
-		}
+		expire = float(Chaos_Properties[CONFIG_EXPIRE]);
+
+		// if(raw) return SanitizeTime(expire);
+		if(raw) return expire;		
+		
+		if(OverwriteDuration != -1.0) expire = OverwriteDuration;
+
 		if(expire < 0){
 			//this should imply that per the config, it doesnt exist, lets provide it the plugins default time instead, just in case it does use it.
 			expire = defaultTime;
@@ -103,10 +107,10 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0){
 char[] GetChaosTitle(char[] function_name){
 	char return_string[128];
 	char temp_title[128];
-	for(int i = 0; i < GetArraySize(EnabledEffects); i++){
-		GetArrayString(EnabledEffects, i, temp_title, sizeof(temp_title));
+	for(int i = 0; i < GetArraySize(Effect_Functions); i++){
+		GetArrayString(Effect_Functions, i, temp_title, sizeof(temp_title));
 		if(StrContains(temp_title, function_name, false) != -1){
-			GetArrayString(EffectTitles, i, return_string, sizeof(return_string));
+			GetArrayString(Effect_Titles, i, return_string, sizeof(return_string));
 			break;
 		}
 	}
