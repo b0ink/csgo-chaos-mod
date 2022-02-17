@@ -70,6 +70,10 @@ public Action Command_StopChaos(int client, int args){
 	g_bClearChaos = true;
 	g_bDecidingChaos = false;
 	Chaos(true);
+
+	HUD_ROUNDEND();
+	
+
 	AnnounceChaos("Chaos is Disabled!", -2.0, true);
 	return Plugin_Handled;
 }
