@@ -251,16 +251,20 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 	while(!g_sLastPlayedEffect[0]){
 		if(!CustomRun){
 			do{
-				randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
-				GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
+				randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
+				if(GetArrayCell(Effect_EnabledStatus, randomEffect) == 1){
+					GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
+				}
 			}while(FindStringInArray(Effect_History, Random_Effect) != -1);
 
 			PushArrayString(Effect_History, Random_Effect);
 			if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
 		}else{
 			//ignore history if run customly
-			randomEffect = GetRandomInt(0, GetArraySize(EnabledEffects) - 1);
-			GetArrayString(EnabledEffects, randomEffect, Random_Effect, sizeof(Random_Effect));
+			randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
+			if(GetArrayCell(Effect_EnabledStatus, randomEffect) == 1){
+				GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
+			}
 		}
 
 		g_sSelectedChaosEffect = Random_Effect;

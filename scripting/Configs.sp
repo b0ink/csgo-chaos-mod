@@ -1,18 +1,20 @@
 #define CONFIG_ENABLED 0
 #define CONFIG_EXPIRE 1
 
-//todo: rename these
-Handle EnabledEffects = INVALID_HANDLE;
-Handle EffectTitles = INVALID_HANDLE;
+Handle Effect_Functions = INVALID_HANDLE;
+Handle Effect_Titles = INVALID_HANDLE;
+Handle Effect_EnabledStatus = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){
 
-	if(EnabledEffects != INVALID_HANDLE){
-		ClearArray(EnabledEffects);
-		ClearArray(EffectTitles);
+	if(Effect_Functions != INVALID_HANDLE){
+		ClearArray(Effect_Functions);
+		ClearArray(Effect_Titles);
+		ClearArray(Effect_EnabledStatus);
 	}else{
-		EnabledEffects = CreateArray(64);
-		EffectTitles = CreateArray(128);
+		Effect_Functions = CreateArray(64);
+		Effect_Titles = CreateArray(128);
+		Effect_EnabledStatus = CreateArray(1);
 	}
 	
 	ParseMapCoordinates();
@@ -64,11 +66,13 @@ void ParseChaosEffects(){
 			
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
-			if(enabled == 1 && Chaos_Function_Name[0]){
-				PushArrayString(EnabledEffects, Chaos_Function_Name);
-				PushArrayString(EffectTitles, 	Chaos_Function_Title);
+			if(Chaos_Function_Name[0]){
+				PushArrayString(Effect_Functions, Chaos_Function_Name);
+				PushArrayString(Effect_Titles, 	Chaos_Function_Title);
+				PushArrayCell(Effect_EnabledStatus, enabled);
 			}
 			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
+
 
 			// PrintToChatAll("%s: on: %i, dur: %i", Chaos_Function_Name, enabled, expires);
 		}
