@@ -33,7 +33,7 @@ public Action Command_NewChaosEffect(int client, int args){
 			if(strlen(effectName) >=3){
 					PoolChaosEffects(effectName);
 					if(GetArraySize(Possible_Chaos_Effects) <= 0){
-						ReplyToCommand(client, "[Chaos] No effects found.");
+						ReplyToCommand(client, "[Chaos] No effects found, or the desired effect is currently disabled.");
 						return Plugin_Handled;
 					}else if(GetArraySize(Possible_Chaos_Effects) == 1){
 						Chaos();
