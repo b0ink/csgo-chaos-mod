@@ -29,6 +29,9 @@ public void PrecacheTextures(){
 
 void ParseChaosEffects(){
 	Chaos_Effects.Clear();
+	ClearArray(Effect_Functions);
+	ClearArray(Effect_Titles);
+	ClearArray(Effect_EnabledStatus);
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
 
