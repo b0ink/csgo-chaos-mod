@@ -3,3 +3,5 @@ archive
 .VSCodeCounter
 compiled
 .vscode
+plugins/ChaosDebug.smx
+scripting/ChaosDebug.sp
