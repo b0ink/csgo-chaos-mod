@@ -1,16 +1,22 @@
 //todo create a settings menu
 
 
+/**
+	TODO
+	when FakeClientCommand/ClientCommand ("slot1") is used, it activates menus, check 
+	if g_hidehud is activated for that user
+ */
+
 void HideHud(int client){
 	if(IsValidClient(client)){
-		g_HideHud[client] = true;
+		// g_HideHud[client] = true;
 	}
 }
 
 
 void ShowHud(int client){
 	if(IsValidClient(client)){
-		g_HideHud[client] = false;
+		// g_HideHud[client] = false;
 	}
 }
 
@@ -32,8 +38,8 @@ void ShowMenu_Main(int client){
 		menu.AddItem("new-effect", "Spawn New Effect", ITEMDRAW_DISABLED);
 	}
 
-	// menu.AddItem("help", "Help");
-	menu.AddItem("credits", "Credits");
+	menu.AddItem("help", "Help");
+	// menu.AddItem("credits", "Credits");
 	menu.AddItem("settings", "Settings");
 
 	menu.ExitButton = true;
@@ -76,31 +82,58 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 }
 
 
+int FindStringInArrayViaKeyword(Handle array, char[] keyword){
+	char search_term[64];
+	int index = -1;
+	for(int i = 0; i < GetArraySize(array); i++){
+		GetArrayString(array, i, search_term, sizeof(search_term));
+		index = StrContains(search_term, keyword, false);
+		if(index != -1) break;
+	}
+	return index;
+}
+
 
 void ShowMenu_Effects(int client, bool AllowRandom = false){
 	if(!IsValidClient(client)) return;
 	HideHud(client);
 	Menu menu = new Menu(Effect_Selection);
 	menu.SetTitle("Select Chaos Effect");
-	char title[64];
-	char title2[64];
-	char title3[1][64];
-	char final_title[128];
+	char function_name[64];
+	// char title2[64];
+	// char title3[1][64];
+	char function_title[128];
 	if(AllowRandom) menu.AddItem("", "Random Effect"); //KEEP ID BLANK
 
 	if(AllowRandom) PoolChaosEffects();
 	
-	for(int i = 0; i < GetArraySize(Possible_Chaos_Effects); i++){
-		GetArrayString(Possible_Chaos_Effects, i, title, sizeof(title));
-		FormatEx(title2, sizeof(title2), "%s", title[6]); //remove Chaos_ Prefix
-		ExplodeString(title2, ".", title3, sizeof(title3), sizeof(title3[]), false);
-		FormatEx(final_title, sizeof(final_title), "%s", GetChaosTitle(title3[0]));
-		menu.AddItem(title, final_title);
+	char search_function[64];
+	for(int i = 0; i < GetArraySize(Effect_Titles); i++){ //should contain all 102 all time
+		GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
+
+		// int index = FindStringInArray(Possible_Chaos_Effects, search_function);
+		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function);
+		if(index != -1){
+			GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
+			GetArrayString(Effect_Functions, i, function_name, sizeof(function_name));
+
+			menu.AddItem(function_name, function_title);
+
+		}else{
+			PrintToChatAll("size of possibleeffects: %i", GetArraySize(Possible_Chaos_Effects));
+			PrintToChatAll("search: %s, found index: %i", search_function, index);
+		}
+		//todo half of them return -1;
+
+
+		// GetArrayString(Possible_Chaos_Effects, i, title, sizeof(title));
+		// FormatEx(title2, sizeof(title2), "%s", title[6]); //remove Chaos_ Prefix
+		// ExplodeString(title2, ".", title3, sizeof(title3), sizeof(title3[]), false);
+		// FormatEx(final_title, sizeof(final_title), "%s", GetChaosTitle(title3[0]));
 	}
 	menu.ExitButton = true;
 	menu.Display(client, 0);
 
-	g_HideHud[client] = true;
 	if(g_DynamicChannel){
 		SetHudTextParams(0.01, 0.42, 0.1, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 		ShowHudText(client, GetDynamicChannel(1), "");
@@ -157,7 +190,6 @@ void ShowMenu_Settings(int client){
 
 	menu.ExitButton = true;
 	menu.Display(client, 0);
-	g_HideHud[client] = true;
 
 
 }
@@ -253,7 +285,6 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
 	menu.Display(client, 0);
-	g_HideHud[client] = true;
 
 	
 }

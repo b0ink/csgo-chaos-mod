@@ -120,6 +120,7 @@ char[] GetChaosTitle(char[] function_name){
 
 
 bool PoolChaosEffects(char[] effectName = ""){
+
 	ClearArray(Possible_Chaos_Effects);
 	if(effectName[0]){
 		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", effectName);
@@ -131,7 +132,58 @@ bool PoolChaosEffects(char[] effectName = ""){
 	g_bFindingPotentialEffects = true;
 	Chaos();
 	g_bFindingPotentialEffects = false;
+
+	// SortChaosEffects();
+	//todo: this is will not be an accurate sort because im sorting FUNCTION names
+	//i could loop through Effect_Functions, see if it exists in possible_effects
+	// SortADTArray(Possible_Chaos_Effects, Sort_Ascending, Sort_String);
+
 }
+
+// char letters[26] = "abcdefghijklmnopqrstuvwxyz";
+// int CharToInt(char letter){
+// 	return FindCharInString(letters, letter);
+// }
+// void SortChaosEffects(){
+// 	PrintToChatAll("starting");
+// 	bool sorted = false;
+// 	Handle temp_array = CloneArray(Effect_Functions);
+
+// 	char string1[64];
+// 	char string2[64];
+
+// 	char title1[64];
+// 	char title2[64];
+
+	
+// 	int tryy = 0;
+// 	while(!sorted){
+// 		tryy++;
+// 		if(tryy > 9999){
+// 			PrintToChatAll("had to break");
+// 			break;
+// 		}
+
+// 		sorted = true;
+// 		for(int i = 0; i < GetArraySize(temp_array); i++){
+// 			GetArrayString(temp_array, i, string1, sizeof(string1));
+// 			Format(title1, sizeof(title1), "%s", GetChaosTitle(string1));
+// 			for(int g = i+1; g < GetArraySize(temp_array); g++){
+// 				GetArrayString(temp_array, i, string2, sizeof(string2));
+// 				Format(title2, sizeof(title2), "%s", GetChaosTitle(string2));
+// 				if(CharToInt(string1[0]) < CharToInt(string2[0])){
+// 					SwapArrayItems(temp_array, i, g);
+// 					sorted = false;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	ClearArray(Effect_Functions);
+// 	Effect_Functions = CloneArray(temp_array);
+// 	delete temp_array;
+
+// 	PrintToChatAll("done");
+// }
 
 
 
@@ -621,3 +673,14 @@ stock int ScreenShake(int iClient, float fAmplitude = 50.0, float duration = 7.0
 	
 	EndMessage();
 }
+
+
+
+bool HasMenuOpen(int client){
+	if(GetClientMenu(client) != MenuSource_None) return true;
+	return false;
+}
+
+// void CancelMenu(int client){
+// 	CancelClientMenu(client,true);
+// }

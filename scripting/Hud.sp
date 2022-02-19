@@ -38,7 +38,7 @@ void AddEffectToHud(char[] message, float time = -1.0){
 
 void PrintEffects(){
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && !g_HideHud[i]){
+		if(IsValidClient(i) && !HasMenuOpen(i)){
 			char chunk[2048];
 			int EffectTime = -1;
 			char EffectName[256];

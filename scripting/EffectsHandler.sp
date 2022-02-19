@@ -1,5 +1,6 @@
 //todo, on a per-map basis, log errors if there arent any valid spawns or bomb spawns, or fog index etc.
 void Chaos(bool reset = false){
+	if(g_bFindingPotentialEffects) reset = true;
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
 	if(IsChaosEnabled("Chaos_NoScopeOnly"))  Chaos_NoScopeOnly();
 	if(IsChaosEnabled("Chaos_PortalGuns"))  Chaos_PortalGuns();
@@ -8,7 +9,7 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_DecoyDodgeball"))  Chaos_DecoyDodgeball();
 	if(!g_bMegaChaos || reset){
 		if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
-		if(GetRandomInt(0, 100) <= 50){
+		if(GetRandomInt(0, 100) <= 50 || reset){
 			if(GetSlowScriptTimeout() > 0 && GetSlowScriptTimeout() <= 8){
 				if(IsChaosEnabled("Chaos_FakeCrash", 0)){
 					Chaos_FakeCrash();
