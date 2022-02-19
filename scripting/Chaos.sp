@@ -248,6 +248,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 
 	//todo: do what command.sp !chaos does, loop through all the chaos effects, add it to possible effects array, get random int from there.
 	//remove the gross while loop for every time it fails
+	//todo why am i not using possible_chaos_effects here?
 	while(!g_sLastPlayedEffect[0]){
 		if(!CustomRun){
 			do{

@@ -1194,8 +1194,10 @@ Action Chaos_DecoyDodgeball(Handle timer = null, bool EndChaos = false){
 				if(ValidAndAlive(i)){
 					StripPlayer(i, true, true, true); //strip grenades only
 					SetEntityHealth(i, 100);
-					ClientCommand(i, "slot2");
-					ClientCommand(i, "slot1");
+					if(!HasMenuOpen(i)){
+						ClientCommand(i, "slot2");
+						ClientCommand(i, "slot1");
+					}
 					// FakeClientCommand(i, "use weapon_knife");
 				}
 			}
@@ -1381,7 +1383,7 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 		g_bTaserRound = false;
 		StopTimer(g_TaserParty_Timer);
 		if(EndChaos){
-			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "slot2;slot1");
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i) && !HasMenuOpen(i)) ClientCommand(i, "slot2;slot1");
 			AnnounceChaos("Taser Party", -1.0, true);
 		}
 	}
@@ -1412,7 +1414,7 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 		g_bKnifeFight = false;
 		
 		if(EndChaos){
-			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "slot1");
+			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i) && !HasMenuOpen(i)) ClientCommand(i, "slot1");
 			AnnounceChaos("Knife Fight", -1.0, true);
 		}
 	}
@@ -1941,7 +1943,7 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 		// if(EndChaos){
 		for(int i = 0; i <= MaxClients; i++){
 			if(ValidAndAlive(i)){
-				ClientCommand(i, "slot1");
+				if(!HasMenuOpen(i)) ClientCommand(i, "slot1");
 				SetEntPropFloat(i, Prop_Send, "m_flModelScale", 1.0);
 				SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
 				SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
@@ -2152,7 +2154,7 @@ void Chaos_DropPrimaryWeapon(){
 	if(NotDecidingChaos("Chaos_DropPrimaryWeapon")) return;
 
 	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
+		if(ValidAndAlive(i) && !HasMenuOpen(i)){
 			ClientCommand(i, "slot2;slot1;drop");
 		}
 	}

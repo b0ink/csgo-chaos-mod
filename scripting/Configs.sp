@@ -4,6 +4,7 @@
 Handle Effect_Functions = INVALID_HANDLE;
 Handle Effect_Titles = INVALID_HANDLE;
 Handle Effect_EnabledStatus = INVALID_HANDLE;
+Handle Effects_Functions_Titles = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){
 
@@ -11,10 +12,12 @@ public void OnConfigsExecuted(){
 		ClearArray(Effect_Functions);
 		ClearArray(Effect_Titles);
 		ClearArray(Effect_EnabledStatus);
+		ClearArray(Effects_Functions_Titles);
 	}else{
 		Effect_Functions = CreateArray(64);
 		Effect_Titles = CreateArray(128);
 		Effect_EnabledStatus = CreateArray(1);
+		Effects_Functions_Titles = CreateArray(200);
 	}
 	
 	ParseMapCoordinates();
@@ -32,6 +35,7 @@ void ParseChaosEffects(){
 	ClearArray(Effect_Functions);
 	ClearArray(Effect_Titles);
 	ClearArray(Effect_EnabledStatus);
+	ClearArray(Effects_Functions_Titles);
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
 
@@ -61,17 +65,28 @@ void ParseChaosEffects(){
 	do{
 		char Chaos_Function_Name[64];
 		char Chaos_Function_Title[128];
+		char Chaos_Function_v_Title[200];
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
 			kvConfig.GetString("name", Chaos_Function_Title, sizeof(Chaos_Function_Title), Chaos_Function_Name);
 			if(enabled != 0 && enabled != 1) enabled = 1;
-			
+			//todo better error logging eg. if enabled or duration out of bounds
+
+			/*
+				i NEED a key-value pair for titles vs functions
+				but i can still use an array of the functions_names to call them
+				(or vice versa..)
+
+			 */
+			//todo strip ** from both titles and functions??
+			Format(Chaos_Function_v_Title, sizeof(Chaos_Function_v_Title), "%s**%s", Chaos_Function_Title, Chaos_Function_Name);
+			PushArrayString(Effects_Functions_Titles, Chaos_Function_v_Title);
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
 			if(Chaos_Function_Name[0]){
-				PushArrayString(Effect_Functions, Chaos_Function_Name);
-				PushArrayString(Effect_Titles, 	Chaos_Function_Title);
+				// PushArrayString(Effect_Functions, Chaos_Function_Name);
+				// PushArrayString(Effect_Titles, 	Chaos_Function_Title);
 				PushArrayCell(Effect_EnabledStatus, enabled);
 			}
 			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
@@ -80,7 +95,19 @@ void ParseChaosEffects(){
 			// PrintToChatAll("%s: on: %i, dur: %i", Chaos_Function_Name, enabled, expires);
 		}
 	} while(kvConfig.GotoNextKey());
+	
+	SortADTArray(Effects_Functions_Titles, Sort_Ascending, Sort_String);
 
+	char title_function[2][128];
+	char temp_string[200];
+	for(int i = 0; i < GetArraySize(Effects_Functions_Titles); i++){
+		GetArrayString(Effects_Functions_Titles, i, temp_string, sizeof(temp_string));
+		ExplodeString(temp_string, "**", title_function, sizeof(title_function), sizeof(title_function[]));
+		PushArrayString(Effect_Titles, title_function[0]);
+		PushArrayString(Effect_Functions, title_function[1]);
+	}
+
+	//i could put everything into one string then once its done re split everything after sorting
 	Log("Parsed Chaos_Effects.cfg succesfully!");
 }
 
