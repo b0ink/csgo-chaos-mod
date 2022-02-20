@@ -17,7 +17,7 @@ Effects are indexed by their function name used within the plugin, for example:
 
 `"name"` can be edited to change the the title that appears in game for that effect. Colors from `Multicolors.inc` are supported (Colors appear in game chat).
 
-`"enabled"` will determine whether the effect has a chance to run or not. Disabling it will also prevent you from also running it manually. `[Values = 1|0]`
+`"enabled"` will determine whether the effect has a chance to run or not. Disabling it will also prevent you from running it manually. `[Values = 1|0]`
 
 `"duration"` will determine how long the effect will run. `[Min. 5 Seconds] [Max. 120 Seconds]`. Setting it to 0 will make the effect last until the end of the round.
 
