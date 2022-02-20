@@ -6,6 +6,9 @@ Handle Effect_Titles = INVALID_HANDLE;
 Handle Effect_EnabledStatus = INVALID_HANDLE;
 Handle Effects_Functions_Titles = INVALID_HANDLE;
 
+
+
+
 public void OnConfigsExecuted(){
 
 	if(Effect_Functions != INVALID_HANDLE){
@@ -95,7 +98,7 @@ void ParseChaosEffects(){
 			// PrintToChatAll("%s: on: %i, dur: %i", Chaos_Function_Name, enabled, expires);
 		}
 	} while(kvConfig.GotoNextKey());
-	
+
 	SortADTArray(Effects_Functions_Titles, Sort_Ascending, Sort_String);
 
 	char title_function[2][128];
@@ -211,4 +214,39 @@ void ParseCore(){
 
 int GetSlowScriptTimeout(){
 	return g_SlowScriptTimeout;
+}
+
+void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key, char[] newValue){
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Effects.cfg");
+
+	if(!FileExists(path)) return;
+
+	KeyValues kvConfig = new KeyValues("Effects");
+	if(!kvConfig.ImportFromFile(path)){
+		Log("Unable to parse Key Values file %s", path);
+		LogError("Unable to parse Key Values file %s", path);
+		// SetFailState("Unable to parse Key Values file %s", path);
+		return;
+	}
+
+	kvConfig.JumpToKey(function_name, true);
+	kvConfig.SetString(key, newValue);
+	kvConfig.Rewind();
+
+	if(kvConfig.ExportToFile(path)){
+		if(IsValidClient(client)){
+			PrintToChatAll("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
+			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
+			// PrintToChat(client, "[Chaos] Effect '%s' has been changed in the config. New value: '%s'.", function_name, newValue);
+		}
+		ParseChaosEffects();
+	}else{
+		if(IsValidClient(client)){
+			PrintToChat(client, "[Chaos] Failed to update config.");
+		}
+	}
+
+	delete 	kvConfig;
+
 }

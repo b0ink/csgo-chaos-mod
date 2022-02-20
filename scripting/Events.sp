@@ -1,20 +1,10 @@
 //todo: move all effects into their own .sp files inside of /scripting/Externals, modularise it a bit more
 
-
-Handle g_BombTimer = INVALID_HANDLE;
-//this was originally coded cos i believe chickens were crashing the game on bomb explosion, i figured out the issue that was unrelated to this. Could potentially be removed in future.
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	g_bCanSpawnChickens = false;
 	g_bBombPlanted = true;
 	C4Chicken();
-	g_BombTimer = CreateTimer(39.9, Timer_ResizeChickens); //todo get c4 timer value
 	return Plugin_Continue;
-}
-public void ResetTimerRemoveChickens(){
-	StopTimer(g_BombTimer);
-}
-public Action Timer_ResizeChickens(Handle timer){
-	g_BombTimer = INVALID_HANDLE;
 }
 
 
@@ -221,7 +211,6 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 
 void ResetChaos(){
 	HUD_ROUNDEND();
-	ResetTimerRemoveChickens();
 	StopTimer(g_NewEffect_Timer);
 	CreateTimer(0.1, ResetRoundChaos);
 }
@@ -235,7 +224,6 @@ public void OnGameFrame(){
 		}
 	}
 	Rollback_Log();
-
 }
 
 
