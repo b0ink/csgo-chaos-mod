@@ -1,18 +1,6 @@
-//todo create a settings menu
-
-
-/**
-	TODO
-	when FakeClientCommand/ClientCommand ("slot1") is used, it activates menus, check 
-	if g_hidehud is activated for that user
- */
-
-
-
 void ShowMenu_Main(int client){
 	if(!IsValidClient(client)) return;
 	Menu menu = new Menu(Main_Handler);
-	
 
 	menu.SetTitle("CS:GO Chaos Mod"); //?
 	if(g_bChaos_Enabled){
@@ -20,7 +8,6 @@ void ShowMenu_Main(int client){
 	}else{
 		menu.AddItem("toggle-chaos", "Enable Chaos");
 	}
-
 	if(g_bCanSpawnEffect){
 		menu.AddItem("new-effect", "Spawn New Effect");
 	}else{
@@ -32,6 +19,7 @@ void ShowMenu_Main(int client){
 	menu.AddItem("settings", "Settings");
 
 	menu.ExitButton = true;
+	//no back button
 	menu.Display(client, 0);
 }
 
@@ -44,12 +32,9 @@ void ToggleChaos(int client = -1){
 }
 
 public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
-	
-	/* If an option was selected, tell the client about the item. */
 	if (action == MenuAction_Select){
 		char info[64];
 		bool found = menu.GetItem(param2, info, sizeof(info));
-		PrintToConsole(param1, "You selected item: %d (found? %d info: %s)", param2, found, info);
 		if(found){
 			if(StrEqual(info, "new-effect", false)){
 				ShowMenu_Effects(param1, true);
@@ -62,7 +47,7 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 			}
 		}
 	}else if (action == MenuAction_Cancel){
-
+		//main menu
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
@@ -87,8 +72,6 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 	Menu menu = new Menu(Effect_Selection);
 	menu.SetTitle("Select Chaos Effect");
 	char function_name[64];
-	// char title2[64];
-	// char title3[1][64];
 	char function_title[128];
 	if(AllowRandom) menu.AddItem("", "Random Effect"); //KEEP ID BLANK
 
@@ -97,8 +80,6 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 	char search_function[64];
 	for(int i = 0; i < GetArraySize(Effect_Titles); i++){ //should contain all 102 all time
 		GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
-
-		// int index = FindStringInArray(Possible_Chaos_Effects, search_function);
 		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function);
 		if(index != -1){
 			GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
@@ -107,18 +88,12 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 			menu.AddItem(function_name, function_title);
 
 		}else{
-			PrintToChatAll("size of possibleeffects: %i", GetArraySize(Possible_Chaos_Effects));
-			PrintToChatAll("search: %s, found index: %i", search_function, index);
+			Log("error finding effect: size of possible effects: %i", GetArraySize(Possible_Chaos_Effects));
+			Log("search: %s, found index: %i", search_function, index);
 		}
-		//todo half of them return -1;
-
-
-		// GetArrayString(Possible_Chaos_Effects, i, title, sizeof(title));
-		// FormatEx(title2, sizeof(title2), "%s", title[6]); //remove Chaos_ Prefix
-		// ExplodeString(title2, ".", title3, sizeof(title3), sizeof(title3[]), false);
-		// FormatEx(final_title, sizeof(final_title), "%s", GetChaosTitle(title3[0]));
 	}
 	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
 	menu.Display(client, 0);
 
 	if(g_DynamicChannel){
@@ -129,16 +104,12 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 }
 
 
-
 //todo: refactor all the actual spawning into ChooseEffect (add paramater)
 
 public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2){
-
-	/* If an option was selected, tell the client about the item. */
 	if (action == MenuAction_Select){
 		char info[64];
 		bool found = menu.GetItem(param2, info, sizeof(info));
-		PrintToConsole(param1, "You selected item: %d (found? %d info: %s)", param2, found, info);
 		if(found){
 			g_sSelectedChaosEffect = info;
 			if(g_sSelectedChaosEffect[0]){
@@ -158,7 +129,9 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 
 		}
 	}else if (action == MenuAction_Cancel){
-		// PrintToServer("Client %d's menu was cancelled.  Reason: %d", param1, param2);
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_Main(param1);
+		}
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
@@ -168,37 +141,144 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 
 void ShowMenu_Settings(int client){
 	if(!IsValidClient(client)) return;
+
 	Menu menu = new Menu(Settings_Handler);
 	menu.SetTitle("Chaos Settings");	
 	menu.AddItem("edit-effects", "Edit Effects"); // "Select an effect you'd like to edit" (list of ALL effects);
 	menu.AddItem("edit-convars", "Edit ConVars");
 
 	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
 	menu.Display(client, 0);
-
-
 }
 
 public int Settings_Handler(Menu menu, MenuAction action, int param1, int param2){
 	if (action == MenuAction_Select){
 		char info[64];
 		bool found = menu.GetItem(param2, info, sizeof(info));
-		PrintToConsole(param1, "You selected item: %d (found? %d info: %s)", param2, found, info);
 		if(found){
 			if(StrEqual(info, "edit-effects", false)){
-				Showmenu_EditAllEffects(param1);
+				ShowMenu_EditAllEffects(param1);
 			}else if(StrEqual(info, "edit-convars", false)){
-
+				ShowMenu_EditConvars(param1);
 			}
 		}
 	}else if (action == MenuAction_Cancel){
-		// PrintToServer("Client %d's menu was cancelled.  Reason: %d", param1, param2);
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_Main(param1);
+		}
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
 }
 
-void Showmenu_EditAllEffects(int client){
+void ShowMenu_EditConvars(int client){
+	Menu menu = new Menu(EditConvars_Handler);
+	menu.SetTitle("Select a ConVar to edit.");
+
+	char ItemTitle[64];
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_enabled: %.2f", g_cvChaosEnabled.FloatValue);
+	menu.AddItem("sm_chaos_enabled", ItemTitle);
+
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_interval: %.2f", g_cvChaosEffectInterval.FloatValue);
+	menu.AddItem("sm_chaos_interval", ItemTitle);
+
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_repeating: %.2f", g_cvChaosRepeating.FloatValue);
+	menu.AddItem("sm_chaos_repeating", ItemTitle);
+
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_overwrite_duration: %.2f", g_cvChaosOverwriteDuration.FloatValue);
+	menu.AddItem("sm_chaos_overwrite_duration", ItemTitle);
+	
+	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
+	menu.Display(client, 0);
+}
+
+void ShowMenu_ConvarIncrements(int client, char[] convar){
+	Menu menu = new Menu(ConvarIncrements_Handler);
+	char title[64];
+	FormatEx(title, sizeof(title), "Edit value for %s", convar);
+
+	menu.SetTitle(title);
+
+	ConVar editing_convar = FindConVar(convar); 
+
+	float max_bound;
+	GetConVarBounds(editing_convar, ConVarBound_Upper, max_bound);
+
+	float min_bound;
+	GetConVarBounds(editing_convar, ConVarBound_Lower, min_bound);
+
+	menu.AddItem(convar,"convar_name" , ITEMDRAW_NOTEXT);
+
+	float current_value = editing_convar.FloatValue;
+	Format(title, sizeof(title), "Current Value: %.2f", current_value);
+	menu.AddItem(title, title, ITEMDRAW_DISABLED);
+	
+	char item_name[64];
+	for(float i = min_bound; i <= max_bound; i++){
+		Format(item_name, sizeof(item_name), "%.2f Seconds", i);
+		menu.AddItem(item_name, item_name);
+	}
+	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
+	menu.Display(client, 0);
+}
+public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, int param2){
+	if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		if(found){
+			char explodes[2][64];
+			ExplodeString(info, " ", explodes, sizeof(explodes), sizeof(explodes[]));
+			PrintToChatAll("%s -- %s", explodes[0], explodes[1]);
+			float seconds = StringToFloat(explodes[0]);
+			char convar_name[64];
+			GetMenuItem(menu, 0, convar_name, sizeof(convar_name));
+			PrintToChatAll("seconds is %f convar is %s", seconds, convar_name); 
+			
+
+			ConVar convar_editing = FindConVar(convar_name);
+			convar_editing.FloatValue = seconds;
+			ShowMenu_ConvarIncrements(param1, convar_name);
+		}
+	}else if (action == MenuAction_Cancel){
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_EditConvars(param1);
+		}
+	}else if (action == MenuAction_End){
+		delete menu;
+	}
+}
+
+void ToggleCvar(char[] cvar){
+	ConVar ToChange = FindConVar(cvar);
+	ToChange.IntValue = 1 - ToChange.IntValue;
+}
+
+public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int param2){
+	if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		if(found){
+			if(StrEqual(info, "sm_chaos_enabled", false) || StrEqual(info, "sm_chaos_repeating", false)){
+				ToggleCvar(info);
+				ShowMenu_EditConvars(param1);
+			}else{
+				ShowMenu_ConvarIncrements(param1, info);
+			}
+		}
+	}else if (action == MenuAction_Cancel){
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_Settings(param1);
+		}
+	}else if (action == MenuAction_End){
+		delete menu;
+	}
+}
+
+
+void ShowMenu_EditAllEffects(int client){
 	Menu menu = new Menu(EditAllEffects_Handler);
 
 	menu.SetTitle("Select an effect to edit.");
@@ -215,22 +295,21 @@ void Showmenu_EditAllEffects(int client){
 	}
 
 	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
 	menu.Display(client, 0);
-
-
 }
 
 public int EditAllEffects_Handler(Menu menu, MenuAction action, int param1, int param2){
-
 	if (action == MenuAction_Select){
 		char info[64];
 		bool found = menu.GetItem(param2, info, sizeof(info));
-		PrintToConsole(param1, "You selected item: %d (found? %d info: %s)", param2, found, info);
 		if(found){
 			ShowMenu_EffectSetting(param1, info);
 		}
 	}else if (action == MenuAction_Cancel){
-		// PrintToServer("Client %d's menu was cancelled.  Reason: %d", param1, param2);
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_Settings(param1);
+		}
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
@@ -260,22 +339,17 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	}
 	menu.AddItem(function_name, "function_name", ITEMDRAW_NOTEXT);
 
-	
-
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
 	menu.Display(client, 0);
-
-	
 }
+
 public int EffectSetting_Handler(Menu menu, MenuAction action, int param1, int param2){
 	char function_name[64];
 	GetMenuItem(menu, 2, function_name, sizeof(function_name));
-	// PrintToChatAll("the found function is %s", function_name);
 	if (action == MenuAction_Select){
 		char info[64];
 		bool found = menu.GetItem(param2, info, sizeof(info));
-		PrintToConsole(param1, "You selected item: %d (found? %d info: %s)", param2, found, info);
 		if(found){
 			if(StrEqual(info, "setting-enabled", false)){
 				if(IsChaosEnabled(function_name)){
@@ -290,16 +364,12 @@ public int EffectSetting_Handler(Menu menu, MenuAction action, int param1, int p
 		}
 	}else if (action == MenuAction_Cancel){
 		if(param2 ==  MenuCancel_ExitBack){
-			Showmenu_EditAllEffects(param1);
+			ShowMenu_EditAllEffects(param1);
 		}
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
 }
-
-
-//todo handle MenuCancel_Timeout to bring back effect hud
-
 
 void ShowMenu_SetDuration(int client, char[] function_name){
 	char effect_title[128];
@@ -342,7 +412,6 @@ public int SetDuration_Handler(Menu menu, MenuAction action, int param1, int par
 	if (action == MenuAction_Select){
 		char info[64];
 		bool found = menu.GetItem(param2, info, sizeof(info));
-		PrintToConsole(param1, "You selected item: %d (found? %d info: %s)", param2, found, info);
 		if(found){
 			UpdateConfig_UpdateEffect(param1, function_name, "duration", info);
 			ShowMenu_SetDuration(param1, function_name);
