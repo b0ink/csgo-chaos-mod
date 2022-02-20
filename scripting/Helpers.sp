@@ -20,6 +20,8 @@ bool ValidBombSpawns(){
 }
 
 
+
+
 bool NotDecidingChaos(char[] EffectName = ""){
 	//if effectname was provided manually, 
 	if(!g_bDecidingChaos) return true;
