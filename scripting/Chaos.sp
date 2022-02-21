@@ -256,7 +256,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 				if(!IsChaosEnabled(Random_Effect)){
 					Random_Effect = "";
 				}
-				PrintToChatAll("do: trying effect %s", Random_Effect);
+				// PrintToChatAll("do: trying effect %s", Random_Effect);
 			}while((FindStringInArray(Effect_History, Random_Effect) != -1) || !Random_Effect[0]);
 
 			PushArrayString(Effect_History, Random_Effect);
