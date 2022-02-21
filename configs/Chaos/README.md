@@ -15,7 +15,7 @@ Effects are indexed by their function name used within the plugin, for example:
 ```
 `"Chaos_PortalGuns"` references the function name within `scripting/Effects.sp`. **Do not edit this line or it will no longer run.**
 
-`"name"` can be edited to change the the title that appears in game for that effect. Colors from `Multicolors.inc` are supported (Colors appear in game chat).
+`"name"` can be edited to change the title that appears in-game for that effect. Colors from `Multicolors.inc` are supported (Colors appear in game chat).
 
 `"enabled" [1 (Enabled) | 0 (Disabled)]` will determine whether the effect has a chance to run or not. Disabling it will also prevent you from running it manually.
 
@@ -31,4 +31,4 @@ The command `!chaos` can be used in-game to edit the config.
 
 `!chaos ->  Settings -> Edit Effects`
 
-**ANY changes you make in-game will create a `Chaos_Override.cfg` file in `addons/configs/Chaos/`, and automatically add/update your changes within the file. The effects found in `Chaos_Override.cfg` will have a higher priority over those same effects in `Chaos_Effects.cfg`. This is encouraged to ensure you save your changes when updating `Chaos_Effects.cfg` to the latest version.**
+**ANY changes you make in-game will create a `Chaos_Override.cfg` file in `addons/configs/Chaos/`, and automatically add/update your changes within the file. The effects found in `Chaos_Override.cfg` will have a higher priority over those same effects in `Chaos_Effects.cfg`. This method is encouraged to ensure you keep your changes when updating `Chaos_Effects.cfg` to the latest version.**
