@@ -327,15 +327,22 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", GetChaosTime(function_name ,-1.0, true));	
 
 	char menu_title[256];
-	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s", effect_title);
+	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s\n ", effect_title);
 
 	Menu menu = new Menu(EffectSetting_Handler);
 
 	menu.SetTitle(menu_title);
 
 	menu.AddItem("setting-enabled", 			enabled_status);
-	if(GetChaosTime(function_name ,-1.0, true) == -1){
-		menu.AddItem("setting-effect_duration", 	effect_duration, ITEMDRAW_DISABLED);
+	// if(GetChaosTime(function_name ,-1.0, true) == -1){
+	bool blacklisted = false;
+
+	for(int i = 0; i < sizeof(EffectsWithNoDuration); i++){
+		if(StrContains(function_name, EffectsWithNoDuration[i], false) != -1) blacklisted = true;
+	}
+	
+	if(blacklisted){
+		menu.AddItem("setting-effect_duration", 	"This effect has no duration.", ITEMDRAW_DISABLED);
 	}else{
 		menu.AddItem("setting-effect_duration", 	effect_duration);
 	}

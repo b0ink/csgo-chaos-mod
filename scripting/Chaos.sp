@@ -88,10 +88,7 @@ bool g_DynamicChannel = false;
 #include "Externals/Fog.sp"
 #include "Externals/Impostors.sp"
 
-
 #include "Effects.sp"
-
-
 
 #include "ConVars.sp"
 #include "Commands.sp"

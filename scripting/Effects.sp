@@ -1998,6 +1998,8 @@ Action Chaos_LightsOff(Handle timer = null, bool EndChaos = false){
 	AnnounceChaos("Who turned the lights off?", duration);
 }
 
+
+//todo make timed
 void Chaos_NightVision(){
 	if(ClearChaos()){
 		for(int i = 0; i <= MaxClients; i++){

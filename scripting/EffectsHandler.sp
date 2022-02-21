@@ -129,3 +129,47 @@ void Chaos(bool reset = false){
 	}
 	g_bClearChaos = false;
 }
+
+
+//Blacklist effects from having their duration edited in-game (regardless if config has -1 in the duration)
+char EffectsWithNoDuration[][] = {
+	"Chaos_Nothing",
+	"Chaos_MEGACHAOS",
+	"Chaos_FakeCrash",
+	"Chaos_RandomInvisiblePlayer",
+	"Chaos_Bankrupt",
+	"Chaos_Shields",
+	"Chaos_AutoPlantC4",
+	"Chaos_TeammateSwap",
+	"Chaos_C4Chicken",
+	"Chaos_Spin180",
+	"Chaos_SlayRandomPlayer",
+	"Chaos_Healthshot",
+	"Chaos_Jackpot",
+	"Chaos_Bumpmines",
+	"Chaos_IgnitePlayer",
+	"Chaos_HealAllPlayers",
+	"Chaos_Give100HP",
+	"Chaos_DropCurrentWeapon",
+	"Chaos_DropPrimaryWeapon",
+	"Chaos_RandomSkybox",
+	"Chaos_RespawnTheDead",
+	"Chaos_ResetSpawns",
+	"Chaos_RespawnDead_LastLocation",
+	"Chaos_BreakTime",
+	"Chaos_RewindTenSeconds",
+	"Chaos_RespawnTheDead_Randomly",
+	"Chaos_LittleChooks",
+	"Chaos_BigChooks",
+	"Chaos_MamaChook",
+	"Chaos_Impostors",
+	"Chaos_MoneyRain",
+	"Chaos_RandomTeleport",
+	"Chaos_LavaFloor",
+	"Chaos_SmokeMap",
+	"Chaos_Soccerballs",
+	"Chaos_FakeTeleport",
+	"Chaos_TeleportFewMeters",
+	"Chaos_SpawnFlashbangs",
+	"Chaos_SpawnExplodingBarrels"
+};
