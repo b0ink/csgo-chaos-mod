@@ -231,16 +231,16 @@ public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, in
 		if(found){
 			char explodes[2][64];
 			ExplodeString(info, " ", explodes, sizeof(explodes), sizeof(explodes[]));
-			PrintToChatAll("%s -- %s", explodes[0], explodes[1]);
+			// PrintToChatAll("%s -- %s", explodes[0], explodes[1]);
 			float seconds = StringToFloat(explodes[0]);
 			char convar_name[64];
 			GetMenuItem(menu, 0, convar_name, sizeof(convar_name));
-			PrintToChatAll("seconds is %f convar is %s", seconds, convar_name); 
-			
+			// PrintToChatAll("seconds is %f convar is %s", seconds, convar_name); 
 
 			ConVar convar_editing = FindConVar(convar_name);
 			convar_editing.FloatValue = seconds;
 			ShowMenu_ConvarIncrements(param1, convar_name);
+			PrintToChatAll("[Chaos] ConVar '%s' has been changed to %.2f", convar_name, seconds);
 		}
 	}else if (action == MenuAction_Cancel){
 		if(param2 ==  MenuCancel_ExitBack){
@@ -254,6 +254,8 @@ public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, in
 void ToggleCvar(char[] cvar){
 	ConVar ToChange = FindConVar(cvar);
 	ToChange.IntValue = 1 - ToChange.IntValue;
+	PrintToChatAll("[Chaos] ConVar '%s' has been changed to %.2f", cvar, ToChange.FloatValue);
+
 }
 
 public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int param2){

@@ -106,8 +106,7 @@ public Action Command_ChaosDebug(int client, int args){
 }
 
 public Action Command_RefreshConfig(int client, int args){
-	ParseChaosEffects();
-	ParseMapCoordinates();
+	OnConfigsExecuted();
 
 	return Plugin_Handled;
 }

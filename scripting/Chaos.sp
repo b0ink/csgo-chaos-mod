@@ -255,18 +255,20 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 		if(!CustomRun){
 			do{
 				randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
-				if(GetArrayCell(Effect_EnabledStatus, randomEffect) == 1){
-					GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
+				GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
+				if(!IsChaosEnabled(Random_Effect)){
+					Random_Effect = "";
 				}
-			}while(FindStringInArray(Effect_History, Random_Effect) != -1);
+			}while((FindStringInArray(Effect_History, Random_Effect) != -1) && !Random_Effect[0]);
 
 			PushArrayString(Effect_History, Random_Effect);
 			if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
 		}else{
 			//ignore history if run customly
 			randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
-			if(GetArrayCell(Effect_EnabledStatus, randomEffect) == 1){
-				GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
+			GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
+			if(!IsChaosEnabled(Random_Effect)){
+				Random_Effect = "";
 			}
 		}
 
@@ -275,6 +277,7 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 		attempts++;
 		Chaos(); //run the chaos
 		if(attempts > 9999){
+			PrintToChatAll("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 			Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 		}
 		if(g_sLastPlayedEffect[0] || attempts > 9999) break;
