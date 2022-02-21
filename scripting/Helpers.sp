@@ -1,14 +1,6 @@
 float g_AllPositions[MAXPLAYERS+1][3];
 
 
-// bool findInArray(int[] array, int target, int arraysize){
-// 	bool found = false;
-// 	for(int i = 0; i < arraysize; i++) if(array[i] == target) found = true;
-// 	if(found) return true;
-// 	return false;
-// }
-
-
 bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
 	return true;
