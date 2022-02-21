@@ -88,8 +88,10 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 			menu.AddItem(function_name, function_title);
 
 		}else{
-			Log("error finding effect: size of possible effects: %i", GetArraySize(Possible_Chaos_Effects));
-			Log("search: %s, found index: %i", search_function, index);
+			if(AllowRandom){
+				Log("error finding effect: size of possible effects: %i", GetArraySize(Possible_Chaos_Effects));
+				Log("search: %s, found index: %i", search_function, index);
+			}
 		}
 	}
 	menu.ExitButton = true;
@@ -120,7 +122,7 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 				}else{
 					ReplyToCommand(param1, "[Chaos] Sorry, no effects can be spawned in right now.");
 					if(!g_bChaos_Enabled){
-						ReplyToCommand(param1, "[Chaos] use !startchaos to re-enable Chaos.");
+						ReplyToCommand(param1, "[Chaos] Use !startchaos to re-enable Chaos.");
 					}
 				}
 			}else{
