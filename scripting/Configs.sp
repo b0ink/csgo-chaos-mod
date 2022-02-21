@@ -3,7 +3,7 @@
 
 Handle Effect_Functions = INVALID_HANDLE;
 Handle Effect_Titles = INVALID_HANDLE;
-Handle Effect_EnabledStatus = INVALID_HANDLE;
+// Handle Effect_EnabledStatus = INVALID_HANDLE;
 Handle Effects_Functions_Titles = INVALID_HANDLE;
 
 
@@ -14,17 +14,18 @@ public void OnConfigsExecuted(){
 	if(Effect_Functions != INVALID_HANDLE){
 		ClearArray(Effect_Functions);
 		ClearArray(Effect_Titles);
-		ClearArray(Effect_EnabledStatus);
+		// ClearArray(Effect_EnabledStatus);
 		ClearArray(Effects_Functions_Titles);
 	}else{
 		Effect_Functions = CreateArray(64);
 		Effect_Titles = CreateArray(128);
-		Effect_EnabledStatus = CreateArray(1);
+		// Effect_EnabledStatus = CreateArray(1);
 		Effects_Functions_Titles = CreateArray(200);
 	}
 	
 	ParseMapCoordinates();
 	ParseChaosEffects();
+	ParseOverrideEffects();
 	ParseCore();
 }
 
@@ -37,7 +38,7 @@ void ParseChaosEffects(){
 	Chaos_Effects.Clear();
 	ClearArray(Effect_Functions);
 	ClearArray(Effect_Titles);
-	ClearArray(Effect_EnabledStatus);
+	// ClearArray(Effect_EnabledStatus);
 	ClearArray(Effects_Functions_Titles);
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
@@ -87,11 +88,11 @@ void ParseChaosEffects(){
 			PushArrayString(Effects_Functions_Titles, Chaos_Function_v_Title);
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
-			if(Chaos_Function_Name[0]){
-				// PushArrayString(Effect_Functions, Chaos_Function_Name);
-				// PushArrayString(Effect_Titles, 	Chaos_Function_Title);
-				PushArrayCell(Effect_EnabledStatus, enabled);
-			}
+			// if(Chaos_Function_Name[0]){
+			// 	// PushArrayString(Effect_Functions, Chaos_Function_Name);
+			// 	// PushArrayString(Effect_Titles, 	Chaos_Function_Title);
+			// 	// PushArrayCell(Effect_EnabledStatus, enabled); //this will all be in the wrong order...
+			// }
 			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
 
 
@@ -114,12 +115,55 @@ void ParseChaosEffects(){
 	Log("Parsed Chaos_Effects.cfg succesfully!");
 }
 
+
+void ParseOverrideEffects(){
+	char filePath[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Override.cfg");
+
+	if(!FileExists(filePath)) return;
+
+	KeyValues kvConfig = new KeyValues("Effects");
+	
+	if(!kvConfig.ImportFromFile(filePath)){
+		Log("Unable to parse Key Values file %s", filePath);
+		return;
+	}
+
+	if(!kvConfig.GotoFirstSubKey()){
+		Log("Unable to find 'Effects' Section in file %s", filePath);
+		return;
+	}
+
+	int  Chaos_Properties[2];
+	do{
+		char Chaos_Function_Name[64];
+		// char Chaos_Function_Title[64];
+		
+		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
+			int enabled = kvConfig.GetNum("enabled", 1);
+			int expires = kvConfig.GetNum("duration", 15);
+			// kvConfig.GetString("name", Chaos_Function_Title, sizeof(Chaos_Function_Title), Chaos_Function_Name);
+			if(enabled != 0 && enabled != 1) enabled = 1;
+
+			Chaos_Properties[CONFIG_ENABLED] = enabled;
+			Chaos_Properties[CONFIG_EXPIRE] = expires;
+
+			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
+			
+		}
+	} while(kvConfig.GotoNextKey());
+	Log("Parsed Chaos_Override.cfg successfully!");
+}
+
+
 //config
 void ParseMapCoordinates() {
 	char path[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Locations.cfg");
-	// if(!FileExists(path)) SetFailState("Config file %s is not found", path);
-	if(!FileExists(path)) return;
+	if(!FileExists(path)){
+		Log("Could not find %s. Effects that rely on map data will no run.", path);
+		return;
+	}
 	
 	char MapName[128];
 	GetCurrentMap(MapName, sizeof(MapName));
@@ -128,19 +172,16 @@ void ParseMapCoordinates() {
 
 	if(!kv.ImportFromFile(path)){
 		Log("Unable to parse Key Values from %s", path);
-		// SetFailState("Unable to parse Key Values from %s", path);
 		return;
 	}
 	//jump to key of map name
 	if(!kv.JumpToKey(MapName)){
 		Log("Unable to find %s Key from %s", MapName, path);
-		// SetFailState("Unable to find %s Key from %s", MapName, path);
 		return;
 	}
 
 	if(!kv.GotoFirstSubKey(false)){
 		Log("Unable to find sub keys %s", path);
-		// SetFailState("Unable to find sub keys %s", path);
 		return;
 	}
 	g_MapCoordinates = CreateArray(3);
@@ -150,10 +191,8 @@ void ParseMapCoordinates() {
 	do{
 		float vec[3];
 		kv.GetVector(NULL_STRING, vec);
-		// PrintToChatAll("FLOAT: %f %f %f", vec[0], vec[1], vec[2]);
 		char key[25];
 		kv.GetSectionName(key, sizeof(key));
-		// PrintToChatAll("Key name: %s", key);
 		if(strcmp(key, "bombA", false) == 0) PushArrayArray(bombSiteA, vec);
 		if(strcmp(key, "bombB", false) == 0) PushArrayArray(bombSiteB, vec);
 		PushArrayArray(g_MapCoordinates, vec);
@@ -218,21 +257,28 @@ int GetSlowScriptTimeout(){
 
 void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key, char[] newValue){
 	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Effects.cfg");
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Override.cfg");
 
-	if(!FileExists(path)) return;
+	if(!FileExists(path)){
+		Handle FileHandle = OpenFile(path, "w");
+		if(!FileHandle){
+			CloseHandle(FileHandle);
+			return;
+		}
+		CloseHandle(FileHandle);
+	}
 
 	KeyValues kvConfig = new KeyValues("Effects");
 	if(!kvConfig.ImportFromFile(path)){
-		Log("Unable to parse Key Values file %s", path);
-		LogError("Unable to parse Key Values file %s", path);
+		Log("Unable to parse Key Values file %s. If you are editing an effect for the first time, you can ignore this error.", path);
 		// SetFailState("Unable to parse Key Values file %s", path);
-		return;
+		// return;
 	}
 
 	kvConfig.JumpToKey(function_name, true);
 	kvConfig.SetString(key, newValue);
 	kvConfig.Rewind();
+	kvConfig.ExportToFile(path);
 
 	if(kvConfig.ExportToFile(path)){
 		if(IsValidClient(client)){
@@ -241,12 +287,11 @@ void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key
 			// PrintToChat(client, "[Chaos] Effect '%s' has been changed in the config. New value: '%s'.", function_name, newValue);
 		}
 		ParseChaosEffects();
+		ParseOverrideEffects();
 	}else{
 		if(IsValidClient(client)){
 			PrintToChat(client, "[Chaos] Failed to update config.");
 		}
 	}
-
 	delete 	kvConfig;
-
 }
