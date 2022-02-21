@@ -256,10 +256,13 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 				if(!IsChaosEnabled(Random_Effect)){
 					Random_Effect = "";
 				}
-			}while((FindStringInArray(Effect_History, Random_Effect) != -1) && !Random_Effect[0]);
+				PrintToChatAll("do: trying effect %s", Random_Effect);
+			}while((FindStringInArray(Effect_History, Random_Effect) != -1) || !Random_Effect[0]);
 
 			PushArrayString(Effect_History, Random_Effect);
-			if(GetArraySize(Effect_History) > 50) RemoveFromArray(Effect_History, 0);
+			//todo change effect_history limit to a percentage of ENABLED effects
+			if(GetArraySize(Effect_History) > 75) RemoveFromArray(Effect_History, 0);
+			
 		}else{
 			//ignore history if run customly
 			randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
