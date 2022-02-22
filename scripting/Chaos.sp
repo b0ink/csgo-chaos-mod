@@ -214,22 +214,15 @@ public void OnClientDisconnect(int client){
 	WeaponJumpDisconnect_Handler(client);
 }
 
-
-
 public Action Timer_CreateHostage(Handle timer){
 	CreateHostageRescue();
 }
-
-
-
-
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
 	
-	// PrintToChatAll("random effect: %s. global : %s",Random_Effect,  g_sSelectedChaosEffect);
 	char Random_Effect[64] = "-";
 	int randomEffect = -1;
 	int attempts = 0;
@@ -237,7 +230,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
-
 
 	//todo: do what command.sp !chaos does, loop through all the chaos effects, add it to possible effects array, get random int from there.
 	//remove the gross while loop for every time it fails
@@ -277,7 +269,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			attempts++;
 			Chaos(); //run the chaos
 			if(attempts > 9999){
-				PrintToChatAll("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
+				// PrintToChatAll("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 				Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 			}
 			if(g_sLastPlayedEffect[0] || attempts > 9999) break;
@@ -327,7 +319,6 @@ public void RetryEffect(){ //Used if there's no map data found for the map that 
 	ChooseEffect(INVALID_HANDLE);
 }
 
-
 public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
 	Fog_OFF();
@@ -335,7 +326,6 @@ public Action ResetRoundChaos(Handle timer){
 	g_bDecidingChaos = false;
 	Chaos(true);
 }
-
 
 #include "Hooks.sp"
 #include "Events.sp"
