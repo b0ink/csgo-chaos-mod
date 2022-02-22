@@ -3,23 +3,16 @@
 
 Handle Effect_Functions = INVALID_HANDLE;
 Handle Effect_Titles = INVALID_HANDLE;
-// Handle Effect_EnabledStatus = INVALID_HANDLE;
 Handle Effects_Functions_Titles = INVALID_HANDLE;
 
-
-
-
 public void OnConfigsExecuted(){
-
 	if(Effect_Functions != INVALID_HANDLE){
 		ClearArray(Effect_Functions);
 		ClearArray(Effect_Titles);
-		// ClearArray(Effect_EnabledStatus);
 		ClearArray(Effects_Functions_Titles);
 	}else{
 		Effect_Functions = CreateArray(64);
 		Effect_Titles = CreateArray(128);
-		// Effect_EnabledStatus = CreateArray(1);
 		Effects_Functions_Titles = CreateArray(200);
 	}
 	
@@ -38,11 +31,9 @@ void ParseChaosEffects(){
 	Chaos_Effects.Clear();
 	ClearArray(Effect_Functions);
 	ClearArray(Effect_Titles);
-	// ClearArray(Effect_EnabledStatus);
 	ClearArray(Effects_Functions_Titles);
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
-
 
 	if(!FileExists(filePath)){
 		Log("Configuration file: %s not found.", filePath);
@@ -65,6 +56,7 @@ void ParseChaosEffects(){
 		SetFailState("Unable to find 'Effects' Section in file %s", filePath);
 		return;
 	}
+
 	int  Chaos_Properties[2];
 	do{
 		char Chaos_Function_Name[64];
@@ -77,26 +69,13 @@ void ParseChaosEffects(){
 			if(enabled != 0 && enabled != 1) enabled = 1;
 			//todo better error logging eg. if enabled or duration out of bounds
 
-			/*
-				i NEED a key-value pair for titles vs functions
-				but i can still use an array of the functions_names to call them
-				(or vice versa..)
-
-			 */
 			//todo strip ** from both titles and functions??
 			Format(Chaos_Function_v_Title, sizeof(Chaos_Function_v_Title), "%s**%s", Chaos_Function_Title, Chaos_Function_Name);
 			PushArrayString(Effects_Functions_Titles, Chaos_Function_v_Title);
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
-			// if(Chaos_Function_Name[0]){
-			// 	// PushArrayString(Effect_Functions, Chaos_Function_Name);
-			// 	// PushArrayString(Effect_Titles, 	Chaos_Function_Title);
-			// 	// PushArrayCell(Effect_EnabledStatus, enabled); //this will all be in the wrong order...
-			// }
 			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
 
-
-			// PrintToChatAll("%s: on: %i, dur: %i", Chaos_Function_Name, enabled, expires);
 		}
 	} while(kvConfig.GotoNextKey());
 
@@ -111,7 +90,6 @@ void ParseChaosEffects(){
 		PushArrayString(Effect_Functions, title_function[1]);
 	}
 
-	//i could put everything into one string then once its done re split everything after sorting
 	Log("Parsed Chaos_Effects.cfg succesfully!");
 }
 
@@ -137,12 +115,10 @@ void ParseOverrideEffects(){
 	int  Chaos_Properties[2];
 	do{
 		char Chaos_Function_Name[64];
-		// char Chaos_Function_Title[64];
 		
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
-			// kvConfig.GetString("name", Chaos_Function_Title, sizeof(Chaos_Function_Title), Chaos_Function_Name);
 			if(enabled != 0 && enabled != 1) enabled = 1;
 
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
@@ -156,7 +132,6 @@ void ParseOverrideEffects(){
 }
 
 
-//config
 void ParseMapCoordinates() {
 	char path[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Locations.cfg");
@@ -202,7 +177,7 @@ void ParseMapCoordinates() {
 }
 
 /*
-	ParseScore() is used to figure out the value of 'SlowScriptTimeout' found in addons/sourcemod/configs/core.cfg
+	ParseCore() is used to figure out the value of 'SlowScriptTimeout' found in addons/sourcemod/configs/core.cfg
 	Chaos_FakeCrash relies on SourceMod disabling the script when it times out (infinite loop) for 8 seconds.
 
 	In the rare case SlowScriptTimeout is disabled (value of 0) or 10+ seconds, we check that to prevent Chaos_Fakecrash from running
@@ -259,6 +234,8 @@ void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key
 	char path[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Override.cfg");
 
+	KeyValues kvConfig = new KeyValues("Effects");
+
 	if(!FileExists(path)){
 		Handle FileHandle = OpenFile(path, "w");
 		if(!FileHandle){
@@ -266,13 +243,10 @@ void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key
 			return;
 		}
 		CloseHandle(FileHandle);
-	}
-
-	KeyValues kvConfig = new KeyValues("Effects");
-	if(!kvConfig.ImportFromFile(path)){
-		Log("Unable to parse Key Values file %s. If you are editing an effect for the first time, you can ignore this error.", path);
-		// SetFailState("Unable to parse Key Values file %s", path);
-		// return;
+	}else{
+		if(!kvConfig.ImportFromFile(path)){
+			Log("Unable to parse Key Values file %s.", path);
+		}
 	}
 
 	kvConfig.JumpToKey(function_name, true);
@@ -282,9 +256,9 @@ void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key
 
 	if(kvConfig.ExportToFile(path)){
 		if(IsValidClient(client)){
+			//todo: convar to who this message should be sent to.
 			PrintToChatAll("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
-			// PrintToChat(client, "[Chaos] Effect '%s' has been changed in the config. New value: '%s'.", function_name, newValue);
 		}
 		ParseChaosEffects();
 		ParseOverrideEffects();
