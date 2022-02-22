@@ -31,4 +31,4 @@ The command `!chaos` can be used in-game to edit the config.
 
 `!chaos ->  Settings -> Edit Effects`
 
-**ANY changes you make in-game will create a `Chaos_Override.cfg` file in `addons/sourcmeod/configs/Chaos/`, and automatically add/update your changes within the file. The effects found in `Chaos_Override.cfg` will have a higher priority over those same effects in `Chaos_Effects.cfg`. This method is encouraged to ensure you keep your changes when updating `Chaos_Effects.cfg` to the latest version.**
+**ANY changes you make in-game will create a `Chaos_Override.cfg` file in `addons/sourcemod/configs/Chaos/`, and automatically add/update your changes within the file. The effects found in `Chaos_Override.cfg` will have a higher priority over those same effects in `Chaos_Effects.cfg`. This method is encouraged to ensure you keep your changes when updating `Chaos_Effects.cfg` to the latest version.**
