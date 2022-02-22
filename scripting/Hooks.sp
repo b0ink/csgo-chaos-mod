@@ -13,7 +13,7 @@ public Action Hook_WeaponSwitch(int client, int weapon){
 			return Plugin_Continue;
 		}
 	}
-	if(g_bKnifeFight){
+	if(g_bKnifeFight > 0){
 		if(StrContains(WeaponName, "knife") == -1 &&
 			StrContains(WeaponName, "c4") == -1){
 				FakeClientCommand(client, "use weapon_knife");
