@@ -567,8 +567,6 @@ bool CreateParticle(char []particle, float[3] vec){
 	return true;
 }
 
-
-
 void StopTimer(Handle &timer){
 	if(timer != INVALID_HANDLE){
 		KillTimer(timer);
