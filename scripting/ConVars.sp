@@ -7,7 +7,7 @@ float       g_fChaos_EffectInterval = 15.0;
 ConVar 	g_cvChaosRepeating;
 bool        g_bChaos_Repeating = true;
 
-ConVar 	g_cvChaosOverwriteDuration;
+ConVar 	g_cvChaosOverrideDuration;
 float       g_fChaos_OverwriteDuration = -1.0;
 
 
@@ -23,19 +23,19 @@ void CreateConVars(){
     g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
     g_cvChaosEffectInterval = CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
     g_cvChaosRepeating = CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
-    g_cvChaosOverwriteDuration = CreateConVar("sm_chaos_overwrite_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
+    g_cvChaosOverrideDuration = CreateConVar("sm_chaos_override_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
 
     HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
     HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
     HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
-    HookConVarChange(g_cvChaosOverwriteDuration, 	ConVarChanged);
+    HookConVarChange(g_cvChaosOverrideDuration, 	ConVarChanged);
 }
 
 void UpdateCvars(){
 	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
 	g_fChaos_EffectInterval = g_cvChaosEffectInterval.FloatValue;
 	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
-	g_fChaos_OverwriteDuration = g_cvChaosOverwriteDuration.FloatValue;
+	g_fChaos_OverwriteDuration = g_cvChaosOverrideDuration.FloatValue;
 }
 
 void FindConVars(){
@@ -70,7 +70,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		}else if(StringToInt(newValue) == 1){
 			g_bChaos_Repeating = true;
 		}
-	} else if(convar == g_cvChaosOverwriteDuration){
+	} else if(convar == g_cvChaosOverrideDuration){
 		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
 	}
 }
