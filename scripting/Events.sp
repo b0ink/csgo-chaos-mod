@@ -173,12 +173,12 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_bC4Chicken = false;
 	g_bCanSpawnEffect = true;
 	g_bRewind_logging_enabled = true;
+	g_bKnifeFight = 0;
 
 	ResetHud();
 	
 	ResetChaos();
 
-	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_iChaos_Round_Count = 0;
 	
 	for(int i = 0; i <= MaxClients; i++){
@@ -192,6 +192,8 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	CreateTimer(5.0, Timer_CreateHostage);
 	
 	SetRandomSeed(GetTime());
+	
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
 		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
