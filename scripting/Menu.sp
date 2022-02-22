@@ -95,7 +95,7 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 		}
 	}
 	menu.ExitButton = true;
-	menu.ExitBackButton = true; 
+	if(AllowRandom) menu.ExitBackButton = true; 
 	menu.Display(client, 0);
 
 	if(g_DynamicChannel){
@@ -116,9 +116,9 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 			g_sSelectedChaosEffect = info;
 			if(g_sSelectedChaosEffect[0]){
 				if(g_bCanSpawnEffect && g_bChaos_Enabled){
-					g_bDecidingChaos = true;
-					g_bClearChaos = false;
-					Chaos();
+					Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", g_sSelectedChaosEffect);
+
+					ChooseEffect(null, true);
 				}else{
 					ReplyToCommand(param1, "[Chaos] Sorry, no effects can be spawned in right now.");
 					if(!g_bChaos_Enabled){

@@ -29,16 +29,17 @@ public Action Command_NewChaosEffect(int client, int args){
 	
 	g_bDisableRetryEffect = true;
 	if(g_bCanSpawnEffect){
-		if(args == 1){
+		if(args >= 1){
 			if(strlen(effectName) >=3){
 					PoolChaosEffects(effectName);
 					if(GetArraySize(Possible_Chaos_Effects) <= 0){
+						//todo show if the chas is enabled or not
 						ReplyToCommand(client, "[Chaos] No effects found, or the desired effect is currently disabled.");
 						return Plugin_Handled;
 					}else if(GetArraySize(Possible_Chaos_Effects) == 1){
-						Chaos();
+						g_sCustomEffect = g_sSelectedChaosEffect;
+						ChooseEffect(null, true);
 					}else{
-						//todo show menu of array
 						ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
 						ShowMenu_Effects(client);
 					}
@@ -47,6 +48,8 @@ public Action Command_NewChaosEffect(int client, int args){
 				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
 				return Plugin_Handled;
 			}
+		}else{
+			ShowMenu_Effects(client, true);
 		}
 	}else{
 		ReplyToCommand(client, "[Chaos] You can't spawn new effects right now, please wait until the round starts.");
