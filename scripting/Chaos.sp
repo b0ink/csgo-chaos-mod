@@ -55,12 +55,11 @@ bool 	g_bCanSpawnEffect = true;
 int 	g_iChaos_Round_Count = 0;
 bool 	g_bMegaChaos = false;
 char 	g_sSelectedChaosEffect[64] = "";
+char 	g_sCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
 bool 	g_bClearChaos = false;
 bool 	g_bDecidingChaos = false;
-
-
 
 
 Handle 	g_NewEffect_Timer = INVALID_HANDLE;
@@ -71,7 +70,6 @@ Handle 	Effect_History = INVALID_HANDLE;
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 bool g_DynamicChannel = false;
-
 
 #include "Externals/InstantWeaponSwitch.sp"
 #include "Externals/WeaponJump.sp"
@@ -96,7 +94,6 @@ bool g_DynamicChannel = false;
 #include "EffectsHandler.sp"
 
 #include "Configs.sp"
-
 #include "Menu.sp"
 
 public void OnPluginStart(){
@@ -132,7 +129,6 @@ public void OnPluginStart(){
 	AUTOPLANT_INIT();
 	EXPLOSIVEBULLETS_INIT();
 	DRUGS_INIT();
-
 
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
@@ -228,7 +224,7 @@ public Action Timer_CreateHostage(Handle timer){
 
 
 
-Action ChooseEffect(Handle timer, bool CustomRun = false){
+Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
@@ -248,43 +244,49 @@ Action ChooseEffect(Handle timer, bool CustomRun = false){
 
 	//todo why am i not using possible_chaos_effects here?
 	//can i not poolChaosEffects() then run it from there wtf lol
-	while(!g_sLastPlayedEffect[0]){
-		if(!CustomRun){
-			do{
+	if(g_sCustomEffect[0]){
+		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
+		Chaos();
+	}else{
+		while(!g_sLastPlayedEffect[0]){
+			if(!CustomRun){
+				do{
+					randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
+					GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
+					if(!IsChaosEnabled(Random_Effect)){
+						Random_Effect = "";
+					}
+					// PrintToChatAll("do: trying effect %s", Random_Effect);
+				}while((FindStringInArray(Effect_History, Random_Effect) != -1) || !Random_Effect[0]);
+
+				PushArrayString(Effect_History, Random_Effect);
+				//todo change effect_history limit to a percentage of ENABLED effects
+				if(GetArraySize(Effect_History) > 75) RemoveFromArray(Effect_History, 0);
+				
+			}else{
+				//ignore history if run customly
 				randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
 				GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
 				if(!IsChaosEnabled(Random_Effect)){
 					Random_Effect = "";
 				}
-				// PrintToChatAll("do: trying effect %s", Random_Effect);
-			}while((FindStringInArray(Effect_History, Random_Effect) != -1) || !Random_Effect[0]);
-
-			PushArrayString(Effect_History, Random_Effect);
-			//todo change effect_history limit to a percentage of ENABLED effects
-			if(GetArraySize(Effect_History) > 75) RemoveFromArray(Effect_History, 0);
-			
-		}else{
-			//ignore history if run customly
-			randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
-			GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
-			if(!IsChaosEnabled(Random_Effect)){
-				Random_Effect = "";
 			}
-		}
 
-		g_sSelectedChaosEffect = Random_Effect;
-	
-		attempts++;
-		Chaos(); //run the chaos
-		if(attempts > 9999){
-			PrintToChatAll("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
-			Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
+			g_sSelectedChaosEffect = Random_Effect;
+		
+			attempts++;
+			Chaos(); //run the chaos
+			if(attempts > 9999){
+				PrintToChatAll("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
+				Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
+			}
+			if(g_sLastPlayedEffect[0] || attempts > 9999) break;
 		}
-		if(g_sLastPlayedEffect[0] || attempts > 9999) break;
 	}
 
+
 	PrintEffects();
-	
+	g_sCustomEffect  = "";
 	if(g_bPlaySound_Debounce == false){
 		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
 		g_bPlaySound_Debounce = true;
