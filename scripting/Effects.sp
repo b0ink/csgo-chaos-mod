@@ -1406,13 +1406,12 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 	AnnounceChaos("Taser Party!", duration);
 }
 
-bool g_bKnifeFight = false;
+int g_bKnifeFight = 0;
 Handle g_KnifeFight_Timer = INVALID_HANDLE;
 Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_KnifeFight_Timer);
-		g_bKnifeFight = false;
-		
+		if(g_bKnifeFight > 0) g_bKnifeFight--;
 		if(EndChaos){
 			for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i) && !HasMenuOpen(i)) ClientCommand(i, "slot1");
 			AnnounceChaos("Knife Fight", -1.0, true);
@@ -1421,7 +1420,7 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 	if(NotDecidingChaos("Chaos_KnifeFight")) return;
 	if(CurrentlyActive(g_KnifeFight_Timer)) return;
 
-	g_bKnifeFight = true;
+	g_bKnifeFight++;
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			FakeClientCommand(i, "use weapon_knife");
@@ -1939,7 +1938,7 @@ Handle g_AlienKnifeFightTimer = INVALID_HANDLE;
 Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_AlienKnifeFightTimer);
-		g_bKnifeFight = false;
+		if(g_bKnifeFight > 0) g_bKnifeFight--;
 		// if(EndChaos){
 		for(int i = 0; i <= MaxClients; i++){
 			if(ValidAndAlive(i)){
@@ -1965,7 +1964,7 @@ Action Chaos_AlienModelKnife(Handle timer = null, bool EndChaos = false){
 		}
 	}
 
-	g_bKnifeFight = true;
+	g_bKnifeFight++;
 	
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -2296,14 +2295,14 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 		cvar("sv_airaccelerate", "12");
 		StopTimer(g_BreakTime_Timer);
 		g_BreakTime = false;
-		g_bKnifeFight = false;
+		if(g_bKnifeFight > 0) g_bKnifeFight--;
 		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
 	}
 	if(NotDecidingChaos("Chaos_BreakTime")) return;
 	if(CurrentlyActive(g_BreakTime_Timer)) return;
 	
 	g_BreakTime = true;
-	g_bKnifeFight = true;
+	g_bKnifeFight++;
 	cvar("sv_accelerate", "0");
 	cvar("sv_airaccelerate", "0");
 
