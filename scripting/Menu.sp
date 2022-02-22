@@ -188,8 +188,8 @@ void ShowMenu_EditConvars(int client){
 	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_repeating: %.2f", g_cvChaosRepeating.FloatValue);
 	menu.AddItem("sm_chaos_repeating", ItemTitle);
 
-	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_overwrite_duration: %.2f", g_cvChaosOverwriteDuration.FloatValue);
-	menu.AddItem("sm_chaos_overwrite_duration", ItemTitle);
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_override_duration: %.2f", g_cvChaosOverrideDuration.FloatValue);
+	menu.AddItem("sm_chaos_override_duration", ItemTitle);
 	
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
