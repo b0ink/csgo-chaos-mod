@@ -24,7 +24,6 @@ public Plugin myinfo = {
 	url = "https://github.com/b0ink/csgo-chaos-mod"
 };
 
-
 char 	g_Prefix[] = ">>{lime}C H A O S{default}<<";
 char 	g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
@@ -40,8 +39,6 @@ Handle 	g_UnusedCoordinates = INVALID_HANDLE;
 Handle 	bombSiteA = INVALID_HANDLE;
 Handle 	bombSiteB = INVALID_HANDLE;
 bool 	g_bBombPlanted = false;
-
-void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bPlayersCanDropWeapon = true;
@@ -61,7 +58,6 @@ char 	g_sLastPlayedEffect[64] = "";
 bool 	g_bClearChaos = false;
 bool 	g_bDecidingChaos = false;
 
-
 Handle 	g_NewEffect_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
 bool 	g_bDisableRetryEffect = false;
@@ -69,7 +65,7 @@ bool 	g_bDisableRetryEffect = false;
 Handle 	Effect_History = INVALID_HANDLE;
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
-bool g_DynamicChannel = false;
+bool 	g_DynamicChannel = false;
 
 #include "Externals/InstantWeaponSwitch.sp"
 #include "Externals/WeaponJump.sp"
@@ -92,7 +88,6 @@ bool g_DynamicChannel = false;
 #include "Commands.sp"
 #include "Hud.sp"
 #include "EffectsHandler.sp"
-
 #include "Configs.sp"
 #include "Menu.sp"
 

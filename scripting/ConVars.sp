@@ -43,14 +43,12 @@ void FindConVars(){
     g_ConVar_AirAccelerate = FindConVar("sv_airaccelerate");
 }
 
-
 void SetAccelerate(int client){
     if(g_bNoStrafe || g_bNoForwardBack){
 	    SetConVarFloat( g_ConVar_Accelerate, Client_Accelerations[client] );
 	    SetConVarFloat( g_ConVar_AirAccelerate, Client_AirAccelerations[client] );
 	}
 }
-
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	if(convar == g_cvChaosEnabled){
