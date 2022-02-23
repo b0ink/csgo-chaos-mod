@@ -131,6 +131,7 @@ void ParseOverrideEffects(){
 	Log("Parsed Chaos_Override.cfg successfully!");
 }
 
+void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 
 void ParseMapCoordinates() {
 	char path[PLATFORM_MAX_PATH];
