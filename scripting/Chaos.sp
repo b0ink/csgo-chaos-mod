@@ -67,6 +67,11 @@ float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 bool 	g_DynamicChannel = false;
 
+
+//todo put back in convar and use functions to adjust it
+// int g_NoAirAcc = 0;
+int g_MaxAirAcc = 0;
+
 #include "Externals/InstantWeaponSwitch.sp"
 #include "Externals/WeaponJump.sp"
 #include "Externals/ESP.sp"
