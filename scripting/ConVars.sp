@@ -11,11 +11,7 @@ ConVar 	g_cvChaosOverrideDuration;
 float       g_fChaos_OverwriteDuration = -1.0;
 
 
-ConVar g_ConVar_Accelerate;
-ConVar g_ConVar_AirAccelerate;
 
-float Client_Accelerations[MAXPLAYERS+1]= {5.5, ...};
-float Client_AirAccelerations[MAXPLAYERS+1]= {12.0, ...};
 
 void CreateConVars(){
     CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
@@ -38,17 +34,37 @@ void UpdateCvars(){
 	g_fChaos_OverwriteDuration = g_cvChaosOverrideDuration.FloatValue;
 }
 
+// ConVar g_ConVar_Accelerate;
+// ConVar g_ConVar_AirAccelerate;
+
+// float Client_Accelerations[MAXPLAYERS+1]= {5.5, ...};
+// float Client_AirAccelerations[MAXPLAYERS+1]= {12.0, ...};
+
 void FindConVars(){
-    g_ConVar_Accelerate = FindConVar("sv_accelerate");
-    g_ConVar_AirAccelerate = FindConVar("sv_airaccelerate");
+	// g_ConVar_Accelerate = FindConVar("sv_accelerate");
+	// g_ConVar_AirAccelerate = FindConVar("sv_airaccelerate");
+
+	// int flags = GetConVarFlags(g_ConVar_Accelerate);
+
+	// flags &= ~FCVAR_NOTIFY;
+	// flags &= ~FCVAR_REPLICATED;
+
+	// SetConVarFlags( g_ConVar_Accelerate, flags );
+
+	// int flags2 = GetConVarFlags(g_ConVar_AirAccelerate);
+
+	// flags2 &= ~FCVAR_NOTIFY;
+	// flags2 &= ~FCVAR_REPLICATED;
+
+	// SetConVarFlags(g_ConVar_AirAccelerate, flags2);
 }
 
-void SetAccelerate(int client){
-    if(g_bNoStrafe || g_bNoForwardBack){
-	    SetConVarFloat( g_ConVar_Accelerate, Client_Accelerations[client] );
-	    SetConVarFloat( g_ConVar_AirAccelerate, Client_AirAccelerations[client] );
-	}
-}
+// void SetAccelerate(int client){
+//     if(g_bNoStrafe || g_bNoForwardBack){
+// 	    SetConVarFloat( g_ConVar_Accelerate, Client_Accelerations[client] );
+// 	    SetConVarFloat( g_ConVar_AirAccelerate, Client_AirAccelerations[client] );
+// 	}
+// }
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	if(convar == g_cvChaosEnabled){

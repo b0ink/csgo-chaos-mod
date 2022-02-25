@@ -30,6 +30,8 @@ public void HookOnDecoySpawn(int iGrenade) {
 	}
 }
 
+
+
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
 	if(g_bSimon_Active) SimonSays(client, buttons, iImpulse, fVel, fAngles, iWeapon, iSubType,  iCmdNum, iTickCount, iSeed);
@@ -68,43 +70,51 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	}
 
 	//todo create overwride for these convars to be used for eg. funky
+
+	/*
+		use old method of setting the clients movement to 0
+		but add a half second buffer?
+	 */
+
+	g_blockMovement[client] = 0;
+
 	if(g_bNoStrafe){
 		if(buttons & IN_MOVELEFT){
-			Client_Accelerations[client] = 		0.0;
-			Client_AirAccelerations[client] = 	0.0;
-
-		}else if(buttons & IN_MOVERIGHT){
-			Client_Accelerations[client] = 		0.0;
-			Client_AirAccelerations[client] = 	0.0;
-		}else{
-			if(g_BreakTime){
-				Client_Accelerations[client] = 		0.0;
-				Client_AirAccelerations[client] = 	0.0;
-			}else{
-				Client_Accelerations[client] = 		5.5;
-				Client_AirAccelerations[client] = 	12.0;
+			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
+				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);
 			}
+			g_blockMovement[client]++;
+		}else if(buttons & IN_MOVERIGHT){
+			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
+				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);
+			}
+			g_blockMovement[client]++;
 		}
 	}
+
 	if(g_bNoForwardBack){
 		if(buttons & IN_FORWARD){
-			Client_Accelerations[client] = 		0.0;
-			Client_AirAccelerations[client] = 	0.0;
-		}else if(buttons & IN_BACK){
-			Client_Accelerations[client] = 		0.0;
-			Client_AirAccelerations[client] = 	0.0;
-		}else{
-			if(g_BreakTime){
-				Client_Accelerations[client] = 		0.0;
-				Client_AirAccelerations[client] = 	0.0;
-			}else{
-				Client_Accelerations[client] = 		5.5;
-				Client_AirAccelerations[client] = 	12.0;
+			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
+				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);
 			}
+			g_blockMovement[client]++;
+		}else if(buttons & IN_BACK){
+			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
+				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);
+			}
+			g_blockMovement[client]++;
 		}
 	}
+
+	if(g_blockMovement[client] == 0){ //not pressing any movement keys
+		g_DisableKeys_OriginalPos[client][0] = 0.0;
+		g_DisableKeys_OriginalPos[client][1] = 0.0;
+		g_DisableKeys_OriginalPos[client][2] = 0.0;
+	}
+
 	return Plugin_Continue;
 }
+
 
 public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
 	GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons) - 1)]);
@@ -218,14 +228,14 @@ void ResetChaos(){
 }
 
 public void OnGameFrame(){
-	if(g_bLockPlayersAim_Active){
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
-			}
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			if(g_bLockPlayersAim_Active) TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
 		}
 	}
+
 	Rollback_Log();
+	
 }
 
 

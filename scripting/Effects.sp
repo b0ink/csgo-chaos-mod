@@ -257,6 +257,7 @@ Action Chaos_InsaneAirSpeed(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		cvar("sv_air_max_wishspeed", "30");
 		cvar("sv_airaccelerate", "12");
+		if(g_MaxAirAcc > 0) g_MaxAirAcc--;
 		StopTimer(g_InsaneStrafe_Timer);
 	}
 	if(NotDecidingChaos("Chaos_InsaneAirSpeed.WishSpeed")) return;
@@ -264,7 +265,8 @@ Action Chaos_InsaneAirSpeed(Handle timer = null, bool EndChaos = false){
 	
 	cvar("sv_air_max_wishspeed", "2000");
 	cvar("sv_airaccelerate", "2000");
-	
+	g_MaxAirAcc++;
+
 	float duration = GetChaosTime("Chaos_InsaneAirSpeed", 20.0);
 	if(duration > 0) g_InsaneStrafe_Timer = CreateTimer(duration, Chaos_InsaneAirSpeed, true);
 
@@ -1440,12 +1442,13 @@ Action Chaos_Funky(Handle timer = null, bool EndChaos = false){
 		cvar("sv_autobunnyhopping", "0");
 		cvar("sv_airaccelerate", "12");
 		StopTimer(g_Funky_Timer);
+		if(g_MaxAirAcc > 0) g_MaxAirAcc--;
 		if(EndChaos) AnnounceChaos("No more {orchid}funky{default}?", -1.0, true);
 	}
 	if(NotDecidingChaos("Chaos_Funky.AutoBhop.Bhop")) return;
 	if(CurrentlyActive(g_Funky_Timer)) return;
 
-	
+	g_MaxAirAcc++;
 	cvar("sv_airaccelerate", "2000");
 	cvar("sv_enablebunnyhopping", "1");
 	cvar("sv_autobunnyhopping", "1");
@@ -2282,7 +2285,6 @@ public void Chaos_RandomInvisiblePlayer(){
 }
 
 Handle g_BreakTime_Timer = INVALID_HANDLE;
-bool g_BreakTime = false;
 /**
 todo!:
 	for variables like g_bKnifeFight, convert it to an INT, when used by an effect, add +1, when resetting it, add -1
@@ -2294,14 +2296,12 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 		cvar("sv_accelerate", "5.5");
 		cvar("sv_airaccelerate", "12");
 		StopTimer(g_BreakTime_Timer);
-		g_BreakTime = false;
 		if(g_bKnifeFight > 0) g_bKnifeFight--;
 		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
 	}
 	if(NotDecidingChaos("Chaos_BreakTime")) return;
 	if(CurrentlyActive(g_BreakTime_Timer)) return;
 	
-	g_BreakTime = true;
 	g_bKnifeFight++;
 	cvar("sv_accelerate", "0");
 	cvar("sv_airaccelerate", "0");

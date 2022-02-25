@@ -93,7 +93,35 @@ public Action Hook_OnTakeDamagePost(int victim, int attacker){
     if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
 }
 
+int g_blockMovement[MAXPLAYERS+1];
+float g_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
 
+//todo put vel and vec variables outside, and index players;
 public void Hook_PreThinkPost(int client){
-	SetAccelerate(client);
+
+	float vel[3];
+	GetEntPropVector(client, Prop_Data, "m_vecVelocity", vel);
+	vel[0] = 0.0;
+	vel[1] = 0.0;
+
+	if(g_blockMovement[client] > 0){
+		float vec[3];
+		GetClientAbsOrigin(client, vec);
+
+		float vec2[3];
+		vec2[0] = g_DisableKeys_OriginalPos[client][0];
+		vec2[1] = g_DisableKeys_OriginalPos[client][1];
+		vec2[2] = vec[2];
+		if(GetVectorDistance(vec, g_DisableKeys_OriginalPos[client]) > 5){
+			g_DisableKeys_OriginalPos[client][0] = 0.0;
+			g_DisableKeys_OriginalPos[client][1] = 0.0;
+			g_DisableKeys_OriginalPos[client][2] = 0.0;
+		}
+		if(g_DisableKeys_OriginalPos[client][0] != 0.0){
+			TeleportEntity(client, vec2, NULL_VECTOR, vel);
+		}else{
+			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vel);
+		}
+	}
+	
 }
