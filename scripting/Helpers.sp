@@ -651,3 +651,17 @@ bool HasMenuOpen(int client){
 // void CancelMenu(int client){
 // 	CancelClientMenu(client,true);
 // }
+
+char[] Truncate(char[] str, int length, int reverse = 0){
+	char return_string[PLATFORM_MAX_PATH];
+	if(reverse){
+		int iLen = strlen(str) - length;
+		for(int i; i < iLen; i++){
+			str[i] = str[iLen + i];
+			length = i;
+		}
+	}
+	str[length] = 0;
+	FormatEx(return_string, sizeof(return_string), "%s", str);
+	return return_string;
+} 
