@@ -226,6 +226,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
 	
+
+
 	char Random_Effect[64] = "-";
 	int randomEffect = -1;
 	int attempts = 0;
@@ -237,42 +239,37 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	//todo: do what command.sp !chaos does, loop through all the chaos effects, add it to possible effects array, get random int from there.
 	//remove the gross while loop for every time it fails
 
-	//todo why am i not using possible_chaos_effects here?
-	//can i not poolChaosEffects() then run it from there wtf lol
-	if(g_sCustomEffect[0]){
+	PoolChaosEffects();
+
+
+	if(g_sCustomEffect[0]){ //run from menu
 		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
 		Chaos();
 	}else{
 		while(!g_sLastPlayedEffect[0]){
 			if(!CustomRun){
 				do{
-					randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
+					randomEffect = GetRandomInt(0, GetArraySize(Possible_Chaos_Effects) - 1);
 					GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
-					if(!IsChaosEnabled(Random_Effect)){
-						Random_Effect = "";
-					}
-					// PrintToChatAll("do: trying effect %s", Random_Effect);
 				}while((FindStringInArray(Effect_History, Random_Effect) != -1) || !Random_Effect[0]);
 
 				PushArrayString(Effect_History, Random_Effect);
-				//todo change effect_history limit to a percentage of ENABLED effects
-				if(GetArraySize(Effect_History) > 75) RemoveFromArray(Effect_History, 0);
+
+				float average = float((GetArraySize(Possible_Chaos_Effects) / 4) * 3);
+				if(GetArraySize(Effect_History) > average) RemoveFromArray(Effect_History, 0);
 				
 			}else{
 				//ignore history if run customly
-				randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
+				randomEffect = GetRandomInt(0, GetArraySize(Possible_Chaos_Effects) - 1);
 				GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
-				if(!IsChaosEnabled(Random_Effect)){
-					Random_Effect = "";
-				}
 			}
 
 			g_sSelectedChaosEffect = Random_Effect;
 		
 			attempts++;
-			Chaos(); //run the chaos
+
+			Chaos(); //finally trigger effect
 			if(attempts > 9999){
-				// PrintToChatAll("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 				Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 			}
 			if(g_sLastPlayedEffect[0] || attempts > 9999) break;
@@ -283,7 +280,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	PrintEffects();
 	g_sCustomEffect  = "";
 	if(g_bPlaySound_Debounce == false){
-		//sometimes this function runs 5 times at once to find a new chaos, this prevents it from being played more than once
+		//Prevent overlapping sounds
 		g_bPlaySound_Debounce = true;
 		for(int i = 0; i <= MaxClients; i++){
 			if(IsValidClient(i)){
