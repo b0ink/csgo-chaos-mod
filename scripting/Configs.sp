@@ -24,7 +24,7 @@ public void OnConfigsExecuted(){
 
 public void PrecacheTextures(){
 	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
-	
+
 	PrecacheModel("models/props_survival/dronegun/dronegun.mdl", true);
 	PrecacheModel("models/props_survival/drone/br_drone.mdl", true);
 	PrecacheModel("models/props_survival/parachute/chute.mdl", true);
@@ -286,5 +286,39 @@ void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key
 			PrintToChat(client, "[Chaos] Failed to update config.");
 		}
 	}
+	delete 	kvConfig;
+}
+
+
+void LogEffect(char[] function_name){
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Statistics.cfg");
+
+	KeyValues kvConfig = new KeyValues("Stats");
+
+	if(!FileExists(path)){
+		Handle FileHandle = OpenFile(path, "w");
+		if(!FileHandle){
+			CloseHandle(FileHandle);
+			return;
+		}
+		CloseHandle(FileHandle);
+	}else{
+		if(!kvConfig.ImportFromFile(path)){
+			Log("Unable to parse Key Values file %s.", path);
+		}
+	}
+
+	kvConfig.JumpToKey(function_name, true);
+
+	int currentValue = kvConfig.GetNum("Times Ran", 0);
+	kvConfig.SetNum("Times Ran", currentValue + 1);
+	kvConfig.Rewind();
+	kvConfig.ExportToFile(path);
+
+	if(!kvConfig.ExportToFile(path)){
+		Log("Error saving to %s", path);
+	}
+
 	delete 	kvConfig;
 }
