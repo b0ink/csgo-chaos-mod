@@ -459,7 +459,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 					for(int coord = 0; coord <= GetArraySize(g_UnusedCoordinates)-1; coord++){
 						float vec[3];
 						GetArrayArray(g_UnusedCoordinates, coord, vec);
-						if(DistanceToClosestBarrel(vec) > 50){
+						if(DistanceToClosestEntity(vec, "prop_exploding_barrel") > 50){
 							float dist = GetVectorDistance(playersVec, vec);
 							if((dist < DistanceToBeat) && dist >= minDist){
 								CoordinateIndex = coord;
@@ -472,7 +472,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 						do{
 							GetArrayArray(g_UnusedCoordinates, CoordinateIndex, realVec);
 						}
-						while(DistanceToClosestBarrel(realVec) < 50);
+						while(DistanceToClosestEntity(realVec, "prop_exploding_barrel") < 50);
 						// realVec[2] = realVec[2] - 60;
 						TeleportEntity(i, realVec, NULL_VECTOR, no_vel);
 						RemoveFromArray(g_UnusedCoordinates, CoordinateIndex);
@@ -531,7 +531,7 @@ bool CurrentlyActive(Handle timer){
 	return false;
 }
 
-int DistanceToClosestBarrel(float vec[3]){
+int DistanceToClosestEntity(float vec[3], char[] entity){
 	float dist = 999999.0;
 	float barrelVec[3];
 
@@ -540,7 +540,7 @@ int DistanceToClosestBarrel(float vec[3]){
 	for(int i=MaxClients;i<iMaxEnts;i++){
 		if(IsValidEntity(i) && IsValidEdict(i) && 
 		GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-		StrEqual(sClassName, "prop_exploding_barrel")){
+		StrEqual(sClassName, entity)){
 			GetEntPropVector(i, Prop_Send, "m_vecOrigin", barrelVec);
 			if(GetVectorDistance(barrelVec, vec) < dist){
 				dist = GetVectorDistance(barrelVec, vec);
@@ -569,7 +569,7 @@ void DoRandomTeleport(int client = -1){
 				int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
 				float vec[3];
 				GetArrayArray(g_UnusedCoordinates, randomCoord, vec);
-				if(DistanceToClosestBarrel(vec) > 50){
+				if(DistanceToClosestEntity(vec, "prop_exploding_barrel") > 50){
 					TeleportEntity(i, vec, NULL_VECTOR, NULL_VECTOR);
 					PrintToConsole(i, "%N to %f %f %f", i, vec[0], vec[1], vec[2]);
 					RemoveFromArray(g_UnusedCoordinates, randomCoord);
@@ -580,7 +580,7 @@ void DoRandomTeleport(int client = -1){
 		int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
 		float vec[3];
 		GetArrayArray(g_UnusedCoordinates, randomCoord, vec);
-		if(DistanceToClosestBarrel(vec) > 50){
+		if(DistanceToClosestEntity(vec, "prop_exploding_barrel") > 50){
 			TeleportEntity(client, vec, NULL_VECTOR, NULL_VECTOR);
 			PrintToConsole(client, "%N to %f %f %f", client, vec[0], vec[1], vec[2]);
 			RemoveFromArray(g_UnusedCoordinates, randomCoord);
