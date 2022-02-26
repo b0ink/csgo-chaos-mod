@@ -275,6 +275,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			if(g_sLastPlayedEffect[0] || attempts > 9999) break;
 		}
 	}
+	LogEffect(g_sLastPlayedEffect);
 
 
 	PrintEffects();

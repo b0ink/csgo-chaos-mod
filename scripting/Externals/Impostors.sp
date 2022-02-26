@@ -51,9 +51,7 @@ void SpawnImpostors(){
 				for(int g = 0;g<3;g++){
 					fChickenOffset[g] = fChickenPos[g] + (fForward[g] * 5.0) + (fUp[g] * 10.0) - 10.0;
 				}
-
 				TeleportEntity(fakePlayer, fChickenOffset, fChickenRot, NULL_VECTOR);
-
 				SetVariantString("!activator");     
 				AcceptEntityInput(fakePlayer, "SetParent", chicken);
 
