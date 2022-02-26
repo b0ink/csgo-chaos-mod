@@ -367,6 +367,7 @@ public int getRandomAlivePlayer(){
 		}
 	}
 	int random = GetRandomInt(0, GetArraySize(players) - 1);
+	delete players;
 	return GetArrayCell(players, random);
 }
 
