@@ -165,6 +165,9 @@ public void OnMapStart(){
 	g_NewEffect_Timer = INVALID_HANDLE;
 
 	if(Effect_History != INVALID_HANDLE) ClearArray(Effect_History);
+
+	RemoveChickens();
+	
 }
 
 public void OnMapEnd(){
