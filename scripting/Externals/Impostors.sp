@@ -48,8 +48,9 @@ void SpawnImpostors(){
 				GetEntPropVector(chicken, Prop_Send, "m_vecOrigin", fChickenPos);
 
 				float fChickenOffset[3];
-				for(int g = 0;g<3;g++)
+				for(int g = 0;g<3;g++){
 					fChickenOffset[g] = fChickenPos[g] + (fForward[g] * 5.0) + (fUp[g] * 10.0) - 10.0;
+				}
 
 				TeleportEntity(fakePlayer, fChickenOffset, fChickenRot, NULL_VECTOR);
 
@@ -61,7 +62,7 @@ void SpawnImpostors(){
 				AcceptEntityInput(fakePlayer, "SetParentAttachmentMaintainOffset", fakePlayer, fakePlayer, 0);    
 				
 				ActivateEntity(fakePlayer);
-				DispatchSpawn(fakePlayer); //???
+				DispatchSpawn(fakePlayer);
 
 				// https://yougame.biz/threads/204191
 
@@ -70,8 +71,6 @@ void SpawnImpostors(){
 				SetVariantString("move_knife_r");
 				AcceptEntityInput(fakePlayer, "SetAnimation");
 				AcceptEntityInput(fakePlayer, "Enable");
-
-				// SetEntityModel(fakePlayer, ImpostorModel);
 
 				SetEntityRenderMode(chicken, RENDER_NONE);
 
