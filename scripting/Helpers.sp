@@ -360,14 +360,14 @@ stock int GetAliveCTCount(){
 
 
 public int getRandomAlivePlayer(){
-	int id = -1;
-	int attempts = 0;
-	while(!ValidAndAlive(id)){
-		id = GetRandomInt(0,MAXPLAYERS+1);
-		attempts++;
-		if(attempts > 9999) break;
-	}	
-	return id;
+	Handle players = CreateArray(4);
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			PushArrayCell(players, i);
+		}
+	}
+	int random = GetRandomInt(0, GetArraySize(players) - 1);
+	return GetArrayCell(players, random);
 }
 
 stock void Log(const char[] format, any ...)
