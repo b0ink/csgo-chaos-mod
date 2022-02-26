@@ -13,12 +13,23 @@ void SpawnImpostors(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
 		if(chance <= 25){
-			int chicken = CreateEntityByName("chicken");
-			int fakePlayer = CreateEntityByName("chicken");
-			if(chicken != -1 && fakePlayer != -1){
-				float vec[3];
-				GetArrayArray(g_MapCoordinates, i, vec);
+			float vec[3];
+			GetArrayArray(g_MapCoordinates, i, vec);
+			
+			if(DistanceToClosestEntity(vec, "prop_exploding_barrel") < 50) continue;
 
+			int chicken = CreateEntityByName("chicken");
+			int fakePlayer = CreateEntityByName("prop_dynamic_override");
+
+			if(chicken != -1 && fakePlayer != -1){
+				char ImpostorModel[PLATFORM_MAX_PATH];
+				int randomSkin = GetRandomInt(0, GetArraySize(OriginalPlayerModels) - 1);
+				GetArrayString(OriginalPlayerModels, randomSkin, ImpostorModel, sizeof(ImpostorModel));
+
+				DispatchKeyValue(fakePlayer, "targetname", "fake_player");
+				DispatchKeyValue(fakePlayer, "disableshadows", "1");
+				DispatchKeyValue(fakePlayer, "model", ImpostorModel);
+				
 				TeleportEntity(chicken, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(chicken);
 
@@ -49,11 +60,18 @@ void SpawnImpostors(){
 
 				AcceptEntityInput(fakePlayer, "SetParentAttachmentMaintainOffset", fakePlayer, fakePlayer, 0);    
 				
-				char ImpostorModel[PLATFORM_MAX_PATH];
-				int randomSkin = GetRandomInt(0, GetArraySize(OriginalPlayerModels) - 1);
-				GetArrayString(OriginalPlayerModels, randomSkin, ImpostorModel, sizeof(ImpostorModel));
+				ActivateEntity(fakePlayer);
+				DispatchSpawn(fakePlayer); //???
 
-				SetEntityModel(fakePlayer, ImpostorModel);
+				// https://yougame.biz/threads/204191
+
+				// SetVariantString("pistol_aim_crouch_moving");
+				// SetVariantString("move_r");
+				SetVariantString("move_knife_r");
+				AcceptEntityInput(fakePlayer, "SetAnimation");
+				AcceptEntityInput(fakePlayer, "Enable");
+
+				// SetEntityModel(fakePlayer, ImpostorModel);
 
 				SetEntityRenderMode(chicken, RENDER_NONE);
 
