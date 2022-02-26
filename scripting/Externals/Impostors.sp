@@ -1,5 +1,3 @@
-// char OriginalPlayerModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
-
 Handle OriginalPlayerModels = INVALID_HANDLE;
 
 void SpawnImpostors(){
@@ -9,11 +7,9 @@ void SpawnImpostors(){
 			char modelName[PLATFORM_MAX_PATH];
 			GetEntPropString(i, Prop_Data, "m_ModelName", modelName, sizeof(modelName));
 			PushArrayString(OriginalPlayerModels, modelName);
-			// OriginalPlayerModels[i] = modelName;
 		}
 	}
 
-		//todo: chickens get stuck, saw a video somewhere that its possible for them to move around like normal
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
 		if(chance <= 25){
@@ -22,46 +18,48 @@ void SpawnImpostors(){
 			if(chicken != -1 && fakePlayer != -1){
 				float vec[3];
 				GetArrayArray(g_MapCoordinates, i, vec);
-				// vec[2] = vec[2] + 25.0;
+
 				TeleportEntity(chicken, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(chicken);
 
-				// SetEntityRenderMode(chicken , RENDER_NONE);
-				// SetEntityRenderColor(chicken, 255, 255, 255, 0);
+				/*
+					Thankyou backwards!
+					https://discord.com/channels/335290997317697536/335290997317697536/840636933478678538
+				*/
 
-				// SetEntProp(ent, Prop_Send, "m_fEffects", 0);
-				// SetEntProp(ent, Prop_Data, "m_flGroundSpeed", 1);
-				// CreateTimer(0.1, Timer_SetChickenModel, ent);
+				float fChickenRot[3];
+				GetEntPropVector(chicken, Prop_Data, "m_angAbsRotation", fChickenRot);
 
+				float fForward[3], fSide[3], fUp[3];
+				GetAngleVectors(fChickenRot, fForward, fSide, fUp);
+
+				float fChickenPos[3];
+				GetEntPropVector(chicken, Prop_Send, "m_vecOrigin", fChickenPos);
+
+				float fChickenOffset[3];
+				for(int g = 0;g<3;g++)
+					fChickenOffset[g] = fChickenPos[g] + (fForward[g] * 5.0) + (fUp[g] * 10.0) - 10.0;
+
+				TeleportEntity(fakePlayer, fChickenOffset, fChickenRot, NULL_VECTOR);
+
+				SetVariantString("!activator");     
+				AcceptEntityInput(fakePlayer, "SetParent", chicken);
+
+				//Note: Entities must be parented before being sent this input. Use at least a 0.1 second delay between SetParent and SetParentAttachmentMaintainOffset inputs, to ensure they run in the right order.
+
+				AcceptEntityInput(fakePlayer, "SetParentAttachmentMaintainOffset", fakePlayer, fakePlayer, 0);    
+				
 				char ImpostorModel[PLATFORM_MAX_PATH];
 				int randomSkin = GetRandomInt(0, GetArraySize(OriginalPlayerModels) - 1);
 				GetArrayString(OriginalPlayerModels, randomSkin, ImpostorModel, sizeof(ImpostorModel));
 
-				vec[2] = vec[2] - 2.0;
-
-				TeleportEntity(fakePlayer, vec, NULL_VECTOR, NULL_VECTOR);
-				DispatchSpawn(fakePlayer);
-
-				// SetEntProp(fakePlayer, Prop_Send, "m_CollisionGroup", COLLISION_GROUP_DEBRIS);
-				SetEntProp(fakePlayer, Prop_Send, "m_usSolidFlags", 0x0008);
-				SetEntProp(fakePlayer, Prop_Data, "m_nSolidType", 6);
-				SetEntProp(fakePlayer, Prop_Send, "m_CollisionGroup", 0); 
-
-				// SetEntProp(chicken, Prop_Send, "m_usSolidFlags", 0x0008);
-				// SetEntProp(chicken, Prop_Data, "m_nSolidType", 0);
-				// SetEntProp(chicken, Prop_Send, "m_CollisionGroup", 0); 
-
-				SetVariantString("!activator");
-				AcceptEntityInput(fakePlayer, "SetParent", chicken, fakePlayer, 0);
-				AcceptEntityInput(fakePlayer, "SetParentAttachmentMaintainOffset", fakePlayer, fakePlayer, 0);    
-
-
-				SetEntityMoveType(fakePlayer, MOVETYPE_NOCLIP);   
-
-
 				SetEntityModel(fakePlayer, ImpostorModel);
-				// SetEntPropFloat(ent, Prop_Send, "m_flSpeed", 2.0);
-				// SetVariantString("!activator");
+
+				SetEntityRenderMode(chicken, RENDER_NONE);
+
+				//causes those annoying messages when your chicken dies if i set the leader
+				// SetEntPropEnt(chicken, Prop_Send, "m_leader", getRandomAlivePlayer());
+
 			}
 		}
 	}
