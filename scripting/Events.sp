@@ -235,7 +235,6 @@ public void OnGameFrame(){
 	}
 
 	Rollback_Log();
-	
 }
 
 

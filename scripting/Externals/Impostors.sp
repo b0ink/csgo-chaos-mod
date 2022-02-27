@@ -12,7 +12,7 @@ void SpawnImpostors(){
 
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
-		if(chance <= 25){
+		if(chance <= 10){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec);
 			
@@ -62,12 +62,27 @@ void SpawnImpostors(){
 				ActivateEntity(fakePlayer);
 				DispatchSpawn(fakePlayer);
 
-				// https://yougame.biz/threads/204191
+				int knife = CreateEntityByName("weapon_knife");
+				SetVariantString("!activator");
+				AcceptEntityInput(knife, "SetParent", fakePlayer);
+				SetVariantString("weapon_hand_R");
+				AcceptEntityInput(knife, "SetParentAttachment", knife, knife, 0);
+				DispatchSpawn(knife);
 
-				// SetVariantString("pistol_aim_crouch_moving");
-				// SetVariantString("move_r");
+				/*
+					https://yougame.biz/threads/204191
+					https://forums.alliedmods.net/showthread.php?t=288278&page=3
+
+					Some animations will just glide, but it appears the following line is required:
+					SetEntPropFloat(i, Prop_Send, "m_flPoseParameter", 0.0, 0);	
+						> More info: https://pastebin.com/YMDDrN9n
+					Couldn't get it to work so now is a todo for another time :(
+				 */
+
 				SetVariantString("move_knife_r");
-				AcceptEntityInput(fakePlayer, "SetAnimation");
+				// SetVariantString("rifle_aim_walk");
+				// SetVariantString("knife_aim_run");
+				AcceptEntityInput(fakePlayer, "SetAnimation", 1, 1, 0);
 				AcceptEntityInput(fakePlayer, "Enable");
 
 				SetEntityRenderMode(chicken, RENDER_NONE);
@@ -78,6 +93,5 @@ void SpawnImpostors(){
 			}
 		}
 	}
-
 	delete OriginalPlayerModels;
 }
