@@ -1,5 +1,3 @@
-float g_AllPositions[MAXPLAYERS+1][3];
-
 
 bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
@@ -10,9 +8,6 @@ bool ValidBombSpawns(){
 	if(GetArraySize(bombSiteA) == 0 || GetArraySize(bombSiteB) == 0) return false;
 	return true;
 }
-
-
-
 
 bool NotDecidingChaos(char[] EffectName = ""){
 	//if effectname was provided manually, 
@@ -61,9 +56,8 @@ bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 }
 
 float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false){
-
-	
 	float OverwriteDuration = g_fChaos_OverwriteDuration;
+
 	if(OverwriteDuration < -1.0){
 		Log("Cvar 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
 		OverwriteDuration = - 1.0;
@@ -74,26 +68,21 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false
 	if(Chaos_Effects.GetArray(EffectName, Chaos_Properties, 2)){
 		expire = float(Chaos_Properties[CONFIG_EXPIRE]);
 
-		// if(raw) return SanitizeTime(expire);
 		if(raw) return expire;		
-		
 		if(OverwriteDuration != -1.0) expire = OverwriteDuration;
 
 		if(expire < 0){
 			//this should imply that per the config, it doesnt exist, lets provide it the plugins default time instead, just in case it does use it.
-			expire = defaultTime;
-			expire = SanitizeTime(expire);
+			expire = SanitizeTime(defaultTime);
 		}else{
 			if(expire != SanitizeTime(expire)){
 				Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", EffectName, expire, SanitizeTime(expire));
 				expire = SanitizeTime(expire);
 			}
 		}
-	
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
-	// PrintToChatAll("%s duration is %f", EffectName, expire);
 	return expire;
 }
 
@@ -126,9 +115,6 @@ bool PoolChaosEffects(char[] effectName = ""){
 	Chaos();
 	g_bFindingPotentialEffects = false;
 }
-
-
-
 
 stock bool IsValidClient(int client, bool nobots = true){
     if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client))) {
@@ -428,6 +414,8 @@ void GetWeaponClassname(int weapon, char[] buffer, int size) {
 	}
 }
 
+float g_AllPositions[MAXPLAYERS+1][3];
+
 void SavePlayersLocations(){
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -501,10 +489,6 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 	
 }
 
-
-
-
-
 bool CreateParticle(char []particle, float[3] vec){
 	int ent = CreateEntityByName("info_particle_system");
 	DispatchKeyValue(ent , "start_active", "0");
@@ -532,30 +516,10 @@ bool CurrentlyActive(Handle timer){
 	return false;
 }
 
-int DistanceToClosestEntity(float vec[3], char[] entity){
-	float dist = 999999.0;
-	float barrelVec[3];
-
-	int iMaxEnts = GetMaxEntities();
-	char sClassName[64];
-	for(int i=MaxClients;i<iMaxEnts;i++){
-		if(IsValidEntity(i) && IsValidEdict(i) && 
-		GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-		StrEqual(sClassName, entity)){
-			GetEntPropVector(i, Prop_Send, "m_vecOrigin", barrelVec);
-			if(GetVectorDistance(barrelVec, vec) < dist){
-				dist = GetVectorDistance(barrelVec, vec);
-			}
-		}
-	}
-	return RoundToFloor(dist);
-}
 
 
 void DoRandomTeleport(int client = -1){
 	Log("[Chaos] Running: DoRandomTeleport (function, not chaos event)");
-
-	// if(g_MapCoordinates == INVALID_HANDLE) return false;
 
 	ClearArray(g_UnusedCoordinates);
 
@@ -606,7 +570,6 @@ stock int GetSlotByWeaponName (int client, const char[] szName){
 	char szClassname[36];
 	int entity = -1;
 	for (int i; i <= 20; i++){
-		// if ((entity = GetPlayerWeaponSlot(client, i)) <= MaxClients || !IsValidEntity(entity)) continue;
 		entity = GetPlayerWeaponSlot(client, i);
 		if(!IsValidEntity(entity)) continue;
 		GetEntityClassname(entity, szClassname, sizeof szClassname);
@@ -624,6 +587,25 @@ int DistanceToClosestPlayer(float vec[3]){
 			GetClientAbsOrigin(i, playerVec);
 			if(GetVectorDistance(playerVec, vec) < dist){
 				dist = GetVectorDistance(playerVec, vec);
+			}
+		}
+	}
+	return RoundToFloor(dist);
+}
+
+int DistanceToClosestEntity(float vec[3], char[] entity){
+	float dist = 999999.0;
+	float barrelVec[3];
+
+	int iMaxEnts = GetMaxEntities();
+	char sClassName[64];
+	for(int i=MaxClients;i<iMaxEnts;i++){
+		if(IsValidEntity(i) && IsValidEdict(i) && 
+		GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
+		StrEqual(sClassName, entity)){
+			GetEntPropVector(i, Prop_Send, "m_vecOrigin", barrelVec);
+			if(GetVectorDistance(barrelVec, vec) < dist){
+				dist = GetVectorDistance(barrelVec, vec);
 			}
 		}
 	}
