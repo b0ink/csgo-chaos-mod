@@ -353,8 +353,9 @@ public int getRandomAlivePlayer(){
 		}
 	}
 	int random = GetRandomInt(0, GetArraySize(players) - 1);
+	int target = GetArrayCell(players, random);
 	delete players;
-	return GetArrayCell(players, random);
+	return target;
 }
 
 stock void Log(const char[] format, any ...)
