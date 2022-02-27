@@ -981,21 +981,16 @@ public void Chaos_MamaChook(){
 	}
 	if(NotDecidingChaos("Chaos_MamaChook")) return;
 
-	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
-		int chance = GetRandomInt(0,100);
-		if(chance <= 25){
-			int ent = CreateEntityByName("chicken");
-			if(ent != -1){
-				float vec[3];
-				GetArrayArray(g_MapCoordinates, i, vec);
-				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
-				DispatchSpawn(ent);
-				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 100.0);
-			}
-			break;
-		}
+	int randomIndex = GetRandomInt(0, GetArraySize(g_MapCoordinates) - 1);
+	int ent = CreateEntityByName("chicken");
+	if(ent != -1){
+		float vec[3];
+		GetArrayArray(g_MapCoordinates, randomIndex, vec);
+		TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+		DispatchSpawn(ent);
+		SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 100.0);
 	}
-
+	
 	AnnounceChaos("Mama Chook", -1.0);
 }
 

@@ -225,8 +225,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
 	if(!g_bChaos_Enabled && !CustomRun) return;
-	
-
 
 	char Random_Effect[64] = "-";
 	int randomEffect = -1;
@@ -236,11 +234,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
 
-	//todo: do what command.sp !chaos does, loop through all the chaos effects, add it to possible effects array, get random int from there.
-	//remove the gross while loop for every time it fails
-
 	PoolChaosEffects();
-
 
 	if(g_sCustomEffect[0]){ //run from menu
 		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
@@ -277,7 +271,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	}
 	LogEffect(g_sLastPlayedEffect);
 
-
 	PrintEffects();
 	g_sCustomEffect  = "";
 	if(g_bPlaySound_Debounce == false){
@@ -312,8 +305,8 @@ public Action Timer_ResetPlaySound(Handle timer){
 	g_bPlaySound_Debounce = false;
 }
 
-//todo, does ChooseEffect already handle retries now
-public void RetryEffect(){ //Used if there's no map data found for the map that renders the event useless
+//Used if there's no map data found for the map that renders the event useless
+public void RetryEffect(){
 	Log("RETRYING EVENT..");
 	if(g_bDisableRetryEffect) return;
 	StopTimer(g_NewEffect_Timer);
