@@ -1,39 +1,53 @@
 # Chaos Mod for CS:GO [101 EFFECTS]
+Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 100+ unique effects into your competitive games such as **Portal Guns, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more! The effects are randomised and every 15 seconds a new one will spawn, keeping you and your enemies on your toes.
 
-Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 100+ unique effects into your competitive games such as **Portal Guns, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more! Every 15 seconds a random effect is triggered, causing chaos to your match.
-
+The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](configs/Chaos/Chaos_Effects.cfg).\
 
 # REQUIREMENTS:
 - Sourcemod 1.10
-- [Dynamic Channels](https://github.com/Vauff/DynamicChannels) (Optional, but recommended for HUD Text)
+- [Dynamic Channels](https://github.com/Vauff/DynamicChannels) (Optional, but recommended for HUD Overlay)
 - [DHooks](https://forums.alliedmods.net/showpost.php?p=2588686&postcount=589)
 
 # INSTALLATION:
-- Copy over `Chaos.smx` from the `/plugins/` folder into your `csgo/addons/sourcemod/plugins/` folder.
-- Copy over the `Chaos` folder from the `/configs` folder into your `csgo/addons/sourcemod/configs/` folder.
-- Copy over `DynamicChannels.smx` from [Dynamic Channels/plugins](https://github.com/Vauff/DynamicChannels/tree/master/plugins) into your `csgo/addons/sourcemod/plugins/` folder.
+- Copy over `Chaos.smx` from the `/plugins/` folder into your `/addons/sourcemod/plugins/` folder.
+- Copy over the `Chaos` folder from the `/configs` folder into your `/addons/sourcemod/configs/` folder.
+- Copy over `DynamicChannels.smx` from [Dynamic Channels/plugins](https://github.com/Vauff/DynamicChannels/tree/master/plugins) into your `/addons/sourcemod/plugins/` folder.
 - Restart your server/load the plugin.
 
-If you encounter any errors please check your error files as well as the plugin's generated `chaos_logs.log` file found in `/csgo/addons/sourcemod/logs`, and double check that the config files are in the correct location.
+If you encounter any errors please check your error files as well as the plugin's generated `chaos_logs.log` file found in `/addons/sourcemod/logs`, and double check that the config files are in the correct location.
 
 ## Available Commands:
-```
-sm_chaos         				- Shows a Menu to control Chaos options.
-sm_effect <Effect Name>			- Runs the effect if it matches with the argument.
-sm_startchaos                  	- Spawns a new effect immediately and starts the effect timer.
-sm_stopchaos                   	- Pauses the Chaos Effect timer and resets all the effects.
+`sm_chaos`
+- Displays a menu of Chaos options:
+	- Enable/Disable Chaos
+	- Spawn new effect from list
+	- Settings
+    	- Effects
+    	- ConVars
+  
+`sm_effect <Effect Name>`
+- Runs the effect if it matches the argument, if multiple are found a menu of options will show.
 
-chaos_refreshconfig            	- Updates and re-parses configs.
-```
+`sm_startchaos`
+- Spawns a new effect immediately and starts the effect timer.
+
+`sm_stopchaos`
+- Pauses the Chaos Effect timer and resets all the effects.
+
+`chaos_refreshconfig`
+- Updates and re-parses configs.
+
+## Config
+Each effect can individually be enabled/disabled and have their duration adjusted within `configs/Chaos/Chaos_Effects.cfg`.\
+More information about the Chaos config can be found [here](configs/Chaos).
+
+### In-Game Config Editor
+Instead of manually editing the `Chaos_Effects.cfg` file, it is recommended to adjust the effects by using the `!chaos` command, and selecting `Settings->Effects`.
+
+ANY changes you make in-game will create a `Chaos_Override.cfg` file in `addons/sourcemod/configs/Chaos/`, and automatically add/update your changes within the file. The effects found in `Chaos_Override.cfg` will have a higher priority over those same effects in `Chaos_Effects.cfg`. To revert to defaults, simply delete `Chaos_Override.cfg`.\
+**Using this method means you can update Chaos to its latest version and corresponding config files without overwriting your changes.**
 
 ## Available ConVars:
-```
-sm_chaos_enabled
-sm_chaos_interval
-sm_chaos_repeating
-sm_chaos_override_duration
-```
-
 `sm_chaos_enabled` | `Default. 1.0` | `Min. 0.0` | `Max. 1.0`
 - Sets whether the Chaos plugin is enabled.\
 Setting it to `1.0` will activate the interval timer and run an effect
@@ -53,9 +67,5 @@ Set to `0.0` for infinite duration.
 ---
 
 <!-- # Known Issues -->
-
-The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](configs/Chaos/Chaos_Effects.cfg).\
-Each effect can individually be enabled/disabled, as well as editing their duration.\
-More information about the Chaos config can be found [here](configs/Chaos).
 
 Project started around the 8th of Septermber, 2021.
