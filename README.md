@@ -65,7 +65,15 @@ If set to `-1.0`, `Chaos_Effects.cfg` durations will be used.\
 Set to `0.0` for infinite duration.
 
 ---
-
-<!-- # Known Issues -->
-
 Project started around the 8th of Septermber, 2021.
+
+<p align="center">
+	<strong>Buy me a coffee!</strong>
+	<br>
+	<br>
+	<a href="https://www.paypal.com/donate/?hosted_button_id=D2RUGH8KTRXTJ" 
+	target="_blank">
+	<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="PayPal this" 
+	title="PayPal – The safer, easier way to pay online!" border="0" />
+	</a>
+</p>
