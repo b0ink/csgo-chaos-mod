@@ -155,6 +155,7 @@ public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbD
 			if(!ValidAndAlive(target)){
 				SetTeleportEndPoint(client);
 				PerformTeleport(client, g_PortalTeleports[client]);
+				EmitSoundToClient(client, SOUND_BLIP, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
 			}
 		}
 		
@@ -219,7 +220,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	Log("--ROUND ENDED--");
 	ResetChaos();
 	g_bCanSpawnEffect = false;
-	
+
 	Clear_Overlay_Que();
 
 	return Plugin_Continue;
