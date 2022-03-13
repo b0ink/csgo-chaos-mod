@@ -2314,6 +2314,13 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	if(CurrentlyActive(g_BreakTime_Timer)) return;
 	
 	g_bKnifeFight++;
+	
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			FakeClientCommand(i, "use weapon_knife");
+		}
+	}
+	
 	cvar("sv_accelerate", "0");
 	cvar("sv_airaccelerate", "0");
 
