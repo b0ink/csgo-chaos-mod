@@ -1875,7 +1875,13 @@ Action Chaos_ReversedRecoil(Handle timer = null, bool EndChaos = false){
 void Chaos_Jackpot(){
 	if(ClearChaos()){	}
 	if(NotDecidingChaos("Chaos_Jackpot")) return;
-	for(int i = 0; i <= MaxClients; i++) if(IsValidClient(i)) SetClientMoney(i, 16000);
+	for(int i = 0; i <= MaxClients; i++){
+		if(IsValidClient(i)){
+			EmitSoundToClient(i, SOUND_MONEY, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
+			SetClientMoney(i, 16000);
+		}
+	}
+
 	AnnounceChaos("Jackpot", -1.0);
 }
 

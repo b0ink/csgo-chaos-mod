@@ -34,6 +34,7 @@ StringMap	Chaos_Effects;
 
 #define SOUND_BELL "buttons/bell1.wav"
 #define SOUND_COUNTDOWN "ui/beep07.wav"
+#define SOUND_MONEY "survival/money_collect_04.wav"
 
 #include "Data.sp"
 
@@ -141,6 +142,7 @@ public void OnMapStart(){
 	
 	PrecacheSound(SOUND_BELL);
 	PrecacheSound(SOUND_COUNTDOWN);
+	PrecacheSound(SOUND_MONEY);
 
 	PrecacheTextures();
 
@@ -165,7 +167,7 @@ public void OnMapStart(){
 	DRUGS_INIT();
 	
 	Overlay_INIT();
-	
+
 	cvar("sv_fade_player_visibility_farz", "1");
 
 	StopTimer(g_NewEffect_Timer);
