@@ -72,5 +72,14 @@ void Chaos_RewindTenSeconds(bool EndChaos = false){
 	g_bRewind_logging_enabled = false;
 	g_Rewinding = true;
 	g_RewindTime = 0;
-	AnnounceChaos("Rewind 10 seconds", -1.0);
+
+
+	float tickrate = 1.0 / GetTickInterval();
+	if (RoundToZero(tickrate) == 128.0){
+		AnnounceChaos("Rewind 5 seconds", -1.0);
+	}else if(RoundToZero(tickrate) == 64.0){
+		AnnounceChaos("Rewind 10 seconds", -1.0);
+	}else{
+		AnnounceChaos("Rewind Movement", -1.0);
+	}
 }

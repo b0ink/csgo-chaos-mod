@@ -72,6 +72,8 @@ float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 bool 	g_DynamicChannel = false;
 
+int ChaosMapCount = 0;
+
 
 //todo put back in convar and use functions to adjust it
 // int g_NoAirAcc = 0;
@@ -128,6 +130,7 @@ public void OnPluginStart(){
 	Effect_History = CreateArray(64);
 	Possible_Chaos_Effects = CreateArray(64);
 }
+
 
 public void OnMapStart(){
 	UpdateCvars();
@@ -274,6 +277,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			attempts++;
 
 			Chaos(); //finally trigger effect
+			ChaosMapCount++;
 			if(attempts > 9999){
 				Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
 			}
