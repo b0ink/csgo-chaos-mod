@@ -9,7 +9,7 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_DecoyDodgeball"))  Chaos_DecoyDodgeball();
 	if(!g_bMegaChaos || reset){
 		if(IsChaosEnabled("Chaos_MEGACHAOS"))  Chaos_MEGACHAOS();
-		if(GetRandomInt(0, 100) <= 50 || reset){
+		if((GetRandomInt(0, 100) <= 50 && ChaosMapCount > 25) || reset){
 			if(GetSlowScriptTimeout() > 0 && GetSlowScriptTimeout() <= 8){
 				if(IsChaosEnabled("Chaos_FakeCrash", 0)){
 					Chaos_FakeCrash();
