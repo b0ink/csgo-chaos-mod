@@ -1,7 +1,6 @@
 archive
-.history
 .VSCodeCounter
-compiled
 .vscode
-plugins/ChaosDebug.smx
-scripting/ChaosDebug.sp
+
+addons/sourcemod/plugins/ChaosDebug.smx
+addons/sourcemod/scripting/ChaosDebug.sp
