@@ -1723,11 +1723,7 @@ Action Chaos_Binoculars(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){	
 		StopTimer(g_Binoculars_Timer);
 		ResetPlayersFOV();
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				ClientCommand(i, "r_screenoverlay \"\"");
-			}
-		}
+		Remove_Overlay("/Chaos/binoculars.vtf");
 	}
 	if(NotDecidingChaos("Chaos_Binoculars")) return;
 	if(CurrentlyActive(g_Binoculars_Timer)) return;
@@ -1735,12 +1731,8 @@ Action Chaos_Binoculars(Handle timer = null, bool EndChaos = false){
 	int RandomFOV = GetRandomInt(20,50);
 	SetPlayersFOV(RandomFOV);
 
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			ClientCommand(i, "r_screenoverlay \"/Chaos/binoculars.vtf\"");
-		}
-	}
-	
+	Add_Overlay("/Chaos/binoculars.vtf");
+
 	float duration = GetChaosTime("Chaos_Binoculars", 25.0);
 	if(duration > 0) g_Binoculars_Timer = CreateTimer(duration, Chaos_Binoculars, true);
 	
@@ -2314,7 +2306,7 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	if(CurrentlyActive(g_BreakTime_Timer)) return;
 	
 	g_bKnifeFight++;
-	
+
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			FakeClientCommand(i, "use weapon_knife");

@@ -191,7 +191,6 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	
 	ResetChaos();
 
-	
 	g_iChaos_Round_Count = 0;
 	
 	for(int i = 0; i <= MaxClients; i++){
@@ -220,6 +219,8 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	Log("--ROUND ENDED--");
 	ResetChaos();
 	g_bCanSpawnEffect = false;
+	
+	Clear_Overlay_Que();
 
 	return Plugin_Continue;
 }

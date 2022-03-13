@@ -163,7 +163,9 @@ public void OnMapStart(){
 	AUTOPLANT_INIT();
 	EXPLOSIVEBULLETS_INIT();
 	DRUGS_INIT();
-
+	
+	Overlay_INIT();
+	
 	cvar("sv_fade_player_visibility_farz", "1");
 
 	StopTimer(g_NewEffect_Timer);
