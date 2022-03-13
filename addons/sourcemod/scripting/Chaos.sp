@@ -13,7 +13,6 @@
 #pragma semicolon 1
 
 #define PLUGIN_NAME "CS:GO Chaos Mod"
-// #define PLUGIN_DESCRIPTION "Spawn random effects from over 100+ effects every 15 seconds."
 #define PLUGIN_DESCRIPTION "Spawn from over 100+ random effects every 15 seconds to ensue chaos towards you and your enemies"
 #define PLUGIN_VERSION "0.0.6"
 
