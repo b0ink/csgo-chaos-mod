@@ -1,23 +1,31 @@
 float mapFogStart = 0.0;
-float mapFogEnd = 0.0;
+float mapFogEnd = 800.0;
 // float mapFogEnd = 175.0;
 float mapFogDensity = 0.995;
-void findLight(){
-	int iMaxEnts = GetMaxEntities();
-	char sClassName[64];
-	for(int i=MaxClients;i<iMaxEnts;i++){
-		if(IsValidEntity(i) && 
-		IsValidEdict(i) && 
-		GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-		StrEqual(sClassName, "env_fog_controller")){
-			RemoveEntity(i);
-		}
-	}
 
+
+void findLight(){
+	int ent = -1;
+	if(
+		StrEqual(mapName, "cs_office", false) ||
+		StrEqual(mapName, "de_vertigo", false) ||
+		StrEqual(mapName, "de_cache", false)
+	){
+		int index = -1;
+		while ((index = FindEntityByClassname(index, "env_fog_controller")) != -1){
+			PrintToChatAll("deleting fog %i", index);
+			RemoveEntity(index);
+		}
+		ent = CreateEntityByName("env_fog_controller");
+		DispatchSpawn(ent);
+
+	}else{
+		ent = FindEntityByClassname(ent, "env_fog_controller");
+	}
 	
-	int ent = CreateEntityByName("env_fog_controller");
 	if (ent != -1) {
 		g_iFog = ent;
+		DispatchKeyValue(g_iFog, "Origin", "0 0 0");
 		DispatchKeyValue(g_iFog, "fogblend", "0");
 		DispatchKeyValue(g_iFog, "fogcolor", "255 255 255");
 		// DispatchKeyValue(g_iFog, "fogcolor", "255 0 0");
@@ -28,6 +36,7 @@ void findLight(){
 		AcceptEntityInput(g_iFog, "TurnOff");
     }
 }
+
 
 void Fog_ON(){
 	AcceptEntityInput(g_iFog, "TurnOn");

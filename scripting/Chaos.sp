@@ -14,7 +14,7 @@
 
 #define PLUGIN_NAME "CS:GO Chaos Mod"
 #define PLUGIN_DESCRIPTION "Spawn random effects from over 100+ effects every 15 seconds."
-#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_VERSION "0.0.4"
 
 public Plugin myinfo = {
 	name = PLUGIN_NAME,
@@ -23,6 +23,8 @@ public Plugin myinfo = {
 	version = PLUGIN_VERSION,
 	url = "https://github.com/b0ink/csgo-chaos-mod"
 };
+
+char mapName[64];
 
 char 	g_Prefix[] = ">>{lime}C H A O S{default}<<";
 char 	g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
@@ -98,8 +100,6 @@ int g_MaxAirAcc = 0;
 
 public void OnPluginStart(){
 	CreateConVars();
-	FindConVars();
-	UpdateCvars();
 	
 	RegisterCommands();
 
@@ -120,16 +120,6 @@ public void OnPluginStart(){
 
 	Chaos_Effects = new StringMap();
 
-	HUD_INIT();
-
-	ESP_INIT();
-	TEAMMATESWAP_INIT();
-	COORD_INIT();
-	NOSCOPE_INIT();
-	AUTOPLANT_INIT();
-	EXPLOSIVEBULLETS_INIT();
-	DRUGS_INIT();
-
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
 	Effect_History = CreateArray(64);
@@ -137,11 +127,14 @@ public void OnPluginStart(){
 }
 
 public void OnMapStart(){
+	UpdateCvars();
+
+	CheckHostageMap();
+
 	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
 	UpdateCvars();
 
-	char mapName[64];
 	GetCurrentMap(mapName, sizeof(mapName));
 	Log("New Map/Plugin Restart - Map: %s", mapName);
 	
@@ -158,6 +151,16 @@ public void OnMapStart(){
 	bombSiteB = 			INVALID_HANDLE;
 
 	findLight();
+
+	HUD_INIT();
+
+	ESP_INIT();
+	TEAMMATESWAP_INIT();
+	COORD_INIT();
+	NOSCOPE_INIT();
+	AUTOPLANT_INIT();
+	EXPLOSIVEBULLETS_INIT();
+	DRUGS_INIT();
 
 	cvar("sv_fade_player_visibility_farz", "1");
 

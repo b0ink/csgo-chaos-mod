@@ -21,7 +21,7 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_Bankrupt"))  Chaos_Bankrupt();
 	if(IsChaosEnabled("Chaos_Shields"))  Chaos_Shields();
 	if(IsChaosEnabled("Chaos_BlindPlayers"))  Chaos_BlindPlayers();
-	if(ValidBombSpawns() || reset){
+	if((ValidBombSpawns() && !isHostageMap()) || reset){
 		if(IsChaosEnabled("Chaos_AutoPlantC4"))  Chaos_AutoPlantC4();
 	}
 	if(IsChaosEnabled("Chaos_InfiniteGrenades"))  Chaos_InfiniteGrenades();
@@ -32,7 +32,7 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_Flying"))  Chaos_Flying();
 	if(IsChaosEnabled("Chaos_OneBulletMag"))  Chaos_OneBulletMag();
 	if(IsChaosEnabled("Chaos_Thirdperson"))  Chaos_Thirdperson();
-	if(!g_bC4Chicken || reset) if(IsChaosEnabled("Chaos_C4Chicken"))  Chaos_C4Chicken();
+	if((!g_bC4Chicken && !isHostageMap()) || reset) if(IsChaosEnabled("Chaos_C4Chicken"))  Chaos_C4Chicken();
 	if(IsChaosEnabled("Chaos_AlienModelKnife"))  Chaos_AlienModelKnife();
 	if(IsChaosEnabled("Chaos_HeadshotOnly"))  Chaos_HeadshotOnly();
 	if(IsChaosEnabled("Chaos_RandomMolotovSpawn"))  Chaos_RandomMolotovSpawn();
@@ -94,10 +94,7 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_InsaneAirSpeed")) Chaos_InsaneAirSpeed();
 	if(IsChaosEnabled("Chaos_DropCurrentWeapon")) Chaos_DropCurrentWeapon();
 	if(IsChaosEnabled("Chaos_DropPrimaryWeapon")) Chaos_DropPrimaryWeapon();
-	//anything BUT dust2 (underwhelming effect due to dust2's 3d skybox :[ )
-	char MapName[128];
-	GetCurrentMap(MapName, sizeof(MapName));
-	if(StrEqual(MapName, "de_dust2", false) == false){
+	if(StrEqual(mapName, "de_dust2", false) == false){ //anything BUT dust2 (underwhelming effect due to dust2's 3d skybox :[ )
 		if(IsChaosEnabled("Chaos_RandomSkybox"))  Chaos_RandomSkybox();
 	}
 	if(g_iChaos_Round_Count > 0 || reset){

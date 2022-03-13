@@ -154,8 +154,13 @@ void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 void ParseMapCoordinates() {
 	char path[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Locations.cfg");
+
+	g_MapCoordinates = CreateArray(3);
+	bombSiteA = CreateArray(3);
+	bombSiteB = CreateArray(3);
+
 	if(!FileExists(path)){
-		Log("Could not find %s. Effects that rely on map data will no run.", path);
+		Log("Could not find %s. Effects that rely on map data will not run.", path);
 		return;
 	}
 	
@@ -163,7 +168,7 @@ void ParseMapCoordinates() {
 	GetCurrentMap(MapName, sizeof(MapName));
 
 	KeyValues kv = new KeyValues("Maps");
-
+	
 	if(!kv.ImportFromFile(path)){
 		Log("Unable to parse Key Values from %s", path);
 		return;
@@ -178,17 +183,15 @@ void ParseMapCoordinates() {
 		Log("Unable to find sub keys %s", path);
 		return;
 	}
-	g_MapCoordinates = CreateArray(3);
-	bombSiteA = CreateArray(3);
-	bombSiteB = CreateArray(3);
+
 	//all keys are fine to go in the all map coordinates, but we ALSO want to add bombA and bombB to respective handles; 
 	do{
 		float vec[3];
 		kv.GetVector(NULL_STRING, vec);
 		char key[25];
 		kv.GetSectionName(key, sizeof(key));
-		if(strcmp(key, "bombA", false) == 0) PushArrayArray(bombSiteA, vec);
-		if(strcmp(key, "bombB", false) == 0) PushArrayArray(bombSiteB, vec);
+		if(StrContains(key, "bombA", false) != -1) PushArrayArray(bombSiteA, vec);
+		if(StrContains(key, "bombB", false) != -1) PushArrayArray(bombSiteB, vec);
 		PushArrayArray(g_MapCoordinates, vec);
 	} while(kv.GotoNextKey(false));
 
