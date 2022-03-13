@@ -33,6 +33,7 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 StringMap	Chaos_Effects;
 
 #define SOUND_BELL "buttons/bell1.wav"
+#define SOUND_COUNTDOWN "ui/beep07.wav"
 
 #include "Data.sp"
 
@@ -139,6 +140,7 @@ public void OnMapStart(){
 	Log("New Map/Plugin Restart - Map: %s", mapName);
 	
 	PrecacheSound(SOUND_BELL);
+	PrecacheSound(SOUND_COUNTDOWN);
 
 	PrecacheTextures();
 
