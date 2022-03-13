@@ -184,11 +184,14 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_bCanSpawnEffect = true;
 	g_bRewind_logging_enabled = true;
 	g_bKnifeFight = 0;
+	
+	CheckHostageMap();
 
 	ResetHud();
 	
 	ResetChaos();
 
+	
 	g_iChaos_Round_Count = 0;
 	
 	for(int i = 0; i <= MaxClients; i++){

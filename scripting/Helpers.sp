@@ -5,6 +5,8 @@ bool ValidMapPoints(){
 }
 
 bool ValidBombSpawns(){
+	if(bombSiteA == INVALID_HANDLE) return false;
+	if(bombSiteB == INVALID_HANDLE) return false;
 	if(GetArraySize(bombSiteA) == 0 || GetArraySize(bombSiteB) == 0) return false;
 	return true;
 }
@@ -631,10 +633,6 @@ bool HasMenuOpen(int client){
 	return false;
 }
 
-// void CancelMenu(int client){
-// 	CancelClientMenu(client,true);
-// }
-
 char[] Truncate(char[] str, int length, int reverse = 0){
 	char return_string[PLATFORM_MAX_PATH];
 	if(reverse){
@@ -648,3 +646,20 @@ char[] Truncate(char[] str, int length, int reverse = 0){
 	FormatEx(return_string, sizeof(return_string), "%s", str);
 	return return_string;
 } 
+
+bool g_bIsHostageMap = false;
+void CheckHostageMap(){
+	g_bIsHostageMap = false;
+	int index = -1;
+	index = FindEntityByClassname(index, "hostage_entity");
+	if(index != -1){
+		g_bIsHostageMap = true;
+		return;
+	}
+	g_bIsHostageMap = false;
+}
+
+bool isHostageMap(){
+
+	return g_bIsHostageMap;
+}

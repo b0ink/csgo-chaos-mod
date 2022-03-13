@@ -507,7 +507,7 @@ Action Chaos_Jumping(Handle timer = null, bool EndChaos = false){
 	if(duration > 0) g_Jumping_Timer = CreateTimer(duration, Chaos_Jumping, true);
 	g_Jumping_Timer_Repeat = CreateTimer(0.3, Timer_ForceJump, _, TIMER_REPEAT);
 	
-	AnnounceChaos("Jumping!", duration);
+	AnnounceChaos("Jumping", duration);
 }
 
 public Action Timer_ForceJump(Handle timer){
@@ -882,7 +882,7 @@ Action Chaos_OneWeaponOnly(Handle timer = null, bool EndChaos = false){
 	for(int i = 0; i < sizeof(randomWeapon); i++) randomWeapon[i] = CharToUpper(randomWeapon[i]);
 
 	char chaosMsg[128];
-	FormatEx(chaosMsg, sizeof(chaosMsg), "%s's Only!", randomWeapon[7]); //strip weapon_ from name;
+	FormatEx(chaosMsg, sizeof(chaosMsg), "%s's Only", randomWeapon[7]); //strip weapon_ from name;
 	// chaosMsg[0] = CharToUpper(chaosMsg[0]);
 
 	float duration = GetChaosTime("Chaos_OneWeaponOnly", 30.0);
@@ -1406,7 +1406,7 @@ Action Chaos_TaserParty(Handle timer = null, bool EndChaos = false){
 	float duration = GetChaosTime("Chaos_TaserParty", 10.0);
 	if(duration > 0) g_TaserParty_Timer = CreateTimer(duration, Chaos_TaserParty, true);
 	
-	AnnounceChaos("Taser Party!", duration);
+	AnnounceChaos("Taser Party", duration);
 }
 
 int g_bKnifeFight = 0;
@@ -1433,7 +1433,7 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 	float duration = GetChaosTime("Chaos_KnifeFight", 15.0);
 	if(duration > 0) g_KnifeFight_Timer = CreateTimer(duration, Chaos_KnifeFight, true);
 	
-	AnnounceChaos("Knife Fight!", duration);
+	AnnounceChaos("Knife Fight", duration);
 }
 
 Handle g_Funky_Timer = INVALID_HANDLE;
@@ -1480,7 +1480,7 @@ Action Chaos_RandomWeapons(Handle timer = null, bool EndChaos = false){
 	float duration = GetChaosTime("Chaos_RandomWeapons", 30.0);
 	if(duration > 0) g_RandWep_Timer = CreateTimer(duration, Chaos_RandomWeapons, true);
 	
-	AnnounceChaos("Random Weapons!", duration);
+	AnnounceChaos("Random Weapons", duration);
 }
 Action Timer_GiveRandomWeapon(Handle timer = null){
 	for(int i = 0; i <= MaxClients; i++){
@@ -1528,7 +1528,7 @@ public void Chaos_RandomMolotovSpawn(){
 	
 	Chaos_MolotovSpawn_Timer = CreateTimer(g_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT);
 
-	AnnounceChaos("Raining Fire!", 25.0);
+	AnnounceChaos("Raining Fire", 25.0);
 }
 
 public Action Timer_SpawnMolotov(Handle timer){
@@ -1597,11 +1597,12 @@ Handle TPos = INVALID_HANDLE;
 Handle CTPos = INVALID_HANDLE;
 Handle tIndex = INVALID_HANDLE;
 Handle ctIndex = INVALID_HANDLE;
+
 public void TEAMMATESWAP_INIT(){
-	TPos = CreateArray(3);
-	CTPos = CreateArray(3);
-	tIndex = CreateArray(1);
-	ctIndex = CreateArray(1);
+	if(TPos == INVALID_HANDLE) TPos = CreateArray(3);
+	if(CTPos == INVALID_HANDLE) CTPos = CreateArray(3);
+	if(tIndex == INVALID_HANDLE) tIndex = CreateArray(1);
+	if(ctIndex == INVALID_HANDLE) ctIndex = CreateArray(1);
 }
 
 void Chaos_TeammateSwap(){
@@ -1639,7 +1640,7 @@ void Chaos_TeammateSwap(){
 		TeleportEntity(GetArrayCell(tIndex, i), vec, NULL_VECTOR, NULL_VECTOR);
 	}
 
-	AnnounceChaos("Teammate Swap!", -1.0);
+	AnnounceChaos("Teammate Swap", -1.0);
 }
 
 //Allows nowclippers to take damage
@@ -2282,7 +2283,7 @@ public void Chaos_RandomInvisiblePlayer(){
 	char chaosMsg[MAX_NAME_LENGTH];
 	FormatEx(chaosMsg, 	sizeof(chaosMsg), "%N", target);
 	Format(chaosMsg, 	sizeof(chaosMsg), "%s...", Truncate(chaosMsg, 10));
-	Format(chaosMsg, 	sizeof(chaosMsg), "{orange}%s {default}has been made invisible!", chaosMsg);
+	Format(chaosMsg, 	sizeof(chaosMsg), "{orange}%s {default}has been made invisible", chaosMsg);
 	AnnounceChaos(chaosMsg, -1.0);
 
 	delete players_array;
@@ -2308,7 +2309,7 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	float duration = GetChaosTime("Chaos_BreakTime", 10.0);
 	if(duration > 0) g_BreakTime_Timer = CreateTimer(duration, Chaos_BreakTime, true);
 	
-	AnnounceChaos("Break Time!", duration);
+	AnnounceChaos("Break Time", duration);
 }
 
 public void Chaos_MEGACHAOS(){

@@ -56,12 +56,15 @@ void PrintEffects(){
 					}else{
 						for(int g = 1; g <= blocks; g++){
 							Format(chunk, sizeof(chunk), "%s▓", chunk);
+							// Format(chunk, sizeof(chunk), "%s▌", chunk);
+							// Format(chunk, sizeof(chunk), "%s▪", chunk);
+							// Format(chunk, sizeof(chunk), "%s⧯", chunk);
 						}
 					}
 				}
 			}
 			//.37 y;
-			SetHudTextParams(0.01, 0.42, 1.0, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
+			SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
 		}
 	}
@@ -87,8 +90,15 @@ void PrintEffects(){
 void PrintTimer(int time){
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
-			SetHudTextParams(-1.0, 0.06, 1.0, 200, 0, 220, 0, 0, 1.0, 0.0, 0.0);
-			ShowHudText(i, GetDynamicChannel(0), "%i", time);
+			if(time > -1){
+				if(time <= 3){
+					SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
+					ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);
+				}else{
+					SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 220, 0, 0, 1.0, 0.0, 0.0);
+					ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);			
+				}
+			}
 		}
 	}
 }
