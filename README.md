@@ -9,8 +9,8 @@ The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](configs/C
 - [DHooks](https://forums.alliedmods.net/showpost.php?p=2588686&postcount=589)
 
 # INSTALLATION:
-- Copy over `Chaos.smx` from the `/plugins/` folder into your `/addons/sourcemod/plugins/` folder.
-- Copy over the `Chaos` folder from the `/configs` folder into your `/addons/sourcemod/configs/` folder.
+- Copy over the folders `configs` and `plugins` from `addons/sourcemod/` into your server's `/addons/sourcemod/` folder.
+- Copy over the contents from `materials/` into your server's `csgo/materials/` folder. You may also need a [Fast DL](https://steamcommunity.com/sharedfiles/filedetails/?id=486331092) setup for other players to download the assets off your server.
 - Copy over `DynamicChannels.smx` from [Dynamic Channels/plugins](https://github.com/Vauff/DynamicChannels/tree/master/plugins) into your `/addons/sourcemod/plugins/` folder.
 - Restart your server/load the plugin.
 
