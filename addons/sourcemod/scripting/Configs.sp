@@ -45,6 +45,8 @@ public void PrecacheTextures(){
 
 	PrecacheDecal("Chaos/binoculars.vmt", true);
 	PrecacheDecal("Chaos/binoculars.vtf", true);
+	AddFileToDownloadsTable("materials/Chaos/binoculars.vtf");
+	AddFileToDownloadsTable("materials/Chaos/binoculars.vmt");
 }
 
 
