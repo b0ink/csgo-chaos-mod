@@ -1,7 +1,7 @@
 # Chaos Mod for CS:GO [101 EFFECTS]
 Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 100+ unique effects into your competitive games such as **Portal Guns, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more! The effects are randomised and every 15 seconds a new one will spawn, keeping you and your enemies on your toes.
 
-The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](configs/Chaos/Chaos_Effects.cfg).
+The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](addons/sourcemod/configs/Chaos/Chaos_Effects.cfg).
 
 # REQUIREMENTS:
 - Sourcemod 1.10
@@ -39,7 +39,7 @@ If you encounter any errors please check your error files as well as the plugin'
 
 ## Config
 Each effect can individually be enabled/disabled and have their duration adjusted within `configs/Chaos/Chaos_Effects.cfg`.\
-More information about the Chaos config can be found [here](configs/Chaos).
+More information about the Chaos config can be found [here](addons/sourcemod/configs/Chaos).
 
 ### In-Game Config Editor
 Instead of manually editing the `Chaos_Effects.cfg` file, it is recommended to adjust the effects by using the `!chaos` command, and selecting `Settings->Effects`.
@@ -65,7 +65,7 @@ If set to `-1.0`, `Chaos_Effects.cfg` durations will be used.\
 Set to `0.0` for infinite duration.
 
 ## Currently supported maps with working spawns
-<sub>Spawns defined in [Chaos_Locations.cfg](/configs/Chaos_Locations.cfg) are used for teleporting players and spawning props. Running Chaos on an unsupported map will mean various effects will not run.</sub>
+<sub>Spawns defined in [Chaos_Locations.cfg](addons/sourcemod/configs/Chaos_Locations.cfg) are used for teleporting players and spawning props. Running Chaos on an unsupported map will mean various effects will not run.</sub>
 - Dust 2
 - Mirage
 - Inferno
