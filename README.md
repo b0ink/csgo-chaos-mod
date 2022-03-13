@@ -64,6 +64,8 @@ If set to `0.0`, only one effect will run at the start of the round.
 If set to `-1.0`, `Chaos_Effects.cfg` durations will be used.\
 Set to `0.0` for infinite duration.
 
+Chaos ConVars can also be edited through the `!chaos` menu using `Settings`.
+
 ## Currently supported maps with working spawns
 <sub>Spawns defined in [Chaos_Locations.cfg](addons/sourcemod/configs/Chaos_Locations.cfg) are used for teleporting players and spawning props. Running Chaos on an unsupported map will mean various effects will not run.</sub>
 - Dust 2
