@@ -4,6 +4,9 @@ void ShowMenu_Main(int client){
 
 	menu.SetTitle("CS:GO Chaos Mod"); //?
 	if(g_bChaos_Enabled){
+		if(g_NewEffect_Timer == INVALID_HANDLE){
+			menu.AddItem("start-chaos-timer", "Start Timer");
+		}
 		menu.AddItem("toggle-chaos", "Disable Chaos");
 	}else{
 		menu.AddItem("toggle-chaos", "Enable Chaos");
@@ -44,6 +47,8 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 				
 			}else if(StrEqual(info, "settings")){
 				ShowMenu_Settings(param1);
+			}else if(StrEqual(info, "start-chaos-timer")){
+				Command_StartChaos(param1, 0);
 			}
 		}
 	}else if (action == MenuAction_Cancel){
