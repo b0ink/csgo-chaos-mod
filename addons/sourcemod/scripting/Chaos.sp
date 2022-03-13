@@ -14,7 +14,7 @@
 
 #define PLUGIN_NAME "CS:GO Chaos Mod"
 #define PLUGIN_DESCRIPTION "Spawn random effects from over 100+ effects every 15 seconds."
-#define PLUGIN_VERSION "0.0.4"
+#define PLUGIN_VERSION "0.0.5"
 
 public Plugin myinfo = {
 	name = PLUGIN_NAME,
