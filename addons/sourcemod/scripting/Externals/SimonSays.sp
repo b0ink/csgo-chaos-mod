@@ -28,7 +28,7 @@ void GenerateSimonOrder(float duration){
 		g_Simon_ActionText = "Crouch.";
 	}
 	// g_time = 13;
-	g_time = RoundToFloor(duration) + 3;
+	g_time = RoundToFloor(duration) + 5;
 
 }
 
@@ -96,7 +96,7 @@ public Action Timer_ShowAction(Handle timer){
 	char message[128];
 	if(g_time > 10){
 		int countdown = g_time - 10;
-		FormatEx(message, sizeof(message), "Simon says starting in %i...", countdown);
+		FormatEx(message, sizeof(message), "Simon says starting in \n%i...", countdown);
 		DisplayCenterTextToAll(message);
 	}else{
 		if(g_time >= 0){
@@ -108,11 +108,11 @@ public Action Timer_ShowAction(Handle timer){
 					}
 				}
 			}
-			FormatEx(message, sizeof(message), "<< SIMON SAYS >>\n\n");
+			// FormatEx(message, sizeof(message), "<< SIMON SAYS >>\n\n");
 			if(g_bSimon_Says){
 				Format(message, sizeof(message), "%sSimon Says ", message);
 			}
-			Format(message, sizeof(message), "%s%s (%i)", message, g_Simon_ActionText, g_time);
+			Format(message, sizeof(message), "%s%s\n(%i)", message, g_Simon_ActionText, g_time);
 			DisplayCenterTextToAll(message);
 		}else{
 			g_bSimon_Active = false;
