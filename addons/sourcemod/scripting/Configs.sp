@@ -42,6 +42,9 @@ public void PrecacheTextures(){
 	PrecacheModel("models/props_survival/crates/crate_ammobox.mdl", true);
 	PrecacheModel("models/weapons/v_parachute.mdl", true);
 	PrecacheModel("models/props_survival/briefcase/briefcase.mdl", true);
+
+	PrecacheDecal("Chaos/binoculars.vmt", true);
+	PrecacheDecal("Chaos/binoculars.vtf", true);
 }
 
 
