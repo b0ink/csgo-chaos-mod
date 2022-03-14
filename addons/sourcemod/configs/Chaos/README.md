@@ -8,7 +8,7 @@ Effects are indexed by their function name used within the plugin, for example:
 "Chaos_PortalGuns"
 {
 	"name"			"Portal Guns"
-	"description"	"Teleport where you shoot"
+	"description"		"Teleport where you shoot"
 	"enabled"		"1"
 	"duration"		"20"
 }
