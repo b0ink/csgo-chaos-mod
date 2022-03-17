@@ -192,6 +192,8 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	
 	ResetChaos();
 
+	CLEAR_CC();
+
 	g_iChaos_Round_Count = 0;
 	
 	for(int i = 0; i <= MaxClients; i++){

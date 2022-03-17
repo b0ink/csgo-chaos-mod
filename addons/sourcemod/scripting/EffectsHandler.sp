@@ -123,6 +123,9 @@ void Chaos(bool reset = false){
 		if(IsChaosEnabled("Chaos_TeleportFewMeters"))  Chaos_TeleportFewMeters();
 		if(IsChaosEnabled("Chaos_SpawnFlashbangs"))  Chaos_SpawnFlashbangs();
 		if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
+		if(IsChaosEnabled("Chaos_LSD"))  Chaos_LSD();
+		if(IsChaosEnabled("Chaos_BlackWhite"))  Chaos_BlackWhite();
+		if(IsChaosEnabled("Chaos_Saturation"))  Chaos_Saturation();
 	}
 	g_bClearChaos = false;
 }

@@ -7,13 +7,13 @@ float mapFogDensity = 0.995;
 void findLight(){
 	int ent = -1;
 	if(
-		StrEqual(mapName, "cs_office", false) ||
+		StrContains(mapName, "cs_office", false) != -1 ||
 		StrEqual(mapName, "de_vertigo", false) ||
 		StrEqual(mapName, "de_cache", false)
 	){
 		int index = -1;
 		while ((index = FindEntityByClassname(index, "env_fog_controller")) != -1){
-			PrintToChatAll("deleting fog %i", index);
+			// PrintToChatAll("deleting fog %i", index);
 			RemoveEntity(index);
 		}
 		ent = CreateEntityByName("env_fog_controller");
