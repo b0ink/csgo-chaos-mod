@@ -106,9 +106,11 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 	if(AllowRandom) menu.ExitBackButton = true; 
 	menu.Display(client, 0);
 
+	SetHudTextParams(0.01, 0.42, 0.1, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 	if(g_DynamicChannel){
-		SetHudTextParams(0.01, 0.42, 0.1, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 		ShowHudText(client, GetDynamicChannel(1), "");
+	}else{
+		ShowHudText(client, -1, "");
 	}
 
 }

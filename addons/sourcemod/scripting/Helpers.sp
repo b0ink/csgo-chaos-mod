@@ -116,6 +116,7 @@ bool PoolChaosEffects(char[] effectName = ""){
 	g_bFindingPotentialEffects = true;
 	Chaos();
 	g_bFindingPotentialEffects = false;
+	Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
 }
 
 stock bool IsValidClient(int client, bool nobots = true){
@@ -161,11 +162,12 @@ void DisplayCenterTextToAll(char[] message){
 
 	for (int i = 1; i <= MaxClients; i++){
 		if(IsValidClient(i)){
+			SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
 			if(g_DynamicChannel){
-				SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
 				ShowHudText(i, GetDynamicChannel(3), "%s", finalMess);
 			}else{
-				PrintCenterText(i, "%s", finalMess);
+				ShowHudText(i, -1, "%s", finalMess);
+				// PrintCenterText(i, "%s", finalMess);
 			}
 		}
 	}
@@ -676,6 +678,7 @@ void Overlay_INIT(){
 
 void Clear_Overlay_Que(){
 	ClearArray(Overlay_Que);
+	Update_Overlay();
 }
 
 void Add_Overlay(char[] path){
@@ -704,7 +707,7 @@ void Update_Overlay(){
 	}
 
 	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
+		if(IsValidClient(i)){
 			ClientCommand(i, "r_screenoverlay \"%s\"", path);
 		}
 	}

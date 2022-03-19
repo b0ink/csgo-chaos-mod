@@ -14,7 +14,7 @@
 
 #define PLUGIN_NAME "CS:GO Chaos Mod"
 #define PLUGIN_DESCRIPTION "Spawn from over 100+ random effects every 15 seconds to ensue chaos towards you and your enemies"
-#define PLUGIN_VERSION "0.0.6"
+#define PLUGIN_VERSION "0.1.0"
 
 public Plugin myinfo = {
 	name = PLUGIN_NAME,
@@ -315,7 +315,9 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			Effect_Interval = 15.0;
 		}
 		g_NewEffect_Timer = CreateTimer(Effect_Interval, ChooseEffect);
-		if(g_DynamicChannel) Timer_Display(null, RoundToFloor(Effect_Interval));
+		if(g_DynamicChannel){
+			Timer_Display(null, RoundToFloor(Effect_Interval));
+		}
 		g_iChaos_Round_Count++;
 	}
 }
@@ -327,8 +329,13 @@ public Action Timer_ResetPlaySound(Handle timer){
 //Used if there's no map data found for the map that renders the event useless
 public void RetryEffect(){
 	Log("RETRYING EVENT..");
-	if(g_bDisableRetryEffect) return;
+	if(g_bDisableRetryEffect){
+		Log("Retries are currently disabled.");
+		return;
+	}
 	StopTimer(g_NewEffect_Timer);
+	g_sCustomEffect = "";
+	g_sSelectedChaosEffect = "";
 	ChooseEffect(INVALID_HANDLE);
 }
 
