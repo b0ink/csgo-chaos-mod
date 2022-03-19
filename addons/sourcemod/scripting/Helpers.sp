@@ -678,6 +678,7 @@ void Overlay_INIT(){
 
 void Clear_Overlay_Que(){
 	ClearArray(Overlay_Que);
+	Update_Overlay();
 }
 
 void Add_Overlay(char[] path){
@@ -706,7 +707,7 @@ void Update_Overlay(){
 	}
 
 	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
+		if(IsValidClient(i)){
 			ClientCommand(i, "r_screenoverlay \"%s\"", path);
 		}
 	}
