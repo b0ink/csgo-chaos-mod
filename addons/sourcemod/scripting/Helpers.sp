@@ -161,11 +161,12 @@ void DisplayCenterTextToAll(char[] message){
 
 	for (int i = 1; i <= MaxClients; i++){
 		if(IsValidClient(i)){
+			SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
 			if(g_DynamicChannel){
-				SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
 				ShowHudText(i, GetDynamicChannel(3), "%s", finalMess);
 			}else{
-				PrintCenterText(i, "%s", finalMess);
+				ShowHudText(i, -1, "%s", finalMess);
+				// PrintCenterText(i, "%s", finalMess);
 			}
 		}
 	}
