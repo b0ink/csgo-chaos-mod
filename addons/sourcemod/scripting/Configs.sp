@@ -115,7 +115,7 @@ void ParseChaosEffects(){
 			//todo better error logging eg. if enabled or duration out of bounds
 
 			//todo strip ** from both titles and functions??
-			Format(Chaos_Function_v_Title, sizeof(Chaos_Function_v_Title), "%s**%s", Chaos_Function_Title, Chaos_Function_Name);
+			Format(Chaos_Function_v_Title, sizeof(Chaos_Function_v_Title), "%s**%s", GetChaosTitle(Chaos_Function_Name), Chaos_Function_Name);
 			PushArrayString(Effects_Functions_Titles, Chaos_Function_v_Title);
 			Chaos_Properties[CONFIG_ENABLED] = enabled;
 			Chaos_Properties[CONFIG_EXPIRE] = expires;
