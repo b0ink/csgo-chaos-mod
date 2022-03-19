@@ -332,6 +332,8 @@ public void RetryEffect(){
 		return;
 	}
 	StopTimer(g_NewEffect_Timer);
+	g_sCustomEffect = "";
+	g_sSelectedChaosEffect = "";
 	ChooseEffect(INVALID_HANDLE);
 }
 
