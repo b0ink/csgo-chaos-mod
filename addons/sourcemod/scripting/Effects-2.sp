@@ -84,3 +84,50 @@ Action Chaos_Saturation(Handle timer = null, bool EndChaos = false){
 	
 	AnnounceChaos("Saturation", duration);
 }
+
+void Chaos_RevealEnemyLocation(){
+	if(ClearChaos()){
+
+	}
+	if(NotDecidingChaos("Chaos_RevealEnemyLocation")) return;
+	ConVar radar = FindConVar("mp_radar_showall");
+
+	if(radar.IntValue == 0){
+		cvar("mp_radar_showall", "1");
+		CreateTimer(0.2, Chaos_EnemyRadar, true); //use already made timer;
+	}
+
+	AnnounceChaos("Reveal Enemies Location", -1.0);
+}
+
+Handle g_HealthRegen_Timer = INVALID_HANDLE;
+bool g_HealthRegen = false;
+Action Chaos_HealthRegen(Handle timer = null, bool EndChaos = false){
+	if(ClearChaos(EndChaos)){
+		StopTimer(g_HealthRegen_Timer);
+		g_HealthRegen = false;
+	}
+	if(NotDecidingChaos("Chaos_HealthRegen")) return;
+	if(CurrentlyActive(g_HealthRegen_Timer)) return;
+
+	g_HealthRegen = true;
+	CreateTimer(1.0, Timer_GiveHealthRegen);
+
+	float duration = GetChaosTime("Chaos_HealthRegen", 20.0);
+	if(duration > 0) g_HealthRegen_Timer = CreateTimer(duration, Chaos_HealthRegen, true);
+	
+	AnnounceChaos("Health Regen", duration);
+}
+
+public Action Timer_GiveHealthRegen(Handle timer){
+	if(g_HealthRegen){
+		int currenthealth = -1;
+		for(int i = 0; i <= MaxClients; i++){
+			if(ValidAndAlive(i)){
+				currenthealth = GetClientHealth(i);
+				SetEntityHealth(i, currenthealth + 10);
+			}
+		}
+		CreateTimer(1.0, Timer_GiveHealthRegen);
+	}
+}

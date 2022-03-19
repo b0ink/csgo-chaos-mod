@@ -370,7 +370,7 @@ stock void Log(const char[] format, any ...)
 }
 
 //HELPERS
-public void cvar(char[] cvarname, char[] value){
+void cvar(char[] cvarname, char[] value){
 	ConVar hndl = FindConVar(cvarname);
 	if (hndl != null) hndl.SetString(value, true);
 }

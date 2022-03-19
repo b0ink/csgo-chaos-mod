@@ -125,6 +125,8 @@ void Chaos(bool reset = false){
 		if(IsChaosEnabled("Chaos_LSD"))  Chaos_LSD();
 		if(IsChaosEnabled("Chaos_BlackWhite"))  Chaos_BlackWhite();
 		if(IsChaosEnabled("Chaos_Saturation"))  Chaos_Saturation();
+		if(IsChaosEnabled("Chaos_RevealEnemyLocation"))  Chaos_RevealEnemyLocation();
+		if(IsChaosEnabled("Chaos_HealthRegen"))  Chaos_HealthRegen();
 	}
 	g_bClearChaos = false;
 }
