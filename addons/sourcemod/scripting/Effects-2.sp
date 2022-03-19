@@ -20,12 +20,6 @@ Action Chaos_LSD(Handle timer = null, bool EndChaos = false){
 	g_LSD = true;
 	g_Previous_LSD = 1;
 	CREATE_CC("env_1");
-	// int test = GetRandomInt(1, 5);
-	// if(test == 1) CREATE_CC("env_1");
-	// if(test == 2) CREATE_CC("env_2");
-	// if(test == 3) CREATE_CC("env_3");
-	// if(test == 4) CREATE_CC("env_4");
-	// if(test == 5) CREATE_CC("env_5");
 
 	g_LSD_Timer_Repeat = CreateTimer(5.0, Timer_SpawnNewLSD);
 
@@ -37,17 +31,16 @@ Action Chaos_LSD(Handle timer = null, bool EndChaos = false){
 
 public Action Timer_SpawnNewLSD(Handle Timer){
 	g_LSD_Timer_Repeat = INVALID_HANDLE;
+
 	CLEAR_CC("env_1.raw");
 	CLEAR_CC("env_2.raw");
 	CLEAR_CC("env_3.raw");
 	CLEAR_CC("env_4.raw");
 	CLEAR_CC("env_5.raw");
+	
 	if(g_LSD){
-
 		int test = g_Previous_LSD;
-		while(test == g_Previous_LSD){
-			test = GetRandomInt(1,5);
-		}
+		while(test == g_Previous_LSD) test = GetRandomInt(1,5);
 
 		if(test == 1) CREATE_CC("env_1");
 		if(test == 2) CREATE_CC("env_2");

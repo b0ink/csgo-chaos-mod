@@ -96,7 +96,7 @@ int g_MaxAirAcc = 0;
 #include "Externals/ColorCorrection.sp"
 
 #include "Effects.sp"
-#include "Effects2.sp"
+#include "Effects-2.sp"
 
 #include "ConVars.sp"
 #include "Commands.sp"
