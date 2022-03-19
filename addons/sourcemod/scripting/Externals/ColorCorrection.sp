@@ -24,12 +24,11 @@ void CLEAR_CC(char[] file = ""){
 			if(file[0]){
 				GetEntPropString(i, Prop_Data, "m_lookupFilename", ent_filename, sizeof(ent_filename));
 				if(StrContains(ent_filename, file, false) != -1){
-					// RemoveEntity(i);
 					AcceptEntityInput(i, "Disable");
+					//potentially delete the entity, but they get removed after a round end anyway
 				}
 			}else{
 				RemoveEntity(i);
-				// AcceptEntityInput(i, "Disable");
 			}
 			
 		}
@@ -37,14 +36,8 @@ void CLEAR_CC(char[] file = ""){
 }
 
 void CREATE_CC(char[] filename){
-	// CLEAR_CC();
-
 	char path[PLATFORM_MAX_PATH];
 	FormatEx(path, sizeof(path), "materials/Chaos/ColorCorrection/%s.raw", filename);
-	// DispatchKeyValue(EntRefToEntIndex(Global_CC), "filename", path);
-	PrintToChatAll(path);
-	// if(EntRefToEntIndex(Global_CC) != -1) return;
-
 	int ent = CreateEntityByName("color_correction");
 	if(ent != -1){
 		DispatchKeyValue(ent, "StartDisabled", "1");
@@ -57,6 +50,5 @@ void CREATE_CC(char[] filename){
 		DispatchSpawn(ent);
 		ActivateEntity(ent);
 		AcceptEntityInput(ent, "Enable");
-		
 	}
 }
