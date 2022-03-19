@@ -1,4 +1,3 @@
-//todo do simon says phrases
 "Phrases"
 {
 	"Chaos_MEGACHAOS_Title"
@@ -641,7 +640,7 @@
 	{
 		"en"		"Displays a menu with a simon says command, if players fail to follow the order they take 20 damage every second"
 	}
-	
+
 	"Chaos_RewindTenSeconds_Title"
 	{
 		"en"		"Rewind 10 Seconds"
