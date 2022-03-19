@@ -92,13 +92,13 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false
 char[] GetChaosTitle(char[] function_name){
 	char return_string[128];
 	char temp_title[128];
-	for(int i = 0; i < GetArraySize(Effect_Functions); i++){
-		GetArrayString(Effect_Functions, i, temp_title, sizeof(temp_title));
-		if(StrContains(temp_title, function_name, false) != -1){
-			GetArrayString(Effect_Titles, i, return_string, sizeof(return_string));
-			break;
-		}
+	if(StrContains(function_name, "Chaos_") != -1){
+		FormatEx(temp_title, sizeof(temp_title), "%s_Title", function_name);
+		FormatEx(return_string, sizeof(return_string), "%t", temp_title, LANG_SERVER);
+	}else{
+		FormatEx(return_string, sizeof(return_string), "%s", function_name);
 	}
+
 	return return_string;
 }
 

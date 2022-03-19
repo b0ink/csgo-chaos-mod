@@ -61,7 +61,7 @@ void Chaos(bool reset = false){
 	if(IsChaosEnabled("Chaos_Bumpmines"))  Chaos_Bumpmines();
 	if(IsChaosEnabled("Chaos_SlowSpeed"))  Chaos_SlowSpeed();
 	if(IsChaosEnabled("Chaos_FastSpeed"))  Chaos_FastSpeed();
-	if(IsChaosEnabled("Chaos_IgnitePlayer"))  Chaos_IgnitePlayer();
+	if(IsChaosEnabled("Chaos_IgniteAllPlayers"))  Chaos_IgniteAllPlayers();
 	if(IsChaosEnabled("Chaos_ChickenPlayers"))  Chaos_ChickenPlayers();
 	if(IsChaosEnabled("Chaos_Earthquake"))  Chaos_Earthquake();
 	if(IsChaosEnabled("Chaos_LockPlayersAim"))  Chaos_LockPlayersAim();
@@ -144,7 +144,7 @@ char EffectsWithNoDuration[][] = {
 	"Chaos_Healthshot",
 	"Chaos_Jackpot",
 	"Chaos_Bumpmines",
-	"Chaos_IgnitePlayer",
+	"Chaos_IgniteAllPlayers",
 	"Chaos_HealAllPlayers",
 	"Chaos_Give100HP",
 	"Chaos_DropCurrentWeapon",

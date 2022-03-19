@@ -13,7 +13,7 @@ void findLight(){
 	){
 		int index = -1;
 		while ((index = FindEntityByClassname(index, "env_fog_controller")) != -1){
-			PrintToChatAll("deleting fog %i", index);
+			// PrintToChatAll("deleting fog %i", index);
 			RemoveEntity(index);
 		}
 		ent = CreateEntityByName("env_fog_controller");
