@@ -65,7 +65,11 @@ void PrintEffects(){
 			}
 			//.37 y;
 			SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
-			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
+			if(g_DynamicChannel){
+				ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
+			}else{
+				ShowHudText(i, -1, "%s", chunk);
+			}
 		}
 	}
 	bool removedAny = false;
@@ -93,11 +97,20 @@ void PrintTimer(int time){
 			if(time > -1){
 				if(time <= 3){
 					SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
-					ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);
+					if(g_DynamicChannel){
+						ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);
+					}else{
+						ShowHudText(i, -1, "New effect in:\n%i", time);
+					}
 					// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
 				}else{
 					SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 220, 0, 0, 1.0, 0.0, 0.0);
-					ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);			
+					if(g_DynamicChannel){
+						ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);	
+					}else{
+						ShowHudText(i, -1, "New effect in:\n%i", time);	
+					}
+		
 				}
 			}
 		}
