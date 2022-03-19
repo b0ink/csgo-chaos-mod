@@ -116,6 +116,7 @@ bool PoolChaosEffects(char[] effectName = ""){
 	g_bFindingPotentialEffects = true;
 	Chaos();
 	g_bFindingPotentialEffects = false;
+	Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
 }
 
 stock bool IsValidClient(int client, bool nobots = true){
