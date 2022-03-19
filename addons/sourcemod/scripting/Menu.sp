@@ -87,10 +87,13 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 		GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
 		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function);
 		if(index != -1){
-			GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
+			// GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
 			GetArrayString(Effect_Functions, i, function_name, sizeof(function_name));
-
+			Format(function_title, sizeof(function_title), "%s", GetChaosTitle(function_name));
+			// PrintToChatAll(function_name);
+			// PrintToChatAll(GetChaosTitle(function_name));
 			menu.AddItem(function_name, function_title);
+			//add item | VALUE | DISPLAY
 
 		}else{
 			if(AllowRandom){
@@ -296,8 +299,9 @@ void ShowMenu_EditAllEffects(int client){
 	char function_name[64];
 
 	for(int i = 0; i < GetArraySize(Effect_Functions); i++){
-		GetArrayString(Effect_Titles, i, name, sizeof(name));
+		// GetArrayString(Effect_Titles, i, name, sizeof(name));
 		GetArrayString(Effect_Functions, i, function_name, sizeof(function_name));
+		Format(name, sizeof(name), "%s", GetChaosTitle(function_name));
 		bool enabled = IsChaosEnabled(function_name);
 		Format(name, sizeof(name), "%s %s", name, enabled ? "[ON]" : "[OFF]");
 		menu.AddItem(function_name, name);

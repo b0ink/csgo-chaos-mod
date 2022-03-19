@@ -104,6 +104,8 @@ int g_MaxAirAcc = 0;
 #include "Menu.sp"
 
 public void OnPluginStart(){
+	LoadTranslations("chaos.phrases");
+	
 	CreateConVars();
 	
 	RegisterCommands();
