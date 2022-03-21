@@ -5,6 +5,8 @@ Handle Effect_Functions = INVALID_HANDLE;
 Handle Effect_Titles = INVALID_HANDLE;
 Handle Effects_Functions_Titles = INVALID_HANDLE;
 
+Handle g_AutoCoord_Timer = INVALID_HANDLE;
+
 public void OnConfigsExecuted(){
 	if(Effect_Functions != INVALID_HANDLE){
 		ClearArray(Effect_Functions);
@@ -16,10 +18,58 @@ public void OnConfigsExecuted(){
 		Effects_Functions_Titles = CreateArray(200);
 	}
 	
-	ParseMapCoordinates();
+	ParseMapCoordinates("Chaos_Locations");
 	ParseChaosEffects();
 	ParseOverrideEffects();
 	ParseCore();
+
+	StopTimer(g_AutoCoord_Timer);
+
+	if(!ValidMapPoints()){
+		Log("No valid map points. Locations will be automatically saved");
+		ParseMapCoordinates("Chaos_TempLocations");
+		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
+	}
+
+
+}
+
+
+//todo check on bomb planted, check c4 location, get closest bomb site, save coord 
+public Action Timer_SaveCoordinates(Handle timer){
+	float client_vec[3];
+	float client_vel[3];
+	float compare_vec[3];
+	char client_vec_string[64];
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			GetClientAbsOrigin(i, client_vec);
+			
+			GetEntPropVector(i, Prop_Data, "m_vecVelocity", client_vel);
+					
+			if(!(GetClientButtons(i) & IN_DUCK) && client_vel[2] == 0.0 && GetEntityMoveType(i) == MOVETYPE_WALK && GetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue") == 1.0) { //ensure player isnt mid jump or falling down
+				FormatEx(client_vec_string, sizeof(client_vec_string), "%f %f %f", client_vec[0], client_vec[1], client_vec[2]);
+				if(GetArraySize(g_MapCoordinates) == 0){
+					UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
+					PushArrayArray(g_MapCoordinates, client_vec);
+				}else{
+					float distanceToBeat = 99999.0;
+					for(int g = 0; g < GetArraySize(g_MapCoordinates); g++){
+						GetArrayArray(g_MapCoordinates, g, compare_vec, sizeof(compare_vec));
+						float dist = GetVectorDistance(client_vec, compare_vec);
+						if(dist < distanceToBeat){
+							distanceToBeat = dist;
+						}
+					}
+					if(distanceToBeat > 250){
+						UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
+						PushArrayArray(g_MapCoordinates, client_vec);
+					}
+				}
+
+			}
+		}
+	}
 }
 
 public void PrecacheTextures(){
@@ -136,9 +186,8 @@ void ParseOverrideEffects(){
 	}
 
 	int  Chaos_Properties[2];
+	char Chaos_Function_Name[64];
 	do{
-		char Chaos_Function_Name[64];
-		
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
@@ -156,13 +205,21 @@ void ParseOverrideEffects(){
 
 void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 
-void ParseMapCoordinates() {
+void ParseMapCoordinates(char[] config) {
 	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Locations.cfg");
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/%s.cfg", config);
 
-	g_MapCoordinates = CreateArray(3);
-	bombSiteA = CreateArray(3);
-	bombSiteB = CreateArray(3);
+	if(g_MapCoordinates == INVALID_HANDLE){
+		g_MapCoordinates = CreateArray(3);
+		bombSiteA = CreateArray(3);
+		bombSiteB = CreateArray(3);
+	}else{
+		if(StrEqual(config, "Chaos_Locations", false)){
+			ClearArray(g_MapCoordinates);
+			ClearArray(bombSiteA);
+			ClearArray(bombSiteB);
+		}
+	}
 
 	if(!FileExists(path)){
 		Log("Could not find %s. Effects that rely on map data will not run.", path);
@@ -257,11 +314,11 @@ int GetSlowScriptTimeout(){
 	return g_SlowScriptTimeout;
 }
 
-void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key, char[] newValue){
+void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] function_name, char[] key, char[] newValue){
 	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Override.cfg");
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/%s.cfg", config);
 
-	KeyValues kvConfig = new KeyValues("Effects");
+	KeyValues kvConfig = new KeyValues(KeyValues_name);
 
 	if(!FileExists(path)){
 		Handle FileHandle = OpenFile(path, "w");
@@ -287,8 +344,10 @@ void UpdateConfig_UpdateEffect(int client = -1, char[] function_name, char[] key
 			PrintToChatAll("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 		}
-		ParseChaosEffects();
-		ParseOverrideEffects();
+		if(StrEqual(KeyValues_name, "Effects", false)){
+			ParseChaosEffects();
+			ParseOverrideEffects();
+		}
 	}else{
 		if(IsValidClient(client)){
 			PrintToChat(client, "[Chaos] Failed to update config.");
