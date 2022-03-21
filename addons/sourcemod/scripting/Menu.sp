@@ -375,9 +375,9 @@ public int EffectSetting_Handler(Menu menu, MenuAction action, int param1, int p
 		if(found){
 			if(StrEqual(info, "setting-enabled", false)){
 				if(IsChaosEnabled(function_name)){
-					UpdateConfig_UpdateEffect(param1, function_name, "enabled", "0");
+					UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "enabled", "0");
 				}else{
-					UpdateConfig_UpdateEffect(param1, function_name, "enabled", "1");
+					UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "enabled", "1");
 				}
 				ShowMenu_EffectSetting(param1, function_name);
 			}else if(StrEqual(info, "setting-effect_duration", false)){
@@ -435,7 +435,7 @@ public int SetDuration_Handler(Menu menu, MenuAction action, int param1, int par
 		char info[64];
 		bool found = menu.GetItem(param2, info, sizeof(info));
 		if(found){
-			UpdateConfig_UpdateEffect(param1, function_name, "duration", info);
+			UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "duration", info);
 			ShowMenu_SetDuration(param1, function_name);
 		}
 	}else if (action == MenuAction_Cancel){

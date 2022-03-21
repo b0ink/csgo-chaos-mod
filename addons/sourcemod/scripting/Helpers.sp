@@ -1,7 +1,7 @@
 
 bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
-	if(GetArraySize(g_MapCoordinates) == 0) return false;
+	if(GetArraySize(g_MapCoordinates) < (GetPlayerCount() * 4)) return false;
 	return true;
 }
 
@@ -328,6 +328,16 @@ stock void SetClip(int weaponid,int ammosize, int clipsize) {
     SetEntProp(weaponid, Prop_Send, "m_iPrimaryReserveAmmoCount", clipsize);
 }
 
+stock int GetPlayerCount(){
+	int count = 0;
+	for(int i = 0; i <= MaxClients; i++){
+		if(IsValidClient(i)){
+			count++;
+		}
+	}
+	return count;
+}
+
 stock int GetAliveTCount(){
 	int count = 0;
 	for(int i = 0; i <= MaxClients; i++){
@@ -464,6 +474,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 					}
 					if(CoordinateIndex != -1){
 						float realVec[3];
+						//todo come back to this??
 						do{
 							GetArrayArray(g_UnusedCoordinates, CoordinateIndex, realVec);
 						}
