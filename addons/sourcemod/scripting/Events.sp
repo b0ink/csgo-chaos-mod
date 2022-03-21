@@ -34,6 +34,15 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
+	if(g_AutoBunnyhop > 0){
+		if(ValidAndAlive(client) && GetEntityFlags(client) & FL_ONGROUND && buttons & IN_JUMP){
+			float fVelocity[3];
+			GetEntPropVector(client, Prop_Data, "m_vecVelocity", fVelocity);
+			fVelocity[2] = 282.0;
+			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, fVelocity);
+		}
+	}
+
 	if(g_bSimon_Active) SimonSays(client, buttons, iImpulse, fVel, fAngles, iWeapon, iSubType,  iCmdNum, iTickCount, iSeed);
 
 	if(g_bRapidFire){
