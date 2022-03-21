@@ -341,6 +341,7 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 	kvConfig.ExportToFile(path);
 
 	if(kvConfig.ExportToFile(path)){
+
 		if(IsValidClient(client)){
 			//todo: convar to who this message should be sent to.
 			PrintToChatAll("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);

@@ -10,11 +10,68 @@ bool        g_bChaos_Repeating = true;
 ConVar 	g_cvChaosOverrideDuration;
 float       g_fChaos_OverwriteDuration = -1.0;
 
+void cvar(char[] cvarname, char[] value, bool updateConfig = true){
+	ConVar hndl = FindConVar(cvarname);
+	if (hndl != null){
+		if(updateConfig){
+			char oldValue[64];
+			IntToString(hndl.IntValue, oldValue, sizeof(oldValue));
+			UpdateConfig(-1, "Chaos_OriginalConvars", "ConVars", "CVARS", cvarname, oldValue);
+			//DONT OVERWRITE
+		}
+		hndl.SetString(value, true);
+	}
+}
 
-void ResetCvar(){
+void ResetCvar(char[] cvarName = "", char[] backupValue = ""){
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_OriginalConvars.cfg");
+	if(!FileExists(filePath)){
+		if(cvarName[0]) cvar(cvarName, backupValue);
+		return;
+	}
 
+	KeyValues kvConfig = new KeyValues("ConVars");
+	if(!kvConfig.ImportFromFile(filePath)){
+		Log("Unable to parse Key Values file %s", filePath);
+		if(cvarName[0]) cvar(cvarName, backupValue);
+		return;
+	}
+
+	if(!kvConfig.JumpToKey("CVARS")){
+		Log("Unable to find CVARS Key from %s", filePath);
+		if(cvarName[0]) cvar(cvarName, backupValue);
+		return;
+	}
+
+	if(!kvConfig.GotoFirstSubKey(false)){
+		Log("Unable to find 'ConVars' Section in file %s", filePath);
+		if(cvarName[0]) cvar(cvarName, backupValue);
+		return;
+	}
+	//if cvar provided, only change that one,
+	bool changed = false;
+	do{
+		char convarName[64];
+		kvConfig.GetSectionName(convarName, sizeof(convarName));
+		char convarValue[64];
+		kvConfig.GetString(NULL_STRING, convarValue, sizeof(convarValue));
+		// PrintToChatAll("convar: %s value: %s", convarName, convarValue);
+
+		if(cvarName[0]){
+			if(StrEqual(convarName, cvarName, false)){
+				cvar(convarName, convarValue, false);
+				changed = true;
+			}
+		}else{
+			cvar(convarName, convarValue, false);
+		}
+
+	} while(kvConfig.GotoNextKey(false));
+	if(!changed && cvarName[0]){
+		cvar(cvarName, backupValue);
+	}
+	if(!cvarName[0]) DeleteFile(filePath);
 }
 
 void CreateConVars(){

@@ -383,10 +383,7 @@ stock void Log(const char[] format, any ...)
 }
 
 //HELPERS
-public void cvar(char[] cvarname, char[] value){
-	ConVar hndl = FindConVar(cvarname);
-	if (hndl != null) hndl.SetString(value, true);
-}
+
 
 void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false){
 	if (ValidAndAlive(client)){
