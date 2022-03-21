@@ -1492,10 +1492,12 @@ Action Chaos_KnifeFight(Handle timer = null, bool EndChaos = false){
 }
 
 Handle g_Funky_Timer = INVALID_HANDLE;
+int g_AutoBunnyhop = 0;
 Action Chaos_Funky(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		cvar("sv_enablebunnyhopping", "0");
-		cvar("sv_autobunnyhopping", "0");
+		// cvar("sv_enablebunnyhopping", "0");
+		// cvar("sv_autobunnyhopping", "0");
+		if(g_AutoBunnyhop > 0) g_AutoBunnyhop--;
 		cvar("sv_airaccelerate", "12");
 		StopTimer(g_Funky_Timer);
 		if(g_MaxAirAcc > 0) g_MaxAirAcc--;
@@ -1504,10 +1506,11 @@ Action Chaos_Funky(Handle timer = null, bool EndChaos = false){
 	if(NotDecidingChaos("Chaos_Funky.AutoBhop.Bhop")) return;
 	if(CurrentlyActive(g_Funky_Timer)) return;
 
+	g_AutoBunnyhop++;
 	g_MaxAirAcc++;
 	cvar("sv_airaccelerate", "2000");
-	cvar("sv_enablebunnyhopping", "1");
-	cvar("sv_autobunnyhopping", "1");
+	// cvar("sv_enablebunnyhopping", "1");
+	// cvar("sv_autobunnyhopping", "1");
 
 	float duration = GetChaosTime("Chaos_Funky", 30.0);
 	if(duration > 0) g_Funky_Timer = CreateTimer(duration, Chaos_Funky, true);

@@ -131,8 +131,13 @@ public void OnPluginStart(){
 
 	Effect_History = CreateArray(64);
 	Possible_Chaos_Effects = CreateArray(64);
+	PrintToChatAll("LOADED");
+
 }
 
+public void OnPluginEnd(){
+	PrintToChatAll("UNLOADED");
+}
 
 public void OnMapStart(){
 	UpdateCvars();
