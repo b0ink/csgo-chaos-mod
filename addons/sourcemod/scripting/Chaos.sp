@@ -104,6 +104,7 @@ int g_MaxAirAcc = 0;
 #include "Menu.sp"
 
 public void OnPluginStart(){
+
 	LoadTranslations("chaos.phrases");
 	
 	CreateConVars();
@@ -136,6 +137,7 @@ public void OnPluginStart(){
 }
 
 public void OnPluginEnd(){
+	ResetCvar();
 	PrintToChatAll("UNLOADED");
 }
 
