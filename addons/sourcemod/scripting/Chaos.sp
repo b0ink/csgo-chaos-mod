@@ -196,6 +196,8 @@ public void OnMapStart(){
 }
 
 public void OnMapEnd(){
+	if(!g_bChaos_Enabled) return;
+
 	Log("Map has ended.");
 	StopTimer(g_NewEffect_Timer);
 	ResetCvar();

@@ -11,7 +11,7 @@ void ShowMenu_Main(int client){
 	}else{
 		menu.AddItem("toggle-chaos", "Enable Chaos");
 	}
-	if(g_bCanSpawnEffect){
+	if(g_bCanSpawnEffect && g_bChaos_Enabled){
 		menu.AddItem("new-effect", "Spawn New Effect");
 	}else{
 		menu.AddItem("new-effect", "Spawn New Effect", ITEMDRAW_DISABLED);
