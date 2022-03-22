@@ -34,6 +34,28 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
+	//use this method to only do reversed strafes / swap A /D or W / S Keys
+	if(g_ReversedMovement){
+		fVel[1] = -fVel[1];
+		if(buttons & IN_MOVELEFT) {
+			buttons &= ~IN_MOVELEFT;
+			buttons |= IN_MOVERIGHT;
+		} else if(buttons & IN_MOVERIGHT) {
+			buttons &= ~IN_MOVERIGHT;
+			buttons |= IN_MOVELEFT;
+		}
+		fVel[0] = -fVel[0];
+
+		if(buttons & IN_FORWARD) {
+			buttons &= ~IN_FORWARD;
+			buttons |= IN_BACK;
+		} else if(buttons & IN_BACK) {
+			buttons &= ~IN_BACK;
+			buttons |= IN_FORWARD;
+		}
+	}
+
+
 	if(g_AutoBunnyhop > 0){
 		if(ValidAndAlive(client) && GetEntityFlags(client) & FL_ONGROUND && buttons & IN_JUMP){
 			float fVelocity[3];
@@ -241,6 +263,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 
 void ResetChaos(){
 	HUD_ROUNDEND();
+	Clear_Overlay_Que();
 	StopTimer(g_NewEffect_Timer);
 	CreateTimer(0.1, ResetRoundChaos);
 }
