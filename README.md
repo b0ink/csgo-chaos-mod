@@ -82,6 +82,7 @@ Chaos ConVars can also be edited through the `!chaos` menu using `Settings`.
 - Agency
 - Italy
 - Assault
+- Iris
 
 ### Known issues:
 - Certain resolutions (mostly widescreens, and in my case 2560x1080) cut off the HUD overlay on the right side of the screen, this means the announcement texts and bar timer might not look correct, lowering your resolution should fix this.
