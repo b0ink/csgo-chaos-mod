@@ -15,7 +15,7 @@ Action Chaos_RapidFire(Handle timer = null, bool EndChaos = false){
 
 	g_bRapidFire = true;
 	cvar("weapon_accuracy_nospread", "1");
-	cvar("weapon_recoil_scale", "0.2");
+	cvar("weapon_recoil_scale", "0.5");
 
 	float duration = GetChaosTime("Chaos_RapidFire", 25.0);
 	if(duration > 0) g_RapidFire_Timer = CreateTimer(duration, Chaos_RapidFire, true);
