@@ -134,6 +134,7 @@ public void OnPluginStart(){
 	Possible_Chaos_Effects = CreateArray(64);
 	PrintToChatAll("LOADED");
 
+	g_SavedConvars  = CreateArray(64);
 }
 
 public void OnPluginEnd(){
