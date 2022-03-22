@@ -8,7 +8,6 @@ Handle Effects_Functions_Titles = INVALID_HANDLE;
 Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){
-	PrintToChatAll("CONFIG EXEC");
 
 	if(Effect_Functions != INVALID_HANDLE){
 		ClearArray(Effect_Functions);
@@ -32,9 +31,6 @@ public void OnConfigsExecuted(){
 		ParseMapCoordinates("Chaos_TempLocations");
 		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
 	}
-
-
-
 }
 
 

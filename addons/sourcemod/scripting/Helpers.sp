@@ -1,6 +1,7 @@
 
 bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
+	if(GetArraySize(g_MapCoordinates) == 0) return false;
 	if(GetArraySize(g_MapCoordinates) < (GetPlayerCount() * 4)) return false;
 	return true;
 }
