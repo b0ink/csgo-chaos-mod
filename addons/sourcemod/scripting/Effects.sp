@@ -391,7 +391,8 @@ void Chaos_SimonSays(){
 	if(NotDecidingChaos("Chaos_SimonSays")) return;
 	if(CurrentlyActive(g_SimonSays_Timer)) return;
 
-	float duration = GetChaosTime("Chaos_SimonSays", 10.0);
+	// float duration = GetChaosTime("Chaos_SimonSays", 10.0);
+	float duration = 10.0;
 	GenerateSimonOrder(duration);
 	StartMessageTimer();
 	g_bSimon_Active = true;

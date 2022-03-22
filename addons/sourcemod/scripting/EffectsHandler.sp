@@ -168,5 +168,6 @@ char EffectsWithNoDuration[][] = {
 	"Chaos_FakeTeleport",
 	"Chaos_TeleportFewMeters",
 	"Chaos_SpawnFlashbangs",
-	"Chaos_SpawnExplodingBarrels"
+	"Chaos_SpawnExplodingBarrels",
+	"Chaos_SimonSays"
 };
