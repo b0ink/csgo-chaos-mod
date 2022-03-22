@@ -139,6 +139,7 @@ public void OnPluginStart(){
 
 public void OnPluginEnd(){
 	ResetCvar();
+	ResetChaos();
 	PrintToChatAll("UNLOADED");
 }
 
@@ -180,6 +181,7 @@ public void OnMapStart(){
 	AUTOPLANT_INIT();
 	EXPLOSIVEBULLETS_INIT();
 	DRUGS_INIT();
+	TELEPORT_INIT();
 	
 	Overlay_INIT();
 
@@ -192,11 +194,13 @@ public void OnMapStart(){
 
 	RemoveChickens();
 	
+	ChaosMapCount = 0;
 }
 
 public void OnMapEnd(){
 	Log("Map has ended.");
 	StopTimer(g_NewEffect_Timer);
+	ResetCvar();
 }
 
 

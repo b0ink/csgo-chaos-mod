@@ -34,11 +34,15 @@ public void OnConfigsExecuted(){
 	}
 
 
+
 }
 
 
 //todo check on bomb planted, check c4 location, get closest bomb site, save coord 
 public Action Timer_SaveCoordinates(Handle timer){
+		
+	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return;
+
 	float client_vec[3];
 	float client_vel[3];
 	float compare_vec[3];
