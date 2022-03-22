@@ -26,7 +26,11 @@ public Action Command_NewChaosEffect(int client, int args){
 	char effectName[64];
 	GetCmdArg(1, effectName, sizeof(effectName));
 
-	
+	if(!g_bChaos_Enabled){
+		ReplyToCommand(client, "[Chaos] Re-enable !chaos to run effects.");
+		return Plugin_Handled;
+	}
+
 	g_bDisableRetryEffect = true;
 	if(g_bCanSpawnEffect){
 		if(args >= 1){
@@ -69,19 +73,18 @@ public Action Timer_ReEnableRetries(Handle timer){
 
 public Action Command_StopChaos(int client, int args){
 	g_bChaos_Enabled = false;
-	StopTimer(g_NewEffect_Timer);
-	g_bClearChaos = true;
-	g_bDecidingChaos = false;
-	Chaos(true);
 
-	HUD_ROUNDEND();
+	ResetChaos();
 
+	g_cvChaosEnabled.SetString("0", true, true);
 	AnnounceChaos("Chaos is Disabled!", -2.0, true);
 	return Plugin_Handled;
 }
 
 public Action Command_StartChaos(int client, int args){
 	if(g_NewEffect_Timer == INVALID_HANDLE){
+		g_cvChaosEnabled.SetString("1", true, true);
+
 		g_bClearChaos = true;
 		g_bDecidingChaos = false;
 		Chaos();

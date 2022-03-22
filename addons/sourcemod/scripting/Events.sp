@@ -1,6 +1,7 @@
 //todo: move all effects into their own .sp files inside of /scripting/Externals, modularise it a bit more
 
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_bCanSpawnChickens = false;
 	g_bBombPlanted = true;
 	C4Chicken();
@@ -33,6 +34,7 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 
 	//use this method to only do reversed strafes / swap A /D or W / S Keys
 	if(g_ReversedMovement){
@@ -152,6 +154,8 @@ public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
 }
 
 public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
+	if(!g_bChaos_Enabled) return;
+
 	char szWeaponName[32];
 	hEvent.GetString("weapon", szWeaponName, sizeof(szWeaponName));
 	int client = GetClientOfUserId(hEvent.GetInt("userid"));
@@ -195,14 +199,20 @@ public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbD
 
 
 public Action Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	Explosive_Event_BulletImpact(event, name, dontBroadcast);
+	return Plugin_Continue;
 }
 
 public Action Hook_BulletShot(const char[] te_name, const int[] Players, int numClients, float delay){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	Explosive_Hook_BulletShot(te_name, Players, numClients, delay);
+	return Plugin_Continue;
 }
 
 public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+
 	int client = GetClientOfUserId(event.GetInt("userid"));
 
 	if(IsValidClient(client)){
@@ -214,6 +224,8 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+	
 	Log("---ROUND STARTED---");
 
 	g_bC4Chicken = false;
@@ -252,6 +264,8 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 }
 
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+	
 	Log("--ROUND ENDED--");
 	ResetChaos();
 	g_bCanSpawnEffect = false;
