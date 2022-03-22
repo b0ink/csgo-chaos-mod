@@ -132,7 +132,6 @@ public void OnPluginStart(){
 
 	Effect_History = CreateArray(64);
 	Possible_Chaos_Effects = CreateArray(64);
-	PrintToChatAll("LOADED");
 
 	g_SavedConvars  = CreateArray(64);
 }
@@ -140,7 +139,6 @@ public void OnPluginStart(){
 public void OnPluginEnd(){
 	ResetCvar();
 	ResetChaos();
-	PrintToChatAll("UNLOADED");
 }
 
 public void OnMapStart(){
