@@ -10,43 +10,66 @@ bool        g_bChaos_Repeating = true;
 ConVar 	g_cvChaosOverrideDuration;
 float       g_fChaos_OverwriteDuration = -1.0;
 
-void cvar(char[] cvarname, char[] value, bool updateConfig = true){
+Handle g_SavedConvars = INVALID_HANDLE;
+
+void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] expectedPreviousValue = ""){
+	if(!cvarname[0]) return;
+
 	ConVar hndl = FindConVar(cvarname);
 	if (hndl != null){
+
+		char oldValue[64];
+		IntToString(hndl.IntValue, oldValue, sizeof(oldValue));
 		if(updateConfig){
-			char oldValue[64];
-			IntToString(hndl.IntValue, oldValue, sizeof(oldValue));
-			UpdateConfig(-1, "Chaos_OriginalConvars", "ConVars", "CVARS", cvarname, oldValue);
 			//DONT OVERWRITE
+			if(FindStringInArray(g_SavedConvars, cvarname) == -1){
+				UpdateConfig(-1, "Chaos_OriginalConvars", "ConVars", "CVARS", cvarname, oldValue);
+				PushArrayString(g_SavedConvars, cvarname);
+			}
 		}
-		hndl.SetString(value, true);
+		if(expectedPreviousValue[0]){
+			if(StrEqual(oldValue, expectedPreviousValue, false)){
+				hndl.SetString(newValue, true);
+			}
+		}else{
+			hndl.SetString(newValue, true);
+		}
 	}
 }
 
-void ResetCvar(char[] cvarName = "", char[] backupValue = ""){
+
+void ResetCvar(char[] cvarName = "", char[] backupValue = "", char[] expectedPreviousValue = ""){
+
+	//when resetting cvar
+	/*
+		-> check if manual convar was given,
+		-> if the convar was saved in originalconvars.cfg,  we want to take that value
+			-> BUT only change it if the current value is equal to the previous expected value
+	 */
+	
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_OriginalConvars.cfg");
 	if(!FileExists(filePath)){
-		if(cvarName[0]) cvar(cvarName, backupValue);
+		cvar(cvarName, backupValue, false, expectedPreviousValue);
 		return;
 	}
 
 	KeyValues kvConfig = new KeyValues("ConVars");
 	if(!kvConfig.ImportFromFile(filePath)){
 		Log("Unable to parse Key Values file %s", filePath);
-		if(cvarName[0]) cvar(cvarName, backupValue);
+		cvar(cvarName, backupValue, false, expectedPreviousValue);
 		return;
 	}
 
 	if(!kvConfig.JumpToKey("CVARS")){
 		Log("Unable to find CVARS Key from %s", filePath);
-		if(cvarName[0]) cvar(cvarName, backupValue);
+		cvar(cvarName, backupValue, false, expectedPreviousValue);
 		return;
 	}
 
 	if(!kvConfig.GotoFirstSubKey(false)){
 		Log("Unable to find 'ConVars' Section in file %s", filePath);
-		if(cvarName[0]) cvar(cvarName, backupValue);
+		cvar(cvarName, backupValue, false, expectedPreviousValue);
 		return;
 	}
 	//if cvar provided, only change that one,
@@ -60,18 +83,22 @@ void ResetCvar(char[] cvarName = "", char[] backupValue = ""){
 
 		if(cvarName[0]){
 			if(StrEqual(convarName, cvarName, false)){
-				cvar(convarName, convarValue, false);
+				cvar(cvarName, convarValue, false);
 				changed = true;
 			}
 		}else{
 			cvar(convarName, convarValue, false);
-		}
+		} 
 
 	} while(kvConfig.GotoNextKey(false));
 	if(!changed && cvarName[0]){
-		cvar(cvarName, backupValue);
+		cvar(cvarName, backupValue, false, expectedPreviousValue);
+		// cvar(cvarName, backupValue, false);
 	}
-	if(!cvarName[0]) DeleteFile(filePath);
+	if(!cvarName[0]){
+		ClearArray(g_SavedConvars);
+		DeleteFile(filePath);
+	}
 }
 
 void CreateConVars(){
