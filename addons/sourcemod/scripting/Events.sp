@@ -158,6 +158,10 @@ public void Event_OnWeaponFire(Event hEvent, const char[] szName, bool g_bbDontB
 
 	int client = GetClientOfUserId(hEvent.GetInt("userid"));
 
+
+
+
+
 	if(g_InfiniteAmmo){
 		int Slot1 = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
 		int Slot2 = GetPlayerWeaponSlot(client, CS_SLOT_SECONDARY);
