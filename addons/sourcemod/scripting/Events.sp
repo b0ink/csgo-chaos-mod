@@ -153,12 +153,31 @@ public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
 	GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons) - 1)]);
 }
 
-public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
+public void Event_OnWeaponFire(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
 	if(!g_bChaos_Enabled) return;
+
+	int client = GetClientOfUserId(hEvent.GetInt("userid"));
+
+	if(g_InfiniteAmmo){
+		int Slot1 = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
+		int Slot2 = GetPlayerWeaponSlot(client, CS_SLOT_SECONDARY);
+		if(IsValidEntity(Slot1)){
+			if(GetEntProp(Slot1, Prop_Data, "m_iState") == 2){
+				SetEntProp(Slot1, Prop_Data, "m_iClip1", GetEntProp(Slot1, Prop_Data, "m_iClip1")+1);
+				return;
+			}
+		}
+		if(IsValidEntity(Slot2)){
+			if(GetEntProp(Slot2, Prop_Data, "m_iState") == 2){
+				SetEntProp(Slot2, Prop_Data, "m_iClip1", GetEntProp(Slot2, Prop_Data, "m_iClip1") + 1);
+				return;
+			}
+		}	
+	}
+
 
 	char szWeaponName[32];
 	hEvent.GetString("weapon", szWeaponName, sizeof(szWeaponName));
-	int client = GetClientOfUserId(hEvent.GetInt("userid"));
 	weaponJump(client, szWeaponName);
 
 	if(g_bOneBulletOneGun){

@@ -2220,16 +2220,17 @@ void Chaos_SmokeMap(){
 }
 
 Handle g_InfiniteAmmo_Timer = INVALID_HANDLE;
+bool g_InfiniteAmmo = false;
 Action Chaos_InfiniteAmmo(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		ResetCvar("sv_infinite_ammo", "0", "1");
 		StopTimer(g_InfiniteAmmo_Timer);
+		g_InfiniteAmmo = false;
 		if(EndChaos) AnnounceChaos("Limited Ammo", -1.0, true);
 	}
 	if(NotDecidingChaos("Chaos_InfiniteAmmo")) return;
 	if(CurrentlyActive(g_InfiniteAmmo_Timer)) return;
 
-	cvar("sv_infinite_ammo", "1");
+	g_InfiniteAmmo = true;
 	
 	float duration = GetChaosTime("Chaos_InfiniteAmmo", 20.0);
 	if(duration > 0) g_InfiniteAmmo_Timer = CreateTimer(duration, Chaos_InfiniteAmmo, true);
