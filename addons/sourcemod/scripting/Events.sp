@@ -111,7 +111,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 
 	g_blockMovement[client] = 0;
 
-	if(g_bNoStrafe){
+	if(g_bNoStrafe > 0){
 		if(buttons & IN_MOVELEFT){
 			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
 				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);
@@ -125,7 +125,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 		}
 	}
 
-	if(g_bNoForwardBack){
+	if(g_bNoForwardBack > 0){
 		if(buttons & IN_FORWARD){
 			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
 				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);

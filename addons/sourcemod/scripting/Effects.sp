@@ -462,22 +462,18 @@ void Chaos_ResetSpawns(){
 
 }
 
-bool g_bNoStrafe = false;
+int g_bNoStrafe = 0;
 Handle g_NoStrafe_Timer = INVALID_HANDLE;
 Action Chaos_DisableStrafe(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		g_bNoStrafe = false;
-		//todo should NOT handle it this way, figure out some override and refactor
-		// ResetCvar("sv_accelerate", "5.5");
-		// ResetCvar("sv_airaccelerate", "12");
+		if(g_bNoStrafe > 1) g_bNoStrafe--;
 		StopTimer(g_NoStrafe_Timer);
 		if(EndChaos) AnnounceChaos("Normal Left/Right Movement", -1.0, true);
 	}
 	if(NotDecidingChaos("Chaos_DisableStrafe.NoLeftRight")) return;
 	if(CurrentlyActive(g_NoStrafe_Timer)) return;
 	
-	g_bNoStrafe = true;
-
+	g_bNoStrafe++;
 	float duration = GetChaosTime("Chaos_DisableStrafe", 20.0);
 	if(duration > 0.0) g_NoStrafe_Timer = CreateTimer(duration, Chaos_DisableStrafe, true);
 	
@@ -485,21 +481,18 @@ Action Chaos_DisableStrafe(Handle timer = null, bool EndChaos = false){
 
 }
 
-bool g_bNoForwardBack = false;
+int g_bNoForwardBack = 0;
 Handle g_NoForwardBack_Timer = INVALID_HANDLE;
 Action Chaos_DisableForwardBack(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		g_bNoForwardBack = false;
-		// ResetCvar("sv_accelerate", "5.5");
-		// ResetCvar("sv_airaccelerate", "12");
+		if(g_bNoForwardBack > 1) g_bNoForwardBack--;
 		StopTimer(g_NoForwardBack_Timer);
 		if(EndChaos) AnnounceChaos("Normal Forward/Backward Movement", -1.0, true);
 	}
 	if(NotDecidingChaos("Chaos_DisableForwardBack")) return;
 	if(CurrentlyActive(g_NoForwardBack_Timer)) return;
 	
-	g_bNoForwardBack = true;
-	
+	g_bNoForwardBack++;
 	float duration = GetChaosTime("Chaos_DisableForwardBack", 20.0);
 	if(duration > 0) g_NoForwardBack_Timer = CreateTimer(duration, Chaos_DisableForwardBack, true);
 	
@@ -2400,8 +2393,6 @@ Handle g_BreakTime_Timer = INVALID_HANDLE;
 
 Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		ResetCvar("sv_accelerate", "5.5", "0");
-		ResetCvar("sv_airaccelerate", "12", "0");
 		StopTimer(g_BreakTime_Timer);
 		if(g_bKnifeFight > 0) g_bKnifeFight--;
 		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
@@ -2410,6 +2401,8 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	if(CurrentlyActive(g_BreakTime_Timer)) return;
 	
 	g_bKnifeFight++;
+	g_bNoForwardBack++;
+	g_bNoStrafe++;
 
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
@@ -2417,9 +2410,6 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 		}
 	}
 	
-	cvar("sv_accelerate", "0");
-	cvar("sv_airaccelerate", "0");
-
 	float duration = GetChaosTime("Chaos_BreakTime", 10.0);
 	if(duration > 0) g_BreakTime_Timer = CreateTimer(duration, Chaos_BreakTime, true);
 	
