@@ -114,7 +114,7 @@ public void OnPluginStart(){
 	HookEvent("round_start", 	Event_RoundStart);
 	HookEvent("round_end", 		Event_RoundEnd);	
 	HookEvent("player_death", 	Event_PlayerDeath);	
-	HookEvent("weapon_fire", 	Event_OnWeaponFirePost, EventHookMode_Post);
+	HookEvent("weapon_fire", 	Event_OnWeaponFire); //, EventHookMode_Post);
 	HookEvent("bomb_planted", 	Event_BombPlanted);
 	HookEvent("bullet_impact", 	Event_BulletImpact);
 	HookEvent("server_cvar", 	Event_Cvar, 			EventHookMode_Pre);
