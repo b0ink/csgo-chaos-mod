@@ -1342,18 +1342,15 @@ int g_NoFallDamage = 0;
 Action Chaos_InsaneGravity(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){	
 		StopTimer(g_InsaneGravityTimer);
-		ResetCvar("sv_gravity", "800", "3000");
-		//todo remove
+		SetPlayersGravity(1.0);
 		if(g_NoFallDamage > 0) g_NoFallDamage--;
-		// ServerCommand("sv_falldamage_scale 1");
 		if(EndChaos) AnnounceChaos("Insane Gravity", -1.0, true);
 	}
 	if(NotDecidingChaos("Chaos_InsaneGravity")) return;
 	if(CurrentlyActive(g_InsaneGravityTimer)) return;
 
-	cvar("sv_gravity", "3000");
+	SetPlayersGravity(15.0);
 	g_NoFallDamage++;
-	// ServerCommand("sv_falldamage_scale 0");
 	
 	float duration = GetChaosTime("Chaos_InsaneGravity", 20.0);
 	if(duration > 0) g_InsaneGravityTimer = CreateTimer(duration, Chaos_InsaneGravity, true);
@@ -1555,14 +1552,15 @@ Handle g_MoonGravity_Timer = INVALID_HANDLE;
 Action Chaos_MoonGravity(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_MoonGravity_Timer);
-		ResetCvar("sv_gravity", "800", "300");
+		SetPlayersGravity(1.0);
 		if(EndChaos) AnnounceChaos("Moon Gravity", -1.0, true);
 	}
 	if(NotDecidingChaos("Chaos_MoonGravity")) return;
 	if(CurrentlyActive(g_MoonGravity_Timer)) return;
 
-	cvar("sv_gravity", "300");
 	//TODO fluctuating gravity thoughout the round?
+
+	SetPlayersGravity(0.6);
 
 	float duration = GetChaosTime("Chaos_MoonGravity", 30.0);
 	if(duration > 0) g_MoonGravity_Timer = CreateTimer(duration, Chaos_MoonGravity, true);

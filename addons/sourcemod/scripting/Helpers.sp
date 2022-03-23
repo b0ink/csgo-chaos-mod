@@ -722,3 +722,12 @@ void Update_Overlay(){
 		}
 	}
 }
+
+
+void SetPlayersGravity(float amount){
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			SetEntityGravity(i, amount);
+		}
+	}
+}
