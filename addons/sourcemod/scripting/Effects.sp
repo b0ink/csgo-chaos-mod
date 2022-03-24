@@ -2394,6 +2394,8 @@ Action Chaos_BreakTime(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
 		StopTimer(g_BreakTime_Timer);
 		if(g_bKnifeFight > 0) g_bKnifeFight--;
+		if(g_bNoForwardBack > 0) g_bNoForwardBack--;
+		if(g_bNoStrafe > 0) g_bNoStrafe--;
 		if(EndChaos) AnnounceChaos("Break Over", -1.0,  true);
 	}
 	if(NotDecidingChaos("Chaos_BreakTime")) return;
