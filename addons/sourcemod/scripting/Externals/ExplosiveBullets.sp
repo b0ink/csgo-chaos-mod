@@ -5,8 +5,8 @@ bool g_bExplosiveBullets = false;
 #define FLASH "explosion_child_core04b"
 #define SMOKE "impact_dirt_child_smoke_puff"
 #define DIRT "impact_dirt_child_clumps"
-// #define SOUND "weapons/sensorgrenade/sensor_explode.wav"
-#define SOUND "weapons/revolver/revolver-1_01.wav"
+#define SOUND "weapons/hegrenade/explode5.wav"
+
 public void EXPLOSIVEBULLETS_INIT(){
 	PrecacheEffect("ParticleEffect");
 	PrecacheParticleEffect(DISTORTION);
