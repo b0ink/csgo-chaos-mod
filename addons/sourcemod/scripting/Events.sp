@@ -1,6 +1,7 @@
 //todo: move all effects into their own .sp files inside of /scripting/Externals, modularise it a bit more
 
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_bCanSpawnChickens = false;
 	g_bBombPlanted = true;
 	C4Chicken();
@@ -33,6 +34,38 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+
+	//use this method to only do reversed strafes / swap A /D or W / S Keys
+	if(g_ReversedMovement){
+		fVel[1] = -fVel[1];
+		if(buttons & IN_MOVELEFT) {
+			buttons &= ~IN_MOVELEFT;
+			buttons |= IN_MOVERIGHT;
+		} else if(buttons & IN_MOVERIGHT) {
+			buttons &= ~IN_MOVERIGHT;
+			buttons |= IN_MOVELEFT;
+		}
+		fVel[0] = -fVel[0];
+
+		if(buttons & IN_FORWARD) {
+			buttons &= ~IN_FORWARD;
+			buttons |= IN_BACK;
+		} else if(buttons & IN_BACK) {
+			buttons &= ~IN_BACK;
+			buttons |= IN_FORWARD;
+		}
+	}
+
+
+	if(g_AutoBunnyhop > 0){
+		if(ValidAndAlive(client) && GetEntityFlags(client) & FL_ONGROUND && buttons & IN_JUMP){
+			float fVelocity[3];
+			GetEntPropVector(client, Prop_Data, "m_vecVelocity", fVelocity);
+			fVelocity[2] = 282.0;
+			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, fVelocity);
+		}
+	}
 
 	if(g_bSimon_Active) SimonSays(client, buttons, iImpulse, fVel, fAngles, iWeapon, iSubType,  iCmdNum, iTickCount, iSeed);
 
@@ -78,7 +111,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 
 	g_blockMovement[client] = 0;
 
-	if(g_bNoStrafe){
+	if(g_bNoStrafe > 0){
 		if(buttons & IN_MOVELEFT){
 			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
 				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);
@@ -92,7 +125,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 		}
 	}
 
-	if(g_bNoForwardBack){
+	if(g_bNoForwardBack > 0){
 		if(buttons & IN_FORWARD){
 			if(g_DisableKeys_OriginalPos[client][0] == 0.0){
 				GetClientAbsOrigin(client, g_DisableKeys_OriginalPos[client]);
@@ -120,10 +153,35 @@ public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
 	GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons) - 1)]);
 }
 
-public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
+public void Event_OnWeaponFire(Event hEvent, const char[] szName, bool g_bbDontBroadcast){
+	if(!g_bChaos_Enabled) return;
+
+	int client = GetClientOfUserId(hEvent.GetInt("userid"));
+
+
+
+
+
+	if(g_InfiniteAmmo){
+		int Slot1 = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
+		int Slot2 = GetPlayerWeaponSlot(client, CS_SLOT_SECONDARY);
+		if(IsValidEntity(Slot1)){
+			if(GetEntProp(Slot1, Prop_Data, "m_iState") == 2){
+				SetEntProp(Slot1, Prop_Data, "m_iClip1", GetEntProp(Slot1, Prop_Data, "m_iClip1")+1);
+				return;
+			}
+		}
+		if(IsValidEntity(Slot2)){
+			if(GetEntProp(Slot2, Prop_Data, "m_iState") == 2){
+				SetEntProp(Slot2, Prop_Data, "m_iClip1", GetEntProp(Slot2, Prop_Data, "m_iClip1") + 1);
+				return;
+			}
+		}	
+	}
+
+
 	char szWeaponName[32];
 	hEvent.GetString("weapon", szWeaponName, sizeof(szWeaponName));
-	int client = GetClientOfUserId(hEvent.GetInt("userid"));
 	weaponJump(client, szWeaponName);
 
 	if(g_bOneBulletOneGun){
@@ -164,14 +222,20 @@ public void Event_OnWeaponFirePost(Event hEvent, const char[] szName, bool g_bbD
 
 
 public Action Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	Explosive_Event_BulletImpact(event, name, dontBroadcast);
+	return Plugin_Continue;
 }
 
 public Action Hook_BulletShot(const char[] te_name, const int[] Players, int numClients, float delay){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
 	Explosive_Hook_BulletShot(te_name, Players, numClients, delay);
+	return Plugin_Continue;
 }
 
 public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+
 	int client = GetClientOfUserId(event.GetInt("userid"));
 
 	if(IsValidClient(client)){
@@ -183,6 +247,8 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+	
 	Log("---ROUND STARTED---");
 
 	g_bC4Chicken = false;
@@ -223,6 +289,8 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 }
 
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+	
 	Log("--ROUND ENDED--");
 	ResetChaos();
 	g_bCanSpawnEffect = false;
@@ -234,7 +302,9 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 
 void ResetChaos(){
 	HUD_ROUNDEND();
+	Clear_Overlay_Que();
 	StopTimer(g_NewEffect_Timer);
+	ResetPlayersFOV();
 	CreateTimer(0.1, ResetRoundChaos);
 }
 

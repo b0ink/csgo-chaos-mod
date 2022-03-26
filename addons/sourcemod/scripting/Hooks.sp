@@ -86,7 +86,10 @@ public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float
 	}
 
 	if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_WALK);
-
+	if(g_NoFallDamage > 0 && damagetype == DMG_FALL){
+		damage = 0.0;
+		return Plugin_Changed;
+	}
 	return Plugin_Continue;
 }
 public Action Hook_OnTakeDamagePost(int victim, int attacker){

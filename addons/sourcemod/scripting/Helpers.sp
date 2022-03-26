@@ -1,6 +1,8 @@
 
 bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
+	if(GetArraySize(g_MapCoordinates) == 0) return false;
+	if(GetArraySize(g_MapCoordinates) < (GetPlayerCount() * 4)) return false;
 	return true;
 }
 
@@ -327,6 +329,16 @@ stock void SetClip(int weaponid,int ammosize, int clipsize) {
     SetEntProp(weaponid, Prop_Send, "m_iPrimaryReserveAmmoCount", clipsize);
 }
 
+stock int GetPlayerCount(){
+	int count = 0;
+	for(int i = 0; i <= MaxClients; i++){
+		if(IsValidClient(i)){
+			count++;
+		}
+	}
+	return count;
+}
+
 stock int GetAliveTCount(){
 	int count = 0;
 	for(int i = 0; i <= MaxClients; i++){
@@ -369,12 +381,6 @@ stock void Log(const char[] format, any ...)
 	char sLogPath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, sLogPath, sizeof(sLogPath), "logs/chaos_logs.log");
 	LogToFile(sLogPath, buffer);
-}
-
-//HELPERS
-void cvar(char[] cvarname, char[] value){
-	ConVar hndl = FindConVar(cvarname);
-	if (hndl != null) hndl.SetString(value, true);
 }
 
 void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false){
@@ -463,6 +469,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 					}
 					if(CoordinateIndex != -1){
 						float realVec[3];
+						//todo come back to this??
 						do{
 							GetArrayArray(g_UnusedCoordinates, CoordinateIndex, realVec);
 						}
@@ -709,6 +716,15 @@ void Update_Overlay(){
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
 			ClientCommand(i, "r_screenoverlay \"%s\"", path);
+		}
+	}
+}
+
+
+void SetPlayersGravity(float amount){
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			SetEntityGravity(i, amount);
 		}
 	}
 }

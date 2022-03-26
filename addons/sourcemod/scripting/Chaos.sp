@@ -106,6 +106,7 @@ int g_MaxAirAcc = 0;
 #include "Menu.sp"
 
 public void OnPluginStart(){
+
 	LoadTranslations("chaos.phrases");
 	
 	CreateConVars();
@@ -115,7 +116,7 @@ public void OnPluginStart(){
 	HookEvent("round_start", 	Event_RoundStart);
 	HookEvent("round_end", 		Event_RoundEnd);	
 	HookEvent("player_death", 	Event_PlayerDeath);	
-	HookEvent("weapon_fire", 	Event_OnWeaponFirePost, EventHookMode_Post);
+	HookEvent("weapon_fire", 	Event_OnWeaponFire); //, EventHookMode_Post);
 	HookEvent("bomb_planted", 	Event_BombPlanted);
 	HookEvent("bullet_impact", 	Event_BulletImpact);
 	HookEvent("server_cvar", 	Event_Cvar, 			EventHookMode_Pre);
@@ -133,8 +134,14 @@ public void OnPluginStart(){
 
 	Effect_History = CreateArray(64);
 	Possible_Chaos_Effects = CreateArray(64);
+
+	g_SavedConvars  = CreateArray(64);
 }
 
+public void OnPluginEnd(){
+	ResetCvar();
+	ResetChaos();
+}
 
 public void OnMapStart(){
 	UpdateCvars();
@@ -174,6 +181,7 @@ public void OnMapStart(){
 	AUTOPLANT_INIT();
 	EXPLOSIVEBULLETS_INIT();
 	DRUGS_INIT();
+	TELEPORT_INIT();
 	
 	Overlay_INIT();
 
@@ -186,11 +194,15 @@ public void OnMapStart(){
 
 	RemoveChickens();
 	
+	ChaosMapCount = 0;
 }
 
 public void OnMapEnd(){
+	if(!g_bChaos_Enabled) return;
+
 	Log("Map has ended.");
 	StopTimer(g_NewEffect_Timer);
+	ResetCvar();
 }
 
 
