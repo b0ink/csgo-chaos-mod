@@ -466,7 +466,7 @@ int g_bNoStrafe = 0;
 Handle g_NoStrafe_Timer = INVALID_HANDLE;
 Action Chaos_DisableStrafe(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		if(g_bNoStrafe > 1) g_bNoStrafe--;
+		if(g_bNoStrafe > 0) g_bNoStrafe--;
 		StopTimer(g_NoStrafe_Timer);
 		if(EndChaos) AnnounceChaos("Normal Left/Right Movement", -1.0, true);
 	}
