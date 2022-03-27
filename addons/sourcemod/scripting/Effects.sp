@@ -126,6 +126,8 @@ void Chaos_FakeCrash(){
 	if(ClearChaos()){    }
 	if(NotDecidingChaos("Chaos_FakeCrash")) return;
 	AnnounceChaos("Fake Crash", -1.0);
+	g_sCustomEffect = "";
+	g_sSelectedChaosEffect = "";
 	g_bLag = true;
 	CreateTimer(1.0, Timer_nolag);
 	while(g_bLag){
