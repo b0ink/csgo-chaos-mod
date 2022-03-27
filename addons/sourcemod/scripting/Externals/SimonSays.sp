@@ -34,6 +34,9 @@ void GenerateSimonOrder(float duration){
 
 bool g_bPlayersToDamage[MAXPLAYERS+1];
 void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.0, 0.0}, float fAngles[3] = {0.0, 0.0, 0.0}, int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+
+	if(g_time >= 8) return;
+	
 	if(fVel[0] || fAngles[0]){
 		//remove warnings!
 	}
@@ -76,7 +79,6 @@ void SimonSays(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.
 			if(g_bSimon_Says) g_bPlayersToDamage[client] = true;
 		}
 	}
-
 }
 
 void DamagePlayer(int client, int amount = 20){
