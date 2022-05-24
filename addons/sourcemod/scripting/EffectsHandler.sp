@@ -2,6 +2,7 @@
 void Chaos(bool reset = false){
 	if(g_bFindingPotentialEffects) reset = true;
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
+	
 	if(IsChaosEnabled("Chaos_NoScopeOnly"))  Chaos_NoScopeOnly();
 	if(IsChaosEnabled("Chaos_PortalGuns"))  Chaos_PortalGuns();
 	if(IsChaosEnabled("Chaos_Aimbot"))  Chaos_Aimbot();
@@ -124,6 +125,7 @@ void Chaos(bool reset = false){
 		if(IsChaosEnabled("Chaos_SpawnFlashbangs"))  Chaos_SpawnFlashbangs();
 		if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
 	}
+	if(IsChaosEnabled("Chaos_Thunderstorm"))  Chaos_Thunderstorm(); // Ozai
 	g_bClearChaos = false;
 }
 

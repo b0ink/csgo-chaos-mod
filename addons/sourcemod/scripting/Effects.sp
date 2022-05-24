@@ -2440,5 +2440,81 @@ public void Chaos_MEGACHAOS(){
 
 public Action Timer_CompleteMegaChaos(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0);
-	g_bMegaChaos = false; 
+	g_bMegaChaos = false;
+}
+
+Handle g_Thunder_Timer = INVALID_HANDLE; //made by ozai, holla if issue and cbf fixing
+
+Action Chaos_Thunderstorm(Handle timer = null, bool EndChaos = false){
+	if(ClearChaos(EndChaos)){
+		StopTimer(g_Thunder_Timer);
+		int iMaxEnts = GetMaxEntities(); // clearing rain
+		char sClassName[64];
+		for(int i=MaxClients;i<iMaxEnts;i++){
+			if(IsValidEntity(i) && 
+			IsValidEdict(i) && 
+			GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
+			StrEqual(sClassName, "func_precipitation")){
+				RemoveEntity(i);
+			}
+		}
+	}
+	if(NotDecidingChaos("Chaos_Thunderstorm")) return;
+	if(CurrentlyActive(g_Thunder_Timer)) return;
+
+	CreateTimer(0.1, Timer_LightningStrike); // starting lightning strikes
+
+	//SPAWN_WEATHER(PARTICLE_SNOW);
+
+	SPAWN_WEATHER(RAIN);
+
+	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
+
+	float duration = GetChaosTime("Chaos_Thunderstorm", 20.0);
+	if(duration > 0) g_Thunder_Timer = CreateTimer(duration, Chaos_Thunderstorm, true);
+
+	AnnounceChaos(GetChaosTitle("Chaos_Thunderstorm"), duration);
+	
+}
+
+public Action Timer_LightningStrike(Handle timer) {
+	if (!g_Thunder_Timer) {
+		return;
+	}
+	
+	CreateTimer(0.1, Timer_LightningStrike);
+
+	float endpos[3];
+	GetArrayArray(g_MapCoordinates, GetRandomInt(0, GetArraySize(g_MapCoordinates) - 1), endpos);
+
+	endpos[0]    = endpos[0] + GetRandomInt(-30, 30);
+	endpos[1]    = endpos[1] + GetRandomInt(-30, 30);
+
+	float startpos[3];
+	startpos = endpos;
+
+	startpos[2]    = startpos[2] + 1000;
+	startpos[0]    = startpos[0] + GetRandomInt(-200, 200);
+	startpos[1]    = startpos[1] + GetRandomInt(-200, 200);
+
+	int   color[4] = { 255, 255, 255, 255 };
+
+	TE_SetupBeamPoints(startpos, endpos, LIGHTNING_sprite, 0, 0, 0, 1.0 /*beam life*/, 20.0, 10.0, 20, 1.0, color, 0);
+	TE_SendToAll();
+
+	if(GetRandomInt(0, 100) <= 50) { // 50/50 chance for slay or superslay boom
+		EmitAmbientSound(EXPLOSION_HE, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.5); // regular slay from os but much more quiet
+	} else {
+		EmitAmbientSound(SOUND_SUPERSLAY, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.5); // one singular superslay boom
+	}
+
+	float pos[3];
+	for(int i = 0; i <= MaxClients; i++){ // dealing damage to player if they are struck
+		if(ValidAndAlive(i)){
+			GetClientAbsOrigin(i, pos);
+			if (GetVectorDistance(pos, endpos) < 200.0){
+				SlapPlayer(i, 30, false);
+			}
+		}
+	}
 }
