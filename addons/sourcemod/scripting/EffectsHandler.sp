@@ -107,6 +107,7 @@ void Chaos(bool reset = false){
 		if(ValidMapPoints()){
 			if(IsChaosEnabled("Chaos_RespawnTheDead_Randomly"))  Chaos_RespawnTheDead_Randomly();
 		}
+		if(IsChaosEnabled("Chaos_ForceReload"))  Chaos_ForceReload(); // Ozai
 	}
 	if(ValidMapPoints()){
 		if(g_bCanSpawnChickens || reset){
@@ -126,6 +127,8 @@ void Chaos(bool reset = false){
 		if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
 	}
 	if(IsChaosEnabled("Chaos_Thunderstorm"))  Chaos_Thunderstorm(); // Ozai
+	if(IsChaosEnabled("Chaos_LooseTrigger"))  Chaos_LooseTrigger(); // Ozai
+
 	g_bClearChaos = false;
 }
 
@@ -171,5 +174,6 @@ char EffectsWithNoDuration[][] = {
 	"Chaos_TeleportFewMeters",
 	"Chaos_SpawnFlashbangs",
 	"Chaos_SpawnExplodingBarrels",
-	"Chaos_SimonSays"
+	"Chaos_SimonSays",
+	"Chaos_ForceReload"
 };
