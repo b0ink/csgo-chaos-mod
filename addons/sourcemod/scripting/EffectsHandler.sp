@@ -2,6 +2,7 @@
 void Chaos(bool reset = false){
 	if(g_bFindingPotentialEffects) reset = true;
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
+	
 	if(IsChaosEnabled("Chaos_NoScopeOnly"))  Chaos_NoScopeOnly();
 	if(IsChaosEnabled("Chaos_PortalGuns"))  Chaos_PortalGuns();
 	if(IsChaosEnabled("Chaos_Aimbot"))  Chaos_Aimbot();
@@ -106,6 +107,7 @@ void Chaos(bool reset = false){
 		if(ValidMapPoints()){
 			if(IsChaosEnabled("Chaos_RespawnTheDead_Randomly"))  Chaos_RespawnTheDead_Randomly();
 		}
+		if(IsChaosEnabled("Chaos_ForceReload"))  Chaos_ForceReload(); // Ozai
 	}
 	if(ValidMapPoints()){
 		if(g_bCanSpawnChickens || reset){
@@ -124,6 +126,9 @@ void Chaos(bool reset = false){
 		if(IsChaosEnabled("Chaos_SpawnFlashbangs"))  Chaos_SpawnFlashbangs();
 		if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
 	}
+	if(IsChaosEnabled("Chaos_Thunderstorm"))  Chaos_Thunderstorm(); // Ozai
+	if(IsChaosEnabled("Chaos_LooseTrigger"))  Chaos_LooseTrigger(); // Ozai
+
 	g_bClearChaos = false;
 }
 
@@ -169,5 +174,6 @@ char EffectsWithNoDuration[][] = {
 	"Chaos_TeleportFewMeters",
 	"Chaos_SpawnFlashbangs",
 	"Chaos_SpawnExplodingBarrels",
-	"Chaos_SimonSays"
+	"Chaos_SimonSays",
+	"Chaos_ForceReload"
 };

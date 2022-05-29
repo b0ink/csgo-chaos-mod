@@ -30,6 +30,7 @@ char 	g_Prefix[] = ">>{lime}C H A O S{default}<<";
 char 	g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
+
 StringMap	Chaos_Effects;
 
 #define SOUND_BELL "buttons/bell1.wav"
@@ -93,6 +94,7 @@ int g_MaxAirAcc = 0;
 #include "Externals/Rollback.sp"
 #include "Externals/Fog.sp"
 #include "Externals/Impostors.sp"
+#include "Externals/Weather.sp"
 
 #include "Effects.sp"
 
@@ -158,6 +160,7 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_MONEY);
 	PrecacheSound(SOUND_BLIP);
 
+
 	PrecacheTextures();
 
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
@@ -180,6 +183,7 @@ public void OnMapStart(){
 	EXPLOSIVEBULLETS_INIT();
 	DRUGS_INIT();
 	TELEPORT_INIT();
+	WEATHER_INIT();
 	
 	Overlay_INIT();
 
