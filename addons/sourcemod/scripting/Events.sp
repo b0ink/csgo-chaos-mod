@@ -145,6 +145,23 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 		g_DisableKeys_OriginalPos[client][2] = 0.0;
 	}
 
+	if (g_bForce_Reload[client]) {
+		buttons |= IN_RELOAD;
+		g_bForce_Reload[client] = false;
+		//return Plugin_Changed;
+	}
+
+	if (g_bLoose_Trigger) {
+		if (g_bLast_Shot[client]) {
+			buttons |= IN_ATTACK;
+			g_bLast_Shot[client] = false;
+		} else {
+			buttons &= ~IN_ATTACK;
+			g_bLast_Shot[client] = true;
+		}
+		//return Plugin_Changed;
+	}
+
 	return Plugin_Continue;
 }
 

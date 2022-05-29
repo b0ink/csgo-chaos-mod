@@ -5,7 +5,7 @@ bool g_bExplosiveBullets = false;
 #define FLASH "explosion_child_core04b"
 #define SMOKE "impact_dirt_child_smoke_puff"
 #define DIRT "impact_dirt_child_clumps"
-#define SOUND "weapons/hegrenade/explode5.wav"
+#define EXPLOSION_HE "weapons/hegrenade/explode5.wav"
 
 public void EXPLOSIVEBULLETS_INIT(){
 	PrecacheEffect("ParticleEffect");
@@ -13,7 +13,7 @@ public void EXPLOSIVEBULLETS_INIT(){
 	PrecacheParticleEffect(FLASH);
 	PrecacheParticleEffect(SMOKE);
 	PrecacheParticleEffect(DIRT);
-	PrecacheSound(SOUND);
+	PrecacheSound(EXPLOSION_HE);
 }
 public Action Explosive_Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
 	if (!g_bExplosiveBullets) return Plugin_Continue;
@@ -50,7 +50,7 @@ public Action Explosive_Hook_BulletShot(const char[] te_name, const int[] Player
 	}
 	delete trace;
 	//Play the explosion sound
-	EmitAmbientSound(SOUND, endpos, SOUND_FROM_WORLD, SNDLEVEL_NORMAL, SND_NOFLAGS, 0.5, SNDPITCH_HIGH);
+	EmitAmbientSound(EXPLOSION_HE, endpos, SOUND_FROM_WORLD, SNDLEVEL_NORMAL, SND_NOFLAGS, 0.5, SNDPITCH_HIGH);
 	return Plugin_Continue;
 }
 
