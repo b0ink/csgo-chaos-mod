@@ -824,4 +824,20 @@
     {
         "en"    "Spawns rain and strikes lightning around the map"
     }
+    "Chaos_ForceReload_Title"
+    {
+        "en"    "Force Reload"
+    }
+    "Chaos_ForceReload_Description"
+    {
+        "en"    "Forces all players to reload their weapon"
+    }
+    "Chaos_LooseTrigger_Title"
+    {
+        "en"    "Loose Trigger"
+    }
+    "Chaos_LooseTrigger_Description"
+    {
+        "en"    "Forces all players to shoot"
+    }
 }

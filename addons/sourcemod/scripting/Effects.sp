@@ -2443,7 +2443,7 @@ public Action Timer_CompleteMegaChaos(Handle timer){
 	g_bMegaChaos = false;
 }
 
-Handle g_Thunder_Timer = INVALID_HANDLE; //made by ozai, holla if issue and cbf fixing
+Handle g_Thunder_Timer = INVALID_HANDLE; 
 
 Action Chaos_Thunderstorm(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
@@ -2459,7 +2459,7 @@ Action Chaos_Thunderstorm(Handle timer = null, bool EndChaos = false){
 			}
 		}
 	}
-	if(NotDecidingChaos("Chaos_Thunderstorm")) return;
+	if(NotDecidingChaos("Chaos_Thunderstorm.Lightning")) return;
 	if(CurrentlyActive(g_Thunder_Timer)) return;
 
 	CreateTimer(0.1, Timer_LightningStrike); // starting lightning strikes
@@ -2517,4 +2517,41 @@ public Action Timer_LightningStrike(Handle timer) {
 			}
 		}
 	}
+}
+
+bool g_bForce_Reload[MAXPLAYERS+1];
+
+public void Chaos_ForceReload(){
+	if(ClearChaos()){
+		for(int i = 0; i <= MaxClients; i++) g_bForce_Reload[i] = false;
+	}
+	if(NotDecidingChaos("Chaos_ForceReload")) return;
+	
+	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) g_bForce_Reload[i] = true;
+
+	AnnounceChaos(GetChaosTitle("Chaos_ForceReload"), -1.0);
+
+}
+
+bool g_bLoose_Trigger = false;
+bool g_bLast_Shot [MAXPLAYERS+1];
+
+Handle g_LooseTrigger_Timer = INVALID_HANDLE;
+
+Action Chaos_LooseTrigger(Handle timer = null, bool EndChaos = false){
+	if(ClearChaos(EndChaos)){
+		StopTimer(g_LooseTrigger_Timer);
+		g_bLoose_Trigger = false;
+	}
+	if(NotDecidingChaos("Chaos_LooseTrigger.forceshoot")) return;
+	if(CurrentlyActive(g_LooseTrigger_Timer)) return;
+
+	for(int i = 0; i <= MaxClients; i++)  g_bLast_Shot[i] = true;
+	g_bLoose_Trigger = true;
+
+	float duration = GetChaosTime("Chaos_LooseTrigger", 5.0);
+	if(duration > 0) g_LooseTrigger_Timer = CreateTimer(duration, Chaos_LooseTrigger, true);
+
+	AnnounceChaos(GetChaosTitle("Chaos_LooseTrigger"), duration);
+	
 }
