@@ -840,4 +840,44 @@
     {
         "en"    "Forces all players to shoot"
     }
+    "Chaos_LSD_Title"
+    {
+        "en"    "LSD"
+    }
+    "Chaos_LSD_Description"
+    {
+        "en"    "Trippy color correction"
+    }
+    "Chaos_BlackWhite_Title"
+    {
+        "en"    "Black & White"
+    }
+    "Chaos_BlackWhite_Description"
+    {
+        "en"    "Black & White Color Effect"
+    }
+    "Chaos_Saturation_Title"
+    {
+        "en"    "Saturation"
+    }
+    "Chaos_Saturation_Description"
+    {
+        "en"    "Saturation Color Effect"
+    }
+    "Chaos_RevealEnemyLocation_Title"
+    {
+        "en"    "Reveal Enemy Location"
+    }
+    "Chaos_RevealEnemyLocation_Description"
+    {
+        "en"    "Briefly reveals enemies on the radar"
+    }
+    "Chaos_HealthRegen_Title"
+    {
+        "en"    "Health Regen"
+    }
+    "Chaos_HealthRegen_Description"
+    {
+        "en"    "Steady health regeneration"
+    }
 }
