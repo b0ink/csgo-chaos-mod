@@ -9,6 +9,7 @@ void SpawnImpostors(){
 			PushArrayString(OriginalPlayerModels, modelName);
 		}
 	}
+	if(GetArraySize(OriginalPlayerModels) == 0) return;
 
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);

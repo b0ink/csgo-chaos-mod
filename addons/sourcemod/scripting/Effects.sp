@@ -126,6 +126,8 @@ void Chaos_FakeCrash(){
 	if(ClearChaos()){    }
 	if(NotDecidingChaos("Chaos_FakeCrash")) return;
 	AnnounceChaos("Fake Crash", -1.0);
+	g_sCustomEffect = "";
+	g_sSelectedChaosEffect = "";
 	g_bLag = true;
 	CreateTimer(1.0, Timer_nolag);
 	while(g_bLag){
@@ -466,7 +468,7 @@ int g_bNoStrafe = 0;
 Handle g_NoStrafe_Timer = INVALID_HANDLE;
 Action Chaos_DisableStrafe(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		if(g_bNoStrafe > 1) g_bNoStrafe--;
+		if(g_bNoStrafe > 0) g_bNoStrafe--;
 		StopTimer(g_NoStrafe_Timer);
 		if(EndChaos) AnnounceChaos("Normal Left/Right Movement", -1.0, true);
 	}
@@ -485,7 +487,7 @@ int g_bNoForwardBack = 0;
 Handle g_NoForwardBack_Timer = INVALID_HANDLE;
 Action Chaos_DisableForwardBack(Handle timer = null, bool EndChaos = false){
 	if(ClearChaos(EndChaos)){
-		if(g_bNoForwardBack > 1) g_bNoForwardBack--;
+		if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 		StopTimer(g_NoForwardBack_Timer);
 		if(EndChaos) AnnounceChaos("Normal Forward/Backward Movement", -1.0, true);
 	}
@@ -493,6 +495,7 @@ Action Chaos_DisableForwardBack(Handle timer = null, bool EndChaos = false){
 	if(CurrentlyActive(g_NoForwardBack_Timer)) return;
 	
 	g_bNoForwardBack++;
+	
 	float duration = GetChaosTime("Chaos_DisableForwardBack", 20.0);
 	if(duration > 0) g_NoForwardBack_Timer = CreateTimer(duration, Chaos_DisableForwardBack, true);
 	
