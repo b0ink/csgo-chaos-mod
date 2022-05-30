@@ -7,7 +7,7 @@ float mapFogDensity = 0.995;
 void findLight(){
 	int ent = -1;
 	if(
-		StrEqual(mapName, "cs_office", false) ||
+		StrContains(mapName, "cs_office", false) != -1 ||
 		StrEqual(mapName, "de_vertigo", false) ||
 		StrEqual(mapName, "de_cache", false)
 	){

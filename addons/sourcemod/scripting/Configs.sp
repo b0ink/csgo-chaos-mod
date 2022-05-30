@@ -24,6 +24,26 @@ public void OnConfigsExecuted(){
 	ParseOverrideEffects();
 	ParseCore();
 
+	int warnings = 0;
+	Log("---------------------------------CONFIGS EXECUTED---------------------------------");
+	Log("-------------------------------------ERRORS--------------------------------------");
+	if(!ValidMapPoints()){
+		warnings++;
+		Log("No valid spawn points were found for %s. Certain effects will not run.", mapName);
+	}
+	if(isHostageMap()){
+		warnings++;
+		Log("WARNING: %s has been flagged as a hostage map, certain C4 effects will be disabled.", mapName);
+	}
+	if(!ValidBombSpawns()){
+		warnings++;
+		Log("No valid bomb spawns were found for %s. Certain C4 effects will not run.", mapName);
+	}
+	if(warnings == 0){
+		Log("-------------------------------------NONE--------------------------------------");
+	}else{
+		Log("-------------------------------------------------------------------------------");
+	}
 	StopTimer(g_AutoCoord_Timer);
 
 	if(!ValidMapPoints()){
@@ -99,6 +119,8 @@ public void PrecacheTextures(){
 	PrecacheDecal("Chaos/binoculars.vtf", true);
 	AddFileToDownloadsTable("materials/Chaos/binoculars.vtf");
 	AddFileToDownloadsTable("materials/Chaos/binoculars.vmt");
+
+	DownloadRawFiles();
 }
 
 

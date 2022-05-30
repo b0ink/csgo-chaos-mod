@@ -1,0 +1,11 @@
+"Phrases"
+{
+	"Chaos_MEGACHAOS_Title"
+	{
+		"en" "Mega Chaos"
+	}	
+	"Chaos_MEGACHAOS_Description"
+	{
+
+	}	
+}

@@ -94,9 +94,11 @@ int g_MaxAirAcc = 0;
 #include "Externals/Rollback.sp"
 #include "Externals/Fog.sp"
 #include "Externals/Impostors.sp"
+#include "Externals/ColorCorrection.sp"
 #include "Externals/Weather.sp"
 
 #include "Effects.sp"
+#include "Effects-2.sp"
 
 #include "ConVars.sp"
 #include "Commands.sp"
@@ -147,7 +149,6 @@ public void OnMapStart(){
 	UpdateCvars();
 
 	CheckHostageMap();
-
 	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
 	UpdateCvars();
@@ -172,9 +173,10 @@ public void OnMapStart(){
 	bombSiteB = 			INVALID_HANDLE;
 
 	findLight();
-
+	
+	CLEAR_CC();
 	HUD_INIT();
-
+	
 	ESP_INIT();
 	TEAMMATESWAP_INIT();
 	COORD_INIT();
@@ -265,7 +267,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	g_bDecidingChaos = true;
 	g_bClearChaos = false;
-
 	PoolChaosEffects();
 
 	if(g_sCustomEffect[0]){ //run from menu
@@ -275,7 +276,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		while(!g_sLastPlayedEffect[0]){
 			if(!CustomRun){
 				do{
-					randomEffect = GetRandomInt(0, GetArraySize(Possible_Chaos_Effects) - 1);
+					// randomEffect = GetRandomInt(0, GetArraySize(Possible_Chaos_Effects) - 1);
+					randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
 					GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
 				}while((FindStringInArray(Effect_History, Random_Effect) != -1) || !Random_Effect[0]);
 

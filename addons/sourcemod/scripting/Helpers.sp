@@ -383,9 +383,6 @@ stock void Log(const char[] format, any ...)
 	LogToFile(sLogPath, buffer);
 }
 
-//HELPERS
-
-
 void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool stripGrenadesOnly = false, bool KeepGrenades = false){
 	if (ValidAndAlive(client)){
 		int iTempWeapon = -1;

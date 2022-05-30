@@ -1,4 +1,3 @@
-//todo, on a per-map basis, log errors if there arent any valid spawns or bomb spawns, or fog index etc.
 void Chaos(bool reset = false){
 	if(g_bFindingPotentialEffects) reset = true;
 	if(IsChaosEnabled("Chaos_Nothing"))  Chaos_Nothing(); //cannot be turned off
@@ -125,6 +124,11 @@ void Chaos(bool reset = false){
 		if(IsChaosEnabled("Chaos_TeleportFewMeters"))  Chaos_TeleportFewMeters();
 		if(IsChaosEnabled("Chaos_SpawnFlashbangs"))  Chaos_SpawnFlashbangs();
 		if(IsChaosEnabled("Chaos_SpawnExplodingBarrels"))  Chaos_SpawnExplodingBarrels();
+		if(IsChaosEnabled("Chaos_LSD"))  Chaos_LSD();
+		if(IsChaosEnabled("Chaos_BlackWhite"))  Chaos_BlackWhite();
+		if(IsChaosEnabled("Chaos_Saturation"))  Chaos_Saturation();
+		if(IsChaosEnabled("Chaos_RevealEnemyLocation"))  Chaos_RevealEnemyLocation();
+		if(IsChaosEnabled("Chaos_HealthRegen"))  Chaos_HealthRegen();
 	}
 	if(IsChaosEnabled("Chaos_Thunderstorm"))  Chaos_Thunderstorm(); // Ozai
 	if(IsChaosEnabled("Chaos_LooseTrigger"))  Chaos_LooseTrigger(); // Ozai
