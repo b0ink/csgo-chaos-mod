@@ -1639,25 +1639,6 @@ Action Chaos_ESP(Handle timer = null, bool EndChaos = false ){
 
 }
 
-Handle g_ReversedMovementTimer = INVALID_HANDLE;
-bool g_ReversedMovement = false;
-Action Chaos_ReversedMovement(Handle timer = null, bool EndChaos = false){
-	if(ClearChaos(EndChaos)){	
-		StopTimer(g_ReversedMovementTimer);
-		g_ReversedMovement = false;
-		if(EndChaos) AnnounceChaos("Reversed Movement", -1.0, true);
-	}
-	if(NotDecidingChaos("Chaos_ReversedMovement")) return;
-	if(CurrentlyActive(g_ReversedMovementTimer)) return;
-
-	g_ReversedMovement = true;
-	
-	float duration = GetChaosTime("Chaos_ReversedMovement", 20.0);
-	if(duration > 0) g_ReversedMovementTimer = CreateTimer(duration, Chaos_ReversedMovement, true);
-	
-	AnnounceChaos(GetChaosTitle("Chaos_ReversedMovement"), duration);
-
-}
 
 Handle TPos = INVALID_HANDLE;
 Handle CTPos = INVALID_HANDLE;
