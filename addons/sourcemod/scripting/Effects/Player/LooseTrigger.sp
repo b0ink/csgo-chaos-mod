@@ -5,7 +5,7 @@ public void Chaos_LooseTrigger_START(){
 	g_bLoose_Trigger = true;
 }
 
-public Action Chaos_LooseTrigger_RESET(Handle timer, bool EndChaos){
+public Action Chaos_LooseTrigger_RESET(bool EndChaos){
 	g_bLoose_Trigger = false;
 }
 
@@ -32,15 +32,7 @@ public Action Chaos_LooseTrigger_OnPlayerRunCmd(int client, int &buttons, int &i
 	-> name as well?
  */
 
-public void Chaos_LooseTrigger_ADDEFFECT(){
-	effect new_effect;
+public bool Chaos_LooseTrigger_Conditions(){
 
-	new_effect.SET_NAME("Loose Trigger");
-	new_effect.SET_CONFIG_NAME("Chaos_LooseTrigger");
-
-	new_effect.SET_START_FUNCTION("Chaos_LooseTrigger_START");
-	new_effect.SET_RESET_FUNCTION("Chaos_LooseTrigger_RESET");
-	new_effect.SET_DEFAULT_DURATION(10);
-
-	Add_Effect(new_effect);
+	return true;
 }

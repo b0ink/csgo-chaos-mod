@@ -16,6 +16,13 @@
 #define PLUGIN_DESCRIPTION "Spawn from over 100+ random effects every 15 seconds to ensue chaos towards you and your enemies"
 #define PLUGIN_VERSION "0.1.0"
 
+
+//todo..
+#define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
+// #define GetRandomMapSpawn(%1) for(int %1 = 0; %1 < )
+
+// #define MAX_EFFECTS 200
+
 public Plugin myinfo = {
 	name = PLUGIN_NAME,
 	author = "BOINK",
@@ -37,6 +44,12 @@ StringMap	Chaos_Effects;
 #define SOUND_BLIP "buttons/blip1.wav"
 #define SOUND_COUNTDOWN "ui/beep07.wav"
 #define SOUND_MONEY "survival/money_collect_04.wav"
+
+#define DISTORTION "explosion_child_distort01b"
+#define FLASH "explosion_child_core04b"
+#define SMOKE "impact_dirt_child_smoke_puff"
+#define DIRT "impact_dirt_child_clumps"
+#define EXPLOSION_HE "weapons/hegrenade/explode5.wav"
 
 #include "Data.sp"
 
@@ -78,37 +91,156 @@ int ChaosMapCount = 0;
 
 //todo put back in convar and use functions to adjust it
 // int g_NoAirAcc = 0;
-int g_MaxAirAcc = 0;
+// int g_MaxAirAcc = 0;
+int g_bKnifeFight = 0;
+int g_bNoStrafe = 0;
+int g_AutoBunnyhop = 0;
+int g_bNoForwardBack = 0;
+int g_NoFallDamage = 0;
 
-#include "Externals/InstantWeaponSwitch.sp"
-#include "Externals/WeaponJump.sp"
-#include "Externals/ESP.sp"
-#include "Externals/Aimbot.sp"
-#include "Externals/Autoplant.sp"
-#include "Externals/Teleport.sp"
-#include "Externals/ChickenModels.sp"
-#include "Externals/ExplosiveBullets.sp"
-#include "Externals/SimonSays.sp"
-#include "Externals/Drugs.sp"
-#include "Externals/C4Chicken.sp"
-#include "Externals/Rollback.sp"
-#include "Externals/Fog.sp"
-#include "Externals/Impostors.sp"
-#include "Externals/ColorCorrection.sp"
-#include "Externals/Weather.sp"
+// Shared by multiple effects
+#include "Global/InstantWeaponSwitch.sp"
+#include "Global/WeaponJump.sp"
+#include "Global/Fog.sp"
+#include "Global/ColorCorrection.sp"
+#include "Global/Weather.sp"
 
-#include "Effects.sp"
-#include "Effects-2.sp"
+#include "EffectsList.sp"
+// #include "Effects-2.sp"
+
+
+
+int global_id_count = 0;
+//with the id in the struct, just let one of the main init chaos functions looop through all the structs, and set their ID
+ArrayList alleffects;
+
+enum struct effect{
+	int id;
+
+	char 		name[64];
+	char 		config_name[64];
+	char 		description[64];
+	
+	int			enabled;
+	int 		duration;
+
+	char 		function_name_start[64];
+	char 		function_name_reset[64];
+	
+	Handle 		timer;
+
+	void run_effect(){
+		PrintToChatAll("attempting to run!: %s for %i seconds", this.function_name_start, this.duration);
+
+		Function func = GetFunctionByName(GetMyHandle(), this.function_name_start);
+		if(func != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), func);
+			Call_Finish();
+
+			float duration = this.Get_Duration(); 
+			if(duration > 0) this.timer = CreateTimer(duration, Effect_Reset, this.id);
+			
+
+			char function_no_announce_check[64];
+			Format(function_no_announce_check, sizeof(function_no_announce_check), "%s_CustomAnnouncement", this.config_name);
+			Function announce = GetFunctionByName(GetMyHandle(), function_no_announce_check);
+
+			bool custom_announce = true;
+			if(announce == INVALID_FUNCTION){
+				custom_announce = false;
+			}else{
+				Call_StartFunction(GetMyHandle(), func);
+				Call_Finish(custom_announce);
+			}
+
+			if(!custom_announce) AnnounceChaos(GetChaosTitle(this.config_name), float(this.duration));
+			g_sLastPlayedEffect = this.config_name;
+			ChaosMapCount++;
+		}
+	}
+
+	void reset_effect(bool EndChaos = false){
+		Function func = GetFunctionByName(GetMyHandle(), this.function_name_reset);
+		if(func != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), func);
+			Call_PushCell(EndChaos);
+			Call_PushCell(EndChaos);
+			Call_Finish();
+		}
+	}
+
+	bool can_run_effect(){
+		bool response = true;
+		char condition_check[64];
+		FormatEx(condition_check, sizeof(condition_check), "%s_Conditions", this.config_name);
+		Function func = GetFunctionByName(GetMyHandle(), condition_check);
+		if(func != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), func);
+			Call_Finish(response);
+		}
+		return response;
+	}
+
+	void SET_NAME(char effect_name[64]){
+		this.name = effect_name;
+	}
+	void SET_CONFIG_NAME(char effect_name[64]){
+		this.config_name = effect_name;
+	}
+	void SET_DESCRIPTION(char effect_name[64]){
+		this.description = effect_name;
+	}
+	void SET_DEFAULT_DURATION(int time){
+		this.duration = time;
+	}
+	void SET_START_FUNCTION(char start_function[64]){
+		this.function_name_start = start_function;
+	}
+	void SET_RESET_FUNCTION(char reset_function[64]){
+		this.function_name_reset = reset_function;
+	}
+	void ADD_EFFECT(){
+		global_id_count++;
+		this.id = global_id_count;
+	}
+	float Get_Duration(){
+		return GetChaosTime(this.config_name, float(this.duration));
+	}
+}
+
+
+public Action Effect_Reset(Handle timer, int effect_id){
+	effect foo;
+	for(int i = 0; i < alleffects.Length; i++){
+		alleffects.GetArray(i, foo, sizeof(foo));
+		if(foo.id == effect_id){
+			foo.reset_effect(true);
+			break;
+		}
+	}
+}
+
+
 
 #include "ConVars.sp"
 #include "Commands.sp"
 #include "Hud.sp"
-#include "EffectsHandler.sp"
+// #include "EffectsHandler.sp"
 #include "Configs.sp"
 #include "Menu.sp"
 
-public void OnPluginStart(){
 
+// #include "Effects/Player/ReversedMovement.sp"
+// #include "Effects/Player/LooseTrigger.sp"
+
+// #include "oldEffects.sp"
+
+// int GetChaosEffectCount(){
+// 	return alleffects.Length;
+// }
+
+public void OnPluginStart(){
+	
 	LoadTranslations("chaos.phrases");
 	
 	CreateConVars();
@@ -118,11 +250,8 @@ public void OnPluginStart(){
 	HookEvent("round_start", 	Event_RoundStart);
 	HookEvent("round_end", 		Event_RoundEnd);	
 	HookEvent("player_death", 	Event_PlayerDeath);	
-	HookEvent("weapon_fire", 	Event_OnWeaponFire); //, EventHookMode_Post);
 	HookEvent("bomb_planted", 	Event_BombPlanted);
-	HookEvent("bullet_impact", 	Event_BulletImpact);
 	HookEvent("server_cvar", 	Event_Cvar, 			EventHookMode_Pre);
-	AddTempEntHook("Shotgun Shot", Hook_BulletShot);
 
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
@@ -135,10 +264,17 @@ public void OnPluginStart(){
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 
 	Effect_History = CreateArray(64);
-	Possible_Chaos_Effects = CreateArray(64);
+	// Possible_Chaos_Effects = CreateArray(64);
+	Possible_Chaos_Effects = new ArrayList(1024);
 
 	g_SavedConvars  = CreateArray(64);
+
+	alleffects = new ArrayList(1024);
+	
 }
+
+
+
 
 public void OnPluginEnd(){
 	ResetCvar();
@@ -172,22 +308,16 @@ public void OnMapStart(){
 	bombSiteA = 			INVALID_HANDLE;
 	bombSiteB = 			INVALID_HANDLE;
 
-	findLight();
+	Find_Fog();
 	
 	CLEAR_CC();
 	HUD_INIT();
-	
-	ESP_INIT();
-	TEAMMATESWAP_INIT();
+
 	COORD_INIT();
-	NOSCOPE_INIT();
-	AUTOPLANT_INIT();
-	EXPLOSIVEBULLETS_INIT();
-	DRUGS_INIT();
-	TELEPORT_INIT();
 	WEATHER_INIT();
-	
 	Overlay_INIT();
+
+	Run_Init_Functions();
 
 	cvar("sv_fade_player_visibility_farz", "1");
 
@@ -200,6 +330,8 @@ public void OnMapStart(){
 	
 	ChaosMapCount = 0;
 }
+
+
 
 public void OnMapEnd(){
 	if(!g_bChaos_Enabled) return;
@@ -255,6 +387,14 @@ public Action Timer_CreateHostage(Handle timer){
 	CreateHostageRescue();
 }
 
+bool Effect_Recently_Played(char[] effect_name){
+	bool found = false;
+	if(FindStringInArray(Effect_History, effect_name) != -1){
+		found = true;
+	}
+	return found;
+}
+
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
@@ -271,39 +411,41 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	if(g_sCustomEffect[0]){ //run from menu
 		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
-		Chaos();
+		effect foo;
+		for(int i = 0; i < alleffects.Length; i++){
+			alleffects.GetArray(i, foo, sizeof(foo));
+			if(StrEqual(foo.config_name, g_sSelectedChaosEffect, false)){
+				foo.run_effect();
+				break;
+			}
+		}
 	}else{
-		while(!g_sLastPlayedEffect[0]){
-			if(!CustomRun){
-				do{
-					// randomEffect = GetRandomInt(0, GetArraySize(Possible_Chaos_Effects) - 1);
-					randomEffect = GetRandomInt(0, GetArraySize(Effect_Functions) - 1);
-					GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
-				}while((FindStringInArray(Effect_History, Random_Effect) != -1) || !Random_Effect[0]);
-
-				PushArrayString(Effect_History, Random_Effect);
-
-				float average = float((GetArraySize(Possible_Chaos_Effects) / 4) * 3);
-				if(GetArraySize(Effect_History) > average) RemoveFromArray(Effect_History, 0);
-				
-			}else{
-				//ignore history if run customly
-				randomEffect = GetRandomInt(0, GetArraySize(Possible_Chaos_Effects) - 1);
-				GetArrayString(Effect_Functions, randomEffect, Random_Effect, sizeof(Random_Effect));
-			}
-
-			g_sSelectedChaosEffect = Random_Effect;
+		effect new_effect;
+		int totalEffects = alleffects.Length;
 		
+		while(!g_sLastPlayedEffect[0]){ // no longer
 			attempts++;
+			do{
+				randomEffect = GetRandomInt(0, totalEffects - 1);
+				alleffects.GetArray(randomEffect, new_effect, sizeof(new_effect));
+				if(new_effect.can_run_effect() && (!Effect_Recently_Played(new_effect.config_name) || CustomRun)){
+					Random_Effect = new_effect.config_name;
+					new_effect.run_effect();
+					PushArrayString(Effect_History, new_effect.config_name);
 
-			Chaos(); //finally trigger effect
-			ChaosMapCount++;
-			if(attempts > 9999){
-				Log("Woops! Something went wrong... (Effect Generator) %s - %s", g_sSelectedChaosEffect, Random_Effect);
+					float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
+					if(GetArraySize(Effect_History) > average) RemoveFromArray(Effect_History, 0);
+				}
+
+			}while(!Random_Effect[0]);
+			if(attempts > 900){
+				LogError("Clearing effect history");
+				ClearArray(Effect_History); //fail safe
+				break;
 			}
-			if(g_sLastPlayedEffect[0] || attempts > 9999) break;
 		}
 	}
+
 	LogEffect(g_sLastPlayedEffect);
 
 	PrintEffects();
@@ -358,11 +500,19 @@ public void RetryEffect(){
 public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
 	Fog_OFF();
-	g_bClearChaos = true;
-	g_bDecidingChaos = false;
-	Chaos(true);
+	// g_bClearChaos = true;
+	// g_bDecidingChaos = false;
+	// Chaos(true);
+	effect foo;
+	for(int i = 0; i < alleffects.Length; i++){
+		alleffects.GetArray(i, foo, sizeof(foo));
+		foo.reset_effect();
+	}
 }
 
-#include "Hooks.sp"
+
+
+
 #include "Events.sp"
+#include "Hooks.sp"
 #include "Helpers.sp"

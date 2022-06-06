@@ -1,0 +1,3 @@
+Menu:
+	-> ShowMenu_Effects:
+			Iterate through effect arraylist, run _conditions to see if it can be run at that time.

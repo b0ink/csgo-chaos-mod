@@ -107,18 +107,54 @@ char[] GetChaosTitle(char[] function_name){
 
 
 bool PoolChaosEffects(char[] effectName = ""){
-	ClearArray(Possible_Chaos_Effects);
-	if(effectName[0]){
-		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", effectName);
-	}else{
-		g_sSelectedChaosEffect = "Chaos_";
+	//---------------------------------------------
+		// ClearArray(Possible_Chaos_Effects);
+		// if(effectName[0]){
+		// 	FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", effectName);
+		// }else{
+		// 	g_sSelectedChaosEffect = "Chaos_";
+		// }
+		// g_bDecidingChaos = true;
+		// g_bClearChaos = false;
+		// g_bFindingPotentialEffects = true;
+		// Chaos();
+		// g_bFindingPotentialEffects = false;
+	//---------------------------------------------
+
+	Possible_Chaos_Effects.Clear();
+
+	effect foo;
+	// char condition_check[64];
+	for(int i = 0; i < alleffects.Length; i++){
+		alleffects.GetArray(i, foo, sizeof(foo));
+
+		if(effectName[0]){ //* if keyword was provided
+			if(StrContains(foo.config_name, effectName, false) != -1){ //todo allow for aliases
+				PrintToChatAll("addin effect %s", foo.config_name);
+				Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
+			}
+		}else{
+			// if(foo.can_run_effect()){ //todo allow all?
+			Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
+			// }
+		}
+		// Format(condition_check, sizeof(condition_check), "%s_Conditions", foo.config_name);
+		// Function func = GetFunctionByName(GetMyHandle(), condition_check);
+		// bool can_run = true;
+		// if(foo.enabled){
+		// 	if(func != INVALID_FUNCTION){
+		// 		Call_StartFunction(GetMyHandle(), func);
+		// 		Call_Finish(can_run);	
+		// 	}
+		// }else{
+		// 	can_run = false;
+		// }
+
+
+			
 	}
-	g_bDecidingChaos = true;
-	g_bClearChaos = false;
-	g_bFindingPotentialEffects = true;
-	Chaos();
-	g_bFindingPotentialEffects = false;
-	Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
+	Log("Size of pooled chaos effects: %i", Possible_Chaos_Effects.Length);
+	// Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
 }
 
 stock bool IsValidClient(int client, bool nobots = true){
@@ -519,14 +555,14 @@ void StopTimer(Handle &timer){
 	}
 }
 
-bool CurrentlyActive(Handle timer){
-	if(timer != INVALID_HANDLE){
-		Log("Effect is already currently running, trying new effect.");
-		RetryEffect();
-		return true;
-	}
-	return false;
-}
+// bool CurrentlyActive(Handle timer){
+// 	if(timer != INVALID_HANDLE){
+// 		Log("Effect is already currently running, trying new effect.");
+// 		RetryEffect();
+// 		return true;
+// 	}
+// 	return false;
+// }
 
 
 
@@ -725,6 +761,24 @@ void SetPlayersGravity(float amount){
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			SetEntityGravity(i, amount);
+		}
+	}
+}
+
+void SetPlayersFOV(int fov){
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			SetEntProp(i, Prop_Send, "m_iFOV", fov);
+			SetEntProp(i, Prop_Send, "m_iDefaultFOV", fov);
+		}
+	}
+}
+
+void ResetPlayersFOV(){
+	for(int i = 0; i <= MaxClients; i++){
+		if(IsValidClient(i)){
+			SetEntProp(i, Prop_Send, "m_iFOV", 0);
+			SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
 		}
 	}
 }

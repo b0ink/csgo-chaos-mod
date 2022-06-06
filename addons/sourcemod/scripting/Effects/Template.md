@@ -17,3 +17,14 @@
 	};
 
  */
+
+
+isHostageMap();
+g_iFog
+g_iChaos_Round_Count
+mapName
+ValidMapPoints
+ValidBombSpawns
+g_bCanSpawnChickens
+g_bC4Chicken
+GetSlowScriptTimeout

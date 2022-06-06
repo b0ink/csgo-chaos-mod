@@ -59,11 +59,28 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 }
 
 
-int FindStringInArrayViaKeyword(Handle array, char[] keyword){
+// int FindStringInArrayViaKeyword(ArrayList array, char[] keyword){
+// 	char search_term[64];
+// 	effect foo;
+// 	int index = -1;
+// 	for(int i = 0; i < array.Length; i++){
+// 		alleffects.GetArray(i, foo, sizeof(foo));
+// 		GetArrayString(array, i, search_term, sizeof(search_term));
+// 		index = StrContains(search_term, keyword, false);
+// 		if(index != -1) break;
+// 	}
+// 	return index;
+// }
+
+
+int FindStringInArrayViaKeyword(ArrayList array, char[] keyword){
 	char search_term[64];
+	effect foo;
 	int index = -1;
-	for(int i = 0; i < GetArraySize(array); i++){
-		GetArrayString(array, i, search_term, sizeof(search_term));
+	for(int i = 0; i < array.Length; i++){
+		alleffects.GetArray(i, foo, sizeof(foo));
+		// search_term = foo.
+		// GetArrayString(array, i, search_term, sizeof(search_term));
 		index = StrContains(search_term, keyword, false);
 		if(index != -1) break;
 	}
@@ -76,23 +93,35 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 
 	Menu menu = new Menu(Effect_Selection);
 	menu.SetTitle("Select Chaos Effect");
-	char function_name[64];
-	char function_title[128];
+	// char function_name[64];
+	char function_title[64];
 	if(AllowRandom) menu.AddItem("", "Random Effect"); //KEEP ID BLANK
 
 	if(AllowRandom) PoolChaosEffects();
 	
 	char search_function[64];
-	for(int i = 0; i < GetArraySize(Effect_Titles); i++){ //should contain all 102 all time
-		GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
-		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function);
-		if(index != -1){
+	effect foo;
+	for(int i = 0; i < Possible_Chaos_Effects.Length; i++){ //should contain all 102 all time
+		Possible_Chaos_Effects.GetArray(i, foo, sizeof(foo));
+		
+		// GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
+
+		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function); //todo for structs wtf is this
+		if(index != -1 || true){ //todo WHY
 			// GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
-			GetArrayString(Effect_Functions, i, function_name, sizeof(function_name));
-			Format(function_title, sizeof(function_title), "%s", GetChaosTitle(function_name));
-			// PrintToChatAll(function_name);
+			
+
+			// GetArrayString(Effect_Functions, i, function_name, sizeof(function_name));
+			Format(function_title, sizeof(function_title), "%s", GetChaosTitle(foo.config_name));
+			
+
+			// PrintToChatAll("%s -- %s", foo.config_name, GetChaosTitle(foo.config_name));
 			// PrintToChatAll(GetChaosTitle(function_name));
-			menu.AddItem(function_name, function_title);
+			if(foo.can_run_effect()){
+				menu.AddItem(foo.config_name, function_title);
+			}else{
+				menu.AddItem(foo.config_name, function_title, ITEMDRAW_DISABLED);
+			}
 			//add item | VALUE | DISPLAY
 
 		}else{
@@ -127,7 +156,7 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 			if(g_sSelectedChaosEffect[0]){
 				if(g_bCanSpawnEffect && g_bChaos_Enabled){
 					Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", g_sSelectedChaosEffect);
-
+					PrintToChatAll("custom = %s", g_sCustomEffect);
 					ChooseEffect(null, true);
 				}else{
 					ReplyToCommand(param1, "[Chaos] Sorry, no effects can be spawned in right now.");
@@ -350,9 +379,10 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	// if(GetChaosTime(function_name ,-1.0, true) == -1){
 	bool blacklisted = false;
 
-	for(int i = 0; i < sizeof(EffectsWithNoDuration); i++){
-		if(StrContains(function_name, EffectsWithNoDuration[i], false) != -1) blacklisted = true;
-	}
+	//todo: check for effects with no duration
+	// for(int i = 0; i < sizeof(EffectsWithNoDuration); i++){
+	// 	if(StrContains(function_name, EffectsWithNoDuration[i], false) != -1) blacklisted = true;
+	// }
 	
 	if(blacklisted){
 		menu.AddItem("setting-effect_duration", 	"This effect has no duration.", ITEMDRAW_DISABLED);

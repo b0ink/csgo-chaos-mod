@@ -9,7 +9,8 @@ void RegisterCommands(){
 	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
 }
 
-Handle Possible_Chaos_Effects = INVALID_HANDLE;
+// Handle Possible_Chaos_Effects = INVALID_HANDLE;
+ArrayList Possible_Chaos_Effects;
 bool g_bFindingPotentialEffects = false;
 
 public Action Command_MainMenu(int client, int args){
@@ -36,18 +37,20 @@ public Action Command_NewChaosEffect(int client, int args){
 		if(args >= 1){
 			if(strlen(effectName) >=3){
 					PoolChaosEffects(effectName);
-					if(GetArraySize(Possible_Chaos_Effects) <= 0){
+					if(Possible_Chaos_Effects.Length <= 0){
 						//todo show if the chas is enabled or not
 						ReplyToCommand(client, "[Chaos] No effects found, or the desired effect is currently disabled.");
 						return Plugin_Handled;
-					}else if(GetArraySize(Possible_Chaos_Effects) == 1){
-						g_sCustomEffect = g_sSelectedChaosEffect;
+					}else if(Possible_Chaos_Effects.Length == 1){
+						// g_sCustomEffect = g_sSelectedChaosEffect;
+						effect foo;
+						Possible_Chaos_Effects.GetArray (0, foo, sizeof(foo));
+						g_sCustomEffect = foo.config_name;
 						ChooseEffect(null, true);
 					}else{
 						ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
 						ShowMenu_Effects(client);
 					}
-				
 			}else{
 				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
 				return Plugin_Handled;
@@ -85,9 +88,9 @@ public Action Command_StartChaos(int client, int args){
 	if(g_NewEffect_Timer == INVALID_HANDLE){
 		g_cvChaosEnabled.SetString("1", true, true);
 
-		g_bClearChaos = true;
-		g_bDecidingChaos = false;
-		Chaos();
+		// g_bClearChaos = true;
+		// g_bDecidingChaos = false;
+		// Chaos();
 		CreateTimer(0.1, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{

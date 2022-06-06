@@ -232,11 +232,11 @@
     {
         "en"    "Sets mp_damage_headshot_only to 1, forcing players to shoot at the head only"
     }
-    "Chaos_RandomMolotovSpawn_Title"
+    "Chaos_RainingMolotovs_Title"
     {
         "en"    "Raining Fire"
     }
-    "Chaos_RandomMolotovSpawn_Description"
+    "Chaos_RainingMolotovs_Description"
     {
         "en"    "Spawns a molotov above every players head. The duration controls how many times it repeats"
     }
@@ -352,11 +352,11 @@
     {
         "en"    "Give all players a sourcemod based ESP/Wall hacks"
     }
-    "Chaos_RandomSlap_Title"
+    "Chaos_GhostSlaps_Title"
     {
         "en"    "Ghost Slaps"
     }
-    "Chaos_RandomSlap_Description"
+    "Chaos_GhostSlaps_Description"
     {
         "en"    "Fling the player violently every 5-10 seconds (repeats 5 times)"
     }
@@ -416,11 +416,11 @@
     {
         "en"    "Give players item_nvgs and enable nightvision"
     }
-    "Chaos_SmokeMap_Title"
+    "Chaos_SmokeStrat_Title"
     {
         "en"    "Smoke Strat"
     }
-    "Chaos_SmokeMap_Description"
+    "Chaos_SmokeStrat_Description"
     {
         "en"    "Spwan Smoke particles on all locations around the map"
     }
@@ -432,19 +432,19 @@
     {
         "en"    "Inverse sv_accelerate, reversing players movement"
     }
-    "Chaos_Funky_Title"
+    "Chaos_Autobhop_Title"
     {
         "en"    "Are you feeling funky?"
     }
-    "Chaos_Funky_Description"
+    "Chaos_Autobhop_Description"
     {
-        "en"    "Enables Auto BHOP and increases sv_airaccelerate 2000"
+        "en"    "Enables Auto Bhop and increases sv_airaccelerate 2000"
     }
-    "Chaos_IceySurface_Title"
+    "Chaos_IceyGround_Title"
     {
         "en"    "Icy Ground"
     }
-    "Chaos_IceySurface_Description"
+    "Chaos_IceyGround_Description"
     {
         "en"    "Removes any ground friction, making players slide and carry momentum"
     }
@@ -744,11 +744,11 @@
     {
         "en"    "Teleports the players randomly around the map, but teleports them back after a few seconds"
     }
-    "Chaos_TeleportFewMeters_Title"
+    "Chaos_TeleportFewMetres_Title"
     {
-        "en"    "Teleport Players A Few Meters"
+        "en"    "Teleport Players A Few Metres"
     }
-    "Chaos_TeleportFewMeters_Description"
+    "Chaos_TeleportFewMetres_Description"
     {
         "en"    "Teleports all players to a near location around them"
     }
@@ -879,5 +879,14 @@
     "Chaos_HealthRegen_Description"
     {
         "en"    "Steady health regeneration"
+    }
+
+    "Chaos_FakeLag_Title"
+    {
+        "en"    "Fake Lag"
+    }
+    "Chaos_FakeLag_Description"
+    {
+        "en"    "Intermittent stutters"
     }
 }

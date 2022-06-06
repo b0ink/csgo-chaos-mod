@@ -42,11 +42,11 @@ void PrintEffects(){
 			char chunk[2048];
 			int EffectTime = -1;
 			char EffectName[256];
-			for(int effect = 0; effect < GetArraySize(EffectHud_Name); effect++){
-				GetArrayString(EffectHud_Name, effect, EffectName, sizeof(EffectName));
-				EffectTime = GetArrayCell(EffectHud_Time, effect);
+			for(int ieffect = 0; ieffect < GetArraySize(EffectHud_Name); ieffect++){
+				GetArrayString(EffectHud_Name, ieffect, EffectName, sizeof(EffectName));
+				EffectTime = GetArrayCell(EffectHud_Time, ieffect);
 				int originalTime = EffectTime;
-				int noDuration = GetArrayCell(EffectHud_NoDuration, effect);
+				int noDuration = GetArrayCell(EffectHud_NoDuration, ieffect);
 				if(EffectTime > 20) EffectTime = 20;
 				Format(chunk, sizeof(chunk), "%s\n%s ", chunk, EffectName);
 				int blocks = EffectTime / 3;
