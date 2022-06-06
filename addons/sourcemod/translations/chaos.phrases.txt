@@ -880,7 +880,6 @@
     {
         "en"    "Steady health regeneration"
     }
-
     "Chaos_FakeLag_Title"
     {
         "en"    "Fake Lag"

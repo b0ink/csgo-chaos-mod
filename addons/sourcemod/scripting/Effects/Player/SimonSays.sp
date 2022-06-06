@@ -1,3 +1,15 @@
+Handle 	g_SimonSays_Timer = INVALID_HANDLE;
+bool 	g_bSimon_Active = false;
+bool 	g_bSimon_Says = false; // whether to say simon says or not
+int 	g_Simon_Says_Action = -1;
+char 	g_Simon_ActionText[64];
+int 	g_time = -1;
+bool g_bPlayersToDamage[MAXPLAYERS+1];
+
+#define SS_STRAFE 1;
+#define SS_CROUCH 2;
+
+
 public void Chaos_SimonSays_START(){
 	float duration = 10.0;
 	GenerateSimonOrder(duration);
@@ -20,16 +32,7 @@ public bool Chaos_SimonSays_Conditions(){
 }
 
 
-Handle 	g_SimonSays_Timer = INVALID_HANDLE;
-bool 	g_bSimon_Active = false;
-bool 	g_bSimon_Says = false; // whether to say simon says or not
-int 	g_Simon_Says_Action = -1;
-char 	g_Simon_ActionText[64];
-int 	g_time = -1;
-bool g_bPlayersToDamage[MAXPLAYERS+1];
 
-#define SS_STRAFE 1;
-#define SS_CROUCH 2;
 
 void GenerateSimonOrder(float duration){
 	g_Simon_Says_Action = GetRandomInt(1,4);
@@ -55,7 +58,7 @@ void GenerateSimonOrder(float duration){
 
 }
 
-public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3] = {0.0, 0.0, 0.0}, float fAngles[3] = {0.0, 0.0, 0.0}, int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
 	if(g_time >= 8) return;
 	

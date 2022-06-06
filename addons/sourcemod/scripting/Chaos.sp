@@ -62,9 +62,6 @@ bool 	g_bBombPlanted = false;
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bPlayersCanDropWeapon = true;
 
-int 	g_iOffset_Clip1 = -1;
-int 	g_iFog = -1;
-
 float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
 bool 	g_bCanSpawnEffect = true;
@@ -89,14 +86,13 @@ bool 	g_DynamicChannel = false;
 int ChaosMapCount = 0;
 
 
-//todo put back in convar and use functions to adjust it
-// int g_NoAirAcc = 0;
-// int g_MaxAirAcc = 0;
+// Any variables shared by multiple plugins can be listed here
 int g_bKnifeFight = 0;
 int g_bNoStrafe = 0;
 int g_AutoBunnyhop = 0;
 int g_bNoForwardBack = 0;
 int g_NoFallDamage = 0;
+int g_iC4ChickenEnt = -1;
 
 // Shared by multiple effects
 #include "Global/InstantWeaponSwitch.sp"
@@ -105,17 +101,15 @@ int g_NoFallDamage = 0;
 #include "Global/ColorCorrection.sp"
 #include "Global/Weather.sp"
 
-#include "EffectsList.sp"
-// #include "Effects-2.sp"
+#include "Effects/EffectsList.sp"
 
 
 
 int global_id_count = 0;
-//with the id in the struct, just let one of the main init chaos functions looop through all the structs, and set their ID
 ArrayList alleffects;
 
 enum struct effect{
-	int id;
+	int 		id;
 
 	char 		name[64];
 	char 		config_name[64];
@@ -199,11 +193,9 @@ enum struct effect{
 	void SET_RESET_FUNCTION(char reset_function[64]){
 		this.function_name_reset = reset_function;
 	}
-	void ADD_EFFECT(){
-		global_id_count++;
-		this.id = global_id_count;
-	}
 	float Get_Duration(){
+		//todo change announcechaos to only take the config name, automatically get the duration
+		// no need for defaults anymore as config is the only default
 		return GetChaosTime(this.config_name, float(this.duration));
 	}
 }
@@ -225,19 +217,9 @@ public Action Effect_Reset(Handle timer, int effect_id){
 #include "ConVars.sp"
 #include "Commands.sp"
 #include "Hud.sp"
-// #include "EffectsHandler.sp"
 #include "Configs.sp"
 #include "Menu.sp"
 
-
-// #include "Effects/Player/ReversedMovement.sp"
-// #include "Effects/Player/LooseTrigger.sp"
-
-// #include "oldEffects.sp"
-
-// int GetChaosEffectCount(){
-// 	return alleffects.Length;
-// }
 
 public void OnPluginStart(){
 	
@@ -259,13 +241,11 @@ public void OnPluginStart(){
 		}
 	}
 
+
+
 	Chaos_Effects = new StringMap();
-
-	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
-
-	Effect_History = CreateArray(64);
-	// Possible_Chaos_Effects = CreateArray(64);
 	Possible_Chaos_Effects = new ArrayList(1024);
+	Effect_History = CreateArray(64);
 
 	g_SavedConvars  = CreateArray(64);
 
@@ -373,9 +353,9 @@ public void OnClientPutInServer(int client){
 	SDKHook(client, SDKHook_WeaponSwitch, 		Hook_WeaponSwitch);
 	SDKHook(client, SDKHook_PreThink, 			Hook_OnPreThink);
 	SDKHook(client, SDKHook_OnTakeDamage, 		Hook_OnTakeDamage);
-	SDKHook(client, SDKHook_OnTakeDamagePost, 	Hook_OnTakeDamagePost);
+	// SDKHook(client, SDKHook_OnTakeDamagePost, 	Hook_OnTakeDamagePost);
 
-	SDKHook(client, SDKHook_PreThinkPost, 		Hook_PreThinkPost);
+	// SDKHook(client, SDKHook_PreThinkPost, 		Hook_PreThinkPost);
 }
 
 public void OnClientDisconnect(int client){
@@ -428,7 +408,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			do{
 				randomEffect = GetRandomInt(0, totalEffects - 1);
 				alleffects.GetArray(randomEffect, new_effect, sizeof(new_effect));
-				if(new_effect.can_run_effect() && (!Effect_Recently_Played(new_effect.config_name) || CustomRun)){
+				if(new_effect.can_run_effect() && (!Effect_Recently_Played(new_effect.config_name) || CustomRun) && new_effect.timer == INVALID_HANDLE){
 					Random_Effect = new_effect.config_name;
 					new_effect.run_effect();
 					PushArrayString(Effect_History, new_effect.config_name);

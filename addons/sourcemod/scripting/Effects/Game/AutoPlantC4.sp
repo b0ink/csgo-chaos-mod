@@ -33,6 +33,9 @@ public void Chaos_AutoPlantC4_INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");
 }
 
+public bool Chaos_AutoPlantC4_CustomAnnouncement(){
+    return true;
+}
 
 public void Chaos_AutoPlantC4_START(){
 

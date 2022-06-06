@@ -1,4 +1,3 @@
-int g_iC4ChickenEnt = -1;
 bool g_bC4Chicken = false;
 bool g_bVisibleChicken = true;
 
@@ -7,7 +6,6 @@ public void Chaos_C4Chicken_INIT(){
 }
 public void Chaos_C4Chicken_START(){
 	g_bC4Chicken = true;
-	C4Chicken(); //convert any planted c4's to chicken
 }
 
 public Action Chaos_C4Chicken_RESET(bool EndChaos){
@@ -26,10 +24,7 @@ public bool Chaos_C4Chicken_Conditions(){
 }
 
 
-
-
-
-public void Chaos_C4Chicken_Event_BombPlanted(){
+void C4Chicken(){
 	if(!g_bC4Chicken) return;
 	int c4 = -1;
 	c4 = FindEntityByClassname(c4, "planted_c4");
@@ -59,4 +54,9 @@ public void Chaos_C4Chicken_Event_BombPlanted(){
 			}
 		}
 	}
+}
+
+
+public Action Chaos_C4Chicken_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+	C4Chicken();
 }

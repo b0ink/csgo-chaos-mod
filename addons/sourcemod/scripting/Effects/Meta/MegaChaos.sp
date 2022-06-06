@@ -1,7 +1,3 @@
-
-
-
-
 public void Chaos_MEGACHAOS(){
 	if(ClearChaos()){	}
 	if(NotDecidingChaos("Chaos_MEGACHAOS")) return;

@@ -1,5 +1,9 @@
 //weapon fire
 bool g_bOneBulletMag = false;
+int g_iOffset_Clip1 = -1;
+public void Chaos_OneBulletMag_INIT(){
+	g_iOffset_Clip1
+}
 public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	if(g_bOneBulletMag){
@@ -58,4 +62,9 @@ public bool Chaos_OneBulletMag_HasNoDuration(){
 
 public bool Chaos_OneBulletMag_Conditions(){
 	return true;
+}
+
+stock void SetClip(int weaponid,int ammosize, int clipsize) {
+    SetEntData(weaponid, g_iOffset_Clip1, ammosize);
+    SetEntProp(weaponid, Prop_Send, "m_iPrimaryReserveAmmoCount", clipsize);
 }

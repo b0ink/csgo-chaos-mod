@@ -1,3 +1,7 @@
+int 	g_iFog = -1;
+
+
+
 float mapFogStart = 0.0;
 float mapFogEnd = 800.0;
 // float mapFogEnd = 175.0;

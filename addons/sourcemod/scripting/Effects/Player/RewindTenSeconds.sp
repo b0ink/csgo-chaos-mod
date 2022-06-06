@@ -102,7 +102,7 @@ public void Rollback_Log(){
 		}else{
 			g_bRewind_logging_enabled = true;
 			g_Rewinding = false;
-			Chaos_RewindTenSeconds(true);
+			Chaos_RewindTenSeconds_RESET(true);
 		}
 	}
 }
