@@ -227,13 +227,13 @@ void ParseChaosEffects(){
 		new_chaos_effect.function_name_start = function_name;
 		Format(function_name, sizeof(function_name), "%s_RESET", title_function[1]);
 		new_chaos_effect.function_name_reset = function_name;
-		new_chaos_effect.name = title_function[0];
+		new_chaos_effect.title = title_function[0];
 		new_chaos_effect.config_name = title_function[1];
 		new_chaos_effect.duration = StringToInt(title_function[2]);
 		new_chaos_effect.id = global_id_count;
 		alleffects.PushArray(new_chaos_effect, sizeof(new_chaos_effect));
 
-		Log("Adding: %s", new_chaos_effect.name);
+		// Log("Adding: %s", new_chaos_effect.title);
 		//todo: check if _HasNoDuration exists
 	}
 

@@ -327,15 +327,13 @@ void ShowMenu_EditAllEffects(int client){
 	menu.SetTitle("Select an effect to edit.");
 
 	char name[128];
-	char function_name[64];
-
-	for(int i = 0; i < GetArraySize(Effect_Functions); i++){
-		// GetArrayString(Effect_Titles, i, name, sizeof(name));
-		GetArrayString(Effect_Functions, i, function_name, sizeof(function_name));
-		Format(name, sizeof(name), "%s", GetChaosTitle(function_name));
-		bool enabled = IsChaosEnabled(function_name);
+	effect foo;
+	for(int i = 0; i < alleffects.Length; i++){
+		alleffects.GetArray(i, foo, sizeof(foo));
+		Format(name, sizeof(name), "%s", GetChaosTitle(foo.config_name));
+		bool enabled = foo.enabled;
 		Format(name, sizeof(name), "%s %s", name, enabled ? "[ON]" : "[OFF]");
-		menu.AddItem(function_name, name);
+		menu.AddItem(foo.config_name, name);
 	}
 
 	menu.ExitButton = true;
@@ -360,16 +358,28 @@ public int EditAllEffects_Handler(Menu menu, MenuAction action, int param1, int 
 }
 
 void ShowMenu_EffectSetting(int client, char[] function_name){
-	char effect_title[128];
-	FormatEx(effect_title, sizeof(effect_title), "%s", GetChaosTitle(function_name));
+
+	effect foo;
+	for(int i = 0; i < alleffects.Length; i++){
+		alleffects.GetArray(i, foo, sizeof(foo));
+		if(StrEqual(function_name, foo.config_name, false)){
+			break;
+		}
+	}
+
+
+	// char effect_title[128];
+	// FormatEx(effect_title, sizeof(effect_title), "%s", GetChaosTitle(function_name));
 	
 	char enabled_status[128];
 	FormatEx(enabled_status, sizeof(enabled_status), "Enabled: %s", IsChaosEnabled(function_name) ? "ON" : "OFF");	
+
 	char effect_duration[128];
-	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", GetChaosTime(function_name ,-1.0, true));	
+	// FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", GetChaosTime(function_name ,-1.0, true));	
+	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", foo.Get_Duration());	
 
 	char menu_title[256];
-	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s\n ", effect_title);
+	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s\n ", foo.title);
 
 	Menu menu = new Menu(EffectSetting_Handler);
 

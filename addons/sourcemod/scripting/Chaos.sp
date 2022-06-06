@@ -111,11 +111,11 @@ ArrayList alleffects;
 enum struct effect{
 	int 		id;
 
-	char 		name[64];
+	char 		title[64];
 	char 		config_name[64];
 	char 		description[64];
 	
-	int			enabled;
+	bool			enabled;
 	int 		duration;
 
 	char 		function_name_start[64];
@@ -176,7 +176,7 @@ enum struct effect{
 	}
 
 	void SET_NAME(char effect_name[64]){
-		this.name = effect_name;
+		this.title = effect_name;
 	}
 	void SET_CONFIG_NAME(char effect_name[64]){
 		this.config_name = effect_name;
@@ -353,9 +353,7 @@ public void OnClientPutInServer(int client){
 	SDKHook(client, SDKHook_WeaponSwitch, 		Hook_WeaponSwitch);
 	SDKHook(client, SDKHook_PreThink, 			Hook_OnPreThink);
 	SDKHook(client, SDKHook_OnTakeDamage, 		Hook_OnTakeDamage);
-	// SDKHook(client, SDKHook_OnTakeDamagePost, 	Hook_OnTakeDamagePost);
 
-	// SDKHook(client, SDKHook_PreThinkPost, 		Hook_PreThinkPost);
 }
 
 public void OnClientDisconnect(int client){
@@ -390,11 +388,11 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	PoolChaosEffects();
 
 	if(g_sCustomEffect[0]){ //run from menu
-		FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
+		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
 		effect foo;
 		for(int i = 0; i < alleffects.Length; i++){
 			alleffects.GetArray(i, foo, sizeof(foo));
-			if(StrEqual(foo.config_name, g_sSelectedChaosEffect, false)){
+			if(StrEqual(foo.config_name, g_sCustomEffect, false)){
 				foo.run_effect();
 				break;
 			}
@@ -408,7 +406,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			do{
 				randomEffect = GetRandomInt(0, totalEffects - 1);
 				alleffects.GetArray(randomEffect, new_effect, sizeof(new_effect));
-				if(new_effect.can_run_effect() && (!Effect_Recently_Played(new_effect.config_name) || CustomRun) && new_effect.timer == INVALID_HANDLE){
+				if(new_effect.enabled && new_effect.can_run_effect() && (!Effect_Recently_Played(new_effect.config_name) || CustomRun) && new_effect.timer == INVALID_HANDLE){
 					Random_Effect = new_effect.config_name;
 					new_effect.run_effect();
 					PushArrayString(Effect_History, new_effect.config_name);

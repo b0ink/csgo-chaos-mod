@@ -280,11 +280,11 @@
     {
         "en"    "Give all players the same random gun and disable weapon dropping"
     }
-    "Chaos_NoSpread_Title"
+    "Chaos_NoRecoil_Title"
     {
         "en"    "100% Weapon Accuracy"
     }
-    "Chaos_NoSpread_Description"
+    "Chaos_NoRecoil_Description"
     {
         "en"    "Set guns to have no recoil"
     }

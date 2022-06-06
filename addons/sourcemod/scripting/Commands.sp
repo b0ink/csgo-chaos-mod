@@ -11,7 +11,6 @@ void RegisterCommands(){
 
 // Handle Possible_Chaos_Effects = INVALID_HANDLE;
 ArrayList Possible_Chaos_Effects;
-bool g_bFindingPotentialEffects = false;
 
 public Action Command_MainMenu(int client, int args){
 	ShowMenu_Main(client);

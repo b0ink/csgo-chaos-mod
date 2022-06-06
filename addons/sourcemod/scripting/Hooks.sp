@@ -80,10 +80,3 @@ public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float
 
 	return Plugin_Continue;
 }
-// public Action Hook_OnTakeDamagePost(int victim, int attacker){
-
-// }
-
-// public void Hook_PreThinkPost(int client){
-	
-// }

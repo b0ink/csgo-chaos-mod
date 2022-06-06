@@ -13,37 +13,32 @@ bool ValidBombSpawns(){
 	return true;
 }
 
-bool NotDecidingChaos(char[] EffectName = ""){
-	//if effectname was provided manually, 
-	if(!g_bDecidingChaos) return true;
-	if(!g_sSelectedChaosEffect[0]) return true;
-	if(EffectName[0] && g_sSelectedChaosEffect[0]){
-		if(!g_bDecidingChaos
-		|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
-		&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
+// bool NotDecidingChaos(char[] EffectName = ""){
+// 	//if effectname was provided manually, 
+// 	if(!g_bDecidingChaos) return true;
+// 	if(!g_sSelectedChaosEffect[0]) return true;
+// 	if(EffectName[0] && g_sSelectedChaosEffect[0]){
+// 		if(!g_bDecidingChaos
+// 		|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
+// 		&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
 			
-			return true;
-		}else{
-			if(g_bFindingPotentialEffects){
-				PushArrayString(Possible_Chaos_Effects, EffectName);
-				return true;
-			}else{
-				Log("[Chaos] Running Effect: %s", EffectName);
-				strcopy(g_sLastPlayedEffect, sizeof(g_sLastPlayedEffect), EffectName);
-				g_sSelectedChaosEffect = "";
-				g_bDecidingChaos = false;
-				return false;
-			}
-		}
-	}
-	return true;
-}
+// 			return true;
+// 		}else{
+// 			if(g_bFindingPotentialEffects){
+// 				PushArrayString(Possible_Chaos_Effects, EffectName);
+// 				return true;
+// 			}else{
+// 				Log("[Chaos] Running Effect: %s", EffectName);
+// 				strcopy(g_sLastPlayedEffect, sizeof(g_sLastPlayedEffect), EffectName);
+// 				g_sSelectedChaosEffect = "";
+// 				g_bDecidingChaos = false;
+// 				return false;
+// 			}
+// 		}
+// 	}
+// 	return true;
+// }
 
-
-bool ClearChaos(bool EndChaos = false){
-	if(g_bClearChaos || EndChaos) return true;
-	return false;
-}
 
 bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 	if(g_bClearChaos) return true;
@@ -360,10 +355,6 @@ public void ResizeChickens(){
 
 
 
-stock void SetClip(int weaponid,int ammosize, int clipsize) {
-    SetEntData(weaponid, g_iOffset_Clip1, ammosize);
-    SetEntProp(weaponid, Prop_Send, "m_iPrimaryReserveAmmoCount", clipsize);
-}
 
 stock int GetPlayerCount(){
 	int count = 0;

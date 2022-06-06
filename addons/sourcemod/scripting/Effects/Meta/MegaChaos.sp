@@ -1,6 +1,6 @@
 public void Chaos_MEGACHAOS(){
-	if(ClearChaos()){	}
-	if(NotDecidingChaos("Chaos_MEGACHAOS")) return;
+	// if(ClearChaos()){	}
+	// if(NotDecidingChaos("Chaos_MEGACHAOS")) return;
 	
 	g_bMegaChaos = true; 
 
