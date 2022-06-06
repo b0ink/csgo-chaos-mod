@@ -1,3 +1,10 @@
+public void Chaos_Binoculars_OnMapStart(){
+	PrecacheDecal("Chaos/binoculars.vmt", true);
+	PrecacheDecal("Chaos/binoculars.vtf", true);
+	AddFileToDownloadsTable("materials/Chaos/binoculars.vtf");
+	AddFileToDownloadsTable("materials/Chaos/binoculars.vmt");
+}
+
 public void Chaos_Binoculars_START(){
 	int RandomFOV = GetRandomInt(20,50);
 	SetPlayersFOV(RandomFOV);

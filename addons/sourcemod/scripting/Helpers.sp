@@ -13,32 +13,6 @@ bool ValidBombSpawns(){
 	return true;
 }
 
-// bool NotDecidingChaos(char[] EffectName = ""){
-// 	//if effectname was provided manually, 
-// 	if(!g_bDecidingChaos) return true;
-// 	if(!g_sSelectedChaosEffect[0]) return true;
-// 	if(EffectName[0] && g_sSelectedChaosEffect[0]){
-// 		if(!g_bDecidingChaos
-// 		|| ((StrContains(g_sSelectedChaosEffect, EffectName, false) == -1) 
-// 		&& (StrContains(EffectName, g_sSelectedChaosEffect, false) == -1))){
-			
-// 			return true;
-// 		}else{
-// 			if(g_bFindingPotentialEffects){
-// 				PushArrayString(Possible_Chaos_Effects, EffectName);
-// 				return true;
-// 			}else{
-// 				Log("[Chaos] Running Effect: %s", EffectName);
-// 				strcopy(g_sLastPlayedEffect, sizeof(g_sLastPlayedEffect), EffectName);
-// 				g_sSelectedChaosEffect = "";
-// 				g_bDecidingChaos = false;
-// 				return false;
-// 			}
-// 		}
-// 	}
-// 	return true;
-// }
-
 
 bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
 	if(g_bClearChaos) return true;
@@ -102,19 +76,6 @@ char[] GetChaosTitle(char[] function_name){
 
 
 bool PoolChaosEffects(char[] effectName = ""){
-	//---------------------------------------------
-		// ClearArray(Possible_Chaos_Effects);
-		// if(effectName[0]){
-		// 	FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", effectName);
-		// }else{
-		// 	g_sSelectedChaosEffect = "Chaos_";
-		// }
-		// g_bDecidingChaos = true;
-		// g_bClearChaos = false;
-		// g_bFindingPotentialEffects = true;
-		// Chaos();
-		// g_bFindingPotentialEffects = false;
-	//---------------------------------------------
 
 	Possible_Chaos_Effects.Clear();
 
@@ -125,7 +86,6 @@ bool PoolChaosEffects(char[] effectName = ""){
 
 		if(effectName[0]){ //* if keyword was provided
 			if(StrContains(foo.config_name, effectName, false) != -1){ //todo allow for aliases
-				PrintToChatAll("addin effect %s", foo.config_name);
 				Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
 			}
 		}else{
@@ -133,19 +93,6 @@ bool PoolChaosEffects(char[] effectName = ""){
 			Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
 			// }
 		}
-		// Format(condition_check, sizeof(condition_check), "%s_Conditions", foo.config_name);
-		// Function func = GetFunctionByName(GetMyHandle(), condition_check);
-		// bool can_run = true;
-		// if(foo.enabled){
-		// 	if(func != INVALID_FUNCTION){
-		// 		Call_StartFunction(GetMyHandle(), func);
-		// 		Call_Finish(can_run);	
-		// 	}
-		// }else{
-		// 	can_run = false;
-		// }
-
-
 			
 	}
 	Log("Size of pooled chaos effects: %i", Possible_Chaos_Effects.Length);

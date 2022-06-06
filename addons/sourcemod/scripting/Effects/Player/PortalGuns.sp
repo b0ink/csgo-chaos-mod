@@ -112,13 +112,13 @@ public void PerformTeleport(int target, float pos[3]){
 	int greyColor[4] = {128, 128, 128, 255};
 	int team = GetClientTeam(target);
 
-	TE_SetupBeamRingPoint(pos, 10.0, 50.0, g_beamsprite, g_halosprite, 0, 15, 0.5, 5.0, 0.0, greyColor, 10, 0);
+	TE_SetupBeamRingPoint(pos, 10.0, 80.0, g_beamsprite, g_halosprite, 0, 15, 0.5, 5.0, 0.0, greyColor, 10, 0);
 	TE_SendToAll();
 	
 	if (team == 2){
-		TE_SetupBeamRingPoint(pos, 10.0, 50.0, g_beamsprite, g_halosprite, 0, 10, 0.6, 10.0, 0.5, redColor, 10, 0);
+		TE_SetupBeamRingPoint(pos, 10.0, 80.0, g_beamsprite, g_halosprite, 0, 10, 0.6, 10.0, 0.5, redColor, 10, 0);
 	}else if (team == 3){
-		TE_SetupBeamRingPoint(pos, 10.0, 50.0, g_beamsprite, g_halosprite, 0, 10, 0.6, 10.0, 0.5, blueColor, 10, 0);
+		TE_SetupBeamRingPoint(pos, 10.0, 80.0, g_beamsprite, g_halosprite, 0, 10, 0.6, 10.0, 0.5, blueColor, 10, 0);
 	}
 	TE_SendToAll();
 }

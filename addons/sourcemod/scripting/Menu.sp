@@ -156,7 +156,6 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 			if(g_sSelectedChaosEffect[0]){
 				if(g_bCanSpawnEffect && g_bChaos_Enabled){
 					Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", g_sSelectedChaosEffect);
-					PrintToChatAll("custom = %s", g_sCustomEffect);
 					ChooseEffect(null, true);
 				}else{
 					ReplyToCommand(param1, "[Chaos] Sorry, no effects can be spawned in right now.");
@@ -375,7 +374,6 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	FormatEx(enabled_status, sizeof(enabled_status), "Enabled: %s", IsChaosEnabled(function_name) ? "ON" : "OFF");	
 
 	char effect_duration[128];
-	// FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", GetChaosTime(function_name ,-1.0, true));	
 	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", foo.Get_Duration());	
 
 	char menu_title[256];

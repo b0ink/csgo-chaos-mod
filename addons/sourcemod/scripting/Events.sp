@@ -113,11 +113,21 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 		g_NewEffect_Timer = CreateTimer(freezeTime, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
 
+	g_iChaos_Round_Time = 0;
+	CreateTimer(1.0, Timer_UpdateRoundTime);
 	return Plugin_Continue;
 }
 
+public Action Timer_UpdateRoundTime(Handle timer){
+	if(g_iChaos_Round_Time < -50){
+		return;
+	}
+	g_iChaos_Round_Time++;	
+	CreateTimer(1.0, Timer_UpdateRoundTime);
+}
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
+	g_iChaos_Round_Time = -100;
 	
 	Log("--ROUND ENDED--");
 	ResetChaos();

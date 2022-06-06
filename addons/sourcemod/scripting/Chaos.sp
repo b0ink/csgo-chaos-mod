@@ -21,8 +21,6 @@
 #define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
 // #define GetRandomMapSpawn(%1) for(int %1 = 0; %1 < )
 
-// #define MAX_EFFECTS 200
-
 public Plugin myinfo = {
 	name = PLUGIN_NAME,
 	author = "BOINK",
@@ -65,14 +63,16 @@ bool 	g_bPlayersCanDropWeapon = true;
 float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
 bool 	g_bCanSpawnEffect = true;
+
 int 	g_iChaos_Round_Count = 0;
+int 	g_iChaos_Round_Time = 0;
+
 bool 	g_bMegaChaos = false;
 char 	g_sSelectedChaosEffect[64] = "";
 char 	g_sCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
 bool 	g_bClearChaos = false;
-bool 	g_bDecidingChaos = false;
 
 Handle 	g_NewEffect_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
@@ -103,20 +103,23 @@ int g_iC4ChickenEnt = -1;
 
 #include "Effects/EffectsList.sp"
 
+#include "ConVars.sp"
 
 
 int global_id_count = 0;
 ArrayList alleffects;
 
 enum struct effect{
+	char 		title[64]; // 0th index for ease of sorting in configs.sp
+	
 	int 		id;
 
-	char 		title[64];
 	char 		config_name[64];
 	char 		description[64];
 	
-	bool			enabled;
 	int 		duration;
+	bool		force_no_duration;
+	bool		enabled;
 
 	char 		function_name_start[64];
 	char 		function_name_reset[64];
@@ -124,8 +127,8 @@ enum struct effect{
 	Handle 		timer;
 
 	void run_effect(){
-		PrintToChatAll("attempting to run!: %s for %i seconds", this.function_name_start, this.duration);
-
+		// PrintToChatAll("attempting to run!: %s for %i seconds", this.function_name_start, this.duration);
+		Log("Running effect: %s", this.function_name_start);
 		Function func = GetFunctionByName(GetMyHandle(), this.function_name_start);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -139,21 +142,24 @@ enum struct effect{
 			Format(function_no_announce_check, sizeof(function_no_announce_check), "%s_CustomAnnouncement", this.config_name);
 			Function announce = GetFunctionByName(GetMyHandle(), function_no_announce_check);
 
-			bool custom_announce = true;
-			if(announce == INVALID_FUNCTION){
-				custom_announce = false;
-			}else{
-				Call_StartFunction(GetMyHandle(), func);
+			bool custom_announce = false;
+			if(announce != INVALID_FUNCTION){
+				Call_StartFunction(GetMyHandle(), announce);
 				Call_Finish(custom_announce);
 			}
 
-			if(!custom_announce) AnnounceChaos(GetChaosTitle(this.config_name), float(this.duration));
+			if(!custom_announce){
+				PrintToChatAll("annoucning");
+				AnnounceChaos(this.title, this.Get_Duration());
+			}
 			g_sLastPlayedEffect = this.config_name;
 			ChaosMapCount++;
 		}
 	}
 
 	void reset_effect(bool EndChaos = false){
+		// PrintToChatAll("attempting to emd!: %s ", this.function_name_reset);
+
 		Function func = GetFunctionByName(GetMyHandle(), this.function_name_reset);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -194,9 +200,35 @@ enum struct effect{
 		this.function_name_reset = reset_function;
 	}
 	float Get_Duration(){
+		if(this.force_no_duration){
+			return -1.0;
+		}
 		//todo change announcechaos to only take the config name, automatically get the duration
 		// no need for defaults anymore as config is the only default
-		return GetChaosTime(this.config_name, float(this.duration));
+		float OverwriteDuration = g_fChaos_OverwriteDuration;
+		float duration = float(this.duration);
+		if(OverwriteDuration < -1.0){
+			Log("Cvar 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
+			OverwriteDuration = - 1.0;
+		}
+		if(OverwriteDuration != -1.0){
+			duration = OverwriteDuration;
+		}else{
+			if(duration == -1.0){
+				return -1.0;
+			}
+			if(duration < 0 ){
+				duration = SanitizeTime(duration);
+			}else{
+				if(duration != SanitizeTime(duration)){
+					Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", this.config_name, duration, SanitizeTime(duration));
+					duration = SanitizeTime(duration);
+				}
+			}
+		}
+
+
+		return duration;
 	}
 }
 
@@ -214,7 +246,6 @@ public Action Effect_Reset(Handle timer, int effect_id){
 
 
 
-#include "ConVars.sp"
 #include "Commands.sp"
 #include "Hud.sp"
 #include "Configs.sp"
@@ -279,6 +310,18 @@ public void OnMapStart(){
 
 
 	PrecacheTextures();
+
+	effect foo;
+	char function_mapstart[64];
+	for(int i = 0; i < alleffects.Length; i++){
+		alleffects.GetArray(i, foo, sizeof(foo));
+		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart");
+		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
+		if(func != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), func);
+			Call_Finish();
+		}
+	}
 
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
 	if(bombSiteA != 		INVALID_HANDLE) ClearArray(bombSiteA);
@@ -383,7 +426,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	int attempts = 0;
 	g_sLastPlayedEffect = "";
 
-	g_bDecidingChaos = true;
 	g_bClearChaos = false;
 	PoolChaosEffects();
 
@@ -478,9 +520,7 @@ public void RetryEffect(){
 public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
 	Fog_OFF();
-	// g_bClearChaos = true;
-	// g_bDecidingChaos = false;
-	// Chaos(true);
+
 	effect foo;
 	for(int i = 0; i < alleffects.Length; i++){
 		alleffects.GetArray(i, foo, sizeof(foo));

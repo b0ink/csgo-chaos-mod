@@ -87,10 +87,13 @@ public Action Command_StartChaos(int client, int args){
 	if(g_NewEffect_Timer == INVALID_HANDLE){
 		g_cvChaosEnabled.SetString("1", true, true);
 
-		// g_bClearChaos = true;
-		// g_bDecidingChaos = false;
-		// Chaos();
-		CreateTimer(0.1, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
+		g_sCustomEffect = "";
+		//start the timer but dont spawn effect.
+		// CreateTimer(0.1, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
+		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
+		if(g_DynamicChannel){
+			Timer_Display(null, RoundToFloor(15.0));
+		}
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{
 		PrintToChat(client, "Chaos is already running!");

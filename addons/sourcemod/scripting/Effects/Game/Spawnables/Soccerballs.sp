@@ -1,3 +1,7 @@
+public void Chaos_Soccerballs_OnMapStart(){
+	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
+}
+
 public void Chaos_Soccerballs_START(){
 	cvar("sv_turbophysics", "100");
 

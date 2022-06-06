@@ -1,30 +1,13 @@
 #define CONFIG_ENABLED 0
 #define CONFIG_EXPIRE 1
 
-Handle Effect_Functions = INVALID_HANDLE;
-Handle Effect_Titles = INVALID_HANDLE;
-Handle Effects_Functions_Titles = INVALID_HANDLE;
-
 Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){
-
-	
-
-	if(Effect_Functions != INVALID_HANDLE){
-		ClearArray(Effect_Functions);
-		ClearArray(Effect_Titles);
-		ClearArray(Effects_Functions_Titles);
-	}else{
-		Effect_Functions = CreateArray(64);
-		Effect_Titles = CreateArray(128);
-		Effects_Functions_Titles = CreateArray(200);
-	}
 	
 	ParseMapCoordinates("Chaos_Locations");
 	ParseChaosEffects();
 	ParseOverrideEffects();
-	// ParseCore();
 
 	int warnings = 0;
 	Log("---------------------------------CONFIGS EXECUTED---------------------------------");
@@ -56,7 +39,6 @@ public void OnConfigsExecuted(){
 
 	Run_Init_Functions();
 
-	
 }
 
 
@@ -116,8 +98,6 @@ public Action Timer_SaveCoordinates(Handle timer){
 }
 
 public void PrecacheTextures(){
-	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
-
 	PrecacheModel("models/props_survival/dronegun/dronegun.mdl", true);
 	PrecacheModel("models/props_survival/drone/br_drone.mdl", true);
 	PrecacheModel("models/props_survival/parachute/chute.mdl", true);
@@ -136,20 +116,11 @@ public void PrecacheTextures(){
 	PrecacheModel("models/weapons/v_parachute.mdl", true);
 	PrecacheModel("models/props_survival/briefcase/briefcase.mdl", true);
 
-	PrecacheDecal("Chaos/binoculars.vmt", true);
-	PrecacheDecal("Chaos/binoculars.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/binoculars.vtf");
-	AddFileToDownloadsTable("materials/Chaos/binoculars.vmt");
-
 	DownloadRawFiles();
 }
 
 
 void ParseChaosEffects(){
-	Chaos_Effects.Clear();
-	ClearArray(Effect_Functions);
-	ClearArray(Effect_Titles);
-	ClearArray(Effects_Functions_Titles);
 	alleffects.Clear();
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
@@ -176,86 +147,62 @@ void ParseChaosEffects(){
 		return;
 	}
 
-	int  Chaos_Properties[2];
 	do{
 		char Chaos_Function_Name[64];
 		char Chaos_Function_Title[64];
-		char Chaos_Function_v_Title[200];
 		char chaos_translation_key[64];
+
+		char call_function_name[64];
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
 			
 			Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_Title", Chaos_Function_Name);
 			Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
-			// kvConfig.GetString("name", Chaos_Function_Title, sizeof(Chaos_Function_Title), Chaos_Function_Name);
 
-			if(enabled != 0 || enabled != 1) enabled = 1;
-			//todo better error logging eg. if enabled or duration out of bounds
+			if(enabled != 0 || enabled != 1) enabled = 1; //todo better error logging eg. if enabled or duration out of bounds
 
-			Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_START", Chaos_Function_Name);
-			Function func = GetFunctionByName(GetMyHandle(), chaos_translation_key);
+			Format(call_function_name, sizeof(call_function_name), "%s_START", Chaos_Function_Name);
+			Function func = GetFunctionByName(GetMyHandle(), call_function_name);
 			if(func != INVALID_FUNCTION){
-				//todo strip ** from both titles and functions??
-				Format(Chaos_Function_v_Title, sizeof(Chaos_Function_v_Title), "%s**%s**%i", GetChaosTitle(Chaos_Function_Name), Chaos_Function_Name, expires);
-				PushArrayString(Effects_Functions_Titles, Chaos_Function_v_Title);
-				Chaos_Properties[CONFIG_ENABLED] = enabled;
-				Chaos_Properties[CONFIG_EXPIRE] = expires;
-				Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
+				global_id_count++;
+
+				effect new_chaos_effect;
+
+				char function_name[64];
+				Format(function_name, sizeof(function_name), "%s_START", Chaos_Function_Name);
+				new_chaos_effect.function_name_start = function_name;
+				Format(function_name, sizeof(function_name), "%s_RESET", Chaos_Function_Name);
+				
+				new_chaos_effect.function_name_reset = function_name;
+				new_chaos_effect.title = Chaos_Function_Title;
+				new_chaos_effect.config_name = Chaos_Function_Name;
+				new_chaos_effect.duration = expires;
+				new_chaos_effect.id = global_id_count;
+				new_chaos_effect.enabled = view_as<bool>(enabled);
+
+				Format(call_function_name, sizeof(call_function_name), "%s_HasNoDuration", Chaos_Function_Name);
+				Function func2 = GetFunctionByName(GetMyHandle(), call_function_name);
+				bool no_duration = false;
+				if(func2 != INVALID_FUNCTION){
+					Call_StartFunction(GetMyHandle(), func2);
+					Call_Finish(no_duration);
+				}
+				new_chaos_effect.force_no_duration = no_duration;
+				alleffects.PushArray(new_chaos_effect, sizeof(new_chaos_effect));
+
 			}else{
 				Log("Could not find start function for: %s. This effect will not run.", Chaos_Function_Name);
 			}
-			// PrintToChatAll("test");
 
 		}
 	} while(kvConfig.GotoNextKey());
 
-	SortADTArray(Effects_Functions_Titles, Sort_Ascending, Sort_String);
-
-	char title_function[3][64];
-	char temp_string[200];
-	effect new_chaos_effect;
-
-	for(int i = 0; i < GetArraySize(Effects_Functions_Titles); i++){
-		GetArrayString(Effects_Functions_Titles, i, temp_string, sizeof(temp_string));
-		ExplodeString(temp_string, "**", title_function, sizeof(title_function), sizeof(title_function[]));
-		// PushArrayString(Effect_Titles, title_function[0]);
-		// PushArrayString(Effect_Functions, title_function[1]);
-		global_id_count++;
-		char function_name[64];
-		Format(function_name, sizeof(function_name), "%s_START", title_function[1]);
-		new_chaos_effect.function_name_start = function_name;
-		Format(function_name, sizeof(function_name), "%s_RESET", title_function[1]);
-		new_chaos_effect.function_name_reset = function_name;
-		new_chaos_effect.title = title_function[0];
-		new_chaos_effect.config_name = title_function[1];
-		new_chaos_effect.duration = StringToInt(title_function[2]);
-		new_chaos_effect.id = global_id_count;
-		alleffects.PushArray(new_chaos_effect, sizeof(new_chaos_effect));
-
-		// Log("Adding: %s", new_chaos_effect.title);
-		//todo: check if _HasNoDuration exists
-	}
-
-
-	// for(int i = 0; i < alleffects.Length; i++){
-	// 	alleffects.GetArray(i, new_chaos_effect, sizeof(new_chaos_effect));
-
-	// 	Format(temp_string, sizeof(temp_string), "%s_ADDEFFECT", new_chaos_effect.config_name);
-	// 	Function func = GetFunctionByName(GetMyHandle(), temp_string);
-
-	// 	if(func != INVALID_FUNCTION){
-	// 		Call_StartFunction(GetMyHandle(), func);
-	// 		Call_Finish();
-	// 	}else{
-	// 		Log("Error finding effect function for %s", temp_string);
-	// 	}
-	// 	// new_chaos_effect.run_effect();
-		
-	// }
+	alleffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
 
 	Log("Parsed Chaos_Effects.cfg succesfully!");
 }
+
 
 
 void ParseOverrideEffects(){
@@ -276,19 +223,22 @@ void ParseOverrideEffects(){
 		return;
 	}
 
-	int  Chaos_Properties[2];
 	char Chaos_Function_Name[64];
 	do{
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
 			if(enabled != 0 && enabled != 1) enabled = 1;
+			effect foo;
+			for(int i = 0; i < alleffects.Length; i++){
+				alleffects.GetArray(i, foo, sizeof(foo));
+				if(StrEqual(foo.config_name, Chaos_Function_Name, false)){
+					foo.enabled = view_as<bool>(enabled);
+					foo.duration = expires;
+					alleffects.SetArray(i, foo);
+				}
+			}
 
-			Chaos_Properties[CONFIG_ENABLED] = enabled;
-			Chaos_Properties[CONFIG_EXPIRE] = expires;
-
-			Chaos_Effects.SetArray(Chaos_Function_Name, Chaos_Properties, 2);
-			
 		}
 	} while(kvConfig.GotoNextKey());
 	Log("Parsed Chaos_Override.cfg successfully!");
@@ -350,60 +300,6 @@ void ParseMapCoordinates(char[] config) {
 
 	delete kv;
 }
-
-/*
-	ParseCore() is used to figure out the value of 'SlowScriptTimeout' found in addons/sourcemod/configs/core.cfg
-	Chaos_FakeCrash relies on SourceMod disabling the script when it times out (infinite loop) for 8 seconds.
-
-	In the rare case SlowScriptTimeout is disabled (value of 0) or 10+ seconds, we check that to prevent Chaos_Fakecrash from running
- */
-
-// int g_SlowScriptTimeout = -1;
-// void ParseCore(){
-// 	char path[PLATFORM_MAX_PATH];
-// 	BuildPath(Path_SM, path, sizeof(path), "configs/core.cfg");
-	
-// 	if(!FileExists(path)) return;
-
-// 	File file = OpenFile(path, "r"); 
-// 	if (file == null) return;
-
-// 	char line[256];
-
-// 	while (file.ReadLine(line, sizeof(line))) {
-// 		if (strlen(line) > 0 && line[strlen(line) - 1] == '\n') {
-// 			line[strlen(line) - 1] = '\0';
-// 		}
-// 		TrimString(line); 
-// 		if(StrContains(line, "\"SlowScriptTimeout\"", false) != -1){
-// 			int len = strlen(line);
-// 			g_SlowScriptTimeout = StringToInt(line[len-2]);
-// 			//check if its a two digit number eg. 10+
-// 			int doubleDigit = StringToInt(line[len-3]);
-// 			if(doubleDigit != 0){
-// 				doubleDigit = doubleDigit * 10;
-// 				g_SlowScriptTimeout = doubleDigit + g_SlowScriptTimeout;
-// 			}
-// 		}
-// 	}
-
-// 	delete file;
-// 	file.Close();
-
-// 	Log("[DEBUG] SlowScriptTimeout is set to %i", g_SlowScriptTimeout);
-
-// 	if(g_SlowScriptTimeout == -1){
-// 		Log("Error parsing configs/core.cfg, could not read 'SlowScriptTimeout' Value. Chaos_FakeCrash will be disabled.");
-// 	}else if(g_SlowScriptTimeout == 0){
-// 		Log("Chaos_FakeCrash will be disabled due to configs/core.cfg value 'SlowScriptTimeout' set to 0.");
-// 	}else if(g_SlowScriptTimeout > 8){
-// 		Log("Chaos_FakeCrash will be disabled due to configs/core.cfg value 'SlowScriptTimeout' set higher than 8 seconds.");
-// 	}
-// }
-
-// int GetSlowScriptTimeout(){
-// 	return g_SlowScriptTimeout;
-// }
 
 void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] function_name, char[] key, char[] newValue){
 	char path[PLATFORM_MAX_PATH];
