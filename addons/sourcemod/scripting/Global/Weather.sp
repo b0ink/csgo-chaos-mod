@@ -2,7 +2,7 @@ char PrecipitationModel[128];
 
 #define SOUND_SUPERSLAY  "weapons/hegrenade/hegrenade_detonate_02.wav"
 #define LIGHTNING_EFFECT "sprites/lgtning.vmt"
-#define TYPE_SNOWFALL define value
+
 enum WEATHER_TYPE{
     RAIN,
     SNOW,
@@ -12,11 +12,13 @@ enum WEATHER_TYPE{
     PARTICLE_RAINSTORM,
     PARTICLE_SNOW,
 };
+
 int    LIGHTNING_sprite = -1;
 
 float map_vecOrigin[3];
-float map_maxbounds[3];
+
 float map_minbounds[3];
+float map_maxbounds[3];
 
 void WEATHER_INIT(){
     PrecacheSound(SOUND_SUPERSLAY);
@@ -40,7 +42,7 @@ void SPAWN_WEATHER(WEATHER_TYPE type){
     FormatEx(PrecipType, sizeof(PrecipType), "%i.0", view_as<int>(type));
     DispatchKeyValue(ent, "model", PrecipitationModel);
     DispatchKeyValue(ent, "preciptype", PrecipType);
-    DispatchKeyValue(ent, "renderamt", "5.0");
+    DispatchKeyValue(ent, "renderamt", "100");
     DispatchKeyValue(ent, "density", "100");
     DispatchKeyValue(ent, "rendercolor", "255 255 255");
     DispatchSpawn(ent);

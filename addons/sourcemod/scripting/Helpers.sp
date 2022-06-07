@@ -658,7 +658,11 @@ void Overlay_INIT(){
 }
 
 void Clear_Overlay_Que(){
-	ClearArray(Overlay_Que);
+	if(Overlay_Que != INVALID_HANDLE){
+		ClearArray(Overlay_Que);
+	}else{
+		Overlay_INIT();
+	}
 	Update_Overlay();
 }
 

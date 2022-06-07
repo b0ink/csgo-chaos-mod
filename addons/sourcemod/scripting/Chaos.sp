@@ -149,7 +149,6 @@ enum struct effect{
 			}
 
 			if(!custom_announce){
-				PrintToChatAll("annoucning");
 				AnnounceChaos(this.title, this.Get_Duration());
 			}
 			g_sLastPlayedEffect = this.config_name;
@@ -308,20 +307,8 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_MONEY);
 	PrecacheSound(SOUND_BLIP);
 
-
 	PrecacheTextures();
 
-	effect foo;
-	char function_mapstart[64];
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
-		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart");
-		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_Finish();
-		}
-	}
 
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
 	if(bombSiteA != 		INVALID_HANDLE) ClearArray(bombSiteA);
@@ -352,6 +339,8 @@ public void OnMapStart(){
 	RemoveChickens();
 	
 	ChaosMapCount = 0;
+
+
 }
 
 

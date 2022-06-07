@@ -2,17 +2,24 @@
 	Effect by Ozai
 */
 
+public void Chaos_Thunderstorm_OnMapStart(){
+	PrintToChatAll("asdf");
+	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/thunderstorm.raw");
+}
+
+
 bool Thunderstorm = false;
 public void Chaos_Thunderstorm_START(){
 	Thunderstorm = true;
 	CreateTimer(0.1, Timer_LightningStrike); // starting lightning strikes
 	
 	SPAWN_WEATHER(RAIN);
-
+	CREATE_CC("thunderstorm");
 	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
 }
 
 public Action Chaos_Thunderstorm_RESET(bool EndChaos){
+	CREATE_CC("thunderstorm.raw");
 	Thunderstorm = false;
 	int iMaxEnts = GetMaxEntities(); // clearing rain
 	char sClassName[64];

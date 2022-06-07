@@ -888,4 +888,12 @@
     {
         "en"    "Intermittent stutters"
     }
+    "Chaos_Snow_Title"
+    {
+        "en"    "Snow"
+    }
+    "Chaos_Snow_Description"
+    {
+        "en"    "Snowing particle effect"
+    }
 }

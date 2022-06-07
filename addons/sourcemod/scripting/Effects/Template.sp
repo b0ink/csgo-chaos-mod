@@ -31,6 +31,13 @@
 
 
 /*
+	Runs on the OnMapStart function. Use this to precache any models or textures.
+*/
+public void Chaos_EffectName_OnMapStart(){
+	
+}
+
+/*
 	INIT function is run on MapStart and after the configs have been executed
 	This may run twice on occasion. // todo
 
@@ -78,7 +85,7 @@ public Action Chaos_EffectName_OnGameFrame(){
 	Use AnnounceChaos("Chaos_FakeTeleport"); when needed.
 */
 public bool Chaos_EffectName_CustomAnnouncement(){
-	return true;
+	return false;
 }
 
 
