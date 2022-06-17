@@ -56,6 +56,7 @@
 #include "Effects/Player/HealAllPlayers.sp"
 #include "Effects/Player/HealthRegen.sp"
 #include "Effects/Player/Healthshot.sp"
+#include "Effects/Player/IceSkate.sp"
 #include "Effects/Player/IceyGround.sp"
 #include "Effects/Player/IgniteAllPlayers.sp"
 #include "Effects/Player/Impostors.sp"

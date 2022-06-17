@@ -44,7 +44,6 @@ public void OnConfigsExecuted(){
 		alleffects.GetArray(i, foo, sizeof(foo));
 		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", foo.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
-		PrintToChatAll("found %s", function_mapstart);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();

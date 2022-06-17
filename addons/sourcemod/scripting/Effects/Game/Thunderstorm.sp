@@ -19,7 +19,8 @@ public void Chaos_Thunderstorm_START(){
 }
 
 public Action Chaos_Thunderstorm_RESET(bool EndChaos){
-	CREATE_CC("thunderstorm.raw");
+	CLEAR_CC("thunderstorm.raw");
+	
 	Thunderstorm = false;
 	int iMaxEnts = GetMaxEntities(); // clearing rain
 	char sClassName[64];

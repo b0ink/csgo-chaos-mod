@@ -37,6 +37,12 @@ public bool Chaos_AutoPlantC4_CustomAnnouncement(){
     return true;
 }
 
+public bool Chaos_AutoPlantC4_Conditions(){
+    if(!ValidBombSpawns()) return false;
+    if(isHostageMap()) return false;
+    return true;
+}
+
 public void Chaos_AutoPlantC4_START(){
 
 

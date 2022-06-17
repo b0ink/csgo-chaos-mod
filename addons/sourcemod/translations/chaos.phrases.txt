@@ -896,4 +896,12 @@
     {
         "en"    "Snowing particle effect"
     }
+    "Chaos_IceSkate_Title"
+    {
+        "en"    "Ice Skating"
+    }
+    "Chaos_IceSkate_Description"
+    {
+        "en"    "Allows for air strafing while skating across the map"
+    }
 }
