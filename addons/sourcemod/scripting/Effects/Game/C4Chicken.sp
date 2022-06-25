@@ -20,6 +20,7 @@ public bool Chaos_C4Chicken_HasNoDuration(){
 
 public bool Chaos_C4Chicken_Conditions(){
 	if(g_iC4ChickenEnt != -1) return false;
+	if(isHostageMap()) return false;
 	return true;
 }
 

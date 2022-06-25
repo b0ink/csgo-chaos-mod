@@ -33,9 +33,9 @@ public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpu
 public Action Chaos_IceSkate_OnGameFrame(){
 		if(!IceSkate) return;
 
-        // trace down, see if there's 8 distance or less to ground
-        float fPosition[3];
-        float fGroundPosition[3];
+		// trace down, see if there's 8 distance or less to ground
+		float fPosition[3];
+		float fGroundPosition[3];
 		float fSpeed[3];
 
 		for(int i = 0; i <= MaxClients; i++){
