@@ -37,7 +37,7 @@ public Action Command_NewChaosEffect(int client, int args){
 			if(strlen(effectName) >=3){
 					PoolChaosEffects(effectName);
 					if(Possible_Chaos_Effects.Length <= 0){
-						//todo show if the chas is enabled or not
+						//TODO: show if the chas is enabled or not
 						ReplyToCommand(client, "[Chaos] No effects found, or the desired effect is currently disabled.");
 						return Plugin_Handled;
 					}else if(Possible_Chaos_Effects.Length == 1){
@@ -51,7 +51,7 @@ public Action Command_NewChaosEffect(int client, int args){
 						ShowMenu_Effects(client);
 					}
 			}else{
-				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters."); //todo, filter around random characters (NOT UNDERSCORES)
+				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters."); //TODO:, filter around random characters (NOT UNDERSCORES)
 				return Plugin_Handled;
 			}
 		}else{
@@ -90,6 +90,7 @@ public Action Command_StartChaos(int client, int args){
 		g_sCustomEffect = "";
 		//start the timer but dont spawn effect.
 		// CreateTimer(0.1, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
+		StopTimer(g_NewEffect_Timer);
 		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
 		if(g_DynamicChannel){
 			Timer_Display(null, RoundToFloor(15.0));

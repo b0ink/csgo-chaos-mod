@@ -106,8 +106,8 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 		
 		// GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
 
-		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function); //todo for structs wtf is this
-		if(index != -1 || true){ //todo WHY
+		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function); //TODO: for structs wtf is this
+		if(index != -1 || true){ //TODO: WHY
 			// GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
 			
 
@@ -144,8 +144,6 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 
 }
 
-
-//todo: refactor all the actual spawning into ChooseEffect (add paramater)
 
 public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2){
 	if (action == MenuAction_Select){
@@ -358,26 +356,29 @@ public int EditAllEffects_Handler(Menu menu, MenuAction action, int param1, int 
 
 void ShowMenu_EffectSetting(int client, char[] function_name){
 
-	effect foo;
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
-		if(StrEqual(function_name, foo.config_name, false)){
-			break;
-		}
-	}
+	effect effect_data;
+	GetEffectData(function_name, effect_data);
+	// effect foo;
+	// for(int i = 0; i < alleffects.Length; i++){
+	// 	alleffects.GetArray(i, foo, sizeof(foo));
+	// 	if(StrEqual(function_name, foo.config_name, false)){
+	// 		break;
+	// 	}
+	// }
 
 
 	// char effect_title[128];
 	// FormatEx(effect_title, sizeof(effect_title), "%s", GetChaosTitle(function_name));
 	
 	char enabled_status[128];
-	FormatEx(enabled_status, sizeof(enabled_status), "Enabled: %s", IsChaosEnabled(function_name) ? "ON" : "OFF");	
+	
+	FormatEx(enabled_status, sizeof(enabled_status), "Enabled: %s", effect_data.enabled ? "ON" : "OFF");	
 
 	char effect_duration[128];
-	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", foo.Get_Duration());	
+	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", effect_data.Get_Duration());	
 
 	char menu_title[256];
-	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s\n ", foo.title);
+	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s\n ", effect_data.title);
 
 	Menu menu = new Menu(EffectSetting_Handler);
 
@@ -387,7 +388,7 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	// if(GetChaosTime(function_name ,-1.0, true) == -1){
 	bool blacklisted = false;
 
-	//todo: check for effects with no duration
+	//TODO:: check for effects with no duration
 	// for(int i = 0; i < sizeof(EffectsWithNoDuration); i++){
 	// 	if(StrContains(function_name, EffectsWithNoDuration[i], false) != -1) blacklisted = true;
 	// }
@@ -412,7 +413,9 @@ public int EffectSetting_Handler(Menu menu, MenuAction action, int param1, int p
 		bool found = menu.GetItem(param2, info, sizeof(info));
 		if(found){
 			if(StrEqual(info, "setting-enabled", false)){
-				if(IsChaosEnabled(function_name)){
+				effect effect_data;
+				GetEffectData(function_name, effect_data);
+				if(effect_data.enabled){
 					UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "enabled", "0");
 				}else{
 					UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "enabled", "1");
@@ -484,8 +487,3 @@ public int SetDuration_Handler(Menu menu, MenuAction action, int param1, int par
 		delete menu;
 	}
 }
-
-// todo create a config README, this ^^ removes any comments from the existing cfg filef
-// readme will also contain a link for default settings
-
-//todo what if manual changes in game do actually create an override cfg file, so that when you update chaos all your changes will technically be saved

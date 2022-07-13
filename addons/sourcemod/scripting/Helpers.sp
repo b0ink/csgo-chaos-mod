@@ -13,46 +13,26 @@ bool ValidBombSpawns(){
 	return true;
 }
 
-
-bool IsChaosEnabled(char[] EffectName, int defaultEnable = 1){
-	if(g_bClearChaos) return true;
-	int Chaos_Properties[2];
-	int enabled = 0;
-	if(Chaos_Effects.GetArray(EffectName, Chaos_Properties, 2)){
-		enabled = Chaos_Properties[CONFIG_ENABLED];
-	}else{
-		Log("[CONFIG] Couldnt find Effect Configuration: %s", EffectName);
-		enabled = defaultEnable;
+bool GetEffectData(char[] function_name, effect return_data){
+	effect effect_data;
+	bool found = false;
+	for(int i = 0; i < alleffects.Length; i++){
+		alleffects.GetArray(i, effect_data, sizeof(effect_data));
+		if(StrEqual(effect_data.config_name, function_name, false)){
+			found = true;
+			break;
+		}
 	}
-	if(enabled == 1) return true;
-	return false;
+	if(found) return_data = effect_data;
+	return found;
+	// return null;
 }
 
 float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false){
-	float OverwriteDuration = g_fChaos_OverwriteDuration;
-
-	if(OverwriteDuration < -1.0){
-		Log("Cvar 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
-		OverwriteDuration = - 1.0;
-	}
-
-	int Chaos_Properties[2];
 	float expire = defaultTime;
-	if(Chaos_Effects.GetArray(EffectName, Chaos_Properties, 2)){
-		expire = float(Chaos_Properties[CONFIG_EXPIRE]);
-
-		if(raw) return expire;		
-		if(OverwriteDuration != -1.0) expire = OverwriteDuration;
-
-		if(expire < 0){
-			//this should imply that per the config, it doesnt exist, lets provide it the plugins default time instead, just in case it does use it.
-			expire = SanitizeTime(defaultTime);
-		}else{
-			if(expire != SanitizeTime(expire)){
-				Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", EffectName, expire, SanitizeTime(expire));
-				expire = SanitizeTime(expire);
-			}
-		}
+	effect effect_data;
+	if(GetEffectData(EffectName, effect_data)){
+		expire = effect_data.Get_Duration(raw);
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
@@ -85,11 +65,11 @@ bool PoolChaosEffects(char[] effectName = ""){
 		alleffects.GetArray(i, foo, sizeof(foo));
 
 		if(effectName[0]){ //* if keyword was provided
-			if(StrContains(foo.config_name, effectName, false) != -1){ //todo allow for aliases
+			if(StrContains(foo.config_name, effectName, false) != -1){ //TODO: allow for aliases
 				Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
 			}
 		}else{
-			// if(foo.can_run_effect()){ //todo allow all?
+			// if(foo.can_run_effect()){ //TODO: allow all?
 			Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
 			// }
 		}
@@ -443,7 +423,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 					}
 					if(CoordinateIndex != -1){
 						float realVec[3];
-						//todo come back to this??
+						//TODO: come back to this??
 						do{
 							GetArrayArray(g_UnusedCoordinates, CoordinateIndex, realVec);
 						}

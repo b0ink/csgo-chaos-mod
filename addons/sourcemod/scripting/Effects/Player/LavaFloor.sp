@@ -5,7 +5,7 @@ public void Chaos_LavaFloor_START(){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec);
 			// vec[2] = vec[2]; //anything bigger and things like vents or ct spawn will spawn molotov in other areas of the map
-			//TODO offset x and z
+			//TODO: offset x and z
 			int ent = CreateEntityByName("molotov_projectile");
 			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 			DispatchSpawn(ent);

@@ -1,6 +1,6 @@
 public void Chaos_HeadshotOnly_START(){
 	cvar("mp_damage_headshot_only", "1");
-	//todo through SM
+	//?: through SM
 }
 
 public Action Chaos_HeadshotOnly_RESET(bool EndChaos){

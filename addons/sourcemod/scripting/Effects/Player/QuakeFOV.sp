@@ -1,5 +1,5 @@
 public void Chaos_QuakeFOV_START(){
-	int RandomFOV = GetRandomInt(110,160);
+	int RandomFOV = GetRandomInt(130,160);
 	SetPlayersFOV(RandomFOV);
 
 }

@@ -7,7 +7,7 @@ public void Chaos_RainingMolotovs_START(){
 	
 	Chaos_MolotovSpawn_Timer = CreateTimer(g_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT);
 }
-//TODO use the map coordinates to make it look like cool raining in another effect
+//TODO: use the map coordinates to make it look like cool raining in another effect
 
 public Action Chaos_RainingMolotovs_RESET(bool EndChaos){
 		StopTimer(Chaos_MolotovSpawn_Timer);
@@ -43,7 +43,7 @@ public Action Timer_SpawnMolotov(Handle timer){
 			float vec[3];
 			GetClientAbsOrigin(client, vec);
 			vec[2] = vec[2] + 100; //anything bigger and things like vents or ct spawn will spawn molotov in other areas of the map
-			//TODO offset x and z
+			//TODO: offset x and z
 			int ent = CreateEntityByName("molotov_projectile");
 			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 			DispatchSpawn(ent);

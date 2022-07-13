@@ -1,11 +1,17 @@
 /*
 
+
+	INIT runs on Plugin Start
+		-> Hook your events here
+	OnMapStart runs on MapStart
+		->Precache your materials here
+
 	Made by your_name_here
 
 
 	Your config/function prefix should follow the convention of:
 		Chaos_EffectName
-	Replace 'EffectName' with a fitting name.
+	Replace 'EffectName' with a fitting name of your effect.
 
 
 	Add the following to Chaos_Effects.cfg in Configs:
@@ -25,7 +31,7 @@
 			"en"    "Short description of the effect"
 		}
 
-	Add this file as include to Effects/Effectlist.sp.
+	#include this file within Effects/Effectlist.sp.
 	
  */
 

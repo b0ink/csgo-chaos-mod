@@ -3,7 +3,7 @@
 	Runs on the OnMapStart function. Use this to precache any models or textures.
 */
 bool IceSkate = false;
-bool ForceJump[MAXPLAYERS+1];
+bool ForceJumpSkate[MAXPLAYERS+1];
 
 /* This is used when the effect is fired */
 public void Chaos_IceSkate_START(){
@@ -17,11 +17,11 @@ public Action Chaos_IceSkate_RESET(bool EndChaos){
 	IceSkate = false;
 }
 
-//todo: add to Chaos_Jumping
+//TODO:: add to Chaos_Jumping
 public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(IceSkate){
-		ForceJump[client] = !ForceJump[client];
-		if(ForceJump[client]){
+		ForceJumpSkate[client] = !ForceJumpSkate[client];
+		if(ForceJumpSkate[client]){
 			buttons |= IN_JUMP;
 		}else{
 			buttons &= ~IN_JUMP;

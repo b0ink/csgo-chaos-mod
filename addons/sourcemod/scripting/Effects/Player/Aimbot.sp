@@ -20,9 +20,7 @@ float g_cvDistance = 10000.0;
 bool g_bCvFlashbang = true;
 
 public void Chaos_Aimbot_INIT(){
-	HookEventEx("weapon_fire", Aimbot_Event_WeaponFire, EventHookMode_Pre);
-	HookEventEx("player_blind", Aimbot_Event_PlayerBlind, EventHookMode_Pre);
-		
+
 	g_cvPredictionConVars[0] = FindConVar("weapon_accuracy_nospread");
 	g_cvPredictionConVars[1] = FindConVar("weapon_recoil_cooldown");
 	g_cvPredictionConVars[2] = FindConVar("weapon_recoil_decay1_exp");
@@ -136,7 +134,7 @@ stock void ToggleAim(int iClient, bool bEnabled = false)
 	}
 }
 
-public Action Aimbot_Event_WeaponFire(Event hEvent, const char[] chName, bool g_bbDontBroadcast){
+public Action Chaos_Aimbot_Event_WeaponFire(Event hEvent, const char[] chName, bool g_bbDontBroadcast){
 	int iClient = GetClientOfUserId(hEvent.GetInt("userid"));
 	if (!g_bAimbot[iClient]) return Plugin_Continue;
 	int iTarget = GetClosestClient(iClient);
@@ -355,7 +353,7 @@ stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, floa
 	return false;
 }
 
-public Action Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool dontBroadcast)
+public Action Chaos_Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool dontBroadcast)
 {
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
 	

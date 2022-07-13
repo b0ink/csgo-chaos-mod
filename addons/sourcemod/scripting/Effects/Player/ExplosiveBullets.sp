@@ -8,8 +8,7 @@ public void Chaos_ExplosiveBullets_INIT(){
 	PrecacheParticleEffect(DIRT);
 	PrecacheSound(EXPLOSION_HE);
 
-	HookEvent("bullet_impact", Chaos_ExplosiveBullets_Event_BulletImpact);
-	AddTempEntHook("Shotgun Shot", Chaos_ExplosiveBullets_Hook_BulletShot);
+
 
 }
 

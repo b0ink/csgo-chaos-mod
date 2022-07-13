@@ -1,6 +1,3 @@
-#define CONFIG_ENABLED 0
-#define CONFIG_EXPIRE 1
-
 Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){
@@ -37,7 +34,7 @@ public void OnConfigsExecuted(){
 		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
 	}
 
-	Run_Init_Functions();
+	// Run_Init_Functions();
 	effect foo;
 	char function_mapstart[64];
 	for(int i = 0; i < alleffects.Length; i++){
@@ -67,7 +64,7 @@ void Run_Init_Functions(){
 }
 
 
-//todo check on bomb planted, check c4 location, get closest bomb site, save coord 
+//TODO: check on bomb planted, check c4 location, get closest bomb site, save coord 
 public Action Timer_SaveCoordinates(Handle timer){
 		
 	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return;
@@ -170,7 +167,7 @@ void ParseChaosEffects(){
 			Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_Title", Chaos_Function_Name);
 			Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
 
-			if(enabled != 0 || enabled != 1) enabled = 1; //todo better error logging eg. if enabled or duration out of bounds
+			if(enabled != 0 || enabled != 1) enabled = 1; //TODO: better error logging eg. if enabled or duration out of bounds
 
 			Format(call_function_name, sizeof(call_function_name), "%s_START", Chaos_Function_Name);
 			Function func = GetFunctionByName(GetMyHandle(), call_function_name);
@@ -338,7 +335,7 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 	if(kvConfig.ExportToFile(path)){
 
 		if(IsValidClient(client)){
-			//todo: convar to who this message should be sent to.
+			//TODO:: convar to who this message should be sent to.
 			PrintToChatAll("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 		}

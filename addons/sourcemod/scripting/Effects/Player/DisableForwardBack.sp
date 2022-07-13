@@ -4,20 +4,10 @@ float Disable_WS_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
 
 public void Chaos_DisableForwardBack_START(){
 	g_bNoForwardBack++;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			SDKHook(i, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
-		}
-	}
 }
 
 public Action Chaos_DisableForwardBack_RESET(bool EndChaos){
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
-			SDKUnhook(i, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
-		}
-	}
 }
 
 public Action Chaos_DisableForwardBack_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){

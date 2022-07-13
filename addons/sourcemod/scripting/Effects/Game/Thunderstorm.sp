@@ -3,7 +3,6 @@
 */
 
 public void Chaos_Thunderstorm_OnMapStart(){
-	PrintToChatAll("asdf");
 	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/thunderstorm.raw");
 }
 

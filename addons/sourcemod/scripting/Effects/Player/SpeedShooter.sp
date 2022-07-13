@@ -1,6 +1,6 @@
 bool SpeedShooter = false;
 
-//todo, if someone has speed once this ends, they still have speed
+//TODO:, if someone has speed once this ends, they still have speed
 // > try saving their old speed but itll still be fucky
 
 public void Chaos_SpeedShooter_START(){

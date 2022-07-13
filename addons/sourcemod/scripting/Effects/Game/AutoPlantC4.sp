@@ -48,7 +48,7 @@ public void Chaos_AutoPlantC4_START(){
 
 
 	if(g_bBombPlanted){
-		//todo make this a little cleaner
+		//TODO: make this a little cleaner
 		float newBombPosition[3];
 		char newBombSiteName[64];
 		if(g_PlantedSite == BOMBSITE_A && bombSiteB != INVALID_HANDLE){

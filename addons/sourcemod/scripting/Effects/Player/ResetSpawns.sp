@@ -13,16 +13,11 @@ public Action Chaos_ResetSpawns_RESET(bool EndChaos){
 
 }
 
-public Action Chaos_ResetSpawns_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
 public bool Chaos_ResetSpawns_HasNoDuration(){
 	return true;
 }
 
 public bool Chaos_ResetSpawns_Conditions(){
-	//todo
+	if(g_iChaos_Round_Time <= 25) return false;
 	return true;
 }

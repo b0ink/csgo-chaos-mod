@@ -3,7 +3,9 @@ bool g_bOneBulletMag = false;
 int g_iOffset_Clip1 = -1;
 public void Chaos_OneBulletMag_INIT(){
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
+
 }
+
 public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	if(g_bOneBulletMag){
@@ -30,7 +32,7 @@ public void Chaos_OneBulletMag_START(){
 	g_bOneBulletMag = true;
 }
 
-public Action _Chaos_OneBulletMag_RESET(bool EndChaos){
+public Action Chaos_OneBulletMag_RESET(bool EndChaos){
 	g_bOneBulletMag = false;
 	if(EndChaos){ //don't need to do this if the round has ended, especially if the event didnt even happen
 		for(int i = 0; i <= MaxClients; i++){

@@ -1,3 +1,4 @@
+
 public void Chaos_BreakTime_START(){
 	g_bKnifeFight++;
 	g_bNoForwardBack++;
@@ -8,8 +9,8 @@ public void Chaos_BreakTime_START(){
 			FakeClientCommand(i, "use weapon_knife");
 		}
 	}
-	//todo switch to knife
 }
+
 
 public Action Chaos_BreakTime_RESET(bool EndChaos){
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
@@ -17,9 +18,9 @@ public Action Chaos_BreakTime_RESET(bool EndChaos){
 	if(g_bNoStrafe > 0) g_bNoStrafe--;
 }
 
-public Action Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_BreakTime_HasNoDuration(){

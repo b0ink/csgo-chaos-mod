@@ -37,5 +37,14 @@ public bool Chaos_RandomInvisiblePlayer_CustomAnnouncement(){
 }
 
 public bool Chaos_RandomInvisiblePlayer_Conditions(){
+	Handle players_array = CreateArray(4);
+	int playerCount = -1;
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)) PushArrayCell(players_array, i);
+	}
+	playerCount = GetArraySize(players_array);
+	delete players_array;
+	if(playerCount <= 1)  return false;
+
 	return true;
 }

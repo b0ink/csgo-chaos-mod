@@ -4,8 +4,6 @@ effect 	Chaos_EffectData_Buffer;
 char 	Chaos_EventName_Buffer[64];
 
 
-//todo: move all effects into their own .sp files inside of /scripting/Externals, modularise it a bit more
-
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_bCanSpawnChickens = false;
@@ -142,11 +140,12 @@ void ResetChaos(){
 	HUD_ROUNDEND();
 	Clear_Overlay_Que();
 	StopTimer(g_NewEffect_Timer);
-	// ResetPlayersFOV(); //todo
+	// ResetPlayersFOV(); //TODO:
 	CreateTimer(0.1, ResetRoundChaos);
 }
 
 public void OnGameFrame(){
+	if (!g_cvChaosEnabled.BoolValue) return;
 	for(int i = 0; i < alleffects.Length; i++){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnGameFrame", Chaos_EffectData_Buffer.config_name);
 		alleffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));

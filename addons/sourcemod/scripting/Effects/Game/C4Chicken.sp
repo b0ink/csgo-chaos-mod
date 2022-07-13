@@ -2,7 +2,6 @@ bool g_bC4Chicken = false;
 bool g_bVisibleChicken = true;
 
 public void Chaos_C4Chicken_INIT(){
-	HookEvent("bomb_planted", Chaos_C4Chicken_Event_BombPlanted);
 }
 public void Chaos_C4Chicken_START(){
 	g_bC4Chicken = true;

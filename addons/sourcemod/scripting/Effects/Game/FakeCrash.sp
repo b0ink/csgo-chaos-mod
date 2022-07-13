@@ -11,13 +11,17 @@ public void Chaos_FakeCrash_START(){
 	for(int i = 0; i <= amount; i++) ServerCommand("spike");
 	ServerCommand("sv_cheats 0");
 
+	CreateTimer(2.0, Timer_AnnounceFakeCrash);
+
+}
+
+public Action Timer_AnnounceFakeCrash(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_FakeCrash"), -1.0);
-
 }
 
-public Action Chaos_FakeCrash_RESET(bool EndChaos){
+// public Action Chaos_FakeCrash_RESET(bool EndChaos){
 
-}
+// }
 
 
 public bool Chaos_FakeCrash_HasNoDuration(){

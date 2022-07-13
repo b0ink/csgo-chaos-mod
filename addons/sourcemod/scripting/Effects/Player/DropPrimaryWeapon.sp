@@ -1,9 +1,10 @@
 public void Chaos_DropPrimaryWeapon_START(){
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i) && !HasMenuOpen(i)){
-			ClientCommand(i, "slot2;slot1"); //todo timer
+			ClientCommand(i, "slot2;slot1");
 		}
 	}
+	CreateTimer(0.1, Timer_DropPrimary);
 }
 
 public Action Timer_DropPrimary(Handle timer){

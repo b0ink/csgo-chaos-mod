@@ -23,6 +23,6 @@ public bool Chaos_RespawnDead_LastLocation_HasNoDuration(){
 }
 
 public bool Chaos_RespawnDead_LastLocation_Conditions(){
-	//todo;
+	//TODO:;
 	return true;
 }

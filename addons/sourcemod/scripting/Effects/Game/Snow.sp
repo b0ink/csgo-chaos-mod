@@ -6,7 +6,7 @@ public void Chaos_Snow_START(){
 	SPAWN_WEATHER(SNOWFALL);
 	SPAWN_WEATHER(SNOWFALL);
 	SPAWN_WEATHER(SNOWFALL);
-	//todo add little fog
+	MinimalFog();
 }
 
 
@@ -16,5 +16,8 @@ public Action Chaos_Snow_RESET(bool EndChaos){
 
 
 public bool Chaos_Snow_Conditions(){
+	if(StrEqual(mapName, "de_dust2", false)){
+		return false; //doesnt work on dust2
+	}
 	return true;
 }

@@ -9,7 +9,7 @@ public void Chaos_GhostSlaps_START(){
 public Action Chaos_GhostSlaps_RESET(bool EndChaos){
 		StopTimer(Chaos_RandomSlap_Timer);
 		// cvar("sv_falldamage_scale", "1");
-		if(g_NoFallDamage > 0) g_NoFallDamage--; //todo
+		if(g_NoFallDamage > 0) g_NoFallDamage--; //TODO:
 }
 
 public Action Chaos_GhostSlaps_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){

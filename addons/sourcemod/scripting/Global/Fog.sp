@@ -64,6 +64,14 @@ void NormalWhiteFog(){
 	Fog_ON();
 }
 
+void MinimalFog(){
+	DispatchKeyValue(g_iFog, "fogcolor", "255 255 255");
+	DispatchKeyValueFloat(g_iFog, "fogend", 900.0);
+	DispatchKeyValueFloat(g_iFog, "fogmaxdensity", 0.5);
+	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
+	Fog_ON();
+}
+
 void ResetRenderDistance(){
 	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
 }

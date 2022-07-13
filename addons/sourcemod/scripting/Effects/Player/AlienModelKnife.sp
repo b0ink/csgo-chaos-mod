@@ -1,11 +1,10 @@
 public void Chaos_AlienModelKnife_START(){
 	g_bKnifeFight++;
-
 	//hitboxes are tiny, but knives work fine
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			SetEntPropFloat(i, Prop_Send, "m_flModelScale", 0.5);
-			// SetEntProp(i, Prop_Send, "m_ScaleType", 5); //TODO EXPERIEMNT WITH
+			// SetEntProp(i, Prop_Send, "m_ScaleType", 5);
 			SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0*0.55);
 			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 2.0);
 			FakeClientCommand(i, "use weapon_knife");
@@ -15,9 +14,7 @@ public void Chaos_AlienModelKnife_START(){
 }
 
 public Action Chaos_AlienModelKnife_RESET(bool EndChaos){
-
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
-	
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			if(!HasMenuOpen(i)) ClientCommand(i, "slot1");
@@ -27,9 +24,6 @@ public Action Chaos_AlienModelKnife_RESET(bool EndChaos){
 		}
 	}	
 }
-
-
-
 
 public bool Chaos_AlienModelKnife_Conditions(){
 	return true;

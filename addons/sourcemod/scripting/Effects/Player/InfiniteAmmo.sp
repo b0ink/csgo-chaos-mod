@@ -1,12 +1,11 @@
 //event weaponfire
 bool g_InfiniteAmmo = false;
 public void Chaos_InfiniteAmmo_INIT(){
-	HookEvent("weapon_fire", Chaos_InfiniteAmmo_Event_OnWeaponFire);
 }
 
 public void Chaos_InfiniteAmmo_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	//todo doesnt work with glock burst fire for some reason
+	//TODO: doesnt work with glock burst fire for some reason
 	if(g_InfiniteAmmo){
 		int Slot1 = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
 		int Slot2 = GetPlayerWeaponSlot(client, CS_SLOT_SECONDARY);

@@ -6,7 +6,7 @@ public void Chaos_MoneyRain_START(){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec);
 			vec[2] = vec[2] + GetRandomInt(50, 200);
-			//todo; randomise the rotation of the cash for extra bounce?
+			//TODO:; randomise the rotation of the cash for extra bounce?
 			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 			DispatchSpawn(ent);
 		}

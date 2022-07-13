@@ -17,7 +17,7 @@
 #define PLUGIN_VERSION "0.1.0"
 
 
-//todo..
+//TODO:..
 #define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
 // #define GetRandomMapSpawn(%1) for(int %1 = 0; %1 < )
 
@@ -31,12 +31,12 @@ public Plugin myinfo = {
 
 char mapName[64];
 
-char 	g_Prefix[] = ">>{lime}C H A O S{default}<<";
+char 	g_Prefix[] = "[{lime}C H A O S{default}]";
 char 	g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 
-StringMap	Chaos_Effects;
+// StringMap	Chaos_Effects;
 
 #define SOUND_BELL "buttons/bell1.wav"
 #define SOUND_BLIP "buttons/blip1.wav"
@@ -102,6 +102,7 @@ int g_iC4ChickenEnt = -1;
 #include "Global/Weather.sp"
 
 #include "Effects/EffectsList.sp"
+#include "Effects/HookedEvents.sp"
 
 #include "ConVars.sp"
 
@@ -163,7 +164,6 @@ enum struct effect{
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_PushCell(EndChaos);
-			Call_PushCell(EndChaos);
 			Call_Finish();
 		}
 	}
@@ -198,14 +198,18 @@ enum struct effect{
 	void SET_RESET_FUNCTION(char reset_function[64]){
 		this.function_name_reset = reset_function;
 	}
-	float Get_Duration(){
+	float Get_Duration(bool raw = false){
 		if(this.force_no_duration){
 			return -1.0;
 		}
-		//todo change announcechaos to only take the config name, automatically get the duration
-		// no need for defaults anymore as config is the only default
 		float OverwriteDuration = g_fChaos_OverwriteDuration;
 		float duration = float(this.duration);
+		if(raw){
+			return duration;
+		}
+		//TODO: change announcechaos to only take the config name, automatically get the duration
+		// no need for defaults anymore as config is the only default
+
 		if(OverwriteDuration < -1.0){
 			Log("Cvar 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
 			OverwriteDuration = - 1.0;
@@ -271,16 +275,14 @@ public void OnPluginStart(){
 		}
 	}
 
-
-
-	Chaos_Effects = new StringMap();
 	Possible_Chaos_Effects = new ArrayList(1024);
 	Effect_History = CreateArray(64);
 
 	g_SavedConvars  = CreateArray(64);
 
 	alleffects = new ArrayList(1024);
-	
+
+	HookEvents();
 }
 
 
@@ -385,6 +387,9 @@ public void OnClientPutInServer(int client){
 	SDKHook(client, SDKHook_WeaponSwitch, 		Hook_WeaponSwitch);
 	SDKHook(client, SDKHook_PreThink, 			Hook_OnPreThink);
 	SDKHook(client, SDKHook_OnTakeDamage, 		Hook_OnTakeDamage);
+
+	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
+	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
 
 }
 
@@ -513,7 +518,7 @@ public Action ResetRoundChaos(Handle timer){
 	effect foo;
 	for(int i = 0; i < alleffects.Length; i++){
 		alleffects.GetArray(i, foo, sizeof(foo));
-		foo.reset_effect();
+		foo.reset_effect(false);
 	}
 }
 

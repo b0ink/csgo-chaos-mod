@@ -1,5 +1,5 @@
 public void Chaos_OneWeaponOnly_START(){
-	//todo; might have to handle weapon pickups?.. (players can still buy)
+	//TODO:; might have to handle weapon pickups?.. (players can still buy)
 	g_bPlayersCanDropWeapon = false;
 	char randomWeapon[64];
 	int randomIndex = GetRandomInt(0, sizeof(g_sWeapons)-1);
@@ -16,7 +16,7 @@ public void Chaos_OneWeaponOnly_START(){
 	FormatEx(chaosMsg, sizeof(chaosMsg), "%s's Only", randomWeapon[7]); //strip weapon_ from name;
 	// chaosMsg[0] = CharToUpper(chaosMsg[0]);
 	AnnounceChaos(chaosMsg,  GetChaosTime("Chaos_OneWeaponOnly", 25.0));
-	//todo translation;
+	//TODO: translation;
 
 }
 

@@ -8,15 +8,14 @@ float g_PortalTeleports[MAXPLAYERS + 1][3];
 public void Chaos_PortalGuns_INIT(){
 	g_beamsprite = PrecacheModel("materials/sprites/laserbeam.vmt");
 	g_halosprite = PrecacheModel("materials/sprites/halo.vmt");
-	HookEvent("weapon_fire", 	Chaos_PortalGuns_Event_OnWeaponFire); //, EventHookMode_Post);
 }
 
 public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 
-	// weaponJump(client, szWeaponName); //todo why
+	// weaponJump(client, szWeaponName); //TODO: why
 
 	if(g_bPortalGuns){
-		//todo; if player is further 
+		//TODO:; if player is further 
 		char szWeaponName[32];
 		event.GetString("weapon", szWeaponName, sizeof(szWeaponName));
 		int client = GetClientOfUserId(event.GetInt("userid"));
@@ -83,7 +82,7 @@ public void SetTeleportEndPoint(int client){
 	if(TR_DidHit(trace)){
    	 	TR_GetEndPosition(vStart, trace);
 		GetVectorDistance(vOrigin, vStart, false);
-		Distance = -35.0;
+		// Distance = -35.0;
    	 	GetAngleVectors(vAngles, vBuffer, NULL_VECTOR, NULL_VECTOR);
 		g_PortalTeleports[client][0] = vStart[0] + (vBuffer[0]*Distance);
 		g_PortalTeleports[client][1] = vStart[1] + (vBuffer[1]*Distance);
@@ -103,7 +102,7 @@ public void SetTeleportEndPoint(int client){
 public void PerformTeleport(int target, float pos[3]){
 	float partpos[3];
 	GetClientEyePosition(target, partpos);
-	partpos[2]-=20.0;	
+	// partpos[2]-=20.0;	
 	TeleportEntity(target, pos, NULL_VECTOR, NULL_VECTOR);
 	// pos[2]+=40.0;
 

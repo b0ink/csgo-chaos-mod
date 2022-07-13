@@ -126,7 +126,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	if(convar == g_cvChaosEnabled){
 		if(StringToInt(oldValue) == 0 && StringToInt(newValue) == 1){
 			g_bChaos_Enabled = true;
-			ChooseEffect(null);
+			// ChooseEffect(null);
 		}else if(StringToInt(newValue) == 0){
 			g_bChaos_Enabled = false;
 			StopTimer(g_NewEffect_Timer);
