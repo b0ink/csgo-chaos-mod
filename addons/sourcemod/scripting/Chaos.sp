@@ -51,10 +51,7 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 #include "Data.sp"
 
-Handle 	g_MapCoordinates = INVALID_HANDLE;
-Handle 	g_UnusedCoordinates = INVALID_HANDLE;
-Handle 	bombSiteA = INVALID_HANDLE;
-Handle 	bombSiteB = INVALID_HANDLE;
+
 bool 	g_bBombPlanted = false;
 
 bool 	g_bCanSpawnChickens = true;
@@ -92,6 +89,11 @@ int g_bNoForwardBack = 0;
 int g_NoFallDamage = 0;
 int g_iC4ChickenEnt = -1;
 
+Handle 	g_MapCoordinates = INVALID_HANDLE;
+Handle 	g_UnusedCoordinates = INVALID_HANDLE;
+Handle 	bombSiteA = INVALID_HANDLE;
+Handle 	bombSiteB = INVALID_HANDLE;
+
 // Shared by multiple effects
 #include "Global/InstantWeaponSwitch.sp"
 #include "Global/WeaponJump.sp"
@@ -104,6 +106,23 @@ int g_iC4ChickenEnt = -1;
 
 #include "ConVars.sp"
 
+//TODO: Organise spawn data
+// enum bomb_site{
+// 	BOMB_A,
+// 	BOMB_B
+// }
+
+// enum struct player_spawn{
+// 	float location[3];
+// }
+// enum struct bomb_spawn{
+// 	float location[3];
+// 	bomb_site site;
+// }
+// enum struct map_spawns{
+// 	ArrayList player_spawns;
+// 	ArrayList bomb_spawns;
+// }
 
 int global_id_count = 0;
 ArrayList ChaosEffects;

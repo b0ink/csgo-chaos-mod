@@ -1,6 +1,6 @@
 public void Chaos_RespawnTheDead_START(){
 	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && !IsPlayerAlive(i)) CS_RespawnPlayer(i);
+		if(IsValidClient(i) && !IsPlayerAlive(i)) if(GetClientTeam(i) == CS_TEAM_CT || GetClientTeam(i) == CS_TEAM_T) CS_RespawnPlayer(i);
 	}
 }
 

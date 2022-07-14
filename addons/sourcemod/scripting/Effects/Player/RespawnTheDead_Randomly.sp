@@ -1,8 +1,10 @@
 public void Chaos_RespawnTheDead_Randomly_START(){
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i) && !IsPlayerAlive(i)){
-			CS_RespawnPlayer(i);
-			DoRandomTeleport(i);
+			if(GetClientTeam(i) == CS_TEAM_CT || GetClientTeam(i) == CS_TEAM_T){
+				CS_RespawnPlayer(i);
+				DoRandomTeleport(i);
+			}
 		}
 	}
 }
