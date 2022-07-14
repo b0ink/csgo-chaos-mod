@@ -12,5 +12,8 @@ public bool Chaos_RandomSkybox_HasNoDuration(){
 }
 
 public bool Chaos_RandomSkybox_Conditions(){
+	if(StrEqual(mapName, "de_dust2")){
+		return false;
+	}
 	return true;
 }

@@ -14,7 +14,7 @@ public Action Chaos_RespawnTheDead_OnPlayerRunCmd(int client, int &buttons, int 
 
 
 public bool Chaos_RespawnTheDead_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_RespawnTheDead_Conditions(){

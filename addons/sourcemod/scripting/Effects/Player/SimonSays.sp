@@ -118,7 +118,6 @@ void StartMessageTimer(){
 
 public Action Timer_ShowAction(Handle timer){
 	g_time--;
-	PrintToChatAll("%i", g_time);
 	char message[128];
 	if(g_time > 11){
 		int countdown = g_time - 10;
