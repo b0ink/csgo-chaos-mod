@@ -38,7 +38,7 @@ public bool Chaos_FakeTeleport_CustomAnnouncement(){
 }
 
 public bool Chaos_FakeTeleport_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_FakeTeleport_Conditions(){

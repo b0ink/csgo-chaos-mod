@@ -9,11 +9,13 @@ public void Chaos_Snow_START(){
 	MinimalFog();
 }
 
-
 public Action Chaos_Snow_RESET(bool EndChaos){
 
 }
 
+public bool Chaos_Snow_HasNoDuration(){
+	return true;
+}
 
 public bool Chaos_Snow_Conditions(){
 	if(StrEqual(mapName, "de_dust2", false)){

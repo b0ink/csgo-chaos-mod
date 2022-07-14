@@ -21,13 +21,12 @@ public Action Chaos_LittleChooks_RESET(bool EndChaos){
 	g_bCanSpawnChickens = true;
 }
 
-public Action Chaos_LittleChooks_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_LittleChooks_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
-
+// }
 
 public bool Chaos_LittleChooks_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_LittleChooks_Conditions(){

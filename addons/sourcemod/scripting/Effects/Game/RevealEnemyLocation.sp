@@ -17,7 +17,7 @@ public Action Chaos_RevealEnemyLocation_RESET(bool EndChaos){
 
 
 public bool Chaos_RevealEnemyLocation_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_RevealEnemyLocation_Conditions(){

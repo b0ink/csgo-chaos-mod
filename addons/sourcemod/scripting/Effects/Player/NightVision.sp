@@ -1,5 +1,3 @@
-//TODO: make timed
-
 public void Chaos_NightVision_START(){
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){

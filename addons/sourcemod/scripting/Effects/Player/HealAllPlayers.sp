@@ -12,7 +12,7 @@ public Action Chaos_HealAllPlayers_RESET(bool EndChaos){
 
 
 public bool Chaos_HealAllPlayers_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_HealAllPlayers_Conditions(){

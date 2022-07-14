@@ -30,11 +30,11 @@ public bool Chaos_RainingMolotovs_Conditions(){
 
 
 public Action Timer_SpawnMolotov(Handle timer){
-	if(g_MolotovSpawn_Count > 5){
+	if(g_MolotovSpawn_Count > 5){ 
 		g_MolotovSpawn_Count = 0;
 		StopTimer(Chaos_MolotovSpawn_Timer);
 		Chaos_MolotovSpawn_Timer = INVALID_HANDLE;
-		AnnounceChaos("Raining Fire Ended", -1.0, true);
+		// AnnounceChaos("Raining Fire Ended", -1.0, true);
 		return;
 	}
 	g_MolotovSpawn_Count++;

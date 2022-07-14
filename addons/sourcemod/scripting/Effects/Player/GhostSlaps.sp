@@ -12,9 +12,9 @@ public Action Chaos_GhostSlaps_RESET(bool EndChaos){
 		if(g_NoFallDamage > 0) g_NoFallDamage--; //TODO:
 }
 
-public Action Chaos_GhostSlaps_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_GhostSlaps_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_GhostSlaps_HasNoDuration(){

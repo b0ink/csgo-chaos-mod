@@ -388,10 +388,10 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	// if(GetChaosTime(function_name ,-1.0, true) == -1){
 	bool blacklisted = false;
 
-	//TODO:: check for effects with no duration
-	// for(int i = 0; i < sizeof(EffectsWithNoDuration); i++){
-	// 	if(StrContains(function_name, EffectsWithNoDuration[i], false) != -1) blacklisted = true;
-	// }
+
+	if(effect_data.force_no_duration){
+		blacklisted = true;
+	}
 	
 	if(blacklisted){
 		menu.AddItem("setting-effect_duration", 	"This effect has no duration.", ITEMDRAW_DISABLED);

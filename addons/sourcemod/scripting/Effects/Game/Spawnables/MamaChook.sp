@@ -20,7 +20,7 @@ public Action Chaos_MamaChook_OnPlayerRunCmd(int client, int &buttons, int &iImp
 
 
 public bool Chaos_MamaChook_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_MamaChook_Conditions(){

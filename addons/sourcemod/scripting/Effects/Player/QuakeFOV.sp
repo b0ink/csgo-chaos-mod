@@ -10,7 +10,7 @@ public Action Chaos_QuakeFOV_RESET(bool EndChaos){
 
 
 public bool Chaos_QuakeFOV_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_QuakeFOV_Conditions(){

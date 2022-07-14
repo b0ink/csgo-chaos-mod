@@ -8,7 +8,7 @@ public Action Chaos_RandomTeleport_RESET(bool EndChaos){
 
 
 public bool Chaos_RandomTeleport_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_RandomTeleport_Conditions(){

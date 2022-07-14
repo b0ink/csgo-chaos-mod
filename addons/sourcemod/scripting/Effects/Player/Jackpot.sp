@@ -12,7 +12,7 @@ public Action Chaos_Jackpot_RESET(bool EndChaos){
 }
 
 public bool Chaos_Jackpot_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_Jackpot_Conditions(){

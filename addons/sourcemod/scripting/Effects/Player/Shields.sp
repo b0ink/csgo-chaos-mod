@@ -29,7 +29,7 @@ public Action Chaos_Shields_OnPlayerRunCmd(int client, int &buttons, int &iImpul
 
 
 public bool Chaos_Shields_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_Shields_Conditions(){

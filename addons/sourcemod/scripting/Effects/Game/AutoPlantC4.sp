@@ -100,7 +100,7 @@ public Action Chaos_AutoPlant_RESET(bool EndChaos){
 
 
 public bool Chaos_AutoPlant_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_AutoPlant_Conditions(){

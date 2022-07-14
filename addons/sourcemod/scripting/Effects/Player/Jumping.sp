@@ -1,18 +1,12 @@
 bool g_bJumping = false;
 bool ForceJump[MAXPLAYERS+1];
 
-// Handle g_Jumping_Timer_Repeat = INVALID_HANDLE;
-
 public void Chaos_Jumping_START(){
-	// StopTimer(g_Jumping_Timer_Repeat);
 	g_bJumping = true;
-	// g_Jumping_Timer_Repeat = CreateTimer(0.3, Timer_ForceJump, _, TIMER_REPEAT);
-
 }
 
 public Action Chaos_Jumping_RESET(bool EndChaos){
 	g_bJumping = false;
-	// StopTimer(g_Jumping_Timer_Repeat);
 }
 
 public Action Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
@@ -34,6 +28,8 @@ public bool Chaos_Jumping_HasNoDuration(){
 public bool Chaos_Jumping_Conditions(){
 	return true;
 }
+
+// once upon a time...
 
 // public Action Timer_ForceJump(Handle timer){
 // 	if(g_bJumping){

@@ -13,7 +13,7 @@ public Action Chaos_SmokeStrat_RESET(bool EndChaos){
 }
 
 public bool Chaos_SmokeStrat_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_SmokeStrat_Conditions(){

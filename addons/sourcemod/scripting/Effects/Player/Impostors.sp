@@ -3,16 +3,18 @@ public void Chaos_Impostors_START(){
 }
 
 public Action Chaos_Impostors_RESET(bool EndChaos){
-	RemoveChickens();
+	if(EndChaos){
+		RemoveChickens();
+	}
 }
 
-public Action Chaos_Impostors_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_Impostors_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_Impostors_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_Impostors_Conditions(){

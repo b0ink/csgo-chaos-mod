@@ -14,7 +14,7 @@ public Action Chaos_C4Chicken_RESET(bool EndChaos){
 }
 
 public bool Chaos_C4Chicken_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_C4Chicken_Conditions(){

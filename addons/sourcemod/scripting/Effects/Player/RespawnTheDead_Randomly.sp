@@ -17,7 +17,7 @@ public Action Chaos_RespawnTheDead_Randomly_OnPlayerRunCmd(int client, int &butt
 
 
 public bool Chaos_RespawnTheDead_Randomly_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_RespawnTheDead_Randomly_Conditions(){

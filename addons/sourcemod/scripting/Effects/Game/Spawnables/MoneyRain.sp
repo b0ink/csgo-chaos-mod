@@ -23,7 +23,7 @@ public Action Chaos_MoneyRain_OnPlayerRunCmd(int client, int &buttons, int &iImp
 
 
 public bool Chaos_MoneyRain_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_MoneyRain_Conditions(){

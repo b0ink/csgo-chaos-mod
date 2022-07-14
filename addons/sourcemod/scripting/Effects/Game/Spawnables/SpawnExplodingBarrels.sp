@@ -22,7 +22,7 @@ public Action Chaos_SpawnExplodingBarrels_OnPlayerRunCmd(int client, int &button
 
 
 public bool Chaos_SpawnExplodingBarrels_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_SpawnExplodingBarrels_Conditions(){

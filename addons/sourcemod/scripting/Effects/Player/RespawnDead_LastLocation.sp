@@ -19,10 +19,10 @@ public Action Chaos_RespawnDead_LastLocation_OnPlayerRunCmd(int client, int &but
 
 
 public bool Chaos_RespawnDead_LastLocation_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_RespawnDead_LastLocation_Conditions(){
-	//TODO:;
+	//TODO: no respawns on first chaos effect
 	return true;
 }
