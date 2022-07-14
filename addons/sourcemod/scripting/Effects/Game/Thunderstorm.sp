@@ -78,7 +78,7 @@ public Action Timer_LightningStrike(Handle timer) {
 		if(ValidAndAlive(i)){
 			GetClientAbsOrigin(i, pos);
 			if (GetVectorDistance(pos, endpos) < 200.0){
-				SlapPlayer(i, 30, false);
+				SlapPlayer(i, 15, false);
 			}
 		}
 	}
