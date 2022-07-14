@@ -97,6 +97,7 @@
 #include "Effects/Player/RespawnTheDead_Randomly.sp"
 #include "Effects/Player/ReversedMovement.sp"
 #include "Effects/Player/ReversedRecoil.sp"
+#include "Effects/Player/ReversedStrafe.sp"
 #include "Effects/Player/RewindTenSeconds.sp"
 #include "Effects/Player/Shields.sp"
 #include "Effects/Player/SimonSays.sp"

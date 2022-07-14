@@ -1,3 +1,5 @@
+//TODO: Organise with structs
+
 Handle EffectHud_Name = INVALID_HANDLE;
 Handle EffectHud_Time = INVALID_HANDLE;
 Handle EffectHud_NoDuration = INVALID_HANDLE;

@@ -904,4 +904,12 @@
     {
         "en"    "Allows for air strafing while skating across the map"
     }
+    "Chaos_ReversedStrafe_Title"
+    {
+        "en"    "Reversed Strafe"
+    }
+    "Chaos_ReversedStrafe_Description"
+    {
+        "en"    "Reverses A & D keys"
+    }
 }
