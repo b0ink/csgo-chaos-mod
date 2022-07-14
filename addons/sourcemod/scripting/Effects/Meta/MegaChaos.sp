@@ -1,7 +1,8 @@
-public void Chaos_MEGACHAOS(){
-	// if(ClearChaos()){	}
-	// if(NotDecidingChaos("Chaos_MEGACHAOS")) return;
-	
+//TODO: remove Meta chaos from the "Possible Chaos Effects" pool and run meta effects as their own random chance
+//? 		Whether thats on an interval, eg. every 25 - 50 effects run a meta effect, or run a 1 in 100 chance every effect to run a meta
+
+
+public void Chaos_MEGACHAOS_START(){
 	g_bMegaChaos = true; 
 
 	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0, true, true);
@@ -16,11 +17,20 @@ public void Chaos_MEGACHAOS(){
 }
 
 public Action Timer_CompleteMegaChaos(Handle timer){
-	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0);
+	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0, true, true);
 	g_bMegaChaos = false;
 }
 
+public bool Chaos_MEGACHAOS_CustomAnnouncement(){
+	return true;
+}
 
-public void Chaos_MEGACHAOS_START(){
-	
+
+public bool Chaos_MEGACHAOS_HasNoDuration(){
+	return true;
+}
+
+public bool Chaos_MEGACHAOS_Conditions(){
+	if(g_bMegaChaos) return false;
+	return true;
 }
