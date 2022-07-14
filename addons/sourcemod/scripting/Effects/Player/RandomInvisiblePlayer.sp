@@ -1,4 +1,5 @@
 public void Chaos_RandomInvisiblePlayer_START(){
+	cvar("sv_disable_immunity_alpha", "1");
 	Handle players_array = CreateArray(4);
 	int playerCount = -1;
 	for(int i = 0; i <= MaxClients; i++){
@@ -17,19 +18,19 @@ public void Chaos_RandomInvisiblePlayer_START(){
 
 	char chaosMsg[MAX_NAME_LENGTH];
 	FormatEx(chaosMsg, 	sizeof(chaosMsg), "%N", target);
-	Format(chaosMsg, 	sizeof(chaosMsg), "%s...", Truncate(chaosMsg, 10));
+	Format(chaosMsg, 	sizeof(chaosMsg), "%s", Truncate(chaosMsg, 10));
 	Format(chaosMsg, 	sizeof(chaosMsg), "{orange}%s {default}has been made invisible", chaosMsg);
 	AnnounceChaos(chaosMsg, -1.0);
 	
 	delete players_array;
 }
 
-public Action Chaos_RandomInvisiblePlayer_RESET(bool EndChaos){
+// public Action Chaos_RandomInvisiblePlayer_RESET(bool EndChaos){
 
-}
+// }
 
 public bool Chaos_RandomInvisiblePlayer_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_RandomInvisiblePlayer_CustomAnnouncement(){
