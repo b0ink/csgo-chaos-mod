@@ -37,8 +37,8 @@ public void OnConfigsExecuted(){
 	// Run_Init_Functions();
 	effect foo;
 	char function_mapstart[64];
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
+	for(int i = 0; i < ChaosEffects.Length; i++){
+		ChaosEffects.GetArray(i, foo, sizeof(foo));
 		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", foo.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
 		if(func != INVALID_FUNCTION){
@@ -52,8 +52,8 @@ public void OnConfigsExecuted(){
 void Run_Init_Functions(){
 	effect foo;
 	char init_function[64];
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
+	for(int i = 0; i < ChaosEffects.Length; i++){
+		ChaosEffects.GetArray(i, foo, sizeof(foo));
 		Format(init_function, sizeof(init_function), "%s_INIT", foo.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
@@ -128,7 +128,7 @@ public void PrecacheTextures(){
 
 
 void ParseChaosEffects(){
-	alleffects.Clear();
+	ChaosEffects.Clear();
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
 
@@ -196,7 +196,7 @@ void ParseChaosEffects(){
 					Call_Finish(no_duration);
 				}
 				new_chaos_effect.force_no_duration = no_duration;
-				alleffects.PushArray(new_chaos_effect, sizeof(new_chaos_effect));
+				ChaosEffects.PushArray(new_chaos_effect, sizeof(new_chaos_effect));
 
 			}else{
 				Log("Could not find start function for: %s. This effect will not run.", Chaos_Function_Name);
@@ -205,7 +205,7 @@ void ParseChaosEffects(){
 		}
 	} while(kvConfig.GotoNextKey());
 
-	alleffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
+	ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
 
 	Log("Parsed Chaos_Effects.cfg succesfully!");
 }
@@ -237,12 +237,12 @@ void ParseOverrideEffects(){
 			int expires = kvConfig.GetNum("duration", 15);
 			if(enabled != 0 && enabled != 1) enabled = 1;
 			effect foo;
-			for(int i = 0; i < alleffects.Length; i++){
-				alleffects.GetArray(i, foo, sizeof(foo));
+			for(int i = 0; i < ChaosEffects.Length; i++){
+				ChaosEffects.GetArray(i, foo, sizeof(foo));
 				if(StrEqual(foo.config_name, Chaos_Function_Name, false)){
 					foo.enabled = view_as<bool>(enabled);
 					foo.duration = expires;
-					alleffects.SetArray(i, foo);
+					ChaosEffects.SetArray(i, foo);
 				}
 			}
 

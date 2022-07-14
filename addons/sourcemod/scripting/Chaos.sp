@@ -102,13 +102,13 @@ int g_iC4ChickenEnt = -1;
 #include "Global/Weather.sp"
 
 #include "Effects/EffectsList.sp"
-#include "Effects/HookedEvents.sp"
+#include "Effects/PluginStart.sp"
 
 #include "ConVars.sp"
 
 
 int global_id_count = 0;
-ArrayList alleffects;
+ArrayList ChaosEffects;
 
 enum struct effect{
 	char 		title[64]; // 0th index for ease of sorting in configs.sp
@@ -238,8 +238,8 @@ enum struct effect{
 
 public Action Effect_Reset(Handle timer, int effect_id){
 	effect foo;
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
+	for(int i = 0; i < ChaosEffects.Length; i++){
+		ChaosEffects.GetArray(i, foo, sizeof(foo));
 		if(foo.id == effect_id){
 			foo.reset_effect(true);
 			break;
@@ -280,9 +280,10 @@ public void OnPluginStart(){
 
 	g_SavedConvars  = CreateArray(64);
 
-	alleffects = new ArrayList(1024);
+	ChaosEffects = new ArrayList(1024);
 
-	HookEvents();
+	/* From Effects/PluginStart.sp */
+	Chaos_OnPluginStart();
 }
 
 
@@ -426,8 +427,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(g_sCustomEffect[0]){ //run from menu
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
 		effect foo;
-		for(int i = 0; i < alleffects.Length; i++){
-			alleffects.GetArray(i, foo, sizeof(foo));
+		for(int i = 0; i < ChaosEffects.Length; i++){
+			ChaosEffects.GetArray(i, foo, sizeof(foo));
 			if(StrEqual(foo.config_name, g_sCustomEffect, false)){
 				foo.run_effect();
 				break;
@@ -435,13 +436,13 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		}
 	}else{
 		effect new_effect;
-		int totalEffects = alleffects.Length;
+		int totalEffects = ChaosEffects.Length;
 		
 		while(!g_sLastPlayedEffect[0]){ // no longer
 			attempts++;
 			do{
 				randomEffect = GetRandomInt(0, totalEffects - 1);
-				alleffects.GetArray(randomEffect, new_effect, sizeof(new_effect));
+				ChaosEffects.GetArray(randomEffect, new_effect, sizeof(new_effect));
 				if(new_effect.enabled && new_effect.can_run_effect() && (!Effect_Recently_Played(new_effect.config_name) || CustomRun) && new_effect.timer == INVALID_HANDLE){
 					Random_Effect = new_effect.config_name;
 					new_effect.run_effect();
@@ -516,8 +517,8 @@ public Action ResetRoundChaos(Handle timer){
 	Fog_OFF();
 
 	effect foo;
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
+	for(int i = 0; i < ChaosEffects.Length; i++){
+		ChaosEffects.GetArray(i, foo, sizeof(foo));
 		foo.reset_effect(false);
 	}
 }

@@ -1,10 +1,19 @@
 
+
+/*
+	Any Required
+*/
+public void Chaos_OnPluginStart(){
+	HookEvents();
+}
+
+
+
 /*
 	ADD ALL YOUR REQUIRED HOOKED EVENTS HERE.
 
 	This on runs on 'OnPluginStart'
 */
-
 public void HookEvents(){
 	HookEvent("weapon_fire", 		Chaos_OneBulletOneGun_Event_OnWeaponFire);
 	HookEvent("weapon_fire", 		Chaos_InfiniteAmmo_Event_OnWeaponFire);

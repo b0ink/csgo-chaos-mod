@@ -10,4 +10,4 @@
 [Autoplant](https://github.com/b3none) by "b3none".\
 SM Teleport by "Spazman0".
 
-Ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".\
+Ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".

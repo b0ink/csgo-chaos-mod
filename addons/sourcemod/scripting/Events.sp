@@ -15,9 +15,9 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 
 
 public void OnEntityCreated(int ent, const char[] classname){
-	for(int i = 0; i < alleffects.Length; i++){
+	for(int i = 0; i < ChaosEffects.Length; i++){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityCreated", Chaos_EffectData_Buffer.config_name);
-		alleffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
+		ChaosEffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -33,9 +33,9 @@ public void OnEntityCreated(int ent, const char[] classname){
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 
-	for(int i = 0; i < alleffects.Length; i++){
+	for(int i = 0; i < ChaosEffects.Length; i++){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.config_name);
-		alleffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
+		ChaosEffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -146,9 +146,9 @@ void ResetChaos(){
 
 public void OnGameFrame(){
 	if (!g_cvChaosEnabled.BoolValue) return;
-	for(int i = 0; i < alleffects.Length; i++){
+	for(int i = 0; i < ChaosEffects.Length; i++){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnGameFrame", Chaos_EffectData_Buffer.config_name);
-		alleffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
+		ChaosEffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);

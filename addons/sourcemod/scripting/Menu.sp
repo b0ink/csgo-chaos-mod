@@ -64,7 +64,7 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 // 	effect foo;
 // 	int index = -1;
 // 	for(int i = 0; i < array.Length; i++){
-// 		alleffects.GetArray(i, foo, sizeof(foo));
+// 		ChaosEffects.GetArray(i, foo, sizeof(foo));
 // 		GetArrayString(array, i, search_term, sizeof(search_term));
 // 		index = StrContains(search_term, keyword, false);
 // 		if(index != -1) break;
@@ -78,7 +78,7 @@ int FindStringInArrayViaKeyword(ArrayList array, char[] keyword){
 	effect foo;
 	int index = -1;
 	for(int i = 0; i < array.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
+		ChaosEffects.GetArray(i, foo, sizeof(foo));
 		// search_term = foo.
 		// GetArrayString(array, i, search_term, sizeof(search_term));
 		index = StrContains(search_term, keyword, false);
@@ -325,8 +325,8 @@ void ShowMenu_EditAllEffects(int client){
 
 	char name[128];
 	effect foo;
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
+	for(int i = 0; i < ChaosEffects.Length; i++){
+		ChaosEffects.GetArray(i, foo, sizeof(foo));
 		Format(name, sizeof(name), "%s", GetChaosTitle(foo.config_name));
 		bool enabled = foo.enabled;
 		Format(name, sizeof(name), "%s %s", name, enabled ? "[ON]" : "[OFF]");
@@ -359,8 +359,8 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	effect effect_data;
 	GetEffectData(function_name, effect_data);
 	// effect foo;
-	// for(int i = 0; i < alleffects.Length; i++){
-	// 	alleffects.GetArray(i, foo, sizeof(foo));
+	// for(int i = 0; i < ChaosEffects.Length; i++){
+	// 	ChaosEffects.GetArray(i, foo, sizeof(foo));
 	// 	if(StrEqual(function_name, foo.config_name, false)){
 	// 		break;
 	// 	}

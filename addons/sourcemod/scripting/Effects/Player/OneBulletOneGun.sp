@@ -4,7 +4,6 @@ bool OneBulletOneGun = false;
 
 public void Chaos_OneBulletOneGun_INIT(){
 	OneBulletOneGun = false;
-
 }
 
 char g_OBOG_WeaponName[32];

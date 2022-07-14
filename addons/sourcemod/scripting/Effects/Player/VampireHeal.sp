@@ -22,9 +22,9 @@ public Action Chaos_VampireHeal_RESET(bool EndChaos){
 	g_bVampireRound = false;
 }
 
-public Action Chaos_VampireHeal_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_VampireHeal_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_VampireHeal_HasNoDuration(){

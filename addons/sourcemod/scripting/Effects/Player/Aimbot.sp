@@ -1,4 +1,4 @@
-/* https://raw.githubusercontent.com/Franc1sco/aimbot/master/scripting/aimbot.sp */
+/* CREDIT: https://raw.githubusercontent.com/Franc1sco/aimbot/master/scripting/aimbot.sp */
 
 /****************************************************************************************************
 BOOLS.

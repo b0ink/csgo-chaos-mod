@@ -16,8 +16,8 @@ bool ValidBombSpawns(){
 bool GetEffectData(char[] function_name, effect return_data){
 	effect effect_data;
 	bool found = false;
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, effect_data, sizeof(effect_data));
+	for(int i = 0; i < ChaosEffects.Length; i++){
+		ChaosEffects.GetArray(i, effect_data, sizeof(effect_data));
 		if(StrEqual(effect_data.config_name, function_name, false)){
 			found = true;
 			break;
@@ -61,8 +61,8 @@ bool PoolChaosEffects(char[] effectName = ""){
 
 	effect foo;
 	// char condition_check[64];
-	for(int i = 0; i < alleffects.Length; i++){
-		alleffects.GetArray(i, foo, sizeof(foo));
+	for(int i = 0; i < ChaosEffects.Length; i++){
+		ChaosEffects.GetArray(i, foo, sizeof(foo));
 
 		if(effectName[0]){ //* if keyword was provided
 			if(StrContains(foo.config_name, effectName, false) != -1){ //TODO: allow for aliases

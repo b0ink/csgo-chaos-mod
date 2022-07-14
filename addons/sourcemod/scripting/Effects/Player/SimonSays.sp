@@ -24,7 +24,7 @@ public Action Chaos_SimonSays_RESET(bool EndChaos){
 
 
 public bool Chaos_SimonSays_HasNoDuration(){
-	return false;
+	return true;
 }
 
 public bool Chaos_SimonSays_Conditions(){
@@ -37,9 +37,9 @@ public bool Chaos_SimonSays_Conditions(){
 void GenerateSimonOrder(float duration){
 	g_Simon_Says_Action = GetRandomInt(1,4);
 	g_bSimon_Says = true;
-	if(GetRandomInt(0, 100) <= 50){
-		g_bSimon_Says = false;
-	}
+	// if(GetRandomInt(0, 100) <= 50){
+	// 	g_bSimon_Says = false;
+	// }
 	if(g_Simon_Says_Action == 1){
 		g_Simon_ActionText = "Strafe.";
 	}
@@ -59,12 +59,10 @@ void GenerateSimonOrder(float duration){
 }
 
 public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-	if(g_time >= 8) return;
+	// PrintToChatAll("testq");
+	if(g_time >= 10) return;
 	
-	if(fVel[0] || fAngles[0]){
-		//remove warnings!
-	}
+
 	if(g_Simon_Says_Action == 1){
 		bool strafing = false;
 		if(buttons & IN_MOVELEFT) strafing = true;
@@ -120,8 +118,9 @@ void StartMessageTimer(){
 
 public Action Timer_ShowAction(Handle timer){
 	g_time--;
+	PrintToChatAll("%i", g_time);
 	char message[128];
-	if(g_time > 10){
+	if(g_time > 11){
 		int countdown = g_time - 10;
 		FormatEx(message, sizeof(message), "Simon says starting in \n%i...", countdown);
 		DisplayCenterTextToAll(message);
