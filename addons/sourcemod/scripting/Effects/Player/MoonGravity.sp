@@ -1,5 +1,5 @@
 public void Chaos_MoonGravity_START(){
-	SetPlayersGravity(0.6);
+	SetPlayersGravity(0.3);
 }
 	//TODO: fluctuating gravity thoughout the round?
 
