@@ -61,7 +61,7 @@ void GenerateSimonOrder(float duration){
 public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	// PrintToChatAll("testq");
 	if(g_time >= 10) return;
-	
+	if(!g_bSimon_Active) return;
 
 	if(g_Simon_Says_Action == 1){
 		bool strafing = false;

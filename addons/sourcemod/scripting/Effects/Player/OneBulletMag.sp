@@ -67,6 +67,8 @@ public bool Chaos_OneBulletMag_Conditions(){
 }
 
 stock void SetClip(int weaponid,int ammosize, int clipsize) {
-    SetEntData(weaponid, g_iOffset_Clip1, ammosize);
-    SetEntProp(weaponid, Prop_Send, "m_iPrimaryReserveAmmoCount", clipsize);
+	SetEntData(weaponid, g_iOffset_Clip1, ammosize);
+	if(clipsize >= 0){
+		SetEntProp(weaponid, Prop_Send, "m_iPrimaryReserveAmmoCount", clipsize);
+	}
 }

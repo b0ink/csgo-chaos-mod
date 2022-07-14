@@ -34,7 +34,7 @@ public void OnConfigsExecuted(){
 		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
 	}
 
-	// Run_Init_Functions();
+	Run_Init_Functions();
 	effect foo;
 	char function_mapstart[64];
 	for(int i = 0; i < ChaosEffects.Length; i++){

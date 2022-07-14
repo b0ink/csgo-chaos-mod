@@ -72,8 +72,6 @@ char 	g_sSelectedChaosEffect[64] = "";
 char 	g_sCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
-bool 	g_bClearChaos = false;
-
 Handle 	g_NewEffect_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
 bool 	g_bDisableRetryEffect = false;
@@ -421,7 +419,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	int attempts = 0;
 	g_sLastPlayedEffect = "";
 
-	g_bClearChaos = false;
 	PoolChaosEffects();
 
 	if(g_sCustomEffect[0]){ //run from menu

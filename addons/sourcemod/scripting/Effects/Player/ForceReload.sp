@@ -1,7 +1,19 @@
 bool g_bForce_Reload[MAXPLAYERS+1];
 
 public void Chaos_ForceReload_START(){
-	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) g_bForce_Reload[i] = true;
+
+	for(int i = 0; i <= MaxClients; i++){
+		if(ValidAndAlive(i)){
+			int iTempWeapon = -1;
+			if (GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon") == GetPlayerWeaponSlot(i, CS_SLOT_PRIMARY)){
+				if ((iTempWeapon = GetPlayerWeaponSlot(i, CS_SLOT_PRIMARY)) != -1) SetClip(iTempWeapon, 0, -1);
+			}else if (GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon") == GetPlayerWeaponSlot(i, CS_SLOT_SECONDARY)){
+				if ((iTempWeapon = GetPlayerWeaponSlot(i, CS_SLOT_SECONDARY)) != -1) SetClip(iTempWeapon, 0, -1);
+			}
+			g_bForce_Reload[i] = true;
+		}
+	}
+
 }
 
 public Action Chaos_ForceReload_RESET(bool EndChaos){
@@ -12,7 +24,6 @@ public Action Chaos_ForceReload_OnPlayerRunCmd(int client, int &buttons, int &iI
 	if (g_bForce_Reload[client]) {
 		buttons |= IN_RELOAD;
 		g_bForce_Reload[client] = false;
-		//return Plugin_Changed;
 	}
 }
 

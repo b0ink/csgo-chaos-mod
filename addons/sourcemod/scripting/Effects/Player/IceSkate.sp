@@ -12,8 +12,7 @@ public void Chaos_IceSkate_START(){
 }
 
 public Action Chaos_IceSkate_RESET(bool EndChaos){
-	ConVar accelerate = FindConVar("sv_airaccelerate");
-	// ResetConVar(accelerate);
+	ResetCvar("sv_airaccelerate", "12", "2000");
 	IceSkate = false;
 }
 
