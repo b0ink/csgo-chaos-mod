@@ -13,9 +13,9 @@ public Action Chaos_RespawnDead_LastLocation_RESET(bool EndChaos){
 
 }
 
-public Action Chaos_RespawnDead_LastLocation_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_RespawnDead_LastLocation_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_RespawnDead_LastLocation_HasNoDuration(){
@@ -23,6 +23,6 @@ public bool Chaos_RespawnDead_LastLocation_HasNoDuration(){
 }
 
 public bool Chaos_RespawnDead_LastLocation_Conditions(){
-	//TODO: no respawns on first chaos effect
+	if(g_iChaos_Round_Time <= 30) return false;
 	return true;
 }
