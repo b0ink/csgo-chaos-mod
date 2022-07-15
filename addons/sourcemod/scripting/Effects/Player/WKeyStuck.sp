@@ -1,3 +1,4 @@
+//TODO: breaktime doesnt stop you from walking
 bool WKeyStuck = false;
 
 public void Chaos_WKeyStuck_START(){

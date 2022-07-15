@@ -1,3 +1,5 @@
+//TODO: if a player is scoping in during this effect, they cant scope back out unless switching weapon
+
 //hook
 bool g_bNoscopeOnly = false;
 int m_flNextSecondaryAttack = -1;
