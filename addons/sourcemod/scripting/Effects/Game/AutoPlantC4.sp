@@ -41,6 +41,8 @@ public bool Chaos_AutoPlantC4_CustomAnnouncement(){
 public bool Chaos_AutoPlantC4_Conditions(){
     if(!ValidBombSpawns()) return false;
     if(isHostageMap()) return false;
+    if(g_iChaos_Round_Time <= 30) return false;
+
     return true;
 }
 
