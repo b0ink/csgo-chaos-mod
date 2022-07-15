@@ -1,4 +1,6 @@
-# Chaos Mod for CS:GO [101 EFFECTS]
+### This branch has been restructed entirely from the main repo (not too far off from a merge), this will be the future main branch but requires a lot of clean up still.
+
+# Chaos Mod for CS:GO [114 EFFECTS]
 Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 100+ unique effects into your competitive games such as **Portal Guns, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more! The effects are randomised and every 15 seconds a new one will spawn, keeping you and your enemies on your toes.
 
 The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](addons/sourcemod/configs/Chaos/Chaos_Effects.cfg).
