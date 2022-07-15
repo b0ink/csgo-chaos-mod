@@ -8,7 +8,12 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	g_bBombPlanted = true;
 	C4Chicken();
 
+	CreateTimer(1.0, Timer_SaveBombPosition);
 	return Plugin_Continue;
+}
+
+public Action Timer_SaveBombPosition(Handle timer){
+	SaveBombPosition();
 }
 
 

@@ -17,9 +17,9 @@ public Action Chaos_Binoculars_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/binoculars.vtf");
 }
 
-public Action Chaos_Binoculars_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_Binoculars_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_Binoculars_HasNoDuration(){

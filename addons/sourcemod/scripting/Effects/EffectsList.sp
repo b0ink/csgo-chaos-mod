@@ -104,6 +104,7 @@
 #include "Effects/Player/SimonSays.sp"
 #include "Effects/Player/SlayRandomPlayer.sp"
 #include "Effects/Player/SlowSpeed.sp"
+#include "Effects/Player/SneakyBeaky.sp"
 #include "Effects/Player/SpeedShooter.sp"
 #include "Effects/Player/Spin180.sp"
 #include "Effects/Player/SuperJump.sp"
@@ -113,6 +114,3 @@
 #include "Effects/Player/Thirdperson.sp"
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WKeyStuck.sp"
-#include "Effects/Player/SneakyBeaky.sp"
-
-//TODO: No running allowed/Shift walking only effect (Chaos_Shhhh)

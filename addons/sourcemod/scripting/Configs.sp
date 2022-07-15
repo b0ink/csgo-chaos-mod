@@ -63,8 +63,45 @@ void Run_Init_Functions(){
 
 }
 
+void SaveBombPosition(){
+	float c4_location[3];
+	bool found = false;
+	int iMaxEnts = GetMaxEntities();
+	char sClassName[64];
+	for(int i=MaxClients;i<iMaxEnts;i++){
+		if(IsValidEntity(i) && IsValidEdict(i) && GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
+		StrEqual(sClassName, "weapon_c4")
+		&& GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
+			found = true;
+			GetEntPropVector(i, Prop_Send, "m_vecOrigin", c4_location);
+		}
+	}
 
-//TODO: check on bomb planted, check c4 location, get closest bomb site, save coord 
+	if(!found) return;
+	
+
+	//TODO: test this
+	int site = GetNearestBombsite(c4_location);
+	if(site == BOMBSITE_INVALID) return;
+
+	char c4_loc_string[64];
+	FormatEx(c4_loc_string, sizeof(c4_loc_string), "%f %f %f", c4_location[0], c4_location[1], c4_location[2]);
+
+	if(site == BOMBSITE_A){
+		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombA", c4_loc_string);
+		PushArrayArray(bombSiteA, c4_location);
+	}else if(site == BOMBSITE_B){
+		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombB", c4_loc_string);
+		PushArrayArray(bombSiteB, c4_location);
+	}
+
+
+
+	PushArrayArray(g_MapCoordinates, c4_location);
+
+
+}
+
 public Action Timer_SaveCoordinates(Handle timer){
 		
 	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return;
@@ -104,6 +141,8 @@ public Action Timer_SaveCoordinates(Handle timer){
 	}
 }
 
+
+//TODO: remove any unused
 public void PrecacheTextures(){
 	PrecacheModel("models/props_survival/dronegun/dronegun.mdl", true);
 	PrecacheModel("models/props_survival/drone/br_drone.mdl", true);

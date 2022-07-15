@@ -140,7 +140,9 @@ void AutoPlantC4(bool ForcedRetry = false){
     bomber = GetBomber();
     
     if (IsValidClient(bomber)){
-        bombsite = GetNearestBombsite(bomber);
+        float pos[3];
+        GetClientAbsOrigin(bomber, pos);
+        bombsite = GetNearestBombsite(pos);
         g_PlantedSite = bombsite;
         if(bombsite == BOMBSITE_A && bombSiteA != INVALID_HANDLE){
             int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
@@ -248,8 +250,8 @@ stock bool IsWarmup(){
     return GameRules_GetProp("m_bWarmupPeriod") == 1;
 }
 
-stock int GetNearestBombsite(int client){
-    float pos[3];
+stock int GetNearestBombsite(float pos[3]){
+    // float pos[3];
     GetClientAbsOrigin(client, pos);
     
     int playerResource = GetPlayerResourceEntity();

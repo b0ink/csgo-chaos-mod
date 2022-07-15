@@ -309,12 +309,19 @@ enum struct effect{
 	}
 }
 
+//TODO: LoopAllEntities()?
+
 #define LoopAllEffects(%1) for(int i = 0; i < 999; i++)\
 									if(i < ChaosEffects.Length)\
 									if(ChaosEffects.GetArray(i, %1, sizeof(%1)))
 //TODO:..
+/*
+	TODO: instead of pooling coords into an empty array, then removing the coord once used
+			Could i do a DIstanceTOClosestPlayer check after teleporting players one by one?
+*/
 #define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
 
+// Already checks if they are on a valid team
 #define LoopAlivePlayers(%1) for(int %1 = 0; %1 <= MaxClients; %1++)\
 							if(ValidAndAlive(%1))
 
