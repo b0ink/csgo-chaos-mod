@@ -1,0 +1,31 @@
+//TODO: sm_rcon ammo_grenade_limit_total 10
+// https://counterstrike.fandom.com/wiki/Grenades
+
+
+public void Chaos_ExtendedGrenades_START(){
+	cvar("ammo_grenade_limit_total", "7");
+	LoopAlivePlayers(i){
+		GivePlayerItem(i, "weapon_hegrenade");
+		GivePlayerItem(i, "weapon_molotov");
+		GivePlayerItem(i, "weapon_flashbang");
+		GivePlayerItem(i, "weapon_smokegrenade");
+		GivePlayerItem(i, "weapon_snowball");
+		GivePlayerItem(i, "weapon_decoy");
+		GivePlayerItem(i, "weapon_tagrenade");
+	}
+}
+
+public void Chaos_ExtendedGrenades_RESET(bool EndChaos){
+	if(EndChaos){
+		ResetCvar("ammo_grenade_limit_total", "4", "7");
+	}
+}
+
+
+public bool Chaos_ExtendedGrenades_HasNoDuration(){
+	return false;
+}
+
+public bool Chaos_ExtendedGrenades_Conditions(){
+	return true;
+}

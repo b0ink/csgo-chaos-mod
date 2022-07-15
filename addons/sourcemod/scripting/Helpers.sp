@@ -16,13 +16,13 @@ bool ValidBombSpawns(){
 bool GetEffectData(char[] function_name, effect return_data){
 	effect effect_data;
 	bool found = false;
-	for(int i = 0; i < ChaosEffects.Length; i++){
-		ChaosEffects.GetArray(i, effect_data, sizeof(effect_data));
+	LoopAllEffects(effect_data){
 		if(StrEqual(effect_data.config_name, function_name, false)){
 			found = true;
 			break;
 		}
 	}
+
 	if(found) return_data = effect_data;
 	return found;
 	// return null;
@@ -59,22 +59,19 @@ bool PoolChaosEffects(char[] effectName = ""){
 
 	Possible_Chaos_Effects.Clear();
 
-	effect foo;
-	// char condition_check[64];
-	for(int i = 0; i < ChaosEffects.Length; i++){
-		ChaosEffects.GetArray(i, foo, sizeof(foo));
-
+	effect data;
+	LoopAllEffects(data){
 		if(effectName[0]){ //* if keyword was provided
-			if(StrContains(foo.config_name, effectName, false) != -1){ //TODO: allow for aliases
-				Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
+			if(StrContains(data.config_name, effectName, false) != -1){ //TODO: allow for aliases
+				Possible_Chaos_Effects.PushArray(data, sizeof(data));
 			}
 		}else{
 			// if(foo.can_run_effect()){ //TODO: allow all?
-			Possible_Chaos_Effects.PushArray(foo, sizeof(foo));
+			Possible_Chaos_Effects.PushArray(data, sizeof(data));
 			// }
 		}
-			
 	}
+
 	Log("Size of pooled chaos effects: %i", Possible_Chaos_Effects.Length);
 	// Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
 }

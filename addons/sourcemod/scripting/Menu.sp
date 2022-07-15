@@ -324,13 +324,12 @@ void ShowMenu_EditAllEffects(int client){
 	menu.SetTitle("Select an effect to edit.");
 
 	char name[128];
-	effect foo;
-	for(int i = 0; i < ChaosEffects.Length; i++){
-		ChaosEffects.GetArray(i, foo, sizeof(foo));
-		Format(name, sizeof(name), "%s", GetChaosTitle(foo.config_name));
-		bool enabled = foo.enabled;
+	effect data;
+	LoopAllEffects(data){
+		Format(name, sizeof(name), "%s", GetChaosTitle(data.config_name));
+		bool enabled = data.enabled;
 		Format(name, sizeof(name), "%s %s", name, enabled ? "[ON]" : "[OFF]");
-		menu.AddItem(foo.config_name, name);
+		menu.AddItem(data.config_name, name);
 	}
 
 	menu.ExitButton = true;
@@ -358,18 +357,7 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 
 	effect effect_data;
 	GetEffectData(function_name, effect_data);
-	// effect foo;
-	// for(int i = 0; i < ChaosEffects.Length; i++){
-	// 	ChaosEffects.GetArray(i, foo, sizeof(foo));
-	// 	if(StrEqual(function_name, foo.config_name, false)){
-	// 		break;
-	// 	}
-	// }
 
-
-	// char effect_title[128];
-	// FormatEx(effect_title, sizeof(effect_title), "%s", GetChaosTitle(function_name));
-	
 	char enabled_status[128];
 	
 	FormatEx(enabled_status, sizeof(enabled_status), "Enabled: %s", effect_data.enabled ? "ON" : "OFF");	

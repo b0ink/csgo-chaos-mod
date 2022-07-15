@@ -46,6 +46,7 @@
 #include "Effects/Player/Drugs.sp"
 #include "Effects/Player/ESP.sp"
 #include "Effects/Player/ExplosiveBullets.sp"
+#include "Effects/Player/ExtendedGrenades.sp"
 #include "Effects/Player/FakeTeleport.sp"
 #include "Effects/Player/FastSpeed.sp"
 #include "Effects/Player/Flying.sp"

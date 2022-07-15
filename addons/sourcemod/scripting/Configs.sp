@@ -35,32 +35,32 @@ public void OnConfigsExecuted(){
 	}
 
 	Run_Init_Functions();
-	effect foo;
+	effect data;
 	char function_mapstart[64];
-	for(int i = 0; i < ChaosEffects.Length; i++){
-		ChaosEffects.GetArray(i, foo, sizeof(foo));
-		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", foo.config_name);
+	LoopAllEffects(data){
+		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", data.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();
 		}
 	}
+
 }
 
 
 void Run_Init_Functions(){
-	effect foo;
+	effect data;
 	char init_function[64];
-	for(int i = 0; i < ChaosEffects.Length; i++){
-		ChaosEffects.GetArray(i, foo, sizeof(foo));
-		Format(init_function, sizeof(init_function), "%s_INIT", foo.config_name);
+	LoopAllEffects(data){
+		Format(init_function, sizeof(init_function), "%s_INIT", data.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();
 		}
 	}
+
 }
 
 
@@ -236,15 +236,15 @@ void ParseOverrideEffects(){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
 			if(enabled != 0 && enabled != 1) enabled = 1;
-			effect foo;
-			for(int i = 0; i < ChaosEffects.Length; i++){
-				ChaosEffects.GetArray(i, foo, sizeof(foo));
-				if(StrEqual(foo.config_name, Chaos_Function_Name, false)){
-					foo.enabled = view_as<bool>(enabled);
-					foo.duration = expires;
-					ChaosEffects.SetArray(i, foo);
+			effect data;
+			LoopAllEffects(data){
+				if(StrEqual(data.config_name, Chaos_Function_Name, false)){
+					data.enabled = view_as<bool>(enabled);
+					data.duration = expires;
+					ChaosEffects.SetArray(i, data);
 				}
 			}
+
 
 		}
 	} while(kvConfig.GotoNextKey());

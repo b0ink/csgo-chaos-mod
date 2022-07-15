@@ -912,4 +912,12 @@
     {
         "en"    "Reverses A & D keys"
     }
+    "Chaos_ExtendedGrenades_Title"
+    {
+        "en"    "Extended Grenades"
+    }
+    "Chaos_ExtendedGrenades_Description"
+    {
+        "en"    "Gives every player 7 grenades to hold"
+    }
 }

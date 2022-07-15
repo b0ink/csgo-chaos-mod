@@ -17,9 +17,6 @@
 #define PLUGIN_VERSION "0.1.0"
 
 
-//TODO:..
-#define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
-
 
 
 
@@ -313,9 +310,15 @@ enum struct effect{
 }
 
 #define LoopAllEffects(%1) for(int i = 0; i < 999; i++)\
-													if(i < ChaosEffects.Length)\
-													if(ChaosEffects.GetArray(i, %1, sizeof(%1)))
-											
+									if(i < ChaosEffects.Length)\
+									if(ChaosEffects.GetArray(i, %1, sizeof(%1)))
+//TODO:..
+#define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
+
+#define LoopAlivePlayers(%1) for(int %1 = 0; %1 <= MaxClients; %1++)\
+							if(ValidAndAlive(%1))
+
+						
 // Shared by multiple effects
 #include "Global/InstantWeaponSwitch.sp"
 #include "Global/WeaponJump.sp"
@@ -330,11 +333,10 @@ enum struct effect{
 
 
 public Action Effect_Reset(Handle timer, int effect_id){
-	effect foo;
-	for(int i = 0; i < ChaosEffects.Length; i++){
-		ChaosEffects.GetArray(i, foo, sizeof(foo));
-		if(foo.id == effect_id){
-			foo.reset_effect(true);
+	effect data;
+	LoopAllEffects(data){
+		if(data.id == effect_id){
+			data.reset_effect(true);
 			break;
 		}
 	}
@@ -518,11 +520,11 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	if(g_sCustomEffect[0]){ //run from menu
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
-		effect foo;
-		for(int i = 0; i < ChaosEffects.Length; i++){
-			ChaosEffects.GetArray(i, foo, sizeof(foo));
-			if(StrEqual(foo.config_name, g_sCustomEffect, false)){
-				foo.run_effect();
+		effect data;
+		LoopAllEffects(data){
+			//TODO: test conditions, return error to user?
+			if(StrEqual(data.config_name, g_sCustomEffect, false)){
+				data.run_effect();
 				break;
 			}
 		}
@@ -608,10 +610,9 @@ public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
 	Fog_OFF();
 
-	effect foo;
-	for(int i = 0; i < ChaosEffects.Length; i++){
-		ChaosEffects.GetArray(i, foo, sizeof(foo));
-		foo.reset_effect(false);
+	effect data;
+	LoopAllEffects(data){
+		data.reset_effect(false);
 	}
 }
 

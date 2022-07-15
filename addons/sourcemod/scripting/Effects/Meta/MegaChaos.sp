@@ -3,21 +3,6 @@
 
 
 public void Chaos_MEGACHAOS_START(){
-
-	effect data;
-	int count = 0;
-	LoopAllEffects(data){
-		count++;
-		PrintToChatAll(data.title);
-	}
-	PrintToChatAll("count: %i", count);
-
-
-	return;
-	
-	
-	
-	
 	g_bMegaChaos = true; 
 
 	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0, true, true);

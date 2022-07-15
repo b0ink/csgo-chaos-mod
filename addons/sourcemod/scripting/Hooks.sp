@@ -1,8 +1,7 @@
 public Action Hook_WeaponSwitch(int client, int weapon){
-	
-	for(int i = 0; i < ChaosEffects.Length; i++){
+	effect data;
+	LoopAllEffects(data){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_Hook_WeaponSwitch", Chaos_EffectData_Buffer.config_name);
-		ChaosEffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		Action return_type;
 		if(func != INVALID_FUNCTION){
@@ -31,14 +30,10 @@ public Action Hook_WeaponDrop(int client,int weapon){
 	return Plugin_Continue;
 } 
 
-//NoScope
 public Action Hook_OnPreThink(int client){
-	// int iWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-	// SetNoScope(iWeapon);
-	
-	for(int i = 0; i < ChaosEffects.Length; i++){
+
+	LoopAllEffects(Chaos_EffectData_Buffer){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_Hook_OnPreThink", Chaos_EffectData_Buffer.config_name);
-		ChaosEffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		Action return_type;
 		if(func != INVALID_FUNCTION){
@@ -48,6 +43,7 @@ public Action Hook_OnPreThink(int client){
 			if(return_type != Plugin_Continue) return return_type;
 		}
 	}
+
 	return Plugin_Continue;
 }
 
@@ -61,9 +57,8 @@ public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float
 		return Plugin_Changed;
 	}
 
-	for(int i = 0; i < ChaosEffects.Length; i++){
+	LoopAllEffects(Chaos_EffectData_Buffer){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_Hook_OnTakeDamage", Chaos_EffectData_Buffer.config_name);
-		ChaosEffects.GetArray(i, Chaos_EffectData_Buffer, sizeof(Chaos_EffectData_Buffer));
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		Action return_type;
 		if(func != INVALID_FUNCTION){
