@@ -48,7 +48,6 @@ public bool Chaos_SlayRandomPlayer_HasNoDuration(){
 }
 
 public bool Chaos_SlayRandomPlayer_Conditions(){
-	//TODO: only run on full teams
 	if(GetAliveCTCount() <= 4) return false;
 	if(GetAliveTCount() <= 4) return false;
 	return true;

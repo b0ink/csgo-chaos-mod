@@ -12,10 +12,8 @@ public void Chaos_PortalGuns_INIT(){
 
 public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 
-	// weaponJump(client, szWeaponName); //TODO: why
-
 	if(g_bPortalGuns){
-		//TODO:; if player is further 
+		//TODO: if player is further than the closest spawn point by x units, tp them back?
 		char szWeaponName[32];
 		event.GetString("weapon", szWeaponName, sizeof(szWeaponName));
 		int client = GetClientOfUserId(event.GetInt("userid"));
@@ -47,10 +45,6 @@ public void Chaos_PortalGuns_RESET(bool EndChaos){
 	if(EndChaos){
 		TeleportPlayersToClosestLocation();
 	}
-
-}
-
-public Action Chaos_PortalGuns_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
 }
 
