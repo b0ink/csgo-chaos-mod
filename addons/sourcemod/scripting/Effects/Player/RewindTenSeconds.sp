@@ -55,6 +55,7 @@ public bool Chaos_RewindTenSeconds_HasNoDuration(){
 }
 
 public bool Chaos_RewindTenSeconds_Conditions(){
+	if(g_iChaos_Round_Time <= 30) return false;
 	return true;
 }
 
