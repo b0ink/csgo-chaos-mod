@@ -920,4 +920,12 @@
     {
         "en"    "Gives every player 7 grenades to hold"
     }
+    "Chaos_WKeyStuck_Title"
+    {
+        "en"    "Help my W key is stuck"
+    }
+    "Chaos_WKeyStuck_Description"
+    {
+        "en"    "Forces players to walk forward"
+    }
 }

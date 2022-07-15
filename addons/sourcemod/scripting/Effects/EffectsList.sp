@@ -112,3 +112,6 @@
 #include "Effects/Player/TeleportFewMetres.sp"
 #include "Effects/Player/Thirdperson.sp"
 #include "Effects/Player/VampireHeal.sp"
+#include "Effects/Player/WKeyStuck.sp"
+
+//TODO: No running allowed/Shift walking only effect (Chaos_Shhhh)
