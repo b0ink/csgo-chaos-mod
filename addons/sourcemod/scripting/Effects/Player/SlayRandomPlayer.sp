@@ -48,5 +48,6 @@ public bool Chaos_SlayRandomPlayer_HasNoDuration(){
 }
 
 public bool Chaos_SlayRandomPlayer_Conditions(){
+	//TODO: only run on full teams
 	return true;
 }
