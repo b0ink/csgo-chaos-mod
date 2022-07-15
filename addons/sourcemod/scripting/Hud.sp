@@ -100,7 +100,7 @@ void PrintTimer(int time){
 				if(time <= 3){
 					SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
 					if(g_DynamicChannel){
-						ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);
+						ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);
 					}else{
 						ShowHudText(i, -1, "New effect in:\n%i", time);
 					}
@@ -108,7 +108,7 @@ void PrintTimer(int time){
 				}else{
 					SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 220, 0, 0, 1.0, 0.0, 0.0);
 					if(g_DynamicChannel){
-						ShowHudText(i, GetDynamicChannel(0), "New effect in:\n%i", time);	
+						ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
 					}else{
 						ShowHudText(i, -1, "New effect in:\n%i", time);	
 					}

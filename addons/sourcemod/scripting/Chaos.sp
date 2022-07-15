@@ -233,7 +233,7 @@ enum struct effect{
 
 	void reset_effect(bool EndChaos = false){
 		// PrintToChatAll("attempting to emd!: %s ", this.function_name_reset);
-
+		//TODO: Rename EndChaos to something like EndTimer or TimerComplete
 		Function func = GetFunctionByName(GetMyHandle(), this.function_name_reset);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -425,6 +425,8 @@ public void OnMapStart(){
 	WEATHER_INIT();
 	Overlay_INIT();
 
+	//TODO: Theres not really going to be anything in here if configs havent loaded yet?
+	//probably should move everything into _INIT, where it can run multiple times after a config refresh
 	Run_Init_Functions();
 
 	cvar("sv_fade_player_visibility_farz", "1");

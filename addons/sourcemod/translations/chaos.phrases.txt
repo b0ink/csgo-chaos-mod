@@ -928,4 +928,12 @@
     {
         "en"    "Forces players to walk forward"
     }
+    "Chaos_SneakyBeaky_Title"
+    {
+        "en"    "Sneaky Beaky"
+    }
+    "Chaos_SneakyBeaky_Description"
+    {
+        "en"    "Forces all players to walk"
+    }
 }

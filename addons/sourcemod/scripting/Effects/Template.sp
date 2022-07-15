@@ -1,5 +1,5 @@
 /*
-
+	TODO: Clean this file up, eg where hook events go
 
 	INIT runs on Plugin Start
 		-> Hook your events here
@@ -31,7 +31,7 @@
 			"en"    "Short description of the effect"
 		}
 
-	#include this file within Effects/Effectlist.sp.
+	#include this file within Effects/$0.sp.
 	
  */
 
