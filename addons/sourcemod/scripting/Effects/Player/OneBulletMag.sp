@@ -53,7 +53,6 @@ public Action Chaos_OneBulletMag_RESET(bool EndChaos){
 				FakeClientCommand(i, "use %s", currentWeapon); //swap back to original weapon
 			}
 		}
-		AnnounceChaos("One Bullet Mags", -1.0, true);
 
 	}
 }

@@ -19,6 +19,11 @@
 
 //TODO:..
 #define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
+
+
+
+
+
 // #define GetRandomMapSpawn(%1) for(int %1 = 0; %1 < )
 
 public Plugin myinfo = {
@@ -31,7 +36,7 @@ public Plugin myinfo = {
 
 char mapName[64];
 
-char 	g_Prefix[] = "[{lime}C H A O S{default}]";
+char 	g_Prefix[] = "[{lime}CHAOS{default}]";
 char 	g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
@@ -49,8 +54,71 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define DIRT "impact_dirt_child_clumps"
 #define EXPLOSION_HE "weapons/hegrenade/explode5.wav"
 
-#include "Data.sp"
 
+char g_sWeapons[][64] = {
+	"weapon_glock",
+    "weapon_p250",
+    "weapon_fiveseven",
+    "weapon_deagle",
+    "weapon_elite",
+    "weapon_hkp2000",
+    "weapon_tec9",
+
+    "weapon_nova",
+    "weapon_xm1014",
+    "weapon_sawedoff",
+
+    "weapon_m249",
+    "weapon_negev",
+    "weapon_mag7",
+
+    "weapon_mp7",
+    "weapon_ump45",
+    "weapon_p90",
+    "weapon_bizon",
+    "weapon_mp9",
+    "weapon_mac10",
+
+    "weapon_famas",
+    "weapon_m4a1",
+    "weapon_aug",
+    "weapon_galilar",
+    "weapon_ak47",
+    "weapon_sg556",
+
+    "weapon_ssg08",
+    "weapon_awp",
+    "weapon_scar20",
+    "weapon_g3sg1",
+
+    // "weapon_taser",
+    // "weapon_molotov",
+    // "weapon_hegrenade"
+};
+
+
+char g_sSkyboxes[][] = {
+	"cs_baggage_skybox_",
+	"cs_tibet",
+	"embassy",
+	"italy",
+	"jungle",
+	"office",
+	"sky_cs15_daylight01_hdr",
+	"sky_cs15_daylight02_hdr",
+	"sky_cs15_daylight03_hdr",
+	"sky_cs15_daylight04_hdr",
+	"sky_day02_05",
+	"nukeblank",
+	"sky_venice",
+	"sky_csgo_cloudy01",
+	"sky_csgo_night02",
+	"sky_csgo_night02b",
+	"vertigo",
+	"vertigoblue_hdr",
+	"sky_dust",
+	"vietnam"
+};
 
 bool 	g_bBombPlanted = false;
 
@@ -94,17 +162,7 @@ Handle 	g_UnusedCoordinates = INVALID_HANDLE;
 Handle 	bombSiteA = INVALID_HANDLE;
 Handle 	bombSiteB = INVALID_HANDLE;
 
-// Shared by multiple effects
-#include "Global/InstantWeaponSwitch.sp"
-#include "Global/WeaponJump.sp"
-#include "Global/Fog.sp"
-#include "Global/ColorCorrection.sp"
-#include "Global/Weather.sp"
 
-#include "Effects/EffectsList.sp"
-#include "Effects/PluginStart.sp"
-
-#include "ConVars.sp"
 
 //TODO: Organise spawn data
 // enum bomb_site{
@@ -123,6 +181,8 @@ Handle 	bombSiteB = INVALID_HANDLE;
 // 	ArrayList player_spawns;
 // 	ArrayList bomb_spawns;
 // }
+#include "ConVars.sp"
+
 
 int global_id_count = 0;
 ArrayList ChaosEffects;
@@ -251,6 +311,22 @@ enum struct effect{
 		return duration;
 	}
 }
+
+#define LoopAllEffects(%1) for(int i = 0; i < 999; i++)\
+													if(i < ChaosEffects.Length)\
+													if(ChaosEffects.GetArray(i, %1, sizeof(%1)))
+											
+// Shared by multiple effects
+#include "Global/InstantWeaponSwitch.sp"
+#include "Global/WeaponJump.sp"
+#include "Global/Fog.sp"
+#include "Global/ColorCorrection.sp"
+#include "Global/Weather.sp"
+
+#include "Effects/EffectsList.sp"
+#include "Effects/PluginStart.sp"
+
+
 
 
 public Action Effect_Reset(Handle timer, int effect_id){

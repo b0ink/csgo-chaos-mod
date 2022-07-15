@@ -1,3 +1,5 @@
+//TODO: Prevent spawnables such as barrels from spawning on bomb spawns, on the off chance it blocks the bomb.. but meme?
+
 public void Chaos_SpawnExplodingBarrels_START(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
