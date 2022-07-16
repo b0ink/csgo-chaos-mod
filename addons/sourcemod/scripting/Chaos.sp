@@ -232,8 +232,6 @@ enum struct effect{
 	}
 
 	void reset_effect(bool HasTimerEnded = false){
-		// PrintToChatAll("attempting to emd!: %s ", this.function_name_reset);
-		//TODO: Rename HasTimerEnded to something like EndTimer or TimerComplete
 		Function func = GetFunctionByName(GetMyHandle(), this.function_name_reset);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);

@@ -105,7 +105,7 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 		Possible_Chaos_Effects.GetArray(i, foo, sizeof(foo));
 		
 		// GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
-
+		//TODO: i think it was an alias search attempt with the new structs?
 		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function); //TODO: for structs wtf is this
 		if(index != -1 || true){ //TODO: WHY
 			// GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
@@ -120,6 +120,7 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 			if(foo.can_run_effect()){
 				menu.AddItem(foo.config_name, function_title);
 			}else{
+				
 				menu.AddItem(foo.config_name, function_title, ITEMDRAW_DISABLED);
 			}
 			//add item | VALUE | DISPLAY
