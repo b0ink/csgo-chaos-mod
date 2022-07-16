@@ -251,25 +251,6 @@ enum struct effect{
 		}
 		return response;
 	}
-
-	void SET_NAME(char effect_name[64]){
-		this.title = effect_name;
-	}
-	void SET_CONFIG_NAME(char effect_name[64]){
-		this.config_name = effect_name;
-	}
-	void SET_DESCRIPTION(char effect_name[64]){
-		this.description = effect_name;
-	}
-	void SET_DEFAULT_DURATION(int time){
-		this.duration = time;
-	}
-	void SET_START_FUNCTION(char start_function[64]){
-		this.function_name_start = start_function;
-	}
-	void SET_RESET_FUNCTION(char reset_function[64]){
-		this.function_name_reset = reset_function;
-	}
 	float Get_Duration(bool raw = false){
 		if(this.force_no_duration){
 			return -1.0;
