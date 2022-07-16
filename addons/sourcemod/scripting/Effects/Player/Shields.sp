@@ -20,7 +20,6 @@ public void Chaos_Shields_START(){
 }
 
 public Action Chaos_Shields_RESET(bool HasTimerEnded){
-
 }
 
 public Action Chaos_Shields_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){

@@ -40,14 +40,16 @@ public Action Command_NewChaosEffect(int client, int args){
 						//TODO: show if the chas is enabled or not
 						ReplyToCommand(client, "[Chaos] No effects found, or the desired effect is currently disabled.");
 						return Plugin_Handled;
-					}else if(Possible_Chaos_Effects.Length == 1){
-						// g_sCustomEffect = g_sSelectedChaosEffect;
-						effect foo;
-						Possible_Chaos_Effects.GetArray (0, foo, sizeof(foo));
-						g_sCustomEffect = foo.config_name;
-						ChooseEffect(null, true);
+					// }else if(Possible_Chaos_Effects.Length == 1){
+					// 	// g_sCustomEffect = g_sSelectedChaosEffect;
+					// 	effect foo;
+					// 	Possible_Chaos_Effects.GetArray (0, foo, sizeof(foo));
+					// 	g_sCustomEffect = foo.config_name;
+					// 	ChooseEffect(null, true);
 					}else{
-						ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
+						if(Possible_Chaos_Effects.Length > 1){
+							ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
+						}
 						ShowMenu_Effects(client);
 					}
 			}else{
