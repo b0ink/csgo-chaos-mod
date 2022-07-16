@@ -252,7 +252,7 @@ stock bool IsWarmup(){
 
 stock int GetNearestBombsite(float pos[3]){
     // float pos[3];
-    GetClientAbsOrigin(client, pos);
+    // GetClientAbsOrigin(client, pos);
     
     int playerResource = GetPlayerResourceEntity();
     if (playerResource == -1) return BOMBSITE_INVALID;
