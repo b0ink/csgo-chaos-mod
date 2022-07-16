@@ -1,6 +1,3 @@
-//TODO: if a player is scoping in during this effect, they cant scope back out unless switching weapon
-
-//hook
 bool g_bNoscopeOnly = false;
 int m_flNextSecondaryAttack = -1;
 public void Chaos_NoScopeOnly_INIT(){
@@ -26,7 +23,15 @@ public Action Chaos_NoScopeOnly_Hook_OnPreThink(int client){
 
 public void Chaos_NoScopeOnly_START(){
 	g_bNoscopeOnly = true;
+	LoopAlivePlayers(client){
+		// If already scoping, switch weapon to exit scope, perhaps theres a better way TODO this
+		if(GetEntProp(client, Prop_Send, "m_bIsScoped")){
+			FakeClientCommand(client, "use weapon_knife");
+			ClientCommand(client, "slot2;slot1");
+		}
+	}
 }
+
 
 public Action Chaos_NoScopeOnly_RESET(bool HasTimerEnded){
 	g_bNoscopeOnly = false;
