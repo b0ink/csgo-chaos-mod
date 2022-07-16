@@ -5,7 +5,7 @@ public void Chaos_LooseTrigger_START(){
 	g_bLoose_Trigger = true;
 }
 
-public Action Chaos_LooseTrigger_RESET(bool EndChaos){
+public Action Chaos_LooseTrigger_RESET(bool HasTimerEnded){
 	g_bLoose_Trigger = false;
 }
 

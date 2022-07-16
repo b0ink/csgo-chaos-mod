@@ -2,8 +2,8 @@ public void Chaos_Impostors_START(){
 	SpawnImpostors();
 }
 
-public Action Chaos_Impostors_RESET(bool EndChaos){
-	if(EndChaos){
+public Action Chaos_Impostors_RESET(bool HasTimerEnded){
+	if(HasTimerEnded){
 		RemoveChickens();
 	}
 }

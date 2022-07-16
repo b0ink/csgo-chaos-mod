@@ -96,7 +96,7 @@ public void Chaos_AutoPlantC4_START(){
 	CreateTimer(0.6, Timer_EnsureSpawnedAutoPlant);
 }
 
-public Action Chaos_AutoPlant_RESET(bool EndChaos){
+public Action Chaos_AutoPlant_RESET(bool HasTimerEnded){
 	AutoPlantRoundEnd();
 }
 

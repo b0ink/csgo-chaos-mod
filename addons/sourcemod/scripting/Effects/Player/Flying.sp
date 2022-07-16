@@ -8,8 +8,8 @@ public void Chaos_Flying_START(){
 	cvar("sv_noclipspeed", "2");
 }
 
-public Action Chaos_Flying_RESET(bool EndChaos){
-	if(EndChaos){
+public Action Chaos_Flying_RESET(bool HasTimerEnded){
+	if(HasTimerEnded){
 		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityMoveType(i, MOVETYPE_WALK);
 		TeleportPlayersToClosestLocation();
 	}

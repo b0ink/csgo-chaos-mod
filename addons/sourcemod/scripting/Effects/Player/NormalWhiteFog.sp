@@ -2,7 +2,7 @@ public void Chaos_NormalWhiteFog_START(){
 	NormalWhiteFog();
 }
 
-public Action Chaos_NormalWhiteFog_RESET(bool EndChaos){
+public Action Chaos_NormalWhiteFog_RESET(bool HasTimerEnded){
 		AcceptEntityInput(g_iFog, "TurnOff");
 	//TODO:
 }

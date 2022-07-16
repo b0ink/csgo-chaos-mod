@@ -16,7 +16,7 @@ public void Chaos_RewindTenSeconds_OnGameFrame(){
 }
 
 
-public void Chaos_RewindTenSeconds_START(bool EndChaos){
+public void Chaos_RewindTenSeconds_START(bool HasTimerEnded){
 	g_bRewind_logging_enabled = false;
 	g_Rewinding = true;
 	g_RewindTime = 0;
@@ -32,7 +32,7 @@ public void Chaos_RewindTenSeconds_START(bool EndChaos){
 }
 
 
-public Action Chaos_RewindTenSeconds_RESET(bool EndChaos){
+public Action Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
 	g_bRewind_logging_enabled = true;
 	g_Rewinding = true;
 	for(int i = 0; i <= MaxClients; i++){

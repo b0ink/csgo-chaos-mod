@@ -24,8 +24,8 @@ public Action Timer_EndTeleport(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_FakeTeleport"), -1.0);
 }
 
-public Action Chaos_FakeTeleport_RESET(bool EndChaos){
-	if(EndChaos){
+public Action Chaos_FakeTeleport_RESET(bool HasTimerEnded){
+	if(HasTimerEnded){
 
 	}
 }

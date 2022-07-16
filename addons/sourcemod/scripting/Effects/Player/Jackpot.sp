@@ -7,7 +7,7 @@ public void Chaos_Jackpot_START(){
 	}
 }
 
-public Action Chaos_Jackpot_RESET(bool EndChaos){
+public Action Chaos_Jackpot_RESET(bool HasTimerEnded){
 
 }
 

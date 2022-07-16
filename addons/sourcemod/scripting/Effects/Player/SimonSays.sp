@@ -17,7 +17,7 @@ public void Chaos_SimonSays_START(){
 	g_bSimon_Active = true;
 }
 
-public Action Chaos_SimonSays_RESET(bool EndChaos){
+public Action Chaos_SimonSays_RESET(bool HasTimerEnded){
 	g_bSimon_Active = false;
 	KillMessageTimer();
 }

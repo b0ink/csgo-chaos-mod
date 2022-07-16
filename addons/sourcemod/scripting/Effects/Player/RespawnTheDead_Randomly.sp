@@ -9,7 +9,7 @@ public void Chaos_RespawnTheDead_Randomly_START(){
 	}
 }
 
-public Action Chaos_RespawnTheDead_Randomly_RESET(bool EndChaos){
+public Action Chaos_RespawnTheDead_Randomly_RESET(bool HasTimerEnded){
 
 }
 

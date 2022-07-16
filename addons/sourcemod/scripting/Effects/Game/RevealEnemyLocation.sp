@@ -11,7 +11,7 @@ public Action Timer_ResetRadar(Handle timer){
 	cvar("mp_radar_showall", "0");
 }
 
-public Action Chaos_RevealEnemyLocation_RESET(bool EndChaos){
+public Action Chaos_RevealEnemyLocation_RESET(bool HasTimerEnded){
 
 }
 

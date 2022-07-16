@@ -11,9 +11,9 @@ public void Chaos_SpeedShooter_START(){
 	SpeedShooter = true;
 }
 
-public Action Chaos_SpeedShooter_RESET(bool EndChaos){
+public Action Chaos_SpeedShooter_RESET(bool HasTimerEnded){
 	SpeedShooter = false;
-	if(EndChaos){
+	if(HasTimerEnded){
 		for(int i = 0; i <= MaxClients; i++){
 			if(ValidAndAlive(i)){
 				SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);

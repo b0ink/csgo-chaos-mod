@@ -25,7 +25,7 @@ public void Chaos_RandomInvisiblePlayer_START(){
 	delete players_array;
 }
 
-// public Action Chaos_RandomInvisiblePlayer_RESET(bool EndChaos){
+// public Action Chaos_RandomInvisiblePlayer_RESET(bool HasTimerEnded){
 
 // }
 

@@ -6,7 +6,7 @@ public void Chaos_NoCrosshair_START(){
 	}
 }
 
-public Action Chaos_NoCrosshair_RESET(bool EndChaos){
+public Action Chaos_NoCrosshair_RESET(bool HasTimerEnded){
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
 			SetEntProp(i, Prop_Send, "m_iHideHUD", 0);

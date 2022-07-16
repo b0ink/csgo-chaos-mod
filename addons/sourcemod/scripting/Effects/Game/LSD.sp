@@ -10,7 +10,7 @@ public void Chaos_LSD_START(){
 	g_LSD_Timer_Repeat = CreateTimer(5.0, Timer_SpawnNewLSD);
 }
 
-public Action Chaos_LSD_RESET(bool EndChaos){
+public Action Chaos_LSD_RESET(bool HasTimerEnded){
 		StopTimer(g_LSD_Timer_Repeat);
 		CLEAR_CC("env_1.raw");
 		CLEAR_CC("env_2.raw");

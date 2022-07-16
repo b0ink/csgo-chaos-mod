@@ -12,7 +12,7 @@ public void Chaos_BreakTime_START(){
 }
 
 
-public Action Chaos_BreakTime_RESET(bool EndChaos){
+public Action Chaos_BreakTime_RESET(bool HasTimerEnded){
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 	if(g_bNoStrafe > 0) g_bNoStrafe--;

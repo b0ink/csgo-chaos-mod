@@ -29,7 +29,7 @@ public Action Timer_FakeLag(Handle timer){
 	CreateTimer(GetRandomFloat(1.0, 5.0), Timer_FakeLag);
 }
 
-public Action Chaos_FakeLag_RESET(bool EndChaos){
+public Action Chaos_FakeLag_RESET(bool HasTimerEnded){
 	FakeLag = false;
 }
 

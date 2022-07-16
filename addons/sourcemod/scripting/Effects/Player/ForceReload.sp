@@ -16,7 +16,7 @@ public void Chaos_ForceReload_START(){
 
 }
 
-public Action Chaos_ForceReload_RESET(bool EndChaos){
+public Action Chaos_ForceReload_RESET(bool HasTimerEnded){
 	//* Automatically resets when reload is activated
 	for(int i = 0; i <= MaxClients; i++) g_bForce_Reload[i] = false;
 }

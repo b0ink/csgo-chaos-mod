@@ -4,7 +4,7 @@ public void Chaos_BlindPlayers_START(){
 	}
 }
 
-public Action Chaos_BlindPlayers_RESET(bool EndChaos){
+public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){
 			PerformBlind(i, 0);

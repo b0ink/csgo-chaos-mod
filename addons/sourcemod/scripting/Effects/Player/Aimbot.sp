@@ -41,7 +41,7 @@ public void Chaos_Aimbot_START(){
 	}
 }
 
-public Action Chaos_Aimbot_RESET(bool EndChaos){
+public Action Chaos_Aimbot_RESET(bool HasTimerEnded){
 		for(int i = 0; i <= MaxClients; i++){
 			if(IsValidClient(i)){
 				Aimbot_REMOVE_SDKHOOKS(i);

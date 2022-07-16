@@ -9,7 +9,7 @@ public void Chaos_ResetSpawns_START(){
 	}
 }
 
-public Action Chaos_ResetSpawns_RESET(bool EndChaos){
+public Action Chaos_ResetSpawns_RESET(bool HasTimerEnded){
 
 }
 

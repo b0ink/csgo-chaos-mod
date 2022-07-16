@@ -7,7 +7,7 @@ public void Chaos_NightVision_START(){
 	}
 }
 
-public Action Chaos_NightVision_RESET(bool EndChaos){
+public Action Chaos_NightVision_RESET(bool HasTimerEnded){
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			SetEntProp(i, Prop_Send, "m_bNightVisionOn", 0);

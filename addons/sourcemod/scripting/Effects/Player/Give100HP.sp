@@ -7,7 +7,7 @@ public void Chaos_Give100HP_START(){
 	}
 }
 
-public Action Chaos_Give100HP_RESET(bool EndChaos){
+public Action Chaos_Give100HP_RESET(bool HasTimerEnded){
 
 }
 

@@ -4,7 +4,7 @@ public void Chaos_QuakeFOV_START(){
 
 }
 
-public Action Chaos_QuakeFOV_RESET(bool EndChaos){
+public Action Chaos_QuakeFOV_RESET(bool HasTimerEnded){
 	ResetPlayersFOV();
 }
 

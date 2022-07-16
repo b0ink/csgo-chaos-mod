@@ -17,7 +17,7 @@ public void Chaos_Thunderstorm_START(){
 	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
 }
 
-public Action Chaos_Thunderstorm_RESET(bool EndChaos){
+public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	CLEAR_CC("thunderstorm.raw");
 	
 	Thunderstorm = false;

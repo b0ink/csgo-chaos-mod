@@ -7,7 +7,7 @@ public void Chaos_DiscoFog_START(){
 	g_DiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT);
 }
 
-public Action Chaos_DiscoFog_RESET(bool EndChaos){
+public Action Chaos_DiscoFog_RESET(bool HasTimerEnded){
 	StopTimer(g_DiscoFog_Timer_Repeat);
 	g_bDiscoFog = false;
 	Fog_OFF();

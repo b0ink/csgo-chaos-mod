@@ -7,7 +7,7 @@ public void Chaos_DiscoPlayers_START(){
 
 }
 
-public Action Chaos_DiscoPlayers_RESET(bool EndChaos){
+public Action Chaos_DiscoPlayers_RESET(bool HasTimerEnded){
 	StopTimer(DiscoPlayers_TimerRepeat);
 	DiscoPlayers = false;
 }

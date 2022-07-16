@@ -14,7 +14,7 @@ public void Chaos_Drugs_START(){
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) CreateDrug(i);
 }
 
-public Action Chaos_Drugs_RESET(bool EndChaos){
+public Action Chaos_Drugs_RESET(bool HasTimerEnded){
 	KillAllDrugs();
 }
 

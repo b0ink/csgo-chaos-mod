@@ -4,7 +4,7 @@ public void Chaos_CrabPeople_START(){
 	g_bForceCrouch = true;
 }
 
-public Action Chaos_CrabPeople_RESET(bool EndChaos){
+public Action Chaos_CrabPeople_RESET(bool HasTimerEnded){
 	g_bForceCrouch = false;
 }
 

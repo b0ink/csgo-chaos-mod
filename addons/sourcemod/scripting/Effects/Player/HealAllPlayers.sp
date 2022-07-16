@@ -6,7 +6,7 @@ public void Chaos_HealAllPlayers_START(){
 	}
 }
 
-public Action Chaos_HealAllPlayers_RESET(bool EndChaos){
+public Action Chaos_HealAllPlayers_RESET(bool HasTimerEnded){
 
 }
 

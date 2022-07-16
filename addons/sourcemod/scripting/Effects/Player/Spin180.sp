@@ -9,7 +9,7 @@ public void Chaos_Spin180_START(){
 	}
 }
 
-// public Action Chaos_Spin180_RESET(bool EndChaos){
+// public Action Chaos_Spin180_RESET(bool HasTimerEnded){
 
 // }
 

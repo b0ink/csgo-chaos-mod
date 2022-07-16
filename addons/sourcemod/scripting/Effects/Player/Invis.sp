@@ -10,7 +10,7 @@ public void Chaos_Invis_START(){
 	}
 }
 
-public Action Chaos_Invis_RESET(bool EndChaos){
+public Action Chaos_Invis_RESET(bool HasTimerEnded){
 	for(int  client = 0;  client <= MaxClients;  client++){
 		if(IsValidClient(client)){
 			SetEntityRenderMode(client , RENDER_NORMAL);

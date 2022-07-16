@@ -18,7 +18,7 @@ public void Chaos_VampireHeal_START(){
 	g_bVampireRound = true;
 }
 
-public Action Chaos_VampireHeal_RESET(bool EndChaos){
+public Action Chaos_VampireHeal_RESET(bool HasTimerEnded){
 	g_bVampireRound = false;
 }
 

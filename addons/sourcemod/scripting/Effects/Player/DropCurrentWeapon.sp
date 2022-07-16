@@ -6,7 +6,7 @@ public void Chaos_DropCurrentWeapon_START(){
 	}
 }
 
-public Action Chaos_DropCurrentWeapon_RESET(bool EndChaos){
+public Action Chaos_DropCurrentWeapon_RESET(bool HasTimerEnded){
 
 }
 

@@ -14,7 +14,7 @@ public void Chaos_LavaFloor_START(){
 	}
 }
 
-public Action Chaos_LavaFloor_RESET(bool EndChaos){
+public Action Chaos_LavaFloor_RESET(bool HasTimerEnded){
 
 }
 

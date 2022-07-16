@@ -6,7 +6,7 @@ public void Chaos_Nothing_START(){
 */
 }
 
-public Action Chaos_Nothing_RESET(bool EndChaos){
+public Action Chaos_Nothing_RESET(bool HasTimerEnded){
 
 }
 

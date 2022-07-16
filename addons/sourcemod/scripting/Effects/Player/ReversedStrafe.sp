@@ -4,7 +4,7 @@ public void Chaos_ReversedStrafe_START(){
 	ReversedStrafe = true;
 }
 
-public Action Chaos_ReversedStrafe_RESET(bool EndChaos){
+public Action Chaos_ReversedStrafe_RESET(bool HasTimerEnded){
 	ReversedStrafe = false;
 }
 

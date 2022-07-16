@@ -4,7 +4,7 @@ public void Chaos_ReversedMovement_START(){
 	g_ReversedMovement = true;
 }
 
-public Action Chaos_ReversedMovement_RESET(bool EndChaos){
+public Action Chaos_ReversedMovement_RESET(bool HasTimerEnded){
 	g_ReversedMovement = false;
 }
 

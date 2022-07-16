@@ -6,7 +6,7 @@ public void Chaos_RandomWeapons_START(){
 	RandomWeapons_Timer_Repeat = CreateTimer(RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
 }
 
-public Action Chaos_RandomWeapons_RESET(bool EndChaos){
+public Action Chaos_RandomWeapons_RESET(bool HasTimerEnded){
 	g_bPlayersCanDropWeapon = true;
 	StopTimer(RandomWeapons_Timer_Repeat);
 }

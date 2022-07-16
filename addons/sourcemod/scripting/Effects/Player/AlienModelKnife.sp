@@ -13,7 +13,7 @@ public void Chaos_AlienModelKnife_START(){
 
 }
 
-public Action Chaos_AlienModelKnife_RESET(bool EndChaos){
+public Action Chaos_AlienModelKnife_RESET(bool HasTimerEnded){
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){

@@ -2,7 +2,7 @@ public void Chaos_ExtremeWhiteFog_START(){
 	ExtremeWhiteFog();
 }
 
-public Action Chaos_ExtremeWhiteFog_RESET(bool EndChaos){
+public Action Chaos_ExtremeWhiteFog_RESET(bool HasTimerEnded){
 	Fog_OFF();
 }
 

@@ -6,7 +6,7 @@ public void Chaos_GhostSlaps_START(){
 	Chaos_RandomSlap_Timer = CreateTimer(g_Chaos_RandomSlap_Interval, Timer_RandomSlap, _,TIMER_REPEAT);
 }
 
-public Action Chaos_GhostSlaps_RESET(bool EndChaos){
+public Action Chaos_GhostSlaps_RESET(bool HasTimerEnded){
 		StopTimer(Chaos_RandomSlap_Timer);
 		// cvar("sv_falldamage_scale", "1");
 		if(g_NoFallDamage > 0) g_NoFallDamage--; //TODO:

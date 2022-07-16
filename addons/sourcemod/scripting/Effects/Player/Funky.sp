@@ -5,7 +5,7 @@ public void Chaos_Autobhop_START(){
 
 }
 
-public Action Chaos_Autobhop_RESET(bool EndChaos){
+public Action Chaos_Autobhop_RESET(bool HasTimerEnded){
 	ResetCvar("sv_airaccelerate", "12", "1999");
 	if(g_AutoBunnyhop > 0) g_AutoBunnyhop--;
 }

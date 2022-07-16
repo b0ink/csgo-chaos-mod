@@ -4,7 +4,7 @@ public void Chaos_RespawnTheDead_START(){
 	}
 }
 
-public Action Chaos_RespawnTheDead_RESET(bool EndChaos){
+public Action Chaos_RespawnTheDead_RESET(bool HasTimerEnded){
 
 }
 

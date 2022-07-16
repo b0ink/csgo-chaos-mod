@@ -3,7 +3,7 @@ public void Chaos_MoonGravity_START(){
 }
 //TODO: fluctuating gravity thoughout the round?
 
-public Action Chaos_MoonGravity_RESET(bool EndChaos){
+public Action Chaos_MoonGravity_RESET(bool HasTimerEnded){
 	SetPlayersGravity(1.0);
 }
 

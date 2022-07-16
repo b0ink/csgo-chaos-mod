@@ -19,7 +19,7 @@ public void Chaos_Shields_START(){
 	}
 }
 
-public Action Chaos_Shields_RESET(bool EndChaos){
+public Action Chaos_Shields_RESET(bool HasTimerEnded){
 
 }
 

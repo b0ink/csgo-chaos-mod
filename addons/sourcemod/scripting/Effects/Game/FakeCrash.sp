@@ -19,7 +19,7 @@ public Action Timer_AnnounceFakeCrash(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_FakeCrash"), -1.0);
 }
 
-// public Action Chaos_FakeCrash_RESET(bool EndChaos){
+// public Action Chaos_FakeCrash_RESET(bool HasTimerEnded){
 
 // }
 

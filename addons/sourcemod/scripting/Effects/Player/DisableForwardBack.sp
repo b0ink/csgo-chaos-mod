@@ -6,7 +6,7 @@ public void Chaos_DisableForwardBack_START(){
 	g_bNoForwardBack++;
 }
 
-public Action Chaos_DisableForwardBack_RESET(bool EndChaos){
+public Action Chaos_DisableForwardBack_RESET(bool HasTimerEnded){
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 }
 

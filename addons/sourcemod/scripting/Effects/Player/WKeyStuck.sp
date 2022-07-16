@@ -9,7 +9,7 @@ public Action Chaos_WKeyStuck_OnPlayerRunCmd(int client, int &buttons, int &iImp
 	if(WKeyStuck) fVel[0] = 400.0;
 }
 
-public void Chaos_WKeyStuck_RESET(bool EndChaos){
+public void Chaos_WKeyStuck_RESET(bool HasTimerEnded){
 	WKeyStuck = false;
 }
 

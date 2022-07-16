@@ -20,7 +20,7 @@ public void Chaos_OneWeaponOnly_START(){
 
 }
 
-public Action Chaos_OneWeaponOnly_RESET(bool EndChaos){
+public Action Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
 	g_bPlayersCanDropWeapon = true;
 }
 

@@ -8,7 +8,7 @@ public void Chaos_DisableStrafe_START(){
 	g_bNoStrafe++;
 }
 
-public Action Chaos_DisableStrafe_RESET(bool EndChaos){
+public Action Chaos_DisableStrafe_RESET(bool HasTimerEnded){
 	if(g_bNoStrafe > 0) g_bNoStrafe--;
 }
 

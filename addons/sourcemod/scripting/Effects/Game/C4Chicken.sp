@@ -7,7 +7,7 @@ public void Chaos_C4Chicken_START(){
 	g_bC4Chicken = true;
 }
 
-public Action Chaos_C4Chicken_RESET(bool EndChaos){
+public Action Chaos_C4Chicken_RESET(bool HasTimerEnded){
 	g_bC4Chicken = false;
 	RemoveChickens();
 	g_iC4ChickenEnt = -1;

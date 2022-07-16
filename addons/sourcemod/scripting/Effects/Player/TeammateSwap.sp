@@ -48,7 +48,7 @@ public void Chaos_TeammateSwap_START(){
 	}
 }
 
-// public Action Chaos_TeammateSwap_RESET(bool EndChaos){
+// public Action Chaos_TeammateSwap_RESET(bool HasTimerEnded){
 
 // }
 

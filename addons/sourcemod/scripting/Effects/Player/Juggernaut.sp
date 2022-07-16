@@ -13,7 +13,7 @@ public void Chaos_Juggernaut_START(){
 	}
 }
 
-public Action Chaos_Juggernaut_RESET(bool EndChaos){
+public Action Chaos_Juggernaut_RESET(bool HasTimerEnded){
 	if(g_bSetJuggernaut){
 		g_bSetJuggernaut = false;
 		for(int i = 0; i <= MaxClients; i++){

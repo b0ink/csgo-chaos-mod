@@ -7,7 +7,7 @@ public void Chaos_RapidFire_START(){
 	cvar("weapon_recoil_scale", "0.5");
 }
 
-public Action Chaos_RapidFire_RESET(bool EndChaos){
+public Action Chaos_RapidFire_RESET(bool HasTimerEnded){
 	ResetCvar("weapon_accuracy_nospread", "0", "1");
 	ResetCvar("weapon_recoil_scale", "2", "0.5");
 	g_bRapidFire = false;

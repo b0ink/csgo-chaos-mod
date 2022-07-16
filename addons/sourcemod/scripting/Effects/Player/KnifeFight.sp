@@ -26,9 +26,9 @@ public void Chaos_KnifeFight_START(){
 	}
 }
 
-public Action Chaos_KnifeFight_RESET(bool EndChaos){
+public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
-	if(EndChaos){ 
+	if(HasTimerEnded){ 
 		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i) && !HasMenuOpen(i)) ClientCommand(i, "slot1");
 	}
 }

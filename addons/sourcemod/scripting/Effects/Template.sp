@@ -59,9 +59,9 @@ public void Chaos_EffectName_START(){
 
 }
 
-/* The reset function will fire once the timer has finished, where EndChaos will be true. */
-/* It will also fire on round end, where EndChaos will be false. */
-public Action Chaos_EffectName_RESET(bool EndChaos){
+/* The reset function will fire once the timer has finished, where HasTimerEnded will be true. */
+/* It will also fire on round end, where HasTimerEnded will be false. */
+public Action Chaos_EffectName_RESET(bool HasTimerEnded){
 
 }
 

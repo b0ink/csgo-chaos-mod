@@ -5,7 +5,7 @@ public void Chaos_Jumping_START(){
 	g_bJumping = true;
 }
 
-public Action Chaos_Jumping_RESET(bool EndChaos){
+public Action Chaos_Jumping_RESET(bool HasTimerEnded){
 	g_bJumping = false;
 }
 

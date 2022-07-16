@@ -14,7 +14,7 @@ public void Chaos_SpawnExplodingBarrels_START(){
 	}
 }
 
-public Action Chaos_SpawnExplodingBarrels_RESET(bool EndChaos){
+public Action Chaos_SpawnExplodingBarrels_RESET(bool HasTimerEnded){
 
 }
 

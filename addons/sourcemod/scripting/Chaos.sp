@@ -34,7 +34,7 @@ public Plugin myinfo = {
 char mapName[64];
 
 char 	g_Prefix[] = "[{lime}CHAOS{default}]";
-char 	g_Prefix_EndChaos[] = "<<{darkred}Ended{default}>>";
+char 	g_Prefix_HasTimerEnded[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 
@@ -231,13 +231,13 @@ enum struct effect{
 		}
 	}
 
-	void reset_effect(bool EndChaos = false){
+	void reset_effect(bool HasTimerEnded = false){
 		// PrintToChatAll("attempting to emd!: %s ", this.function_name_reset);
-		//TODO: Rename EndChaos to something like EndTimer or TimerComplete
+		//TODO: Rename HasTimerEnded to something like EndTimer or TimerComplete
 		Function func = GetFunctionByName(GetMyHandle(), this.function_name_reset);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
-			Call_PushCell(EndChaos);
+			Call_PushCell(HasTimerEnded);
 			Call_Finish();
 		}
 	}

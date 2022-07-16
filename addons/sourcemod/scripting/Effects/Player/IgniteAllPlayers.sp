@@ -6,7 +6,7 @@ public void Chaos_IgniteAllPlayers_START(){
 	}
 }
 
-public Action Chaos_IgniteAllPlayers_RESET(bool EndChaos){
+public Action Chaos_IgniteAllPlayers_RESET(bool HasTimerEnded){
 
 }
 

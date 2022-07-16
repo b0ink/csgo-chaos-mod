@@ -14,7 +14,7 @@ public void Chaos_SpawnFlashbangs_START(){
 	}
 }
 
-public Action Chaos_SpawnFlashbangs_RESET(bool EndChaos){
+public Action Chaos_SpawnFlashbangs_RESET(bool HasTimerEnded){
 
 }
 

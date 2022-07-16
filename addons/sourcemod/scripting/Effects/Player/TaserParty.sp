@@ -29,11 +29,11 @@ public void Chaos_TaserParty_START(){
 	}
 }
 
-public Action Chaos_TaserParty_RESET(bool EndChaos){
+public Action Chaos_TaserParty_RESET(bool HasTimerEnded){
 	ResetCvar("mp_taser_recharge_time", "-1", "0.5");
 	ResetCvar("sv_party_mode", "0", "1");
 	g_bTaserRound = false;
-	if(EndChaos){
+	if(HasTimerEnded){
 		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i) && !HasMenuOpen(i)) ClientCommand(i, "slot2;slot1");
 	}
 }

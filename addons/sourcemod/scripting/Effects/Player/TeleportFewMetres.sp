@@ -3,7 +3,7 @@ public void Chaos_TeleportFewMetres_START(){
 	TeleportPlayersToClosestLocation(-1, 350); //250 units of minimum teleport distance
 }
 
-// public Action Chaos_TeleportFewMetres_RESET(bool EndChaos){
+// public Action Chaos_TeleportFewMetres_RESET(bool HasTimerEnded){
 
 // }
 

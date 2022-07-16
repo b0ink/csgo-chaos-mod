@@ -9,7 +9,7 @@ public void Chaos_RainingMolotovs_START(){
 }
 //TODO: use the map coordinates to make it look like cool raining in another effect
 
-public Action Chaos_RainingMolotovs_RESET(bool EndChaos){
+public Action Chaos_RainingMolotovs_RESET(bool HasTimerEnded){
 		StopTimer(Chaos_MolotovSpawn_Timer);
 		ResetCvar("inferno_flame_lifetime", "7", "4");
 

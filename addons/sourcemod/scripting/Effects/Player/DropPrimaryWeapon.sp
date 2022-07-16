@@ -16,7 +16,7 @@ public Action Timer_DropPrimary(Handle timer){
 }
 
 
-public Action Chaos_DropPrimaryWeapon_RESET(bool EndChaos){
+public Action Chaos_DropPrimaryWeapon_RESET(bool HasTimerEnded){
 
 }
 

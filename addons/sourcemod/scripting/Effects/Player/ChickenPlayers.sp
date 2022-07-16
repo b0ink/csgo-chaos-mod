@@ -5,8 +5,8 @@ public void Chaos_ChickenPlayers_START(){
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetChicken(i);
 }
 
-public Action Chaos_ChickenPlayers_RESET(bool EndChaos){
-	if(EndChaos){
+public Action Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
+	if(HasTimerEnded){
 		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) DisableChicken(i);
 	}
 }

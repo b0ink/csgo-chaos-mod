@@ -34,7 +34,7 @@ public void Chaos_SlayRandomPlayer_START(){
 	}
 }
 
-// public Action Chaos_SlayRandomPlayer_RESET(bool EndChaos){
+// public Action Chaos_SlayRandomPlayer_RESET(bool HasTimerEnded){
 
 // }
 

@@ -5,7 +5,7 @@ public void Chaos_Thirdperson_START(){
 	}
 }
 
-public Action Chaos_Thirdperson_RESET(bool EndChaos){
+public Action Chaos_Thirdperson_RESET(bool HasTimerEnded){
 	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) ClientCommand(i, "firstperson");
 	ResetCvar("sv_allow_thirdperson", "0", "1");
 }

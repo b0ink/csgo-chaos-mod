@@ -57,8 +57,8 @@ public void Chaos_DecoyDodgeball_START(){
 
 }
 
-public Action Chaos_DecoyDodgeball_RESET(bool EndChaos){
-	if(g_bDecoyDodgeball && EndChaos){
+public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
+	if(g_bDecoyDodgeball && HasTimerEnded){
 		for(int i = 0; i <= MaxClients; i++){
 			if(ValidAndAlive(i)){
 				StripPlayer(i, true, true, true); //strip grenades only

@@ -4,7 +4,7 @@ public void Chaos_HealthRegen_START(){
 	CreateTimer(1.0, Timer_GiveHealthRegen);
 }
 
-public Action Chaos_HealthRegen_RESET(bool EndChaos){
+public Action Chaos_HealthRegen_RESET(bool HasTimerEnded){
 	g_HealthRegen = false;
 }
 

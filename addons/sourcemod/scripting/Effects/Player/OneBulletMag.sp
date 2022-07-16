@@ -32,9 +32,9 @@ public void Chaos_OneBulletMag_START(){
 	g_bOneBulletMag = true;
 }
 
-public Action Chaos_OneBulletMag_RESET(bool EndChaos){
+public Action Chaos_OneBulletMag_RESET(bool HasTimerEnded){
 	g_bOneBulletMag = false;
-	if(EndChaos){ //don't need to do this if the round has ended, especially if the event didnt even happen
+	if(HasTimerEnded){ //don't need to do this if the round has ended, especially if the event didnt even happen
 		for(int i = 0; i <= MaxClients; i++){
 			if(ValidAndAlive(i)){
 				char currentWeapon[64];

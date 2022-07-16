@@ -8,7 +8,7 @@ public void Chaos_SmokeStrat_START(){
 	}
 }
 
-public Action Chaos_SmokeStrat_RESET(bool EndChaos){
+public Action Chaos_SmokeStrat_RESET(bool HasTimerEnded){
 
 }
 

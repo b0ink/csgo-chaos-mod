@@ -136,7 +136,7 @@ void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, b
 		DisplayCenterTextToAll(message);
 		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_MegaChaos, message);
 	}else if(endingChaos){
-		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_EndChaos, message);
+		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_HasTimerEnded, message);
 	}else{
 		DisplayCenterTextToAll(message);
 		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix, message);

@@ -11,7 +11,7 @@ public void Chaos_RespawnDead_LastLocation_START(){
 	}
 }
 
-public Action Chaos_RespawnDead_LastLocation_RESET(bool EndChaos){
+public Action Chaos_RespawnDead_LastLocation_RESET(bool HasTimerEnded){
 
 }
 

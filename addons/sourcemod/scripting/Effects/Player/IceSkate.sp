@@ -11,7 +11,7 @@ public void Chaos_IceSkate_START(){
 	IceSkate = true;
 }
 
-public Action Chaos_IceSkate_RESET(bool EndChaos){
+public Action Chaos_IceSkate_RESET(bool HasTimerEnded){
 	ResetCvar("sv_airaccelerate", "12", "2000");
 	IceSkate = false;
 }

@@ -4,7 +4,7 @@ public void Chaos_SneakyBeaky_START(){
 	SneakyBeaky = true;
 }
 
-public Action Chaos_SneakyBeaky_RESET(bool EndChaos){
+public Action Chaos_SneakyBeaky_RESET(bool HasTimerEnded){
 	SneakyBeaky = false;
 }
 

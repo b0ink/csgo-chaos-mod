@@ -28,7 +28,7 @@ public void Chaos_NoScopeOnly_START(){
 	g_bNoscopeOnly = true;
 }
 
-public Action Chaos_NoScopeOnly_RESET(bool EndChaos){
+public Action Chaos_NoScopeOnly_RESET(bool HasTimerEnded){
 	g_bNoscopeOnly = false;
 }
 

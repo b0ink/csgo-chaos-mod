@@ -9,7 +9,7 @@ public void Chaos_Snow_START(){
 	MinimalFog();
 }
 
-public Action Chaos_Snow_RESET(bool EndChaos){
+public Action Chaos_Snow_RESET(bool HasTimerEnded){
 
 }
 

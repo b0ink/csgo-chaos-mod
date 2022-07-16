@@ -12,7 +12,7 @@ public void Chaos_Binoculars_START(){
 	Add_Overlay("/Chaos/binoculars.vtf");
 }
 
-public Action Chaos_Binoculars_RESET(bool EndChaos){
+public Action Chaos_Binoculars_RESET(bool HasTimerEnded){
 	ResetPlayersFOV();
 	Remove_Overlay("/Chaos/binoculars.vtf");
 }

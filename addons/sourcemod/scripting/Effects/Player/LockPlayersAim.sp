@@ -16,7 +16,7 @@ public void Chaos_LockPlayersAim_START(){
 
 }
 
-public Action Chaos_LockPlayersAim_RESET(bool EndChaos){
+public Action Chaos_LockPlayersAim_RESET(bool HasTimerEnded){
 	g_bLockPlayersAim_Active = false;
 }
 

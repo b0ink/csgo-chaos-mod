@@ -14,8 +14,8 @@ public void Chaos_ExtendedGrenades_START(){
 	}
 }
 
-public void Chaos_ExtendedGrenades_RESET(bool EndChaos){
-	if(EndChaos){
+public void Chaos_ExtendedGrenades_RESET(bool HasTimerEnded){
+	if(HasTimerEnded){
 		ResetCvar("ammo_grenade_limit_total", "4", "7");
 	}
 }

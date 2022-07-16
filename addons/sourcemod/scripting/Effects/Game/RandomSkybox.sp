@@ -3,7 +3,7 @@ public void Chaos_RandomSkybox_START(){
 	DispatchKeyValue(0, "skyname", g_sSkyboxes[randomSkyboxIndex]);
 }
 
-public Action Chaos_RandomSkybox_RESET(bool EndChaos){
+public Action Chaos_RandomSkybox_RESET(bool HasTimerEnded){
 
 }
 

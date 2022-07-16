@@ -28,7 +28,7 @@ public void Chaos_OneBulletOneGun_START(){
 	OneBulletOneGun = true;
 }
 
-public Action Chaos_OneBulletOneGun_RESET(bool EndChaos){
+public Action Chaos_OneBulletOneGun_RESET(bool HasTimerEnded){
 	OneBulletOneGun = false;
 }
 

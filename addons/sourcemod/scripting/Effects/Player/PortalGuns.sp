@@ -40,9 +40,9 @@ public void Chaos_PortalGuns_START(){
 	SavePlayersLocations();
 }
 
-public void Chaos_PortalGuns_RESET(bool EndChaos){
+public void Chaos_PortalGuns_RESET(bool HasTimerEnded){
 	g_bPortalGuns = false;
-	if(EndChaos){
+	if(HasTimerEnded){
 		TeleportPlayersToClosestLocation();
 	}
 

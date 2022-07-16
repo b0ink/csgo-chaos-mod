@@ -7,7 +7,7 @@ public void Chaos_Earthquake_START(){
 	}
 }
 
-public Action Chaos_Earthquake_RESET(bool EndChaos){
+public Action Chaos_Earthquake_RESET(bool HasTimerEnded){
 
 }
 
