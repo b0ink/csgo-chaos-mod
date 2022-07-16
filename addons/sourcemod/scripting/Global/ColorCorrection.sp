@@ -12,30 +12,22 @@ void DownloadRawFiles(){
 void CLEAR_CC(char[] file = ""){
 	char ent_filename[PLATFORM_MAX_PATH];
 
-	int iMaxEnts = GetMaxEntities();
-	char sClassName[64];
-	for(int i=MaxClients; i < iMaxEnts; i++){
-		if(
-			IsValidEntity(i) && 
-			IsValidEdict(i) && 
-			GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-			StrEqual(sClassName, "color_correction")
-		){
-			if(file[0]){
-				GetEntPropString(i, Prop_Data, "m_lookupFilename", ent_filename, sizeof(ent_filename));
-				if(StrContains(ent_filename, file, false) != -1){
-					AcceptEntityInput(i, "Disable");
-					//potentially delete the entity, but they get removed after a round end anyway
-				}
-			}else{
-				RemoveEntity(i);
+	char classname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(!StrEqual(classname, "color_correction")) continue;
+		if(file[0]){
+			GetEntPropString(ent, Prop_Data, "m_lookupFilename", ent_filename, sizeof(ent_filename));
+			if(StrContains(ent_filename, file, false) != -1){
+				AcceptEntityInput(ent, "Disable");
+				//potentially delete the entity, but they get removed after a round end anyway
 			}
-			
+		}else{
+			RemoveEntity(ent);
 		}
 	}
 }
 
-void CREATE_CC(char[] filename){
+void CREATE_CC(char[] filename, char[] targetname = ""){
 	char path[PLATFORM_MAX_PATH];
 	FormatEx(path, sizeof(path), "materials/Chaos/ColorCorrection/%s.raw", filename);
 	int ent = CreateEntityByName("color_correction");
@@ -47,6 +39,7 @@ void CREATE_CC(char[] filename){
 		DispatchKeyValue(ent, "fadeInDuration", "3.0");
 		DispatchKeyValue(ent, "fadeOutDuration", "3.0");
 		DispatchKeyValue(ent, "filename", path);
+		if(targetname[0]) DispatchKeyValue(ent, "targetname", targetname);
 		DispatchSpawn(ent);
 		ActivateEntity(ent);
 		AcceptEntityInput(ent, "Enable");

@@ -355,7 +355,9 @@ stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, floa
 
 public Action Chaos_Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool dontBroadcast)
 {
+	
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
+	if(!g_bAimbot[client]) return;
 	
 	if (GetEntPropFloat(client, Prop_Send, "m_flFlashMaxAlpha") >= 180.0)
 	{

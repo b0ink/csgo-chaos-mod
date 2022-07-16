@@ -264,17 +264,12 @@ public Action timer_resetchickendebounce(Handle timer){
 }
 
 public void ResizeChickens(){
-    int iMaxEnts = GetMaxEntities();
-    char sClassName[64];
-    for(int i=MaxClients;i<iMaxEnts;i++){
-        if(IsValidEntity(i) && 
-           IsValidEdict(i) && 
-           GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-           StrEqual(sClassName, "chicken") &&
-           GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
-			SetEntPropFloat(i, Prop_Data, "m_flModelScale", 1.0);
-        }
-    }
+	char classname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, "chicken") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
+			SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 1.0);
+		}
+	}
 }  
 
 
@@ -559,19 +554,17 @@ int DistanceToClosestPlayer(float vec[3]){
 int DistanceToClosestEntity(float vec[3], char[] entity){
 	float dist = 999999.0;
 	float barrelVec[3];
-
-	int iMaxEnts = GetMaxEntities();
-	char sClassName[64];
-	for(int i=MaxClients;i<iMaxEnts;i++){
-		if(IsValidEntity(i) && IsValidEdict(i) && 
-		GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-		StrEqual(sClassName, entity)){
-			GetEntPropVector(i, Prop_Send, "m_vecOrigin", barrelVec);
+	
+	char classname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, entity)){
+			GetEntPropVector(ent, Prop_Send, "m_vecOrigin", barrelVec);
 			if(GetVectorDistance(barrelVec, vec) < dist){
 				dist = GetVectorDistance(barrelVec, vec);
 			}
 		}
 	}
+	
 	return RoundToFloor(dist);
 }
 

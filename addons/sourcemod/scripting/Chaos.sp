@@ -309,7 +309,13 @@ enum struct effect{
 	}
 }
 
-//TODO: LoopAllEntities()?
+
+// #define LoopAllEntities(%1,%2) for(int %1 = 0; %1 < %2;%1++)
+// 								if(IsValidEntity(%1) && IsValidEdict(%1))
+
+#define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++)\
+								if(IsValidEntity(%1) && IsValidEdict(%1))\
+								if(GetEdictClassname(%1, %3, 64))
 
 #define LoopAllEffects(%1) for(int i = 0; i < 999; i++)\
 									if(i < ChaosEffects.Length)\

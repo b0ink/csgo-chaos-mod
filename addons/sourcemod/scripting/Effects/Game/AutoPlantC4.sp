@@ -158,15 +158,22 @@ void AutoPlantC4(bool ForcedRetry = false){
         PlantBomb(INVALID_HANDLE, bomber);
 
     }else if(!ForcedRetry){
-        int iMaxEnts = GetMaxEntities();
-        char sClassName[64];
-        for(int i=MaxClients;i<iMaxEnts;i++){
-            if(IsValidEntity(i) && IsValidEdict(i) && GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-            StrEqual(sClassName, "weapon_c4")
-            && GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
-                RemoveEntity(i);
+        
+        char classname[64];
+        LoopAllEntities(ent, GetMaxEntities(), classname){
+            if(StrEqual(classname, "weapon_c4") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
+                RemoveEntity(ent);
             }
         }
+        // int iMaxEnts = GetMaxEntities();
+        // char sClassName[64];
+        // for(int i=MaxClients;i<iMaxEnts;i++){
+        //     if(IsValidEntity(i) && IsValidEdict(i) && GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
+        //     StrEqual(sClassName, "weapon_c4")
+        //     && GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
+        //         RemoveEntity(i);
+        //     }
+        // }
         for(int i = 0; i <= MaxClients; i++){
             if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_T){
                 GivePlayerItem(i, "weapon_c4");

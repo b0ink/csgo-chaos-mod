@@ -12,23 +12,26 @@ public void Chaos_Thunderstorm_START(){
 	Thunderstorm = true;
 	CreateTimer(0.1, Timer_LightningStrike); // starting lightning strikes
 	
-	SPAWN_WEATHER(RAIN);
+	SPAWN_WEATHER(RAIN, "Thunderstorm");
 	CREATE_CC("thunderstorm");
 	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
+	
 }
 
 public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	CLEAR_CC("thunderstorm.raw");
 	
 	Thunderstorm = false;
-	int iMaxEnts = GetMaxEntities(); // clearing rain
-	char sClassName[64];
-	for(int i=MaxClients;i<iMaxEnts;i++){
-		if(IsValidEntity(i) && 
-		IsValidEdict(i) && 
-		GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-		StrEqual(sClassName, "func_precipitation")){
-			RemoveEntity(i);
+	//TODO: create some sort of UUID to set the name of the entity, then delete finding the name
+	//not even that just name it thunderstorm and remove all of them
+	char classname[64];
+	char targetname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, "func_precipitation")){
+			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
+			if(StrEqual(targetname, "Thunderstorm")){
+				RemoveEntity(ent);
+			}
 		}
 	}
 }
