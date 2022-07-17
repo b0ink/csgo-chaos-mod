@@ -125,12 +125,10 @@ public Action Timer_ShowAction(Handle timer){
 		DisplayCenterTextToAll(message);
 	}else{
 		if(g_time >= 0){
-			for(int i = 0; i <= MaxClients; i++){
-				if(IsValidClient(i)){
-					if(g_bPlayersToDamage[i]){
-						DamagePlayer(i);
-						g_bPlayersToDamage[i] = false;
-					}
+			LoopAlivePlayers(i){
+				if(g_bPlayersToDamage[i]){
+					DamagePlayer(i);
+					g_bPlayersToDamage[i] = false;
 				}
 			}
 			// FormatEx(message, sizeof(message), "<< SIMON SAYS >>\n\n");

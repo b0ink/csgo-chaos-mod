@@ -45,13 +45,11 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 public void Chaos_DecoyDodgeball_START(){
 	g_bDecoyDodgeball = true;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			StripPlayer(i, true, true, true); //strip grenades only
-			GivePlayerItem(i, "weapon_decoy");
-			FakeClientCommand(i, "use weapon_decoy");
-			SetEntityHealth(i, 1);
-		}
+	LoopAlivePlayers(i){
+		StripPlayer(i, true, true, true); //strip grenades only
+		GivePlayerItem(i, "weapon_decoy");
+		FakeClientCommand(i, "use weapon_decoy");
+		SetEntityHealth(i, 1);	
 	}
 	g_DecoyDodgeball_CheckDecoyTimer = CreateTimer(5.0, Timer_CheckDecoys, _, TIMER_REPEAT);
 
@@ -59,15 +57,12 @@ public void Chaos_DecoyDodgeball_START(){
 
 public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
 	if(g_bDecoyDodgeball && HasTimerEnded){
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				StripPlayer(i, true, true, true); //strip grenades only
-				SetEntityHealth(i, 100);
-				if(!HasMenuOpen(i)){
-					ClientCommand(i, "slot2");
-					ClientCommand(i, "slot1");
-				}
-				// FakeClientCommand(i, "use weapon_knife");
+		LoopAlivePlayers(i){
+			StripPlayer(i, true, true, true); //strip grenades only
+			SetEntityHealth(i, 100);
+			if(!HasMenuOpen(i)){
+				ClientCommand(i, "slot2");
+				ClientCommand(i, "slot1");
 			}
 		}
 	}
@@ -76,9 +71,9 @@ public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
 	delete g_DecoyDodgeball_CheckDecoyTimer;
 }
 
-public Action Chaos_DecoyDodgeball_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_DecoyDodgeball_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_DecoyDodgeball_HasNoDuration(){
@@ -89,29 +84,24 @@ public bool Chaos_DecoyDodgeball_Conditions(){
 	return true;
 }
 
-
-
-
 Action Timer_CheckDecoys(Handle timer){
 	if(g_bDecoyDodgeball){
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				bool hasDecoy = false;
-				int wepID = -1;
-				for(int slot = 0; slot < 7; slot++){
-					if((wepID = GetPlayerWeaponSlot(i, slot)) != -1){
-						char ClientWeaponName[64];
-						GetWeaponClassname(wepID, ClientWeaponName, 64);
-						if(IsValidEntity(wepID)){
-							if(StrContains(ClientWeaponName, "weapon_decoy") != -1){
-								hasDecoy = true;
-							}
-						} 
-					}
+		LoopAlivePlayers(i){
+			bool hasDecoy = false;
+			int wepID = -1;
+			for(int slot = 0; slot < 7; slot++){
+				if((wepID = GetPlayerWeaponSlot(i, slot)) != -1){
+					char ClientWeaponName[64];
+					GetWeaponClassname(wepID, ClientWeaponName, 64);
+					if(IsValidEntity(wepID)){
+						if(StrContains(ClientWeaponName, "weapon_decoy") != -1){
+							hasDecoy = true;
+						}
+					} 
 				}
-				if(!hasDecoy){
-					GivePlayerItem(i, "weapon_decoy");
-				}
+			}
+			if(!hasDecoy){
+				GivePlayerItem(i, "weapon_decoy");
 			}
 		}
 	}

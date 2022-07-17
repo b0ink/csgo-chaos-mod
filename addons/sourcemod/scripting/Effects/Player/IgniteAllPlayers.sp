@@ -1,8 +1,6 @@
 public void Chaos_IgniteAllPlayers_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			IgniteEntity(i, 10.0);
-		}
+	LoopAlivePlayers(i){
+		IgniteEntity(i, 10.0);
 	}
 }
 

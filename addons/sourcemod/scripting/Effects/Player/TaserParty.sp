@@ -21,11 +21,9 @@ public void Chaos_TaserParty_START(){
 	g_bTaserRound = true;
 	cvar("mp_taser_recharge_time", "0.5");
 	cvar("sv_party_mode", "1");
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			GivePlayerItem(i, "weapon_taser");
-			FakeClientCommand(i, "use weapon_taser");
-		}
+	LoopAlivePlayers(i){
+		GivePlayerItem(i, "weapon_taser");
+		FakeClientCommand(i, "use weapon_taser");
 	}
 }
 
@@ -34,7 +32,11 @@ public Action Chaos_TaserParty_RESET(bool HasTimerEnded){
 	ResetCvar("sv_party_mode", "0", "1");
 	g_bTaserRound = false;
 	if(HasTimerEnded){
-		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i) && !HasMenuOpen(i)) ClientCommand(i, "slot2;slot1");
+		LoopAlivePlayers(i){
+			if(!HasMenuOpen(i)){
+				ClientCommand(i, "slot2;slot1");
+			}
+		}
 	}
 }
 

@@ -1,9 +1,7 @@
 public void Chaos_Give100HP_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			int currenthealth = GetClientHealth(i);
-			SetEntityHealth(i, currenthealth + 100);
-		}
+	LoopAlivePlayers(i){
+		int currenthealth = GetClientHealth(i);
+		SetEntityHealth(i, currenthealth + 100);
 	}
 }
 

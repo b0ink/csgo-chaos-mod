@@ -29,17 +29,15 @@ public bool Chaos_DiscoPlayers_Conditions(){
 
 Action Timer_DiscoPlayers(Handle timer = null){
 	if(DiscoPlayers){
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				SetEntityRenderMode(i, RENDER_TRANSCOLOR);
-				int color[3];
-				color[0] = GetRandomInt(0, 255);
-				color[1] = GetRandomInt(0, 255);
-				color[2] = GetRandomInt(0, 255);
-				int oldcolors[4];
-				GetEntityRenderColor(i, oldcolors[0],oldcolors[1],oldcolors[2],oldcolors[3]);
-				SetEntityRenderColor(i, color[0], color[1], color[2], oldcolors[3]);
-			}
+		LoopAlivePlayers(i){
+			SetEntityRenderMode(i, RENDER_TRANSCOLOR);
+			int color[3];
+			color[0] = GetRandomInt(0, 255);
+			color[1] = GetRandomInt(0, 255);
+			color[2] = GetRandomInt(0, 255);
+			int oldcolors[4];
+			GetEntityRenderColor(i, oldcolors[0],oldcolors[1],oldcolors[2],oldcolors[3]);
+			SetEntityRenderColor(i, color[0], color[1], color[2], oldcolors[3]);
 		}
 	}else{
 		StopTimer(DiscoPlayers_TimerRepeat);

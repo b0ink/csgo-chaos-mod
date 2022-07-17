@@ -1,8 +1,6 @@
 public void Chaos_HealAllPlayers_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			SetEntityHealth(i, 100);
-		}
+	LoopAlivePlayers(i){
+		SetEntityHealth(i, 100);
 	}
 }
 

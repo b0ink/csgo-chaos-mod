@@ -33,21 +33,17 @@ public void Chaos_Aimbot_INIT(){
 }
 
 public void Chaos_Aimbot_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			Aimbot_SDKHOOKS(i);
-			ToggleAim(i, true);
-		}
+	LoopAlivePlayers(i){
+		Aimbot_SDKHOOKS(i);
+		ToggleAim(i, true);
 	}
 }
 
 public Action Chaos_Aimbot_RESET(bool HasTimerEnded){
-		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i)){
-				Aimbot_REMOVE_SDKHOOKS(i);
-				ToggleAim(i, false);
-			}
-		}
+	LoopValidPlayers(i){
+		Aimbot_REMOVE_SDKHOOKS(i);
+		ToggleAim(i, false);
+	}
 }
 
 
@@ -242,30 +238,27 @@ stock int GetClosestClient(int iClient){
 	float fClosestDistance = -1.0;
 	float fTargetDistance;
 	
-	for (int i = 1; i <= MaxClients; i++){
-		if (IsValidClient(i)){
-			if (iClient == i || GetClientTeam(i) == iClientTeam || !IsPlayerAlive(i)) continue;
-			
-			GetClientAbsOrigin(i, fTargetOrigin);
-			fTargetDistance = GetVectorDistance(fClientOrigin, fTargetOrigin);
+	LoopAlivePlayers(i){
+		if (iClient == i || GetClientTeam(i) == iClientTeam) continue;
+		GetClientAbsOrigin(i, fTargetOrigin);
+		fTargetDistance = GetVectorDistance(fClientOrigin, fTargetOrigin);
 
-			if (fTargetDistance > fClosestDistance && fClosestDistance > -1.0) continue;
+		if (fTargetDistance > fClosestDistance && fClosestDistance > -1.0) continue;
 
-			if (!ClientCanSeeTarget(iClient, i)) continue;
+		if (!ClientCanSeeTarget(iClient, i)) continue;
 
-			if (GetEngineVersion() == Engine_CSGO){
-				if (GetEntPropFloat(i, Prop_Send, "m_fImmuneToGunGameDamageTime") > 0.0) continue;
-			}
-
-			// if (g_cvDistance != 0.0 && fTargetDistance > g_cvDistance) continue;
-			if (g_cvFov != 0.0 && !IsTargetInSightRange(iClient, i, g_cvFov, g_cvDistance)) continue;
-			if (g_bCvFlashbang && g_bFlashed[iClient]) continue;
-			
-			fClosestDistance = fTargetDistance;
-			iClosestTarget = i;
+		if (GetEngineVersion() == Engine_CSGO){
+			if (GetEntPropFloat(i, Prop_Send, "m_fImmuneToGunGameDamageTime") > 0.0) continue;
 		}
+
+		// if (g_cvDistance != 0.0 && fTargetDistance > g_cvDistance) continue;
+		if (g_cvFov != 0.0 && !IsTargetInSightRange(iClient, i, g_cvFov, g_cvDistance)) continue;
+		if (g_bCvFlashbang && g_bFlashed[iClient]) continue;
+		
+		fClosestDistance = fTargetDistance;
+		iClosestTarget = i;
 	}
-	
+
 	return iClosestTarget;
 }
 

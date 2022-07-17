@@ -93,12 +93,8 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 	g_iChaos_Round_Count = 0;
 	
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			float vec[3];
-			GetClientAbsOrigin(i, vec);
-			g_OriginalSpawnVec[i] = vec;
-		}
+	LoopAlivePlayers(client){
+		GetClientAbsOrigin(client, g_OriginalSpawnVec[client]);
 	}
 
 	CreateTimer(5.0, Timer_CreateHostage);

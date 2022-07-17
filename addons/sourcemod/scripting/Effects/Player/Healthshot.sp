@@ -1,10 +1,8 @@
 public void Chaos_Healthshot_START(){
 	int amount = GetRandomInt(1,3);
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
+	LoopAlivePlayers(i){
 			for(int j = 1; j <= amount; j++){
-				GivePlayerItem(i, "weapon_healthshot");
-			}
+			GivePlayerItem(i, "weapon_healthshot");
 		}
 	}
 }

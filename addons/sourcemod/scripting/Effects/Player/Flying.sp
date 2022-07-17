@@ -4,13 +4,17 @@ bool g_bActiveNoclip = false;
 public void Chaos_Flying_START(){
 	g_bActiveNoclip = true;
 	SavePlayersLocations();
-	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityMoveType(i, MOVETYPE_NOCLIP);
+	LoopAlivePlayers(i){
+		SetEntityMoveType(i, MOVETYPE_NOCLIP);
+	}
 	cvar("sv_noclipspeed", "2");
 }
 
 public Action Chaos_Flying_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
-		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetEntityMoveType(i, MOVETYPE_WALK);
+		LoopAlivePlayers(i){
+			SetEntityMoveType(i, MOVETYPE_WALK);
+		}
 		TeleportPlayersToClosestLocation();
 	}
 	ResetCvar("sv_noclipspeed", "5", "2");

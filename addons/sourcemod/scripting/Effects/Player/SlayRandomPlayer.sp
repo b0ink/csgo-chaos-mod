@@ -6,30 +6,26 @@ public void Chaos_SlayRandomPlayer_START(){
 
 	if(aliveT > 1){
 		aliveT = 0;
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				if(GetClientTeam(i) == CS_TEAM_T){
-					aliveT++;
-					if(aliveT == RandomTSlay){
-						ForcePlayerSuicide(i);
-					}
+		LoopAlivePlayers(i){
+			if(GetClientTeam(i) == CS_TEAM_T){
+				aliveT++;
+				if(aliveT == RandomTSlay){
+					ForcePlayerSuicide(i);
 				}
-			}
+			}	
 		}
 	}
 	if(aliveCT > 1){
 		aliveCT = 0;
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				if(GetClientTeam(i) == CS_TEAM_CT){
-					aliveCT++;
-					if(aliveCT == RandomCTSlay){
-						if(aliveCT){
-							ForcePlayerSuicide(i);
-						}
+		LoopAlivePlayers(i){
+			if(GetClientTeam(i) == CS_TEAM_CT){
+				aliveCT++;
+				if(aliveCT == RandomCTSlay){
+					if(aliveCT){
+						ForcePlayerSuicide(i);
 					}
 				}
-			}
+			}	
 		}
 	}
 }

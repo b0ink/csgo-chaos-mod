@@ -25,12 +25,10 @@ Handle OriginalPlayerModels = INVALID_HANDLE;
 
 void SpawnImpostors(){
 	OriginalPlayerModels = CreateArray(PLATFORM_MAX_PATH);
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			char modelName[PLATFORM_MAX_PATH];
-			GetEntPropString(i, Prop_Data, "m_ModelName", modelName, sizeof(modelName));
-			PushArrayString(OriginalPlayerModels, modelName);
-		}
+	char modelName[PLATFORM_MAX_PATH];
+	LoopAlivePlayers(i){
+		GetEntPropString(i, Prop_Data, "m_ModelName", modelName, sizeof(modelName));
+		PushArrayString(OriginalPlayerModels, modelName);
 	}
 	if(GetArraySize(OriginalPlayerModels) == 0) return;
 

@@ -37,8 +37,7 @@ public Action Chaos_IceSkate_OnGameFrame(){
 		float fGroundPosition[3];
 		float fSpeed[3];
 
-		for(int i = 0; i <= MaxClients; i++){
-			if(!ValidAndAlive(i)) continue;
+		LoopAlivePlayers(i){
 			GetClientAbsOrigin(i, fPosition);
 			TR_TraceRayFilter(fPosition, view_as<float>({90.0, 0.0, 0.0}), MASK_PLAYERSOLID, RayType_Infinite, TRFilter_NoPlayers, i);
 
@@ -46,13 +45,11 @@ public Action Chaos_IceSkate_OnGameFrame(){
 			if(TR_DidHit() && TR_GetEndPosition(fGroundPosition) && GetVectorDistance(fPosition, fGroundPosition) <= 25.0)
 			{
 				GetEntPropVector(i, Prop_Data, "m_vecAbsVelocity", fSpeed);
-
 				// fSpeed[2] = 8.0 * GetEntityGravity(i) * GetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue"); //! * (sv_gravity.FloatValue / 800);
 				fSpeed[2] = 25.0 * GetEntityGravity(i) * GetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue"); //! * (sv_gravity.FloatValue / 800);
 				TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, fSpeed);
 			}
 		}
-
 }
 
 

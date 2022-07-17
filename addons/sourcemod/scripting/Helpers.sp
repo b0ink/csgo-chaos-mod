@@ -117,17 +117,16 @@ void DisplayCenterTextToAll(char[] message){
 	char finalMess[256];
 	Format(finalMess, sizeof(finalMess), "%s", RemoveMulticolors(message));
 
-	for (int i = 1; i <= MaxClients; i++){
-		if(IsValidClient(i)){
-			SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
-			if(g_DynamicChannel){
-				ShowHudText(i, GetDynamicChannel(0), "%s", finalMess);
-			}else{
-				ShowHudText(i, -1, "%s", finalMess);
-				// PrintCenterText(i, "%s", finalMess);
-			}
+	LoopValidPlayers(i){
+		SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
+		if(g_DynamicChannel){
+			ShowHudText(i, GetDynamicChannel(0), "%s", finalMess);
+		}else{
+			ShowHudText(i, -1, "%s", finalMess);
+			// PrintCenterText(i, "%s", finalMess);
 		}
 	}
+
 }
 
 void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, bool megaChaos = false){
@@ -234,25 +233,20 @@ void RemoveChickens(bool removec4Chicken = false){
 	if(!g_bRemovechicken_debounce){
 		Log("[Chaos] > Removing Chickens");
 		g_bRemovechicken_debounce = true;
-		int iMaxEnts = GetMaxEntities();
-		char sClassName[64];
-		for(int i=MaxClients;i<iMaxEnts;i++){
-			if(IsValidEntity(i) && 
-			IsValidEdict(i) && 
-			GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-			StrEqual(sClassName, "chicken")
-			&& GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
+
+		char classname[64];
+		LoopAllEntities(ent, GetMaxEntities(), classname){
+			if(StrEqual(classname, "chicken") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
 				if(removec4Chicken){
-					if(i == g_iC4ChickenEnt){
-						RemoveEntity(i);
+					if(ent == g_iC4ChickenEnt){
+						RemoveEntity(ent);
 					}
 				}else{
-					if(i != g_iC4ChickenEnt){
-						SetEntPropFloat(i, Prop_Data, "m_flModelScale", 1.0);
-						RemoveEntity(i);
+					if(ent != g_iC4ChickenEnt){
+						SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 1.0);
+						RemoveEntity(ent);
 					}
 				}
-
 			}
 		}
 		CreateTimer(5.0, timer_resetchickendebounce);
@@ -277,30 +271,24 @@ public void ResizeChickens(){
 
 stock int GetPlayerCount(){
 	int count = 0;
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
-			count++;
-		}
+	LoopValidPlayers(i){
+		count++;
 	}
 	return count;
 }
 
 stock int GetAliveTCount(){
 	int count = 0;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_T){
-			count++;
-		}
+	LoopAlivePlayers(i){
+		if(GetClientTeam(i) == CS_TEAM_T) count++;
 	}
 	return count;
 }
 
 stock int GetAliveCTCount(){
 	int count = 0;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_CT){
-			count++;
-		}
+	LoopAlivePlayers(i){
+		if(GetClientTeam(i) == CS_TEAM_CT) count++;
 	}
 	return count;
 }
@@ -309,10 +297,8 @@ stock int GetAliveCTCount(){
 
 public int getRandomAlivePlayer(){
 	Handle players = CreateArray(4);
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			PushArrayCell(players, i);
-		}
+	LoopAlivePlayers(i){
+		PushArrayCell(players, i);
 	}
 	int random = GetRandomInt(0, GetArraySize(players) - 1);
 	int target = GetArrayCell(players, random);
@@ -374,10 +360,8 @@ void GetWeaponClassname(int weapon, char[] buffer, int size) {
 float g_AllPositions[MAXPLAYERS+1][3];
 
 void SavePlayersLocations(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			GetClientAbsOrigin(i, g_AllPositions[i]);
-		}
+	LoopAlivePlayers(i){
+		GetClientAbsOrigin(i, g_AllPositions[i]);
 	}
 }
 
@@ -394,8 +378,7 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 			PushArrayArray(g_UnusedCoordinates, vec);
 		}
 
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
+		LoopAlivePlayers(i){
 				if(client != -1 && client != i) continue; //only set specific player
 				int CoordinateIndex = -1;
 				float DistanceToBeat = 99999.0;
@@ -432,16 +415,12 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 					TeleportEntity(i, g_AllPositions[i], NULL_VECTOR, no_vel);
 				}
 				SetEntityMoveType(i, MOVETYPE_WALK);
-			}
 		}
-
-
+			
 	} else{
-		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i)){
-				TeleportEntity(i, g_AllPositions[i], NULL_VECTOR, no_vel);
-				SetEntityMoveType(i, MOVETYPE_WALK);
-			}
+		LoopValidPlayers(i){
+			TeleportEntity(i, g_AllPositions[i], NULL_VECTOR, no_vel);
+			SetEntityMoveType(i, MOVETYPE_WALK);
 		}
 	}
 	
@@ -487,10 +466,10 @@ void DoRandomTeleport(int client = -1){
 		PushArrayArray(g_UnusedCoordinates, vec);
 	}
 	if(client == -1){
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i) && GetArraySize(g_UnusedCoordinates) > 0){
+		float vec[3];
+		LoopAlivePlayers(i){
+			if(GetArraySize(g_UnusedCoordinates) > 0){
 				int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
-				float vec[3];
 				GetArrayArray(g_UnusedCoordinates, randomCoord, vec);
 				if(DistanceToClosestEntity(vec, "prop_exploding_barrel") > 50){
 					TeleportEntity(i, vec, NULL_VECTOR, NULL_VECTOR);
@@ -540,12 +519,10 @@ stock int GetSlotByWeaponName (int client, const char[] szName){
 int DistanceToClosestPlayer(float vec[3]){
 	float dist = 999999.0;
 	float playerVec[3];
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			GetClientAbsOrigin(i, playerVec);
-			if(GetVectorDistance(playerVec, vec) < dist){
-				dist = GetVectorDistance(playerVec, vec);
-			}
+	LoopAlivePlayers(i){
+		GetClientAbsOrigin(i, playerVec);
+		if(GetVectorDistance(playerVec, vec) < dist){
+			dist = GetVectorDistance(playerVec, vec);
 		}
 	}
 	return RoundToFloor(dist);
@@ -661,36 +638,28 @@ void Update_Overlay(){
 		path = "";
 	}
 
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
-			ClientCommand(i, "r_screenoverlay \"%s\"", path);
-		}
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"%s\"", path);
 	}
 }
 
 
 void SetPlayersGravity(float amount){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			SetEntityGravity(i, amount);
-		}
+	LoopAlivePlayers(i){
+		SetEntityGravity(i, amount);
 	}
 }
 
 void SetPlayersFOV(int fov){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			SetEntProp(i, Prop_Send, "m_iFOV", fov);
-			SetEntProp(i, Prop_Send, "m_iDefaultFOV", fov);
-		}
+	LoopAlivePlayers(i){
+		SetEntProp(i, Prop_Send, "m_iFOV", fov);
+		SetEntProp(i, Prop_Send, "m_iDefaultFOV", fov);
 	}
 }
 
 void ResetPlayersFOV(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
-			SetEntProp(i, Prop_Send, "m_iFOV", 0);
-			SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
-		}
+	LoopValidPlayers(i){
+		SetEntProp(i, Prop_Send, "m_iFOV", 0);
+		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
 	}
 }

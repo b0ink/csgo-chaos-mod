@@ -21,10 +21,8 @@ public bool Chaos_RandomWeapons_Conditions(){
 }
 
 Action Timer_GiveRandomWeapon(Handle timer = null){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			int randomWeaponIndex = GetRandomInt(0,sizeof(g_sWeapons)-1);	
-			GiveAndSwitchWeapon(i, g_sWeapons[randomWeaponIndex]);
-		}
+	LoopAlivePlayers(i){
+		int randomWeaponIndex = GetRandomInt(0,sizeof(g_sWeapons)-1);	
+		GiveAndSwitchWeapon(i, g_sWeapons[randomWeaponIndex]);
 	}
 }

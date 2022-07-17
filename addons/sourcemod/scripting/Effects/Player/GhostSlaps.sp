@@ -30,19 +30,17 @@ float g_maxRange = 750.0;
 float g_minRange = -750.0;
 Action Timer_RandomSlap(Handle timer){
 	//play sound? or do ghost slaps make no noise at all? { o.o }
-	for(int  client = 0;  client <= MaxClients;  client++){
-		if(ValidAndAlive(client)){
-			float vec[3];
-			GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
-			float x = GetRandomFloat(g_minRange,g_maxRange) * GetRandomFloat(-100.0, -1.0);
-			float y = GetRandomFloat(g_minRange,g_maxRange) * GetRandomFloat(0.0, 50.0);
-			float z = GetRandomFloat(g_minRange,g_maxRange) * GetRandomFloat(20.0, 50.0);
-			vec[0] = vec[0]+x;
-			vec[1] = vec[1]+y;
-			vec[2] = vec[2]+z;
-			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec); 
-			CPrintToChat(client, "What was that?");
-		}
+	float vec[3];
+	LoopAlivePlayers(client){
+		GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec);
+		float x = GetRandomFloat(g_minRange,g_maxRange) * GetRandomFloat(-100.0, -1.0);
+		float y = GetRandomFloat(g_minRange,g_maxRange) * GetRandomFloat(0.0, 50.0);
+		float z = GetRandomFloat(g_minRange,g_maxRange) * GetRandomFloat(20.0, 50.0);
+		vec[0] = vec[0]+x;
+		vec[1] = vec[1]+y;
+		vec[2] = vec[2]+z;
+		TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec); 
+		CPrintToChat(client, "What was that?");
 	}
 }
 

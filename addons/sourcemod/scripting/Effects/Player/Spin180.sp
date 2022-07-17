@@ -1,11 +1,9 @@
 public void Chaos_Spin180_START(){
 	float angs[3];
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			GetClientEyeAngles(i, angs);
-			angs[1] = angs[1] + 180;
-			TeleportEntity(i, NULL_VECTOR, angs, NULL_VECTOR);
-		}
+	LoopAlivePlayers(i){
+		GetClientEyeAngles(i, angs);
+		angs[1] = angs[1] + 180;
+		TeleportEntity(i, NULL_VECTOR, angs, NULL_VECTOR);
 	}
 }
 

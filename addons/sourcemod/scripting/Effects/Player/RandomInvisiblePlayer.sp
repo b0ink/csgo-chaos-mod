@@ -2,8 +2,8 @@ public void Chaos_RandomInvisiblePlayer_START(){
 	cvar("sv_disable_immunity_alpha", "1");
 	Handle players_array = CreateArray(4);
 	int playerCount = -1;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)) PushArrayCell(players_array, i);
+	LoopAlivePlayers(i){
+		PushArrayCell(players_array, i);
 	}
 	playerCount = GetArraySize(players_array);
 	if(playerCount <= 1) {
@@ -40,8 +40,8 @@ public bool Chaos_RandomInvisiblePlayer_CustomAnnouncement(){
 public bool Chaos_RandomInvisiblePlayer_Conditions(){
 	Handle players_array = CreateArray(4);
 	int playerCount = -1;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)) PushArrayCell(players_array, i);
+	LoopAlivePlayers(i){
+		PushArrayCell(players_array, i);
 	}
 	playerCount = GetArraySize(players_array);
 	delete players_array;

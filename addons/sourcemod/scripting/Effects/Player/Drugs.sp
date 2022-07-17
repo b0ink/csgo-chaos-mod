@@ -11,7 +11,9 @@ float g_DrugAngles[20] = {0.0, 5.0, 10.0, 15.0, 20.0, 25.0, 20.0, 15.0, 10.0, 5.
 
 
 public void Chaos_Drugs_START(){
-	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) CreateDrug(i);
+	LoopAlivePlayers(i){
+		CreateDrug(i);
+	}
 }
 
 public Action Chaos_Drugs_RESET(bool HasTimerEnded){
@@ -25,8 +27,6 @@ public bool Chaos_Drugs_HasNoDuration(){
 public bool Chaos_Drugs_Conditions(){
 	return true;
 }
-
-
 
 
 void CreateDrug(int client){
@@ -79,7 +79,7 @@ void KillDrugTimer(int client){
 }
 
 void KillAllDrugs(){
-	for (int i = 1; i <= MaxClients; i++){
+	LoopAllClients(i){
 		if (g_DrugTimers[i] != null){
 			if(IsClientInGame(i)){
 				KillDrug(i);

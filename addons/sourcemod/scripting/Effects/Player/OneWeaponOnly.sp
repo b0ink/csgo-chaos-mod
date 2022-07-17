@@ -4,11 +4,9 @@ public void Chaos_OneWeaponOnly_START(){
 	char randomWeapon[64];
 	int randomIndex = GetRandomInt(0, sizeof(g_sWeapons)-1);
 	randomWeapon = g_sWeapons[randomIndex];
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			StripPlayer(i);
-			GivePlayerItem(i, randomWeapon);
-		}
+	LoopAlivePlayers(i){
+		StripPlayer(i);
+		GivePlayerItem(i, randomWeapon);		
 	}
 	for(int i = 0; i < sizeof(randomWeapon); i++) randomWeapon[i] = CharToUpper(randomWeapon[i]);
 
@@ -24,9 +22,9 @@ public Action Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
 	g_bPlayersCanDropWeapon = true;
 }
 
-public Action Chaos_OneWeaponOnly_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+// public Action Chaos_OneWeaponOnly_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
-}
+// }
 
 
 public bool Chaos_OneWeaponOnly_HasNoDuration(){

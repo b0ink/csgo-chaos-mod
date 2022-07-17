@@ -2,12 +2,16 @@ char chickenModel[] = "models/chicken/chicken.mdl";
 char playersModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
 
 public void Chaos_ChickenPlayers_START(){
-	for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) SetChicken(i);
+	LoopAlivePlayers(i){
+		SetChicken(i);
+	}
 }
 
 public Action Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
-		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i)) DisableChicken(i);
+		LoopAlivePlayers(i){
+			DisableChicken(i);
+		}
 	}
 }
 

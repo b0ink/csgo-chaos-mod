@@ -22,6 +22,7 @@ public void Chaos_TeammateSwap_START(){
 
 	
 	float vec[3];
+	
 	for(int i = 0; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			GetClientAbsOrigin(i, vec);

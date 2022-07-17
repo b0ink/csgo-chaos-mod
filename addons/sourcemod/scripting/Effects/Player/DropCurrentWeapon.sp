@@ -1,8 +1,6 @@
 public void Chaos_DropCurrentWeapon_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			ClientCommand(i, "drop");
-		}
+	LoopAlivePlayers(i){
+		ClientCommand(i, "drop");
 	}
 }
 

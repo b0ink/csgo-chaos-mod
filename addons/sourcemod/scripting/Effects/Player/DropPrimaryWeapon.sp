@@ -1,6 +1,6 @@
 public void Chaos_DropPrimaryWeapon_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i) && !HasMenuOpen(i)){
+	LoopAlivePlayers(i){
+		if(!HasMenuOpen(i)){
 			ClientCommand(i, "slot2;slot1");
 		}
 	}
@@ -8,10 +8,8 @@ public void Chaos_DropPrimaryWeapon_START(){
 }
 
 public Action Timer_DropPrimary(Handle timer){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			ClientCommand(i, "drop");
-		}
+	LoopAlivePlayers(i){
+		ClientCommand(i, "drop");
 	}
 }
 

@@ -16,20 +16,21 @@ public Action Chaos_KnifeFight_Hook_WeaponSwitch(int client, int weapon){
 
 }
 
-
 public void Chaos_KnifeFight_START(){
 	g_bKnifeFight++;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			FakeClientCommand(i, "use weapon_knife");
-		}
+	LoopAlivePlayers(i){
+		FakeClientCommand(i, "use weapon_knife");
 	}
 }
 
 public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
 	if(HasTimerEnded){ 
-		for(int i = 0; i <= MaxClients; i++) if(ValidAndAlive(i) && !HasMenuOpen(i)) ClientCommand(i, "slot1");
+		LoopAlivePlayers(i){
+			if(!HasMenuOpen(i)){
+				ClientCommand(i, "slot1");
+			}
+		}
 	}
 }
 

@@ -1,14 +1,12 @@
 public void Chaos_BlindPlayers_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)) PerformBlind(i, 255);
+	LoopAlivePlayers(i){
+		PerformBlind(i, 255);
 	}
 }
 
 public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
-			PerformBlind(i, 0);
-		}
+	LoopAlivePlayers(i){
+		PerformBlind(i, 0);
 	}
 }
 

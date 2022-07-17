@@ -69,17 +69,6 @@ public bool Chaos_ExplosiveBullets_Conditions(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 public bool TR_DontHitSelf(int target, int mask, int client){
 	return target != client;
 }
@@ -92,14 +81,10 @@ void CS_CreateExplosion(int attacker, int weapon, float damage, float radius, fl
 	TE_DispatchEffect(DIRT, pos);
 	
 	//Hurt the players in the area of explosion
-	for (int victim = 1; victim <= MaxClients; victim++){
-		if (!IsClientInGame(victim) || !IsPlayerAlive(victim)) continue;
-		
-		float victim_pos[3];
+	float victim_pos[3];
+	LoopAlivePlayers(victim){
 		GetClientAbsOrigin(victim, victim_pos);
-		
 		float distance = GetVectorDistance(pos, victim_pos);
-		
 		if(distance <= radius){
 			//Calculate damage based of distance
 			float result = Sine(((radius - distance) / radius) * (3.14159 / 2)) * damage;

@@ -1,10 +1,8 @@
 public void Chaos_ResetSpawns_START(){
 	float zero_vector[3] = {0.0, 0.0, 0.0};
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			if(g_OriginalSpawnVec[i][0] != 0.0 && g_OriginalSpawnVec[i][1] != 0.0 && g_OriginalSpawnVec[i][2] != 0.0){
-				TeleportEntity(i, g_OriginalSpawnVec[i], NULL_VECTOR, zero_vector);
-			}
+	LoopAlivePlayers(i){
+		if(g_OriginalSpawnVec[i][0] != 0.0 && g_OriginalSpawnVec[i][1] != 0.0 && g_OriginalSpawnVec[i][2] != 0.0){
+			TeleportEntity(i, g_OriginalSpawnVec[i], NULL_VECTOR, zero_vector);
 		}
 	}
 }

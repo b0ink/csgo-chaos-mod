@@ -77,12 +77,10 @@ public Action Timer_LightningStrike(Handle timer) {
 	}
 
 	float pos[3];
-	for(int i = 0; i <= MaxClients; i++){ // dealing damage to player if they are struck
-		if(ValidAndAlive(i)){
-			GetClientAbsOrigin(i, pos);
-			if (GetVectorDistance(pos, endpos) < 200.0){
-				SlapPlayer(i, 15, false);
-			}
+	LoopAlivePlayers(i){
+		GetClientAbsOrigin(i, pos);
+		if (GetVectorDistance(pos, endpos) < 200.0){ // dealing damage to player if they are struck
+			SlapPlayer(i, 15, false);
 		}
 	}
 }

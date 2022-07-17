@@ -4,10 +4,8 @@ public void Chaos_BreakTime_START(){
 	g_bNoForwardBack++;
 	g_bNoStrafe++;
 
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			FakeClientCommand(i, "use weapon_knife");
-		}
+	LoopAlivePlayers(i){
+		FakeClientCommand(i, "use weapon_knife");
 	}
 }
 

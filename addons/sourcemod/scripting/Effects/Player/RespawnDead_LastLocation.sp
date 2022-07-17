@@ -1,11 +1,9 @@
 public void Chaos_RespawnDead_LastLocation_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i) && !IsPlayerAlive(i)){
-			if(GetClientTeam(i) == CS_TEAM_CT || GetClientTeam(i) == CS_TEAM_T){
-				CS_RespawnPlayer(i);
-				if(g_PlayerDeathLocations[i][0] != 0.0 && g_PlayerDeathLocations[i][1] != 0.0 && g_PlayerDeathLocations[i][2] != 0.0){ //safety net for any players that joined mid round
-					TeleportEntity(i, g_PlayerDeathLocations[i], NULL_VECTOR, NULL_VECTOR);
-				}
+	LoopValidPlayers(i){
+		if(!IsPlayerAlive(i)){
+			CS_RespawnPlayer(i);
+			if(g_PlayerDeathLocations[i][0] != 0.0 && g_PlayerDeathLocations[i][1] != 0.0 && g_PlayerDeathLocations[i][2] != 0.0){ //safety net for any players that joined mid round
+				TeleportEntity(i, g_PlayerDeathLocations[i], NULL_VECTOR, NULL_VECTOR);
 			}
 		}
 	}

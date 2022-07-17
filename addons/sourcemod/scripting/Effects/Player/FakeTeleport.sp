@@ -1,25 +1,17 @@
 float FakeTelport_loc[MAXPLAYERS+1][3];
 
 public void Chaos_FakeTeleport_START(){
-	// float duration = 3.0;
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			float vec[3];
-			GetClientAbsOrigin(i, vec);
-			FakeTelport_loc[i] = vec;
-		}
+	LoopAlivePlayers(i){
+		GetClientAbsOrigin(i, FakeTelport_loc[i]);
 	}
+
 	DoRandomTeleport();
 	CreateTimer(3.0, Timer_EndTeleport);
 }
 
 public Action Timer_EndTeleport(Handle timer){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			float vec[3];
-			vec = FakeTelport_loc[i];
-			TeleportEntity(i, vec, NULL_VECTOR, NULL_VECTOR);
-		}
+	LoopAlivePlayers(i){
+		TeleportEntity(i, FakeTelport_loc[i], NULL_VECTOR, NULL_VECTOR);
 	}
 	AnnounceChaos(GetChaosTitle("Chaos_FakeTeleport"), -1.0);
 }

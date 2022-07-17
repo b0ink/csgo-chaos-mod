@@ -21,12 +21,10 @@ public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name
 
 
 public void Chaos_OneBulletMag_START(){
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			for (int j = 0; j < 2; j++){
-				int iTempWeapon = -1;
-				if ((iTempWeapon = GetPlayerWeaponSlot(i, j)) != -1) SetClip(iTempWeapon, 1, 1);
-			}
+	LoopAlivePlayers(i){
+		for (int j = 0; j < 2; j++){
+			int iTempWeapon = -1;
+			if ((iTempWeapon = GetPlayerWeaponSlot(i, j)) != -1) SetClip(iTempWeapon, 1, 1);
 		}
 	}
 	g_bOneBulletMag = true;
@@ -35,23 +33,21 @@ public void Chaos_OneBulletMag_START(){
 public Action Chaos_OneBulletMag_RESET(bool HasTimerEnded){
 	g_bOneBulletMag = false;
 	if(HasTimerEnded){ //don't need to do this if the round has ended, especially if the event didnt even happen
-		for(int i = 0; i <= MaxClients; i++){
-			if(ValidAndAlive(i)){
-				char currentWeapon[64];
-				GetClientWeapon(i, currentWeapon, sizeof(currentWeapon));
-				int wepID = -1;
-				for(int slot = 0; slot < 2; slot++){ //pistol and primary are the only ones i care about
-					if((wepID = GetPlayerWeaponSlot(i, slot)) != -1){
-						char ClientWeaponName[64];
-						GetWeaponClassname(wepID, ClientWeaponName, 64);
-						if(IsValidEntity(wepID)){
-							RemovePlayerItem(i, wepID);
-							GivePlayerItem(i, ClientWeaponName);
-						} 
-					}
+		char currentWeapon[64];
+		LoopAlivePlayers(i){
+			GetClientWeapon(i, currentWeapon, sizeof(currentWeapon));
+			int wepID = -1;
+			for(int slot = 0; slot < 2; slot++){ //pistol and primary are the only ones i care about
+				if((wepID = GetPlayerWeaponSlot(i, slot)) != -1){
+					char ClientWeaponName[64];
+					GetWeaponClassname(wepID, ClientWeaponName, 64);
+					if(IsValidEntity(wepID)){
+						RemovePlayerItem(i, wepID);
+						GivePlayerItem(i, ClientWeaponName);
+					} 
 				}
-				FakeClientCommand(i, "use %s", currentWeapon); //swap back to original weapon
 			}
+			FakeClientCommand(i, "use %s", currentWeapon); //swap back to original weapon	
 		}
 
 	}

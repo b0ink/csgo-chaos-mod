@@ -66,14 +66,12 @@ void Run_Init_Functions(){
 void SaveBombPosition(){
 	float c4_location[3];
 	bool found = false;
-	int iMaxEnts = GetMaxEntities();
-	char sClassName[64];
-	for(int i=MaxClients;i<iMaxEnts;i++){
-		if(IsValidEntity(i) && IsValidEdict(i) && GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-		StrEqual(sClassName, "weapon_c4")
-		&& GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
+
+	char classname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, "weapon_c4") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
 			found = true;
-			GetEntPropVector(i, Prop_Send, "m_vecOrigin", c4_location);
+			GetEntPropVector(ent, Prop_Send, "m_vecOrigin", c4_location);
 		}
 	}
 
@@ -110,33 +108,31 @@ public Action Timer_SaveCoordinates(Handle timer){
 	float client_vel[3];
 	float compare_vec[3];
 	char client_vec_string[64];
-	for(int i = 0; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			GetClientAbsOrigin(i, client_vec);
-			
-			GetEntPropVector(i, Prop_Data, "m_vecVelocity", client_vel);
-					
-			if(!(GetClientButtons(i) & IN_DUCK) && client_vel[2] == 0.0 && GetEntityMoveType(i) == MOVETYPE_WALK && GetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue") == 1.0) { //ensure player isnt mid jump or falling down
-				FormatEx(client_vec_string, sizeof(client_vec_string), "%f %f %f", client_vec[0], client_vec[1], client_vec[2]);
-				if(GetArraySize(g_MapCoordinates) == 0){
-					UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
-					PushArrayArray(g_MapCoordinates, client_vec);
-				}else{
-					float distanceToBeat = 99999.0;
-					for(int g = 0; g < GetArraySize(g_MapCoordinates); g++){
-						GetArrayArray(g_MapCoordinates, g, compare_vec, sizeof(compare_vec));
-						float dist = GetVectorDistance(client_vec, compare_vec);
-						if(dist < distanceToBeat){
-							distanceToBeat = dist;
-						}
-					}
-					if(distanceToBeat > 250){
-						UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
-						PushArrayArray(g_MapCoordinates, client_vec);
+	LoopAlivePlayers(i){
+		GetClientAbsOrigin(i, client_vec);
+		
+		GetEntPropVector(i, Prop_Data, "m_vecVelocity", client_vel);
+				
+		if(!(GetClientButtons(i) & IN_DUCK) && client_vel[2] == 0.0 && GetEntityMoveType(i) == MOVETYPE_WALK && GetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue") == 1.0) { //ensure player isnt mid jump or falling down
+			FormatEx(client_vec_string, sizeof(client_vec_string), "%f %f %f", client_vec[0], client_vec[1], client_vec[2]);
+			if(GetArraySize(g_MapCoordinates) == 0){
+				UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
+				PushArrayArray(g_MapCoordinates, client_vec);
+			}else{
+				float distanceToBeat = 99999.0;
+				for(int g = 0; g < GetArraySize(g_MapCoordinates); g++){
+					GetArrayArray(g_MapCoordinates, g, compare_vec, sizeof(compare_vec));
+					float dist = GetVectorDistance(client_vec, compare_vec);
+					if(dist < distanceToBeat){
+						distanceToBeat = dist;
 					}
 				}
-
+				if(distanceToBeat > 250){
+					UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
+					PushArrayArray(g_MapCoordinates, client_vec);
+				}
 			}
+
 		}
 	}
 }

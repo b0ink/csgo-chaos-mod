@@ -165,17 +165,9 @@ void AutoPlantC4(bool ForcedRetry = false){
                 RemoveEntity(ent);
             }
         }
-        // int iMaxEnts = GetMaxEntities();
-        // char sClassName[64];
-        // for(int i=MaxClients;i<iMaxEnts;i++){
-        //     if(IsValidEntity(i) && IsValidEdict(i) && GetEdictClassname(i, sClassName, sizeof(sClassName)) &&
-        //     StrEqual(sClassName, "weapon_c4")
-        //     && GetEntPropEnt(i, Prop_Send, "m_hOwnerEntity") == -1){
-        //         RemoveEntity(i);
-        //     }
-        // }
-        for(int i = 0; i <= MaxClients; i++){
-            if(ValidAndAlive(i) && GetClientTeam(i) == CS_TEAM_T){
+
+        LoopAlivePlayers(i){
+            if(GetClientTeam(i) == CS_TEAM_T){
                 GivePlayerItem(i, "weapon_c4");
                 CreateTimer(0.5, Timer_RetryAutoPlant);
                 break;
@@ -244,7 +236,9 @@ stock bool SafeRemoveWeapon(int client, int weapon){
 }
 
 stock int GetBomber(){
-    for (int i = 1; i <= MaxClients; i++) if (IsValidClient(i) && HasBomb(i)) return i;
+    LoopAlivePlayers(i){
+        if(HasBomb(i)) return i;
+    }
     return -1;
 }
 

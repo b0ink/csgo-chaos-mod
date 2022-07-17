@@ -38,16 +38,14 @@ public Action Timer_SpawnMolotov(Handle timer){
 		return;
 	}
 	g_MolotovSpawn_Count++;
-	for(int client = 0; client <= MaxClients; client++){
-		if(ValidAndAlive(client)){
-			float vec[3];
-			GetClientAbsOrigin(client, vec);
-			vec[2] = vec[2] + 100; //anything bigger and things like vents or ct spawn will spawn molotov in other areas of the map
-			//TODO: offset x and z
-			int ent = CreateEntityByName("molotov_projectile");
-			TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
-			DispatchSpawn(ent);
-			AcceptEntityInput(ent, "InitializeSpawnFromWorld"); 
-		}
+	float vec[3];
+	LoopAlivePlayers(i){
+		GetClientAbsOrigin(i, vec);
+		vec[2] = vec[2] + 100; //anything bigger and things like vents or ct spawn will spawn molotov in other areas of the map
+		//TODO: offset x and z
+		int ent = CreateEntityByName("molotov_projectile");
+		TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
+		DispatchSpawn(ent);
+		AcceptEntityInput(ent, "InitializeSpawnFromWorld"); 
 	}
 }

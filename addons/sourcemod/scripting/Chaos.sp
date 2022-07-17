@@ -307,8 +307,10 @@ enum struct effect{
 #define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
 
 // Already checks if they are on a valid team
-#define LoopAlivePlayers(%1) for(int %1 = 0; %1 <= MaxClients; %1++)\
-							if(ValidAndAlive(%1))
+#define LoopAllClients(%1) 		for(int %1 = 0; %1 <= MaxClients; %1++)
+#define LoopValidPlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(IsValidClient(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
+#define LoopAlivePlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
+
 
 						
 // Shared by multiple effects
@@ -556,10 +558,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(g_bPlaySound_Debounce == false){
 		//Prevent overlapping sounds
 		g_bPlaySound_Debounce = true;
-		for(int i = 0; i <= MaxClients; i++){
-			if(IsValidClient(i)){
-				EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
-			}
+		LoopValidPlayers(i){
+			EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
 		}
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}

@@ -82,33 +82,29 @@ public void RemoveSkin(int client) {
     playerModelsIndex[client] = -1;
 }
 public void destroyGlows() {
-    for(int client = 1; client <= MaxClients; client++) {
-        if(IsClientInGame(client)) {
-            if(ValidAndAlive(client)){
-                RemoveSkin(client);
-            }
-        }
+    LoopAlivePlayers(i){
+        RemoveSkin(i);
     }
 }
 
 
 public void createGlows() {
-	char model[PLATFORM_MAX_PATH];
-	char attachment[PLATFORM_MAX_PATH];
-	int skin = -1;
-	//Loop and setup a glow on alive players.
-	attachment = "primary";
-	for(int client = 1; client <= MaxClients; client++) {
-        if(!IsClientInGame(client) || !IsPlayerAlive(client)) continue;
+    char model[PLATFORM_MAX_PATH];
+    char attachment[PLATFORM_MAX_PATH];
+    int skin = -1;
+    //Loop and setup a glow on alive players.
+    attachment = "primary";
+    LoopAlivePlayers(client){
         int team = GetClientTeam(client);
         if(team <= 1) continue;
         //Create Skin
         GetClientModel(client, model, sizeof(model));
         skin = CreatePlayerModelProp(client, model, attachment, true, 1.0);
         if(skin > MaxClients) {
-			if(SDKHookEx(skin, SDKHook_SetTransmit, OnSetTransmit_All)) setGlowTeam(skin, team);
-        }
+            if(SDKHookEx(skin, SDKHook_SetTransmit, OnSetTransmit_All)) setGlowTeam(skin, team);
+        } 
     }
+
 }
 
 public int CreatePlayerModelProp(int client, char[] sModel, char[] attachment, bool bonemerge, float scale) {
