@@ -7,8 +7,9 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	g_bCanSpawnChickens = false;
 	g_bBombPlanted = true;
 	C4Chicken();
-
-	CreateTimer(1.0, Timer_SaveBombPosition);
+	if(!ValidBombSpawns()){
+		CreateTimer(1.0, Timer_SaveBombPosition);
+	}
 	return Plugin_Continue;
 }
 

@@ -69,14 +69,12 @@ void SaveBombPosition(){
 
 	char classname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "weapon_c4") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
+		if(StrEqual(classname, "planted_c4")){ //&& GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
 			found = true;
 			GetEntPropVector(ent, Prop_Send, "m_vecOrigin", c4_location);
 		}
 	}
-
 	if(!found) return;
-	
 
 	//TODO: test this
 	int site = GetNearestBombsite(c4_location);
