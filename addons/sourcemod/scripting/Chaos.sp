@@ -206,7 +206,7 @@ Handle 	bombSiteB = INVALID_HANDLE;
 int global_id_count = 0;
 ArrayList ChaosEffects;
 
-enum struct effect{
+enum struct effect_data{
 	char 		title[64]; // 0th index for ease of sorting in configs.sp
 	
 	int 		id;
@@ -312,10 +312,10 @@ enum struct effect{
 
 
 public Action Effect_Reset(Handle timer, int effect_id){
-	effect data;
-	LoopAllEffects(data){
-		if(data.id == effect_id){
-			data.reset_effect(true);
+	effect_data effect;
+	LoopAllEffects(effect){
+		if(effect.id == effect_id){
+			effect.reset_effect(true);
 			break;
 		}
 	}
@@ -364,7 +364,7 @@ public void OnPluginStart(){
 
 	g_SavedConvars  = CreateArray(64);
 
-	ChaosEffects = new ArrayList(sizeof(effect));
+	ChaosEffects = new ArrayList(sizeof(effect_data));
 
 	/* From Effects/PluginStart.sp */
 	Chaos_OnPluginStart();
@@ -508,27 +508,27 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	if(g_sCustomEffect[0]){ //run from menu
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
-		effect data;
-		LoopAllEffects(data){
+		effect_data effect;
+		LoopAllEffects(effect){
 			//TODO: test conditions, return error to user?
-			if(StrEqual(data.config_name, g_sCustomEffect, false)){
-				data.run_effect();
+			if(StrEqual(effect.config_name, g_sCustomEffect, false)){
+				effect.run_effect();
 				break;
 			}
 		}
 	}else{
-		effect new_effect;
+		effect_data effect;
 		int totalEffects = ChaosEffects.Length;
 		
 		while(!g_sLastPlayedEffect[0]){ // no longer
 			attempts++;
 			do{
 				randomEffect = GetRandomInt(0, totalEffects - 1);
-				ChaosEffects.GetArray(randomEffect, new_effect, sizeof(new_effect));
-				if(new_effect.enabled && new_effect.can_run_effect() && (!Effect_Recently_Played(new_effect.config_name) || CustomRun) && new_effect.timer == INVALID_HANDLE){
-					Random_Effect = new_effect.config_name;
-					new_effect.run_effect();
-					PushArrayString(Effect_History, new_effect.config_name);
+				ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
+				if(effect.enabled && effect.can_run_effect() && (!Effect_Recently_Played(effect.config_name) || CustomRun) && effect.timer == INVALID_HANDLE){
+					Random_Effect = effect.config_name;
+					effect.run_effect();
+					PushArrayString(Effect_History, effect.config_name);
 
 					float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
 					if(GetArraySize(Effect_History) > average) RemoveFromArray(Effect_History, 0);
@@ -597,9 +597,9 @@ public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);
 	Fog_OFF();
 
-	effect data;
-	LoopAllEffects(data){
-		data.reset_effect(false);
+	effect_data effect;
+	LoopAllEffects(effect){
+		effect.reset_effect(false);
 	}
 }
 

@@ -13,26 +13,26 @@ bool ValidBombSpawns(){
 	return true;
 }
 
-bool GetEffectData(char[] function_name, effect return_data){
-	effect effect_data;
+bool GetEffectData(char[] function_name, effect_data return_data){
+	effect_data effect;
 	bool found = false;
-	LoopAllEffects(effect_data){
-		if(StrEqual(effect_data.config_name, function_name, false)){
+	LoopAllEffects(effect){
+		if(StrEqual(effect.config_name, function_name, false)){
 			found = true;
 			break;
 		}
 	}
 
-	if(found) return_data = effect_data;
+	if(found) return_data = effect;
 	return found;
 	// return null;
 }
 
 float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false){
 	float expire = defaultTime;
-	effect effect_data;
-	if(GetEffectData(EffectName, effect_data)){
-		expire = effect_data.Get_Duration(raw);
+	effect_data effect;
+	if(GetEffectData(EffectName, effect)){
+		expire = effect.Get_Duration(raw);
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
@@ -59,15 +59,15 @@ bool PoolChaosEffects(char[] effectName = ""){
 
 	Possible_Chaos_Effects.Clear();
 
-	effect data;
-	LoopAllEffects(data){
+	effect_data effect;
+	LoopAllEffects(effect){
 		if(effectName[0]){ //* if keyword was provided
-			if(StrContains(data.config_name, effectName, false) != -1){ //TODO: allow for aliases
-				Possible_Chaos_Effects.PushArray(data, sizeof(data));
+			if(StrContains(effect.config_name, effectName, false) != -1){ //TODO: allow for aliases
+				Possible_Chaos_Effects.PushArray(effect, sizeof(effect));
 			}
 		}else{
-			// if(foo.can_run_effect()){ //TODO: allow all?
-			Possible_Chaos_Effects.PushArray(data, sizeof(data));
+			// if(effect.can_run_effect()){ //TODO: allow all?
+			Possible_Chaos_Effects.PushArray(effect, sizeof(effect));
 			// }
 		}
 	}

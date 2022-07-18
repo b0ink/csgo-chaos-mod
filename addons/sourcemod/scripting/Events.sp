@@ -1,5 +1,5 @@
-effect 	Chaos_EffectData_Buffer;
-char 	Chaos_EventName_Buffer[64];
+effect_data 	Chaos_EffectData_Buffer;
+char 			Chaos_EventName_Buffer[64];
 
 
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){

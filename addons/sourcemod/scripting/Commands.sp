@@ -42,9 +42,9 @@ public Action Command_NewChaosEffect(int client, int args){
 						return Plugin_Handled;
 					// }else if(Possible_Chaos_Effects.Length == 1){
 					// 	// g_sCustomEffect = g_sSelectedChaosEffect;
-					// 	effect foo;
-					// 	Possible_Chaos_Effects.GetArray (0, foo, sizeof(foo));
-					// 	g_sCustomEffect = foo.config_name;
+					// 	effect_data effect;
+					// 	Possible_Chaos_Effects.GetArray (0, effect, sizeof(effect));
+					// 	g_sCustomEffect = effect.config_name;
 					// 	ChooseEffect(null, true);
 					}else{
 						if(Possible_Chaos_Effects.Length > 1){

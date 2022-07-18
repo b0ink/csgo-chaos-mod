@@ -35,10 +35,10 @@ public void OnConfigsExecuted(){
 	}
 
 	Run_Init_Functions();
-	effect data;
+	effect_data effect;
 	char function_mapstart[64];
-	LoopAllEffects(data){
-		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", data.config_name);
+	LoopAllEffects(effect){
+		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", effect.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -50,10 +50,10 @@ public void OnConfigsExecuted(){
 
 
 void Run_Init_Functions(){
-	effect data;
+	effect_data effect;
 	char init_function[64];
-	LoopAllEffects(data){
-		Format(init_function, sizeof(init_function), "%s_INIT", data.config_name);
+	LoopAllEffects(effect){
+		Format(init_function, sizeof(init_function), "%s_INIT", effect.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -207,19 +207,19 @@ void ParseChaosEffects(){
 			if(func != INVALID_FUNCTION){
 				global_id_count++;
 
-				effect new_chaos_effect;
+				effect_data effect;
 
 				char function_name[64];
 				Format(function_name, sizeof(function_name), "%s_START", Chaos_Function_Name);
-				new_chaos_effect.function_name_start = function_name;
+				effect.function_name_start = function_name;
 				Format(function_name, sizeof(function_name), "%s_RESET", Chaos_Function_Name);
 				
-				new_chaos_effect.function_name_reset = function_name;
-				new_chaos_effect.title = Chaos_Function_Title;
-				new_chaos_effect.config_name = Chaos_Function_Name;
-				new_chaos_effect.duration = expires;
-				new_chaos_effect.id = global_id_count;
-				new_chaos_effect.enabled = view_as<bool>(enabled);
+				effect.function_name_reset = function_name;
+				effect.title = Chaos_Function_Title;
+				effect.config_name = Chaos_Function_Name;
+				effect.duration = expires;
+				effect.id = global_id_count;
+				effect.enabled = view_as<bool>(enabled);
 
 				Format(call_function_name, sizeof(call_function_name), "%s_HasNoDuration", Chaos_Function_Name);
 				Function func2 = GetFunctionByName(GetMyHandle(), call_function_name);
@@ -228,8 +228,8 @@ void ParseChaosEffects(){
 					Call_StartFunction(GetMyHandle(), func2);
 					Call_Finish(no_duration);
 				}
-				new_chaos_effect.force_no_duration = no_duration;
-				ChaosEffects.PushArray(new_chaos_effect, sizeof(new_chaos_effect));
+				effect.force_no_duration = no_duration;
+				ChaosEffects.PushArray(effect, sizeof(effect));
 
 			}else{
 				Log("Could not find start function for: %s. This effect will not run.", Chaos_Function_Name);
@@ -269,12 +269,12 @@ void ParseOverrideEffects(){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
 			if(enabled != 0 && enabled != 1) enabled = 1;
-			effect data;
-			LoopAllEffects(data){
-				if(StrEqual(data.config_name, Chaos_Function_Name, false)){
-					data.enabled = view_as<bool>(enabled);
-					data.duration = expires;
-					ChaosEffects.SetArray(i, data);
+			effect_data effect;
+			LoopAllEffects(effect){
+				if(StrEqual(effect.config_name, Chaos_Function_Name, false)){
+					effect.enabled = view_as<bool>(enabled);
+					effect.duration = expires;
+					ChaosEffects.SetArray(i, effect);
 				}
 			}
 

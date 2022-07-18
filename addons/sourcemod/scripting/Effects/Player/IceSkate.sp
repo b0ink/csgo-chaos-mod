@@ -16,7 +16,8 @@ public Action Chaos_IceSkate_RESET(bool HasTimerEnded){
 	IceSkate = false;
 }
 
-//TODO:: add to Chaos_Jumping
+//TODO: Increasing the players speed helps them get over ramps and makes the effect playable
+
 public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(IceSkate){
 		ForceJumpSkate[client] = !ForceJumpSkate[client];
@@ -30,26 +31,26 @@ public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpu
 
 
 public Action Chaos_IceSkate_OnGameFrame(){
-		if(!IceSkate) return;
+	if(!IceSkate) return;
 
-		// trace down, see if there's 8 distance or less to ground
-		float fPosition[3];
-		float fGroundPosition[3];
-		float fSpeed[3];
+	// trace down, see if there's 8 distance or less to ground
+	float fPosition[3];
+	float fGroundPosition[3];
+	float fSpeed[3];
 
-		LoopAlivePlayers(i){
-			GetClientAbsOrigin(i, fPosition);
-			TR_TraceRayFilter(fPosition, view_as<float>({90.0, 0.0, 0.0}), MASK_PLAYERSOLID, RayType_Infinite, TRFilter_NoPlayers, i);
+	LoopAlivePlayers(i){
+		GetClientAbsOrigin(i, fPosition);
+		TR_TraceRayFilter(fPosition, view_as<float>({90.0, 0.0, 0.0}), MASK_PLAYERSOLID, RayType_Infinite, TRFilter_NoPlayers, i);
 
 
-			if(TR_DidHit() && TR_GetEndPosition(fGroundPosition) && GetVectorDistance(fPosition, fGroundPosition) <= 25.0)
-			{
-				GetEntPropVector(i, Prop_Data, "m_vecAbsVelocity", fSpeed);
-				// fSpeed[2] = 8.0 * GetEntityGravity(i) * GetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue"); //! * (sv_gravity.FloatValue / 800);
-				fSpeed[2] = 25.0 * GetEntityGravity(i) * GetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue"); //! * (sv_gravity.FloatValue / 800);
-				TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, fSpeed);
-			}
+		if(TR_DidHit() && TR_GetEndPosition(fGroundPosition) && GetVectorDistance(fPosition, fGroundPosition) <= 25.0)
+		{
+			GetEntPropVector(i, Prop_Data, "m_vecAbsVelocity", fSpeed);
+			// fSpeed[2] = 8.0 * GetEntityGravity(i) * GetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue"); //! * (sv_gravity.FloatValue / 800);
+			fSpeed[2] = 15.0 * GetEntityGravity(i) * GetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue"); //! * (sv_gravity.FloatValue / 800);
+			TeleportEntity(i, NULL_VECTOR, NULL_VECTOR, fSpeed);
 		}
+	}
 }
 
 
