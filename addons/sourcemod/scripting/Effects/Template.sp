@@ -35,6 +35,12 @@
 	
  */
 
+public bool Chaos_$0(effect_data effect){
+	effect.force_no_duration = false;
+	effect.type = "Player"
+	// effect.type = "Meta"
+	// effect.type = "Game"
+}
 
 /*
 	Runs on the OnMapStart function. Use this to precache any models or textures.

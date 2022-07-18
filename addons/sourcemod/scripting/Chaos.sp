@@ -206,6 +206,13 @@ Handle 	bombSiteB = INVALID_HANDLE;
 int global_id_count = 0;
 ArrayList ChaosEffects;
 
+/*
+	If Chaos_Effects.cfg was to be removed, then it would make sense to do the whole:
+		effect.duration = x
+		effect.enabled = x
+		effect.name = x
+		effect.description = x
+*/
 enum struct effect_data{
 	char 		title[64]; // 0th index for ease of sorting in configs.sp
 	
