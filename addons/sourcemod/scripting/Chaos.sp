@@ -368,7 +368,7 @@ public void OnPluginStart(){
 
 	g_SavedConvars  = CreateArray(64);
 
-	ChaosEffects = new ArrayList(1024);
+	ChaosEffects = new ArrayList(sizeof(effect));
 
 	/* From Effects/PluginStart.sp */
 	Chaos_OnPluginStart();
