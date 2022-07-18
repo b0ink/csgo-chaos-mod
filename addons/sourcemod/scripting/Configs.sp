@@ -221,6 +221,19 @@ void ParseChaosEffects(){
 				effect.id = global_id_count;
 				effect.enabled = view_as<bool>(enabled);
 
+
+					// effect_data effect;
+					// effect.conditions = "adsf";
+					// PrintToChatAll(effect.conditions);
+					// Chaos_Autobhop(effect);
+					// PrintToChatAll(effect.conditions);
+					 //resave to stringmap, or just do it when creating the
+				//TODO: instead of using functions for these checks, create one function ( Chaos_EffectName() ) that adds data to the enum struct
+					// public bool Chaos_Autobhop(effect_data effect){
+					// 	effect.force_no_duration = true;
+					// 	effect.conditions = "Chaos_Autobhop_Conditions";
+					// }
+
 				Format(call_function_name, sizeof(call_function_name), "%s_HasNoDuration", Chaos_Function_Name);
 				Function func2 = GetFunctionByName(GetMyHandle(), call_function_name);
 				bool no_duration = false;

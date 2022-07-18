@@ -1,9 +1,3 @@
-public bool Chaos_Autobhop(effect_data effect){
-	// effect.NoDuration = true;
-
-}
-
-
 public void Chaos_Autobhop_START(){
 	g_AutoBunnyhop++;
 	cvar("sv_airaccelerate", "1999");

@@ -220,6 +220,7 @@ enum struct effect_data{
 
 	char 		function_name_start[64];
 	char 		function_name_reset[64];
+	char 		conditions[64];
 	
 	Handle 		timer;
 
@@ -368,6 +369,11 @@ public void OnPluginStart(){
 
 	/* From Effects/PluginStart.sp */
 	Chaos_OnPluginStart();
+
+
+
+
+
 }
 
 
