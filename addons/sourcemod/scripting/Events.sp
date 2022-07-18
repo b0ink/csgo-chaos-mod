@@ -6,7 +6,6 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_bCanSpawnChickens = false;
 	g_bBombPlanted = true;
-	C4Chicken();
 	if(!ValidBombSpawns()){
 		CreateTimer(1.0, Timer_SaveBombPosition);
 	}
