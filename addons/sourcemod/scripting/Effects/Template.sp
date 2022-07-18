@@ -40,6 +40,9 @@ public bool Chaos_$0(effect_data effect){
 	effect.type = "Player"
 	// effect.type = "Meta"
 	// effect.type = "Game"
+	// effect.addAlias("Effect NmE");
+	effect.incompatibleWith("Chaos_BreakTime") 
+	effect.incompatibleWith("Chaos_Funky") 
 }
 
 /*
