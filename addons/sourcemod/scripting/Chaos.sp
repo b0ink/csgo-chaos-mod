@@ -51,6 +51,28 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define DIRT "impact_dirt_child_clumps"
 #define EXPLOSION_HE "weapons/hegrenade/explode5.wav"
 
+// #define LoopAllEntities(%1,%2) for(int %1 = 0; %1 < %2;%1++)
+// 								if(IsValidEntity(%1) && IsValidEdict(%1))
+
+#define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++)\
+								if(IsValidEntity(%1) && IsValidEdict(%1))\
+								if(GetEdictClassname(%1, %3, 64))
+
+#define LoopAllEffects(%1) for(int i = 0; i < 999; i++)\
+									if(i < ChaosEffects.Length)\
+									if(ChaosEffects.GetArray(i, %1, sizeof(%1)))
+//TODO:..
+/*
+	TODO: instead of pooling coords into an empty array, then removing the coord once used
+			Could i do a DIstanceTOClosestPlayer check after teleporting players one by one?
+*/
+#define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
+
+// Already checks if they are on a valid team
+#define LoopAllClients(%1) 		for(int %1 = 0; %1 <= MaxClients; %1++)
+#define LoopValidPlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(IsValidClient(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
+#define LoopAlivePlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
+
 
 char g_sWeapons[][64] = {
 	"weapon_glock",
@@ -289,43 +311,6 @@ enum struct effect{
 }
 
 
-// #define LoopAllEntities(%1,%2) for(int %1 = 0; %1 < %2;%1++)
-// 								if(IsValidEntity(%1) && IsValidEdict(%1))
-
-#define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++)\
-								if(IsValidEntity(%1) && IsValidEdict(%1))\
-								if(GetEdictClassname(%1, %3, 64))
-
-#define LoopAllEffects(%1) for(int i = 0; i < 999; i++)\
-									if(i < ChaosEffects.Length)\
-									if(ChaosEffects.GetArray(i, %1, sizeof(%1)))
-//TODO:..
-/*
-	TODO: instead of pooling coords into an empty array, then removing the coord once used
-			Could i do a DIstanceTOClosestPlayer check after teleporting players one by one?
-*/
-#define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
-
-// Already checks if they are on a valid team
-#define LoopAllClients(%1) 		for(int %1 = 0; %1 <= MaxClients; %1++)
-#define LoopValidPlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(IsValidClient(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
-#define LoopAlivePlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
-
-
-						
-// Shared by multiple effects
-#include "Global/InstantWeaponSwitch.sp"
-#include "Global/WeaponJump.sp"
-#include "Global/Fog.sp"
-#include "Global/ColorCorrection.sp"
-#include "Global/Weather.sp"
-
-#include "Effects/EffectsList.sp"
-#include "Effects/PluginStart.sp"
-
-
-
-
 public Action Effect_Reset(Handle timer, int effect_id){
 	effect data;
 	LoopAllEffects(data){
@@ -336,6 +321,17 @@ public Action Effect_Reset(Handle timer, int effect_id){
 	}
 }
 
+
+// Shared by multiple effects
+#include "Global/InstantWeaponSwitch.sp"
+#include "Global/WeaponJump.sp"
+#include "Global/Fog.sp"
+#include "Global/ColorCorrection.sp"
+#include "Global/Weather.sp"
+
+
+#include "Effects/EffectsList.sp"
+#include "Effects/PluginStart.sp"
 
 
 #include "Commands.sp"
@@ -373,8 +369,6 @@ public void OnPluginStart(){
 	/* From Effects/PluginStart.sp */
 	Chaos_OnPluginStart();
 }
-
-
 
 
 public void OnPluginEnd(){
@@ -435,7 +429,6 @@ public void OnMapStart(){
 
 
 }
-
 
 
 public void OnMapEnd(){
@@ -587,6 +580,7 @@ public Action Timer_ResetPlaySound(Handle timer){
 }
 
 //Used if there's no map data found for the map that renders the event useless
+//TODO: to be removed, some like AutoPlant still rely on it as its difficult to make those checks
 public void RetryEffect(){
 	Log("RETRYING EVENT..");
 	if(g_bDisableRetryEffect){
