@@ -345,7 +345,6 @@ public Action Effect_Reset(Handle timer, int effect_id){
 
 
 public void OnPluginStart(){
-	PrintToChatAll("test!");
 	LoadTranslations("chaos.phrases");
 	
 	CreateConVars();

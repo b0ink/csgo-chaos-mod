@@ -15,6 +15,7 @@ public void Chaos_Thunderstorm_START(){
 	SPAWN_WEATHER(RAIN, "Thunderstorm");
 	CREATE_CC("thunderstorm");
 	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
+	MinimalFog();
 	
 }
 
@@ -34,6 +35,7 @@ public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 			}
 		}
 	}
+	Fog_OFF();
 }
 
 
