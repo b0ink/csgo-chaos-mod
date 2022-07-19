@@ -8,6 +8,7 @@ float mapFogEnd = 800.0;
 float mapFogDensity = 0.995;
 
 
+
 void Find_Fog(){
 	int ent = -1;
 	if(
@@ -24,6 +25,9 @@ void Find_Fog(){
 
 	}else{
 		ent = FindEntityByClassname(ent, "env_fog_controller");
+		if(ent == -1){
+			ent = CreateEntityByName("env_fog_controller");
+		}
 	}
 	
 	if (ent != -1) {
