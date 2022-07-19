@@ -18,13 +18,15 @@ public Action Chaos_Snow_RESET(bool HasTimerEnded){
 			RemoveEntity(ent);
 		}
 	}
-	Fog_OFF();
+	MinimalFog(true);
+	// Fog_OFF();
 }
 
 public bool Chaos_Snow_HasNoDuration(){
 	return false;
 }
 
+//TODO: Add a way to show notes on why its disabled
 public bool Chaos_Snow_Conditions(){
 	if(StrEqual(mapName, "de_dust2", false)){
 		return false; //doesnt work on dust2

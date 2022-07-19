@@ -10,7 +10,8 @@ public void Chaos_DiscoFog_START(){
 public Action Chaos_DiscoFog_RESET(bool HasTimerEnded){
 	StopTimer(g_DiscoFog_Timer_Repeat);
 	g_bDiscoFog = false;
-	Fog_OFF();
+	DiscoFog(true);
+	// Fog_OFF();
 }
 
 public Action Chaos_DiscoFog_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){

@@ -16,7 +16,7 @@ public Action Chaos_DisableStrafe_OnPlayerRunCmd(int client, int &buttons, int &
 	Disable_Strafe[client] = 0;
 
 	if(g_bNoStrafe > 0){
-		if(buttons & IN_MOVELEFT){
+		if(buttons & IN_MOVELEFT){ //TODO: && if vel[x] != 0.0
 			if(Disable_Strafe_DisableKeys_OriginalPos[client][0] == 0.0){
 				GetClientAbsOrigin(client, Disable_Strafe_DisableKeys_OriginalPos[client]);
 			}

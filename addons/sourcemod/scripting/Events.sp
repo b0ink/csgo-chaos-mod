@@ -124,6 +124,8 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_iChaos_Round_Time = -100;
 	
+	ClearFog();
+	
 	Log("--ROUND ENDED--");
 	ResetChaos();
 	g_bCanSpawnEffect = false;

@@ -3,7 +3,8 @@ public void Chaos_LightsOff_START(){
 }
 
 public Action Chaos_LightsOff_RESET(bool HasTimerEnded){
-	Fog_OFF();
+	LightsOff(true);
+	// Fog_OFF();
 }
 
 public bool Chaos_LightsOff_HasNoDuration(){

@@ -35,7 +35,9 @@ public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 			}
 		}
 	}
-	Fog_OFF();
+	MinimalFog(true);
+
+	// Fog_OFF();
 }
 
 
