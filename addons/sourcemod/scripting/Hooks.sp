@@ -1,5 +1,5 @@
 public Action Hook_WeaponSwitch(int client, int weapon){
-	LoopAllEffects(Chaos_EffectData_Buffer){
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_Hook_WeaponSwitch", Chaos_EffectData_Buffer.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		Action return_type;
@@ -30,7 +30,7 @@ public Action Hook_WeaponDrop(int client,int weapon){
 } 
 
 public Action Hook_OnPreThink(int client){
-	LoopAllEffects(Chaos_EffectData_Buffer){
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_Hook_OnPreThink", Chaos_EffectData_Buffer.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		Action return_type;
@@ -55,7 +55,7 @@ public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float
 		return Plugin_Changed;
 	}
 
-	LoopAllEffects(Chaos_EffectData_Buffer){
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_Hook_OnTakeDamage", Chaos_EffectData_Buffer.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		Action return_type;

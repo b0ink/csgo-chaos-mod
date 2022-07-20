@@ -16,7 +16,7 @@ bool ValidBombSpawns(){
 bool GetEffectData(char[] function_name, effect_data return_data){
 	effect_data effect;
 	bool found = false;
-	LoopAllEffects(effect){
+	LoopAllEffects(effect, index){
 		if(StrEqual(effect.config_name, function_name, false)){
 			found = true;
 			break;
@@ -60,7 +60,7 @@ bool PoolChaosEffects(char[] effectName = ""){
 	Possible_Chaos_Effects.Clear();
 
 	effect_data effect;
-	LoopAllEffects(effect){
+	LoopAllEffects(effect, index){
 		if(effectName[0]){ //* if keyword was provided
 			if(StrContains(effect.config_name, effectName, false) != -1){ //TODO: allow for aliases
 				Possible_Chaos_Effects.PushArray(effect, sizeof(effect));

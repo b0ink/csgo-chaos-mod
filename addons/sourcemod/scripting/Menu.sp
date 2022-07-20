@@ -326,7 +326,7 @@ void ShowMenu_EditAllEffects(int client){
 
 	char name[128];
 	effect_data effect;
-	LoopAllEffects(effect){
+	LoopAllEffects(effect, index){
 		Format(name, sizeof(name), "%s", GetChaosTitle(effect.config_name));
 		bool enabled = effect.enabled;
 		Format(name, sizeof(name), "%s %s", name, enabled ? "[ON]" : "[OFF]");

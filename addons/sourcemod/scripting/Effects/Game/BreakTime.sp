@@ -1,3 +1,8 @@
+// public void Chaos_BreakTime(effect_data effect){
+// 	effect.IncompatibleWith("")
+// }
+
+
 
 bool BreakTime = false;
 public void Chaos_BreakTime_START(){

@@ -20,7 +20,6 @@
 
 
 
-
 // #define GetRandomMapSpawn(%1) for(int %1 = 0; %1 < )
 
 public Plugin myinfo = {
@@ -58,9 +57,10 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 								if(IsValidEntity(%1) && IsValidEdict(%1))\
 								if(GetEdictClassname(%1, %3, 64))
 
-#define LoopAllEffects(%1) for(int i = 0; i < 999; i++)\
-									if(i < ChaosEffects.Length)\
-									if(ChaosEffects.GetArray(i, %1, sizeof(%1)))
+// If i revert on the 2nd param being the index, index/i is accessible in the loop as its a define, but for clarity ill leave it..
+#define LoopAllEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
+									if(%2 < ChaosEffects.Length)\
+									if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
 //TODO:..
 /*
 	TODO: instead of pooling coords into an empty array, then removing the coord once used
@@ -203,7 +203,6 @@ Handle 	bombSiteB = INVALID_HANDLE;
 #include "ConVars.sp"
 
 
-int global_id_count = 0;
 ArrayList ChaosEffects;
 
 /*
@@ -258,6 +257,9 @@ enum struct effect_data{
 			}
 			g_sLastPlayedEffect = this.config_name;
 			ChaosMapCount++;
+			ChaosEffects.SetArray(this.id, this); // save timer
+			// ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
+			
 		}
 	}
 
@@ -267,7 +269,12 @@ enum struct effect_data{
 			Call_StartFunction(GetMyHandle(), func);
 			Call_PushCell(HasTimerEnded);
 			Call_Finish();
+			this.timer = INVALID_HANDLE;
+			ChaosEffects.SetArray(this.id, this);
 		}
+
+		// ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
+
 	}
 
 	bool can_run_effect(){
@@ -321,9 +328,10 @@ enum struct effect_data{
 
 public Action Effect_Reset(Handle timer, int effect_id){
 	effect_data effect;
-	LoopAllEffects(effect){
+	LoopAllEffects(effect, index){
 		if(effect.id == effect_id){
 			effect.reset_effect(true);
+			ChaosEffects.SetArray(index, effect);
 			break;
 		}
 	}
@@ -522,7 +530,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(g_sCustomEffect[0]){ //run from menu
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
 		effect_data effect;
-		LoopAllEffects(effect){
+		LoopAllEffects(effect, index){
 			//TODO: test conditions, return error to user?
 			if(StrEqual(effect.config_name, g_sCustomEffect, false)){
 				effect.run_effect();
@@ -541,6 +549,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				if(effect.enabled && effect.can_run_effect() && (!Effect_Recently_Played(effect.config_name) || CustomRun) && effect.timer == INVALID_HANDLE){
 					Random_Effect = effect.config_name;
 					effect.run_effect();
+
 					PushArrayString(Effect_History, effect.config_name);
 
 					float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
@@ -611,7 +620,7 @@ public Action ResetRoundChaos(Handle timer){
 	Fog_OFF();
 
 	effect_data effect;
-	LoopAllEffects(effect){
+	LoopAllEffects(effect, index){
 		effect.reset_effect(false);
 	}
 }

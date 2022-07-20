@@ -8,11 +8,19 @@ bool ForceJumpSkate[MAXPLAYERS+1];
 /* This is used when the effect is fired */
 public void Chaos_IceSkate_START(){
 	cvar("sv_airaccelerate", "2000");
+	LoopAlivePlayers(i){
+		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 2.0);
+	}
 	IceSkate = true;
 }
 
 public Action Chaos_IceSkate_RESET(bool HasTimerEnded){
 	ResetCvar("sv_airaccelerate", "12", "2000");
+	if(HasTimerEnded){
+		LoopAlivePlayers(i){
+			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
+		}
+	}
 	IceSkate = false;
 }
 

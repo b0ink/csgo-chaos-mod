@@ -37,7 +37,7 @@ public void OnConfigsExecuted(){
 	Run_Init_Functions();
 	effect_data effect;
 	char function_mapstart[64];
-	LoopAllEffects(effect){
+	LoopAllEffects(effect, index){
 		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", effect.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
 		if(func != INVALID_FUNCTION){
@@ -52,7 +52,7 @@ public void OnConfigsExecuted(){
 void Run_Init_Functions(){
 	effect_data effect;
 	char init_function[64];
-	LoopAllEffects(effect){
+	LoopAllEffects(effect, index){
 		Format(init_function, sizeof(init_function), "%s_INIT", effect.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
@@ -205,7 +205,6 @@ void ParseChaosEffects(){
 			Format(call_function_name, sizeof(call_function_name), "%s_START", Chaos_Function_Name);
 			Function func = GetFunctionByName(GetMyHandle(), call_function_name);
 			if(func != INVALID_FUNCTION){
-				global_id_count++;
 
 				effect_data effect;
 
@@ -218,7 +217,6 @@ void ParseChaosEffects(){
 				effect.title = Chaos_Function_Title;
 				effect.config_name = Chaos_Function_Name;
 				effect.duration = expires;
-				effect.id = global_id_count;
 				effect.enabled = view_as<bool>(enabled);
 
 
@@ -253,8 +251,16 @@ void ParseChaosEffects(){
 
 	ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
 
+	effect_data effect;
+	LoopAllEffects(effect, index){
+		effect.id = index;
+		ChaosEffects.SetArray(index, effect);		
+	}
+
 	Log("Parsed Chaos_Effects.cfg succesfully!");
 }
+
+
 
 
 
@@ -283,11 +289,11 @@ void ParseOverrideEffects(){
 			int expires = kvConfig.GetNum("duration", 15);
 			if(enabled != 0 && enabled != 1) enabled = 1;
 			effect_data effect;
-			LoopAllEffects(effect){
+			LoopAllEffects(effect, index){
 				if(StrEqual(effect.config_name, Chaos_Function_Name, false)){
 					effect.enabled = view_as<bool>(enabled);
 					effect.duration = expires;
-					ChaosEffects.SetArray(i, effect);
+					ChaosEffects.SetArray(index, effect);
 				}
 			}
 

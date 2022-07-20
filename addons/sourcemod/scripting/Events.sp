@@ -18,7 +18,7 @@ public Action Timer_SaveBombPosition(Handle timer){
 
 
 public void OnEntityCreated(int ent, const char[] classname){
-	LoopAllEffects(Chaos_EffectData_Buffer){
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityCreated", Chaos_EffectData_Buffer.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
@@ -35,7 +35,7 @@ public void OnEntityCreated(int ent, const char[] classname){
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 
-	LoopAllEffects(Chaos_EffectData_Buffer){
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
@@ -146,7 +146,7 @@ void ResetChaos(){
 public void OnGameFrame(){
 	if (!g_cvChaosEnabled.BoolValue) return;
 
-	LoopAllEffects(Chaos_EffectData_Buffer){
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnGameFrame", Chaos_EffectData_Buffer.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
