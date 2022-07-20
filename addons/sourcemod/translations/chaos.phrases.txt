@@ -936,4 +936,12 @@
     {
         "en"    "Forces all players to walk"
     }
+    "Chaos_ReducedDamage_Title"
+	{
+		"en"    "Half Damage"
+	}
+	"Chaos_ReducedDamage_Description"
+	{
+		"en"    "Reduces every inflicted damage by 50%"
+	}
 }

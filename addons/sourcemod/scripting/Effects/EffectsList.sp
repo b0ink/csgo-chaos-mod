@@ -92,6 +92,7 @@
 #include "Effects/Player/RandomTeleport.sp"
 #include "Effects/Player/RandomWeapons.sp"
 #include "Effects/Player/RapidFire.sp"
+#include "Effects/Player/ReducedDamage.sp"
 #include "Effects/Player/ResetSpawns.sp"
 #include "Effects/Player/RespawnDead_LastLocation.sp"
 #include "Effects/Player/RespawnTheDead.sp"
