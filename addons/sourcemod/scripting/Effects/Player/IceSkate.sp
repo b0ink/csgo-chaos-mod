@@ -67,12 +67,3 @@ public bool TRFilter_NoPlayers(int entity, int mask, any data)
 	//return (entity != view_as<int>(data) || (entity < 1 || entity > MaxClients));
 	return !(1 <= entity <= MaxClients);
 }
-
-
-public bool Chaos_IceSkate_CustomAnnouncement(){
-	return false;
-}
-
-public bool Chaos_IceSkate_Conditions(){
-	return true;
-}

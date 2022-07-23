@@ -59,16 +59,6 @@ public Action Chaos_ExplosiveBullets_Hook_BulletShot(const char[] te_name, const
 	return;
 }
 
-
-public bool Chaos_ExplosiveBullets_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_ExplosiveBullets_Conditions(){
-	return true;
-}
-
-
 public bool TR_DontHitSelf(int target, int mask, int client){
 	return target != client;
 }

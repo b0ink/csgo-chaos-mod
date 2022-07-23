@@ -40,11 +40,6 @@ public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	// Fog_OFF();
 }
 
-
-public bool Chaos_Thunderstorm_HasNoDuration(){
-	return false;
-}
-
 public bool Chaos_Thunderstorm_Conditions(){
 	return true;
 }

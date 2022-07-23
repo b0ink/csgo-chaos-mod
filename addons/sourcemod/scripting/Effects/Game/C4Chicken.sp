@@ -1,6 +1,10 @@
 bool g_bC4Chicken = false;
 bool g_bVisibleChicken = true;
 
+public void Chaos_C4Chicken(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_C4Chicken_INIT(){
 }
 public void Chaos_C4Chicken_START(){
@@ -11,10 +15,6 @@ public Action Chaos_C4Chicken_RESET(bool HasTimerEnded){
 	g_bC4Chicken = false;
 	RemoveChickens();
 	g_iC4ChickenEnt = -1;
-}
-
-public bool Chaos_C4Chicken_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_C4Chicken_Conditions(){

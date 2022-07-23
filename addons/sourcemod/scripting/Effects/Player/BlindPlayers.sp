@@ -9,11 +9,3 @@ public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
 		PerformBlind(i, 0);
 	}
 }
-
-public bool Chaos_BlindPlayers_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_BlindPlayers_Conditions(){
-	return true;
-}

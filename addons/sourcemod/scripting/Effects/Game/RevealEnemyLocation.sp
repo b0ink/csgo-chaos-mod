@@ -1,3 +1,7 @@
+public void Chaos_RevealEnemyLocation(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_RevealEnemyLocation_START(){
 	ConVar radar = FindConVar("mp_radar_showall");
 
@@ -11,15 +15,6 @@ public Action Timer_ResetRadar(Handle timer){
 	cvar("mp_radar_showall", "0");
 }
 
-public Action Chaos_RevealEnemyLocation_RESET(bool HasTimerEnded){
-
-}
-
-
-public bool Chaos_RevealEnemyLocation_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_RevealEnemyLocation_Conditions(){
-	return true;
-}
+// public bool Chaos_RevealEnemyLocation_Conditions(){
+// 	return true;
+// }

@@ -3,7 +3,7 @@
 */
 
 bool FakeLag = false;
-public void Chaos_FakeLag_START(){
+public void Chaos_Lag_START(){
 	FakeLag = true;
 	CreateTimer(3.0, Timer_FakeLag);
 }
@@ -29,14 +29,6 @@ public Action Timer_FakeLag(Handle timer){
 	CreateTimer(GetRandomFloat(1.0, 5.0), Timer_FakeLag);
 }
 
-public Action Chaos_FakeLag_RESET(bool HasTimerEnded){
+public Action Chaos_Lag_RESET(bool HasTimerEnded){
 	FakeLag = false;
-}
-
-public bool Chaos_FakeLag_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_FakeLag_Conditions(){
-	return true;
 }

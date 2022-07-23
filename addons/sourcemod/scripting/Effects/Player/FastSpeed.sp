@@ -11,11 +11,3 @@ public Action Chaos_FastSpeed_RESET(bool HasTimerEnded){
 		}
 	}
 }
-
-public bool Chaos_FastSpeed_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_FastSpeed_Conditions(){
-	return true;
-}

@@ -19,7 +19,3 @@ public Action Chaos_AlienModelKnife_RESET(bool HasTimerEnded){
 		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
 }
-
-public bool Chaos_AlienModelKnife_Conditions(){
-	return true;
-}

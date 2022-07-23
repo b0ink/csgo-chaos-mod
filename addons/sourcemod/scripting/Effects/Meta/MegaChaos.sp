@@ -1,6 +1,11 @@
 //TODO: remove Meta chaos from the "Possible Chaos Effects" pool and run meta effects as their own random chance
 //? 		Whether thats on an interval, eg. every 25 - 50 effects run a meta effect, or run a 1 in 100 chance every effect to run a meta
 
+public void Chaos_MegaChaos(effect_data effect){
+	effect.HasNoDuration = true;
+	effect.HasCustomAnnouncement = true;
+	effect.IncompatibleWith("Chaos_EffectName");
+}
 
 public void Chaos_MEGACHAOS_START(){
 	g_bMegaChaos = true; 
@@ -19,15 +24,6 @@ public void Chaos_MEGACHAOS_START(){
 public Action Timer_CompleteMegaChaos(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0, true, true);
 	g_bMegaChaos = false;
-}
-
-public bool Chaos_MEGACHAOS_CustomAnnouncement(){
-	return true;
-}
-
-
-public bool Chaos_MEGACHAOS_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_MEGACHAOS_Conditions(){

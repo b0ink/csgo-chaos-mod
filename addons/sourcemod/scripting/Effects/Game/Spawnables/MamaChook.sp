@@ -1,3 +1,7 @@
+public void Chaos_MamaChook(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_MamaChook_START(){
 	int randomIndex = GetRandomInt(0, GetArraySize(g_MapCoordinates) - 1);
 	int ent = CreateEntityByName("chicken");
@@ -12,17 +16,4 @@ public void Chaos_MamaChook_START(){
 
 public Action Chaos_MamaChook_RESET(bool HasTimerEnded){
 	RemoveChickens();
-}
-
-public Action Chaos_MamaChook_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_MamaChook_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_MamaChook_Conditions(){
-	return true;
 }

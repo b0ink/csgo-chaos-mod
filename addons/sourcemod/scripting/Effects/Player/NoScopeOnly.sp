@@ -36,16 +36,3 @@ public void Chaos_NoScopeOnly_START(){
 public Action Chaos_NoScopeOnly_RESET(bool HasTimerEnded){
 	g_bNoscopeOnly = false;
 }
-
-public Action Chaos_NoScopeOnly_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_NoScopeOnly_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_NoScopeOnly_Conditions(){
-	return true;
-}

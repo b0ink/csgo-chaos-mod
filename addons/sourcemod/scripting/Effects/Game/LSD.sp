@@ -21,16 +21,6 @@ public Action Chaos_LSD_RESET(bool HasTimerEnded){
 		g_Previous_LSD = -1;
 }
 
-
-public bool Chaos_LSD_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_LSD_Conditions(){
-	return true;
-}
-
-
 public Action Timer_SpawnNewLSD(Handle Timer){
 	g_LSD_Timer_Repeat = INVALID_HANDLE;
 

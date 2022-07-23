@@ -1,3 +1,7 @@
+public void Chaos_BigChooks(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_BigChooks_START(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
@@ -19,11 +23,6 @@ public void Chaos_BigChooks_START(){
 public Action Chaos_BigChooks_RESET(bool HasTimerEnded){
 	RemoveChickens();
 	g_bCanSpawnChickens = true;
-}
-
-
-public bool Chaos_BigChooks_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_BigChooks_Conditions(){

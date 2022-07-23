@@ -1,8 +1,12 @@
+public void Chaos_RewindTenSeconds(effect_data effect){
+	effect.HasNoDuration = true;
+	effect.HasCustomAnnouncement = true;
+}
+
 
 bool g_bRewind_logging_enabled = true;
 bool g_Rewinding = false;
 int g_RewindTime = 0;
-
 
 
 #define g_RollbackFrames 640 //64tick by 10 seconds; 128tick servers will replay in 5 seconds
@@ -38,18 +42,6 @@ public Action Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
-}
-
-// public Action Chaos_RewindTenSeconds_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-public bool Chaos_RewindTenSeconds_CustomAnnouncement(){
-	return true;
-}
-
-public bool Chaos_RewindTenSeconds_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_RewindTenSeconds_Conditions(){

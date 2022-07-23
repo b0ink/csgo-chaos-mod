@@ -20,18 +20,6 @@ public Action Chaos_ESP_RESET(bool HasTimerEnded){
 	destroyGlows();
 }
 
-
-public bool Chaos_ESP_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_ESP_Conditions(){
-	return true;
-}
-
-
-
-
 int playerModels[MAXPLAYERS+1] = {INVALID_ENT_REFERENCE,...};
 int playerModelsIndex[MAXPLAYERS+1] = {-1,...};
 
@@ -43,9 +31,6 @@ public void checkGlows(){
 	destroyGlows();
 	createGlows();
 }
-
-
-
 
 public void SetupGlow(int entity, int color[4]) {
     int offset;
@@ -86,7 +71,6 @@ public void destroyGlows() {
         RemoveSkin(i);
     }
 }
-
 
 public void createGlows() {
     char model[PLATFORM_MAX_PATH];

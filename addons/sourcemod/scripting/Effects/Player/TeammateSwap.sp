@@ -4,6 +4,10 @@ Handle CTPos = INVALID_HANDLE;
 Handle tIndex = INVALID_HANDLE;
 Handle ctIndex = INVALID_HANDLE;
 
+public void Chaos_TeammatesSwap(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_TeammateSwap_INIT(){
 	if(TPos == INVALID_HANDLE) TPos = CreateArray(3);
 	if(CTPos == INVALID_HANDLE) CTPos = CreateArray(3);
@@ -47,21 +51,4 @@ public void Chaos_TeammateSwap_START(){
 		GetArrayArray(TPos, i, vec);
 		TeleportEntity(GetArrayCell(tIndex, i), vec, NULL_VECTOR, NULL_VECTOR);
 	}
-}
-
-// public Action Chaos_TeammateSwap_RESET(bool HasTimerEnded){
-
-// }
-
-// public Action Chaos_TeammateSwap_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_TeammateSwap_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_TeammateSwap_Conditions(){
-	return true;
 }

@@ -34,15 +34,6 @@ public Action Chaos_DisableForwardBack_OnPlayerRunCmd(int client, int &buttons, 
 
 }
 
-
-public bool Chaos_DisableForwardBack_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_DisableForwardBack_Conditions(){
-	return true;
-}
-
 public void Chaos_DisableForwardBack_Hook_PreThinkPost(int client){
 
 	float vel[3];

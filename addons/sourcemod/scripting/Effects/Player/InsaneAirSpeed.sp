@@ -8,12 +8,3 @@ public Action Chaos_InsaneAirSpeed_RESET(bool HasTimerEnded){
 	ResetCvar("sv_air_max_wishspeed", "30", "2000");
 	ResetCvar("sv_airaccelerate", "12", "2000");
 }
-
-
-public bool Chaos_InsaneAirSpeed_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_InsaneAirSpeed_Conditions(){
-	return true;
-}

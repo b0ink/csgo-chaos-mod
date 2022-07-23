@@ -1,4 +1,8 @@
 bool g_bForce_Reload[MAXPLAYERS+1];
+public void Chaos_ForceReload(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 
 public void Chaos_ForceReload_START(){
 	int iTempWeapon = -1;
@@ -24,13 +28,4 @@ public Action Chaos_ForceReload_OnPlayerRunCmd(int client, int &buttons, int &iI
 		buttons |= IN_RELOAD;
 		g_bForce_Reload[client] = false;
 	}
-}
-
-
-public bool Chaos_ForceReload_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_ForceReload_Conditions(){
-	return true;
 }

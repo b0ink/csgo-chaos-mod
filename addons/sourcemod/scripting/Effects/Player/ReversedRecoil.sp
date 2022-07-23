@@ -5,12 +5,3 @@ public void Chaos_ReversedRecoil_START(){
 public Action Chaos_ReversedRecoil_RESET(bool HasTimerEnded){
 	ResetCvar("weapon_recoil_scale", "2", "-5");
 }
-
-
-public bool Chaos_ReversedRecoil_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_ReversedRecoil_Conditions(){
-	return true;
-}

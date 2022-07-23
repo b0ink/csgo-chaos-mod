@@ -18,16 +18,3 @@ public void Chaos_LockPlayersAim_START(){
 public Action Chaos_LockPlayersAim_RESET(bool HasTimerEnded){
 	g_bLockPlayersAim_Active = false;
 }
-
-// public Action Chaos_LockPlayersAim_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_LockPlayersAim_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_LockPlayersAim_Conditions(){
-	return true;
-}

@@ -1,3 +1,8 @@
+public void Chaos_RandomInvisiblePlayer(effect_data effect){
+	effect.HasNoDuration = true;
+	effect.HasCustomAnnouncement = true;
+}
+
 public void Chaos_RandomInvisiblePlayer_START(){
 	cvar("sv_disable_immunity_alpha", "1");
 	Handle players_array = CreateArray(4);
@@ -23,18 +28,6 @@ public void Chaos_RandomInvisiblePlayer_START(){
 	AnnounceChaos(chaosMsg, -1.0);
 	
 	delete players_array;
-}
-
-// public Action Chaos_RandomInvisiblePlayer_RESET(bool HasTimerEnded){
-
-// }
-
-public bool Chaos_RandomInvisiblePlayer_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_RandomInvisiblePlayer_CustomAnnouncement(){
-	return true;
 }
 
 public bool Chaos_RandomInvisiblePlayer_Conditions(){

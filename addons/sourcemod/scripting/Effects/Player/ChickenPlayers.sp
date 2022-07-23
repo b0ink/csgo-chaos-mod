@@ -15,15 +15,6 @@ public Action Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
 	}
 }
 
-public bool Chaos_ChickenPlayers_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_ChickenPlayers_Conditions(){
-	return true;
-}
-
-
 void SetChicken(int client){
 	// Get player model to revert it on chicken disable
 	char modelName[PLATFORM_MAX_PATH];

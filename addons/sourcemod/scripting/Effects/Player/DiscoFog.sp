@@ -14,19 +14,6 @@ public Action Chaos_DiscoFog_RESET(bool HasTimerEnded){
 	// Fog_OFF();
 }
 
-public Action Chaos_DiscoFog_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_DiscoFog_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_DiscoFog_Conditions(){
-	return true;
-}
-
 public Action Timer_NewFogColor(Handle timer){
 	if(g_bDiscoFog){
 		char color[32];

@@ -11,6 +11,8 @@ void HUD_INIT(){
 	EffectHud_NoDuration = 	CreateArray(1);
 }
 
+
+
 void HUD_ROUNDEND(){
 	ClearArray(EffectHud_Name);
 	ClearArray(EffectHud_Time);

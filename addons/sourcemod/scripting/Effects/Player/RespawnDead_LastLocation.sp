@@ -1,3 +1,7 @@
+public void Chaos_Chaos_RespawnDead_LastLocation(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_RespawnDead_LastLocation_START(){
 	LoopValidPlayers(i){
 		if(!IsPlayerAlive(i)){
@@ -7,19 +11,6 @@ public void Chaos_RespawnDead_LastLocation_START(){
 			}
 		}
 	}
-}
-
-public Action Chaos_RespawnDead_LastLocation_RESET(bool HasTimerEnded){
-
-}
-
-// public Action Chaos_RespawnDead_LastLocation_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_RespawnDead_LastLocation_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_RespawnDead_LastLocation_Conditions(){

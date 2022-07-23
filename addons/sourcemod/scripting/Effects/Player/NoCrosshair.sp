@@ -9,11 +9,3 @@ public Action Chaos_NoCrosshair_RESET(bool HasTimerEnded){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", 0);
 	}
 }
-
-public bool Chaos_NoCrosshair_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_NoCrosshair_Conditions(){
-	return true;
-}

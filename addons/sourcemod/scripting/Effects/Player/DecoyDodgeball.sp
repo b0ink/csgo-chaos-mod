@@ -71,19 +71,6 @@ public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
 	delete g_DecoyDodgeball_CheckDecoyTimer;
 }
 
-// public Action Chaos_DecoyDodgeball_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_DecoyDodgeball_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_DecoyDodgeball_Conditions(){
-	return true;
-}
-
 Action Timer_CheckDecoys(Handle timer){
 	if(g_bDecoyDodgeball){
 		LoopAlivePlayers(i){

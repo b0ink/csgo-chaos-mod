@@ -11,15 +11,6 @@ public Action Chaos_RandomWeapons_RESET(bool HasTimerEnded){
 	StopTimer(RandomWeapons_Timer_Repeat);
 }
 
-
-public bool Chaos_RandomWeapons_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_RandomWeapons_Conditions(){
-	return true;
-}
-
 Action Timer_GiveRandomWeapon(Handle timer = null){
 	LoopAlivePlayers(i){
 		int randomWeaponIndex = GetRandomInt(0,sizeof(g_sWeapons)-1);	

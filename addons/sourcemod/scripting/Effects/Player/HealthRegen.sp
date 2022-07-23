@@ -8,15 +8,6 @@ public Action Chaos_HealthRegen_RESET(bool HasTimerEnded){
 	g_HealthRegen = false;
 }
 
-public bool Chaos_HealthRegen_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_HealthRegen_Conditions(){
-	return true;
-}
-
-
 public Action Timer_GiveHealthRegen(Handle timer){
 	if(g_HealthRegen){
 		int currenthealth = -1;

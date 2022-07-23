@@ -1,3 +1,4 @@
+
 //weappon fire
 
 bool g_bPortalGuns = false;
@@ -46,15 +47,6 @@ public void Chaos_PortalGuns_RESET(bool HasTimerEnded){
 		TeleportPlayersToClosestLocation();
 	}
 
-}
-
-
-public bool Chaos_PortalGuns_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_PortalGuns_Conditions(){
-	return true;
 }
 
 

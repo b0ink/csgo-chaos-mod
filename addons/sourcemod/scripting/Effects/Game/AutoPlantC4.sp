@@ -29,6 +29,12 @@ enum //Bombsites
     BOMBSITE_B = 1
 }
 
+public void Chaos_AutoPlantC4(effect_data effect){
+    effect.HasNoDuration = true;
+    effect.HasCustomAnnouncement = true;
+
+    // effect.IncompatibleWith("Chaos_C4Chicken");
+}
 
 public void Chaos_AutoPlantC4_INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");

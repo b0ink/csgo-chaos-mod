@@ -12,20 +12,6 @@ public Action Chaos_GhostSlaps_RESET(bool HasTimerEnded){
 		if(g_NoFallDamage > 0) g_NoFallDamage--; //TODO:
 }
 
-// public Action Chaos_GhostSlaps_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_GhostSlaps_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_GhostSlaps_Conditions(){
-	return true;
-}
-
-
 float g_maxRange = 750.0;
 float g_minRange = -750.0;
 Action Timer_RandomSlap(Handle timer){

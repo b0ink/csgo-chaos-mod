@@ -5,11 +5,3 @@ public void Chaos_EnemyRadar_START(){
 public Action Chaos_EnemyRadar_RESET(bool HasTimerEnded){
 	ResetCvar("mp_radar_showall", "0", "1");
 }
-
-public bool Chaos_EnemyRadar_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_EnemyRadar_Conditions(){
-	return true;
-}

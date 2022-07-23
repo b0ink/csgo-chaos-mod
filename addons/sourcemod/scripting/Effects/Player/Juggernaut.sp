@@ -29,12 +29,3 @@ public Action Chaos_Juggernaut_RESET(bool HasTimerEnded){
 	}
 	ResetCvar("mp_weapons_allow_heavyassaultsuit", "0", "1");
 }
-
-
-public bool Chaos_Juggernaut_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_Juggernaut_Conditions(){
-	return true;
-}

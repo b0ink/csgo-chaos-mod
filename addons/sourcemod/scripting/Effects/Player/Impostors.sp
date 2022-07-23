@@ -1,3 +1,7 @@
+public void Chaos_Impostors(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_Impostors_START(){
 	SpawnImpostors();
 }
@@ -6,19 +10,6 @@ public Action Chaos_Impostors_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		RemoveChickens();
 	}
-}
-
-// public Action Chaos_Impostors_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_Impostors_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_Impostors_Conditions(){
-	return true;
 }
 
 Handle OriginalPlayerModels = INVALID_HANDLE;

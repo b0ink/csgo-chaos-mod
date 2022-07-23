@@ -1,3 +1,9 @@
+public void Chaos_OneWeaponOnly(effect_data effect){
+	effect.HasNoDuration = false;
+	effect.HasCustomAnnouncement = true;
+	effect.IncompatibleWith("Chaos_EffectName");
+}
+
 public void Chaos_OneWeaponOnly_START(){
 	//TODO:; might have to handle weapon pickups?.. (players can still buy)
 	g_bPlayersCanDropWeapon = false;
@@ -20,20 +26,6 @@ public void Chaos_OneWeaponOnly_START(){
 
 public Action Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
 	g_bPlayersCanDropWeapon = true;
-}
-
-// public Action Chaos_OneWeaponOnly_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_OneWeaponOnly_HasNoDuration(){
-	return false;
-}
-
-
-public bool Chaos_OneWeaponOnly_CustomAnnouncement(){
-	return true;
 }
 
 public bool Chaos_OneWeaponOnly_Conditions(){

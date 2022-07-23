@@ -1,3 +1,7 @@
+public void Chaos_LavaFloor(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_LavaFloor_START(){
 	for(int i = 0; i <=  GetArraySize(g_MapCoordinates)-1; i++){
 		int spawnChance = GetRandomInt(0,100);
@@ -12,21 +16,4 @@ public void Chaos_LavaFloor_START(){
 			AcceptEntityInput(ent, "InitializeSpawnFromWorld"); 
 		}
 	}
-}
-
-public Action Chaos_LavaFloor_RESET(bool HasTimerEnded){
-
-}
-
-public Action Chaos_LavaFloor_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_LavaFloor_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_LavaFloor_Conditions(){
-	return true;
 }

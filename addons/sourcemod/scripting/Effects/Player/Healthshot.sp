@@ -1,3 +1,7 @@
+public void Chaos_Healthshot(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_Healthshot_START(){
 	int amount = GetRandomInt(1,3);
 	LoopAlivePlayers(i){
@@ -5,17 +9,4 @@ public void Chaos_Healthshot_START(){
 			GivePlayerItem(i, "weapon_healthshot");
 		}
 	}
-}
-
-public Action Chaos_Healthshot_RESET(bool HasTimerEnded){
-
-}
-
-
-public bool Chaos_Healthshot_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_Healthshot_Conditions(){
-	return true;
 }

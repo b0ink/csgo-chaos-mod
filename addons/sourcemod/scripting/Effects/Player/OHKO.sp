@@ -11,7 +11,3 @@ public Action Chaos_OHKO_RESET(bool HasTimerEnded){
 		}
 	}
 }
-
-public bool Chaos_OHKO_Conditions(){
-	return true;
-}

@@ -19,12 +19,3 @@ public Action Chaos_Autobhop_OnPlayerRunCmd(int client, int &buttons, int &iImpu
 		}
 	}
 }
-
-
-public bool Chaos_Autobhop_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_Autobhop_Conditions(){
-	return true;
-}

@@ -1,6 +1,5 @@
 bool g_bActiveNoclip = false;
 
-
 public void Chaos_Flying_START(){
 	g_bActiveNoclip = true;
 	SavePlayersLocations();
@@ -25,16 +24,6 @@ public Action Chaos_Flying_Hook_OnTakeDamage(int victim, int &attacker, int &inf
 	if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_WALK);
 }
 
-
 public Action Chaos_Flying_Hook_OnTakeDamagePost(int victim, int attacker){
     if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
 }	//ontake
-
-
-public bool Chaos_Flying_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_Flying_Conditions(){
-	return true;
-}

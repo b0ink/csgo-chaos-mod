@@ -1,3 +1,6 @@
+public void Chaos_SpawnFlashbangs(effect_data effect){
+	effect.HasNoDuration = true;
+}
 
 float flashbang_vec[3];
 public void Chaos_SpawnFlashbangs_START(){
@@ -12,15 +15,6 @@ public void Chaos_SpawnFlashbangs_START(){
 			}
 		}	
 	}
-}
-
-public Action Chaos_SpawnFlashbangs_RESET(bool HasTimerEnded){
-
-}
-
-
-public bool Chaos_SpawnFlashbangs_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_SpawnFlashbangs_Conditions(){

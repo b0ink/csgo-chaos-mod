@@ -10,6 +10,10 @@ bool g_bPlayersToDamage[MAXPLAYERS+1];
 #define SS_CROUCH 2;
 
 
+public void Chaos_SimonSays(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_SimonSays_START(){
 	float duration = 10.0;
 	GenerateSimonOrder(duration);
@@ -22,17 +26,9 @@ public Action Chaos_SimonSays_RESET(bool HasTimerEnded){
 	KillMessageTimer();
 }
 
-
-public bool Chaos_SimonSays_HasNoDuration(){
-	return true;
-}
-
 public bool Chaos_SimonSays_Conditions(){
 	return true;
 }
-
-
-
 
 void GenerateSimonOrder(float duration){
 	g_Simon_Says_Action = GetRandomInt(1,4);
@@ -59,7 +55,6 @@ void GenerateSimonOrder(float duration){
 }
 
 public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-	// PrintToChatAll("testq");
 	if(g_time >= 10) return;
 	if(!g_bSimon_Active) return;
 

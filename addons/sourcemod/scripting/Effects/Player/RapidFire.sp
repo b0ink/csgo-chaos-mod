@@ -35,12 +35,3 @@ public Action Chaos_RapidFire_OnPlayerRunCmd(int client, int &buttons, int &iImp
 		}
 	}
 }
-
-
-public bool Chaos_RapidFire_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_RapidFire_Conditions(){
-	return true;
-}

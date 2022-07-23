@@ -11,12 +11,3 @@ public void Chaos_InfiniteGrenades_START(){
 public Action Chaos_InfiniteGrenades_RESET(bool HasTimerEnded){
 	ResetCvar("sv_infinite_ammo", "0", "2");
 }
-
-
-public bool Chaos_InfiniteGrenades_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_InfiniteGrenades_Conditions(){
-	return true;
-}

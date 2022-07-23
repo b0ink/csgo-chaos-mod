@@ -1,3 +1,7 @@
+public void Chaos_MoneyRain(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_MoneyRain_START(){
 	cvar("sv_dz_cash_bundle_size", "500");
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
@@ -15,17 +19,4 @@ public void Chaos_MoneyRain_START(){
 
 public Action Chaos_MoneyRain_RESET(bool HasTimerEnded){
 	ResetCvar("sv_dz_cash_bundle_size", "50", "500");
-}
-
-public Action Chaos_MoneyRain_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_MoneyRain_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_MoneyRain_Conditions(){
-	return true;
 }

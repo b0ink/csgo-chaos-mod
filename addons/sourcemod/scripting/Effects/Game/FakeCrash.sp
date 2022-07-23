@@ -1,7 +1,8 @@
-public void Chaos_FakeCrash_INIT(){
-	
+public void Chaos_FakeCrash(effect_data effect){
+	effect.HasNoDuration = true;
+	effect.HasCustomAnnouncement = true;
+	effect.IncompatibleWith("Chaos_Lag");
 }
-
 
 public void Chaos_FakeCrash_START(){
 	g_sCustomEffect = "";
@@ -17,19 +18,6 @@ public void Chaos_FakeCrash_START(){
 
 public Action Timer_AnnounceFakeCrash(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_FakeCrash"), -1.0);
-}
-
-// public Action Chaos_FakeCrash_RESET(bool HasTimerEnded){
-
-// }
-
-
-public bool Chaos_FakeCrash_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_FakeCrash_CustomAnnouncement(){
-	return true;
 }
 
 public bool Chaos_FakeCrash_Conditions(){

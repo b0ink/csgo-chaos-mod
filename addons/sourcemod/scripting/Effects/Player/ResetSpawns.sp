@@ -1,3 +1,7 @@
+public void Chaos_ResetSpawns(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_ResetSpawns_START(){
 	float zero_vector[3] = {0.0, 0.0, 0.0};
 	LoopAlivePlayers(i){
@@ -5,14 +9,6 @@ public void Chaos_ResetSpawns_START(){
 			TeleportEntity(i, g_OriginalSpawnVec[i], NULL_VECTOR, zero_vector);
 		}
 	}
-}
-
-public Action Chaos_ResetSpawns_RESET(bool HasTimerEnded){
-
-}
-
-public bool Chaos_ResetSpawns_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_ResetSpawns_Conditions(){

@@ -8,20 +8,6 @@ public Action Chaos_NoRecoil_RESET(bool HasTimerEnded){
 	ResetCvar("weapon_recoil_scale", "2", "0");
 }
 
-public Action Chaos_NoRecoil_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_NoRecoil_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_NoRecoil_Conditions(){
-	return true;
-}
-
-
 // weapon_accuracy_nospread "1";
 // weapon_debug_spread_gap "1";
 // weapon_recoil_cooldown "0";

@@ -1,4 +1,3 @@
-//hook
 public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
@@ -38,17 +37,4 @@ public Action Chaos_TaserParty_RESET(bool HasTimerEnded){
 			}
 		}
 	}
-}
-
-// public Action Chaos_TaserParty_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_TaserParty_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_TaserParty_Conditions(){
-	return true;
 }

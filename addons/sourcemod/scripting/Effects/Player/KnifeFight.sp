@@ -1,4 +1,3 @@
-//hook
 
 public Action Chaos_KnifeFight_Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];
@@ -32,13 +31,4 @@ public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
 			}
 		}
 	}
-}
-
-
-public bool Chaos_KnifeFight_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_KnifeFight_Conditions(){
-	return true;
 }

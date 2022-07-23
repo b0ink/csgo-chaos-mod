@@ -5,11 +5,3 @@ public void Chaos_SuperJump_START(){
 public Action Chaos_SuperJump_RESET(bool HasTimerEnded){
 	ResetCvar("sv_jump_impulse", "301", "590");
 }
-
-public bool Chaos_SuperJump_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_SuperJump_Conditions(){
-	return true;
-}

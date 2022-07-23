@@ -53,14 +53,6 @@ public Action Chaos_OneBulletMag_RESET(bool HasTimerEnded){
 	}
 }
 
-public bool Chaos_OneBulletMag_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_OneBulletMag_Conditions(){
-	return true;
-}
-
 stock void SetClip(int weaponid,int ammosize, int clipsize) {
 	SetEntData(weaponid, g_iOffset_Clip1, ammosize);
 	if(clipsize >= 0){

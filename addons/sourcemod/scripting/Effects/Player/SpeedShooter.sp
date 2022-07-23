@@ -1,9 +1,5 @@
 bool SpeedShooter = false;
 
-//TODO: Create a stringmap of speeds, gravity, etc. take the latest added one, once the effect ends find te id and remove it from there
-//? perhaps a timer that checks every second what the speed should be?
-
-
 //TODO:, if someone has speed once this ends, they still have speed
 // > try saving their old speed but itll still be fucky
 
@@ -26,13 +22,4 @@ public Action Chaos_SpeedShooter_OnPlayerRunCmd(int client, int &buttons, int &i
 	}else if(SpeedShooter){
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
-}
-
-
-public bool Chaos_SpeedShooter_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_SpeedShooter_Conditions(){
-	return true;
 }

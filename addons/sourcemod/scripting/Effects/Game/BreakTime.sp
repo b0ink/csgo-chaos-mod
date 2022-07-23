@@ -1,15 +1,11 @@
-// public void Chaos_BreakTime(effect_data effect){
-// 	effect.IncompatibleWith("")
-// }
-
+public void Chaos_BreakTime(effect_data effect){
+	effect.HasNoDuration = false;
+	effect.IncompatibleWith("Chaos_WKeyStuck");
+}
 
 
 bool BreakTime = false;
 public void Chaos_BreakTime_START(){
-	// g_bKnifeFight++;
-	// g_bNoForwardBack++;
-	// g_bNoStrafe++;
-	PrintToChatAll("asd");
 	BreakTime = true;
 	LoopAlivePlayers(i){
 		FakeClientCommand(i, "use weapon_knife");

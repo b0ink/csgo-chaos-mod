@@ -1,6 +1,4 @@
-//weapon fire
 bool OneBulletOneGun = false;
-
 
 public void Chaos_OneBulletOneGun_INIT(){
 	OneBulletOneGun = false;
@@ -30,13 +28,4 @@ public void Chaos_OneBulletOneGun_START(){
 
 public Action Chaos_OneBulletOneGun_RESET(bool HasTimerEnded){
 	OneBulletOneGun = false;
-}
-
-
-public bool Chaos_OneBulletOneGun_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_OneBulletOneGun_Conditions(){
-	return true;
 }

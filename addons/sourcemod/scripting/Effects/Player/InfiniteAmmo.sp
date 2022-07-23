@@ -32,16 +32,3 @@ public void Chaos_InfiniteAmmo_START(){
 public Action Chaos_InfiniteAmmo_RESET(bool HasTimerEnded){
 		g_InfiniteAmmo = false;
 }
-
-public Action Chaos_InfiniteAmmo_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_InfiniteAmmo_HasNoDuration(){
-	return false;
-}
-
-public bool _Conditions(){
-	return true;
-}

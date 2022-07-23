@@ -880,11 +880,11 @@
     {
         "en"    "Steady health regeneration"
     }
-    "Chaos_FakeLag_Title"
+    "Chaos_Lag_Title"
     {
-        "en"    "Fake Lag"
+        "en"    "Lag"
     }
-    "Chaos_FakeLag_Description"
+    "Chaos_Lag_Description"
     {
         "en"    "Intermittent stutters"
     }

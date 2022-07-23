@@ -16,11 +16,3 @@ public Action Chaos_Invis_RESET(bool HasTimerEnded){
 	}
 
 }
-
-public bool Chaos_Invis_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_Invis_Conditions(){
-	return true;
-}

@@ -1,3 +1,6 @@
+public void Chaos_VampireHeal(effect_data effect){
+	effect.HasNoDuration = false;
+}
 
 bool g_bVampireRound = false;
 public Action Chaos_VampireHeal_Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype){
@@ -20,17 +23,4 @@ public void Chaos_VampireHeal_START(){
 
 public Action Chaos_VampireHeal_RESET(bool HasTimerEnded){
 	g_bVampireRound = false;
-}
-
-// public Action Chaos_VampireHeal_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-
-public bool Chaos_VampireHeal_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_VampireHeal_Conditions(){
-	return true;
 }

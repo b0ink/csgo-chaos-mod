@@ -204,9 +204,17 @@ void ParseChaosEffects(){
 
 			Format(call_function_name, sizeof(call_function_name), "%s_START", Chaos_Function_Name);
 			Function func = GetFunctionByName(GetMyHandle(), call_function_name);
-			if(func != INVALID_FUNCTION){
 
+			Format(call_function_name, sizeof(call_function_name), "%s", Chaos_Function_Name);
+			Function func3 = GetFunctionByName(GetMyHandle(), call_function_name);
+			
+			if(func != INVALID_FUNCTION){
 				effect_data effect;
+				if(func3 != INVALID_FUNCTION){
+					Call_StartFunction(GetMyHandle(), func3);
+					Call_PushArrayEx(effect, sizeof(effect), SM_PARAM_COPYBACK);
+					Call_Finish();
+				}
 
 				char function_name[64];
 				Format(function_name, sizeof(function_name), "%s_START", Chaos_Function_Name);

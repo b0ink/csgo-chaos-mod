@@ -11,12 +11,3 @@ public Action Chaos_Thirdperson_RESET(bool HasTimerEnded){
 	}
 	ResetCvar("sv_allow_thirdperson", "0", "1");
 }
-
-
-public bool Chaos_Thirdperson_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_Thirdperson_Conditions(){
-	return true;
-}

@@ -1,3 +1,7 @@
+public void Chaos_LittleChooks(effect_data effect){
+	effect.HasNoDuration = true;
+}
+
 public void Chaos_LittleChooks_START(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
@@ -19,14 +23,6 @@ public void Chaos_LittleChooks_START(){
 public Action Chaos_LittleChooks_RESET(bool HasTimerEnded){
 	RemoveChickens();
 	g_bCanSpawnChickens = true;
-}
-
-// public Action Chaos_LittleChooks_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-// }
-
-public bool Chaos_LittleChooks_HasNoDuration(){
-	return true;
 }
 
 public bool Chaos_LittleChooks_Conditions(){

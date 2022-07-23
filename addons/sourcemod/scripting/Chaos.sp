@@ -222,12 +222,15 @@ enum struct effect_data{
 	
 	int 		duration;
 	bool		force_no_duration;
+	bool 		HasNoDuration;
+	bool		HasCustomAnnouncement;
 	bool		enabled;
 
 	char 		function_name_start[64];
 	char 		function_name_reset[64];
 	char 		conditions[64];
 	
+	Handle		IncompatibleEffects;
 	Handle 		timer;
 
 	void run_effect(){
@@ -278,6 +281,7 @@ enum struct effect_data{
 	}
 
 	bool can_run_effect(){
+		//TODO: slowly remove conditions and check .isCompatible
 		bool response = true;
 		char condition_check[64];
 		FormatEx(condition_check, sizeof(condition_check), "%s_Conditions", this.config_name);
@@ -323,8 +327,37 @@ enum struct effect_data{
 
 		return duration;
 	}
+	void IncompatibleWith(char[] effectName){
+		if(this.IncompatibleEffects == INVALID_HANDLE){
+			this.IncompatibleEffects = CreateArray(255);
+		}
+		PushArrayString(this.IncompatibleEffects, effectName);
+
+	}
+	bool isCompatible(){
+		if(this.IncompatibleEffects == INVALID_HANDLE) return true;
+		
+		char effectName[255];
+		for(int i = 0; i < GetArraySize(this.IncompatibleEffects); i++){
+			GetArrayString(this.IncompatibleEffects, i, effectName, sizeof(effectName));
+			if(IsEffectRunning(effectName)){
+				return false;
+			}
+		}
+
+		return true;
+	}
 }
 
+bool IsEffectRunning(char[] effectName){
+	effect_data effect;
+	LoopAllEffects(effect, index){
+		if(effect.timer != INVALID_HANDLE && StrEqual(effect.config_name, effectName, false)){
+			return true;
+		}
+	}
+	return false;
+}
 
 public Action Effect_Reset(Handle timer, int effect_id){
 	effect_data effect;
@@ -546,7 +579,13 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			do{
 				randomEffect = GetRandomInt(0, totalEffects - 1);
 				ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
-				if(effect.enabled && effect.can_run_effect() && (!Effect_Recently_Played(effect.config_name) || CustomRun) && effect.timer == INVALID_HANDLE){
+				if(
+					effect.enabled &&
+					effect.can_run_effect() &&
+					(!Effect_Recently_Played(effect.config_name) || CustomRun) &&
+					effect.timer == INVALID_HANDLE &&
+					effect.isCompatible()
+				){
 					Random_Effect = effect.config_name;
 					effect.run_effect();
 

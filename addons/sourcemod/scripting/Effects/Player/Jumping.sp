@@ -20,15 +20,6 @@ public Action Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &iImpul
 	}
 }
 
-
-public bool Chaos_Jumping_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_Jumping_Conditions(){
-	return true;
-}
-
 // once upon a time...
 
 // public Action Timer_ForceJump(Handle timer){

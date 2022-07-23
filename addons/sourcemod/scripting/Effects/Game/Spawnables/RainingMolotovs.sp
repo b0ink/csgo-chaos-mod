@@ -1,3 +1,8 @@
+public void Chaos_RainingMolotovs(effect_data effect){
+	effect.HasNoDuration = false;
+}
+
+
 Handle Chaos_MolotovSpawn_Timer = INVALID_HANDLE;
 float g_RandomMolotovSpawn_Interval = 5.0; //5+ recommended for bomb plants
 int g_MolotovSpawn_Count = 0;
@@ -12,20 +17,6 @@ public void Chaos_RainingMolotovs_START(){
 public Action Chaos_RainingMolotovs_RESET(bool HasTimerEnded){
 		StopTimer(Chaos_MolotovSpawn_Timer);
 		ResetCvar("inferno_flame_lifetime", "7", "4");
-
-}
-
-public Action Chaos_RainingMolotovs_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-
-}
-
-
-public bool Chaos_RainingMolotovs_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_RainingMolotovs_Conditions(){
-	return true;
 }
 
 

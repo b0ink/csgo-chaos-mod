@@ -37,15 +37,6 @@ public Action Chaos_DisableStrafe_OnPlayerRunCmd(int client, int &buttons, int &
 
 }
 
-
-public bool Chaos_DisableStrafe_HasNoDuration(){
-	return false;
-}
-
-public bool Chaos_DisableStrafe_Conditions(){
-	return true;
-}
-
 float disableStrafe_vel[3];
 float disableStrafe_vec[3];
 float disableStrafe_vec2[3];
