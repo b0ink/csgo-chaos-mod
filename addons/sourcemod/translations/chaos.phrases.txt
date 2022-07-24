@@ -938,7 +938,7 @@
     }
     "Chaos_ReducedDamage_Title"
 	{
-		"en"    "Half Damage"
+		"en"    "Half Shot Damage"
 	}
 	"Chaos_ReducedDamage_Description"
 	{
