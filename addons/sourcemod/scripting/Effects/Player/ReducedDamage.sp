@@ -1,5 +1,11 @@
 bool ReducedDamage = false;
 
+public void Chaos_ReducedDamage(effect_data effect){
+	effect.AddAlias("HalfDamage");
+	effect.AddAlias("ReduceDamage");
+	effect.IncompatibleWith("Chaos_VampireHeal");
+}
+
 public void Chaos_ReducedDamage_START(){
     ReducedDamage = true;
 }
@@ -13,7 +19,6 @@ public Action Chaos_ReducedDamage_Hook_OnTakeDamage(int victim, int &attacker, i
 		if(ValidAndAlive(victim) && ValidAndAlive(inflictor)){
 			if(GetClientTeam(victim) != GetClientTeam(inflictor)){
 				damage = damage / 2.0;
-
 				return Plugin_Changed;
 			}
 		}

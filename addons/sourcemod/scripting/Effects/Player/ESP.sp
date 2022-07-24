@@ -1,3 +1,8 @@
+public void Chaos_ESP(effect_data effect){
+    effect.AddAlias("Wallhacks");
+    effect.AddAlias("Cheats");
+}
+
 int portal_colors[2][4];
 public void Chaos_ESP_INIT(){
 	portal_colors[0][0] = 144;

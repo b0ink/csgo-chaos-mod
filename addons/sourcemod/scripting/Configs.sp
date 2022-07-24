@@ -240,14 +240,14 @@ void ParseChaosEffects(){
 					// 	effect.conditions = "Chaos_Autobhop_Conditions";
 					// }
 
-				Format(call_function_name, sizeof(call_function_name), "%s_HasNoDuration", Chaos_Function_Name);
-				Function func2 = GetFunctionByName(GetMyHandle(), call_function_name);
-				bool no_duration = false;
-				if(func2 != INVALID_FUNCTION){
-					Call_StartFunction(GetMyHandle(), func2);
-					Call_Finish(no_duration);
-				}
-				effect.force_no_duration = no_duration;
+				// Format(call_function_name, sizeof(call_function_name), "%s_HasNoDuration", Chaos_Function_Name);
+				// Function func2 = GetFunctionByName(GetMyHandle(), call_function_name);
+				// bool no_duration = false;
+				// if(func2 != INVALID_FUNCTION){
+				// 	Call_StartFunction(GetMyHandle(), func2);
+				// 	Call_Finish(no_duration);
+				// }
+				// effect.force_no_duration = no_duration;
 				ChaosEffects.PushArray(effect, sizeof(effect));
 
 			}else{

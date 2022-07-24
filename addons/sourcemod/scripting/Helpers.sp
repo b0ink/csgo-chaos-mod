@@ -57,18 +57,32 @@ char[] GetChaosTitle(char[] function_name){
 
 bool PoolChaosEffects(char[] effectName = ""){
 
+	char alias[64];
 	Possible_Chaos_Effects.Clear();
 
 	effect_data effect;
 	LoopAllEffects(effect, index){
 		if(effectName[0]){ //* if keyword was provided
-			if(StrContains(effect.config_name, effectName, false) != -1){ //TODO: allow for aliases
+			bool containsAlias = false;
+			if(effect.Aliases != INVALID_HANDLE){
+				for(int i = 0; i < GetArraySize(effect.Aliases); i++){
+					GetArrayString(effect.Aliases, i, alias, sizeof(alias));
+					if(StrContains(alias, effectName, false) != -1){
+						containsAlias = true;
+					}
+				}
+			}
+
+		
+			if(
+				StrContains(effect.config_name, effectName, false) != -1 ||
+				StrContains(effect.title, effectName, false) != -1 ||
+				containsAlias
+			){
 				Possible_Chaos_Effects.PushArray(effect, sizeof(effect));
 			}
 		}else{
-			// if(effect.can_run_effect()){ //TODO: allow all?
-			Possible_Chaos_Effects.PushArray(effect, sizeof(effect));
-			// }
+			Possible_Chaos_Effects.PushArray(effect, sizeof(effect)); //* Show all but may be disabled in menu
 		}
 	}
 

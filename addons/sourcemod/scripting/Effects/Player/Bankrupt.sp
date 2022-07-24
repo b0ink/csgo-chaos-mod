@@ -1,5 +1,6 @@
 public void Chaos_Bankrupt(effect_data effect){
 	effect.HasNoDuration = true;
+	effect.AddAlias("Money");
 }
 
 public void Chaos_Bankrupt_START(){

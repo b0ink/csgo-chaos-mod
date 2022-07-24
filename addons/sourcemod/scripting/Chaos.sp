@@ -221,7 +221,7 @@ enum struct effect_data{
 	char 		description[64];
 	
 	int 		duration;
-	bool		force_no_duration;
+	// bool		force_no_duration;
 	bool 		HasNoDuration;
 	bool		HasCustomAnnouncement;
 	bool		enabled;
@@ -231,6 +231,7 @@ enum struct effect_data{
 	char 		conditions[64];
 	
 	Handle		IncompatibleEffects;
+	Handle		Aliases;
 	Handle 		timer;
 
 	void run_effect(){
@@ -245,17 +246,17 @@ enum struct effect_data{
 			if(duration > 0) this.timer = CreateTimer(duration, Effect_Reset, this.id);
 			
 
-			char function_no_announce_check[64];
-			Format(function_no_announce_check, sizeof(function_no_announce_check), "%s_CustomAnnouncement", this.config_name);
-			Function announce = GetFunctionByName(GetMyHandle(), function_no_announce_check);
+			// char function_no_announce_check[64];
+			// Format(function_no_announce_check, sizeof(function_no_announce_check), "%s_CustomAnnouncement", this.config_name);
+			// Function announce = GetFunctionByName(GetMyHandle(), function_no_announce_check);
 
-			bool custom_announce = false;
-			if(announce != INVALID_FUNCTION){
-				Call_StartFunction(GetMyHandle(), announce);
-				Call_Finish(custom_announce);
-			}
+			// bool custom_announce = false;
+			// if(announce != INVALID_FUNCTION){
+			// 	Call_StartFunction(GetMyHandle(), announce);
+			// 	Call_Finish(custom_announce);
+			// }
 
-			if(!custom_announce){
+			if(!this.HasCustomAnnouncement){
 				AnnounceChaos(this.title, this.Get_Duration());
 			}
 			g_sLastPlayedEffect = this.config_name;
@@ -293,7 +294,7 @@ enum struct effect_data{
 		return response;
 	}
 	float Get_Duration(bool raw = false){
-		if(this.force_no_duration){
+		if(this.HasNoDuration){
 			return -1.0;
 		}
 		float OverwriteDuration = g_fChaos_OverwriteDuration;
@@ -346,6 +347,12 @@ enum struct effect_data{
 		}
 
 		return true;
+	}
+	void AddAlias(char[] effectName){
+		if(this.Aliases == INVALID_HANDLE){
+			this.Aliases = CreateArray(255);
+		}
+		PushArrayString(this.Aliases, effectName);
 	}
 }
 

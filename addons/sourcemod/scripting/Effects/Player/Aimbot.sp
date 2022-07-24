@@ -1,3 +1,8 @@
+public void Chaos_Aimbot(effect_data effect){
+	effect.AddAlias("Hacks");
+    effect.AddAlias("Cheats");
+}
+
 /* CREDIT: https://raw.githubusercontent.com/Franc1sco/aimbot/master/scripting/aimbot.sp */
 
 /****************************************************************************************************

@@ -1,3 +1,9 @@
+public void Chaos_Autobhop(effect_data effect){
+	effect.AddAlias("Funky");
+	effect.AddAlias("Bunnyhop");
+	effect.AddAlias("Autohop");
+}
+
 public void Chaos_Autobhop_START(){
 	g_AutoBunnyhop++;
 	cvar("sv_airaccelerate", "1999");

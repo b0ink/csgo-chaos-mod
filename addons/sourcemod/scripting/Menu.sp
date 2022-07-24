@@ -58,80 +58,28 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 	}
 }
 
-
-// int FindStringInArrayViaKeyword(ArrayList array, char[] keyword){
-// 	char search_term[64];
-// 	effect_data effect;
-// 	int index = -1;
-// 	for(int i = 0; i < array.Length; i++){
-// 		ChaosEffects.GetArray(i, effect, sizeof(effect));
-// 		GetArrayString(array, i, search_term, sizeof(search_term));
-// 		index = StrContains(search_term, keyword, false);
-// 		if(index != -1) break;
-// 	}
-// 	return index;
-// }
-
-
-int FindStringInArrayViaKeyword(ArrayList array, char[] keyword){
-	char search_term[64];
-	effect_data effect;
-	int index = -1;
-	for(int i = 0; i < array.Length; i++){
-		ChaosEffects.GetArray(i, effect, sizeof(effect));
-		// search_term = effect.
-		// GetArrayString(array, i, search_term, sizeof(search_term));
-		index = StrContains(search_term, keyword, false);
-		if(index != -1) break;
-	}
-	return index;
-}
-
-
 void ShowMenu_Effects(int client, bool AllowRandom = false){
 	if(!IsValidClient(client)) return;
 
 	Menu menu = new Menu(Effect_Selection);
 	menu.SetTitle("Select Chaos Effect");
-	// char function_name[64];
+
 	char function_title[64];
 	if(AllowRandom) menu.AddItem("", "Random Effect"); //KEEP ID BLANK
 
 	if(AllowRandom) PoolChaosEffects();
 	
-	char search_function[64];
 	effect_data effect;
 	for(int i = 0; i < Possible_Chaos_Effects.Length; i++){ //should contain all 102 all time
 		Possible_Chaos_Effects.GetArray(i, effect, sizeof(effect));
-		
-		// GetArrayString(Effect_Functions, i, search_function, sizeof(search_function));
-		//TODO: i think it was an alias search attempt with the new structs?
-		int index = FindStringInArrayViaKeyword(Possible_Chaos_Effects, search_function); //TODO: for structs wtf is this
-		if(index != -1 || true){ //TODO: WHY
-			// GetArrayString(Effect_Titles, i, function_title, sizeof(function_title));
-			
-
-			// GetArrayString(Effect_Functions, i, function_name, sizeof(function_name));
-			Format(function_title, sizeof(function_title), "%s", GetChaosTitle(effect.config_name));
-			
-
-			// PrintToChatAll("%s -- %s", effect.config_name, GetChaosTitle(effect.config_name));
-			// PrintToChatAll(GetChaosTitle(function_name));
-			if(effect.can_run_effect()){
-				menu.AddItem(effect.config_name, function_title);
-			}else{
-				
-				menu.AddItem(effect.config_name, function_title, ITEMDRAW_DISABLED);
-			}
-			//add item | VALUE | DISPLAY
-
+		Format(function_title, sizeof(function_title), "%s", GetChaosTitle(effect.config_name));
+		if(effect.can_run_effect()){
+			menu.AddItem(effect.config_name, function_title);
 		}else{
-			if(AllowRandom){
-				Log("error finding effect: size of possible effects: %i", GetArraySize(Possible_Chaos_Effects));
-				Log("search: %s, found index: %i", search_function, index);
-			}
+			menu.AddItem(effect.config_name, function_title, ITEMDRAW_DISABLED);
 		}
 	}
+	
 	menu.ExitButton = true;
 	if(AllowRandom) menu.ExitBackButton = true; 
 	menu.Display(client, 0);
@@ -378,7 +326,7 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 	bool blacklisted = false;
 
 
-	if(effect.force_no_duration){
+	if(effect.HasNoDuration){
 		blacklisted = true;
 	}
 	
