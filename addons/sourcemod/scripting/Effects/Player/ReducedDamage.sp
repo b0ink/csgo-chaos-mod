@@ -12,10 +12,13 @@ public Action Chaos_ReducedDamage_Hook_OnTakeDamage(int victim, int &attacker, i
 	if(ReducedDamage){
 		if(ValidAndAlive(victim) && ValidAndAlive(inflictor)){
 			if(GetClientTeam(victim) != GetClientTeam(inflictor)){
-                damage = damage / 2.0;
+				damage = damage / 2.0;
+
+				return Plugin_Changed;
 			}
 		}
 	}
+	return Plugin_Continue;
 }
 
 

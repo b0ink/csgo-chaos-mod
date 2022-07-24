@@ -34,7 +34,7 @@ public void OnEntityCreated(int ent, const char[] classname){
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
-
+	
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);

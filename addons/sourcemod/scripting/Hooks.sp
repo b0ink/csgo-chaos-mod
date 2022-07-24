@@ -12,7 +12,7 @@ public Action Hook_WeaponSwitch(int client, int weapon){
 		}
 	}
 
-	return Plugin_Continue;
+	return Plugin_Changed;
 }
 
 //DISABLE WEAPON DROP DURING RANDOM WEAPON EVENT
@@ -26,7 +26,7 @@ public Action Hook_WeaponDrop(int client,int weapon){
 			}
 		}
 	}
-	return Plugin_Continue;
+	return Plugin_Changed;
 } 
 
 public Action Hook_OnPreThink(int client){
@@ -42,7 +42,7 @@ public Action Hook_OnPreThink(int client){
 		}
 	}
 
-	return Plugin_Continue;
+	return Plugin_Changed;
 }
 
 
@@ -64,12 +64,12 @@ public Action Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float
 			Call_PushCell(victim); 
 			Call_PushCellRef(attacker);
 			Call_PushCellRef(inflictor);
-			Call_PushCellRef(damage);
+			Call_PushFloatRef(damage);
 			Call_PushCellRef(damagetype);
 			Call_Finish();
 			if(return_type != Plugin_Continue) return return_type;
 		}
 	}
 
-	return Plugin_Continue;
+	return Plugin_Changed;
 }
