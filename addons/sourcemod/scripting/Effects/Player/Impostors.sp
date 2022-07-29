@@ -1,6 +1,6 @@
 public void Chaos_Impostors(effect_data effect){
 	effect.HasNoDuration = true;
-    effect.AddAlias("Clones");
+	effect.AddAlias("Clones");
 }
 
 public void Chaos_Impostors_START(){

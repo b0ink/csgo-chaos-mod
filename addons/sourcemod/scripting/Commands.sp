@@ -7,6 +7,9 @@ void RegisterCommands(){
 	RegAdminCmd("sm_effect", 			Command_NewChaosEffect,	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
+
+	RegAdminCmd("chaos_votes", 			Command_GetVotes, 		ADMFLAG_ROOT);
+	RegAdminCmd("save_chaos_vote", 			Command_SaveVote, 		ADMFLAG_ROOT);
 }
 
 // Handle Possible_Chaos_Effects = INVALID_HANDLE;

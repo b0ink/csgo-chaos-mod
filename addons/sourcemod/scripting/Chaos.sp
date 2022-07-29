@@ -394,6 +394,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 #include "Hud.sp"
 #include "Configs.sp"
 #include "Menu.sp"
+#include "Twitch.sp"
 
 
 public void OnPluginStart(){
@@ -425,7 +426,7 @@ public void OnPluginStart(){
 	/* From Effects/PluginStart.sp */
 	Chaos_OnPluginStart();
 
-
+	TWITCH_INIT();
 
 
 
@@ -567,6 +568,50 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	PoolChaosEffects();
 
+
+	/*
+		* so at this point, an effect is ready to be played, if no effect has been preselected, and twitch is enabled, play no effect, start timer, and activate vote
+		*hook a vote command `chaos_votes` will print the 3/4 available effects to play, can be selected 2-4 as a user
+
+	*/
+	//TODO can go under in the else if not custom effect...
+
+
+	if(g_bChaos_TwitchEnabled){
+		// if(g_sChaosNextEffect[0]){ //* if nexteffect is empty, start timer again
+			g_cvChaosNextEffect.SetString("PENDING"); // marker for the twitch app
+			if(GetArraySize(VotingEffects) != 0){
+				// Handle WinningEffect = CreateArray(128);
+				char effectName[128];
+				// char effectSelected[128];
+				int highestVote = 0;
+				for(int i = 0; i < GetArraySize(VotingEffects); i++){
+					GetArrayString(VotingEffects, i, effectName, sizeof(effectName));
+					int vote = 0;
+					Twitch_Votes.GetValue(effectName, vote);
+
+					if(vote >= highestVote){
+						highestVote = vote;
+						// g_sCustomEffect = effectName;
+						Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", effectName);
+					}
+				}
+				// }
+				effect_data effect;
+				LoopAllEffects(effect, index){
+					if(StrEqual(effect.title, g_sCustomEffect)){
+						g_sCustomEffect = effect.config_name;
+					}
+				}
+				if(!g_sCustomEffect[0]){
+					//TODO: restar timer, random on fail?
+				}
+			}
+			
+
+	}
+
+
 	if(g_sCustomEffect[0]){ //run from menu
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
 		effect_data effect;
@@ -580,6 +625,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	}else{
 		effect_data effect;
 		int totalEffects = ChaosEffects.Length;
+
+
 		
 		while(!g_sLastPlayedEffect[0]){ // no longer
 			attempts++;
@@ -630,6 +677,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	bool Chaos_Repeating = g_bChaos_Repeating;
 
 	if(Chaos_Repeating){
+		Twitch_PoolNewVotingEffects(); // pull 4 effects.
+		//TODO: if enabled
 		float Effect_Interval = g_fChaos_EffectInterval;
 		if(Effect_Interval > 60 || Effect_Interval < 5){
 			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
