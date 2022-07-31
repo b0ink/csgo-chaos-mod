@@ -576,35 +576,42 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	*/
 	//TODO can go under in the else if not custom effect...
 
-
-	if(g_bChaos_TwitchEnabled){
+	//TODO: reset effect twitch list if the round ends, otherwise an effect like 'rewind 10 sewconds' is selected at the end of the round,
+	//! but wont be 
+	if(g_bChaos_TwitchEnabled && !g_bMegaChaos && !CustomRun){
 		// if(g_sChaosNextEffect[0]){ //* if nexteffect is empty, start timer again
-			g_cvChaosNextEffect.SetString("PENDING"); // marker for the twitch app
-			if(GetArraySize(VotingEffects) != 0){
+			// g_cvChaosNextEffect.SetString("PENDING"); // marker for the twitch app
+			if(Twitch_Votes.Length != 0){
 				// Handle WinningEffect = CreateArray(128);
 				char effectName[128];
 				// char effectSelected[128];
-				int highestVote = 0;
-				for(int i = 0; i < GetArraySize(VotingEffects); i++){
-					GetArrayString(VotingEffects, i, effectName, sizeof(effectName));
-					int vote = 0;
-					Twitch_Votes.GetValue(effectName, vote);
+				// int highestVote = 0;
+				//TODO get effect thing
+				// for(int i = 0; i < GetArraySize(VotingEffects); i++){
+				// 	GetArrayString(VotingEffects, i, effectName, sizeof(effectName));
+				// 	int vote = 0;
+				// 	Twitch_Votes.GetValue(effectName, vote);
 
-					if(vote >= highestVote){
-						highestVote = vote;
-						// g_sCustomEffect = effectName;
-						Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", effectName);
-					}
-				}
+				// 	if(vote >= highestVote){
+				// 		highestVote = vote;
+				// 		// g_sCustomEffect = effectName;
+				// 		Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", effectName);
+				// 	}
 				// }
+				// }
+				GetHighestVotedEffect(effectName, sizeof(effectName)); //TODO: 'EnsureValidEffect' param as convar, if players want to force the effect regardless of restrictions
+
 				effect_data effect;
 				LoopAllEffects(effect, index){
 					if(StrEqual(effect.title, g_sCustomEffect)){
 						g_sCustomEffect = effect.config_name;
+						break;
 					}
 				}
-				if(!g_sCustomEffect[0]){
-					//TODO: restar timer, random on fail?
+				if(!effect.can_run_effect()){
+					//TODO: opt to find another effect selected.
+					g_sCustomEffect = "";
+					
 				}
 			}
 			

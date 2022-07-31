@@ -17,5 +17,10 @@ enum struct player_data{
 	float gravity;
 	float airacceleration;
 	float FOV;
+	
+	float Disable_LEFT;
+	float Disable_RIGHT;
+	float Disable_FORWARD;
+	float Disable_BACK;
 
 }

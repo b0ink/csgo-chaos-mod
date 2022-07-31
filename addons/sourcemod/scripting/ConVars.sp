@@ -160,11 +160,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	} else if(convar == g_cvChaosOverrideDuration){
 		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
 	} else if(convar == g_cvChaosTwitchEnabled){
-		if(StringToInt(oldValue) == 0 && StringToInt(newValue) == 1){
-			g_bChaos_TwitchEnabled = true;
-		}else if(StringToInt(newValue) == 0){
-			g_bChaos_TwitchEnabled = false;
-		}
+			g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
 	} else if(convar == g_cvChaosNextEffect){
 		g_cvChaosNextEffect.GetString(g_sChaosNextEffect, sizeof(g_sChaosNextEffect));
 	}

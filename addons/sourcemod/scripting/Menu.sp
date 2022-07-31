@@ -175,6 +175,13 @@ void ShowMenu_EditConvars(int client){
 
 	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_override_duration: %.2f", g_cvChaosOverrideDuration.FloatValue);
 	menu.AddItem("sm_chaos_override_duration", ItemTitle);
+
+	float twitchEnabled = 0.0;
+	if(g_bChaos_TwitchEnabled){
+		twitchEnabled = 1.0;
+	}
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_twitch_enabled: %.2f", twitchEnabled);
+	menu.AddItem("sm_chaos_twitch_enabled", ItemTitle);
 	
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
@@ -228,6 +235,7 @@ public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, in
 			convar_editing.FloatValue = seconds;
 			ShowMenu_ConvarIncrements(param1, convar_name);
 			PrintToChatAll("[Chaos] ConVar '%s' has been changed to %.2f", convar_name, seconds);
+			UpdateCvars();
 		}
 	}else if (action == MenuAction_Cancel){
 		if(param2 ==  MenuCancel_ExitBack){

@@ -41,32 +41,33 @@ void AddEffectToHud(char[] message, float time = -1.0){
 }
 
 void PrintEffects(){
-	char chunk[2048];
 	char EffectName[256];
-	LoopValidPlayers(i){
-		if(HasMenuOpen(i)) continue;
-		int EffectTime = -1;
-		for(int ieffect = 0; ieffect < GetArraySize(EffectHud_Name); ieffect++){
-			GetArrayString(EffectHud_Name, ieffect, EffectName, sizeof(EffectName));
-			EffectTime = GetArrayCell(EffectHud_Time, ieffect);
-			int originalTime = EffectTime;
-			int noDuration = GetArrayCell(EffectHud_NoDuration, ieffect);
-			if(EffectTime > 20) EffectTime = 20;
-			Format(chunk, sizeof(chunk), "%s\n%s ", chunk, EffectName);
-			int blocks = EffectTime / 3;
-			if(noDuration == 0){
-				if(originalTime > 120){
-					Format(chunk, sizeof(chunk), "%s ∞", chunk);
-				}else{
-					for(int g = 1; g <= blocks; g++){
-						Format(chunk, sizeof(chunk), "%s▓", chunk);
-						// Format(chunk, sizeof(chunk), "%s▌", chunk);
-						// Format(chunk, sizeof(chunk), "%s▪", chunk);
-						// Format(chunk, sizeof(chunk), "%s⧯", chunk);
-					}
+	char chunk[2048];
+	int EffectTime = -1;
+	for(int ieffect = 0; ieffect < GetArraySize(EffectHud_Name); ieffect++){
+		GetArrayString(EffectHud_Name, ieffect, EffectName, sizeof(EffectName));
+		EffectTime = GetArrayCell(EffectHud_Time, ieffect);
+		int originalTime = EffectTime;
+		int noDuration = GetArrayCell(EffectHud_NoDuration, ieffect);
+		if(EffectTime > 20) EffectTime = 20;
+		Format(chunk, sizeof(chunk), "%s\n%s ", chunk, EffectName);
+		int blocks = EffectTime / 3;
+		if(noDuration == 0){
+			if(originalTime > 120){
+				Format(chunk, sizeof(chunk), "%s ∞", chunk);
+			}else{
+				for(int g = 1; g <= blocks; g++){
+					Format(chunk, sizeof(chunk), "%s▓", chunk);
+					// Format(chunk, sizeof(chunk), "%s▌", chunk);
+					// Format(chunk, sizeof(chunk), "%s▪", chunk);
+					// Format(chunk, sizeof(chunk), "%s⧯", chunk);
 				}
 			}
 		}
+	}
+	LoopValidPlayers(i){
+		if(HasMenuOpen(i)) continue;
+
 		//.37 y;
 		SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 		if(g_DynamicChannel){
@@ -80,7 +81,7 @@ void PrintEffects(){
 	while(!removedAny){
 		removedAny = false;
 		for(int i = 0; i < GetArraySize(EffectHud_Name); i++){
-			int EffectTime = GetArrayCell(EffectHud_Time, i);
+			EffectTime = GetArrayCell(EffectHud_Time, i);
 			if(EffectTime < 2 && !removedAny){
 				RemoveFromArray(EffectHud_Name, i);
 				RemoveFromArray(EffectHud_Time, i);

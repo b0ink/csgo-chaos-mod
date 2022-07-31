@@ -98,7 +98,7 @@ public Action Command_StartChaos(int client, int args){
 		StopTimer(g_NewEffect_Timer);
 		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
 		if(g_DynamicChannel){
-			Timer_Display(null, RoundToFloor(15.0));
+			Timer_Display(null, RoundToFloor(15.0)); //TODO effect interval convar?
 		}
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{
