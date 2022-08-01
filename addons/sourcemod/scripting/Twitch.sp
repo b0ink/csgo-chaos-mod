@@ -1,6 +1,3 @@
-// StringMap Twitch_Votes;
-// Handle VotingEffects = INVALID_HANDLE;
-// StringMapSnapshot Twitch_Votes_Snapshot;
 ArrayList Twitch_Votes;
 bool alternateIndex = false;
 
@@ -14,11 +11,31 @@ bool alternateIndex = false;
 enum struct vote_data{
 	int votes;
 	char name[128];
+	char config_name[128];
 }
 
+void TWITCH_INIT(){
+	Twitch_Votes = new ArrayList(sizeof(vote_data));
+	HookEvent("round_start", 	Twitch_RoundStart);
+	HookEvent("round_end", 		Twitch_RoundEnd);
+}
+
+public Action Twitch_RoundStart(Event event, char[] name, bool dontBroadcast){
+	CreateTimer(0.1, Timer_DelayTwitchPool);
+}
+
+public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	Twitch_Votes.Clear();
+}
+
+public Action Timer_DelayTwitchPool(Handle timer){
+	Twitch_PoolNewVotingEffects(); //*start votes at the start of the round
+}
 
 public Action Command_GetVotes(int client, int args){
 	
+	ReplyToCommand(client, "%s", GetChaosTitle(g_sLastPlayedEffect));
+
 	if(g_bChaos_TwitchEnabled){
 		ReplyToCommand(client, "twitch-enabled");
 	}else{
@@ -61,12 +78,6 @@ public Action Command_SaveVote(int client, int args){
 	return Plugin_Handled;
 }
 
-void TWITCH_INIT(){
-	// Twitch_Votes = new StringMap();
-	// VotingEffects = CreateArray(128);
-
-	Twitch_Votes = new ArrayList(sizeof(vote_data));
-}
 
 bool IsEffectInVoteList(char[] effectName){
 	vote_data effect;
@@ -99,6 +110,7 @@ void Twitch_PoolNewVotingEffects(){
 			vote_data vote;
 			vote.name = effect.title;
 			vote.votes = 0;
+			vote.config_name = effect.config_name;
 			Twitch_Votes.PushArray(vote);
 			PushArrayString(Effect_History, effect.config_name);
 
@@ -110,28 +122,30 @@ void Twitch_PoolNewVotingEffects(){
 }
 
 
-bool GetHighestVotedEffect(char[] effectName, int maxlength, bool EnsureValidEffect = false){
+bool GetHighestVotedEffect(effect_data effectReturn, bool EnsureValidEffect = false){
 	Twitch_Votes.Sort(Sort_Descending, Sort_Integer);
 
 	bool ranEffects = false;
 	vote_data vote;
 	effect_data effect;
 	
-	LoopAllVotes(effect, index){
-		GetEffectData(vote.name, effect);
-		
+	LoopAllVotes(vote, index){
+		GetEffectData(vote.config_name, effect);
 		if(
 			(effect.enabled &&
 			effect.can_run_effect() &&
-			(!Effect_Recently_Played(effect.config_name)) &&
+			// (!Effect_Recently_Played(effect.config_name)) &&
 			effect.timer == INVALID_HANDLE &&
 			effect.isCompatible())
-
 			|| EnsureValidEffect
 		){
-			strcopy(effectName, maxlength, effect.config_name);
+			effectReturn = effect;
 			ranEffects = true;
+			break;
 		}
+	}
+	if(!ranEffects){
+		PrintToChatAll("couldnt find effect");
 	}
 	return ranEffects;
 }

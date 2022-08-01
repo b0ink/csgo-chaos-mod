@@ -245,17 +245,6 @@ enum struct effect_data{
 			float duration = this.Get_Duration(); 
 			if(duration > 0) this.timer = CreateTimer(duration, Effect_Reset, this.id);
 			
-
-			// char function_no_announce_check[64];
-			// Format(function_no_announce_check, sizeof(function_no_announce_check), "%s_CustomAnnouncement", this.config_name);
-			// Function announce = GetFunctionByName(GetMyHandle(), function_no_announce_check);
-
-			// bool custom_announce = false;
-			// if(announce != INVALID_FUNCTION){
-			// 	Call_StartFunction(GetMyHandle(), announce);
-			// 	Call_Finish(custom_announce);
-			// }
-
 			if(!this.HasCustomAnnouncement){
 				AnnounceChaos(this.title, this.Get_Duration());
 			}
@@ -582,34 +571,15 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		// if(g_sChaosNextEffect[0]){ //* if nexteffect is empty, start timer again
 			// g_cvChaosNextEffect.SetString("PENDING"); // marker for the twitch app
 			if(Twitch_Votes.Length != 0){
-				// Handle WinningEffect = CreateArray(128);
-				char effectName[128];
-				// char effectSelected[128];
-				// int highestVote = 0;
-				//TODO get effect thing
-				// for(int i = 0; i < GetArraySize(VotingEffects); i++){
-				// 	GetArrayString(VotingEffects, i, effectName, sizeof(effectName));
-				// 	int vote = 0;
-				// 	Twitch_Votes.GetValue(effectName, vote);
-
-				// 	if(vote >= highestVote){
-				// 		highestVote = vote;
-				// 		// g_sCustomEffect = effectName;
-				// 		Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", effectName);
-				// 	}
-				// }
-				// }
-				GetHighestVotedEffect(effectName, sizeof(effectName)); //TODO: 'EnsureValidEffect' param as convar, if players want to force the effect regardless of restrictions
+				// char effectName[128];
 
 				effect_data effect;
-				LoopAllEffects(effect, index){
-					if(StrEqual(effect.title, g_sCustomEffect)){
-						g_sCustomEffect = effect.config_name;
-						break;
-					}
-				}
+				if(GetHighestVotedEffect(effect)){
+					g_sCustomEffect = effect.config_name;
+				}else{
+				} //TODO: 'EnsureValidEffect' param as convar, if players want to force the effect regardless of restrictions
+
 				if(!effect.can_run_effect()){
-					//TODO: opt to find another effect selected.
 					g_sCustomEffect = "";
 					
 				}
