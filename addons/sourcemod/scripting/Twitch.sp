@@ -1,5 +1,6 @@
 ArrayList Twitch_Votes;
 bool alternateIndex = false;
+bool EnableRandomEffectOption = true;
 
 #define LoopAllVotes(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
 									if(%2 < Twitch_Votes.Length)\
@@ -117,7 +118,19 @@ void Twitch_PoolNewVotingEffects(){
 			float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
 			if(GetArraySize(Effect_History) > average) RemoveFromArray(Effect_History, 0);
 		}
+		if(EnableRandomEffectOption){
+			if(Twitch_Votes.Length == 3) break;
+		}
 	}while(Twitch_Votes.Length < 4);
+
+	if(EnableRandomEffectOption){
+		vote_data randomVote;
+		randomVote.name = "Random Effect";
+		randomVote.votes = 0;
+		randomVote.config_name = "RANDOMEFFECT";
+		Twitch_Votes.PushArray(randomVote);
+
+	}
 
 }
 
@@ -131,6 +144,9 @@ bool GetHighestVotedEffect(effect_data effectReturn, bool EnsureValidEffect = fa
 	
 	LoopAllVotes(vote, index){
 		GetEffectData(vote.config_name, effect);
+		if(index == 0 && StrEqual(vote.config_name, "RANDOMEFFECT", false)){
+			break;
+		}
 		if(
 			(effect.enabled &&
 			effect.can_run_effect() &&
