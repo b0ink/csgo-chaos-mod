@@ -40,15 +40,8 @@ public Action Command_NewChaosEffect(int client, int args){
 			if(strlen(effectName) >=3){
 					PoolChaosEffects(effectName);
 					if(Possible_Chaos_Effects.Length <= 0){
-						//TODO: show if the chas is enabled or not
 						ReplyToCommand(client, "[Chaos] No effects found, or the desired effect is currently disabled.");
 						return Plugin_Handled;
-					// }else if(Possible_Chaos_Effects.Length == 1){
-					// 	// g_sCustomEffect = g_sSelectedChaosEffect;
-					// 	effect_data effect;
-					// 	Possible_Chaos_Effects.GetArray (0, effect, sizeof(effect));
-					// 	g_sCustomEffect = effect.config_name;
-					// 	ChooseEffect(null, true);
 					}else{
 						if(Possible_Chaos_Effects.Length > 1){
 							ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
@@ -56,7 +49,7 @@ public Action Command_NewChaosEffect(int client, int args){
 						ShowMenu_Effects(client);
 					}
 			}else{
-				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters."); //TODO:, filter around random characters (NOT UNDERSCORES)
+				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters.");
 				return Plugin_Handled;
 			}
 		}else{

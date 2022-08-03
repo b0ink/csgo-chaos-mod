@@ -76,7 +76,6 @@ void SaveBombPosition(){
 	}
 	if(!found) return;
 
-	//TODO: test this
 	int site = GetNearestBombsite(c4_location);
 	if(site == BOMBSITE_INVALID) return;
 
@@ -136,26 +135,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 }
 
 
-//TODO: remove any unused
 public void PrecacheTextures(){
-	PrecacheModel("models/props_survival/dronegun/dronegun.mdl", true);
-	PrecacheModel("models/props_survival/drone/br_drone.mdl", true);
-	PrecacheModel("models/props_survival/parachute/chute.mdl", true);
-	PrecacheModel("models/props_survival/parachute/v_parachute.mdl", true);
-	PrecacheModel("models/props_survival/cash/dufflebag.mdl", true);
-	PrecacheModel("models/props_survival/cash/prop_cash_stack.mdl", true);
-	PrecacheModel("models/props_survival/upgrades/upgrade_tablet_zone.mdl", true);
-	PrecacheModel("models/props_survival/upgrades/parachutepack.mdl", true);
-	PrecacheModel("models/props_survival/upgrades/upgrade_tablet_hires.mdl", true);
-	PrecacheModel("models/props_survival/upgrades/upgrade_tablet_drone.mdl", true);
-	PrecacheModel("models/props_survival/upgrades/upgrade_dz_helmet.mdl", true);
-	PrecacheModel("models/props_survival/upgrades/upgrade_dz_armor_helmet.mdl", true);
-	PrecacheModel("models/props_survival/upgrades/upgrade_dz_armor.mdl", true);
-	PrecacheModel("models/props_survival/jammer/jammer.mdl", true);
-	PrecacheModel("models/props_survival/crates/crate_ammobox.mdl", true);
-	PrecacheModel("models/weapons/v_parachute.mdl", true);
-	PrecacheModel("models/props_survival/briefcase/briefcase.mdl", true);
-
 	DownloadRawFiles();
 }
 
