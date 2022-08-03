@@ -1,23 +1,22 @@
-//TODO: Organise with structs
+ArrayList HudData;
 
-Handle EffectHud_Name = INVALID_HANDLE;
-Handle EffectHud_Time = INVALID_HANDLE;
-Handle EffectHud_NoDuration = INVALID_HANDLE;
+enum struct hud_effect_data{
+	char name[256];
+	int time;
+	bool HasNoDuration;
+} 
+
 
 int g_HudTime = -1;
 void HUD_INIT(){
-	EffectHud_Name = 		CreateArray(256);
-	EffectHud_Time = 		CreateArray(1);
-	EffectHud_NoDuration = 	CreateArray(1);
+	HudData = new ArrayList(sizeof(hud_effect_data));
 }
-
 
 
 void HUD_ROUNDEND(){
-	ClearArray(EffectHud_Name);
-	ClearArray(EffectHud_Time);
-	ClearArray(EffectHud_NoDuration);
+	HudData.Clear();
 }
+
 
 bool g_HideHud[MAXPLAYERS+1] = {false, ...};
 
@@ -29,30 +28,36 @@ void ResetHud(){
 //15 seconds for all times with -1 (healthshots, etc.)
 
 void AddEffectToHud(char[] message, float time = -1.0){
-	PushArrayString(EffectHud_Name, message);
+	hud_effect_data effect;
+	Format(effect.name, sizeof(effect.name), "%s", message);
+
 	if(time == -1.0){
-		PushArrayCell(EffectHud_NoDuration, 1);
-		PushArrayCell(EffectHud_Time, 20);	
+		effect.HasNoDuration = true;
+		effect.time = 20;
 	}else{
-		PushArrayCell(EffectHud_NoDuration, 0);
-		PushArrayCell(EffectHud_Time, RoundToFloor(time));	
+		effect.HasNoDuration = false;
+		effect.time = RoundToFloor(time);
 	}
+	HudData.PushArray(effect);
 	PrintTimer(g_HudTime);
 }
 
 void PrintEffects(){
-	char EffectName[256];
 	char chunk[2048];
 	int EffectTime = -1;
-	for(int ieffect = 0; ieffect < GetArraySize(EffectHud_Name); ieffect++){
-		GetArrayString(EffectHud_Name, ieffect, EffectName, sizeof(EffectName));
-		EffectTime = GetArrayCell(EffectHud_Time, ieffect);
+
+	hud_effect_data effect;
+
+	for(int i = 0; i < HudData.Length; i++){
+		HudData.GetArray(i, effect, sizeof(effect));
+
+		EffectTime = effect.time;
 		int originalTime = EffectTime;
-		int noDuration = GetArrayCell(EffectHud_NoDuration, ieffect);
 		if(EffectTime > 20) EffectTime = 20;
-		Format(chunk, sizeof(chunk), "%s\n%s ", chunk, EffectName);
+		Format(chunk, sizeof(chunk), "%s\n%s ", chunk, effect.name);
 		int blocks = EffectTime / 3;
-		if(noDuration == 0){
+
+		if(!effect.HasNoDuration){
 			if(originalTime > 120){
 				Format(chunk, sizeof(chunk), "%s ∞", chunk);
 			}else{
@@ -64,7 +69,9 @@ void PrintEffects(){
 				}
 			}
 		}
+		
 	}
+
 	LoopValidPlayers(i){
 		if(HasMenuOpen(i)) continue;
 
@@ -77,23 +84,16 @@ void PrintEffects(){
 		}
 	}
 
-	bool removedAny = false;
-	while(!removedAny){
-		removedAny = false;
-		for(int i = 0; i < GetArraySize(EffectHud_Name); i++){
-			EffectTime = GetArrayCell(EffectHud_Time, i);
-			if(EffectTime < 2 && !removedAny){
-				RemoveFromArray(EffectHud_Name, i);
-				RemoveFromArray(EffectHud_Time, i);
-				RemoveFromArray(EffectHud_NoDuration, i);
-				removedAny = true;
-				break;
-			}
+
+	for(int i = 0; i < HudData.Length; i++){
+		HudData.GetArray(i, effect, sizeof(effect));
+		EffectTime = effect.time;
+		if(EffectTime <= 1){
+			HudData.Erase(i);
+			i--;
 		}
-		if(!removedAny) break;
 	}
 }
-
 
 
 void PrintTimer(int time){
@@ -120,12 +120,17 @@ void PrintTimer(int time){
 	}
 }
 
+
 Action Timer_DisplayEffects(Handle timer){
-	for(int i = 0; i < GetArraySize(EffectHud_Name); i++){
-		SetArrayCell(EffectHud_Time, i, GetArrayCell(EffectHud_Time, i) - 1);
+	hud_effect_data effect;
+	for(int i = 0; i < HudData.Length; i++){
+		HudData.GetArray(i, effect, sizeof(effect));
+		effect.time = effect.time - 1;
+		HudData.SetArray(i, effect, sizeof(effect));
 	}
 	PrintEffects();
 }
+
 
 Action Timer_Display(Handle timer = null, int time){
 	g_HudTime = time;
