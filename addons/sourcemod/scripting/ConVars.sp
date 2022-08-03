@@ -13,9 +13,6 @@ float       g_fChaos_OverwriteDuration = -1.0;
 ConVar 	g_cvChaosTwitchEnabled;
 bool       g_bChaos_TwitchEnabled = false;
 
-ConVar 	g_cvChaosNextEffect;
-char 		g_sChaosNextEffect[MAX_NAME_LENGTH];
-
 Handle g_SavedConvars = INVALID_HANDLE;
 
 void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] expectedPreviousValue = ""){
@@ -116,7 +113,6 @@ void CreateConVars(){
 	g_cvChaosOverrideDuration = CreateConVar("sm_chaos_override_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
 
 	g_cvChaosTwitchEnabled = CreateConVar("sm_chaos_twitch_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
-	g_cvChaosNextEffect = CreateConVar("sm_chaos_nexteffect", "", "Sets what the next effect will be - twitch functionality", _, false, 0.0, false, 1.0);
 
 	HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
 	HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
@@ -136,7 +132,6 @@ void UpdateCvars(){
 	g_fChaos_OverwriteDuration = g_cvChaosOverrideDuration.FloatValue;
 
 	g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
-	g_cvChaosNextEffect.GetString(g_sChaosNextEffect, sizeof(g_sChaosNextEffect));
 }
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
@@ -161,7 +156,5 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
 	} else if(convar == g_cvChaosTwitchEnabled){
 			g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
-	} else if(convar == g_cvChaosNextEffect){
-		g_cvChaosNextEffect.GetString(g_sChaosNextEffect, sizeof(g_sChaosNextEffect));
 	}
 }
