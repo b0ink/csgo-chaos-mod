@@ -139,7 +139,6 @@ void ResetChaos(){
 	HUD_ROUNDEND();
 	Clear_Overlay_Que();
 	StopTimer(g_NewEffect_Timer);
-	// ResetPlayersFOV(); //TODO:
 	CreateTimer(0.1, ResetRoundChaos);
 }
 

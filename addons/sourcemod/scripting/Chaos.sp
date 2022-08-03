@@ -654,8 +654,9 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	bool Chaos_Repeating = g_bChaos_Repeating;
 
 	if(Chaos_Repeating){
-		Twitch_PoolNewVotingEffects(); // pull 4 effects.
-		//TODO: if enabled
+		if(g_bChaos_TwitchEnabled){
+			Twitch_PoolNewVotingEffects(); // pull 4 effects, this WILL add them into the effect cooldown.
+		}
 		float Effect_Interval = g_fChaos_EffectInterval;
 		if(Effect_Interval > 60 || Effect_Interval < 5){
 			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
