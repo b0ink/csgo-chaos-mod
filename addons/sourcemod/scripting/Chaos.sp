@@ -558,34 +558,17 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	PoolChaosEffects();
 
 
-	/*
-		* so at this point, an effect is ready to be played, if no effect has been preselected, and twitch is enabled, play no effect, start timer, and activate vote
-		*hook a vote command `chaos_votes` will print the 3/4 available effects to play, can be selected 2-4 as a user
-
-	*/
-	//TODO can go under in the else if not custom effect...
-
-	//TODO: reset effect twitch list if the round ends, otherwise an effect like 'rewind 10 sewconds' is selected at the end of the round,
-	//! but wont be 
 	if(g_bChaos_TwitchEnabled && !g_bMegaChaos && !CustomRun){
-		// if(g_sChaosNextEffect[0]){ //* if nexteffect is empty, start timer again
-			// g_cvChaosNextEffect.SetString("PENDING"); // marker for the twitch app
 			if(Twitch_Votes.Length != 0){
-				// char effectName[128];
-
 				effect_data effect;
 				if(GetHighestVotedEffect(effect)){
 					g_sCustomEffect = effect.config_name;
-				}else{
-				} //TODO: 'EnsureValidEffect' param as convar, if players want to force the effect regardless of restrictions
+				}
 
 				if(!effect.can_run_effect()){
 					g_sCustomEffect = "";
-					
 				}
 			}
-			
-
 	}
 
 

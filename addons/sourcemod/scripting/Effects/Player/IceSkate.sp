@@ -24,8 +24,6 @@ public Action Chaos_IceSkate_RESET(bool HasTimerEnded){
 	IceSkate = false;
 }
 
-//TODO: Increasing the players speed helps them get over ramps and makes the effect playable
-
 public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(IceSkate){
 		ForceJumpSkate[client] = !ForceJumpSkate[client];

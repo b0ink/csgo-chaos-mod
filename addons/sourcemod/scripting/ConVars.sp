@@ -120,7 +120,6 @@ void CreateConVars(){
 	HookConVarChange(g_cvChaosOverrideDuration, 	ConVarChanged);
 
 	HookConVarChange(g_cvChaosTwitchEnabled, 	ConVarChanged);
-	HookConVarChange(g_cvChaosNextEffect, 		ConVarChanged);
 
 	AutoExecConfig(true, "ChaosMod");
 }

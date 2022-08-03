@@ -26,6 +26,15 @@ public Action Twitch_RoundStart(Event event, char[] name, bool dontBroadcast){
 }
 
 public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
+	//* Remove current items from the histor/cooldown, as we can assume those effects have not been run.
+	vote_data effect;
+	LoopAllVotes(effect, i){
+		int index = FindStringInArray(Effect_History, effect.config_name);
+		if(index != -1){
+			RemoveFromArray(Effect_History, i);
+		}
+	}
+
 	Twitch_Votes.Clear();
 }
 
