@@ -8,6 +8,7 @@
 [Explosive Bullets](https:github.com/xcalvinsz/explosivebullets) by "Tak (Chaosxk)".\
 [Weapon Jump/Taser Knockback](https://forums.alliedmods.net/showthread.php?t=292151) by "Nyuu".\
 [Autoplant](https://github.com/b3none) by "b3none".\
-SM Teleport by "Spazman0".
+SM Teleport by "Spazman0".\
+[LSD ColorCorrection](https://gamebanana.com/mods/80495) (.raw) files from "[SG] Paul!"
 
 Ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".
