@@ -944,4 +944,12 @@
 	{
 		"en"    "Reduces every inflicted damage by 50%"
 	}
+    "Chaos_PigeonHole_Title"
+	{
+		"en"    "Pigeon Hole"
+	}
+	"Chaos_PigeonHole_Description"
+	{
+		"en"    "See through pigeon hole cutouts"
+	}
 }

@@ -1,3 +1,5 @@
+//TODO: potentially remove the chaos_effects config, add all default times from inside the effect file, and force config changes using the !chaos menu
+
 Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
 public void OnConfigsExecuted(){

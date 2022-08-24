@@ -557,6 +557,10 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	PoolChaosEffects();
 
+	if(g_MapCoordinates == INVALID_HANDLE){
+		ParseMapCoordinates("Chaos_Locations");
+	}
+
 
 	if(g_bChaos_TwitchEnabled && !g_bMegaChaos && !CustomRun){
 			if(Twitch_Votes.Length != 0){
