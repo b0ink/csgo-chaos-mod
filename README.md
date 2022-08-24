@@ -4,7 +4,7 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](addons/sourcemod/configs/Chaos/Chaos_Effects.cfg).
 
 # Twitch Voting
-An [Electron](https://www.electronjs.org/) based app is currently being worked on to connect your Twitch account and your CS:GO server via RCON to pull effects from the server and allow users to vote for effects in your Twitch chat. A pop-up overlay can be used in OBS and a green-screen filter to overlay the effects and votes.\
+An [Electron](https://www.electronjs.org/) based app is currently being worked on to connect your Twitch account and your CS:GO server via RCON to pull effects from the server and allow users to vote for effects in your Twitch chat. A pop-up overlay can be used in [OBS](https://obsproject.com/) and a green-screen filter can be applied to overlay the effects and votes on steam.\
 <br>
 Release TBA.
 
