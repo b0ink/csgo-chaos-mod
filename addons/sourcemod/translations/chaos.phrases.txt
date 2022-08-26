@@ -952,4 +952,12 @@
 	{
 		"en"    "See through pigeon hole cutouts"
 	}
+    "Chaos_DoubleJump_Title"
+	{
+		"en"    "Double Jump"
+	}
+	"Chaos_DoubleJump_Description"
+	{
+		"en"    "Allow players to double jump"
+	}
 }

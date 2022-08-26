@@ -116,3 +116,4 @@
 #include "Effects/Player/Thirdperson.sp"
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WKeyStuck.sp"
+#include "Effects/Player/DoubleJump.sp"
