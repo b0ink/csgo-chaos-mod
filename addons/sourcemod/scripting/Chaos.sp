@@ -225,6 +225,7 @@ enum struct effect_data{
 	bool 		HasNoDuration;
 	bool		HasCustomAnnouncement;
 	bool		enabled;
+	bool		meta;
 
 	char 		function_name_start[64];
 	char 		function_name_reset[64];
@@ -233,6 +234,8 @@ enum struct effect_data{
 	Handle		IncompatibleEffects;
 	Handle		Aliases;
 	Handle 		timer;
+
+
 
 	void run_effect(){
 		// PrintToChatAll("attempting to run!: %s for %i seconds", this.function_name_start, this.duration);
@@ -246,7 +249,7 @@ enum struct effect_data{
 			if(duration > 0) this.timer = CreateTimer(duration, Effect_Reset, this.id);
 			
 			if(!this.HasCustomAnnouncement){
-				AnnounceChaos(this.title, this.Get_Duration());
+				AnnounceChaos(this.title, this.Get_Duration(), _, this.meta);
 			}
 			g_sLastPlayedEffect = this.config_name;
 			ChaosMapCount++;

@@ -1,10 +1,10 @@
 "Phrases"
 {
-    "Chaos_MEGACHAOS_Title"
+    "Chaos_Meta_Mega_Title"
     {
-        "en"    "MEGA CHAOS"
+        "en"    "Mega Chaos"
     }
-    "Chaos_MEGACHAOS_Description"
+    "Chaos_Meta_Mega_Description"
     {
         "en"    "Runs 5 Chaos Effects at the same time"
     }
@@ -960,4 +960,29 @@
 	{
 		"en"    "Allow players to double jump"
 	}
+    "Chaos_Meta_HalfTimerSpeed_Title"
+	{
+		"en"    "Half Timer Speed"
+	}
+	"Chaos_Meta_HalfTimerSpeed_Description"
+	{
+		"en"    "[META] Cuts the timer interval in half"
+	}
+    "Chaos_Meta_DoubleTimerSpeed_Title"
+	{
+		"en"    "Half Timer Speed"
+	}
+	"Chaos_Meta_DoubleTimerSpeed_Description"
+	{
+		"en"    "[META] Cuts the timer interval in half"
+	}
+    "Chaos_Meta_WhatsHappening_Title"
+	{
+		"en"    "What's Happening?"
+	}
+	"Chaos_Meta_WhatsHappening_Description"
+	{
+		"en"    "Hides what effects are currently running"
+	}
 }
+

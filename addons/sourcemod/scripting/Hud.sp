@@ -4,6 +4,11 @@ enum struct hud_effect_data{
 	char name[256];
 	int time;
 	bool HasNoDuration;
+	bool meta;
+
+	bool isMeta(){
+		return this.meta;
+	}
 } 
 
 
@@ -27,7 +32,7 @@ void ResetHud(){
 }
 //15 seconds for all times with -1 (healthshots, etc.)
 
-void AddEffectToHud(char[] message, float time = -1.0){
+void AddEffectToHud(char[] message, float time = -1.0, bool isMeta){
 	hud_effect_data effect;
 	Format(effect.name, sizeof(effect.name), "%s", message);
 
@@ -38,38 +43,58 @@ void AddEffectToHud(char[] message, float time = -1.0){
 		effect.HasNoDuration = false;
 		effect.time = RoundToFloor(time);
 	}
+	effect.meta = isMeta;
 	HudData.PushArray(effect);
 	PrintTimer(g_HudTime);
 }
 
 void PrintEffects(){
 	char chunk[2048];
+	char chunk_meta[2048];
 	int EffectTime = -1;
 
 	hud_effect_data effect;
 
 	for(int i = 0; i < HudData.Length; i++){
 		HudData.GetArray(i, effect, sizeof(effect));
-
 		EffectTime = effect.time;
 		int originalTime = EffectTime;
 		if(EffectTime > 20) EffectTime = 20;
-		Format(chunk, sizeof(chunk), "%s\n%s ", chunk, effect.name);
 		int blocks = EffectTime / 3;
 
-		if(!effect.HasNoDuration){
-			if(originalTime > 120){
-				Format(chunk, sizeof(chunk), "%s ∞", chunk);
-			}else{
-				for(int g = 1; g <= blocks; g++){
-					Format(chunk, sizeof(chunk), "%s▓", chunk);
-					// Format(chunk, sizeof(chunk), "%s▌", chunk);
-					// Format(chunk, sizeof(chunk), "%s▪", chunk);
-					// Format(chunk, sizeof(chunk), "%s⧯", chunk);
+		if(effect.isMeta()){
+			Format(chunk, sizeof(chunk), "%s\n", chunk);
+			Format(chunk_meta, sizeof(chunk), "%s\n%s ", chunk_meta, effect.name);
+
+			// * Assume meta always has duration (120s), ignore check
+			for(int g = 1; g <= blocks; g++){
+				Format(chunk_meta, sizeof(chunk_meta), "%s▓", chunk_meta);
+				// Format(chunk, sizeof(chunk), "%s▌", chunk);
+				// Format(chunk, sizeof(chunk), "%s▪", chunk);
+				// Format(chunk, sizeof(chunk), "%s⧯", chunk);
+			}
+		}else{
+			if(Meta_IsWhatsHappeningEnabled()) continue;
+			
+			Format(chunk_meta, sizeof(chunk_meta), "%s\n", chunk_meta);
+
+			Format(chunk, sizeof(chunk), "%s\n%s ", chunk, effect.name);
+
+
+			if(!effect.HasNoDuration){
+				if(originalTime > 120){
+					Format(chunk, sizeof(chunk), "%s ∞", chunk);
+				}else{
+					for(int g = 1; g <= blocks; g++){
+						Format(chunk, sizeof(chunk), "%s▓", chunk);
+						// Format(chunk, sizeof(chunk), "%s▌", chunk);
+						// Format(chunk, sizeof(chunk), "%s▪", chunk);
+						// Format(chunk, sizeof(chunk), "%s⧯", chunk);
+					}
 				}
 			}
 		}
-		
+
 	}
 
 	LoopValidPlayers(i){
@@ -79,6 +104,15 @@ void PrintEffects(){
 		SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 		if(g_DynamicChannel){
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
+		}else{
+			ShowHudText(i, -1, "%s", chunk);
+		}
+
+
+
+		SetHudTextParams(0.01, 0.42, 1.5, 252, 227, 0, 0, 0, 1.0, 0.0, 0.0);
+		if(g_DynamicChannel){
+			ShowHudText(i, GetDynamicChannel(2), "%s", chunk_meta);
 		}else{
 			ShowHudText(i, -1, "%s", chunk);
 		}

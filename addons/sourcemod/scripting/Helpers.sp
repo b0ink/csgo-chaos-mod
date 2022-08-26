@@ -144,26 +144,29 @@ void DisplayCenterTextToAll(char[] message){
 }
 
 void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, bool megaChaos = false){
-	char announcingMessage[128];
-	if(megaChaos){
-		DisplayCenterTextToAll(message);
-		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_MegaChaos, message);
-	}else if(endingChaos){
-		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_HasTimerEnded, message);
-	}else{
-		DisplayCenterTextToAll(message);
-		Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix, message);
+	if(!Meta_IsWhatsHappeningEnabled()){
+		char announcingMessage[128];
+		if(megaChaos){
+			DisplayCenterTextToAll(message);
+			Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_MegaChaos, message);
+		}else if(endingChaos){
+			Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_HasTimerEnded, message);
+		}else{
+			DisplayCenterTextToAll(message);
+			Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix, message);
+		}
+		CPrintToChatAll(announcingMessage);
 	}
-	CPrintToChatAll(announcingMessage);
+
 
 	char EffectName[256];
 	FormatEx(EffectName, sizeof(EffectName), "%s", RemoveMulticolors(message));
 	if(!endingChaos && EffectTime > -2.0){
 		if(g_DynamicChannel){
 			if(EffectTime == 0.0){
-				AddEffectToHud(EffectName, 9999.0);
+				AddEffectToHud(EffectName, 9999.0, megaChaos);
 			}else{
-				AddEffectToHud(EffectName, EffectTime);
+				AddEffectToHud(EffectName, EffectTime, megaChaos);
 			}
 		}
 	}

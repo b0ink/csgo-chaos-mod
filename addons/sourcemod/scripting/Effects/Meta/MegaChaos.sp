@@ -2,16 +2,17 @@
 //? 		Whether thats on an interval, eg. every 25 - 50 effects run a meta effect, or run a 1 in 100 chance every effect to run a meta
 
 
-public void Chaos_MegaChaos(effect_data effect){
+public void Chaos_Meta_Mega(effect_data effect){
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
-	effect.IncompatibleWith("Chaos_EffectName");
+	effect.meta = true;
+	// effect.IncompatibleWith("Chaos_EffectName");
 }
 
-public void Chaos_MEGACHAOS_START(){
+public void Chaos_Meta_Mega_START(){
 	g_bMegaChaos = true; 
 
-	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0, true, true);
+	AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), 15.0, false, true);
 
 	g_bDisableRetryEffect = false;
 	CreateTimer(0.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
@@ -23,11 +24,11 @@ public void Chaos_MEGACHAOS_START(){
 }
 
 public Action Timer_CompleteMegaChaos(Handle timer){
-	AnnounceChaos(GetChaosTitle("Chaos_MEGACHAOS"), -1.0, true, true);
+	AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), -1.0, true, true);
 	g_bMegaChaos = false;
 }
 
-public bool Chaos_MEGACHAOS_Conditions(){
+public bool Chaos_Meta_Mega_Conditions(){
 	if(g_bMegaChaos) return false;
 	return true;
 }

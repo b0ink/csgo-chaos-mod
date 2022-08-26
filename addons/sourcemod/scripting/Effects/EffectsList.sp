@@ -28,7 +28,12 @@
 #include "Effects/Game/Spawnables/SpawnExplodingBarrels.sp"
 #include "Effects/Game/Spawnables/SpawnFlashbangs.sp"
 #include "Effects/Game/Thunderstorm.sp"
+
 #include "Effects/Meta/MegaChaos.sp"
+#include "Effects/Meta/DoubleTimerSpeed.sp"
+#include "Effects/Meta/HalfTimerSpeed.sp"
+#include "Effects/Meta/WhatsHappening.sp"
+
 #include "Effects/Player/Aimbot.sp"
 #include "Effects/Player/AlienModelKnife.sp"
 #include "Effects/Player/Autobhop.sp"
