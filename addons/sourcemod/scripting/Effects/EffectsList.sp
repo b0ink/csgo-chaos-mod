@@ -43,6 +43,7 @@
 #include "Effects/Player/DisableStrafe.sp"
 #include "Effects/Player/DiscoFog.sp"
 #include "Effects/Player/DiscoPlayers.sp"
+#include "Effects/Player/DoubleJump.sp"
 #include "Effects/Player/DropCurrentWeapon.sp"
 #include "Effects/Player/DropPrimaryWeapon.sp"
 #include "Effects/Player/Drugs.sp"
@@ -116,4 +117,3 @@
 #include "Effects/Player/Thirdperson.sp"
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WKeyStuck.sp"
-#include "Effects/Player/DoubleJump.sp"
