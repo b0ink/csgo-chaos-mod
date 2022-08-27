@@ -54,14 +54,20 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 // 								if(IsValidEntity(%1) && IsValidEdict(%1))
 
 #define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++)\
-								if(IsValidEntity(%1) && IsValidEdict(%1))\
-								if(GetEdictClassname(%1, %3, 64))
+		if(IsValidEntity(%1) && IsValidEdict(%1))\
+		if(GetEdictClassname(%1, %3, 64))
 
 // If i revert on the 2nd param being the index, index/i is accessible in the loop as its a define, but for clarity ill leave it..
 #define LoopAllEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
-									if(%2 < ChaosEffects.Length)\
-									if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
-//TODO:..
+		if(%2 < ChaosEffects.Length)\
+		if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
+
+#define LoopAllMetaEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
+		if(%2 < ChaosEffects.Length)\
+		if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))\
+		if(%1.meta)
+
+		
 /*
 	TODO: instead of pooling coords into an empty array, then removing the coord once used
 			Could i do a DIstanceTOClosestPlayer check after teleporting players one by one?
@@ -148,8 +154,12 @@ float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
 bool 	g_bCanSpawnEffect = true;
 
-int 	g_iChaos_Round_Count = 0;
+int 	g_iChaos_EffectsRun_Count = 0;
+int		g_TotalRounds = 0;
+Handle	g_MetaHistory = INVALID_HANDLE;
+int		g_EffectsSinceMeta = 0;
 int 	g_iChaos_Round_Time = 0;
+
 
 bool 	g_bMegaChaos = false;
 char 	g_sSelectedChaosEffect[64] = "";
@@ -420,6 +430,7 @@ public void OnPluginStart(){
 
 	TWITCH_INIT();
 
+	g_MetaHistory = CreateArray(128);
 
 
 }
@@ -431,6 +442,9 @@ public void OnPluginEnd(){
 }
 
 public void OnMapStart(){
+	if(g_MetaHistory != INVALID_HANDLE){
+		ClearArray(g_MetaHistory);
+	}
 	UpdateCvars();
 
 	CheckHostageMap();
@@ -594,6 +608,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		int totalEffects = ChaosEffects.Length;
 
 
+
 		
 		while(!g_sLastPlayedEffect[0]){ // no longer
 			attempts++;
@@ -605,11 +620,12 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 					effect.can_run_effect() &&
 					(!Effect_Recently_Played(effect.config_name) || CustomRun) &&
 					effect.timer == INVALID_HANDLE &&
-					effect.isCompatible()
+					effect.isCompatible() &&
+					!effect.meta
 				){
 					Random_Effect = effect.config_name;
 					effect.run_effect();
-
+					g_EffectsSinceMeta++;
 					PushArrayString(Effect_History, effect.config_name);
 
 					float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
@@ -634,11 +650,32 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		g_bPlaySound_Debounce = true;
 		LoopValidPlayers(i){
 			EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
-		}
+		}	
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
 
 	if(CustomRun) return;
+
+
+	if(!CustomRun &&  (g_TotalRounds >= 5 && GetRandomInt(0, 100) <= 50 && g_EffectsSinceMeta >= 10 )){
+		g_EffectsSinceMeta = 0;
+		effect_data metaEffect;
+		int count = 0;
+		LoopAllMetaEffects(metaEffect, index){
+			PrintToChatAll("%s s", metaEffect.title);
+			count++;
+		}
+		// TODO: g_MetaHistory
+		int random = GetRandomInt(0, count-1);
+		count = 0;
+		LoopAllMetaEffects(metaEffect, index){
+			if(count != random) continue;
+
+			g_sCustomEffect = metaEffect.config_name;
+			ChooseEffect(null, true);
+		}
+	}
+
 
 	StopTimer(g_NewEffect_Timer);
 	bool Chaos_Repeating = g_bChaos_Repeating;
@@ -656,7 +693,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		if(g_DynamicChannel){
 			Timer_Display(null, RoundToFloor(Effect_Interval));
 		}
-		g_iChaos_Round_Count++;
+		g_iChaos_EffectsRun_Count++;
 	}
 }
 
