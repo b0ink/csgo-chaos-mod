@@ -157,3 +157,40 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 			g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
 	}
 }
+
+void Update_Settings(char[] convar_name, char[] newValue){
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Settings.cfg");
+
+	KeyValues kv = new KeyValues("Settings");
+
+	if(!FileExists(path)){
+		//TODO: automatically create file
+		Log("Could not find configs/Chaos/Chaos_Settings.cfg");
+		return;
+	}
+	
+	if(!kv.ImportFromFile(path)){
+		Log("Unable to parse Key Values file %s.", path);
+	}
+
+	kv.SetString(convar_name, newValue);
+	kv.Rewind();
+	if(kv.ExportToFile(path)){
+		PrintToChatAll("Updated '%s' to %s", convar_name, newValue);
+	}
+
+
+
+
+}
+
+//!When editing KeyValues, it removes all comments - this is a temp fix to re add them to assist the server owner
+void Fix_Convar_Comments(){
+	Handle File = OpenFile(path, "a");
+	char line[256];
+	while(file.ReadLine(line, sizeof(line))){
+
+	}
+
+}

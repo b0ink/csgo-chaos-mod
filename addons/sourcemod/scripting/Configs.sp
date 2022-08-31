@@ -401,6 +401,7 @@ void LogEffect(char[] function_name){
 	KeyValues kvConfig = new KeyValues("Stats");
 
 	if(!FileExists(path)){
+		//TODO: replace 'w' flag with 'a' - opens existing or creates new one. 'w' empties any existing ones
 		Handle FileHandle = OpenFile(path, "w");
 		if(!FileHandle){
 			CloseHandle(FileHandle);

@@ -233,6 +233,10 @@ public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, in
 
 			ConVar convar_editing = FindConVar(convar_name);
 			convar_editing.FloatValue = seconds;
+			char newValue[64];
+			FloatToString(seconds, newValue, sizeof(newValue));
+			Update_Settings(convar_name, newValue);
+
 			ShowMenu_ConvarIncrements(param1, convar_name);
 			PrintToChatAll("[Chaos] ConVar '%s' has been changed to %.2f", convar_name, seconds);
 			UpdateCvars();
