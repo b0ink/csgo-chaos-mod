@@ -105,7 +105,6 @@ void ResetCvar(char[] cvarName = "", char[] backupValue = "", char[] expectedPre
 }
 
 void CreateConVars(){
-	PrintToChatAll("asdfdsaf");
 	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
 
 	g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
