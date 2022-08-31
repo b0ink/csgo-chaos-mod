@@ -1,3 +1,7 @@
+public void Chaos_Thunderstorm(effect_data effect){
+	effect.IncompatibleWith("Chaos_DecoyDodgeball");
+}
+
 /*
 	Effect by Ozai
 */

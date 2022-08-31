@@ -1,3 +1,7 @@
+public void Chaos_DecoyDodgeball(effect_data effect){
+	effect.IncompatibleWith("Chaos_Thunderstorm");
+} 
+
 //hook
 //tood; buggy if you still have other nades?
 bool g_bDecoyDodgeball = false;
