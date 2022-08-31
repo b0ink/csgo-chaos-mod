@@ -73,7 +73,7 @@ Set to `0.0` for infinite duration (Effect lasts the entire round).
 If set to `0`, effects will be spawned at random.\
 If set to `1`, 3 random effects will be displayed in the Twitch Overlay app and will spawn the most voted effect. (1 of the 3 effects will be spawned if there are no votes). 
 
-Chaos ConVars can also be edited through the `!chaos` menu using `Settings`.
+Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`, or alternatively through the `!chaos->Settings` menu, which will automatically updating the ConVar config.
 
 
 ## Currently supported maps with working spawns
