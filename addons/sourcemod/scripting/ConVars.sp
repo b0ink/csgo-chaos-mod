@@ -133,28 +133,21 @@ void UpdateCvars(){
 
 	if(FileExists(path)){
 		if(kv.ImportFromFile(path)){
-			// char convar_value[128];
 			int convar_value = -1;
 			convar_value = kv.GetNum("sm_chaos_enabled", 1);
-			SetConVarInt(g_cvChaosEnabled, convar_value);
-			PrintToChatAll("%i", convar_value);
+			g_cvChaosEnabled.SetInt(convar_value);
 
 			convar_value = kv.GetNum("sm_chaos_interval", 999);
 			g_cvChaosEffectInterval.SetInt(convar_value);
-			// SetConVarInt(g_cvChaosEffectInterval, convar_value);
-			PrintToChatAll("%i interval", convar_value);
 
 			convar_value = kv.GetNum("sm_chaos_override_duration", 1);
-			SetConVarInt(g_cvChaosOverrideDuration, convar_value);
-			PrintToChatAll("%i", convar_value);
+			g_cvChaosOverrideDuration.SetInt(convar_value);
 
 			convar_value = kv.GetNum("sm_chaos_repeating", 1);
-			SetConVarInt(g_cvChaosRepeating, convar_value);
-			PrintToChatAll("%i", convar_value);
+			g_cvChaosRepeating.SetInt(convar_value);
 
 			convar_value = kv.GetNum("sm_chaos_twitch_enabled", 1);
-			SetConVarInt(g_cvChaosTwitchEnabled, convar_value);
-			PrintToChatAll("%i", convar_value);
+			g_cvChaosTwitchEnabled.SetInt(convar_value);
 		}
 	}
 

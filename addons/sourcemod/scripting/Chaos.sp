@@ -667,7 +667,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		int random = GetRandomInt(0, count-1);
 		count = 0;
 		LoopAllMetaEffects(metaEffect, index){
-			if(count != random) continue;
+			if(index != random) continue;
 
 			g_sCustomEffect = metaEffect.config_name;
 			ChooseEffect(null, true);
