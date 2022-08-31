@@ -235,11 +235,12 @@ public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, in
 			convar_editing.FloatValue = seconds;
 			char newValue[64];
 			FloatToString(seconds, newValue, sizeof(newValue));
-			Update_Settings(convar_name, newValue);
+			UpdateCvars();
+			// Update_Settings(convar_name, newValue);
+			Update_Convar_Config();
 
 			ShowMenu_ConvarIncrements(param1, convar_name);
 			PrintToChatAll("[Chaos] ConVar '%s' has been changed to %.2f", convar_name, seconds);
-			UpdateCvars();
 		}
 	}else if (action == MenuAction_Cancel){
 		if(param2 ==  MenuCancel_ExitBack){
@@ -254,6 +255,7 @@ void ToggleCvar(char[] cvar){
 	ConVar ToChange = FindConVar(cvar);
 	ToChange.IntValue = 1 - ToChange.IntValue;
 	PrintToChatAll("[Chaos] ConVar '%s' has been changed to %.2f", cvar, ToChange.FloatValue);
+	Update_Convar_Config();
 
 }
 

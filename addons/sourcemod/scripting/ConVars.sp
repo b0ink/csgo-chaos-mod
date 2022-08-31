@@ -105,8 +105,9 @@ void ResetCvar(char[] cvarName = "", char[] backupValue = "", char[] expectedPre
 }
 
 void CreateConVars(){
+	PrintToChatAll("asdfdsaf");
 	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
-	
+
 	g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
 	g_cvChaosEffectInterval = CreateConVar("sm_chaos_interval", "30.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
 	g_cvChaosRepeating = CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
@@ -121,16 +122,51 @@ void CreateConVars(){
 
 	HookConVarChange(g_cvChaosTwitchEnabled, 	ConVarChanged);
 
-	AutoExecConfig(true, "ChaosMod");
+	// AutoExecConfig(true, "ChaosMod");
 }
 
 void UpdateCvars(){
+
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Convars.cfg");
+	KeyValues kv = new KeyValues("Convars");
+
+	if(FileExists(path)){
+		if(kv.ImportFromFile(path)){
+			// char convar_value[128];
+			int convar_value = -1;
+			convar_value = kv.GetNum("sm_chaos_enabled", 1);
+			SetConVarInt(g_cvChaosEnabled, convar_value);
+			PrintToChatAll("%i", convar_value);
+
+			convar_value = kv.GetNum("sm_chaos_interval", 999);
+			g_cvChaosEffectInterval.SetInt(convar_value);
+			// SetConVarInt(g_cvChaosEffectInterval, convar_value);
+			PrintToChatAll("%i interval", convar_value);
+
+			convar_value = kv.GetNum("sm_chaos_override_duration", 1);
+			SetConVarInt(g_cvChaosOverrideDuration, convar_value);
+			PrintToChatAll("%i", convar_value);
+
+			convar_value = kv.GetNum("sm_chaos_repeating", 1);
+			SetConVarInt(g_cvChaosRepeating, convar_value);
+			PrintToChatAll("%i", convar_value);
+
+			convar_value = kv.GetNum("sm_chaos_twitch_enabled", 1);
+			SetConVarInt(g_cvChaosTwitchEnabled, convar_value);
+			PrintToChatAll("%i", convar_value);
+		}
+	}
+
+
+
 	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
-	g_fChaos_EffectInterval = g_cvChaosEffectInterval.FloatValue;
+	g_fChaos_EffectInterval = float(g_cvChaosEffectInterval.IntValue);
 	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
 	g_fChaos_OverwriteDuration = g_cvChaosOverrideDuration.FloatValue;
 
 	g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
+
 }
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
@@ -158,39 +194,60 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	}
 }
 
-void Update_Settings(char[] convar_name, char[] newValue){
-	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Settings.cfg");
-
-	KeyValues kv = new KeyValues("Settings");
-
-	if(!FileExists(path)){
-		//TODO: automatically create file
-		Log("Could not find configs/Chaos/Chaos_Settings.cfg");
-		return;
-	}
-	
-	if(!kv.ImportFromFile(path)){
-		Log("Unable to parse Key Values file %s.", path);
-	}
-
-	kv.SetString(convar_name, newValue);
-	kv.Rewind();
-	if(kv.ExportToFile(path)){
-		PrintToChatAll("Updated '%s' to %s", convar_name, newValue);
-	}
-
-
-
-
-}
 
 //!When editing KeyValues, it removes all comments - this is a temp fix to re add them to assist the server owner
-void Fix_Convar_Comments(){
-	Handle File = OpenFile(path, "a");
-	char line[256];
-	while(file.ReadLine(line, sizeof(line))){
-
+void Update_Convar_Config(){
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Convars.cfg");
+	File file = OpenFile(path, "w");
+	if(file == null){
+		PrintToChatAll("is null!");
+		return;
 	}
+	file.WriteLine("\"Convars\"");
+	file.WriteLine("{");
+	file.WriteLine("");
+
+	file.WriteLine("	// Determines whether the chaos plugin will be enabled or not.");
+	file.WriteLine("	// Setting it to 1 will activate the plugin automatically.");
+	file.WriteLine("");
+	file.WriteLine("	\"sm_chaos_enabled\"    \"%i\"", g_cvChaosEnabled.IntValue);
+
+	file.WriteLine("");
+	file.WriteLine("	// Determines how often a new effect will be spawned.");
+	file.WriteLine("	// Most effects have a standard duration of 30 seconds.");
+	file.WriteLine("	// It is recommended to adjust sm_chaos_effectduration_scale based on the effect interval.");
+	file.WriteLine("	\"sm_chaos_interval\"    \"%i\"", g_cvChaosEffectInterval.IntValue);
+	file.WriteLine("");
+
+	file.WriteLine("");
+	file.WriteLine("	//Overrides ALL effect durations if set above -1.");
+	file.WriteLine("	// Setting it to -1 (Default) will mean all effects use the durations set in Chaos_Effects.cfg");
+	file.WriteLine("	// Setting it to 0 will mean all effects will last the entire round.");
+	file.WriteLine("	// Setting it to anything above 0, will mean all effects last for that value in seconds.");
+	file.WriteLine("	\"sm_chaos_override_duration\"    \"%i\"", g_cvChaosOverrideDuration.IntValue);
+	file.WriteLine("");
+
+	file.WriteLine("");
+	file.WriteLine("	// Determines whether or not new effects will be spawned throughout the round.");
+	file.WriteLine("	// Setting it to 1 means a new effect will be spawned at the rate of sm_chaos_interval");
+	file.WriteLine("	// Setting it to 0 means only one effect will spawn at the start of the round");
+	file.WriteLine("	\"sm_chaos_repeating\"    \"%i\"", g_cvChaosRepeating.IntValue);
+	file.WriteLine("");
+
+	file.WriteLine("");
+	file.WriteLine("	// Determines whether effects will be pooled in for twitch voting.");
+	file.WriteLine("	// If you are using the twitch overlay app, set this to 1.");
+	file.WriteLine("	// This setting will be set to 0 by default on each map change.");
+	file.WriteLine("	\"sm_chaos_twitch_enabled\"    \"%i\"", g_cvChaosTwitchEnabled.IntValue);
+	file.WriteLine("");
+
+	file.WriteLine("	// Automatically adjust the length of all the effects based off sm_chaos_interval.");
+	file.WriteLine("	// if interval = 15 seconds, effect default durations = 25;");
+	file.WriteLine("	// if interval = 20 seconds, effect default durations = 30;");
+	file.WriteLine("	// if interval = 30 seconds, effect default durations = 40;");
+
+	file.WriteLine("}");
+	delete file;
 
 }

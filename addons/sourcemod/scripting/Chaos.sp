@@ -450,8 +450,6 @@ public void OnMapStart(){
 	CheckHostageMap();
 	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
-	UpdateCvars();
-
 	GetCurrentMap(mapName, sizeof(mapName));
 	Log("New Map/Plugin Restart - Map: %s", mapName);
 	
@@ -686,7 +684,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		}
 		float Effect_Interval = g_fChaos_EffectInterval;
 		if(Effect_Interval > 60 || Effect_Interval < 5){
-			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg");
+			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg | was set to %f", Effect_Interval);
 			Effect_Interval = 15.0;
 		}
 		g_NewEffect_Timer = CreateTimer(Effect_Interval, ChooseEffect);
