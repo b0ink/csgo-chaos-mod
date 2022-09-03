@@ -2,7 +2,7 @@
 {
     "Chaos_Meta_Mega_Title"
     {
-        "en"    "Mega Chaos"
+        "en"    "Mega Chaos [META]"
     }
     "Chaos_Meta_Mega_Description"
     {
@@ -962,7 +962,7 @@
 	}
     "Chaos_Meta_HalfTimerSpeed_Title"
 	{
-		"en"    "Half Timer Speed"
+		"en"    "Half Timer Speed [META]"
 	}
 	"Chaos_Meta_HalfTimerSpeed_Description"
 	{
@@ -970,7 +970,7 @@
 	}
     "Chaos_Meta_DoubleTimerSpeed_Title"
 	{
-		"en"    "Double Timer Speed"
+		"en"    "Double Timer Speed [META]"
 	}
 	"Chaos_Meta_DoubleTimerSpeed_Description"
 	{
@@ -978,7 +978,7 @@
 	}
     "Chaos_Meta_WhatsHappening_Title"
 	{
-		"en"    "What's Happening?"
+		"en"    "What's Happening? [META]"
 	}
 	"Chaos_Meta_WhatsHappening_Description"
 	{
