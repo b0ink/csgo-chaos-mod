@@ -984,5 +984,12 @@
 	{
 		"en"    "Hides what effects are currently running"
 	}
+    "Chaos_SilentFootsteps_Title"
+	{
+		"en"    "Silent Footsteps"
+	}
+	"Chaos_SilentFootsteps_Description"
+	{
+		"en"    "Mutes all footsteps"
+	}
 }
-

@@ -29,9 +29,9 @@
 #include "Effects/Game/Spawnables/SpawnFlashbangs.sp"
 #include "Effects/Game/Thunderstorm.sp"
 
-#include "Effects/Meta/MegaChaos.sp"
 #include "Effects/Meta/DoubleTimerSpeed.sp"
 #include "Effects/Meta/HalfTimerSpeed.sp"
+#include "Effects/Meta/MegaChaos.sp"
 #include "Effects/Meta/WhatsHappening.sp"
 
 #include "Effects/Player/Aimbot.sp"
@@ -109,6 +109,7 @@
 #include "Effects/Player/ReversedStrafe.sp"
 #include "Effects/Player/RewindTenSeconds.sp"
 #include "Effects/Player/Shields.sp"
+#include "Effects/Player/SilentFootsteps.sp"
 #include "Effects/Player/SimonSays.sp"
 #include "Effects/Player/SlayRandomPlayer.sp"
 #include "Effects/Player/SlowSpeed.sp"
