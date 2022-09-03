@@ -970,7 +970,7 @@
 	}
     "Chaos_Meta_DoubleTimerSpeed_Title"
 	{
-		"en"    "Half Timer Speed"
+		"en"    "Double Timer Speed"
 	}
 	"Chaos_Meta_DoubleTimerSpeed_Description"
 	{
