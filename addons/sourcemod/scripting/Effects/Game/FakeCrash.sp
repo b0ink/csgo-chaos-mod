@@ -12,7 +12,7 @@ public void Chaos_FakeCrash_START(){
 	for(int i = 0; i <= amount; i++) ServerCommand("spike");
 	ServerCommand("sv_cheats 0");
 
-	CreateTimer(2.0, Timer_AnnounceFakeCrash);
+	CreateTimer(1.0, Timer_AnnounceFakeCrash);
 
 }
 
