@@ -7,15 +7,11 @@ Effects are indexed by their function name used within the plugin, for example:
 ```
 "Chaos_PortalGuns"
 {
-	"name"			"Portal Guns"
-	"description"		"Teleport where you shoot"
 	"enabled"		"1"
 	"duration"		"20"
 }
 ```
 `"Chaos_PortalGuns"` references the function name within `scripting/Effects.sp`. **Do not edit this line or it will no longer run.**
-
-`"name"` and `"description"` are only used for reference. You can adjust the titles in [the translation files](https://github.com/b0ink/csgo-chaos-mod/tree/main/addons/sourcemod/translations) to appear differently in-game.
 
 `"enabled" [1 (Enabled) | 0 (Disabled)]` will determine whether the effect has a chance to run or not. Disabling it will also prevent you from running it manually.
 
@@ -23,6 +19,7 @@ Effects are indexed by their function name used within the plugin, for example:
 
 **Effects that currently have the duration set to `-1` implies that the effect does not have any duration, and is a one off effect. Changing its duration will not alter the effect.**
 
+You can adjust the effect titles in [the translation files](https://github.com/b0ink/csgo-chaos-mod/tree/main/addons/sourcemod/translations) to appear differently in-game.
 
 # In-Game Config Editor (Recommended)
 

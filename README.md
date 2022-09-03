@@ -45,6 +45,8 @@ If you encounter any errors please check your error files as well as the plugin'
 Each effect can individually be enabled/disabled and have their duration adjusted within `configs/Chaos/Chaos_Effects.cfg`.\
 More information about the Chaos config can be found [here](addons/sourcemod/configs/Chaos).
 
+You can adjust the effect titles in [the translation files](https://github.com/b0ink/csgo-chaos-mod/tree/main/addons/sourcemod/translations) to appear differently in-game.
+
 ### In-Game Config Editor
 Instead of manually editing the `Chaos_Effects.cfg` file, it is recommended to adjust the effects by using the `!chaos` command, and selecting `Settings->Effects`.
 
