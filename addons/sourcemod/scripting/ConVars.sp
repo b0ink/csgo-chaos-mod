@@ -150,7 +150,6 @@ void UpdateCvars(){
 		}
 	}
 
-	PrintToChatAll("updated %i", g_cvChaosEffectInterval.IntValue);
 
 	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
 	g_fChaos_EffectInterval = float(g_cvChaosEffectInterval.IntValue);
@@ -193,7 +192,6 @@ void Update_Convar_Config(){
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Convars.cfg");
 	File file = OpenFile(path, "w");
 	if(file == null){
-		PrintToChatAll("is null!");
 		return;
 	}
 	file.WriteLine("\"Convars\"");
