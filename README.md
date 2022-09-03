@@ -1,4 +1,4 @@
-# Chaos Mod for CS:GO [122 EFFECTS] + Twitch Voting
+# Chaos Mod for CS:GO [123 EFFECTS] + Twitch Voting
 Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 100+ unique effects into your competitive games such as **Portal Guns, Snow, Saturation, Auto bunnyhopping, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more! The effects are randomised and every 15 seconds a new one will spawn, keeping you and your enemies on your toes.
 
 The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](addons/sourcemod/configs/Chaos/Chaos_Effects.cfg).
