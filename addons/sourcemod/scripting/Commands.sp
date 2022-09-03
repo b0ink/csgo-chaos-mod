@@ -76,6 +76,8 @@ public Action Command_StopChaos(int client, int args){
 	ResetChaos();
 
 	g_cvChaosEnabled.SetString("0", true, true);
+	Update_Convar_Config();
+
 	AnnounceChaos("Chaos is Disabled!", -2.0, true);
 	return Plugin_Handled;
 }
@@ -83,6 +85,7 @@ public Action Command_StopChaos(int client, int args){
 public Action Command_StartChaos(int client, int args){
 	if(g_NewEffect_Timer == INVALID_HANDLE){
 		g_cvChaosEnabled.SetString("1", true, true);
+		Update_Convar_Config();
 
 		g_sCustomEffect = "";
 		//start the timer but dont spawn effect.

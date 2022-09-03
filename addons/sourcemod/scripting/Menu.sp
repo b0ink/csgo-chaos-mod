@@ -29,12 +29,9 @@ void ShowMenu_Main(int client){
 void ToggleChaos(int client = -1){
 	if(g_bChaos_Enabled){
 		Command_StopChaos(client, 0);
-		g_cvChaosEnabled.IntValue = 0;
 	}else{
 		Command_StartChaos(client, 0);
-		g_cvChaosEnabled.IntValue = 1;
 	}
-	Update_Convar_Config();
 }
 
 public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
