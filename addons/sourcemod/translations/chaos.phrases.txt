@@ -992,4 +992,12 @@
 	{
 		"en"    "Mutes all footsteps"
 	}
+    "Chaos_DeepFried_Title"
+	{
+		"en"    "Deep Fried"
+	}
+	"Chaos_DeepFried_Description"
+	{
+		"en"    "Deep Fried colour correction"
+	}
 }

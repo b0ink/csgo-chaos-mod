@@ -3,6 +3,7 @@
 #include "Effects/Game/BreakTime.sp"
 #include "Effects/Game/BuyAnywhere.sp"
 #include "Effects/Game/C4Chicken.sp"
+#include "Effects/Game/DeepFried.sp"
 #include "Effects/Game/DisableRadar.sp"
 #include "Effects/Game/Earthquake.sp"
 #include "Effects/Game/EnemyRadar.sp"
