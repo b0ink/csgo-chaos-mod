@@ -92,6 +92,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	CLEAR_CC();
 
 	g_TotalRounds++;
+
 	g_iChaos_EffectsRun_Count = 0;
 	
 	LoopAlivePlayers(client){

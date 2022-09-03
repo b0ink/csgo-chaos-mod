@@ -214,6 +214,11 @@ Handle 	bombSiteB = INVALID_HANDLE;
 
 
 ArrayList ChaosEffects;
+ArrayList Possible_Chaos_Effects;
+
+ArrayList 	Possible_Meta_Effects;
+ArrayList	Meta_Effects_History;
+
 
 /*
 	If Chaos_Effects.cfg was to be removed, then it would make sense to do the whole:
@@ -418,7 +423,8 @@ public void OnPluginStart(){
 		}
 	}
 
-	Possible_Chaos_Effects = new ArrayList(1024);
+	Possible_Chaos_Effects = new ArrayList(sizeof(effect_data));
+	Meta_Effects_History = new ArrayList(sizeof(effect_data));
 	Effect_History = CreateArray(64);
 
 	g_SavedConvars  = CreateArray(64);
@@ -658,20 +664,29 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun &&  (g_TotalRounds >= 5 && GetRandomInt(0, 100) <= 50 && g_EffectsSinceMeta >= 10 )){
 		g_EffectsSinceMeta = 0;
 		effect_data metaEffect;
-		int count = 0;
+		bool metaAlreadyRunning = false;
+		Possible_Meta_Effects.Clear();
 		LoopAllMetaEffects(metaEffect, index){
 			PrintToChatAll("%s s", metaEffect.title);
-			count++;
+			if(metaEffect.can_run_effect()){
+				Possible_Meta_Effects.PushArray(metaEffect, sizeof(metaEffect));
+			}
+			if(metaEffect.timer != INVALID_HANDLE){
+				metaAlreadyRunning = true;
+			}
 		}
-		// TODO: g_MetaHistory
-		int random = GetRandomInt(0, count-1);
-		count = 0;
-		LoopAllMetaEffects(metaEffect, index){
-			if(index != random) continue;
-
+		if(!metaAlreadyRunning) {
+			int random = GetRandomInt(0, Possible_Meta_Effects.Length - 1);
+			Possible_Meta_Effects.GetArray(random, metaEffect, sizeof(metaEffect));
 			g_sCustomEffect = metaEffect.config_name;
+			Meta_Effects_History.PushArray(metaEffect);
 			ChooseEffect(null, true);
 		}
+		// History too full, clear it to allow old ones to be spawned.
+		if(Meta_Effects_History.Length > Possible_Meta_Effects.Length - 1){
+			Meta_Effects_History.Clear();
+		}
+
 	}
 
 
