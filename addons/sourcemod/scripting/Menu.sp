@@ -232,12 +232,14 @@ public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, in
 			// PrintToChatAll("seconds is %f convar is %s", seconds, convar_name); 
 
 			ConVar convar_editing = FindConVar(convar_name);
+
+			//Rather than correctly editing the KV - the convar is set, then the config is rewritten based off new convars
 			convar_editing.FloatValue = seconds;
 			char newValue[64];
 			FloatToString(seconds, newValue, sizeof(newValue));
+			Update_Convar_Config();
 			UpdateCvars();
 			// Update_Settings(convar_name, newValue);
-			Update_Convar_Config();
 
 			ShowMenu_ConvarIncrements(param1, convar_name);
 			PrintToChatAll("[Chaos] ConVar '%s' has been changed to %.2f", convar_name, seconds);
