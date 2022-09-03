@@ -425,6 +425,7 @@ public void OnPluginStart(){
 
 	Possible_Chaos_Effects = new ArrayList(sizeof(effect_data));
 	Meta_Effects_History = new ArrayList(sizeof(effect_data));
+	Possible_Meta_Effects = new ArrayList(sizeof(effect_data));
 	Effect_History = CreateArray(64);
 
 	g_SavedConvars  = CreateArray(64);
