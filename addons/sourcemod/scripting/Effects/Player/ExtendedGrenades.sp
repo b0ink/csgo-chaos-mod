@@ -1,4 +1,5 @@
 public void Chaos_ExtendedGrenades(effect_data effect){
+	effect.title = "Extended Grenades";
 	effect.HasNoDuration = true;
 }
 

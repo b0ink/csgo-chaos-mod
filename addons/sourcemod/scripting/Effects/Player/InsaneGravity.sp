@@ -1,3 +1,8 @@
+public void Chaos_InsaneGravity(effect_data effect){
+	effect.title = "Insane Gravity";
+	effect.duration = 30;
+}
+
 public void Chaos_InsaneGravity_START(){
 	SetPlayersGravity(15.0);
 	g_NoFallDamage++;

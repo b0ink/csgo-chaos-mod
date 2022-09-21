@@ -1,4 +1,8 @@
 bool ReversedStrafe = false;
+public void Chaos_ReversedStrafe(effect_data effect){
+	effect.title = "Reversed Strafe";
+	effect.duration = 30;
+}
 
 public void Chaos_ReversedStrafe_START(){
 	ReversedStrafe = true;

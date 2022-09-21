@@ -2,6 +2,11 @@
 	Keep in mind this does "pause" the game time, meaning the duration of this effect is much longer as stated
 */
 
+public void Chaos_Lag(effect_data effect){
+	effect.title = "Lag";
+	effect.duration = 30;
+}
+
 bool FakeLag = false;
 public void Chaos_Lag_START(){
 	FakeLag = true;

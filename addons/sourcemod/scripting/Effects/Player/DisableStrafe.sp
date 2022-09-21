@@ -1,7 +1,10 @@
 
 int Disable_Strafe[MAXPLAYERS+1];
 float Disable_Strafe_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
-
+public void Chaos_DisableStrafe(effect_data effect){
+	effect.title = "Disable A / D Keys";
+	effect.duration = 30;
+}
 
 
 public void Chaos_DisableStrafe_START(){

@@ -1,4 +1,5 @@
 public void Chaos_QuakeFOV(effect_data effect){
+	effect.title = "Quake FOV";
 	effect.HasNoDuration = true;
 }
 

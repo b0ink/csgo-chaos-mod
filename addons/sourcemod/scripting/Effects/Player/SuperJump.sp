@@ -1,3 +1,8 @@
+public void Chaos_SuperJump(effect_data effect){
+	effect.title = "Super Jump";
+	effect.duration = 30;
+}
+
 public void Chaos_SuperJump_START(){
 	cvar("sv_jump_impulse", "590");
 }

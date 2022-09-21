@@ -4,7 +4,8 @@ Handle CTPos = INVALID_HANDLE;
 Handle tIndex = INVALID_HANDLE;
 Handle ctIndex = INVALID_HANDLE;
 
-public void Chaos_TeammatesSwap(effect_data effect){
+public void Chaos_TeammateSwap(effect_data effect){
+	effect.title = "Teammate Swap";
 	effect.HasNoDuration = true;
 }
 

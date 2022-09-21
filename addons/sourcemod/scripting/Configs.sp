@@ -2,10 +2,64 @@
 
 Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
+public void ParseChaosEffects(){
+	ChaosEffects.Clear();
+
+	char function_name[64];
+	int count = 0;
+	for(int i = 0; i < sizeof(EffectNames); i++)
+	{
+		effect_data effect; // Ensures a new object every time
+		Function effect_function = GetFunctionByName(GetMyHandle(), EffectNames[i]);
+
+		if(effect_function == INVALID_FUNCTION) continue; // Cannot find respective function, effect won't be added
+		count++;
+
+		Call_StartFunction(GetMyHandle(), effect_function);
+		Call_PushArrayEx(effect, sizeof(effect), SM_PARAM_COPYBACK);
+		Call_Finish();
+
+
+		Format(function_name, sizeof(function_name), "%s_START", EffectNames[i]);
+		effect.function_name_start = function_name;
+		Function start_func = GetFunctionByName(GetMyHandle(), function_name);
+
+		Format(function_name, sizeof(function_name), "%s_RESET", EffectNames[i]);
+		effect.function_name_reset = function_name;
+		Function reset_func = GetFunctionByName(GetMyHandle(), function_name);
+
+		if(start_func == INVALID_FUNCTION || reset_func == INVALID_FUNCTION) continue;
+
+		if(effect.duration == 0 && effect.HasNoDuration == false){
+			effect.duration = 30; // Default time
+		}
+		Format(function_name, sizeof(function_name), EffectNames[i]);
+		Format(effect.config_name, sizeof(effect.config_name), "%s", function_name);
+		effect.enabled = true;
+
+		ChaosEffects.PushArray(effect);
+
+	}
+	PrintToChatAll("count is %i", count);
+	effect_data effect;
+	char init_function[64];
+	LoopAllEffects(effect, index){
+		Format(init_function, sizeof(init_function), "%s_INIT", effect.config_name);
+		PrintToChatAll("funning %s", init_function);
+		Function func = GetFunctionByName(GetMyHandle(), init_function);
+		if(func != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), func);
+			Call_Finish();
+		}
+	}
+}
+
+
+
 public void OnConfigsExecuted(){
 	
 	ParseMapCoordinates("Chaos_Locations");
-	ParseChaosEffects();
+	ParseChaosConfigEffects();
 	ParseOverrideEffects();
 
 	int warnings = 0;
@@ -36,7 +90,7 @@ public void OnConfigsExecuted(){
 		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
 	}
 
-	Run_Init_Functions();
+	Run_OnMapStart_Functions();
 	effect_data effect;
 	char function_mapstart[64];
 	LoopAllEffects(effect, index){
@@ -51,18 +105,17 @@ public void OnConfigsExecuted(){
 }
 
 
-void Run_Init_Functions(){
+void Run_OnMapStart_Functions(){
 	effect_data effect;
 	char init_function[64];
 	LoopAllEffects(effect, index){
-		Format(init_function, sizeof(init_function), "%s_INIT", effect.config_name);
+		Format(init_function, sizeof(init_function), "%s_OnMapStart", effect.config_name);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();
 		}
 	}
-
 }
 
 void SaveBombPosition(){
@@ -142,15 +195,16 @@ public void PrecacheTextures(){
 }
 
 
-void ParseChaosEffects(){
-	ChaosEffects.Clear();
+//Old ParseChaosEffects
+void ParseChaosConfigEffects(){
+	// ChaosEffects.Clear();
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
 
 	if(!FileExists(filePath)){
 		Log("Configuration file: %s not found.", filePath);
 		LogError("Configuration file: %s not found.", filePath);
-		SetFailState("[CHAOS] Could not find configuration file: %s", filePath);
+		// SetFailState("[CHAOS] Could not find configuration file: %s", filePath);
 		return;
 	}
 	KeyValues kvConfig = new KeyValues("Effects");
@@ -158,15 +212,22 @@ void ParseChaosEffects(){
 	if(!kvConfig.ImportFromFile(filePath)){
 		Log("Unable to parse Key Values file %s", filePath);
 		LogError("Unable to parse Key Values file %s", filePath);
-		SetFailState("Unable to parse Key Values file %s", filePath);
+		// SetFailState("Unable to parse Key Values file %s", filePath);
 		return;
 	}
 
 	if(!kvConfig.GotoFirstSubKey()){
 		Log("Unable to find 'Effects' Section in file %s", filePath);
 		LogError("Unable to find 'Effects' Section in file %s", filePath);
-		SetFailState("Unable to find 'Effects' Section in file %s", filePath);
+		// SetFailState("Unable to find 'Effects' Section in file %s", filePath);
 		return;
+	}
+
+	char translation_path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, translation_path, sizeof(translation_path), "translations/chaos.phrases.txt");
+	bool translations = false;
+	if(FileExists(translation_path)){
+		translations = true;
 	}
 
 	do{
@@ -174,68 +235,31 @@ void ParseChaosEffects(){
 		char Chaos_Function_Title[64];
 		char chaos_translation_key[64];
 
-		char call_function_name[64];
+		// char call_function_name[64];
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
-			
+
 			Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_Title", Chaos_Function_Name);
-			Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
+			bool newTitle = false;
+			if(translations){
+				if(TranslationPhraseExists(chaos_translation_key)){
+					newTitle = true;
+					Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
+				}
+			}
 
 			if(enabled != 0 || enabled != 1) enabled = 1; //TODO: better error logging eg. if enabled or duration out of bounds
 
-			Format(call_function_name, sizeof(call_function_name), "%s_START", Chaos_Function_Name);
-			Function func = GetFunctionByName(GetMyHandle(), call_function_name);
+			effect_data effect;
 
-			Format(call_function_name, sizeof(call_function_name), "%s", Chaos_Function_Name);
-			Function func3 = GetFunctionByName(GetMyHandle(), call_function_name);
-			
-			if(func != INVALID_FUNCTION){
-				effect_data effect;
-				if(func3 != INVALID_FUNCTION){
-					Call_StartFunction(GetMyHandle(), func3);
-					Call_PushArrayEx(effect, sizeof(effect), SM_PARAM_COPYBACK);
-					Call_Finish();
+			LoopAllEffects(effect, index){
+				if(StrEqual(effect.config_name, Chaos_Function_Name, false)){
+					if(newTitle) effect.title = Chaos_Function_Title;
+					effect.enabled = view_as<bool>(enabled);
+					effect.duration = expires;
 				}
-
-				char function_name[64];
-				Format(function_name, sizeof(function_name), "%s_START", Chaos_Function_Name);
-				effect.function_name_start = function_name;
-				Format(function_name, sizeof(function_name), "%s_RESET", Chaos_Function_Name);
-				
-				effect.function_name_reset = function_name;
-				effect.title = Chaos_Function_Title;
-				effect.config_name = Chaos_Function_Name;
-				effect.duration = expires;
-				effect.enabled = view_as<bool>(enabled);
-
-
-					// effect_data effect;
-					// effect.conditions = "adsf";
-					// PrintToChatAll(effect.conditions);
-					// Chaos_Autobhop(effect);
-					// PrintToChatAll(effect.conditions);
-					 //resave to stringmap, or just do it when creating the
-				//TODO: instead of using functions for these checks, create one function ( Chaos_EffectName() ) that adds data to the enum struct
-					// public bool Chaos_Autobhop(effect_data effect){
-					// 	effect.force_no_duration = true;
-					// 	effect.conditions = "Chaos_Autobhop_Conditions";
-					// }
-
-				// Format(call_function_name, sizeof(call_function_name), "%s_HasNoDuration", Chaos_Function_Name);
-				// Function func2 = GetFunctionByName(GetMyHandle(), call_function_name);
-				// bool no_duration = false;
-				// if(func2 != INVALID_FUNCTION){
-				// 	Call_StartFunction(GetMyHandle(), func2);
-				// 	Call_Finish(no_duration);
-				// }
-				// effect.force_no_duration = no_duration;
-				ChaosEffects.PushArray(effect, sizeof(effect));
-
-			}else{
-				Log("Could not find start function for: %s. This effect will not run.", Chaos_Function_Name);
 			}
-
 		}
 	} while(kvConfig.GotoNextKey());
 
@@ -382,7 +406,7 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 		}
 		if(StrEqual(KeyValues_name, "Effects", false)){
-			ParseChaosEffects();
+			ParseChaosConfigEffects();
 			ParseOverrideEffects();
 		}
 	}else{

@@ -1,4 +1,5 @@
 public void Chaos_LavaFloor(effect_data effect){
+	effect.title = "FLOOR IS LAVA";
 	effect.HasNoDuration = true;
 }
 

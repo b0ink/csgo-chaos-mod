@@ -1,3 +1,8 @@
+public void Chaos_LightsOff(effect_data effect){
+	effect.title = "Who turned the lights off?";
+	effect.duration = 30;
+}
+
 public void Chaos_LightsOff_START(){
 	LightsOff();
 }

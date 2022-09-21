@@ -1,5 +1,6 @@
 public void Chaos_VampireHeal(effect_data effect){
-	effect.HasNoDuration = false;
+	effect.title = "Vampires";
+	effect.duration = 30;
 }
 
 bool g_bVampireRound = false;

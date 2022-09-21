@@ -1,3 +1,8 @@
+public void Chaos_TaserParty(effect_data effect){
+	effect.title = "Tasery Party";
+	effect.duration = 30;
+}
+
 public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));

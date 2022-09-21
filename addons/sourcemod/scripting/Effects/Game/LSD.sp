@@ -1,3 +1,9 @@
+public void Chaos_LSD(effect_data effect){
+	effect.title = "LSD";
+	effect.duration = 30;
+}
+
+
 Handle g_LSD_Timer_Repeat = INVALID_HANDLE;
 bool g_LSD = false;
 int g_Previous_LSD = -1;

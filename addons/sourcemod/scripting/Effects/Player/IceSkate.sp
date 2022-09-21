@@ -1,7 +1,8 @@
+public void Chaos_IceSkate(effect_data effect){
+	effect.title = "Ice Skating";
+	effect.duration = 30;
+}
 
-/*
-	Runs on the OnMapStart function. Use this to precache any models or textures.
-*/
 bool IceSkate = false;
 bool ForceJumpSkate[MAXPLAYERS+1];
 

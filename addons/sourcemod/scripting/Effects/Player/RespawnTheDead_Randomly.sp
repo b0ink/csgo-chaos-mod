@@ -1,4 +1,6 @@
 public void Chaos_RespawnTheDead_Randomly(effect_data effect){
+	effect.title = "Resurrect dead players in random locations";
+	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;
 }
 public void Chaos_RespawnTheDead_Randomly_START(){

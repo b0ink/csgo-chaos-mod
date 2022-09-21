@@ -1,4 +1,5 @@
 public void Chaos_RevealEnemyLocation(effect_data effect){
+	effect.title = "Reveal Enemy Location";
 	effect.HasNoDuration = true;
 }
 

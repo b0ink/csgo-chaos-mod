@@ -1,6 +1,11 @@
 bool g_bDiscoFog = false;
 Handle g_DiscoFog_Timer_Repeat = INVALID_HANDLE;
 
+public void Chaos_DiscoFog(effect_data effect){
+	effect.title = "Disco Fog";
+	effect.duration = 30;
+}
+
 public void Chaos_DiscoFog_START(){
 	DiscoFog();
 	g_bDiscoFog = true;

@@ -1,4 +1,5 @@
 public void Chaos_Healthshot(effect_data effect){
+	effect.title = "Healthshot";
 	effect.HasNoDuration = true;
 }
 

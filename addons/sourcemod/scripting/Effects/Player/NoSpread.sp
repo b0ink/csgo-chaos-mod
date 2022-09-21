@@ -1,3 +1,8 @@
+public void Chaos_NoRecoil(effect_data effect){
+	effect.title = "100% Weapon Accuracy";
+	effect.duration = 30;
+}
+
 public void Chaos_NoRecoil_START(){
 	cvar("weapon_accuracy_nospread", "1");
 	cvar("weapon_recoil_scale", "0");

@@ -1,3 +1,8 @@
+public void Chaos_BlindPlayers(effect_data effect){
+	effect.title = "Blind";
+	effect.duration = 7;
+}
+
 public void Chaos_BlindPlayers_START(){
 	LoopAlivePlayers(i){
 		PerformBlind(i, 255);

@@ -184,7 +184,7 @@
     {
         "en"    "Sets all players to noclip, but players can still be damaged"
     }
-    "Chaos_MoneyRain_Title"
+    "a_Title"
     {
         "en"    "Make it rain"
     }

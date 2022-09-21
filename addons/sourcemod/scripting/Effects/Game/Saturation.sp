@@ -1,3 +1,8 @@
+public void Chaos_Saturation(effect_data effect){
+	effect.title = "Saturation";
+	effect.duration = 30;
+}
+
 public void Chaos_Saturation_START(){
 	CREATE_CC("saturation");
 }

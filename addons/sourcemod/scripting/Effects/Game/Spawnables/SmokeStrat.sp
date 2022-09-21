@@ -1,4 +1,5 @@
 public void Chaos_SmokeStrat(effect_data effect){
+	effect.title = "Smoke Strat";
 	effect.HasNoDuration = true;
 }
 

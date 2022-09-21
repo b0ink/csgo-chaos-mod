@@ -1,5 +1,8 @@
 bool g_bForceCrouch = false;
-
+public void Chaos_CrabPeople(effect_data effect){
+	effect.title = "Crab People";
+	effect.duration = 30;
+}
 public void Chaos_CrabPeople_START(){
 	g_bForceCrouch = true;
 }

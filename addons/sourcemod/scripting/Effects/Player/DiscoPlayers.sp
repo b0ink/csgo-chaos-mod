@@ -1,5 +1,9 @@
 Handle DiscoPlayers_TimerRepeat = INVALID_HANDLE;
 bool DiscoPlayers = false;
+public void Chaos_DiscoPlayers(effect_data effect){
+	effect.title = "Disco Players";
+	effect.duration = 30;
+}
 public void Chaos_DiscoPlayers_START(){
 	DiscoPlayers = true;
 	Timer_DiscoPlayers();

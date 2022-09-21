@@ -1,3 +1,7 @@
+public void Chaos_KnifeFight(effect_data effect){
+	effect.title = "Knife Fight";
+	effect.duration = 30;
+}
 
 public Action Chaos_KnifeFight_Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];

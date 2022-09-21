@@ -1,3 +1,8 @@
+public void Chaos_Thirdperson(effect_data effect){
+	effect.title = "Thirdperson";
+	effect.duration = 30;
+}
+
 public void Chaos_Thirdperson_START(){
 	cvar("sv_allow_thirdperson", "1");
 	LoopAlivePlayers(i){

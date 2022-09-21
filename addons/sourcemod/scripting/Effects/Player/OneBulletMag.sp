@@ -1,9 +1,15 @@
 //weapon fire
 bool g_bOneBulletMag = false;
 int g_iOffset_Clip1 = -1;
+
+public void Chaos_OneBulletMag(effect_data effect){
+	effect.title = "One Bullet Mags";
+	effect.duration = 30;
+}
+
 public void Chaos_OneBulletMag_INIT(){
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
-
+	HookEvent("weapon_fire", 		Chaos_OneBulletMag_Event_OnWeaponFire);
 }
 
 public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){

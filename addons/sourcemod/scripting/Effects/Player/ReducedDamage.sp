@@ -1,6 +1,8 @@
 bool ReducedDamage = false;
 
 public void Chaos_ReducedDamage(effect_data effect){
+	effect.title = "Half Shot Damage"; 
+	effect.duration = 30;
 	effect.AddAlias("HalfDamage");
 	effect.AddAlias("ReduceDamage");
 	effect.IncompatibleWith("Chaos_VampireHeal");

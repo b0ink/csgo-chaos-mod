@@ -1,4 +1,6 @@
 public void Chaos_SlayRandomPlayer(effect_data effect){
+	effect.title = "Slay Random Player On Each Team";
+	effect.duration = 30;
 	effect.HasNoDuration = true;
 }
 

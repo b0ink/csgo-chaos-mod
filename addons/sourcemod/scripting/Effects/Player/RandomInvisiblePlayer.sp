@@ -1,4 +1,5 @@
 public void Chaos_RandomInvisiblePlayer(effect_data effect){
+	effect.title = "Random Invisible Player";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 }

@@ -17,7 +17,8 @@ int g_iJumpMax = 1;
 
 bool g_bDoubleJump = false;
 public void Chaos_DoubleJump(effect_data effect){
-
+	effect.title = "Double Jump";
+	effect.duration = 30;
 }
 
 

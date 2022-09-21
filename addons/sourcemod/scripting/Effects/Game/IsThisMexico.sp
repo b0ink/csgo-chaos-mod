@@ -1,3 +1,8 @@
+public void Chaos_IsThisMexico(effect_data effect){
+	effect.title = "Is This What Mexico Looks Like?";
+	effect.duration = 30;
+}
+
 public void Chaos_IsThisMexico_START(){
 	Mexico();
 }

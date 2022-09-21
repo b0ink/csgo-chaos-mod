@@ -1,4 +1,5 @@
 public void Chaos_DropPimaryWeapon(effect_data effect){
+	effect.title = "Drop Primary Weapon";
 	effect.HasNoDuration = true;
 }
 

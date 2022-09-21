@@ -1,3 +1,8 @@
+public void Chaos_IncreasedRecoil(effect_data effect){
+	effect.title = "Increased Recoil";
+	effect.duration = 30;
+}
+
 public void Chaos_IncreasedRecoil_START(){
 	cvar("weapon_recoil_scale", "10");
 }

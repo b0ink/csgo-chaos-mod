@@ -1,5 +1,6 @@
 public void Chaos_BreakTime(effect_data effect){
-	effect.HasNoDuration = false;
+	effect.title = "Take a Break";
+	effect.duration = 15;
 	effect.IncompatibleWith("Chaos_WKeyStuck");
 }
 

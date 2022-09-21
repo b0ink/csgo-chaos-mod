@@ -3,6 +3,7 @@
 
 
 public void Chaos_Meta_Mega(effect_data effect){
+	effect.title = "Mega Chaos";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.meta = true;

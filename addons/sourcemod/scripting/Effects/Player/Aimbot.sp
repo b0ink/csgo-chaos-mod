@@ -1,4 +1,7 @@
 public void Chaos_Aimbot(effect_data effect){
+	effect.title = "Aimbot";
+	effect.duration = 30;
+	
 	effect.AddAlias("Hacks");
 	effect.AddAlias("Cheats");
 }
@@ -35,6 +38,8 @@ public void Chaos_Aimbot_INIT(){
 	g_cvPredictionConVars[6] = FindConVar("weapon_recoil_suppression_shots");
 	g_cvPredictionConVars[7] = FindConVar("weapon_recoil_variance");
 	g_cvPredictionConVars[8] = FindConVar("weapon_recoil_view_punch_extra");
+	HookEventEx("weapon_fire", 		Chaos_Aimbot_Event_WeaponFire, EventHookMode_Pre);
+	HookEventEx("player_blind", 	Chaos_Aimbot_Event_PlayerBlind, EventHookMode_Pre);
 }
 
 public void Chaos_Aimbot_START(){

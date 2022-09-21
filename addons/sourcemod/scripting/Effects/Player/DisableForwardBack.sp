@@ -2,6 +2,11 @@
 int Disable_WS[MAXPLAYERS+1];
 float Disable_WS_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
 
+public void Chaos_DisableForwardBack(effect_data effect){
+	effect.title = "Disable W / S Keys";
+	effect.duration = 30;
+}
+
 public void Chaos_DisableForwardBack_START(){
 	g_bNoForwardBack++;
 }

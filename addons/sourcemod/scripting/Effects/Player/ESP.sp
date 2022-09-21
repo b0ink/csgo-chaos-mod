@@ -1,4 +1,7 @@
 public void Chaos_ESP(effect_data effect){
+    effect.title = "Wall Hacks";
+    effect.duration = 30;
+    
     effect.AddAlias("Wallhacks");
     effect.AddAlias("Cheats");
 }

@@ -1,5 +1,9 @@
 bool g_bJumping = false;
 bool ForceJump[MAXPLAYERS+1];
+public void Chaos_Jumping(effect_data effect){
+	effect.title = "Jump Jump!";
+	effect.duration = 30;
+}
 
 public void Chaos_Jumping_START(){
 	g_bJumping = true;

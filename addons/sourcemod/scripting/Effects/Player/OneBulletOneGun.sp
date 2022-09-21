@@ -1,7 +1,13 @@
 bool OneBulletOneGun = false;
 
+public void Chaos_OneBulletOneGun(effect_data effect){
+	effect.title = "One Bullet One Gun";
+	effect.duration = 30;
+}
+
 public void Chaos_OneBulletOneGun_INIT(){
 	OneBulletOneGun = false;
+	HookEvent("weapon_fire", 		Chaos_OneBulletOneGun_Event_OnWeaponFire);
 }
 
 char g_OBOG_WeaponName[32];

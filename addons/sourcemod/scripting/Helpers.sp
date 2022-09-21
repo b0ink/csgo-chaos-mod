@@ -43,9 +43,21 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false
 char[] GetChaosTitle(char[] function_name){
 	char return_string[128];
 	char temp_title[128];
+	char translation_path[PLATFORM_MAX_PATH];
+
 	if(StrContains(function_name, "Chaos_") != -1){
-		FormatEx(temp_title, sizeof(temp_title), "%s_Title", function_name);
-		FormatEx(return_string, sizeof(return_string), "%t", temp_title, LANG_SERVER);
+		BuildPath(Path_SM, translation_path, sizeof(translation_path), "translations/chaos.phrases.txt");
+		if(FileExists(translation_path)){
+			FormatEx(temp_title, sizeof(temp_title), "%s_Title", function_name);
+			if(TranslationPhraseExists(temp_title)){
+				FormatEx(return_string, sizeof(return_string), "%t", temp_title, LANG_SERVER);
+			}
+
+		}else{
+			effect_data effect;
+			GetEffectData(function_name, effect);
+			FormatEx(return_string, sizeof(return_string), "%s", effect.title);
+		}
 	}else{
 		FormatEx(return_string, sizeof(return_string), "%s", function_name);
 	}

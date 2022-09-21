@@ -6,9 +6,18 @@ int g_beamsprite;
 int g_halosprite;
 float g_PortalTeleports[MAXPLAYERS + 1][3];
 
-public void Chaos_PortalGuns_INIT(){
+public void Chaos_PortalGuns(effect_data effect){
+	effect.title = "Portal Guns";
+	effect.duration = 30;
+}
+
+public void Chaos_PortalGuns_OnMapStart(){
 	g_beamsprite = PrecacheModel("materials/sprites/laserbeam.vmt");
 	g_halosprite = PrecacheModel("materials/sprites/halo.vmt");
+}
+
+public void Chaos_PortalGuns_INIT(){
+	HookEvent("weapon_fire", 		Chaos_PortalGuns_Event_OnWeaponFire); //, EventHookMode_Post);
 }
 
 public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){

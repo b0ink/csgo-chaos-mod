@@ -1,5 +1,10 @@
 bool SneakyBeaky = false;
 
+public void Chaos_SneakyBeaky(effect_data effect){
+	effect.title = "Sneaky Beaky";
+	effect.duration = 30;
+}
+
 public void Chaos_SneakyBeaky_START(){
 	SneakyBeaky = true;
 }

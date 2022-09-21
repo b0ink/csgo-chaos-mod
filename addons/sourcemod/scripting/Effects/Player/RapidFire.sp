@@ -1,6 +1,11 @@
 bool g_bRapidFire = false;
 float g_RapidFire_Rate = 0.7;
 
+public void Chaos_RapidFire(effect_data effect){
+	effect.title = "Rapid Fire";
+	effect.duration = 30;
+}
+
 public void Chaos_RapidFire_START(){
 	g_bRapidFire = true;
 	cvar("weapon_accuracy_nospread", "1");

@@ -1,21 +1,27 @@
 bool g_bExplosiveBullets = false;
 
-public void Chaos_ExplosiveBullets_INIT(){
+public void Chaos_ExplosiveBullets(effect_data effect){
+	effect.title = "Explosive Bullets";
+	effect.duration = 30;
+}
+
+public void Chaos_ExplosiveBullets_OnMapStart(){
 	PrecacheEffect("ParticleEffect");
 	PrecacheParticleEffect(DISTORTION);
 	PrecacheParticleEffect(FLASH);
 	PrecacheParticleEffect(SMOKE);
 	PrecacheParticleEffect(DIRT);
 	PrecacheSound(EXPLOSION_HE);
+}
 
-
-
+public void Chaos_ExplosiveBullets_INIT(){
+	HookEvent("bullet_impact", 		Chaos_ExplosiveBullets_Event_BulletImpact);
+	AddTempEntHook("Shotgun Shot", 	Chaos_ExplosiveBullets_Hook_BulletShot);
 }
 
 
 public void Chaos_ExplosiveBullets_START(){
 	g_bExplosiveBullets = true;
-
 }
 
 public Action Chaos_ExplosiveBullets_RESET(bool HasTimerEnded){

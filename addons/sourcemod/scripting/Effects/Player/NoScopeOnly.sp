@@ -1,5 +1,11 @@
 bool g_bNoscopeOnly = false;
 int m_flNextSecondaryAttack = -1;
+
+public void Chaos_NoScopeOnly(effect_data effect){
+	effect.title = "No Scopes Only";
+	effect.duration = 30;
+}
+
 public void Chaos_NoScopeOnly_INIT(){
 	m_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack");
 }

@@ -1,6 +1,9 @@
 public void Chaos_BigChooks(effect_data effect){
+	effect.title = "Effect Name";
+	effect.AddAlias("Chicken");
 	effect.HasNoDuration = true;
 }
+
 
 public void Chaos_BigChooks_START(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){

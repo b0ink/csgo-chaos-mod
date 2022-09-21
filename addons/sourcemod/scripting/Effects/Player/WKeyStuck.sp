@@ -2,6 +2,8 @@
 bool WKeyStuck = false;
 
 public void Chaos_WKeyStuck(effect_data effect){
+	effect.title = "Help my W key is stuck";
+	effect.duration = 30;
 	effect.IncompatibleWith("Chaos_BreakTime");
 }
 

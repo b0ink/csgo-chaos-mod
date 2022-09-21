@@ -30,10 +30,12 @@ enum //Bombsites
 }
 
 public void Chaos_AutoPlantC4(effect_data effect){
+    effect.title = "Auto Plant C4";
     effect.HasNoDuration = true;
-    effect.HasCustomAnnouncement = true;
 
-    // effect.IncompatibleWith("Chaos_C4Chicken");
+    effect.AddAlias("Bomb");
+
+    effect.HasCustomAnnouncement = true;
 }
 
 public void Chaos_AutoPlantC4_INIT(){

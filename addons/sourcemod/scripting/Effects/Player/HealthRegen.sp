@@ -1,4 +1,9 @@
 bool g_HealthRegen = false;
+public void Chaos_HealthRegen(effect_data effect){
+	effect.title = "Health Regen";
+	effect.duration = 30;
+}
+
 public void Chaos_HealthRegen_START(){
 	g_HealthRegen = true;
 	CreateTimer(1.0, Timer_GiveHealthRegen);

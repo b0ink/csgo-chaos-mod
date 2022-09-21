@@ -1,7 +1,8 @@
-
 bool Meta_WhatsHappening = false;
 
 public void Chaos_Meta_WhatsHappening(effect_data effect){
+	effect.title = "What's Happening?";
+	effect.duration = 120;
 	effect.meta = true;
 }
 

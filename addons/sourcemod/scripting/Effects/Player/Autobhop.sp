@@ -1,4 +1,6 @@
 public void Chaos_Autobhop(effect_data effect){
+	effect.title = "Are you feeling funky?";
+	effect.duration = 30;
 	effect.AddAlias("Funky");
 	effect.AddAlias("Bunnyhop");
 	effect.AddAlias("Autohop");

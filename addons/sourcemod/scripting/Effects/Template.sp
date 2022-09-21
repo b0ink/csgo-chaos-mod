@@ -1,13 +1,5 @@
 /*
-	TODO: Clean this file up, eg where hook events go
-
-	INIT runs on Plugin Start
-		-> Hook your events here
-	OnMapStart runs on MapStart
-		->Precache your materials here
-
 	Made by your_name_here
-
 
 	Your config/function prefix should follow the convention of:
 		Chaos_EffectName
@@ -36,79 +28,67 @@
  */
 
 public bool Chaos_$0(effect_data effect){
-	effect.force_no_duration = false;
-	effect.type = "Player"
-	// effect.type = "Meta"
-	// effect.type = "Game"
-	// effect.addAlias("Effect NmE");
-	effect.incompatibleWith("Chaos_BreakTime") 
-	effect.incompatibleWith("Chaos_Funky") 
+	effect.title = "Effect Name";
+	effect.duration = 30;
+	// Mark effects that cannot be run at the same time.
+	effect.incompatibleWith("Chaos_BreakTime") ;
+	effect.incompatibleWith("Chaos_Funky");
+
+	// Alternative keywords to target this effect (Chaos_EffectName and the title is used by default)
+	effect.AddAlias("Keyword");
+	effect.AddAlias("Keyword2");
+
+ 	// Remove this line if it is a timed effect
+	// effect.HasNoDuration();
+
+	// The title of the effect will automatically be announced/added to the hud when it's run. Use this to prevent it.
+	// Use AnnounceChaos("Chaos_$0") //TODO
+	effect.HasCustomAnnouncement = false;
+
 }
+
+
 
 /*
 	Runs on the OnMapStart function. Use this to precache any models or textures.
 */
-public void Chaos_EffectName_OnMapStart(){
+public void Chaos_$0_OnMapStart(){
 	
 }
 
 /*
-	INIT function is run on MapStart and after the configs have been executed
-	This may run twice on occasion. // todo
-
-	Use this for precaching model or materials, or hooking events.
-	Your callback functions should begin with Chaos_EffectName
+	Runs OnPluginStart.
+	Use this to hook events
 */
-public void Chaos_EffectName_INIT(){
+public void Chaos_$0_INIT(){
 	
 }
 
 /* This is used when the effect is fired */
-public void Chaos_EffectName_START(){
+public void Chaos_$0_START(){
 
 }
 
 /* The reset function will fire once the timer has finished, where HasTimerEnded will be true. */
 /* It will also fire on round end, where HasTimerEnded will be false. */
-public Action Chaos_EffectName_RESET(bool HasTimerEnded){
+public Action Chaos_$0_RESET(bool HasTimerEnded){
 
 }
 
 /* Remove or comment out if not used */
-public Action Chaos_EffectName_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public Action Chaos_$0_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 
 }
 
 /* Remove or comment out if not used */
-public Action Chaos_EffectName_OnEntityCreated(int ent, const char[] classname){
+public Action Chaos_$0_OnEntityCreated(int ent, const char[] classname){
 
 }
 
 /* Remove or comment out if not used */
-public Action Chaos_EffectName_OnGameFrame(){
+public Action Chaos_$0_OnGameFrame(){
 
 }
-
-
-/*
-	If you want to prevent the plugin from automatically announcing the effect, keep this
-	Otherwise, remove it or return false
-
-	If removed, assume it returns false.
-
-	
-	Use AnnounceChaos("Chaos_FakeTeleport"); when needed.
-*/
-public bool Chaos_EffectName_CustomAnnouncement(){
-	return false;
-}
-
-
-/* Used to indicate that the effect should not have a duration, even if one is set in the config. */
-public bool Chaos_EffectName_HasNoDuration(){
-	return false;
-}
-
 
 /*
 	A final check before running the effect.

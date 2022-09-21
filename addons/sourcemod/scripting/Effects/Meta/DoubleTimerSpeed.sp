@@ -1,5 +1,7 @@
 
 public void Chaos_Meta_DoubleTimerSpeed(effect_data effect){
+	effect.title = "Double Timer Speed";
+	effect.duration = 120;
 	effect.meta = true;
 }
 

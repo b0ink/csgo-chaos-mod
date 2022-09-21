@@ -2,6 +2,11 @@ char g_OriginalModels_Jugg[MAXPLAYERS + 1][PLATFORM_MAX_PATH+1];
 //https://forums.alliedmods.net/showthread.php?t=307674 thanks for prop_send 
 bool g_bSetJuggernaut = false;
 
+public void Chaos_Juggernaut(effect_data effect){
+	effect.title = "Juggernauts";
+	effect.duration = 30;
+}
+
 public void Chaos_Juggernaut_START(){
 	cvar("mp_weapons_allow_heavyassaultsuit", "1");
 	g_bSetJuggernaut = true;

@@ -250,8 +250,6 @@ enum struct effect_data{
 	Handle		Aliases;
 	Handle 		timer;
 
-
-
 	void run_effect(){
 		// PrintToChatAll("attempting to run!: %s for %i seconds", this.function_name_start, this.duration);
 		Log("Running effect: %s", this.function_name_start);
@@ -340,7 +338,6 @@ enum struct effect_data{
 			this.IncompatibleEffects = CreateArray(255);
 		}
 		PushArrayString(this.IncompatibleEffects, effectName);
-
 	}
 	bool isCompatible(){
 		if(this.IncompatibleEffects == INVALID_HANDLE) return true;
@@ -394,8 +391,10 @@ public Action Effect_Reset(Handle timer, int effect_id){
 
 
 #include "Effects/EffectsList.sp"
-#include "Effects/PluginStart.sp"
 
+char EffectNames[][] = {
+	#include "Effects/EffectNames.sp"
+};
 
 #include "Commands.sp"
 #include "Hud.sp"
@@ -424,16 +423,16 @@ public void OnPluginStart(){
 	}
 
 	Possible_Chaos_Effects = new ArrayList(sizeof(effect_data));
-	Meta_Effects_History = new ArrayList(sizeof(effect_data));
-	Possible_Meta_Effects = new ArrayList(sizeof(effect_data));
 	Effect_History = CreateArray(64);
+
+	Possible_Meta_Effects = new ArrayList(sizeof(effect_data));
+	Meta_Effects_History = new ArrayList(sizeof(effect_data));
 
 	g_SavedConvars  = CreateArray(64);
 
 	ChaosEffects = new ArrayList(sizeof(effect_data));
 
-	/* From Effects/PluginStart.sp */
-	Chaos_OnPluginStart();
+	ParseChaosEffects();
 
 	TWITCH_INIT();
 
@@ -449,6 +448,7 @@ public void OnPluginEnd(){
 }
 
 public void OnMapStart(){
+	
 	if(g_MetaHistory != INVALID_HANDLE){
 		ClearArray(g_MetaHistory);
 	}
@@ -466,6 +466,8 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_BLIP);
 
 	PrecacheTextures();
+
+	ParseChaosConfigEffects();
 
 
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
@@ -485,9 +487,7 @@ public void OnMapStart(){
 	WEATHER_INIT();
 	Overlay_INIT();
 
-	//TODO: Theres not really going to be anything in here if configs havent loaded yet?
-	//probably should move everything into _INIT, where it can run multiple times after a config refresh
-	Run_Init_Functions();
+	Run_OnMapStart_Functions();
 
 	cvar("sv_fade_player_visibility_farz", "1");
 

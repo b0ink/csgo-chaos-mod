@@ -1,4 +1,5 @@
 public void Chaos_FakeCrash(effect_data effect){
+	effect.title = "Fake Crash";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_Lag");

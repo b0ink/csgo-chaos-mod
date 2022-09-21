@@ -1,4 +1,6 @@
 public void Chaos_ResetSpawns(effect_data effect){
+	effect.title = "Teleport all players back to spawn";
+	effect.AddAlias("Teleport");
 	effect.HasNoDuration = true;
 }
 

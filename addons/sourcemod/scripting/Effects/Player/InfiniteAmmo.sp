@@ -1,6 +1,13 @@
 //event weaponfire
+
+public void Chaos_InfiniteAmmo(effect_data effect){
+	effect.title = "Infinite Ammo";
+	effect.duration = 30;
+}
+
 bool g_InfiniteAmmo = false;
 public void Chaos_InfiniteAmmo_INIT(){
+	HookEvent("weapon_fire", 		Chaos_InfiniteAmmo_Event_OnWeaponFire);
 }
 
 public void Chaos_InfiniteAmmo_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){

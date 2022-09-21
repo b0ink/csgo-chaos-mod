@@ -1,3 +1,8 @@
+public void Chaos_Binoculars(effect_data effect){
+	effect.title = "Binoculars";
+	effect.duration = 30;
+}
+
 public void Chaos_Binoculars_OnMapStart(){
 	PrecacheDecal("Chaos/binoculars.vmt", true);
 	PrecacheDecal("Chaos/binoculars.vtf", true);

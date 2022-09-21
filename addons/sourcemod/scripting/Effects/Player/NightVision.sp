@@ -1,3 +1,8 @@
+public void Chaos_NightVision(effect_data effect){
+	effect.title = "Night Vision";
+	effect.HasNoDuration = true;
+} 
+
 public void Chaos_NightVision_START(){
 	LoopAlivePlayers(i){
 		GivePlayerItem(i, "item_nvgs");
