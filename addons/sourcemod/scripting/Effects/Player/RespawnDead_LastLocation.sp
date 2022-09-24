@@ -1,6 +1,7 @@
 public void Chaos_RespawnDead_LastLocation(effect_data effect){
 	effect.title = "Resurrect players where they died";
 	effect.AddAlias("Respawn");
+	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;
 }
 

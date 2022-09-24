@@ -12,13 +12,15 @@ public void ParseChaosEffects(){
 		effect_data effect; // Ensures a new object every time
 		Function effect_function = GetFunctionByName(GetMyHandle(), EffectNames[i]);
 
-		if(effect_function == INVALID_FUNCTION) continue; // Cannot find respective function, effect won't be added
+		if(effect_function == INVALID_FUNCTION){
+			Log("Couldnt find setup function for %s", EffectNames[i]);
+			continue;
+		}
 		count++;
 
 		Call_StartFunction(GetMyHandle(), effect_function);
 		Call_PushArrayEx(effect, sizeof(effect), SM_PARAM_COPYBACK);
 		Call_Finish();
-
 
 		Format(function_name, sizeof(function_name), "%s_START", EffectNames[i]);
 		effect.function_name_start = function_name;
@@ -26,9 +28,13 @@ public void ParseChaosEffects(){
 
 		Format(function_name, sizeof(function_name), "%s_RESET", EffectNames[i]);
 		effect.function_name_reset = function_name;
-		Function reset_func = GetFunctionByName(GetMyHandle(), function_name);
+		// Function reset_func = GetFunctionByName(GetMyHandle(), function_name);
 
-		if(start_func == INVALID_FUNCTION || reset_func == INVALID_FUNCTION) continue;
+		if(start_func == INVALID_FUNCTION){
+			Log("Could not find start function for %s", EffectNames[i]);
+			continue;
+		}
+		// if(start_func == INVALID_FUNCTION || reset_func == INVALID_FUNCTION) continue;
 
 		if(effect.duration == 0 && effect.HasNoDuration == false){
 			effect.duration = 30; // Default time
@@ -40,12 +46,12 @@ public void ParseChaosEffects(){
 		ChaosEffects.PushArray(effect);
 
 	}
-	PrintToChatAll("count is %i", count);
+	// PrintToChatAll("count is %i", count);
 	effect_data effect;
 	char init_function[64];
 	LoopAllEffects(effect, index){
 		Format(init_function, sizeof(init_function), "%s_INIT", effect.config_name);
-		PrintToChatAll("funning %s", init_function);
+		// PrintToChatAll("funning %s", init_function);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -272,7 +278,7 @@ void ParseChaosConfigEffects(){
 	}
 
 	Log("Parsed Chaos_Effects.cfg succesfully!");
-}
+} 
 
 
 

@@ -1,5 +1,5 @@
 public void Chaos_BigChooks(effect_data effect){
-	effect.title = "Effect Name";
+	effect.title = "Big Chooks";
 	effect.AddAlias("Chicken");
 	effect.HasNoDuration = true;
 }

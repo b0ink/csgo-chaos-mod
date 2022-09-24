@@ -438,6 +438,13 @@ public void OnPluginStart(){
 
 	g_MetaHistory = CreateArray(128);
 
+	effect_data effect;
+	LoopAllEffects(effect, index){
+		if(effect.Aliases != INVALID_HANDLE){
+			PrintToChatAll("%s has %i", effect.title, GetArraySize(effect.Aliases));
+		}	
+	}
+
 
 }
 
@@ -668,7 +675,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		bool metaAlreadyRunning = false;
 		Possible_Meta_Effects.Clear();
 		LoopAllMetaEffects(metaEffect, index){
-			PrintToChatAll("%s s", metaEffect.title);
+			// PrintToChatAll("%s s", metaEffect.title);
 			if(metaEffect.can_run_effect()){
 				Possible_Meta_Effects.PushArray(metaEffect, sizeof(metaEffect));
 			}
@@ -676,7 +683,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				metaAlreadyRunning = true;
 			}
 		}
-		if(!metaAlreadyRunning) {
+		if(!metaAlreadyRunning && Possible_Meta_Effects.Length > 0) {
 			int random = GetRandomInt(0, Possible_Meta_Effects.Length - 1);
 			Possible_Meta_Effects.GetArray(random, metaEffect, sizeof(metaEffect));
 			g_sCustomEffect = metaEffect.config_name;

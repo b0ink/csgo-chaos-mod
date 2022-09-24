@@ -71,7 +71,6 @@ bool PoolChaosEffects(char[] effectName = ""){
 
 	char alias[64];
 	Possible_Chaos_Effects.Clear();
-
 	effect_data effect;
 	LoopAllEffects(effect, index){
 		if(effectName[0]){ //* if keyword was provided
@@ -102,7 +101,7 @@ bool PoolChaosEffects(char[] effectName = ""){
 	// Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
 }
 
-stock bool IsValidClient(int client, bool nobots = true){
+stock bool IsValidClient(int client, bool nobots = false){
     if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client))) {
         return false;
     }

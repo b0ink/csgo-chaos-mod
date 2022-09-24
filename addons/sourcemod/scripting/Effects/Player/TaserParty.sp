@@ -1,5 +1,5 @@
 public void Chaos_TaserParty(effect_data effect){
-	effect.title = "Tasery Party";
+	effect.title = "Taser Party";
 	effect.duration = 30;
 }
 

@@ -1,4 +1,4 @@
-public void Chaos_EarthQuake(effect_data effect){
+public void Chaos_Earthquake(effect_data effect){
 	effect.title = "Earthquake";
 	effect.HasNoDuration = true;
 }
