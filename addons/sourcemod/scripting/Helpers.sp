@@ -387,7 +387,15 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 						}
 						while(DistanceToClosestEntity(realVec, "prop_exploding_barrel") < 50);
 						// realVec[2] = realVec[2] - 60;
+
+						// PrintToChatAll("flags: %i", GetEntProp(i, Prop_Send, "m_fEffects"));
+
+						// SetEntProp(i, Prop_Send, "m_fEffects", 0);
 						TeleportEntity(i, realVec, NULL_VECTOR, no_vel);
+						// SetEntityFlags(i, ER_NO)
+
+						// int effect = GetEntProp(i, Prop_Data, "m_fEffects");
+
 						RemoveFromArray(g_UnusedCoordinates, CoordinateIndex);
 						CoordinateIndex = -1;
 						DistanceToBeat = 99999.0;
@@ -408,6 +416,8 @@ void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
 	}
 	
 }
+
+
 
 bool CreateParticle(char []particle, float[3] vec){
 	int ent = CreateEntityByName("info_particle_system");
