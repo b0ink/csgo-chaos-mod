@@ -184,51 +184,6 @@ void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, b
 }
 
 
-// UserMessageId for Fade.
-UserMsg g_FadeUserMsgId;
-void PerformBlind(int target, int amount)
-{
-	int targets[2];
-	targets[0] = target;
-	
-	int duration = 1536;
-	int holdtime = 1536;
-	int flags;
-	if (amount == 0)
-	{
-		flags = (0x0001 | 0x0010);
-	}
-	else
-	{
-		flags = (0x0002 | 0x0008);
-	}
-	
-	int color[4] = { 0, 0, 0, 0 };
-	color[3] = amount;
-	g_FadeUserMsgId = GetUserMessageId("Fade");
-	
-	// Handle message = StartMessageEx(g_FadeUserMsgId, targets, 1);
-	Handle message = StartMessageEx(g_FadeUserMsgId, targets, 1);
-	if (GetUserMessageType() == UM_Protobuf){
-		Protobuf pb = UserMessageToProtobuf(message);
-		pb.SetInt("duration", duration);
-		pb.SetInt("hold_time", holdtime);
-		pb.SetInt("flags", flags);
-		pb.SetColor("clr", color);
-	}else{
-		BfWrite bf = UserMessageToBfWrite(message);
-		bf.WriteShort(duration);
-		bf.WriteShort(holdtime);
-		bf.WriteShort(flags);		
-		bf.WriteByte(color[0]);
-		bf.WriteByte(color[1]);
-		bf.WriteByte(color[2]);
-		bf.WriteByte(color[3]);
-	}
-	
-	EndMessage();
-
-}
 
 
 stock bool SetClientMoney(int client, int money, bool absolute = false){
@@ -472,16 +427,6 @@ void StopTimer(Handle &timer){
 	}
 }
 
-// bool CurrentlyActive(Handle timer){
-// 	if(timer != INVALID_HANDLE){
-// 		Log("Effect is already currently running, trying new effect.");
-// 		RetryEffect();
-// 		return true;
-// 	}
-// 	return false;
-// }
-
-
 
 void DoRandomTeleport(int client = -1){
 	Log("[Chaos] Running: DoRandomTeleport (function, not chaos event)");
@@ -573,16 +518,6 @@ int DistanceToClosestEntity(float vec[3], char[] entity){
 	return RoundToFloor(dist);
 }
 
-stock int ScreenShake(int iClient, float fAmplitude = 50.0, float duration = 7.0){
-	Handle hMessage = StartMessageOne("Shake", iClient, 1);
-	
-	PbSetInt(hMessage, "command", 0);
-	PbSetFloat(hMessage, "local_amplitude", fAmplitude);
-	PbSetFloat(hMessage, "frequency", 255.0);
-	PbSetFloat(hMessage, "duration", duration);
-	
-	EndMessage();
-}
 
 
 
@@ -621,56 +556,6 @@ bool isHostageMap(){
 	return g_bIsHostageMap;
 }
 
-//Overlays
-
-Handle Overlay_Que = INVALID_HANDLE;
-void Overlay_INIT(){
-	if(Overlay_Que == INVALID_HANDLE){
-		Overlay_Que = CreateArray(256);
-	}else{
-		ClearArray(Overlay_Que);
-	}
-}
-
-void Clear_Overlay_Que(){
-	if(Overlay_Que != INVALID_HANDLE){
-		ClearArray(Overlay_Que);
-	}else{
-		Overlay_INIT();
-	}
-	Update_Overlay();
-}
-
-void Add_Overlay(char[] path){
-	PushArrayString(Overlay_Que, path);
-	Update_Overlay();
-}
-
-void Remove_Overlay(char[] path){
-	int index = -1;
-	while((index = FindStringInArray(Overlay_Que, path)) != -1){
-		if(index != -1){
-			RemoveFromArray(Overlay_Que, index);
-		}else{
-			break;
-		}
-	}
-	Update_Overlay();
-}
-
-void Update_Overlay(){
-	char path[256];
-	if(GetArraySize(Overlay_Que) > 0){
-		GetArrayString(Overlay_Que, 0, path, sizeof(path));
-	}else{
-		path = "";
-	}
-
-	LoopValidPlayers(i){
-		ClientCommand(i, "r_screenoverlay \"%s\"", path);
-	}
-}
-
 
 void SetPlayersGravity(float amount){
 	LoopAlivePlayers(i){
@@ -691,3 +576,6 @@ void ResetPlayersFOV(){
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
 	}
 }
+
+
+#include "Global/Overlay.sp"

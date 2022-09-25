@@ -170,7 +170,7 @@ bool GetHighestVotedEffect(effect_data effectReturn, bool EnsureValidEffect = fa
 		}
 	}
 	if(!ranEffects){
-		PrintToChatAll("couldnt find effect");
+		// PrintToChatAll("couldnt find effect");
 	}
 	return ranEffects;
 }

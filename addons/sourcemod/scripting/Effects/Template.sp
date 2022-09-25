@@ -100,3 +100,15 @@ public Action Chaos_$0_OnGameFrame(){
 public bool Chaos_EffectName_Conditions(){
 	return true;
 }
+
+
+
+// isHostageMap();
+// g_iFog
+// g_iChaos_Round_Count
+// mapName
+// ValidMapPoints
+// ValidBombSpawns
+// g_bCanSpawnChickens
+// g_bC4Chicken
+// GetSlowScriptTimeout

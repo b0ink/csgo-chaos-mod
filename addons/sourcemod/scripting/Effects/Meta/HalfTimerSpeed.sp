@@ -1,7 +1,7 @@
 
 public void Chaos_Meta_HalfTimerSpeed(effect_data effect){
 	effect.title = "Half Timer Speed";
-	effect.duration = 120;
+	effect.duration = 90;
 	effect.meta = true;
 }
 
