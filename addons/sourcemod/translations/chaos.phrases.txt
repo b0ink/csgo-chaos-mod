@@ -4,113 +4,57 @@
     {
         "en"    "Mega Chaos [META]"
     }
-    "Chaos_Meta_Mega_Description"
-    {
-        "en"    "Runs 5 Chaos Effects at the same time"
-    }
     "Chaos_Nothing_Title"
     {
         "en"    "Nothing"
-    }
-    "Chaos_Nothing_Description"
-    {
-        "en"    "Nothing..."
     }
     "Chaos_Invis_Title"
     {
         "en"    "Where did everyone go?"
     }
-    "Chaos_Invis_Description"
-    {
-        "en"    "All players are almost invisible, (barely visible if duration = 0, otherwise full invis if effect expires)"
-    }
     "Chaos_OneBulletMag_Title"
     {
         "en"    "One Bullet Mags"
-    }
-    "Chaos_OneBulletMag_Description"
-    {
-        "en"    "You can only shoot once before having to reload"
     }
     "Chaos_PortalGuns_Title"
     {
         "en"    "Portal Guns"
     }
-    "Chaos_PortalGuns_Description"
-    {
-        "en"    "Teleport where you shoot"
-    }
     "Chaos_NoScopeOnly_Title"
     {
         "en"    "No Scopes Only"
-    }
-    "Chaos_NoScopeOnly_Description"
-    {
-        "en"    "Prevent players from using their scopes, if the weapon has one"
     }
     "Chaos_Aimbot_Title"
     {
         "en"    "Aimbot"
     }
-    "Chaos_Aimbot_Description"
-    {
-        "en"    "Toggles on a sourcemod based Aimbot for all players"
-    }
     "Chaos_InfiniteAmmo_Title"
     {
         "en"    "Infinite Ammo"
-    }
-    "Chaos_InfiniteAmmo_Description"
-    {
-        "en"    "Never run out of ammo"
     }
     "Chaos_RandomSkybox_Title"
     {
         "en"    "Random Skybox"
     }
-    "Chaos_RandomSkybox_Description"
-    {
-        "en"    "Changes the skybox from a random selection of 20 default CSGO skyboxes (works on maps that dont have a 3d skybox)"
-    }
     "Chaos_DecoyDodgeball_Title"
     {
         "en"    "Decoy Dodgeball"
-    }
-    "Chaos_DecoyDodgeball_Description"
-    {
-        "en"    "Sets everyones HP to 1 and gives everyones decoys, players are restricted from using other weapons"
     }
     "Chaos_RandomInvisiblePlayer_Title"
     {
         "en"    "Random Invisible Player"
     }
-    "Chaos_RandomInvisiblePlayer_Description"
-    {
-        "en"    "Makes one player in the server invisible (only works if there are 2+ players)"
-    }
     "Chaos_Bankrupt_Title"
     {
         "en"    "Bankrupt"
-    }
-    "Chaos_Bankrupt_Description"
-    {
-        "en"    "Sets every player's cash to $0"
     }
     "Chaos_Shields_Title"
     {
         "en"    "Shields"
     }
-    "Chaos_Shields_Description"
-    {
-        "en"    "Gives all players weapon_shield"
-    }
     "Chaos_BlindPlayers_Title"
     {
         "en"    "Blind"
-    }
-    "Chaos_BlindPlayers_Description"
-    {
-        "en"    "Blinds all players"
     }
     "Chaos_AutoPlantC4_Title"
     {
@@ -124,880 +68,440 @@
     {
         "en"    "Auto Plant C4 at Bombsite B"
     }
-    "Chaos_AutoPlantC4_Description"
-    {
-        "en"    "Auto plants the c4 bomb at the closest bombsite to the player holding the c4, if c4 is dropped, bombsite is random"
-    }
     "Chaos_InfiniteGrenades_Title"
     {
         "en"    "Infinite Grenades"
-    }
-    "Chaos_InfiniteGrenades_Description"
-    {
-        "en"    "Give players grenades and set sv_infinite_ammo to 2 (nades only)"
     }
     "Chaos_KnifeFight_Title"
     {
         "en"    "Knife Fight"
     }
-    "Chaos_KnifeFight_Description"
-    {
-        "en"    "Restricts everyones weapons to knife only"
-    }
     "Chaos_LowRenderDistance_Title"
     {
         "en"    "Low Render Distance"
-    }
-    "Chaos_LowRenderDistance_Description"
-    {
-        "en"    "Set fog farz to a lower value that prevents anything further than set distance to render"
     }
     "Chaos_RandomWeapons_Title"
     {
         "en"    "Random Weapons"
     }
-    "Chaos_RandomWeapons_Description"
-    {
-        "en"    "Give players random weapons every x seconds (interval setting). An interval of 0 will only spawn the random weapons once"
-    }
     "Chaos_OHKO_Title"
     {
         "en"    "1 HP"
-    }
-    "Chaos_OHKO_Description"
-    {
-        "en"    "Sets everyones HP to 1 (One Hit Knockout)"
     }
     "Chaos_TeammateSwap_Title"
     {
         "en"    "Teammate Swap"
     }
-    "Chaos_TeammateSwap_Description"
-    {
-        "en"    "Swap positions with all your teammates"
-    }
     "Chaos_Flying_Title"
     {
         "en"    "Flying"
     }
-    "Chaos_Flying_Description"
-    {
-        "en"    "Sets all players to noclip, but players can still be damaged"
-    }
-    "a_Title"
+    "Chaos_MoneyRain_Title"
     {
         "en"    "Make it rain"
-    }
-    "Chaos_MoneyRain_Description"
-    {
-        "en"    "Spawns item_cash around the map that gives players $500 money"
     }
     "Chaos_Thirdperson_Title"
     {
         "en"    "Thirdperson"
     }
-    "Chaos_Thirdperson_Description"
-    {
-        "en"    "Sets all players POV to thirdperson"
-    }
     "Chaos_C4Chicken_Title"
     {
         "en"    "C4 Chicken"
-    }
-    "Chaos_C4Chicken_Description"
-    {
-        "en"    "Sets any current c4, or future planted c4 to morph into a chicken that run around the map"
     }
     "Chaos_AlienModelKnife_Title"
     {
         "en"    "Alien Knife Fight"
     }
-    "Chaos_AlienModelKnife_Description"
-    {
-        "en"    "Sets players movement speed to 3x, restricts weapons to knife, and morphs all player models to look oddly skinny"
-    }
     "Chaos_IsThisMexico_Title"
     {
         "en"    "Is This What Mexico Looks Like?"
-    }
-    "Chaos_IsThisMexico_Description"
-    {
-        "en"    "Give a thick orange hue to the map"
     }
     "Chaos_HeadshotOnly_Title"
     {
         "en"    "Headshots Only"
     }
-    "Chaos_HeadshotOnly_Description"
-    {
-        "en"    "Sets mp_damage_headshot_only to 1, forcing players to shoot at the head only"
-    }
     "Chaos_RainingMolotovs_Title"
     {
         "en"    "Raining Fire"
-    }
-    "Chaos_RainingMolotovs_Description"
-    {
-        "en"    "Spawns a molotov above every players head. The duration controls how many times it repeats"
     }
     "Chaos_RandomTeleport_Title"
     {
         "en"    "Random Teleport"
     }
-    "Chaos_RandomTeleport_Description"
-    {
-        "en"    "Teleports all players to a random location"
-    }
     "Chaos_LavaFloor_Title"
     {
         "en"    "THE FLOOR IS LAVA"
-    }
-    "Chaos_LavaFloor_Description"
-    {
-        "en"    "Spawns molotovs all around the map"
     }
     "Chaos_CrabPeople_Title"
     {
         "en"    "Crab People"
     }
-    "Chaos_CrabPeople_Description"
-    {
-        "en"    "Restricts players movement to crouch walking only"
-    }
     "Chaos_Spin180_Title"
     {
         "en"    "180 Spin"
-    }
-    "Chaos_Spin180_Description"
-    {
-        "en"    "Spin players cameras the opposite direction from where theyre looking"
     }
     "Chaos_OneWeaponOnly_Title"
     {
         "en"    "One weapon Only"
     }
-    "Chaos_OneWeaponOnly_Description"
-    {
-        "en"    "Give all players the same random gun and disable weapon dropping"
-    }
     "Chaos_NoRecoil_Title"
     {
         "en"    "100% Weapon Accuracy"
-    }
-    "Chaos_NoRecoil_Description"
-    {
-        "en"    "Set guns to have no recoil"
     }
     "Chaos_LittleChooks_Title"
     {
         "en"    "Little Chooks"
     }
-    "Chaos_LittleChooks_Description"
-    {
-        "en"    "Spawn chickens around the map with a smaller model scale"
-    }
     "Chaos_BigChooks_Title"
     {
         "en"    "Big Chooks"
-    }
-    "Chaos_BigChooks_Description"
-    {
-        "en"    "Spawns large chicken models around the map"
     }
     "Chaos_MamaChook_Title"
     {
         "en"    "Mama Chook"
     }
-    "Chaos_MamaChook_Description"
-    {
-        "en"    "Spawn one large chicken at random location"
-    }
     "Chaos_MoonGravity_Title"
     {
         "en"    "Moon Gravity"
-    }
-    "Chaos_MoonGravity_Description"
-    {
-        "en"    "Set the gravity to 300"
     }
     "Chaos_SlayRandomPlayer_Title"
     {
         "en"    "Slay Random Player On Each Team"
     }
-    "Chaos_SlayRandomPlayer_Description"
-    {
-        "en"    "If there a 2 more or players on the team, a random player will be slain (both teams)"
-    }
     "Chaos_TaserParty_Title"
     {
         "en"    "Taser Party"
-    }
-    "Chaos_TaserParty_Description"
-    {
-        "en"    "Restrict weapons to zeus/tasers. Players can boost in the direction they are shooting, tasers shoot confetti!"
     }
     "Chaos_InsaneGravity_Title"
     {
         "en"    "Insane Gravity"
     }
-    "Chaos_InsaneGravity_Description"
-    {
-        "en"    "Set the gravity to 3000, making jumps harder"
-    }
     "Chaos_ESP_Title"
     {
         "en"    "Wall Hacks"
-    }
-    "Chaos_ESP_Description"
-    {
-        "en"    "Give all players a sourcemod based ESP/Wall hacks"
     }
     "Chaos_GhostSlaps_Title"
     {
         "en"    "Ghost Slaps"
     }
-    "Chaos_GhostSlaps_Description"
-    {
-        "en"    "Fling the player violently every 5-10 seconds (repeats 5 times)"
-    }
     "Chaos_Healthshot_Title"
     {
         "en"    "Healthshot"
-    }
-    "Chaos_Healthshot_Description"
-    {
-        "en"    "Give players a random amount (1 - 3) of healthshots"
     }
     "Chaos_Jackpot_Title"
     {
         "en"    "Jackpot"
     }
-    "Chaos_Jackpot_Description"
-    {
-        "en"    "Set everybodys cash money to $16000"
-    }
     "Chaos_LightsOff_Title"
     {
         "en"    "Who turned the lights off?"
-    }
-    "Chaos_LightsOff_Description"
-    {
-        "en"    "Simulates low map brightness by spawning dense black fog"
     }
     "Chaos_QuakeFOV_Title"
     {
         "en"    "Quake FOV"
     }
-    "Chaos_QuakeFOV_Description"
-    {
-        "en"    "Sets all players FOV between 110 and 160 (wide quake fov)"
-    }
     "Chaos_Binoculars_Title"
     {
         "en"    "Binoculars"
-    }
-    "Chaos_Binoculars_Description"
-    {
-        "en"    "Opposite of Quake FOV, random zoomed in FOV between 20,50"
     }
     "Chaos_VampireHeal_Title"
     {
         "en"    "Vampires"
     }
-    "Chaos_VampireHeal_Description"
-    {
-        "en"    "Players receieve the HP equal to the amount of damage done to other players (stealing their HP)"
-    }
     "Chaos_NightVision_Title"
     {
         "en"    "Night Vision"
-    }
-    "Chaos_NightVision_Description"
-    {
-        "en"    "Give players item_nvgs and enable nightvision"
     }
     "Chaos_SmokeStrat_Title"
     {
         "en"    "Smoke Strat"
     }
-    "Chaos_SmokeStrat_Description"
-    {
-        "en"    "Spwan Smoke particles on all locations around the map"
-    }
     "Chaos_ReversedMovement_Title"
     {
         "en"    "Reversed Movement"
-    }
-    "Chaos_ReversedMovement_Description"
-    {
-        "en"    "Inverse sv_accelerate, reversing players movement"
     }
     "Chaos_Autobhop_Title"
     {
         "en"    "Are you feeling funky?"
     }
-    "Chaos_Autobhop_Description"
-    {
-        "en"    "Enables Auto Bhop and increases sv_airaccelerate 2000"
-    }
     "Chaos_IceyGround_Title"
     {
         "en"    "Icy Ground"
-    }
-    "Chaos_IceyGround_Description"
-    {
-        "en"    "Removes any ground friction, making players slide and carry momentum"
     }
     "Chaos_IncreasedRecoil_Title"
     {
         "en"    "Increased Recoil"
     }
-    "Chaos_IncreasedRecoil_Description"
-    {
-        "en"    "Increases the recoil scale"
-    }
     "Chaos_ReversedRecoil_Title"
     {
         "en"    "Reversed Recoil"
-    }
-    "Chaos_ReversedRecoil_Description"
-    {
-        "en"    "Inverses the default recoil scale"
     }
     "Chaos_Bumpmines_Title"
     {
         "en"    "Bumpmines"
     }
-    "Chaos_Bumpmines_Description"
-    {
-        "en"    "Give all players weapon_bumpmine"
-    }
     "Chaos_RespawnTheDead_Title"
     {
         "en"    "Resurrect dead players"
-    }
-    "Chaos_RespawnTheDead_Description"
-    {
-        "en"    "Respawns dead players back to spawn"
     }
     "Chaos_RespawnTheDead_Randomly_Title"
     {
         "en"    "Resurrect dead players in random locations"
     }
-    "Chaos_RespawnTheDead_Randomly_Description"
-    {
-        "en"    "Respawns dead players and teleports them randomly on the map"
-    }
     "Chaos_RespawnDead_LastLocation_Title"
     {
         "en"    "Resurrect players where they died"
-    }
-    "Chaos_RespawnDead_LastLocation_Description"
-    {
-        "en"    "Respawns dead players where they last died"
     }
     "Chaos_SlowSpeed_Title"
     {
         "en"    "0.5x movement speed"
     }
-    "Chaos_SlowSpeed_Description"
-    {
-        "en"    "Sets players movement to half 0.5 speed"
-    }
     "Chaos_FastSpeed_Title"
     {
         "en"    "3x Movement Speed"
-    }
-    "Chaos_FastSpeed_Description"
-    {
-        "en"    "Sets players movement to three 3x speed"
     }
     "Chaos_IgniteAllPlayers_Title"
     {
         "en"    "Ignite All Players"
     }
-    "Chaos_IgniteAllPlayers_Description"
-    {
-        "en"    "Ignite all players for 10 seconds"
-    }
     "Chaos_ChickenPlayers_Title"
     {
         "en"    "Make all players a chicken"
-    }
-    "Chaos_ChickenPlayers_Description"
-    {
-        "en"    "Sets all player models to a chicken"
     }
     "Chaos_NormalWhiteFog_Title"
     {
         "en"    "Fog"
     }
-    "Chaos_NormalWhiteFog_Description"
-    {
-        "en"    "Sets the maps fog to a moderate level"
-    }
     "Chaos_ExtremeWhiteFog_Title"
     {
         "en"    "Extreme Fog"
-    }
-    "Chaos_ExtremeWhiteFog_Description"
-    {
-        "en"    "Normal Fog but 100% density"
     }
     "Chaos_Earthquake_Title"
     {
         "en"    "Earthquake"
     }
-    "Chaos_Earthquake_Description"
-    {
-        "en"    "Violently shakes all players screens"
-    }
     "Chaos_LockPlayersAim_Title"
     {
         "en"    "Lock Mouse Movement"
-    }
-    "Chaos_LockPlayersAim_Description"
-    {
-        "en"    "Locks mouse movement to where they were looking"
     }
     "Chaos_OneBulletOneGun_Title"
     {
         "en"    "One Bullet One Gun"
     }
-    "Chaos_OneBulletOneGun_Description"
-    {
-        "en"    "Replace the players weapon with a new random one every time they shoot"
-    }
     "Chaos_DiscoFog_Title"
     {
         "en"    "Disco Fog"
-    }
-    "Chaos_DiscoFog_Description"
-    {
-        "en"    "Spawn fog and randomise the colour every 1 second"
     }
     "Chaos_Jumping_Title"
     {
         "en"    "Jumping"
     }
-    "Chaos_Jumping_Description"
-    {
-        "en"    "Force players to constantly jump"
-    }
     "Chaos_DisableForwardBack_Title"
     {
         "en"    "Disable W / S Keys"
-    }
-    "Chaos_DisableForwardBack_Description"
-    {
-        "en"    "Restrict players from using their W/S keys"
     }
     "Chaos_DisableStrafe_Title"
     {
         "en"    "Disable A / D Keys"
     }
-    "Chaos_DisableStrafe_Description"
-    {
-        "en"    "Restrict players from using their A/D keys - no strafing"
-    }
     "Chaos_ResetSpawns_Title"
     {
         "en"    "Teleport all players back to spawn"
-    }
-    "Chaos_ResetSpawns_Description"
-    {
-        "en"    "Teleports players back to where they first spawned that round"
     }
     "Chaos_SpeedShooter_Title"
     {
         "en"    "Speed Shooter"
     }
-    "Chaos_SpeedShooter_Description"
-    {
-        "en"    "Increases players movement x3 whenever they shoot"
-    }
     "Chaos_ExplosiveBullets_Title"
     {
         "en"    "Explosive Bullets"
-    }
-    "Chaos_ExplosiveBullets_Description"
-    {
-        "en"    "Spawns explosion particles where players shoot, causes damage around the explosion"
     }
     "Chaos_DiscoPlayers_Title"
     {
         "en"    "Random Player Colours"
     }
-    "Chaos_DiscoPlayers_Description"
-    {
-        "en"    "Sets player models to a random colour"
-    }
     "Chaos_SimonSays_Title"
     {
         "en"    "Simon Says"
-    }
-    "Chaos_SimonSays_Description"
-    {
-        "en"    "Displays a menu with a simon says command, if players fail to follow the order they take 20 damage every second"
     }
     "Chaos_RewindTenSeconds_Title"
     {
         "en"    "Rewind 10 Seconds"
     }
-    "Chaos_RewindTenSeconds_Description"
-    {
-        "en"    "Teleports players back to where they were 10 seconds ago"
-    }
     "Chaos_BuyAnywhere_Title"
     {
         "en"    "Buy Anywhere Enabled"
-    }
-    "Chaos_BuyAnywhere_Description"
-    {
-        "en"    "players can buy weapons anywhere on the map"
     }
     "Chaos_HealAllPlayers_Title"
     {
         "en"    "Set all players health to 100"
     }
-    "Chaos_HealAllPlayers_Description"
-    {
-        "en"    "Sets players HP to 100"
-    }
     "Chaos_Give100HP_Title"
     {
         "en"    "Give all players +100 HP"
-    }
-    "Chaos_Give100HP_Description"
-    {
-        "en"    "Gives players an additional 100 HP"
     }
     "Chaos_EnemyRadar_Title"
     {
         "en"    "Enemy Radar"
     }
-    "Chaos_EnemyRadar_Description"
-    {
-        "en"    "Allows payers to see enemies on the radar"
-    }
     "Chaos_Drugs_Title"
     {
         "en"    "Drugs"
-    }
-    "Chaos_Drugs_Description"
-    {
-        "en"    "Tilts players camera with flashing screen colours"
     }
     "Chaos_SpawnExplodingBarrels_Title"
     {
         "en"    "Exploding Barrels"
     }
-    "Chaos_SpawnExplodingBarrels_Description"
-    {
-        "en"    "Spwans prop_exploding_barrel around the map"
-    }
     "Chaos_SuperJump_Title"
     {
         "en"    "Super Jump"
-    }
-    "Chaos_SuperJump_Description"
-    {
-        "en"    "Allows players to jump higher than normal"
     }
     "Chaos_SpawnFlashbangs_Title"
     {
         "en"    "Spawn Flashbangs"
     }
-    "Chaos_SpawnFlashbangs_Description"
-    {
-        "en"    "Spawns flashban projectiles around the map that blinds anyone looking at it"
-    }
     "Chaos_NoCrosshair_Title"
     {
         "en"    "No Crosshair"
-    }
-    "Chaos_NoCrosshair_Description"
-    {
-        "en"    "Hides players crosshairs"
     }
     "Chaos_FakeCrash_Title"
     {
         "en"    "Fake Crash"
     }
-    "Chaos_FakeCrash_Description"
-    {
-        "en"    "Causes server to timeout momentarily - sourcemod breaks the plugin as it times out, but continues as normal"
-    }
     "Chaos_Soccerballs_Title"
     {
         "en"    "Soccer Balls"
-    }
-    "Chaos_Soccerballs_Description"
-    {
-        "en"    "Spawns soccerballs around the map"
     }
     "Chaos_FakeTeleport_Title"
     {
         "en"    "Fake Teleport"
     }
-    "Chaos_FakeTeleport_Description"
-    {
-        "en"    "Teleports the players randomly around the map, but teleports them back after a few seconds"
-    }
     "Chaos_TeleportFewMetres_Title"
     {
         "en"    "Teleport Players A Few Metres"
-    }
-    "Chaos_TeleportFewMetres_Description"
-    {
-        "en"    "Teleports all players to a near location around them"
     }
     "Chaos_Impostors_Title"
     {
         "en"    "Impostors"
     }
-    "Chaos_Impostors_Description"
-    {
-        "en"    "Spawns chickens around the map and changes their model to a player"
-    }
     "Chaos_Juggernaut_Title"
     {
         "en"    "Juggernauts"
-    }
-    "Chaos_Juggernaut_Description"
-    {
-        "en"    "Makes all players a juggernaut (extra HP and armour with lower speed)"
     }
     "Chaos_BreakTime_Title"
     {
         "en"    "Break Time"
     }
-    "Chaos_BreakTime_Description"
-    {
-        "en"    "freezes players and restricts them from doing anything"
-    }
     "Chaos_RapidFire_Title"
     {
         "en"    "Rapid Fire"
-    }
-    "Chaos_RapidFire_Description"
-    {
-        "en"    "Increases weapon fire rate"
     }
     "Chaos_DisableRadar_Title"
     {
         "en"    "Disable Radar"
     }
-    "Chaos_DisableRadar_Description"
-    {
-        "en"    "Hides radar for all players"
-    }
     "Chaos_InsaneAirSpeed_Title"
     {
         "en"    "Extreme Strafe Acceleration"
-    }
-    "Chaos_InsaneAirSpeed_Description"
-    {
-        "en"    "sets sv_air_max_wishspeed to 2000, has a weird strafing effect, works best with autobhop"
     }
     "Chaos_DropCurrentWeapon_Title"
     {
         "en"    "Drop Current Weapon"
     }
-    "Chaos_DropCurrentWeapon_Description"
-    {
-        "en"    "Forces all players to drop the weapon theyre holding"
-    }
     "Chaos_DropPrimaryWeapon_Title"
     {
         "en"    "Drop Primary Weapon"
-    }
-    "Chaos_DropPrimaryWeapon_Description"
-    {
-        "en"    "Forces all players to drop the weapon theyre holding"
     }
 	"Chaos_Thunderstorm_Title"
     {
         "en"    "Thunderstorm"
     }
-    "Chaos_Thunderstorm_Description"
-    {
-        "en"    "Spawns rain and strikes lightning around the map"
-    }
     "Chaos_ForceReload_Title"
     {
         "en"    "Force Reload"
-    }
-    "Chaos_ForceReload_Description"
-    {
-        "en"    "Forces all players to reload their weapon"
     }
     "Chaos_LooseTrigger_Title"
     {
         "en"    "Loose Trigger"
     }
-    "Chaos_LooseTrigger_Description"
-    {
-        "en"    "Forces all players to shoot"
-    }
     "Chaos_LSD_Title"
     {
         "en"    "LSD"
-    }
-    "Chaos_LSD_Description"
-    {
-        "en"    "Trippy color correction"
     }
     "Chaos_BlackWhite_Title"
     {
         "en"    "Black & White"
     }
-    "Chaos_BlackWhite_Description"
-    {
-        "en"    "Black & White Color Effect"
-    }
     "Chaos_Saturation_Title"
     {
         "en"    "Saturation"
-    }
-    "Chaos_Saturation_Description"
-    {
-        "en"    "Saturation Color Effect"
     }
     "Chaos_RevealEnemyLocation_Title"
     {
         "en"    "Reveal Enemy Location"
     }
-    "Chaos_RevealEnemyLocation_Description"
-    {
-        "en"    "Briefly reveals enemies on the radar"
-    }
     "Chaos_HealthRegen_Title"
     {
         "en"    "Health Regen"
-    }
-    "Chaos_HealthRegen_Description"
-    {
-        "en"    "Steady health regeneration"
     }
     "Chaos_Lag_Title"
     {
         "en"    "Lag"
     }
-    "Chaos_Lag_Description"
-    {
-        "en"    "Intermittent stutters"
-    }
     "Chaos_Snow_Title"
     {
         "en"    "Snow"
-    }
-    "Chaos_Snow_Description"
-    {
-        "en"    "Snowing particle effect"
     }
     "Chaos_IceSkate_Title"
     {
         "en"    "Ice Skating"
     }
-    "Chaos_IceSkate_Description"
-    {
-        "en"    "Allows for air strafing while skating across the map"
-    }
     "Chaos_ReversedStrafe_Title"
     {
         "en"    "Reversed Strafe"
-    }
-    "Chaos_ReversedStrafe_Description"
-    {
-        "en"    "Reverses A & D keys"
     }
     "Chaos_ExtendedGrenades_Title"
     {
         "en"    "Extended Grenades"
     }
-    "Chaos_ExtendedGrenades_Description"
-    {
-        "en"    "Gives every player 7 grenades to hold"
-    }
     "Chaos_WKeyStuck_Title"
     {
         "en"    "Help my W key is stuck"
-    }
-    "Chaos_WKeyStuck_Description"
-    {
-        "en"    "Forces players to walk forward"
     }
     "Chaos_SneakyBeaky_Title"
     {
         "en"    "Sneaky Beaky"
     }
-    "Chaos_SneakyBeaky_Description"
-    {
-        "en"    "Forces all players to walk"
-    }
     "Chaos_ReducedDamage_Title"
 	{
 		"en"    "Half Shot Damage"
-	}
-	"Chaos_ReducedDamage_Description"
-	{
-		"en"    "Reduces every inflicted damage by 50%"
-	}
+    }
     "Chaos_PigeonHole_Title"
 	{
 		"en"    "Pigeon Hole"
-	}
-	"Chaos_PigeonHole_Description"
-	{
-		"en"    "See through pigeon hole cutouts"
-	}
+    }
     "Chaos_DoubleJump_Title"
 	{
 		"en"    "Double Jump"
-	}
-	"Chaos_DoubleJump_Description"
-	{
-		"en"    "Allow players to double jump"
-	}
+    }
     "Chaos_Meta_HalfTimerSpeed_Title"
 	{
 		"en"    "Half Timer Speed [META]"
-	}
-	"Chaos_Meta_HalfTimerSpeed_Description"
-	{
-		"en"    "[META] Cuts the timer interval in half"
-	}
+    }
     "Chaos_Meta_DoubleTimerSpeed_Title"
 	{
 		"en"    "Double Timer Speed [META]"
-	}
-	"Chaos_Meta_DoubleTimerSpeed_Description"
-	{
-		"en"    "[META] Cuts the timer interval in half"
-	}
+    }
     "Chaos_Meta_WhatsHappening_Title"
 	{
 		"en"    "What's Happening? [META]"
-	}
-	"Chaos_Meta_WhatsHappening_Description"
-	{
-		"en"    "Hides what effects are currently running"
-	}
+    }
     "Chaos_SilentFootsteps_Title"
 	{
 		"en"    "Silent Footsteps"
-	}
-	"Chaos_SilentFootsteps_Description"
-	{
-		"en"    "Mutes all footsteps"
-	}
+    }
     "Chaos_DeepFried_Title"
 	{
 		"en"    "Deep Fried"
-	}
-	"Chaos_DeepFried_Description"
-	{
-		"en"    "Deep Fried colour correction"
-	}
+    }
 }
