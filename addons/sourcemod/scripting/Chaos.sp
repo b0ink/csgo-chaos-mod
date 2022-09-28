@@ -547,15 +547,23 @@ public void OnLibraryAdded(const char[] name){
 public void OnClientPutInServer(int client){
 	WeaponJumpConnect_Handler(client);
 
-	SDKHook(client, SDKHook_WeaponDrop, 		Hook_WeaponDrop);
-	SDKHook(client, SDKHook_WeaponSwitch, 		Hook_WeaponSwitch);
-	SDKHook(client, SDKHook_PreThink, 			Hook_OnPreThink);
-	SDKHook(client, SDKHook_OnTakeDamage, 		Hook_OnTakeDamage);
-
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
-
 }
+
+public Action Hook_WeaponDrop(int client,int weapon){
+	if(weapon != -1 && IsValidEntity(weapon)){
+		if(!g_bPlayersCanDropWeapon){
+			char WeaponName[32];
+			GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
+			if(StrContains(WeaponName, "c4") == -1){ //allow c4 drops
+				return Plugin_Handled; 
+			}
+		}
+	}
+	return Plugin_Changed;
+} 
+
 
 public void OnClientDisconnect(int client){
 	ToggleAim(client, false);
@@ -750,5 +758,4 @@ public Action ResetRoundChaos(Handle timer){
 
 
 #include "Events.sp"
-#include "Hooks.sp"
 #include "Helpers.sp"

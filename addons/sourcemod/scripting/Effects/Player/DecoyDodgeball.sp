@@ -50,6 +50,11 @@ public void HookOnDecoySpawn(int iGrenade) {
 
 
 public void Chaos_DecoyDodgeball_START(){
+	
+	LoopAlivePlayers(i){
+		SDKHook(i, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
+	}
+
 	g_bDecoyDodgeball = true;
 	LoopAlivePlayers(i){
 		StripPlayer(i, true, true, true); //strip grenades only
@@ -62,6 +67,10 @@ public void Chaos_DecoyDodgeball_START(){
 }
 
 public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
+	LoopAllClients(i){
+		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
+	}
+	
 	if(g_bDecoyDodgeball && HasTimerEnded){
 		LoopAlivePlayers(i){
 			StripPlayer(i, true, true, true); //strip grenades only

@@ -9,11 +9,17 @@ public void Chaos_ReducedDamage(effect_data effect){
 }
 
 public void Chaos_ReducedDamage_START(){
-    ReducedDamage = true;
+	LoopAlivePlayers(i){
+		SDKHook(i, SDKHook_OnTakeDamage, Chaos_ReducedDamage_Hook_OnTakeDamage);
+	}
+	ReducedDamage = true;
 }
 
 public Action Chaos_ReducedDamage_RESET(bool HasTimerEnded){
-    ReducedDamage = false;
+	LoopAllClients(i){
+		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_ReducedDamage_Hook_OnTakeDamage);
+	}
+	ReducedDamage = false;
 }
 
 public Action Chaos_ReducedDamage_Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype){

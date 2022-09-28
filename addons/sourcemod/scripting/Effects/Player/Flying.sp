@@ -8,12 +8,18 @@ public void Chaos_Flying_START(){
 	g_bActiveNoclip = true;
 	SavePlayersLocations();
 	LoopAlivePlayers(i){
+		SDKHook(i, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
+		SDKHook(i, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);
 		SetEntityMoveType(i, MOVETYPE_NOCLIP);
 	}
 	cvar("sv_noclipspeed", "2");
 }
 
 public Action Chaos_Flying_RESET(bool HasTimerEnded){
+	LoopAllClients(i){
+		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
+		SDKUnhook(i, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);
+	}
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			SetEntityMoveType(i, MOVETYPE_WALK);

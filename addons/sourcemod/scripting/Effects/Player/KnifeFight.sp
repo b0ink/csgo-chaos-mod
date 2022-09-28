@@ -20,6 +20,11 @@ public Action Chaos_KnifeFight_Hook_WeaponSwitch(int client, int weapon){
 }
 
 public void Chaos_KnifeFight_START(){
+
+	LoopAlivePlayers(i){
+		SDKHook(i, SDKHook_WeaponSwitch, Chaos_KnifeFight_Hook_WeaponSwitch);
+	}
+
 	g_bKnifeFight++;
 	LoopAlivePlayers(i){
 		FakeClientCommand(i, "use weapon_knife");
@@ -27,6 +32,11 @@ public void Chaos_KnifeFight_START(){
 }
 
 public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
+	
+	LoopAllClients(i){
+		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_KnifeFight_Hook_WeaponSwitch);
+	}
+	
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
 	if(HasTimerEnded){ 
 		LoopAlivePlayers(i){

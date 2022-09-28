@@ -22,6 +22,13 @@ public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 }
 
 public void Chaos_TaserParty_START(){
+
+	LoopAlivePlayers(i){
+		SDKHook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
+	}
+
+
+	
 	g_bTaserRound = true;
 	cvar("mp_taser_recharge_time", "0.5");
 	cvar("sv_party_mode", "1");
@@ -32,6 +39,11 @@ public void Chaos_TaserParty_START(){
 }
 
 public Action Chaos_TaserParty_RESET(bool HasTimerEnded){
+	
+	LoopAllClients(i){
+		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
+	}
+
 	ResetCvar("mp_taser_recharge_time", "-1", "0.5");
 	ResetCvar("sv_party_mode", "0", "1");
 	g_bTaserRound = false;

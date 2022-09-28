@@ -28,6 +28,11 @@ public Action Chaos_NoScopeOnly_Hook_OnPreThink(int client){
 }
 
 public void Chaos_NoScopeOnly_START(){
+	
+	LoopAlivePlayers(i){
+		SDKHook(i, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
+	}
+
 	g_bNoscopeOnly = true;
 	LoopAlivePlayers(client){
 		// If already scoping, switch weapon to exit scope, perhaps theres a better way TODO this
@@ -40,5 +45,8 @@ public void Chaos_NoScopeOnly_START(){
 
 
 public Action Chaos_NoScopeOnly_RESET(bool HasTimerEnded){
+	LoopAllClients(i){
+		SDKHook(i, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
+	}
 	g_bNoscopeOnly = false;
 }
