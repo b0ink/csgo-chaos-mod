@@ -3,6 +3,17 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 
 The list of effects can be found in [/configs/Chaos/Chaos_Effects.cfg](addons/sourcemod/configs/Chaos/Chaos_Effects.cfg).
 
+# Screenshots
+<p align="center">
+	<img src="https://csgochaosmod.com/gallery/chaos_1.jpg" 	width="375" title="LSD">
+	<img src="https://csgochaosmod.com/gallery/chaos_2.jpg" 	width="375" title="Extreme Fog">
+	<img src="https://csgochaosmod.com/gallery/chaos_5.jpg" 	width="375" title="Alien Knife Fight">
+	<img src="https://csgochaosmod.com/gallery/chaos_7.jpg" 	width="375" title="Thunderstorm">
+	<img src="https://csgochaosmod.com/gallery/chaos_9.jpg" 	width="375" title="Binoculars">
+	<img src="https://csgochaosmod.com/gallery/chaos_10.jpg" 	width="375" title="Deep Fried">
+</p>
+
+
 # Twitch Voting
 An [Electron](https://www.electronjs.org/) based app is currently being worked on to connect your Twitch account and your CS:GO server via RCON to pull effects from the server and allow users to vote for effects in your Twitch chat. A pop-up overlay can be used in [OBS](https://obsproject.com/) and a green-screen filter can be applied to overlay the effects and votes on stream.\
 <br>
