@@ -677,7 +677,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(CustomRun) return;
 
 
-	if(!CustomRun &&  (g_TotalRounds >= 5 && GetRandomInt(0, 100) <= 50 && g_EffectsSinceMeta >= 10 )){
+	if(!CustomRun &&  (g_TotalRounds >= 5 && GetRandomInt(0, 100) <= 35 && g_EffectsSinceMeta >= 20 )){
 		g_EffectsSinceMeta = 0;
 		effect_data metaEffect;
 		bool metaAlreadyRunning = false;
