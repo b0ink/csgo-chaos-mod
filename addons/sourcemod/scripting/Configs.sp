@@ -5,6 +5,14 @@ Handle g_AutoCoord_Timer = INVALID_HANDLE;
 public void ParseChaosEffects(){
 	ChaosEffects.Clear();
 
+	// Check if translations exist on the server
+	char translation_path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, translation_path, sizeof(translation_path), "translations/chaos.phrases.txt");
+	bool translations = false;
+	if(FileExists(translation_path)){
+		translations = true;
+	}
+
 	char function_name[64];
 	int count = 0;
 	for(int i = 0; i < sizeof(EffectNames); i++)
@@ -43,20 +51,35 @@ public void ParseChaosEffects(){
 		Format(effect.config_name, sizeof(effect.config_name), "%s", function_name);
 		effect.enabled = true;
 
+		char chaos_translation_key[64];
+		char Chaos_Function_Title[64];
+
+		// If valid translation exists, use translation, else use plugin default
+		Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_Title", function_name);
+		if(translations){
+			if(TranslationPhraseExists(chaos_translation_key)){
+				Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
+				effect.title = Chaos_Function_Title;
+			}
+		}
+
 		ChaosEffects.PushArray(effect);
 
 	}
-	// PrintToChatAll("count is %i", count);
+
+	ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
+
 	effect_data effect;
 	char init_function[64];
 	LoopAllEffects(effect, index){
 		Format(init_function, sizeof(init_function), "%s_INIT", effect.config_name);
-		// PrintToChatAll("funning %s", init_function);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();
 		}
+		effect.id = index;
+		ChaosEffects.SetArray(index, effect);
 	}
 }
 
@@ -65,7 +88,7 @@ public void ParseChaosEffects(){
 public void OnConfigsExecuted(){
 	
 	ParseMapCoordinates("Chaos_Locations");
-	ParseChaosConfigEffects();
+	// ParseChaosConfigEffects();
 	ParseOverrideEffects();
 
 	int warnings = 0;
@@ -200,60 +223,29 @@ public void PrecacheTextures(){
 	DownloadRawFiles();
 }
 
-
-//Old ParseChaosEffects
-void ParseChaosConfigEffects(){
-	// ChaosEffects.Clear();
+void ParseOverrideEffects(){
 	char filePath[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Effects.cfg");
+	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Override.cfg");
 
 	if(!FileExists(filePath)){
-		Log("Configuration file: %s not found.", filePath);
-		LogError("Configuration file: %s not found.", filePath);
-		// SetFailState("[CHAOS] Could not find configuration file: %s", filePath);
 		return;
 	}
 	KeyValues kvConfig = new KeyValues("Effects");
 
 	if(!kvConfig.ImportFromFile(filePath)){
-		Log("Unable to parse Key Values file %s", filePath);
-		LogError("Unable to parse Key Values file %s", filePath);
-		// SetFailState("Unable to parse Key Values file %s", filePath);
 		return;
 	}
 
 	if(!kvConfig.GotoFirstSubKey()){
-		Log("Unable to find 'Effects' Section in file %s", filePath);
-		LogError("Unable to find 'Effects' Section in file %s", filePath);
-		// SetFailState("Unable to find 'Effects' Section in file %s", filePath);
 		return;
-	}
-
-	char translation_path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, translation_path, sizeof(translation_path), "translations/chaos.phrases.txt");
-	bool translations = false;
-	if(FileExists(translation_path)){
-		translations = true;
 	}
 
 	do{
 		char Chaos_Function_Name[64];
-		char Chaos_Function_Title[64];
-		char chaos_translation_key[64];
 
-		// char call_function_name[64];
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
-
-			Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_Title", Chaos_Function_Name);
-			bool newTitle = false;
-			if(translations){
-				if(TranslationPhraseExists(chaos_translation_key)){
-					newTitle = true;
-					Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
-				}
-			}
 
 			if(enabled != 0 || enabled != 1) enabled = 1; //TODO: better error logging eg. if enabled or duration out of bounds
 
@@ -261,9 +253,9 @@ void ParseChaosConfigEffects(){
 
 			LoopAllEffects(effect, index){
 				if(StrEqual(effect.config_name, Chaos_Function_Name, false)){
-					if(newTitle) effect.title = Chaos_Function_Title;
 					effect.enabled = view_as<bool>(enabled);
 					effect.duration = expires;
+					ChaosEffects.SetArray(index, effect);
 				}
 			}
 		}
@@ -271,57 +263,8 @@ void ParseChaosConfigEffects(){
 
 	ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
 
-	effect_data effect;
-	LoopAllEffects(effect, index){
-		effect.id = index;
-		ChaosEffects.SetArray(index, effect);		
-	}
-
-	Log("Parsed Chaos_Effects.cfg succesfully!");
+	Log("Parsed Chaos_Override.cfg Effects succesfully!");
 } 
-
-
-
-
-
-void ParseOverrideEffects(){
-	char filePath[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Override.cfg");
-
-	if(!FileExists(filePath)) return;
-
-	KeyValues kvConfig = new KeyValues("Effects");
-	
-	if(!kvConfig.ImportFromFile(filePath)){
-		Log("Unable to parse Key Values file %s", filePath);
-		return;
-	}
-
-	if(!kvConfig.GotoFirstSubKey()){
-		Log("Unable to find 'Effects' Section in file %s", filePath);
-		return;
-	}
-
-	char Chaos_Function_Name[64];
-	do{
-		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
-			int enabled = kvConfig.GetNum("enabled", 1);
-			int expires = kvConfig.GetNum("duration", 15);
-			if(enabled != 0 && enabled != 1) enabled = 1;
-			effect_data effect;
-			LoopAllEffects(effect, index){
-				if(StrEqual(effect.config_name, Chaos_Function_Name, false)){
-					effect.enabled = view_as<bool>(enabled);
-					effect.duration = expires;
-					ChaosEffects.SetArray(index, effect);
-				}
-			}
-
-
-		}
-	} while(kvConfig.GotoNextKey());
-	Log("Parsed Chaos_Override.cfg successfully!");
-}
 
 void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 
@@ -412,7 +355,7 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 		}
 		if(StrEqual(KeyValues_name, "Effects", false)){
-			ParseChaosConfigEffects();
+			// ParseChaosConfigEffects();
 			ParseOverrideEffects();
 		}
 	}else{

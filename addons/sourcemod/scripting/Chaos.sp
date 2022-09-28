@@ -474,7 +474,7 @@ public void OnMapStart(){
 
 	PrecacheTextures();
 
-	ParseChaosConfigEffects();
+	// ParseChaosConfigEffects();
 
 
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);

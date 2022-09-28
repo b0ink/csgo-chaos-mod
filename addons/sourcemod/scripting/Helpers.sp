@@ -39,7 +39,7 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false
 	return expire;
 }
 
-
+//TODO: remove the need for GetChaosTitle -> use GetEffectDate and use effect.title more instead of this jank
 char[] GetChaosTitle(char[] function_name){
 	char return_string[128];
 	char temp_title[128];
@@ -51,6 +51,7 @@ char[] GetChaosTitle(char[] function_name){
 			FormatEx(temp_title, sizeof(temp_title), "%s_Title", function_name);
 			if(TranslationPhraseExists(temp_title)){
 				FormatEx(return_string, sizeof(return_string), "%t", temp_title, LANG_SERVER);
+			}else{
 			}
 
 		}else{
