@@ -182,7 +182,7 @@ void ResetRenderDistance(){
 }
 
 void LowRenderDistance(){
-	DispatchKeyValueFloat(g_iFog, "farz", 450.0);
+	DispatchKeyValueFloat(g_iFog, "farz", 250.0);
 }
 
 void DiscoFog(bool removeFog = false){

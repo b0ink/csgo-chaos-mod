@@ -46,7 +46,7 @@ public void Chaos_NoScopeOnly_START(){
 
 public Action Chaos_NoScopeOnly_RESET(bool HasTimerEnded){
 	LoopAllClients(i){
-		SDKHook(i, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
+		SDKUnhook(i, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
 	}
 	g_bNoscopeOnly = false;
 }

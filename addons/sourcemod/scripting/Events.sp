@@ -101,7 +101,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 	CreateTimer(5.0, Timer_CreateHostage);
 	
-	SetRandomSeed(GetTime());
+	SetRandomSeed(GetTime()); //TODO: ?
 	
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	
