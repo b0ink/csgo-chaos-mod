@@ -14,7 +14,7 @@
 
 #define PLUGIN_NAME "CS:GO Chaos Mod"
 #define PLUGIN_DESCRIPTION "Spawn from over 100+ random effects every 15 seconds to ensue chaos towards you and your enemies"
-#define PLUGIN_VERSION "0.2.0"
+#define PLUGIN_VERSION "0.2.1"
 
 
 
@@ -645,7 +645,9 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				){
 					Random_Effect = effect.config_name;
 					effect.run_effect();
-					g_EffectsSinceMeta++;
+					if(!g_bMegaChaos){ // just in case?
+						g_EffectsSinceMeta++;
+					}
 					PushArrayString(Effect_History, effect.config_name);
 
 					float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
