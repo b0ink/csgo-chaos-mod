@@ -224,12 +224,12 @@ void Mexico(bool removeFog = false){
 
 void LightsOff(bool removeFog = false){
 	if(removeFog){
-		RemoveFog("Mexico");
+		RemoveFog("LightsOff");
 		return;
 	}
 
 	fog_data fog;
-	fog.effectName = "Mexico";
+	fog.effectName = "LightsOff";
 	fog.SetDefault();
 	fog.color = "0 0 0";
 	fog.end = "0.0";
