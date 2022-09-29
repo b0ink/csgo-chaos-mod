@@ -472,8 +472,6 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_MONEY);
 	PrecacheSound(SOUND_BLIP);
 
-	PrecacheTextures();
-
 	// ParseChaosConfigEffects();
 
 

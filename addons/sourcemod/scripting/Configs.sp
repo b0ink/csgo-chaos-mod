@@ -219,10 +219,6 @@ public Action Timer_SaveCoordinates(Handle timer){
 }
 
 
-public void PrecacheTextures(){
-	DownloadRawFiles();
-}
-
 void ParseOverrideEffects(){
 	char filePath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_Override.cfg");

@@ -1,13 +1,11 @@
-void DownloadRawFiles(){
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_1.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_2.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_3.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_4.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_5.raw");
+/*
+	.raw files can be added to the downloads table in the OnMapStart function.
+	eg.
 
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/saturation.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/blackandwhite.raw");
-}
+	public void Chaos_EffectName_OnMapStart(){
+		AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/xxxxxx.raw");
+	}
+*/
 
 void CLEAR_CC(char[] file = ""){
 	char ent_filename[PLATFORM_MAX_PATH];
