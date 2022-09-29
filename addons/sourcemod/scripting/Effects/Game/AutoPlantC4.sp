@@ -11,6 +11,7 @@
 //     url = "https://github.com/b3none"
 // };
 
+//TODO: with the changes to translations -> fix the announcements for this one
 
 int bomber;
 int bombsite;

@@ -13,6 +13,7 @@ public void Chaos_FakeTeleport_START(){
 		GetClientAbsOrigin(i, FakeTelport_loc[i]);
 	}
 
+	AnnounceChaos("Random Teleport", -1.0);
 	DoRandomTeleport();
 	CreateTimer(3.0, Timer_EndTeleport);
 }
