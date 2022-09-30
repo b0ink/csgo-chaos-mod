@@ -43,26 +43,14 @@ If you encounter any errors please check your error files as well as the plugin'
 `sm_effect <Effect Name | Search Term>`
 - Brings up a menu of any effects containing the search term.
 
-`sm_startchaos`
-- Spawns a new effect immediately and starts the effect timer.
-
-`sm_stopchaos`
-- Pauses the Chaos Effect timer and resets all the effects.
-
-`chaos_refreshconfig`
-- Updates and re-parses configs.
-
 ## Config
-Each effect can individually be enabled/disabled and have their duration adjusted within `configs/Chaos/Chaos_Effects.cfg`.\
-More information about the Chaos config can be found [here](addons/sourcemod/configs/Chaos).
+You can adjust the effect's duration and enable/disable it by using the "!chaos" command, and selecting `Settings -> Effects`.
 
-You can adjust the effect titles in [the translation files](https://github.com/b0ink/csgo-chaos-mod/tree/main/addons/sourcemod/translations) to appear differently in-game.
+ANY changes you make in-game will create a "Chaos_Override.cfg" file in "addons/sourcemod/configs/Chaos/", and automatically add/update your changes within the file. Anything in this file with be used instead of the plugin defaults (which in most cases is Enabled and 30 seconds duration).
 
-### In-Game Config Editor
-Instead of manually editing the `Chaos_Effects.cfg` file, it is recommended to adjust the effects by using the `!chaos` command, and selecting `Settings->Effects`.
+Using this method means you can update Chaos to its latest version and corresponding config files without overwriting your changes.
+More information about the Chaos config can be found here.
 
-ANY changes you make in-game will create a `Chaos_Override.cfg` file in `addons/sourcemod/configs/Chaos/`, and automatically add/update your changes within the file. The effects found in `Chaos_Override.cfg` will have a higher priority over those same effects in `Chaos_Effects.cfg`. To revert to defaults, simply delete `Chaos_Override.cfg`.\
-**Using this method means you can update Chaos to its latest version and corresponding config files without overwriting your changes.**
 
 ## Available ConVars:
 `sm_chaos_enabled` | `Default. 1` | `Min. 0` | `Max. 1`
@@ -111,6 +99,7 @@ Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`
 ### Known issues:
 - Certain resolutions (mostly widescreens, and in my case 2560x1080) cut off the HUD overlay on the right side of the screen, this means the announcement texts and bar timer might not look correct, lowering your resolution should fix this.
 	- It is also recommended to **restart** CS:GO after adjusting your resolution, otherwise the HUD may appear much larger than it should be.
+	- 4k resolutions by default have an extremely enlarged HUD that makes the game unplayable, setting it to 1080p and restarting your game should fix this.
 <p></p>
 
 ---
