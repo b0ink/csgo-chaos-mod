@@ -66,7 +66,7 @@ If set to `0.0`, only one effect will run at the start of the round.
 
 `sm_chaos_override_duration` | `Default. -1` | `Min. -1` | `Max. 120`
 - Override the duration (in seconds) of ALL effects.\
-If set to `-1.0`, `Chaos_Effects.cfg` durations will be used.\
+If set to `-1.0`, the plugin's default durations will be used.\
 Set to `0.0` for infinite duration (Effect lasts the entire round).
 
 `sm_chaos_twitch_enabled` | `Default. 0` | `Min. 0` | `Max. 1`
