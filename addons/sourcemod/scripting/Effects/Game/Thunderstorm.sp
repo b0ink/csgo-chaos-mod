@@ -10,6 +10,8 @@ public void Chaos_Thunderstorm(effect_data effect){
 	Effect by Ozai
 */
 
+int thunder_count = 0;
+
 public void Chaos_Thunderstorm_OnMapStart(){
 	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/thunderstorm.raw");
 }
@@ -17,6 +19,8 @@ public void Chaos_Thunderstorm_OnMapStart(){
 
 bool Thunderstorm = false;
 public void Chaos_Thunderstorm_START(){
+	thunder_count = 0;
+
 	Thunderstorm = true;
 	CreateTimer(0.1, Timer_LightningStrike); // starting lightning strikes
 	
@@ -25,6 +29,17 @@ public void Chaos_Thunderstorm_START(){
 	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
 	MinimalFog();
 	
+	int randomDistant = GetRandomInt(1, 3);
+
+	LoopValidPlayers(i){
+		if(randomDistant == 1){
+			ClientCommand(i, "playgamesound \"%s\"", THUNDERDISTANT_1);
+		}else if(randomDistant == 2){
+			ClientCommand(i, "playgamesound \"%s\"", THUNDERDISTANT_2);
+		}else if(randomDistant == 3){
+			ClientCommand(i, "playgamesound \"%s\"", THUNDERDISTANT_3);
+		}
+	}
 }
 
 public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
@@ -57,7 +72,6 @@ public Action Timer_LightningStrike(Handle timer) {
 		return;
 	}
 	
-	CreateTimer(0.1, Timer_LightningStrike);
 
 	float endpos[3];
 	GetArrayArray(g_MapCoordinates, GetRandomInt(0, GetArraySize(g_MapCoordinates) - 1), endpos);
@@ -78,9 +92,9 @@ public Action Timer_LightningStrike(Handle timer) {
 	TE_SendToAll();
 
 	if(GetRandomInt(0, 100) <= 50) { // 50/50 chance for slay or superslay boom
-		EmitAmbientSound(EXPLOSION_HE, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.5); // regular slay from os but much more quiet
+		EmitAmbientSound(EXPLOSION_HE, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.25); // regular slay from os but much more quiet
 	} else {
-		EmitAmbientSound(SOUND_SUPERSLAY, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.5); // one singular superslay boom
+		EmitAmbientSound(SOUND_SUPERSLAY, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.25); // one singular superslay boom
 	}
 
 	float pos[3];
@@ -90,4 +104,20 @@ public Action Timer_LightningStrike(Handle timer) {
 			SlapPlayer(i, 15, false); //TODO: if player has less than 15 health dont slap/ only go as far as 1hp instead of killing them?
 		}
 	}
+
+	thunder_count++;
+	if(thunder_count % 50 == 0){
+		int randomThunder = GetRandomInt(1, 3);
+		LoopValidPlayers(i){
+			if(randomThunder == 1){
+				ClientCommand(i, "playgamesound \"%s\"", THUNDER_1);
+			}else if(randomThunder == 2){
+				ClientCommand(i, "playgamesound \"%s\"", THUNDER_2);
+			}else if(randomThunder == 3){
+				ClientCommand(i, "playgamesound \"%s\"", THUNDER_3);
+			}
+		}
+	}
+
+	CreateTimer(0.1, Timer_LightningStrike);
 }

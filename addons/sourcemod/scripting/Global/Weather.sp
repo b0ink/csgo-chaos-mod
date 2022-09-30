@@ -2,6 +2,14 @@ char PrecipitationModel[128];
 
 #define SOUND_SUPERSLAY  "weapons/hegrenade/hegrenade_detonate_02.wav"
 #define LIGHTNING_EFFECT "sprites/lgtning.vmt"
+#define THUNDERDISTANT_1 "ambient/playonce/weather/thunder_distant_01.wav"
+#define THUNDERDISTANT_2 "ambient/playonce/weather/thunder_distant_02.wav"
+#define THUNDERDISTANT_3 "ambient/playonce/weather/thunder_distant_06.wav"
+
+#define THUNDER_1 "ambient/weather/thunderstorm/thunder_1.wav"
+#define THUNDER_2 "ambient/weather/thunderstorm/thunder_2.wav"
+#define THUNDER_3 "ambient/weather/thunderstorm/thunder_3.wav"
+
 
 enum WEATHER_TYPE{
     RAIN,
@@ -22,6 +30,15 @@ float map_maxbounds[3];
 
 void WEATHER_INIT(){
     PrecacheSound(SOUND_SUPERSLAY);
+
+    PrecacheSound(THUNDERDISTANT_1);
+    PrecacheSound(THUNDERDISTANT_2);
+    PrecacheSound(THUNDERDISTANT_3);
+    PrecacheSound(THUNDER_1);
+    PrecacheSound(THUNDER_2);
+    PrecacheSound(THUNDER_3);
+
+
 
     LIGHTNING_sprite = PrecacheModel(LIGHTNING_EFFECT);
 
