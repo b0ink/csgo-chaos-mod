@@ -2,7 +2,7 @@ ConVar 	g_cvChaosEnabled;
 bool        g_bChaos_Enabled = true;
 
 ConVar 	g_cvChaosEffectInterval;
-float       g_fChaos_EffectInterval = 30.0;
+float       g_fChaos_EffectInterval = 15.0;
 
 ConVar 	g_cvChaosRepeating;
 bool        g_bChaos_Repeating = true;
