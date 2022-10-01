@@ -1,7 +1,6 @@
 float FakeTelport_loc[MAXPLAYERS+1][3];
 
 public void Chaos_FakeTeleport(effect_data effect){
-	//TODO: announce it as "Random Teleport", then change the name to "Fake Teleport"
 	effect.title = "Fake Teleport";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;

@@ -1,4 +1,3 @@
-//TODO: breaktime doesnt stop you from walking
 bool WKeyStuck = false;
 
 public void Chaos_WKeyStuck(effect_data effect){
