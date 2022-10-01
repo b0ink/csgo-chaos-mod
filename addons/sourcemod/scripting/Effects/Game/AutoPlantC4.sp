@@ -11,14 +11,12 @@
 //     url = "https://github.com/b3none"
 // };
 
-//TODO: with the changes to translations -> fix the announcements for this one
 
 int bomber;
 int bombsite;
 
 bool g_bHasBombBeenDeleted;
 float bombPosition[3];
-// Handle bombTimer;
 int bombTicking;
 int g_PlantedSite = -1;
 
@@ -43,87 +41,82 @@ public void Chaos_AutoPlantC4_INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");
 }
 
-public bool Chaos_AutoPlantC4_CustomAnnouncement(){
-    return true;
-}
 
 public bool Chaos_AutoPlantC4_Conditions(){
     if(!ValidBombSpawns()) return false;
     if(isHostageMap()) return false;
-    if(g_iChaos_Round_Time <= 30) return false;
-
+    if(g_iChaos_Round_Time <= 16) return false; // prevent a bomb plant as soon as the round starts
+    if(
+        (g_PlantedSite != BOMBSITE_A) && (bombSiteB == INVALID_HANDLE) &&
+        (g_PlantedSite != BOMBSITE_B) && (bombSiteA == INVALID_HANDLE) &&
+        (g_PlantedSite != -1)
+    ){
+        return false;
+    }
     return true;
 }
 
+
 public void Chaos_AutoPlantC4_START(){
-
-
-
 	if(g_bBombPlanted){
-		//TODO: make this a little cleaner
-		float newBombPosition[3];
-		char newBombSiteName[64];
-		if(g_PlantedSite == BOMBSITE_A && bombSiteB != INVALID_HANDLE){
-			int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
-			GetArrayArray(bombSiteB, randomCoord, newBombPosition);
-			newBombSiteName = "Bombsite B";
-			g_PlantedSite = BOMBSITE_B;
-		}else if(g_PlantedSite == BOMBSITE_B && bombSiteA != INVALID_HANDLE){
-			int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
-			GetArrayArray(bombSiteA, randomCoord, newBombPosition);
-			newBombSiteName = "Bombsite A";
-			g_PlantedSite = BOMBSITE_A;
-		}else if(g_PlantedSite == -1 && bombSiteA != INVALID_HANDLE && bombSiteB != INVALID_HANDLE){
-			if(GetRandomInt(0,100) <= 50){
-				int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
-				GetArrayArray(bombSiteA, randomCoord, newBombPosition);
-				newBombSiteName = "Bombsite A";
-				g_PlantedSite = BOMBSITE_A;
-			}else{
-				int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
-				GetArrayArray(bombSiteB, randomCoord, newBombPosition);
-				newBombSiteName = "Bombsite B";
-				g_PlantedSite = BOMBSITE_B;
-			}
-		}
-		int bombEnt = FindEntityByClassname(-1, "planted_c4");
-		if(g_iC4ChickenEnt != -1) bombEnt = g_iC4ChickenEnt;
-		// newBombPosition[2] = newBombPosition[2] - 64;
-		if(bombEnt != -1){
-			TeleportEntity(bombEnt, newBombPosition, NULL_VECTOR, NULL_VECTOR);
-			char AnnounceMessage[128];
-			FormatEx(AnnounceMessage, sizeof(AnnounceMessage), "Teleport bomb to %s", newBombSiteName);
-			AnnounceChaos(AnnounceMessage, -1.0);
-			return;
-		}else{
-			g_PlantedSite = -1; //fooked up
-		}
-		RetryEffect();
-		return;
+        TeleportC4ToNewBombSite();
+        return;
 	}
 	AutoPlantC4();
 	CreateTimer(0.6, Timer_EnsureSpawnedAutoPlant);
 }
 
-public Action Chaos_AutoPlant_RESET(bool HasTimerEnded){
+
+public void TeleportC4ToNewBombSite(){
+    float newBombPosition[3];
+    char newBombSiteName[64];
+
+    if(bombSiteA == INVALID_HANDLE || bombSiteB == INVALID_HANDLE){
+        return;
+    }
+
+    bool randomASite = false;
+    bool randomBSite = false;
+    if(g_PlantedSite == -1){
+        if(GetRandomInt(1,100) < 50){
+            randomASite = true;
+        }else{
+            randomBSite = true;
+        }
+    }
+
+    if(g_PlantedSite == BOMBSITE_A || randomASite){
+        int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
+        GetArrayArray(bombSiteB, randomCoord, newBombPosition);
+        newBombSiteName = "Bombsite B";
+        g_PlantedSite = BOMBSITE_B; 
+    }else if(g_PlantedSite == BOMBSITE_B || randomBSite){
+        int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
+        GetArrayArray(bombSiteA, randomCoord, newBombPosition);
+        newBombSiteName = "Bombsite A";
+        g_PlantedSite = BOMBSITE_A;
+    }
+
+    int bombEnt = FindEntityByClassname(-1, "planted_c4");
+    if(g_iC4ChickenEnt != -1) bombEnt = g_iC4ChickenEnt;
+    // newBombPosition[2] = newBombPosition[2] - 64;
+    if(bombEnt != -1){
+        TeleportEntity(bombEnt, newBombPosition, NULL_VECTOR, NULL_VECTOR);
+        char AnnounceMessage[128];
+        FormatEx(AnnounceMessage, sizeof(AnnounceMessage), "Teleport bomb to %s", newBombSiteName);
+        AnnounceChaos(AnnounceMessage, -1.0);
+        return;
+    }else{
+        g_PlantedSite = -1; //fooked up
+    }
+    RetryEffect();
+
+}
+
+public Action Chaos_AutoPlantC4_RESET(bool HasTimerEnded){
 	AutoPlantRoundEnd();
 }
 
-
-public bool Chaos_AutoPlant_HasNoDuration(){
-	return true;
-}
-
-public bool Chaos_AutoPlant_Conditions(){
-	if(
-		(g_PlantedSite != BOMBSITE_A) && (bombSiteB == INVALID_HANDLE) &&
-		(g_PlantedSite != BOMBSITE_B) && (bombSiteA == INVALID_HANDLE) &&
-		(g_PlantedSite != -1)
-	){
-		return false;
-	}
-	return true;
-}
 
 
 public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
@@ -255,10 +248,6 @@ stock bool HasBomb(int client){
     return GetPlayerWeaponSlot(client, 4) != -1;
 }
 
-
-stock bool IsWarmup(){
-    return GameRules_GetProp("m_bWarmupPeriod") == 1;
-}
 
 stock int GetNearestBombsite(float pos[3]){
     // float pos[3];
