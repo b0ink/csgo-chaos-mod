@@ -1,5 +1,3 @@
-//TODO: potentially remove the chaos_effects config, add all default times from inside the effect file, and force config changes using the !chaos menu
-
 Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
 public void ParseChaosEffects(){
@@ -243,7 +241,7 @@ void ParseOverrideEffects(){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
 
-			if(enabled != 0 || enabled != 1) enabled = 1; //TODO: better error logging eg. if enabled or duration out of bounds
+			if(enabled != 0 || enabled != 1) enabled = 1;
 
 			effect_data effect;
 
@@ -346,7 +344,6 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 	if(kvConfig.ExportToFile(path)){
 
 		if(IsValidClient(client)){
-			//TODO:: convar to who this message should be sent to.
 			PrintToChatAll("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 		}
