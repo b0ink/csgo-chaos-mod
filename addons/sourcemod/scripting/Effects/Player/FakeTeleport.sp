@@ -13,7 +13,7 @@ public void Chaos_FakeTeleport_START(){
 		GetClientAbsOrigin(i, FakeTelport_loc[i]);
 	}
 
-	AnnounceChaos("Random Teleport", -1.0);
+	AnnounceChaos("Random Teleport  ", -1.0);
 	DoRandomTeleport();
 	CreateTimer(3.0, Timer_EndTeleport);
 }
@@ -23,6 +23,7 @@ public Action Timer_EndTeleport(Handle timer){
 		TeleportEntity(i, FakeTelport_loc[i], NULL_VECTOR, NULL_VECTOR);
 	}
 	AnnounceChaos(GetChaosTitle("Chaos_FakeTeleport"), -1.0);
+	RemoveHudByName("Random Teleport  ");
 }
 
 public bool Chaos_FakeTeleport_Conditions(){

@@ -48,6 +48,18 @@ void AddEffectToHud(char[] message, float time = -1.0, bool isMeta){
 	PrintTimer(g_HudTime);
 }
 
+void RemoveHudByName(char[] EffectName){
+	hud_effect_data effect;
+	for(int i = 0; i < HudData.Length; i++){
+		HudData.GetArray(i, effect, sizeof(effect));
+		if(StrEqual(effect.name, EffectName, false)){
+			HudData.Erase(i);
+			break;
+		}
+	}
+	PrintTimer(g_HudTime);
+}
+
 void PrintEffects(){
 	char chunk[2048];
 	char chunk_meta[2048];
