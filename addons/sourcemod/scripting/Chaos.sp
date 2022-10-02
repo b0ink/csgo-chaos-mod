@@ -68,16 +68,12 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 		if(%1.meta)
 
 		
-/*
-	TODO: instead of pooling coords into an empty array, then removing the coord once used
-			Could i do a DIstanceTOClosestPlayer check after teleporting players one by one?
-*/
-#define LoopMapPoints(%1) for(int %1 = 0; %1 < GetArraySize(g_MapCoordinates); %1++)
 
 // Already checks if they are on a valid team
 #define LoopAllClients(%1) 		for(int %1 = 0; %1 <= MaxClients; %1++)
 #define LoopValidPlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(IsValidClient(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
 #define LoopAlivePlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
+
 
 
 char g_sWeapons[][64] = {
@@ -185,11 +181,6 @@ int g_AutoBunnyhop = 0;
 int g_bNoForwardBack = 0;
 int g_NoFallDamage = 0;
 int g_iC4ChickenEnt = -1;
-
-Handle 	g_MapCoordinates = INVALID_HANDLE;
-Handle 	g_UnusedCoordinates = INVALID_HANDLE;
-Handle 	bombSiteA = INVALID_HANDLE;
-Handle 	bombSiteB = INVALID_HANDLE;
 
 
 
@@ -388,6 +379,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 #include "Global/Fog.sp"
 #include "Global/ColorCorrection.sp"
 #include "Global/Weather.sp"
+#include "Spawns.sp"
 
 
 #include "Effects/EffectsList.sp"

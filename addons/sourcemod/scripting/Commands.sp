@@ -15,6 +15,7 @@ void RegisterCommands(){
 // Handle Possible_Chaos_Effects = INVALID_HANDLE;
 
 public Action Command_MainMenu(int client, int args){
+	ShuffleMapSpawns();
 	ShowMenu_Main(client);
 
 	return Plugin_Handled;

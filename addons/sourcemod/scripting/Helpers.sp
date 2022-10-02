@@ -1,17 +1,4 @@
 
-bool ValidMapPoints(){
-	if(g_MapCoordinates == INVALID_HANDLE) return false;
-	if(GetArraySize(g_MapCoordinates) == 0) return false;
-	if(GetArraySize(g_MapCoordinates) < (GetPlayerCount() * 4)) return false;
-	return true;
-}
-
-bool ValidBombSpawns(){
-	if(bombSiteA == INVALID_HANDLE) return false;
-	if(bombSiteB == INVALID_HANDLE) return false;
-	if(GetArraySize(bombSiteA) == 0 || GetArraySize(bombSiteB) == 0) return false;
-	return true;
-}
 
 bool GetEffectData(char[] function_name, effect_data return_data){
 	effect_data effect;
@@ -341,82 +328,6 @@ void GetWeaponClassname(int weapon, char[] buffer, int size) {
 	}
 }
 
-float g_AllPositions[MAXPLAYERS+1][3];
-
-void SavePlayersLocations(){
-	LoopAlivePlayers(i){
-		GetClientAbsOrigin(i, g_AllPositions[i]);
-	}
-}
-
-//make sure to SavePlayersLocations before using this.
-float no_vel[3] = {0.0, 0.0, 0.0};
-
-void TeleportPlayersToClosestLocation(int client = -1, int minDist = 0){
-	if(g_MapCoordinates != INVALID_HANDLE){
-		ClearArray(g_UnusedCoordinates);
-
-		for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
-			float vec[3];
-			GetArrayArray(g_MapCoordinates, i, vec);
-			PushArrayArray(g_UnusedCoordinates, vec);
-		}
-
-		LoopAlivePlayers(i){
-				if(client != -1 && client != i) continue; //only set specific player
-				int CoordinateIndex = -1;
-				float DistanceToBeat = 99999.0;
-				if(GetArraySize(g_UnusedCoordinates) > 0){
-					float playersVec[3];
-					GetClientAbsOrigin(i, playersVec);
-					for(int coord = 0; coord <= GetArraySize(g_UnusedCoordinates)-1; coord++){
-						float vec[3];
-						GetArrayArray(g_UnusedCoordinates, coord, vec);
-						if(DistanceToClosestEntity(vec, "prop_exploding_barrel") > 50){
-							float dist = GetVectorDistance(playersVec, vec);
-							if((dist < DistanceToBeat) && dist >= minDist){
-								CoordinateIndex = coord;
-								DistanceToBeat = dist;
-							}
-						}
-					}
-					if(CoordinateIndex != -1){
-						float realVec[3];
-						//TODO: come back to this??
-						do{
-							GetArrayArray(g_UnusedCoordinates, CoordinateIndex, realVec);
-						}
-						while(DistanceToClosestEntity(realVec, "prop_exploding_barrel") < 50);
-						// realVec[2] = realVec[2] - 60;
-
-						// PrintToChatAll("flags: %i", GetEntProp(i, Prop_Send, "m_fEffects"));
-
-						// SetEntProp(i, Prop_Send, "m_fEffects", 0);
-						TeleportEntity(i, realVec, NULL_VECTOR, no_vel);
-						// SetEntityFlags(i, ER_NO)
-
-						// int effect = GetEntProp(i, Prop_Data, "m_fEffects");
-
-						RemoveFromArray(g_UnusedCoordinates, CoordinateIndex);
-						CoordinateIndex = -1;
-						DistanceToBeat = 99999.0;
-					}else{
-						TeleportEntity(i, g_AllPositions[i], NULL_VECTOR, no_vel);
-					}
-				}else{
-					TeleportEntity(i, g_AllPositions[i], NULL_VECTOR, no_vel);
-				}
-				SetEntityMoveType(i, MOVETYPE_WALK);
-		}
-			
-	} else{
-		LoopValidPlayers(i){
-			TeleportEntity(i, g_AllPositions[i], NULL_VECTOR, no_vel);
-			SetEntityMoveType(i, MOVETYPE_WALK);
-		}
-	}
-	
-}
 
 
 
@@ -438,41 +349,6 @@ void StopTimer(Handle &timer){
 	}
 }
 
-
-void DoRandomTeleport(int client = -1){
-	Log("[Chaos] Running: DoRandomTeleport (function, not chaos event)");
-
-	ClearArray(g_UnusedCoordinates);
-
-	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
-		float vec[3];
-		GetArrayArray(g_MapCoordinates, i, vec);
-		PushArrayArray(g_UnusedCoordinates, vec);
-	}
-	if(client == -1){
-		float vec[3];
-		LoopAlivePlayers(i){
-			if(GetArraySize(g_UnusedCoordinates) > 0){
-				int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
-				GetArrayArray(g_UnusedCoordinates, randomCoord, vec);
-				if(DistanceToClosestEntity(vec, "prop_exploding_barrel") > 50){
-					TeleportEntity(i, vec, NULL_VECTOR, NULL_VECTOR);
-					PrintToConsole(i, "%N to %f %f %f", i, vec[0], vec[1], vec[2]);
-					RemoveFromArray(g_UnusedCoordinates, randomCoord);
-				}
-			}
-		}
-	}else{
-		int randomCoord = GetRandomInt(0, GetArraySize(g_UnusedCoordinates)-1);
-		float vec[3];
-		GetArrayArray(g_UnusedCoordinates, randomCoord, vec);
-		if(DistanceToClosestEntity(vec, "prop_exploding_barrel") > 50){
-			TeleportEntity(client, vec, NULL_VECTOR, NULL_VECTOR);
-			PrintToConsole(client, "%N to %f %f %f", client, vec[0], vec[1], vec[2]);
-			RemoveFromArray(g_UnusedCoordinates, randomCoord);
-		}
-	}
-}
 
 
 
@@ -499,35 +375,6 @@ stock int GetSlotByWeaponName (int client, const char[] szName){
 	return -1;
 }
 
-//returns the units between vec[3] and the closest player
-int DistanceToClosestPlayer(float vec[3]){
-	float dist = 999999.0;
-	float playerVec[3];
-	LoopAlivePlayers(i){
-		GetClientAbsOrigin(i, playerVec);
-		if(GetVectorDistance(playerVec, vec) < dist){
-			dist = GetVectorDistance(playerVec, vec);
-		}
-	}
-	return RoundToFloor(dist);
-}
-
-int DistanceToClosestEntity(float vec[3], char[] entity){
-	float dist = 999999.0;
-	float barrelVec[3];
-	
-	char classname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, entity)){
-			GetEntPropVector(ent, Prop_Send, "m_vecOrigin", barrelVec);
-			if(GetVectorDistance(barrelVec, vec) < dist){
-				dist = GetVectorDistance(barrelVec, vec);
-			}
-		}
-	}
-	
-	return RoundToFloor(dist);
-}
 
 
 
