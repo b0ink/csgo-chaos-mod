@@ -175,7 +175,15 @@ void ShowMenu_EditConvars(int client){
 	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_repeating: %s", g_cvChaosRepeating.FloatValue ? "YES" : "NO");
 	menu.AddItem("sm_chaos_repeating", ItemTitle);
 
-	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_override_duration: %.2f", g_cvChaosOverrideDuration.FloatValue);
+	char override_customtext[32];
+	if(g_cvChaosOverrideDuration.FloatValue == -1.0){
+		override_customtext = "DISABLED";
+	}else if(g_cvChaosOverrideDuration.FloatValue == 0.0){
+		override_customtext = "LAST ALL ROUND";
+	}else{
+		FormatEx(override_customtext, 32, "All effects last %.2f Seconds", g_cvChaosOverrideDuration.FloatValue);
+	}
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_override_duration: %s", override_customtext);
 	menu.AddItem("sm_chaos_override_duration", ItemTitle);
 
 
@@ -198,6 +206,7 @@ void ShowMenu_EditConvars(int client){
 void ShowMenu_ConvarIncrements(int client, char[] convar){
 	Menu menu = new Menu(ConvarIncrements_Handler);
 	char title[64];
+
 	FormatEx(title, sizeof(title), "Edit value for %s", convar);
 
 	menu.SetTitle(title);
@@ -213,7 +222,15 @@ void ShowMenu_ConvarIncrements(int client, char[] convar){
 	menu.AddItem(convar,"convar_name" , ITEMDRAW_NOTEXT);
 
 	float current_value = editing_convar.FloatValue;
-	Format(title, sizeof(title), "Current Value: %.2f", current_value);
+	if(StrEqual(convar, "sm_chaos_override_duration", false)){
+		Format(title, sizeof(title), "Current Value: %.2f\nSets the duration of ALL effects.", current_value);
+	}else if(StrEqual(convar, "sm_chaos_repeating", false)){
+		Format(title, sizeof(title), "Current Value: %.2f\nIf set to 0, only one effect will be spawned per round", current_value);
+	}else if(StrEqual(convar, "sm_chaos_interval", false)){
+		Format(title, sizeof(title), "Current Value: %.2f\nHow often a new effect is spawned.", current_value);
+	}else{
+		Format(title, sizeof(title), "Current Value: %.2f", current_value);
+	}
 	menu.AddItem(title, title, ITEMDRAW_DISABLED);
 	
 	char item_name[64];

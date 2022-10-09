@@ -205,7 +205,6 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	}else if(convar == g_cvChaosEffectTimer_Color){
 		char color[128];
 		g_cvChaosEffectTimer_Color.GetString(color, 128);
-		PrintToChatAll("thing is %s", color);
 		char colorchunks[4][128];
 		int count = ExplodeString(color, " ", colorchunks, 4, 128);
 		if(count != 4 || !color[0]){ // if config wasn't set properly
