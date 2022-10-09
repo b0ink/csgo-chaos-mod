@@ -178,13 +178,18 @@ void ShowMenu_EditConvars(int client){
 	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_override_duration: %.2f", g_cvChaosOverrideDuration.FloatValue);
 	menu.AddItem("sm_chaos_override_duration", ItemTitle);
 
-	float twitchEnabled = 0.0;
-	if(g_bChaos_TwitchEnabled){
-		twitchEnabled = 1.0;
-	}
-	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_twitch_enabled: %s", twitchEnabled ? "YES" : "NO");
-	menu.AddItem("sm_chaos_twitch_enabled", ItemTitle);
-	
+
+	#if defined TWITCH_ENABLED
+		float twitchEnabled = 0.0;
+		if(g_bChaos_TwitchEnabled){
+			twitchEnabled = 1.0;
+		}
+
+		FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_twitch_enabled: %s", twitchEnabled ? "YES" : "NO");
+		menu.AddItem("sm_chaos_twitch_enabled", ItemTitle);
+	#endif
+
+
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
 	menu.Display(client, 0);

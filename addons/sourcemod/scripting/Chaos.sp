@@ -16,6 +16,7 @@
 #define PLUGIN_DESCRIPTION "Spawn from over 100+ random effects every 15 seconds to ensue chaos towards you and your enemies"
 #define PLUGIN_VERSION "0.2.2"
 
+// #define TWITCH_ENABLED
 
 
 

@@ -221,7 +221,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		char color[128];
 		g_cvChaosEffectList_Color.GetString(color, 128);
 
-		char colorchunks[4][128];w
+		char colorchunks[4][128];
 		int count = ExplodeString(color, " ", colorchunks, 4, 128);
 		if(count != 4 || !color[0]){
 			g_ChaosEffectList_Color = {37,186,255, 0};
