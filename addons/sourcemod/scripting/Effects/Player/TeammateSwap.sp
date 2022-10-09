@@ -53,3 +53,8 @@ public void Chaos_TeammateSwap_START(){
 		TeleportEntity(GetArrayCell(tIndex, i), vec, NULL_VECTOR, NULL_VECTOR);
 	}
 }
+
+public bool Chaos_TeammateSwap_Conditions(){
+	if(GetAliveCTCount() <= 1 && GetAliveTCount() <= 1) return false;
+	return true;
+}
