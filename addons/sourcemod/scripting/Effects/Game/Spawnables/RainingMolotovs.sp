@@ -34,7 +34,6 @@ public Action Timer_SpawnMolotov(Handle timer){
 	LoopAlivePlayers(i){
 		GetClientAbsOrigin(i, vec);
 		vec[2] = vec[2] + 100; //anything bigger and things like vents or ct spawn will spawn molotov in other areas of the map
-		//TODO: offset x and z
 		int ent = CreateEntityByName("molotov_projectile");
 		TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 		DispatchSpawn(ent);

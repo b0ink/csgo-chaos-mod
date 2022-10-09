@@ -26,7 +26,6 @@ public Action Chaos_Snow_RESET(bool HasTimerEnded){
 	// Fog_OFF();
 }
 
-//TODO: Add a way to show notes on why its disabled
 public bool Chaos_Snow_Conditions(){
 	if(StrEqual(mapName, "de_dust2", false)){
 		return false; //doesnt work on dust2

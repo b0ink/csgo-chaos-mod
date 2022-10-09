@@ -46,8 +46,6 @@ public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	CLEAR_CC("thunderstorm.raw");
 	
 	Thunderstorm = false;
-	//TODO: create some sort of UUID to set the name of the entity, then delete finding the name
-	//not even that just name it thunderstorm and remove all of them
 	char classname[64];
 	char targetname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){
