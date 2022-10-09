@@ -45,6 +45,8 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 				ToggleChaos(param1);
 			}else if(StrEqual(info, "credits", false)){
 				
+			}else if(StrEqual(info, "help", false)){
+				CPrintToChat(param1, "{default}[{lime}CHAOS{default}] Visit {orange}https://csgochaosmod.com {default}for help with this plugin.");
 			}else if(StrEqual(info, "settings")){
 				ShowMenu_Settings(param1);
 			}else if(StrEqual(info, "start-chaos-timer")){
