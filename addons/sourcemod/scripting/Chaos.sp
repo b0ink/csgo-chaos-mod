@@ -183,24 +183,6 @@ int g_NoFallDamage = 0;
 int g_iC4ChickenEnt = -1;
 
 
-
-//TODO: Organise spawn data
-// enum bomb_site{
-// 	BOMB_A,
-// 	BOMB_B
-// }
-
-// enum struct player_spawn{
-// 	float location[3];
-// }
-// enum struct bomb_spawn{
-// 	float location[3];
-// 	bomb_site site;
-// }
-// enum struct map_spawns{
-// 	ArrayList player_spawns;
-// 	ArrayList bomb_spawns;
-// }
 #include "ConVars.sp"
 
 
@@ -669,7 +651,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(CustomRun) return;
 
 
-	if(!CustomRun &&  (g_TotalRounds >= 5 && GetRandomInt(0, 100) <= 35 && g_EffectsSinceMeta >= 20 )){
+	if(!CustomRun &&  (g_TotalRounds >= 5 && GetRandomInt(0, 100) <= 40 && g_EffectsSinceMeta >= 20 && g_iChaos_Round_Time < 30)){
 		g_EffectsSinceMeta = 0;
 		effect_data metaEffect;
 		bool metaAlreadyRunning = false;
