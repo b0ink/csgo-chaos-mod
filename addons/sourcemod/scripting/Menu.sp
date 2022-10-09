@@ -166,13 +166,13 @@ void ShowMenu_EditConvars(int client){
 	menu.SetTitle("Select a ConVar to edit.");
 
 	char ItemTitle[64];
-	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_enabled: %.2f", g_cvChaosEnabled.FloatValue);
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_enabled: %s", g_cvChaosEnabled.FloatValue ? "YES" : "NO");
 	menu.AddItem("sm_chaos_enabled", ItemTitle);
 
 	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_interval: %.2f", g_cvChaosEffectInterval.FloatValue);
 	menu.AddItem("sm_chaos_interval", ItemTitle);
 
-	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_repeating: %.2f", g_cvChaosRepeating.FloatValue);
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_repeating: %s", g_cvChaosRepeating.FloatValue ? "YES" : "NO");
 	menu.AddItem("sm_chaos_repeating", ItemTitle);
 
 	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_override_duration: %.2f", g_cvChaosOverrideDuration.FloatValue);
@@ -182,7 +182,7 @@ void ShowMenu_EditConvars(int client){
 	if(g_bChaos_TwitchEnabled){
 		twitchEnabled = 1.0;
 	}
-	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_twitch_enabled: %.2f", twitchEnabled);
+	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_twitch_enabled: %s", twitchEnabled ? "YES" : "NO");
 	menu.AddItem("sm_chaos_twitch_enabled", ItemTitle);
 	
 	menu.ExitButton = true;
