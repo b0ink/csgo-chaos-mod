@@ -13,6 +13,13 @@ float       g_fChaos_OverwriteDuration = -1.0;
 ConVar 	g_cvChaosTwitchEnabled;
 bool       g_bChaos_TwitchEnabled = false;
 
+
+ConVar 	g_cvChaosEffectTimer_Color;
+int       g_ChaosEffectTimer_Color[4] = {200,0,220, 0};
+
+ConVar 	g_cvChaosEffectList_Color;
+int       g_ChaosEffectList_Color[4] = {37,186,255, 0};
+
 Handle g_SavedConvars = INVALID_HANDLE;
 
 void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] expectedPreviousValue = ""){
@@ -114,10 +121,16 @@ void CreateConVars(){
 
 	g_cvChaosTwitchEnabled = CreateConVar("sm_chaos_twitch_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
 
+	g_cvChaosEffectTimer_Color = CreateConVar("sm_chaos_effect_timer_color", "220 0 220 0", "Set the RGB values of the Effect Timer countdown. (Default is purple)", _, false, 0.0, false, 1.0);
+	g_cvChaosEffectList_Color = CreateConVar("sm_chaos_effect_list_color", "220 0 220 0", "Set the RGB values of the Effect List on the side. (Default is blue)", _, false, 0.0, false, 1.0);
+
 	HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
 	HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
 	HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
 	HookConVarChange(g_cvChaosOverrideDuration, 	ConVarChanged);
+
+	HookConVarChange(g_cvChaosEffectTimer_Color, 	ConVarChanged);
+	HookConVarChange(g_cvChaosEffectList_Color, 	ConVarChanged);
 
 	HookConVarChange(g_cvChaosTwitchEnabled, 	ConVarChanged);
 
@@ -147,6 +160,13 @@ void UpdateCvars(){
 
 			convar_value = kv.GetNum("sm_chaos_twitch_enabled", 1);
 			g_cvChaosTwitchEnabled.SetInt(convar_value);
+
+			char color[128];
+			kv.GetString("sm_chaos_effect_timer_color", color, 128);
+			g_cvChaosEffectTimer_Color.SetString(color);
+			kv.GetString("sm_chaos_effect_list_color", color, 128);
+			g_cvChaosEffectList_Color.SetString(color);
+
 		}
 	}
 
@@ -182,6 +202,36 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
 	} else if(convar == g_cvChaosTwitchEnabled){
 			g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
+	}else if(convar == g_cvChaosEffectTimer_Color){
+		char color[128];
+		g_cvChaosEffectTimer_Color.GetString(color, 128);
+		PrintToChatAll("thing is %s", color);
+		char colorchunks[4][128];
+		int count = ExplodeString(color, " ", colorchunks, 4, 128);
+		if(count != 4 || !color[0]){ // if config wasn't set properly
+			g_ChaosEffectTimer_Color = {200,0,220, 0};
+		}else{
+			g_ChaosEffectTimer_Color[0] = StringToInt(colorchunks[0]);
+			g_ChaosEffectTimer_Color[1] = StringToInt(colorchunks[1]);
+			g_ChaosEffectTimer_Color[2] = StringToInt(colorchunks[2]);
+			g_ChaosEffectTimer_Color[3] = StringToInt(colorchunks[3]);
+		}
+
+	} else if(convar == g_cvChaosEffectList_Color){
+		char color[128];
+		g_cvChaosEffectList_Color.GetString(color, 128);
+
+		char colorchunks[4][128];w
+		int count = ExplodeString(color, " ", colorchunks, 4, 128);
+		if(count != 4 || !color[0]){
+			g_ChaosEffectList_Color = {37,186,255, 0};
+		}else{
+			g_ChaosEffectList_Color[0] = StringToInt(colorchunks[0]);
+			g_ChaosEffectList_Color[1] = StringToInt(colorchunks[1]);
+			g_ChaosEffectList_Color[2] = StringToInt(colorchunks[2]);
+			g_ChaosEffectList_Color[3] = StringToInt(colorchunks[3]);
+		}
+
 	}
 }
 
@@ -230,6 +280,19 @@ void Update_Convar_Config(){
 	file.WriteLine("	// If you are using the twitch overlay app, set this to 1.");
 	file.WriteLine("	// This setting will be set to 0 by default on each map change.");
 	file.WriteLine("	\"sm_chaos_twitch_enabled\"    \"%i\"", g_cvChaosTwitchEnabled.IntValue);
+	file.WriteLine("");
+	
+	file.WriteLine("");
+	file.WriteLine("	// Sets the color (RGBA) of the countdown timer at the top of the screen.");
+	file.WriteLine("	// Default is \"200 0 220 0\"");
+	file.WriteLine("	\"sm_chaos_effect_timer_color\"    \"%i\"", g_cvChaosEffectTimer_Color.IntValue);
+	file.WriteLine("");
+
+
+	file.WriteLine("");
+	file.WriteLine("	// Sets the color (RGBA) of the effect list on the side of the screen.");
+	file.WriteLine("	// Default is \"37 186 255 0\"");
+	file.WriteLine("	\"sm_chaos_effect_list_color\"    \"%i\"", g_cvChaosEffectList_Color.IntValue);
 	file.WriteLine("");
 
 	file.WriteLine("	// Automatically adjust the length of all the effects based off sm_chaos_interval.");

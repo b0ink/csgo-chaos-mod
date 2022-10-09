@@ -19,7 +19,6 @@
 
 
 
-
 // #define GetRandomMapSpawn(%1) for(int %1 = 0; %1 < )
 
 public Plugin myinfo = {

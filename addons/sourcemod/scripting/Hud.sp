@@ -113,7 +113,13 @@ void PrintEffects(){
 		if(HasMenuOpen(i)) continue;
 
 		//.37 y;
-		SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
+		// SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
+		SetHudTextParams(0.01, 0.42, 1.5, 
+			g_ChaosEffectList_Color[0],
+			g_ChaosEffectList_Color[1],
+			g_ChaosEffectList_Color[2],
+			g_ChaosEffectList_Color[3], 0, 1.0, 0.0, 0.0);
+
 		if(g_DynamicChannel){
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
 		}else{
@@ -154,7 +160,12 @@ void PrintTimer(int time){
 				}
 				// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
 			}else{
-				SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 220, 0, 0, 1.0, 0.0, 0.0);
+				SetHudTextParams(-1.0, 0.06, 1.5,
+					g_ChaosEffectTimer_Color[0],
+					g_ChaosEffectTimer_Color[1],
+					g_ChaosEffectTimer_Color[2],
+					g_ChaosEffectTimer_Color[3], 0, 1.0, 0.0, 0.0);
+				
 				if(g_DynamicChannel){
 					ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
 				}else{
