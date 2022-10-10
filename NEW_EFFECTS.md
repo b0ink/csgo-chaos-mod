@@ -1,7 +1,11 @@
 # Making your own effects
 
 ## Starter Template:
-Name your file following the convention of `EffectName.sp` and place it in the respective category of `Meta`, 
+Name your file following the convention of `EffectName.sp` and place it in the respective category of `Meta`, `Player`, or `Game`.\
+`Meta` is only for meta effects.\
+`Player` is for effects that directly affect the player.\
+`Game` is for effects that manipulates the environment, such as weather, image overlays, color corrections, etc.\
+These are only used for organisation purposes.
 ```c++
 
 /*
