@@ -91,10 +91,11 @@ public void OnConfigsExecuted(){
 
 	int warnings = 0;
 	Log("---------------------------------CONFIGS EXECUTED---------------------------------");
-	Log("-------------------------------------ERRORS--------------------------------------");
 	if(!ValidMapPoints()){
 		warnings++;
-		Log("No valid spawn points were found for %s. Certain effects will not run.", mapName);
+		Log("ERROR: No valid spawn points were found for %s. Certain effects will not run.", mapName);
+	}else{
+		Log("MAP SPAWNS FOUND.");
 	}
 	if(isHostageMap()){
 		warnings++;
@@ -117,17 +118,7 @@ public void OnConfigsExecuted(){
 		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
 	}
 
-	Run_OnMapStart_Functions();
-	effect_data effect;
-	char function_mapstart[64];
-	LoopAllEffects(effect, index){
-		Format(function_mapstart, sizeof(function_mapstart), "%s_OnMapStart", effect.config_name);
-		Function func = GetFunctionByName(GetMyHandle(), function_mapstart);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_Finish();
-		}
-	}
+	// Run_OnMapStart_Functions();
 
 }
 
