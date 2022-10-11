@@ -39,10 +39,9 @@ public void Chaos_EffectName(effect_data effect){
 public void Chaos_EffectName_INIT(){
 	/*
 	
-	Runs on plugin start. Use this to Hook Events 
+	Runs on plugin start. Use this to Hook Events. This will only run ONCE.
 	eg. 
 		HookEvent("bullet_impact", Chaos_EffectName_Event_BulletImpact);
-		SDKHook("
 	*/
 }
 
