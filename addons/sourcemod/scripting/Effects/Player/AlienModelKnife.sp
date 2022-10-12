@@ -5,7 +5,8 @@ public void Chaos_AlienModelKnife(effect_data effect){
 }
 
 public void Chaos_AlienModelKnife_START(){
-	g_bKnifeFight++;
+	HookBlockAllGuns();
+
 	//hitboxes are tiny, but knives work fine
 	LoopAlivePlayers(i){
 		SetEntPropFloat(i, Prop_Send, "m_flModelScale", 0.5);
@@ -16,8 +17,11 @@ public void Chaos_AlienModelKnife_START(){
 	}
 }
 
+
+
 public Action Chaos_AlienModelKnife_RESET(bool HasTimerEnded){
-	if(g_bKnifeFight > 0) g_bKnifeFight--;
+	UnhookBlockAllGuns();
+
 	LoopAlivePlayers(i){
 		if(HasTimerEnded){
 			if(!HasMenuOpen(i)) ClientCommand(i, "slot1");

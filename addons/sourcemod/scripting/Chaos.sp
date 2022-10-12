@@ -361,6 +361,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 #include "Global/Fog.sp"
 #include "Global/ColorCorrection.sp"
 #include "Global/Weather.sp"
+#include  "Global/Players.sp"
 #include "Spawns.sp"
 
 
@@ -466,7 +467,7 @@ public void OnMapStart(){
 	WEATHER_INIT();
 	Overlay_INIT();
 
-	Run_OnMapStart_Functions();
+	// Run_OnMapStart_Functions();
 
 	cvar("sv_fade_player_visibility_farz", "1");
 

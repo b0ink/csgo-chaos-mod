@@ -8,6 +8,8 @@ public void Chaos_BreakTime(effect_data effect){
 bool BreakTime = false;
 public void Chaos_BreakTime_START(){
 	BreakTime = true;
+	HookBlockAllGuns();
+
 	LoopAlivePlayers(i){
 		FakeClientCommand(i, "use weapon_knife");
 	}
@@ -16,6 +18,7 @@ public void Chaos_BreakTime_START(){
 
 public Action Chaos_BreakTime_RESET(bool HasTimerEnded){
 	BreakTime = false;
+	UnhookBlockAllGuns();
 	if(g_bKnifeFight > 0) g_bKnifeFight--;
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 	if(g_bNoStrafe > 0) g_bNoStrafe--;

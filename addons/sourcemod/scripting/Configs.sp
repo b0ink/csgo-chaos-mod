@@ -118,7 +118,7 @@ public void OnConfigsExecuted(){
 		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
 	}
 
-	// Run_OnMapStart_Functions();
+	Run_OnMapStart_Functions();
 
 }
 

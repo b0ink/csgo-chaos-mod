@@ -12,15 +12,71 @@
 
 
 
-enum struct player_data{
-	float speed;
-	float gravity;
-	float airacceleration;
-	float FOV;
+// enum struct player_data{
+// 	float speed;
+// 	float gravity;
+// 	float airacceleration;
+// 	float FOV;
 	
-	float Disable_LEFT;
-	float Disable_RIGHT;
-	float Disable_FORWARD;
-	float Disable_BACK;
+// 	float Disable_LEFT;
+// 	float Disable_RIGHT;
+// 	float Disable_FORWARD;
+// 	float Disable_BACK;
 
+// 	bool KnifeOnly;
+// }
+
+int BlockGun_EffectCount = 0;
+
+
+public Action BlockAllGuns(int client, int weapon) {
+	char WeaponName[32];
+	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
+	if(
+		StrContains(WeaponName, "knife") == -1 &&
+		StrContains(WeaponName, "c4") == -1 &&
+		StrContains(WeaponName, "grenade") == -1 &&
+		StrContains(WeaponName, "molotov") == -1 &&
+		StrContains(WeaponName, "flashbang") == -1 &&
+		StrContains(WeaponName, "decoy") == -1 &&
+		StrContains(WeaponName, "snowball") == -1 &&
+		StrContains(WeaponName, "diversion") == -1
+		){
+			FakeClientCommand(client, "use weapon_knife");
+			return Plugin_Handled;
+	}
+	return Plugin_Continue;
 }
+
+/**
+ * Blocks (most) primary and secondary weapons, allows knives, grenades and c4 only.
+ * If multiple effects use this, both will need to use UnhookBlockAllGuns() to releaes the lock.
+ */
+public void HookBlockAllGuns(){
+	BlockGun_EffectCount++;
+	LoopAlivePlayers(i){
+		SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
+	}
+	LoopAlivePlayers(i){
+		SDKHook(i, SDKHook_WeaponSwitch, BlockAllGuns);
+	}
+}
+
+public void UnhookBlockAllGuns(){
+	if(BlockGun_EffectCount > 0) BlockGun_EffectCount--;
+	if(BlockGun_EffectCount == 0){
+		LoopAlivePlayers(i){
+			SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
+		}
+	}
+}
+
+
+
+/*
+	TODO:
+		- add player_data to each effect
+		- go through the effects inside of the HUD queue, (attached to an effect?)
+		- everytime a new one is added or deleted, loop through effects from newest to oldest, if a variable is set to null, check the next effect
+		
+*/
