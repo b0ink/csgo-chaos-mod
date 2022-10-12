@@ -50,6 +50,7 @@
 #include "Effects/Player/DiscoFog.sp"
 #include "Effects/Player/DiscoPlayers.sp"
 #include "Effects/Player/DoubleJump.sp"
+#include "Effects/Player/DropAllWeapons.sp"
 #include "Effects/Player/DropCurrentWeapon.sp"
 #include "Effects/Player/DropPrimaryWeapon.sp"
 #include "Effects/Player/Drugs.sp"

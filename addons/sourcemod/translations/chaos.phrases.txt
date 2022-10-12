@@ -504,4 +504,8 @@
 	{
 		"en"    "Deep Fried"
     }
+    "Chaos_DropAllWeapons_Title"
+	{
+		"en"    "Drop All Weapons"
+    }
 }

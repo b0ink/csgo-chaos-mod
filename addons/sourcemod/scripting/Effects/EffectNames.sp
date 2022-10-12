@@ -21,6 +21,7 @@
 "Chaos_DiscoFog",
 "Chaos_DiscoPlayers",
 "Chaos_DoubleJump",
+"Chaos_DropAllWeapons",
 "Chaos_DropCurrentWeapon",
 "Chaos_DropPrimaryWeapon",
 "Chaos_Drugs",
