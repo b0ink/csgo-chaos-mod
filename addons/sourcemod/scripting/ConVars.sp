@@ -281,17 +281,21 @@ void Update_Convar_Config(){
 	file.WriteLine("	\"sm_chaos_twitch_enabled\"    \"%i\"", g_cvChaosTwitchEnabled.IntValue);
 	file.WriteLine("");
 	
+	char colorDetails[64];
+	g_cvChaosEffectTimer_Color.GetString(colorDetails, 64);
+
 	file.WriteLine("");
 	file.WriteLine("	// Sets the color (RGBA) of the countdown timer at the top of the screen.");
 	file.WriteLine("	// Default is \"200 0 220 0\"");
-	file.WriteLine("	\"sm_chaos_effect_timer_color\"    \"%i\"", g_cvChaosEffectTimer_Color.IntValue);
+	file.WriteLine("	\"sm_chaos_effect_timer_color\"    \"%s\"", colorDetails);
 	file.WriteLine("");
 
+	g_cvChaosEffectList_Color.GetString(colorDetails, 64);
 
 	file.WriteLine("");
 	file.WriteLine("	// Sets the color (RGBA) of the effect list on the side of the screen.");
 	file.WriteLine("	// Default is \"37 186 255 0\"");
-	file.WriteLine("	\"sm_chaos_effect_list_color\"    \"%i\"", g_cvChaosEffectList_Color.IntValue);
+	file.WriteLine("	\"sm_chaos_effect_list_color\"    \"%s\"", colorDetails);
 	file.WriteLine("");
 
 	file.WriteLine("	// Automatically adjust the length of all the effects based off sm_chaos_interval.");
