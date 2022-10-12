@@ -22,7 +22,8 @@ public Action Chaos_Autobhop_OnPlayerRunCmd(int client, int &buttons, int &iImpu
 	if(g_AutoBunnyhop > 0){
 		if(ValidAndAlive(client) && GetEntityFlags(client) & FL_ONGROUND && buttons & IN_JUMP){
 			GetEntPropVector(client, Prop_Data, "m_vecVelocity", funky_Velocity);
-			funky_Velocity[2] = 282.0;
+			// funky_Velocity[2] = 282.0;
+			funky_Velocity[2] = 300.0;
 			TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, funky_Velocity);
 		}
 	}
