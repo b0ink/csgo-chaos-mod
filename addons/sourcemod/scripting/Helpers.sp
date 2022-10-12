@@ -32,6 +32,9 @@ char[] GetChaosTitle(char[] function_name){
 	char temp_title[128];
 	char translation_path[PLATFORM_MAX_PATH];
 
+	effect_data effect;
+	GetEffectData(function_name, effect);
+	
 	if(StrContains(function_name, "Chaos_") != -1){
 		BuildPath(Path_SM, translation_path, sizeof(translation_path), "translations/chaos.phrases.txt");
 		if(FileExists(translation_path)){
@@ -39,11 +42,9 @@ char[] GetChaosTitle(char[] function_name){
 			if(TranslationPhraseExists(temp_title)){
 				FormatEx(return_string, sizeof(return_string), "%t", temp_title, LANG_SERVER);
 			}else{
+				FormatEx(return_string, sizeof(return_string), "%s", effect.title);
 			}
-
 		}else{
-			effect_data effect;
-			GetEffectData(function_name, effect);
 			FormatEx(return_string, sizeof(return_string), "%s", effect.title);
 		}
 	}else{
