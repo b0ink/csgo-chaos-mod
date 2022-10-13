@@ -24,6 +24,8 @@ public void Chaos_EffectName(effect_data effect){
 	
 	Optional configs: 
 
+	effect.HasNoDuration = troe; // Use this if your effect isn't timed, eg. spawning models
+
 	effect.AddAlias("SearchTerm"); // Allow the effect to show up when using "!effect searchterm"
 	effect.IncompatibleWith("Chaos_DifferentEffectName"); // Prevents the effect running the same time with other effects
 
