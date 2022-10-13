@@ -28,6 +28,7 @@
 #include "Effects/Game/Spawnables/Soccerballs.sp"
 #include "Effects/Game/Spawnables/SpawnExplodingBarrels.sp"
 #include "Effects/Game/Spawnables/SpawnFlashbangs.sp"
+#include "Effects/Game/Spawnables/Turrets.sp"
 #include "Effects/Game/Thunderstorm.sp"
 
 #include "Effects/Meta/DoubleTimerSpeed.sp"

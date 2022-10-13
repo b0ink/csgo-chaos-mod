@@ -516,4 +516,8 @@
 	{
 		"en"    "Chatterbox"
     }
+    "Chaos_Turrets_Title"
+	{
+		"en"    "Turrets"
+    }
 }
