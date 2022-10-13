@@ -12,10 +12,7 @@ void RegisterCommands(){
 	RegAdminCmd("save_chaos_vote", 			Command_SaveVote, 		ADMFLAG_ROOT);
 }
 
-// Handle Possible_Chaos_Effects = INVALID_HANDLE;
-
 public Action Command_MainMenu(int client, int args){
-	ShuffleMapSpawns();
 	ShowMenu_Main(client);
 
 	return Plugin_Handled;

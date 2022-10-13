@@ -413,14 +413,6 @@ public void OnPluginStart(){
 
 	g_MetaHistory = CreateArray(128);
 
-	// effect_data effect;
-	// LoopAllEffects(effect, index){
-	// 	if(effect.Aliases != INVALID_HANDLE){
-	// 		PrintToChatAll("%s has %i", effect.title, GetArraySize(effect.Aliases));
-	// 	}	
-	// }
-
-
 }
 
 
@@ -433,6 +425,9 @@ public void OnMapStart(){
 	
 	if(g_MetaHistory != INVALID_HANDLE){
 		ClearArray(g_MetaHistory);
+	}
+	if(Effect_History != INVALID_HANDLE){
+		ClearArray(Effect_History);
 	}
 	UpdateCvars();
 
