@@ -512,4 +512,8 @@
 	{
 		"en"    "Shoot To Stay Awake"
     }
+    "Chaos_Chatterbox_Title"
+	{
+		"en"    "Chatterbox"
+    }
 }

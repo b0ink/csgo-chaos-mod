@@ -11,6 +11,7 @@
 "Chaos_Bumpmines",
 "Chaos_BuyAnywhere",
 "Chaos_C4Chicken",
+"Chaos_Chatterbox",
 "Chaos_ChickenPlayers",
 "Chaos_CrabPeople",
 "Chaos_DecoyDodgeball",

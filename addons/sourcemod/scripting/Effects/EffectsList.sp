@@ -42,6 +42,7 @@
 #include "Effects/Player/Binoculars.sp"
 #include "Effects/Player/BlindPlayers.sp"
 #include "Effects/Player/Bumpmines.sp"
+#include "Effects/Player/Chatterbox.sp"
 #include "Effects/Player/ChickenPlayers.sp"
 #include "Effects/Player/CrabPeople.sp"
 #include "Effects/Player/DecoyDodgeball.sp"
