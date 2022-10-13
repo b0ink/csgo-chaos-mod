@@ -12,6 +12,7 @@ public void Chaos_C4Chicken_INIT(){
 
 public void Chaos_C4Chicken_START(){
 	g_bC4Chicken = true;
+	C4Chicken();
 }
 
 public Action Chaos_C4Chicken_RESET(bool HasTimerEnded){
