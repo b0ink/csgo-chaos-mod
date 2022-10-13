@@ -5,6 +5,8 @@ public void ParseChaosEffects(){
 
 	// Check if translations exist on the server
 	char translation_path[PLATFORM_MAX_PATH];
+	//TODO: this is only checking stock english phrases....... will need to check other languages obviously :D 
+
 	BuildPath(Path_SM, translation_path, sizeof(translation_path), "translations/chaos.phrases.txt");
 	bool translations = false;
 	if(FileExists(translation_path)){

@@ -49,6 +49,9 @@ void SendCallout(int client){
 		Format(location_final, sizeof(location_final), "%s%c", location_final, location[i]);
 	}
 
+	//! the one case I see 3 words used, and 'of' is lowercase :')
+	if(StrEqual("topofmid", location, false)) location_final = "Top of Mid";
+
 	FakeClientCommand(client, "say %s %s%s", callout_names[calloutCounter], location_final, (GetRandomInt(0, 100) < 50) ? "!" : "...");
 
 	calloutCounter++;
