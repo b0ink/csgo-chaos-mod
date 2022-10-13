@@ -114,6 +114,7 @@
 #include "Effects/Player/SilentFootsteps.sp"
 #include "Effects/Player/SimonSays.sp"
 #include "Effects/Player/SlayRandomPlayer.sp"
+#include "Effects/Player/SleepyShooter.sp"
 #include "Effects/Player/SlowSpeed.sp"
 #include "Effects/Player/SneakyBeaky.sp"
 #include "Effects/Player/SpeedShooter.sp"

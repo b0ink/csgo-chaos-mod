@@ -17,20 +17,16 @@ public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
 
 // UserMessageId for Fade.
 UserMsg g_FadeUserMsgId;
-void PerformBlind(int target, int amount)
-{
+void PerformBlind(int target, int amount, int duration = 1536, int holdtime = 1536){
 	int targets[2];
 	targets[0] = target;
 	
-	int duration = 1536;
-	int holdtime = 1536;
+	// int duration = 1536;
+	// int holdtime = 1536;
 	int flags;
-	if (amount == 0)
-	{
+	if (amount == 0){
 		flags = (0x0001 | 0x0010);
-	}
-	else
-	{
+	}else{
 		flags = (0x0002 | 0x0008);
 	}
 	
@@ -56,7 +52,5 @@ void PerformBlind(int target, int amount)
 		bf.WriteByte(color[2]);
 		bf.WriteByte(color[3]);
 	}
-	
 	EndMessage();
-
 }

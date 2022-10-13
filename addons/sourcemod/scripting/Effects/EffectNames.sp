@@ -106,6 +106,7 @@
 "Chaos_SilentFootsteps",
 "Chaos_SimonSays",
 "Chaos_SlayRandomPlayer",
+"Chaos_SleepyShooter",
 "Chaos_SlowSpeed",
 "Chaos_SmokeStrat",
 "Chaos_SneakyBeaky",

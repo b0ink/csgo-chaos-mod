@@ -508,4 +508,8 @@
 	{
 		"en"    "Drop All Weapons"
     }
+    "Chaos_SleepyShooter_Title"
+	{
+		"en"    "Shoot To Stay Awake"
+    }
 }
