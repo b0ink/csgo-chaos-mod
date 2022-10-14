@@ -3,19 +3,26 @@ void ShowMenu_Main(int client){
 	Menu menu = new Menu(Main_Handler);
 
 	menu.SetTitle("CS:GO Chaos Mod"); //?
+	int style = ITEMDRAW_DISABLED;
+
+	if(CheckCommandAccess(client, "sm_slay", ADMFLAG_CHAT)){
+		style = ITEMDRAW_DEFAULT;
+	}
+
 	if(g_bChaos_Enabled){
 		if(g_NewEffect_Timer == INVALID_HANDLE){
-			menu.AddItem("start-chaos-timer", "Start Timer");
+			menu.AddItem("start-chaos-timer", "Start Timer", style);
 		}
-		menu.AddItem("toggle-chaos", "Disable Chaos");
+		menu.AddItem("toggle-chaos", "Disable Chaos", style);
 	}else{
-		menu.AddItem("toggle-chaos", "Enable Chaos");
+		menu.AddItem("toggle-chaos", "Enable Chaos", style);
 	}
 	if(g_bCanSpawnEffect && g_bChaos_Enabled){
-		menu.AddItem("new-effect", "Spawn New Effect");
+		menu.AddItem("new-effect", "Spawn New Effect", style);
 	}else{
 		menu.AddItem("new-effect", "Spawn New Effect", ITEMDRAW_DISABLED);
 	}
+
 
 	menu.AddItem("help", "Help");
 	// menu.AddItem("credits", "Credits");
@@ -131,10 +138,17 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 void ShowMenu_Settings(int client){
 	if(!IsValidClient(client)) return;
 
+	int style = ITEMDRAW_DISABLED;
+
+	if(CheckCommandAccess(client, "sm_slay", ADMFLAG_CHAT)){
+		style = ITEMDRAW_DEFAULT;
+	}
+
 	Menu menu = new Menu(Settings_Handler);
 	menu.SetTitle("Chaos Settings");	
-	menu.AddItem("edit-effects", "Edit Effects"); // "Select an effect you'd like to edit" (list of ALL effects);
-	menu.AddItem("edit-convars", "Edit ConVars");
+	menu.AddItem("edit-effects", "Edit Effects", style); // "Select an effect you'd like to edit" (list of ALL effects);
+	menu.AddItem("edit-convars", "Edit ConVars", style);
+	menu.AddItem("edit-effect-volume", "Adjust Bell SFX Volume");
 
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
@@ -150,11 +164,59 @@ public int Settings_Handler(Menu menu, MenuAction action, int param1, int param2
 				ShowMenu_EditAllEffects(param1);
 			}else if(StrEqual(info, "edit-convars", false)){
 				ShowMenu_EditConvars(param1);
+			}else if(StrEqual(info, "edit-effect-volume", false)){
+				ShowMenu_EditEffectVolume(param1);
 			}
 		}
 	}else if (action == MenuAction_Cancel){
 		if(param2 ==  MenuCancel_ExitBack){
 			ShowMenu_Main(param1);
+		}
+	}else if (action == MenuAction_End){
+		delete menu;
+	}
+}
+
+void ShowMenu_EditEffectVolume(int client){
+	if(!IsValidClient(client)) return;
+	
+	Menu menu = new Menu(EditEffectVolume_Handler);
+	menu.SetTitle("New Effect SFX Volume");
+	char currentVolume[128];
+	FormatEx(currentVolume, sizeof(currentVolume), "Adjust the volume of the bell sound when a new effect spawns:\nCurrent Volume: %i%%", RoundToZero(BellVolume[client] * 100.0));
+	menu.AddItem("-", currentVolume, ITEMDRAW_DISABLED);
+
+	char displayText[32];
+	char infoText[32];
+	for(int i = 0; i < 11; i++){
+		Format(infoText, sizeof(infoText), "%i", i);
+		Format(displayText, sizeof(displayText), "%i%%", i*10);
+		float volumeCheck = float(i) / 10;
+		if(volumeCheck == BellVolume[client]){
+			Format(displayText, sizeof(displayText), "%s <", displayText);
+			menu.AddItem(infoText, displayText, ITEMDRAW_DISABLED);
+		}else{
+			menu.AddItem(infoText, displayText);
+		}
+	}
+	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
+	menu.Display(client, 0);
+}
+
+public int EditEffectVolume_Handler(Menu menu, MenuAction action, int param1, int param2){
+	if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		if(found){
+			float volume = StringToFloat(info) / 10;
+			BellVolume[param1] = volume;
+			EmitSoundToClient(param1, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[param1]);
+		}
+		ShowMenu_EditEffectVolume(param1);
+	}else if (action == MenuAction_Cancel){
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_Settings(param1);
 		}
 	}else if (action == MenuAction_End){
 		delete menu;

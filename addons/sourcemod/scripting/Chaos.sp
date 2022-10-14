@@ -371,6 +371,8 @@ char EffectNames[][] = {
 	#include "Effects/EffectNames.sp"
 };
 
+float BellVolume[MAXPLAYERS+1] = {0.5, ...};
+
 #include "Commands.sp"
 #include "Hud.sp"
 #include "Configs.sp"
@@ -513,6 +515,7 @@ public void OnLibraryAdded(const char[] name){
 }
 
 public void OnClientPutInServer(int client){
+	BellVolume[client] = 0.5;
 	WeaponJumpConnect_Handler(client);
 
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
@@ -549,6 +552,7 @@ bool Effect_Recently_Played(char[] effect_name){
 	}
 	return found;
 }
+
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
@@ -639,7 +643,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		//Prevent overlapping sounds
 		g_bPlaySound_Debounce = true;
 		LoopValidPlayers(i){
-			EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
+			EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[i]);
 		}	
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
