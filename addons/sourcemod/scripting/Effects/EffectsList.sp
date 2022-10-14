@@ -7,6 +7,7 @@
 #include "Effects/Game/DisableRadar.sp"
 #include "Effects/Game/Earthquake.sp"
 #include "Effects/Game/EnemyRadar.sp"
+#include "Effects/Game/ExtendRoundTime.sp"
 #include "Effects/Game/ExtremeWhiteFog.sp"
 #include "Effects/Game/FakeCrash.sp"
 #include "Effects/Game/Lag.sp"

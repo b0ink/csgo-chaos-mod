@@ -31,6 +31,7 @@
 "Chaos_EnemyRadar",
 "Chaos_ExplosiveBullets",
 "Chaos_ExtendedGrenades",
+"Chaos_ExtendRoundTime",
 "Chaos_ExtremeWhiteFog",
 "Chaos_FakeCrash",
 "Chaos_FakeTeleport",

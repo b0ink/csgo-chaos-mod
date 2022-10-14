@@ -524,4 +524,8 @@
 	{
 		"en"    "Fenced Off"
     }
+    "Chaos_ExtendRoundTime_Title"
+	{
+		"en"    "Extend Round Time"
+    }
 }
