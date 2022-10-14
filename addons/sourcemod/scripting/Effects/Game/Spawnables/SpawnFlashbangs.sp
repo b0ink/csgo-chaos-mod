@@ -3,7 +3,6 @@ public void Chaos_SpawnFlashbangs(effect_data effect){
 	effect.HasNoDuration = true;
 }
 
-float flashbang_vec[3];
 public void Chaos_SpawnFlashbangs_START(){
 	ShuffleMapSpawns();
 	float vec[3];
@@ -16,8 +15,6 @@ public void Chaos_SpawnFlashbangs_START(){
 			}
 		}	
 	}
-
-	
 }
 
 public bool Chaos_SpawnFlashbangs_Conditions(){

@@ -35,6 +35,7 @@
 "Chaos_FakeCrash",
 "Chaos_FakeTeleport",
 "Chaos_FastSpeed",
+"Chaos_FencedOff",
 "Chaos_Flying",
 "Chaos_ForceReload",
 "Chaos_GhostSlaps",

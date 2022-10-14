@@ -21,6 +21,7 @@
 #include "Effects/Game/Saturation.sp"
 #include "Effects/Game/Snow.sp"
 #include "Effects/Game/Spawnables/BigChooks.sp"
+#include "Effects/Game/Spawnables/FencedOff.sp"
 #include "Effects/Game/Spawnables/MamaChook.sp"
 #include "Effects/Game/Spawnables/MoneyRain.sp"
 #include "Effects/Game/Spawnables/RainingMolotovs.sp"
