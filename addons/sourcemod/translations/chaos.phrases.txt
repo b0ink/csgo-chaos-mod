@@ -520,4 +520,8 @@
 	{
 		"en"    "Turrets"
     }
+    "Chaos_FencedOff_Title"
+	{
+		"en"    "Fenced Off"
+    }
 }
