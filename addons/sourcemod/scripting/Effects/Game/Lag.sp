@@ -3,8 +3,8 @@
 */
 
 public void Chaos_Lag(effect_data effect){
-	effect.title = "Lag";
-	effect.duration = 30;
+	effect.Title = "Lag";
+	effect.Duration = 30;
 }
 
 bool FakeLag = false;

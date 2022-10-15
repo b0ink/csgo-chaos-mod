@@ -1,8 +1,8 @@
 
 public void Chaos_Meta_HalfTimerSpeed(effect_data effect){
-	effect.title = "Half Timer Speed";
-	effect.duration = 90;
-	effect.meta = true;
+	effect.Title = "Half Timer Speed";
+	effect.Duration = 90;
+	effect.IsMetaEffect = true;
 }
 
 float HalfTimerSpeed_Original;
@@ -23,6 +23,6 @@ public void Chaos_Meta_HalfTimerSpeed_RESET(bool HasTimerEnded){
 
 
 public bool Chaos_Meta_HalfTimerSpeed_Conditions(){
-	if(g_bMegaChaos) return false;
+	if(g_bMegaChaosIsActive) return false;
 	return true;
 }

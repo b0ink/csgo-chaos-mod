@@ -3,8 +3,8 @@ bool g_bOneBulletMag = false;
 int g_iOffset_Clip1 = -1;
 
 public void Chaos_OneBulletMag(effect_data effect){
-	effect.title = "One Bullet Mags";
-	effect.duration = 30;
+	effect.Title = "One Bullet Mags";
+	effect.Duration = 30;
 }
 
 public void Chaos_OneBulletMag_INIT(){

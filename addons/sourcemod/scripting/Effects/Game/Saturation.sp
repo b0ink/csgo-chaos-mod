@@ -1,6 +1,6 @@
 public void Chaos_Saturation(effect_data effect){
-	effect.title = "Saturation";
-	effect.duration = 30;
+	effect.Title = "Saturation";
+	effect.Duration = 30;
 }
 
 public void Chaos_Saturation_OnMapStart(){

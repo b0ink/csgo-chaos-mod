@@ -1,8 +1,8 @@
 bool OneBulletOneGun = false;
 
 public void Chaos_OneBulletOneGun(effect_data effect){
-	effect.title = "One Bullet One Gun";
-	effect.duration = 30;
+	effect.Title = "One Bullet One Gun";
+	effect.Duration = 30;
 }
 
 public void Chaos_OneBulletOneGun_INIT(){

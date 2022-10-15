@@ -1,6 +1,6 @@
 public void Chaos_KnifeFight(effect_data effect){
-	effect.title = "Knife Fight";
-	effect.duration = 30;
+	effect.Title = "Knife Fight";
+	effect.Duration = 30;
 }
 
 
@@ -8,7 +8,6 @@ public void Chaos_KnifeFight(effect_data effect){
 public void Chaos_KnifeFight_START(){
 	HookBlockAllGuns();
 
-	// g_bKnifeFight++;
 	LoopAlivePlayers(i){
 		FakeClientCommand(i, "use weapon_knife");
 	}
@@ -18,7 +17,6 @@ public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
 
 	UnhookBlockAllGuns();
 
-	// if(g_bKnifeFight > 0) g_bKnifeFight--;
 	if(HasTimerEnded){ 
 		LoopAlivePlayers(i){
 			if(!HasMenuOpen(i)){

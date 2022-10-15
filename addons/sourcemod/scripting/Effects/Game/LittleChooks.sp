@@ -1,5 +1,5 @@
 public void Chaos_LittleChooks(effect_data effect){
-	effect.title = "Lil' Chooks";
+	effect.Title = "Lil' Chooks";
 	effect.HasNoDuration = true;
 }
 

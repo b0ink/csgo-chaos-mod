@@ -1,5 +1,5 @@
 public void Chaos_Spin180(effect_data effect){
-	effect.title = "180 Spin";
+	effect.Title = "180 Spin";
 	effect.HasNoDuration = true;
 }
 

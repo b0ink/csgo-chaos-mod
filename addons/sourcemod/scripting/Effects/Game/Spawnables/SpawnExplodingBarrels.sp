@@ -1,5 +1,5 @@
 public void Chaos_SpawnExplodingBarrels(effect_data effect){
-	effect.title = "Exploding Barrels";
+	effect.Title = "Exploding Barrels";
 	effect.HasNoDuration = true;
 }
 

@@ -1,6 +1,6 @@
 public void Chaos_InsaneGravity(effect_data effect){
-	effect.title = "Insane Gravity";
-	effect.duration = 30;
+	effect.Title = "Insane Gravity";
+	effect.Duration = 30;
 }
 
 public void Chaos_InsaneGravity_START(){

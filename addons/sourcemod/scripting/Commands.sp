@@ -37,11 +37,11 @@ public Action Command_NewChaosEffect(int client, int args){
 		if(args >= 1){
 			if(strlen(effectName) >=3){
 					PoolChaosEffects(effectName);
-					if(Possible_Chaos_Effects.Length <= 0){
+					if(PossibleChaosEffects.Length <= 0){
 						ReplyToCommand(client, "[Chaos] No effects found, or the desired effect is currently disabled.");
 						return Plugin_Handled;
 					}else{
-						if(Possible_Chaos_Effects.Length > 1){
+						if(PossibleChaosEffects.Length > 1){
 							ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
 						}
 						ShowMenu_Effects(client);
@@ -86,12 +86,12 @@ public Action Command_StartChaos(int client, int args){
 		g_cvChaosEnabled.SetString("1", true, true);
 		Update_Convar_Config();
 
-		g_sCustomEffect = "";
+		g_sForceCustomEffect = "";
 		//start the timer but dont spawn effect.
 		// CreateTimer(0.1, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 		StopTimer(g_NewEffect_Timer);
 		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
-		if(g_DynamicChannel){
+		if(g_bDynamicChannelsEnabled){
 			Timer_Display(null, RoundToFloor(g_fChaos_EffectInterval));
 		}
 		AnnounceChaos("Chaos is Enabled!", -2.0);

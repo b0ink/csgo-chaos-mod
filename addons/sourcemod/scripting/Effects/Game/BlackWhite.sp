@@ -1,6 +1,6 @@
 public void Chaos_BlackWhite(effect_data effect){
-	effect.title = "Black and White";
-	effect.duration = 30;
+	effect.Title = "Black and White";
+	effect.Duration = 30;
 }
 
 public void Chaos_BlackWhite_OnMapStart(){

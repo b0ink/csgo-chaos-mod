@@ -79,13 +79,13 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 	if(AllowRandom) PoolChaosEffects();
 	
 	effect_data effect;
-	for(int i = 0; i < Possible_Chaos_Effects.Length; i++){ //should contain all 102 all time
-		Possible_Chaos_Effects.GetArray(i, effect, sizeof(effect));
-		Format(function_title, sizeof(function_title), "%s", GetChaosTitle(effect.config_name));
-		if(effect.can_run_effect()){
-			menu.AddItem(effect.config_name, function_title);
+	for(int i = 0; i < PossibleChaosEffects.Length; i++){ //should contain all 102 all time
+		PossibleChaosEffects.GetArray(i, effect, sizeof(effect));
+		Format(function_title, sizeof(function_title), "%s", GetChaosTitle(effect.FunctionName));
+		if(effect.CanRunEffect()){
+			menu.AddItem(effect.FunctionName, function_title);
 		}else{
-			menu.AddItem(effect.config_name, function_title, ITEMDRAW_DISABLED);
+			menu.AddItem(effect.FunctionName, function_title, ITEMDRAW_DISABLED);
 		}
 	}
 	
@@ -94,7 +94,7 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 	menu.Display(client, 0);
 
 	SetHudTextParams(0.01, 0.42, 0.1, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
-	if(g_DynamicChannel){
+	if(g_bDynamicChannelsEnabled){
 		ShowHudText(client, GetDynamicChannel(1), "");
 	}else{
 		ShowHudText(client, -1, "");
@@ -111,7 +111,7 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 			g_sSelectedChaosEffect = info;
 			if(g_sSelectedChaosEffect[0]){
 				if(g_bCanSpawnEffect && g_bChaos_Enabled){
-					Format(g_sCustomEffect, sizeof(g_sCustomEffect), "%s", g_sSelectedChaosEffect);
+					Format(g_sForceCustomEffect, sizeof(g_sForceCustomEffect), "%s", g_sSelectedChaosEffect);
 					ChooseEffect(null, true);
 				}else{
 					ReplyToCommand(param1, "[Chaos] Sorry, no effects can be spawned in right now.");
@@ -376,10 +376,10 @@ void ShowMenu_EditAllEffects(int client){
 	char name[128];
 	effect_data effect;
 	LoopAllEffects(effect, index){
-		Format(name, sizeof(name), "%s", GetChaosTitle(effect.config_name));
-		bool enabled = effect.enabled;
+		Format(name, sizeof(name), "%s", GetChaosTitle(effect.FunctionName));
+		bool enabled = effect.Enabled;
 		Format(name, sizeof(name), "%s %s", name, enabled ? "[ON]" : "[OFF]");
-		menu.AddItem(effect.config_name, name);
+		menu.AddItem(effect.FunctionName, name);
 	}
 
 	menu.ExitButton = true;
@@ -410,13 +410,13 @@ void ShowMenu_EffectSetting(int client, char[] function_name){
 
 	char enabled_status[128];
 	
-	FormatEx(enabled_status, sizeof(enabled_status), "Enabled: %s", effect.enabled ? "ON" : "OFF");	
+	FormatEx(enabled_status, sizeof(enabled_status), "Enabled: %s", effect.Enabled ? "ON" : "OFF");	
 
 	char effect_duration[128];
-	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", effect.Get_Duration());	
+	FormatEx(effect_duration, sizeof(effect_duration), "Duration: %f", effect.GetDuration());	
 
 	char menu_title[256];
-	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s\n ", effect.title);
+	FormatEx(menu_title, sizeof(menu_title), "Edit settings for %s\n ", effect.Title);
 
 	Menu menu = new Menu(EffectSetting_Handler);
 
@@ -453,7 +453,7 @@ public int EffectSetting_Handler(Menu menu, MenuAction action, int param1, int p
 			if(StrEqual(info, "setting-enabled", false)){
 				effect_data effect;
 				GetEffectData(function_name, effect);
-				if(effect.enabled){
+				if(effect.Enabled){
 					UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "enabled", "0");
 				}else{
 					UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "enabled", "1");

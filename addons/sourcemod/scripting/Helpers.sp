@@ -4,7 +4,7 @@ bool GetEffectData(char[] function_name, effect_data return_data){
 	effect_data effect;
 	bool found = false;
 	LoopAllEffects(effect, index){
-		if(StrEqual(effect.config_name, function_name, false)){
+		if(StrEqual(effect.FunctionName, function_name, false)){
 			found = true;
 			break;
 		}
@@ -19,14 +19,14 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false
 	float expire = defaultTime;
 	effect_data effect;
 	if(GetEffectData(EffectName, effect)){
-		expire = effect.Get_Duration(raw);
+		expire = effect.GetDuration(raw);
 	}else{
 		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
 	}
 	return expire;
 }
 
-//TODO: remove the need for GetChaosTitle -> use GetEffectDate and use effect.title more instead of this jank
+//TODO: remove the need for GetChaosTitle -> use GetEffectDate and use effect.Title more instead of this jank
 char[] GetChaosTitle(char[] function_name){
 	char return_string[128];
 	char temp_title[128];
@@ -41,7 +41,7 @@ char[] GetChaosTitle(char[] function_name){
 		if(FileExists(translation_path) && TranslationPhraseExists(temp_title)){
 				FormatEx(return_string, sizeof(return_string), "%t", temp_title, LANG_SERVER);
 		}else{
-			FormatEx(return_string, sizeof(return_string), "%s", effect.title);
+			FormatEx(return_string, sizeof(return_string), "%s", effect.Title);
 		}
 	}else{
 		FormatEx(return_string, sizeof(return_string), "%s", function_name);
@@ -82,7 +82,7 @@ void DisplayCenterTextToAll(char[] message){
 
 	LoopValidPlayers(i){
 		SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
-		if(g_DynamicChannel){
+		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(0), "%s", finalMess);
 		}else{
 			ShowHudText(i, -1, "%s", finalMess);
@@ -111,7 +111,7 @@ void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, b
 	char EffectName[256];
 	FormatEx(EffectName, sizeof(EffectName), "%s", RemoveMulticolors(message));
 	if(!endingChaos && EffectTime > -2.0){
-		if(g_DynamicChannel){
+		if(g_bDynamicChannelsEnabled){
 			if(EffectTime == 0.0){
 				AddEffectToHud(EffectName, 9999.0, megaChaos);
 			}else{

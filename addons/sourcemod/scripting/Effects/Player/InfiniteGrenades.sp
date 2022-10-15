@@ -1,6 +1,6 @@
 public void Chaos_InfiniteGrenades(effect_data effect){
-	effect.title = "Infinite Grenades";
-	effect.duration = 30;
+	effect.Title = "Infinite Grenades";
+	effect.Duration = 30;
 }
 
 public void Chaos_InfiniteGrenades_START(){

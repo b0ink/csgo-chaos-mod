@@ -1,6 +1,6 @@
 public void Chaos_SilentFootsteps(effect_data effect){
-	effect.title = "Silent Footsteps";
-	effect.duration = 30;
+	effect.Title = "Silent Footsteps";
+	effect.Duration = 30;
 }
 
 public void Chaos_SilentFootsteps_START(){

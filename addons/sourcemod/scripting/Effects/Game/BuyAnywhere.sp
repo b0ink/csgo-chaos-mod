@@ -1,6 +1,6 @@
 public void Chaos_BuyAnywhere(effect_data effect){
-	effect.title = "Buy Anyhere Enabled";
-	effect.duration = 30;
+	effect.Title = "Buy Anyhere Enabled";
+	effect.Duration = 30;
 }
 
 public void Chaos_BuyAnywhere_START(){

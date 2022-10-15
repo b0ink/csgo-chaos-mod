@@ -1,7 +1,7 @@
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 public void Chaos_ResetSpawns(effect_data effect){
-	effect.title = "Teleport all players back to spawn";
+	effect.Title = "Teleport all players back to spawn";
 	effect.AddAlias("Teleport");
 	effect.HasNoDuration = true;
 }
@@ -26,6 +26,6 @@ public void Chaos_ResetSpawns_START(){
 }
 
 public bool Chaos_ResetSpawns_Conditions(){
-	if(g_iChaos_Round_Time <= 25) return false;
+	if(g_iChaosRoundTime <= 25) return false;
 	return true;
 }

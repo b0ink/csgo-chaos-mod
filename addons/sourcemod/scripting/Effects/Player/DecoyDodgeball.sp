@@ -1,6 +1,6 @@
 public void Chaos_DecoyDodgeball(effect_data effect){
-	effect.title = "Decoy Dodgeball";
-	effect.duration = 30;
+	effect.Title = "Decoy Dodgeball";
+	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Thunderstorm");
 } 
 

@@ -1,5 +1,5 @@
 public void Chaos_ExtendRoundTime(effect_data effect){
-	effect.title = "Extend Round Time";
+	effect.Title = "Extend Round Time";
 	effect.HasNoDuration = true;	
 }
 

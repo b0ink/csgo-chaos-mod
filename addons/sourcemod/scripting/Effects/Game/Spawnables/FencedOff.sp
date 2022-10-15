@@ -12,7 +12,7 @@ enum struct fence_data {
 }
 
 public void Chaos_FencedOff(effect_data effect){
-	effect.title = "Fenced Off";
+	effect.Title = "Fenced Off";
 	effect.HasNoDuration = true;
 }
 

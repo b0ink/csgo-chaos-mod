@@ -64,7 +64,7 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define LoopAllMetaEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
 		if(%2 < ChaosEffects.Length)\
 		if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))\
-		if(%1.meta)
+		if(%1.IsMetaEffect)
 
 		
 
@@ -75,190 +75,121 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 
 
-char g_sWeapons[][64] = {
-	"weapon_glock",
-    "weapon_p250",
-    "weapon_fiveseven",
-    "weapon_deagle",
-    "weapon_elite",
-    "weapon_hkp2000",
-    "weapon_tec9",
-
-    "weapon_nova",
-    "weapon_xm1014",
-    "weapon_sawedoff",
-
-    "weapon_m249",
-    "weapon_negev",
-    "weapon_mag7",
-
-    "weapon_mp7",
-    "weapon_ump45",
-    "weapon_p90",
-    "weapon_bizon",
-    "weapon_mp9",
-    "weapon_mac10",
-
-    "weapon_famas",
-    "weapon_m4a1",
-    "weapon_aug",
-    "weapon_galilar",
-    "weapon_ak47",
-    "weapon_sg556",
-
-    "weapon_ssg08",
-    "weapon_awp",
-    "weapon_scar20",
-    "weapon_g3sg1",
-
-    // "weapon_taser",
-    // "weapon_molotov",
-    // "weapon_hegrenade"
+char g_sWeapons[][64] = {"weapon_glock", "weapon_p250", "weapon_fiveseven", "weapon_deagle", "weapon_elite",
+    "weapon_hkp2000", "weapon_tec9", "weapon_nova", "weapon_xm1014", "weapon_sawedoff",
+    "weapon_m249", "weapon_negev", "weapon_mag7",
+    "weapon_mp7", "weapon_ump45", "weapon_p90", "weapon_bizon", "weapon_mp9", "weapon_mac10",
+    "weapon_famas", "weapon_m4a1", "weapon_aug", "weapon_galilar", "weapon_ak47", "weapon_sg556",
+    "weapon_ssg08", "weapon_awp", "weapon_scar20", "weapon_g3sg1",
 };
 
 
 char g_sSkyboxes[][] = {
-	"cs_baggage_skybox_",
-	"cs_tibet",
-	"embassy",
-	"italy",
-	"jungle",
-	"office",
-	"sky_cs15_daylight01_hdr",
-	"sky_cs15_daylight02_hdr",
-	"sky_cs15_daylight03_hdr",
-	"sky_cs15_daylight04_hdr",
-	"sky_day02_05",
-	"nukeblank",
-	"sky_venice",
-	"sky_csgo_cloudy01",
-	"sky_csgo_night02",
-	"sky_csgo_night02b",
-	"vertigo",
-	"vertigoblue_hdr",
-	"sky_dust",
-	"vietnam"
+	"cs_baggage_skybox_", "cs_tibet", "embassy", "italy", "jungle", "office", "sky_cs15_daylight01_hdr",
+	"sky_cs15_daylight02_hdr", "sky_cs15_daylight03_hdr", "sky_cs15_daylight04_hdr", "sky_day02_05",
+	"nukeblank", "sky_venice", "sky_csgo_cloudy01", "sky_csgo_night02", "sky_csgo_night02b", "vertigo", "vertigoblue_hdr",
+	"sky_dust", "vietnam"
 };
 
 
 bool 	g_bCanSpawnChickens = true;
-
-
 bool 	g_bCanSpawnEffect = true;
 
-int 	g_iChaos_EffectsRun_Count = 0;
-int		g_TotalRounds = 0;
-Handle	g_MetaHistory = INVALID_HANDLE;
-int		g_EffectsSinceMeta = 0;
-int 	g_iChaos_Round_Time = 0;
+int 	g_iTotalEffectsRanThisRound = 0;
+int		g_iTotalRoundsThisMap = 0;
+int		g_iEffectsSinceMeta = 0;
+int 	g_iChaosRoundTime = 0; // starts counting from round start, including freeze time
 
 
-bool 	g_bMegaChaos = false;
+bool 	g_bMegaChaosIsActive = false;
+
 char 	g_sSelectedChaosEffect[64] = "";
-char 	g_sCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
+char 	g_sForceCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
-Handle 	g_NewEffect_Timer = INVALID_HANDLE;
 bool 	g_bPlaySound_Debounce = false;
 bool 	g_bDisableRetryEffect = false;
 
-Handle 	Effect_History = INVALID_HANDLE;
 
-bool 	g_DynamicChannel = false;
+bool 	g_bDynamicChannelsEnabled = false;
 
-int ChaosMapCount = 0;
+int 	ChaosMapCount = 0;
 
 
 // Any variables shared by multiple plugins can be listed here
-int g_bKnifeFight = 0;
-int g_bNoStrafe = 0;
-int g_AutoBunnyhop = 0;
-int g_bNoForwardBack = 0;
-int g_NoFallDamage = 0;
-int g_iC4ChickenEnt = -1;
+int 	g_bNoStrafe = 0;
+int 	g_AutoBunnyhop = 0;
+int 	g_bNoForwardBack = 0;
+int 	g_NoFallDamage = 0;
+int 	g_iC4ChickenEnt = -1;
 
 
 #include "ConVars.sp"
 
+Handle 		g_NewEffect_Timer = INVALID_HANDLE;
+ArrayList 	ChaosEffects;
+ArrayList 	PossibleChaosEffects;
 
-ArrayList ChaosEffects;
-ArrayList Possible_Chaos_Effects;
+Handle 		EffectsHistory = INVALID_HANDLE;
 
-ArrayList 	Possible_Meta_Effects;
-ArrayList	Meta_Effects_History;
+ArrayList 	PossibleMetaEffects;
+ArrayList	MetaEffectsHistory;
 
-
-/*
-	If Chaos_Effects.cfg was to be removed, then it would make sense to do the whole:
-		effect.duration = x
-		effect.enabled = x
-		effect.name = x
-		effect.description = x
-*/
 enum struct effect_data{
-	char 		title[64]; // 0th index for ease of sorting in configs.sp
+	char 		Title[64]; // 0th index for ease of sorting in configs.sp
+	int 		ID;
+	char 		FunctionName[64];
 	
-	int 		id;
-
-	char 		config_name[64];
-	char 		description[64];
-	
-	int 		duration;
-	// bool		force_no_duration;
+	int 		Duration;
 	bool 		HasNoDuration;
 	bool		HasCustomAnnouncement;
-	bool		enabled;
-	bool		meta;
+	bool		Enabled;
+	bool		IsMetaEffect;
 
-	char 		function_name_start[64];
-	char 		function_name_reset[64];
-	char 		conditions[64];
-	
 	Handle		IncompatibleEffects;
 	Handle		Aliases;
-	Handle 		timer;
+	Handle 		Timer;
 
-	void run_effect(){
-		// PrintToChatAll("attempting to run!: %s for %i seconds", this.function_name_start, this.duration);
-		Log("Running effect: %s", this.function_name_start);
+	void Run(){
 		Function func = GetFunctionByName(GetMyHandle(), this.function_name_start);
+		char function_name_start[64];
+		Format(function_name_start, sizeof(function_name_start), "%s_START", this.FunctionName);
+
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();
 
-			float duration = this.Get_Duration(); 
-			if(duration > 0) this.timer = CreateTimer(duration, Effect_Reset, this.id);
+			float duration = this.GetDuration(); 
+			if(duration > 0) this.Timer = CreateTimer(duration, Effect_Reset, this.ID);
 			
 			if(!this.HasCustomAnnouncement){
-				AnnounceChaos(this.title, this.Get_Duration(), _, this.meta);
+				AnnounceChaos(this.Title, this.GetDuration(), _, this.IsMetaEffect);
 			}
-			g_sLastPlayedEffect = this.config_name;
+			g_sLastPlayedEffect = this.FunctionName;
 			ChaosMapCount++;
-			ChaosEffects.SetArray(this.id, this); // save timer
-			// ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
-			
+			ChaosEffects.SetArray(this.ID, this); // save timer
 		}
 	}
 
-	void reset_effect(bool HasTimerEnded = false){
+	void Reset(bool HasTimerEnded = false){
 		Function func = GetFunctionByName(GetMyHandle(), this.function_name_reset);
+		char function_name_reset[64];
+		Format(function_name_reset, sizeof(function_name_reset), "%_RESET", this.FunctionName);
+
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_PushCell(HasTimerEnded);
 			Call_Finish();
-			this.timer = INVALID_HANDLE;
-			ChaosEffects.SetArray(this.id, this);
+			this.Timer = INVALID_HANDLE;
+			ChaosEffects.SetArray(this.ID, this);
 		}
-
-		// ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
-
 	}
 
-	bool can_run_effect(){
-		//TODO: slowly remove conditions and check .isCompatible
+	bool CanRunEffect(){
+		//TODO: slowly remove conditions and check .IsCompatible
 		bool response = true;
 		char condition_check[64];
-		FormatEx(condition_check, sizeof(condition_check), "%s_Conditions", this.config_name);
+		FormatEx(condition_check, sizeof(condition_check), "%s_Conditions", this.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), condition_check);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -266,12 +197,12 @@ enum struct effect_data{
 		}
 		return response;
 	}
-	float Get_Duration(bool raw = false){
+	float GetDuration(bool raw = false){
 		if(this.HasNoDuration){
 			return -1.0;
 		}
 		float OverwriteDuration = g_fChaos_OverwriteDuration;
-		float duration = float(this.duration);
+		float duration = float(this.Duration);
 		if(raw){
 			return duration;
 		}
@@ -292,7 +223,7 @@ enum struct effect_data{
 				duration = SanitizeTime(duration);
 			}else{
 				if(duration != SanitizeTime(duration)){
-					Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", this.config_name, duration, SanitizeTime(duration));
+					Log("Incorrect duration set for %s. You set: %f, defaulting to: %f", this.FunctionName, duration, SanitizeTime(duration));
 					duration = SanitizeTime(duration);
 				}
 			}
@@ -307,7 +238,7 @@ enum struct effect_data{
 		}
 		PushArrayString(this.IncompatibleEffects, effectName);
 	}
-	bool isCompatible(){
+	bool IsCompatible(){
 		if(this.IncompatibleEffects == INVALID_HANDLE) return true;
 		
 		char effectName[255];
@@ -320,10 +251,10 @@ enum struct effect_data{
 		effect_data effect;
 
 		LoopAllEffects(effect, index){
-			if(effect.timer != INVALID_HANDLE){
+			if(effect.Timer != INVALID_HANDLE){
 				for(int i = 0; i < GetArraySize(effect.IncompatibleEffects); i++){
 					GetArrayString(effect.IncompatibleEffects, i, effectName, sizeof(effectName));
-					if(StrEqual(effect.config_name, effectName)){
+					if(StrEqual(effect.FunctionName, effectName)){
 						return false;
 					}
 				}
@@ -343,7 +274,7 @@ enum struct effect_data{
 bool IsEffectRunning(char[] effectName){
 	effect_data effect;
 	LoopAllEffects(effect, index){
-		if(effect.timer != INVALID_HANDLE && StrEqual(effect.config_name, effectName, false)){
+		if(effect.Timer != INVALID_HANDLE && StrEqual(effect.FunctionName, effectName, false)){
 			return true;
 		}
 	}
@@ -353,8 +284,8 @@ bool IsEffectRunning(char[] effectName){
 public Action Effect_Reset(Handle timer, int effect_id){
 	effect_data effect;
 	LoopAllEffects(effect, index){
-		if(effect.id == effect_id){
-			effect.reset_effect(true);
+		if(effect.ID == effect_id){
+			effect.Reset(true);
 			ChaosEffects.SetArray(index, effect);
 			break;
 		}
@@ -405,11 +336,11 @@ public void OnPluginStart(){
 		}
 	}
 
-	Possible_Chaos_Effects = new ArrayList(sizeof(effect_data));
-	Effect_History = CreateArray(64);
+	PossibleChaosEffects = new ArrayList(sizeof(effect_data));
+	EffectsHistory = CreateArray(64);
 
-	Possible_Meta_Effects = new ArrayList(sizeof(effect_data));
-	Meta_Effects_History = new ArrayList(sizeof(effect_data));
+	PossibleMetaEffects = new ArrayList(sizeof(effect_data));
+	MetaEffectsHistory = new ArrayList(sizeof(effect_data));
 
 	g_SavedConvars  = CreateArray(64);
 
@@ -419,8 +350,6 @@ public void OnPluginStart(){
 
 	TWITCH_INIT();
 	Overlay_INIT()l
-
-	g_MetaHistory = CreateArray(128);
 
 }
 
@@ -432,11 +361,9 @@ public void OnPluginEnd(){
 
 public void OnMapStart(){
 	
-	if(g_MetaHistory != INVALID_HANDLE){
-		ClearArray(g_MetaHistory);
-	}
-	if(Effect_History != INVALID_HANDLE){
-		ClearArray(Effect_History);
+	MetaEffectsHistory.Clear();
+	if(EffectsHistory != INVALID_HANDLE){
+		ClearArray(EffectsHistory);
 	}
 	UpdateCvars();
 
@@ -476,7 +403,7 @@ public void OnMapStart(){
 	StopTimer(g_NewEffect_Timer);
 	g_NewEffect_Timer = INVALID_HANDLE;
 
-	if(Effect_History != INVALID_HANDLE) ClearArray(Effect_History);
+	if(EffectsHistory != INVALID_HANDLE) ClearArray(EffectsHistory);
 
 	RemoveChickens();
 	
@@ -501,21 +428,21 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 }
 
 public void OnAllPluginsLoaded(){
-	g_DynamicChannel = LibraryExists("DynamicChannels");
-	if(!g_DynamicChannel){
+	g_bDynamicChannelsEnabled = LibraryExists("DynamicChannels");
+	if(!g_bDynamicChannelsEnabled){
 		Log("Could not find plugin 'DynamicChannels.smx'. To enable HUD text for Chaos effects and timers, install the 'DynamicChannels.smx' plugin from https://github.com/Vauff/DynamicChannels");
 	}
 }
  
 public void OnLibraryRemoved(const char[] name){
     if (StrEqual(name, "DynamicChannels")){
-        g_DynamicChannel = false;
+        g_bDynamicChannelsEnabled = false;
     }
 }
  
 public void OnLibraryAdded(const char[] name){
     if (StrEqual(name, "DynamicChannels")){
-        g_DynamicChannel = true;
+        g_bDynamicChannelsEnabled = true;
     }
 }
 
@@ -538,7 +465,7 @@ public Action Timer_CreateHostage(Handle timer){
 
 bool Effect_Recently_Played(char[] effect_name){
 	bool found = false;
-	if(FindStringInArray(Effect_History, effect_name) != -1){
+	if(FindStringInArray(EffectsHistory, effect_name) != -1){
 		found = true;
 	}
 	return found;
@@ -547,7 +474,7 @@ bool Effect_Recently_Played(char[] effect_name){
 bool PoolChaosEffects(char[] effectName = ""){
 
 	char alias[64];
-	Possible_Chaos_Effects.Clear();
+	PossibleChaosEffects.Clear();
 	effect_data effect;
 	LoopAllEffects(effect, index){
 		if(effectName[0]){ //* if keyword was provided
@@ -563,19 +490,18 @@ bool PoolChaosEffects(char[] effectName = ""){
 
 		
 			if(
-				StrContains(effect.config_name, effectName, false) != -1 ||
-				StrContains(effect.title, effectName, false) != -1 ||
+				StrContains(effect.FunctionName, effectName, false) != -1 ||
+				StrContains(effect.Title, effectName, false) != -1 ||
 				containsAlias
 			){
-				Possible_Chaos_Effects.PushArray(effect, sizeof(effect));
+				PossibleChaosEffects.PushArray(effect, sizeof(effect));
 			}
 		}else{
-			Possible_Chaos_Effects.PushArray(effect, sizeof(effect)); //* Show all but may be disabled in menu
+			PossibleChaosEffects.PushArray(effect, sizeof(effect)); //* Show all but may be disabled in menu
 		}
 	}
 
-	Log("Size of pooled chaos effects: %i", Possible_Chaos_Effects.Length);
-	// Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
+	Log("Size of pooled chaos effects: %i", PossibleChaosEffects.Length);
 }
 
 
@@ -595,28 +521,27 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		ParseMapCoordinates("Chaos_Locations");
 	}
 
-
-	if(g_bChaos_TwitchEnabled && !g_bMegaChaos && !CustomRun){
+	if(g_bChaos_TwitchEnabled && !g_bMegaChaosIsActive && !CustomRun){
 			if(Twitch_Votes.Length != 0){
 				effect_data effect;
 				if(GetHighestVotedEffect(effect)){
-					g_sCustomEffect = effect.config_name;
+					g_sForceCustomEffect = effect.FunctionName;
 				}
 
-				if(!effect.can_run_effect()){
-					g_sCustomEffect = "";
+				if(!effect.CanRunEffect()){
+					g_sForceCustomEffect = "";
 				}
 			}
 	}
 
 
-	if(g_sCustomEffect[0]){ //run from menu
-		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sCustomEffect);
+	if(g_sForceCustomEffect[0]){ //run from menu
+		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
 		effect_data effect;
 		LoopAllEffects(effect, index){
 			//TODO: test conditions, return error to user?
-			if(StrEqual(effect.config_name, g_sCustomEffect, false)){
-				effect.run_effect();
+			if(StrEqual(effect.FunctionName, g_sForceCustomEffect, false)){
+				effect.Run();
 				break;
 			}
 		}
@@ -633,28 +558,28 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				randomEffect = GetRandomInt(0, totalEffects - 1);
 				ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
 				if(
-					effect.enabled &&
-					effect.can_run_effect() &&
-					(!Effect_Recently_Played(effect.config_name) || CustomRun) &&
-					effect.timer == INVALID_HANDLE &&
-					effect.isCompatible() &&
-					!effect.meta
+					effect.Enabled &&
+					effect.CanRunEffect() &&
+					(!Effect_Recently_Played(effect.FunctionName) || CustomRun) &&
+					effect.Timer == INVALID_HANDLE &&
+					effect.IsCompatible() &&
+					!effect.IsMetaEffect
 				){
-					Random_Effect = effect.config_name;
-					effect.run_effect();
-					if(!g_bMegaChaos){ // just in case?
-						g_EffectsSinceMeta++;
+					Random_Effect = effect.FunctionName;
+					effect.Run();
+					if(!g_bMegaChaosIsActive){ // just in case?
+						g_iEffectsSinceMeta++;
 					}
-					PushArrayString(Effect_History, effect.config_name);
+					PushArrayString(EffectsHistory, effect.FunctionName);
 
-					float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
-					if(GetArraySize(Effect_History) > average) RemoveFromArray(Effect_History, 0);
+					float average = float((PossibleChaosEffects.Length / 4) * 3); //idk
+					if(GetArraySize(EffectsHistory) > average) RemoveFromArray(EffectsHistory, 0);
 				}
 
 			}while(!Random_Effect[0]);
 			if(attempts > 900){
 				LogError("Clearing effect history");
-				ClearArray(Effect_History); //fail safe
+				ClearArray(EffectsHistory); //fail safe
 				break;
 			}
 		}
@@ -663,7 +588,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	LogEffect(g_sLastPlayedEffect);
 
 	PrintEffects();
-	g_sCustomEffect  = "";
+	g_sForceCustomEffect  = "";
 	if(g_bPlaySound_Debounce == false){
 		//Prevent overlapping sounds
 		g_bPlaySound_Debounce = true;
@@ -676,30 +601,30 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(CustomRun) return;
 
 
-	if(!CustomRun &&  (g_TotalRounds >= 5 && GetRandomInt(0, 100) <= 40 && g_EffectsSinceMeta >= 20 && g_iChaos_Round_Time < 30)){
-		g_EffectsSinceMeta = 0;
+	if(!CustomRun &&  (g_iTotalRoundsThisMap >= 5 && GetRandomInt(0, 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
+		g_iEffectsSinceMeta = 0;
 		effect_data metaEffect;
 		bool metaAlreadyRunning = false;
-		Possible_Meta_Effects.Clear();
+		PossibleMetaEffects.Clear();
 		LoopAllMetaEffects(metaEffect, index){
-			// PrintToChatAll("%s s", metaEffect.title);
-			if(metaEffect.can_run_effect()){
-				Possible_Meta_Effects.PushArray(metaEffect, sizeof(metaEffect));
+			// PrintToChatAll("%s s", metaEffect.Title);
+			if(metaEffect.CanRunEffect()){
+				PossibleMetaEffects.PushArray(metaEffect, sizeof(metaEffect));
 			}
-			if(metaEffect.timer != INVALID_HANDLE){
+			if(metaEffect.Timer != INVALID_HANDLE){
 				metaAlreadyRunning = true;
 			}
 		}
-		if(!metaAlreadyRunning && Possible_Meta_Effects.Length > 0) {
-			int random = GetRandomInt(0, Possible_Meta_Effects.Length - 1);
-			Possible_Meta_Effects.GetArray(random, metaEffect, sizeof(metaEffect));
-			g_sCustomEffect = metaEffect.config_name;
-			Meta_Effects_History.PushArray(metaEffect);
+		if(!metaAlreadyRunning && PossibleMetaEffects.Length > 0) {
+			int random = GetRandomInt(0, PossibleMetaEffects.Length - 1);
+			PossibleMetaEffects.GetArray(random, metaEffect, sizeof(metaEffect));
+			g_sForceCustomEffect = metaEffect.FunctionName;
+			MetaEffectsHistory.PushArray(metaEffect);
 			ChooseEffect(null, true);
 		}
 		// History too full, clear it to allow old ones to be spawned.
-		if(Meta_Effects_History.Length > Possible_Meta_Effects.Length - 1){
-			Meta_Effects_History.Clear();
+		if(MetaEffectsHistory.Length > PossibleMetaEffects.Length - 1){
+			MetaEffectsHistory.Clear();
 		}
 
 	}
@@ -718,10 +643,10 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			Effect_Interval = 15.0;
 		}
 		g_NewEffect_Timer = CreateTimer(Effect_Interval, ChooseEffect);
-		if(g_DynamicChannel){
+		if(g_bDynamicChannelsEnabled){
 			Timer_Display(null, RoundToFloor(Effect_Interval));
 		}
-		g_iChaos_EffectsRun_Count++;
+		g_iTotalEffectsRanThisRound++;
 	}
 }
 
@@ -738,7 +663,7 @@ public void RetryEffect(){
 		return;
 	}
 	StopTimer(g_NewEffect_Timer);
-	g_sCustomEffect = "";
+	g_sForceCustomEffect = "";
 	g_sSelectedChaosEffect = "";
 	ChooseEffect(INVALID_HANDLE);
 }
@@ -749,7 +674,7 @@ public Action ResetRoundChaos(Handle timer){
 
 	effect_data effect;
 	LoopAllEffects(effect, index){
-		effect.reset_effect(false);
+		effect.Reset(false);
 	}
 }
 

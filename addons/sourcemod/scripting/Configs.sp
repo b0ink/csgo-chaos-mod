@@ -44,12 +44,12 @@ public void ParseChaosEffects(){
 		}
 		// if(start_func == INVALID_FUNCTION || reset_func == INVALID_FUNCTION) continue;
 
-		if(effect.duration == 0 && effect.HasNoDuration == false){
-			effect.duration = 30; // Default time
+		if(effect.Duration == 0 && effect.HasNoDuration == false){
+			effect.Duration = 30; // Default time
 		}
 		Format(function_name, sizeof(function_name), EffectNames[i]);
-		Format(effect.config_name, sizeof(effect.config_name), "%s", function_name);
-		effect.enabled = true;
+		Format(effect.FunctionName, sizeof(effect.FunctionName), "%s", function_name);
+		effect.Enabled = true;
 
 		char chaos_translation_key[64];
 		char Chaos_Function_Title[64];
@@ -59,7 +59,7 @@ public void ParseChaosEffects(){
 		if(translations){
 			if(TranslationPhraseExists(chaos_translation_key)){
 				Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
-				effect.title = Chaos_Function_Title;
+				effect.Title = Chaos_Function_Title;
 			}
 		}
 
@@ -72,13 +72,13 @@ public void ParseChaosEffects(){
 	effect_data effect;
 	char init_function[64];
 	LoopAllEffects(effect, index){
-		Format(init_function, sizeof(init_function), "%s_INIT", effect.config_name);
+		Format(init_function, sizeof(init_function), "%s_INIT", effect.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();
 		}
-		effect.id = index;
+		effect.ID = index;
 		ChaosEffects.SetArray(index, effect);
 	}
 }
@@ -129,7 +129,7 @@ void Run_OnMapStart_Functions(){
 	effect_data effect;
 	char init_function[64];
 	LoopAllEffects(effect, index){
-		Format(init_function, sizeof(init_function), "%s_OnMapStart", effect.config_name);
+		Format(init_function, sizeof(init_function), "%s_OnMapStart", effect.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), init_function);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -239,9 +239,9 @@ void ParseOverrideEffects(){
 			effect_data effect;
 
 			LoopAllEffects(effect, index){
-				if(StrEqual(effect.config_name, Chaos_Function_Name, false)){
-					effect.enabled = view_as<bool>(enabled);
-					effect.duration = expires;
+				if(StrEqual(effect.FunctionName, Chaos_Function_Name, false)){
+					effect.Enabled = view_as<bool>(enabled);
+					effect.Duration = expires;
 					ChaosEffects.SetArray(index, effect);
 				}
 			}

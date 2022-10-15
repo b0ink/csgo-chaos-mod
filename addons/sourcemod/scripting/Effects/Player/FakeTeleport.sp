@@ -1,7 +1,7 @@
 float FakeTelport_loc[MAXPLAYERS+1][3];
 
 public void Chaos_FakeTeleport(effect_data effect){
-	effect.title = "Fake Teleport";
+	effect.Title = "Fake Teleport";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_EffectName");

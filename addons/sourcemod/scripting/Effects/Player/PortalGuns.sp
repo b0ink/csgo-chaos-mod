@@ -7,8 +7,8 @@ int g_halosprite;
 float g_PortalTeleports[MAXPLAYERS + 1][3];
 
 public void Chaos_PortalGuns(effect_data effect){
-	effect.title = "Portal Guns";
-	effect.duration = 30;
+	effect.Title = "Portal Guns";
+	effect.Duration = 30;
 }
 
 public void Chaos_PortalGuns_OnMapStart(){

@@ -18,7 +18,7 @@ public Action Timer_SaveBombPosition(Handle timer){
 
 public void OnEntityCreated(int ent, const char[] classname){
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityCreated", Chaos_EffectData_Buffer.config_name);
+		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityCreated", Chaos_EffectData_Buffer.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -33,7 +33,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.config_name);
+		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -65,9 +65,9 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	ResetChaos();
 	CLEAR_CC();
 
-	g_TotalRounds++;
+	g_iTotalRoundsThisMap++;
 
-	g_iChaos_EffectsRun_Count = 0;
+	g_iTotalEffectsRanThisRound = 0;
 
 	CreateTimer(5.0, Timer_CreateHostage);
 	
@@ -80,21 +80,21 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 		g_NewEffect_Timer = CreateTimer(freezeTime, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
 
-	g_iChaos_Round_Time = 0;
+	g_iChaosRoundTime = 0;
 	CreateTimer(1.0, Timer_UpdateRoundTime);
 	return Plugin_Continue;
 }
 
 public Action Timer_UpdateRoundTime(Handle timer){
-	if(g_iChaos_Round_Time < -50){
+	if(g_iChaosRoundTime < -50){
 		return;
 	}
-	g_iChaos_Round_Time++;	
+	g_iChaosRoundTime++;	
 	CreateTimer(1.0, Timer_UpdateRoundTime);
 }
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
-	g_iChaos_Round_Time = -100;
+	g_iChaosRoundTime = -100;
 	
 	ClearFog();
 	
@@ -117,7 +117,7 @@ void ResetChaos(){
 public void OnGameFrame(){
 	if (!g_cvChaosEnabled.BoolValue) return;
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnGameFrame", Chaos_EffectData_Buffer.config_name);
+		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnGameFrame", Chaos_EffectData_Buffer.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);

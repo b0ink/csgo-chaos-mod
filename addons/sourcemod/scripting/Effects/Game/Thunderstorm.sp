@@ -1,6 +1,6 @@
 public void Chaos_Thunderstorm(effect_data effect){
-	effect.title = "Thunderstorm";
-	effect.duration = 30;
+	effect.Title = "Thunderstorm";
+	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_DecoyDodgeball");
 	effect.IncompatibleWith("Chaos_OHKO");
 	effect.AddAlias("Weather");

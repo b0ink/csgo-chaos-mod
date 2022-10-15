@@ -1,6 +1,6 @@
 public void Chaos_EnemyRadar(effect_data effect){
-	effect.title = "Enemy Radar";
-	effect.duration = 30;
+	effect.Title = "Enemy Radar";
+	effect.Duration = 30;
 }
 public void Chaos_EnemyRadar_START(){
 	cvar("mp_radar_showall", "1");

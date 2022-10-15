@@ -1,5 +1,5 @@
 public void Chaos_Nothing(effect_data effect){
-	effect.title = "Nothing";
+	effect.Title = "Nothing";
 	effect.HasNoDuration = true;
 }
 

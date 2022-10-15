@@ -1,5 +1,5 @@
 public void Chaos_Earthquake(effect_data effect){
-	effect.title = "Earthquake";
+	effect.Title = "Earthquake";
 	effect.HasNoDuration = true;
 }
 

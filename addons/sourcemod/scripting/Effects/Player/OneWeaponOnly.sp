@@ -1,6 +1,6 @@
 public void Chaos_OneWeaponOnly(effect_data effect){
-	effect.title = "One Weapon Only";
-	effect.duration = 30;
+	effect.Title = "One Weapon Only";
+	effect.Duration = 30;
 	effect.HasNoDuration = false;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_EffectName");

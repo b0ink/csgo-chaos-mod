@@ -29,9 +29,9 @@ public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	//* Remove current items from the histor/cooldown, as we can assume those effects have not been run.
 	vote_data effect;
 	LoopAllVotes(effect, i){
-		int index = FindStringInArray(Effect_History, effect.config_name);
+		int index = FindStringInArray(EffectsHistory, effect.FunctionName);
 		if(index != -1){
-			RemoveFromArray(Effect_History, i);
+			RemoveFromArray(EffectsHistory, i);
 		}
 	}
 
@@ -109,23 +109,23 @@ void Twitch_PoolNewVotingEffects(){
 		randomEffect = GetRandomInt(0, totalEffects - 1);
 		ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
 		if(
-			effect.enabled &&
-			effect.can_run_effect() &&
-			(!Effect_Recently_Played(effect.config_name)) &&
-			effect.timer == INVALID_HANDLE &&
-			effect.isCompatible() &&
-			!IsEffectInVoteList(effect.config_name)
+			effect.Enabled &&
+			effect.CanRunEffect() &&
+			(!Effect_Recently_Played(effect.FunctionName)) &&
+			effect.Timer == INVALID_HANDLE &&
+			effect.IsCompatible() &&
+			!IsEffectInVoteList(effect.FunctionName)
 		){
-			// PushArrayString(VotingEffects, effect.title);
+			// PushArrayString(VotingEffects, effect.Title);
 			vote_data vote;
-			vote.name = effect.title;
+			vote.name = effect.Title;
 			vote.votes = 0;
-			vote.config_name = effect.config_name;
+			vote.FunctionName = effect.FunctionName;
 			Twitch_Votes.PushArray(vote);
-			PushArrayString(Effect_History, effect.config_name);
+			PushArrayString(EffectsHistory, effect.FunctionName);
 
-			float average = float((Possible_Chaos_Effects.Length / 4) * 3); //idk
-			if(GetArraySize(Effect_History) > average) RemoveFromArray(Effect_History, 0);
+			float average = float((PossibleChaosEffects.Length / 4) * 3); //idk
+			if(GetArraySize(EffectsHistory) > average) RemoveFromArray(EffectsHistory, 0);
 		}
 		if(EnableRandomEffectOption){
 			if(Twitch_Votes.Length == 3) break;
@@ -136,7 +136,7 @@ void Twitch_PoolNewVotingEffects(){
 		vote_data randomVote;
 		randomVote.name = "Random Effect";
 		randomVote.votes = 0;
-		randomVote.config_name = "RANDOMEFFECT";
+		randomVote.FunctionName = "RANDOMEFFECT";
 		Twitch_Votes.PushArray(randomVote);
 
 	}
@@ -152,16 +152,16 @@ bool GetHighestVotedEffect(effect_data effectReturn, bool EnsureValidEffect = fa
 	effect_data effect;
 	
 	LoopAllVotes(vote, index){
-		GetEffectData(vote.config_name, effect);
-		if(index == 0 && StrEqual(vote.config_name, "RANDOMEFFECT", false)){
+		GetEffectData(vote.FunctionName, effect);
+		if(index == 0 && StrEqual(vote.FunctionName, "RANDOMEFFECT", false)){
 			break;
 		}
 		if(
-			(effect.enabled &&
-			effect.can_run_effect() &&
-			// (!Effect_Recently_Played(effect.config_name)) &&
-			effect.timer == INVALID_HANDLE &&
-			effect.isCompatible())
+			(effect.Enabled &&
+			effect.CanRunEffect() &&
+			// (!Effect_Recently_Played(effect.FunctionName)) &&
+			effect.Timer == INVALID_HANDLE &&
+			effect.IsCompatible())
 			|| EnsureValidEffect
 		){
 			effectReturn = effect;

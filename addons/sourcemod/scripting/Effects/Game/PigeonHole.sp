@@ -1,6 +1,6 @@
 public void Chaos_PigeonHole(effect_data effect){
-	effect.title = "Pigeon Hole";
-	effect.duration = 30;
+	effect.Title = "Pigeon Hole";
+	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Binoculars");
 }
 

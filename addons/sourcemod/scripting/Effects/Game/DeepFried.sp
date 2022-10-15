@@ -1,6 +1,6 @@
 public void Chaos_DeepFried(effect_data effect){
-	effect.title = "Deep Fried";
-	effect.duration = 30;
+	effect.Title = "Deep Fried";
+	effect.Duration = 30;
 }
 
 public void Chaos_DeepFried_OnMapStart(){

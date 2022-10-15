@@ -1,8 +1,8 @@
 bool g_ReversedMovement = false;
 
 public void Chaos_ReversedMovement(effect_data effect){
-	effect.title = "Reversed Movement";
-	effect.duration = 30;
+	effect.Title = "Reversed Movement";
+	effect.Duration = 30;
 }
 
 public void Chaos_ReversedMovement_START(){

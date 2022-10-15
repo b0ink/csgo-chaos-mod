@@ -1,5 +1,5 @@
 public void Chaos_RewindTenSeconds(effect_data effect){
-	effect.title = "Rewind 10 Seconds";
+	effect.Title = "Rewind 10 Seconds";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 }
@@ -54,7 +54,7 @@ public Action Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
 }
 
 public bool Chaos_RewindTenSeconds_Conditions(){
-	if(g_iChaos_Round_Time <= 30) return false;
+	if(g_iChaosRoundTime <= 30) return false;
 	return true;
 }
 

@@ -3,15 +3,15 @@
 
 
 public void Chaos_Meta_Mega(effect_data effect){
-	effect.title = "Mega Chaos";
+	effect.Title = "Mega Chaos";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
-	effect.meta = true;
+	effect.IsMetaEffect = true;
 	// effect.IncompatibleWith("Chaos_EffectName");
 }
 
 public void Chaos_Meta_Mega_START(){
-	g_bMegaChaos = true; 
+	g_bMegaChaosIsActive = true; 
 
 	AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), 15.0, false, true);
 
@@ -26,10 +26,10 @@ public void Chaos_Meta_Mega_START(){
 
 public Action Timer_CompleteMegaChaos(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), -1.0, true, true);
-	g_bMegaChaos = false;
+	g_bMegaChaosIsActive = false;
 }
 
 public bool Chaos_Meta_Mega_Conditions(){
-	if(g_bMegaChaos) return false;
+	if(g_bMegaChaosIsActive) return false;
 	return true;
 }

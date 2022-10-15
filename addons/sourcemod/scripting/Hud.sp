@@ -7,7 +7,7 @@ enum struct hud_effect_data{
 	bool meta;
 
 	bool isMeta(){
-		return this.meta;
+		return this.IsMetaEffect;
 	}
 } 
 
@@ -43,7 +43,7 @@ void AddEffectToHud(char[] message, float time = -1.0, bool isMeta){
 		effect.HasNoDuration = false;
 		effect.time = RoundToFloor(time);
 	}
-	effect.meta = isMeta;
+	effect.IsMetaEffect = isMeta;
 	HudData.PushArray(effect);
 	PrintTimer(g_HudTime);
 }
@@ -120,7 +120,7 @@ void PrintEffects(){
 			g_ChaosEffectList_Color[2],
 			g_ChaosEffectList_Color[3], 0, 1.0, 0.0, 0.0);
 
-		if(g_DynamicChannel){
+		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
 		}else{
 			ShowHudText(i, -1, "%s", chunk);
@@ -129,7 +129,7 @@ void PrintEffects(){
 
 
 		SetHudTextParams(0.01, 0.42, 1.5, 252, 227, 0, 0, 0, 1.0, 0.0, 0.0);
-		if(g_DynamicChannel){
+		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(2), "%s", chunk_meta);
 		}else{
 			ShowHudText(i, -1, "%s", chunk);
@@ -153,7 +153,7 @@ void PrintTimer(int time){
 		if(time > -1){
 			if(time <= 3){
 				SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
-				if(g_DynamicChannel){
+				if(g_bDynamicChannelsEnabled){
 					ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);
 				}else{
 					ShowHudText(i, -1, "New effect in:\n%i", time);
@@ -166,7 +166,7 @@ void PrintTimer(int time){
 					g_ChaosEffectTimer_Color[2],
 					g_ChaosEffectTimer_Color[3], 0, 1.0, 0.0, 0.0);
 				
-				if(g_DynamicChannel){
+				if(g_bDynamicChannelsEnabled){
 					ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
 				}else{
 					ShowHudText(i, -1, "New effect in:\n%i", time);	

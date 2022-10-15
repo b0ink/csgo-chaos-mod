@@ -1,6 +1,6 @@
 public void Chaos_IceyGround(effect_data effect){
-	effect.title = "Icy Ground";
-	effect.duration = 30;
+	effect.Title = "Icy Ground";
+	effect.Duration = 30;
 }
 
 public void Chaos_IceyGround_START(){

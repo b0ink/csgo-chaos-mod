@@ -1,6 +1,6 @@
 
 public void Chaos_Jackpot(effect_data effect){
-	effect.title = "Jackpot";
+	effect.Title = "Jackpot";
 	effect.HasNoDuration = true;
 }
 

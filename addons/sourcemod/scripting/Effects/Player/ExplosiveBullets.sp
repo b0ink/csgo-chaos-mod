@@ -1,8 +1,8 @@
 bool g_bExplosiveBullets = false;
 
 public void Chaos_ExplosiveBullets(effect_data effect){
-	effect.title = "Explosive Bullets";
-	effect.duration = 30;
+	effect.Title = "Explosive Bullets";
+	effect.Duration = 30;
 }
 
 public void Chaos_ExplosiveBullets_OnMapStart(){

@@ -1,7 +1,7 @@
 
 public void Chaos_AlienModelKnife(effect_data effect){
-	effect.title = "Alien Knife Fight";
-	effect.duration = 30;
+	effect.Title = "Alien Knife Fight";
+	effect.Duration = 30;
 }
 
 public void Chaos_AlienModelKnife_START(){

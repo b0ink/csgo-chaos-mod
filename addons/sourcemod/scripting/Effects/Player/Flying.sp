@@ -1,7 +1,7 @@
 bool g_bActiveNoclip = false;
 public void Chaos_Flying(effect_data effect){
-	effect.title = "Flying";
-	effect.duration = 15;
+	effect.Title = "Flying";
+	effect.Duration = 15;
 }
 
 public void Chaos_Flying_START(){

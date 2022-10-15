@@ -1,6 +1,6 @@
 public void Chaos_BreakTime(effect_data effect){
-	effect.title = "Take a Break";
-	effect.duration = 15;
+	effect.Title = "Take a Break";
+	effect.Duration = 15;
 	effect.IncompatibleWith("Chaos_WKeyStuck");
 }
 
@@ -19,7 +19,6 @@ public void Chaos_BreakTime_START(){
 public Action Chaos_BreakTime_RESET(bool HasTimerEnded){
 	BreakTime = false;
 	UnhookBlockAllGuns();
-	if(g_bKnifeFight > 0) g_bKnifeFight--;
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 	if(g_bNoStrafe > 0) g_bNoStrafe--;
 }

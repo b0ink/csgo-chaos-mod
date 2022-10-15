@@ -1,6 +1,6 @@
 public void Chaos_Aimbot(effect_data effect){
-	effect.title = "Aimbot";
-	effect.duration = 30;
+	effect.Title = "Aimbot";
+	effect.Duration = 30;
 	
 	effect.AddAlias("Hacks");
 	effect.AddAlias("Cheats");

@@ -1,6 +1,6 @@
 public void Chaos_LSD(effect_data effect){
-	effect.title = "LSD";
-	effect.duration = 30;
+	effect.Title = "LSD";
+	effect.Duration = 30;
 }
 
 public void Chaos_LSD_OnMapStart(){

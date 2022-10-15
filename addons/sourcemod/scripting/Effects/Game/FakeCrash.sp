@@ -1,12 +1,12 @@
 public void Chaos_FakeCrash(effect_data effect){
-	effect.title = "Fake Crash";
+	effect.Title = "Fake Crash";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_Lag");
 }
 
 public void Chaos_FakeCrash_START(){
-	g_sCustomEffect = "";
+	g_sForceCustomEffect = "";
 	g_sSelectedChaosEffect = "";
 	ServerCommand("sv_cheats 1");
 	int amount = GetRandomInt(5, 10);
@@ -22,6 +22,6 @@ public Action Timer_AnnounceFakeCrash(Handle timer){
 }
 
 public bool Chaos_FakeCrash_Conditions(){
-	if(g_iChaos_Round_Time < 30) return false; 
+	if(g_iChaosRoundTime < 30) return false; 
 	return true;
 }

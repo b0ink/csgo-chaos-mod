@@ -1,8 +1,8 @@
 //event weaponfire
 
 public void Chaos_InfiniteAmmo(effect_data effect){
-	effect.title = "Infinite Ammo";
-	effect.duration = 30;
+	effect.Title = "Infinite Ammo";
+	effect.Duration = 30;
 }
 
 bool g_InfiniteAmmo = false;

@@ -2,8 +2,8 @@ int SleepShooter_LastShot[MAXPLAYERS + 1];
 bool g_SleepyShooter = false;
 
 public void Chaos_SleepyShooter(effect_data effect){
-	effect.title = "Shoot To Stay Awake";
-	effect.duration = 30;
+	effect.Title = "Shoot To Stay Awake";
+	effect.Duration = 30;
 
 	effect.AddAlias("Sleepy");
 	effect.AddAlias("Shooter");

@@ -11,7 +11,7 @@ bool g_bPlayersToDamage[MAXPLAYERS+1];
 
 
 public void Chaos_SimonSays(effect_data effect){
-	effect.title = "Simon Says";
+	effect.Title = "Simon Says";
 	effect.HasNoDuration = true;
 }
 

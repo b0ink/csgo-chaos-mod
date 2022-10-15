@@ -1,6 +1,6 @@
 public void Chaos_TaserParty(effect_data effect){
-	effect.title = "Taser Party";
-	effect.duration = 30;
+	effect.Title = "Taser Party";
+	effect.Duration = 30;
 }
 
 public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){

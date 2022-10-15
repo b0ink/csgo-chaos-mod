@@ -1,6 +1,6 @@
 public void Chaos_MoonGravity(effect_data effect){
-	effect.title = "Low Gravity";
-	effect.duration = 30;
+	effect.Title = "Low Gravity";
+	effect.Duration = 30;
 	effect.AddAlias("LowGravity");
 }
 

@@ -1,6 +1,6 @@
 public void Chaos_OHKO(effect_data effect){
-	effect.title = "1 HP";
-	effect.duration = 15;
+	effect.Title = "1 HP";
+	effect.Duration = 15;
 	
 	effect.AddAlias("1 HP");
 	effect.AddAlias("Knockout");

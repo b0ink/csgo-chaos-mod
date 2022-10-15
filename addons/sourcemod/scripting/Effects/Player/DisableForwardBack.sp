@@ -3,8 +3,8 @@ int Disable_WS[MAXPLAYERS+1];
 float Disable_WS_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
 
 public void Chaos_DisableForwardBack(effect_data effect){
-	effect.title = "Disable W / S Keys";
-	effect.duration = 30;
+	effect.Title = "Disable W / S Keys";
+	effect.Duration = 30;
 }
 
 public void Chaos_DisableForwardBack_START(){

@@ -1,6 +1,6 @@
 bool g_bForce_Reload[MAXPLAYERS+1];
 public void Chaos_ForceReload(effect_data effect){
-	effect.title = "Force Reload";
+	effect.Title = "Force Reload";
 	effect.HasNoDuration = true;
 }
 

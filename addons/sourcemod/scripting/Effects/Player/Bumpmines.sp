@@ -1,5 +1,5 @@
 public void Chaos_Bumpmines(effect_data effect){
-	effect.title = "Bumpmines";
+	effect.Title = "Bumpmines";
 	effect.HasNoDuration = true;
 }
 public void Chaos_Bumpmines_START(){

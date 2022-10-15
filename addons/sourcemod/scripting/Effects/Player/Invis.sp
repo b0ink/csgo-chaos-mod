@@ -1,6 +1,6 @@
 public void Chaos_Invis(effect_data effect){
-	effect.title = "Where did everyone go?";
-	effect.duration = 30;
+	effect.Title = "Where did everyone go?";
+	effect.Duration = 30;
 }
 
 public void Chaos_Invis_START(){

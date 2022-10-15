@@ -1,5 +1,5 @@
 public void Chaos_Bankrupt(effect_data effect){
-	effect.title = "Bankrupt";
+	effect.Title = "Bankrupt";
 	effect.HasNoDuration = true;
 	effect.AddAlias("Money");
 }

@@ -1,6 +1,6 @@
 public void Chaos_Thirdperson(effect_data effect){
-	effect.title = "Thirdperson";
-	effect.duration = 30;
+	effect.Title = "Thirdperson";
+	effect.Duration = 30;
 }
 
 public void Chaos_Thirdperson_START(){

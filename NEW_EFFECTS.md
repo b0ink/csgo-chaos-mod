@@ -17,8 +17,8 @@ These are only used for organisation purposes.
 g_EffectName = false;
 
 public void Chaos_EffectName(effect_data effect){
-	effect.title = "Effect Name";
-	effect.duration = 30;
+	effect.Title = "Effect Name";
+	effect.Duration = 30;
 	
 	/*
 	
@@ -33,7 +33,7 @@ public void Chaos_EffectName(effect_data effect){
 	// Useful if you want to delay the Announcement -> use AnnounceChaos() manually
 	effect.HasCustomAnnouncement = true; 
 
-	effect.meta = true; // Marks the effect as a meta effect (rarely run)
+	effect.IsMetaEffect = true; // Marks the effect as a meta effect (rarely run)
 	
 	*/
 }
@@ -121,7 +121,7 @@ Add the following to `addons/sourcemod/translations/chaos.phrases.txt`.
 	"en"    "Effect Name"
 }
 ```
-If translations are missing on the server, the `effect.title` will be used by the plugin
+If translations are missing on the server, the `effect.Title` will be used by the plugin
 
 ## Including your effect
 Include your `EffectName.sp` inside of `addons/sourcemod/scripting/Effects/EffectsList.sp`

@@ -1,8 +1,8 @@
 
 public void Chaos_Meta_DoubleTimerSpeed(effect_data effect){
-	effect.title = "Double Timer Speed";
-	effect.duration = 90;
-	effect.meta = true;
+	effect.Title = "Double Timer Speed";
+	effect.Duration = 90;
+	effect.IsMetaEffect = true;
 }
 
 float DoubleTimerSpeed_Original;
@@ -19,6 +19,6 @@ public void Chaos_Meta_DoubleTimerSpeed_RESET(bool HasTimerEnded){
 
 
 public bool Chaos_Meta_DoubleTimerSpeed_Conditions(){
-	if(g_bMegaChaos) return false;
+	if(g_bMegaChaosIsActive) return false;
 	return true;
 }

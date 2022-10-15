@@ -1,8 +1,8 @@
 bool SneakyBeaky = false;
 
 public void Chaos_SneakyBeaky(effect_data effect){
-	effect.title = "Sneaky Beaky";
-	effect.duration = 30;
+	effect.Title = "Sneaky Beaky";
+	effect.Duration = 30;
 }
 
 public void Chaos_SneakyBeaky_START(){

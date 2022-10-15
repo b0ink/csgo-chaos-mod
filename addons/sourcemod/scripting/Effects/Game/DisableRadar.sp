@@ -1,6 +1,6 @@
 public void Chaos_DisableRadar(effect_data effect){
-	effect.title = "Disable Radar";
-	effect.duration = 30;
+	effect.Title = "Disable Radar";
+	effect.Duration = 30;
 }
 
 public void Chaos_DisableRadar_START(){

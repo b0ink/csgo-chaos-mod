@@ -2,8 +2,8 @@ bool g_Chatterbox = false;
 bool g_CalloutSent[MAXPLAYERS+1];
 
 public void Chaos_Chatterbox(effect_data effect){
-	effect.title = "Chatterbox";
-	effect.duration = 30;
+	effect.Title = "Chatterbox";
+	effect.Duration = 30;
 	
 	effect.AddAlias("Callouts");
 	effect.AddAlias("Location");

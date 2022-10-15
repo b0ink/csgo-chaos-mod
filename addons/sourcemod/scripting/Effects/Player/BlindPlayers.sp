@@ -1,6 +1,6 @@
 public void Chaos_BlindPlayers(effect_data effect){
-	effect.title = "Blind";
-	effect.duration = 7;
+	effect.Title = "Blind";
+	effect.Duration = 7;
 }
 
 public void Chaos_BlindPlayers_START(){

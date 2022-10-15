@@ -1,5 +1,5 @@
 public void Chaos_Shields(effect_data effect){
-	effect.title = "Shields";
+	effect.Title = "Shields";
 	effect.HasNoDuration = true;
 }
 

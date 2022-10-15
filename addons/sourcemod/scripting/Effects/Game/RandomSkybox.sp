@@ -1,5 +1,5 @@
 public void Chaos_RandomSkybox(effect_data effect){
-	effect.title = "Random Skybox";
+	effect.Title = "Random Skybox";
 	effect.HasNoDuration = true;
 }
 public void Chaos_RandomSkybox_START(){

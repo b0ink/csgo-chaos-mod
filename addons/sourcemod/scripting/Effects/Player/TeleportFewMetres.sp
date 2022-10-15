@@ -1,6 +1,6 @@
 public void Chaos_TeleportFewMetres(effect_data effect){
-	effect.title = "Teleport Players A Few Metres";
-	effect.duration = 30;
+	effect.Title = "Teleport Players A Few Metres";
+	effect.Duration = 30;
 	effect.HasNoDuration = true;
 }
 

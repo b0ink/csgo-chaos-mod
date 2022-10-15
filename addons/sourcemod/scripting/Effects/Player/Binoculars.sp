@@ -1,6 +1,6 @@
 public void Chaos_Binoculars(effect_data effect){
-	effect.title = "Binoculars";
-	effect.duration = 30;
+	effect.Title = "Binoculars";
+	effect.Duration = 30;
 }
 
 public void Chaos_Binoculars_OnMapStart(){

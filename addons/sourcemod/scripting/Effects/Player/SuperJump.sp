@@ -1,6 +1,6 @@
 public void Chaos_SuperJump(effect_data effect){
-	effect.title = "Super Jump";
-	effect.duration = 30;
+	effect.Title = "Super Jump";
+	effect.Duration = 30;
 }
 
 public void Chaos_SuperJump_START(){

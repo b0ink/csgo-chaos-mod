@@ -1,6 +1,6 @@
 public void Chaos_InsaneAirSpeed(effect_data effect){
-	effect.title = "Extreme Strafe Acceleration";
-	effect.duration = 30;
+	effect.Title = "Extreme Strafe Acceleration";
+	effect.Duration = 30;
 	effect.AddAlias("Wish");
 }
 

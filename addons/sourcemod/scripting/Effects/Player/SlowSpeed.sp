@@ -1,6 +1,6 @@
 public void Chaos_SlowSpeed(effect_data effect){
-	effect.title = "Slow Speed";
-	effect.duration = 30;
+	effect.Title = "Slow Speed";
+	effect.Duration = 30;
 }
 
 public void Chaos_SlowSpeed_START(){

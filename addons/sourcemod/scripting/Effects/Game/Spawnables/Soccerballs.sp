@@ -1,5 +1,5 @@
 public void Chaos_Soccerballs(effect_data effect){
-	effect.title = "Soccerballs";
+	effect.Title = "Soccerballs";
 	effect.HasNoDuration = true;
 }
 

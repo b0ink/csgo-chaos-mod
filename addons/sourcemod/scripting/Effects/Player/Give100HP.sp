@@ -1,6 +1,6 @@
 public void Chaos_Give100HP(effect_data effect){
-	effect.title = "Give all players +100 HP";
-	effect.duration = 30;
+	effect.Title = "Give all players +100 HP";
+	effect.Duration = 30;
 	effect.HasNoDuration = true;
 }
 

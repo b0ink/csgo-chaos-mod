@@ -1,9 +1,9 @@
 bool Meta_WhatsHappening = false;
 
 public void Chaos_Meta_WhatsHappening(effect_data effect){
-	effect.title = "What's Happening?";
-	effect.duration = 90;
-	effect.meta = true;
+	effect.Title = "What's Happening?";
+	effect.Duration = 90;
+	effect.IsMetaEffect = true;
 }
 
 public void Chaos_Meta_WhatsHappening_START(){
@@ -16,7 +16,7 @@ public void Chaos_Meta_WhatsHappening_RESET(bool HasTimerEnded){
 
 
 public bool Chaos_Meta_WhatsHappening_Conditions(){
-	if(g_bMegaChaos) return false;
+	if(g_bMegaChaosIsActive) return false;
 	return true;
 }
 

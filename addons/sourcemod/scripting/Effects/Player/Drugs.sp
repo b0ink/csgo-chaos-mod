@@ -3,8 +3,8 @@
 UserMsg g_FadeUserMsgId_drugs;
 
 public void Chaos_Drugs(effect_data effect){
-	effect.title = "Drugs";
-	effect.duration = 30;
+	effect.Title = "Drugs";
+	effect.Duration = 30;
 }
 
 public void Chaos_Drugs_INIT(){

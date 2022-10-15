@@ -1,7 +1,7 @@
 //Credit: https://forums.alliedmods.net/showthread.php?t=312548
 
 public void Chaos_Turrets(effect_data effect){
-	effect.title = "Turrets";
+	effect.Title = "Turrets";
 	effect.HasNoDuration = true;
 
 	effect.AddAlias("Droneguns");

@@ -1,6 +1,6 @@
 public void Chaos_Snow(effect_data effect){
-	effect.title = "Snow";
-	effect.duration = 45;
+	effect.Title = "Snow";
+	effect.Duration = 45;
 }
 public void Chaos_Snow_INIT(){
 	

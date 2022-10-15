@@ -30,7 +30,7 @@ enum //Bombsites
 }
 
 public void Chaos_AutoPlantC4(effect_data effect){
-    effect.title = "Auto Plant C4";
+    effect.Title = "Auto Plant C4";
     effect.HasNoDuration = true;
 
     effect.AddAlias("Bomb");
@@ -50,7 +50,7 @@ public Action Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, boo
 public bool Chaos_AutoPlantC4_Conditions(){
     if(!ValidBombSpawns()) return false;
     if(isHostageMap()) return false;
-    if(g_iChaos_Round_Time <= 16) return false; // prevent a bomb plant as soon as the round starts
+    if(g_iChaosRoundTime <= 16) return false; // prevent a bomb plant as soon as the round starts
     if(
         (g_PlantedSite != BOMBSITE_A) && (bombSiteB == INVALID_HANDLE) &&
         (g_PlantedSite != BOMBSITE_B) && (bombSiteA == INVALID_HANDLE) &&

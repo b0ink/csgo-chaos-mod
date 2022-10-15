@@ -2,7 +2,7 @@ bool g_bC4Chicken = false;
 bool g_bVisibleChicken = true;
 
 public void Chaos_C4Chicken(effect_data effect){
-	effect.title = "C4 Chicken";
+	effect.Title = "C4 Chicken";
 	effect.HasNoDuration = true;
 }
 

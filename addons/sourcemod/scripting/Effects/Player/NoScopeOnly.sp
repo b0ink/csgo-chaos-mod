@@ -2,8 +2,8 @@ bool g_bNoscopeOnly = false;
 int m_flNextSecondaryAttack = -1;
 
 public void Chaos_NoScopeOnly(effect_data effect){
-	effect.title = "No Scopes Only";
-	effect.duration = 30;
+	effect.Title = "No Scopes Only";
+	effect.Duration = 30;
 }
 
 public void Chaos_NoScopeOnly_INIT(){

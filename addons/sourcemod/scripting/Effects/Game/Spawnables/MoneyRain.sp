@@ -1,5 +1,5 @@
 public void Chaos_MoneyRain(effect_data effect){
-	effect.title = "Make it Rain";
+	effect.Title = "Make it Rain";
 	effect.HasNoDuration = true;
 }
 

@@ -1,6 +1,6 @@
 public void Chaos_ExtremeWhiteFog(effect_data effect){
-	effect.title = "Extreme Fog";
-	effect.duration = 30;
+	effect.Title = "Extreme Fog";
+	effect.Duration = 30;
 }
 public void Chaos_ExtremeWhiteFog_START(){
 	ExtremeWhiteFog();

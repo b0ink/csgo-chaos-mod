@@ -1,5 +1,5 @@
 public void Chaos_SpawnFlashbangs(effect_data effect){
-	effect.title = "Flashbangs";
+	effect.Title = "Flashbangs";
 	effect.HasNoDuration = true;
 }
 

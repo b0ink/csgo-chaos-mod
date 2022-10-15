@@ -1,6 +1,6 @@
 public void Chaos_RainingMolotovs(effect_data effect){
-	effect.title = "Raining Fire";
-	effect.duration = 30;
+	effect.Title = "Raining Fire";
+	effect.Duration = 30;
 }
 
 

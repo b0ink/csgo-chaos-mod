@@ -1,6 +1,6 @@
 public void Chaos_ReversedRecoil(effect_data effect){
-	effect.title = "Reversed Recoil";
-	effect.duration = 30;
+	effect.Title = "Reversed Recoil";
+	effect.Duration = 30;
 }
 
 public void Chaos_ReversedRecoil_START(){

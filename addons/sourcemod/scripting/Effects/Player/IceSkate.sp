@@ -1,6 +1,6 @@
 public void Chaos_IceSkate(effect_data effect){
-	effect.title = "Ice Skating";
-	effect.duration = 30;
+	effect.Title = "Ice Skating";
+	effect.Duration = 30;
 }
 
 bool IceSkate = false;

@@ -2,8 +2,8 @@ bool g_bLoose_Trigger = false;
 bool ShouldAttack[MAXPLAYERS+1];
 
 public void Chaos_LooseTrigger(effect_data effect){
-	effect.title = "Loose Trigger";
-	effect.duration = 10;
+	effect.Title = "Loose Trigger";
+	effect.Duration = 10;
 }
 public void Chaos_LooseTrigger_START(){
 	g_bLoose_Trigger = true;

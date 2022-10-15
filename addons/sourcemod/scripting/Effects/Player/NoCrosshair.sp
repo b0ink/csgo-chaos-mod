@@ -1,6 +1,6 @@
 public void Chaos_NoCrosshair(effect_data effect){
-	effect.title = "No Crosshair";
-	effect.duration = 30;
+	effect.Title = "No Crosshair";
+	effect.Duration = 30;
 }
 
 public void Chaos_NoCrosshair_START(){
