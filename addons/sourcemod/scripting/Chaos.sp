@@ -123,10 +123,9 @@ int 	g_bNoForwardBack = 0;
 int 	g_NoFallDamage = 0;
 int 	g_iC4ChickenEnt = -1;
 
-
+Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 #include "ConVars.sp"
 
-Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 ArrayList 	ChaosEffects;
 ArrayList 	PossibleChaosEffects;
 
@@ -151,9 +150,9 @@ enum struct effect_data{
 	Handle 		Timer;
 
 	void Run(){
-		Function func = GetFunctionByName(GetMyHandle(), this.function_name_start);
 		char function_name_start[64];
 		Format(function_name_start, sizeof(function_name_start), "%s_START", this.FunctionName);
+		Function func = GetFunctionByName(GetMyHandle(), function_name_start);
 
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
@@ -172,9 +171,9 @@ enum struct effect_data{
 	}
 
 	void Reset(bool HasTimerEnded = false){
-		Function func = GetFunctionByName(GetMyHandle(), this.function_name_reset);
 		char function_name_reset[64];
 		Format(function_name_reset, sizeof(function_name_reset), "%_RESET", this.FunctionName);
+		Function func = GetFunctionByName(GetMyHandle(), function_name_reset);
 
 		if(func != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), func);
