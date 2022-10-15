@@ -225,17 +225,6 @@ public Action timer_resetchickendebounce(Handle timer){
 	g_bRemovechicken_debounce = false;
 }
 
-public void ResizeChickens(){
-	char classname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "chicken") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
-			SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 1.0);
-		}
-	}
-}  
-
-
-
 
 stock int GetPlayerCount(){
 	int count = 0;

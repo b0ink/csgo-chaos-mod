@@ -57,7 +57,12 @@ public void Chaos_DecoyDodgeball_START(){
 
 	g_bDecoyDodgeball = true;
 	LoopAlivePlayers(i){
-		StripPlayer(i, true, true, true); //strip grenades only
+		StripPlayer(
+			.client=i,
+			.knife=true,
+			.keepBomb=true,
+			.stripGrenadesOnly=true
+		);
 		GivePlayerItem(i, "weapon_decoy");
 		FakeClientCommand(i, "use weapon_decoy");
 		SetEntityHealth(i, 1);	
@@ -73,7 +78,11 @@ public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
 	
 	if(g_bDecoyDodgeball && HasTimerEnded){
 		LoopAlivePlayers(i){
-			StripPlayer(i, true, true, true); //strip grenades only
+			StripPlayer(i,
+				.knife=true,
+				.keepBomb=true,
+				.stripGrenadesOnly=true
+			);
 			SetEntityHealth(i, 100);
 			if(!HasMenuOpen(i)){
 				ClientCommand(i, "slot2");
