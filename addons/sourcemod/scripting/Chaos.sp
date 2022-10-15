@@ -318,6 +318,18 @@ enum struct effect_data{
 				return false;
 			}
 		}
+		effect_data effect;
+
+		LoopAllEffects(effect, index){
+			if(effect.timer != INVALID_HANDLE){
+				for(int i = 0; i < GetArraySize(effect.IncompatibleEffects); i++){
+					GetArrayString(effect.IncompatibleEffects, i, effectName, sizeof(effectName));
+					if(StrEqual(effect.config_name, effectName)){
+						return false;
+					}
+				}
+			}
+		}
 
 		return true;
 	}
