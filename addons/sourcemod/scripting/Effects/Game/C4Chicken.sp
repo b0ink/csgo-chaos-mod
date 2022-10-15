@@ -8,7 +8,7 @@ public void Chaos_C4Chicken(effect_data effect){
 
 public void Chaos_C4Chicken_INIT(){
 	HookEvent("bomb_planted", 		Chaos_C4Chicken_Event_BombPlanted);
-	HookEvent("round_start", 		Chaos_C4Chicken_Event_RoundStart)
+	HookEvent("round_start", 		Chaos_C4Chicken_Event_RoundStart);
 }
 
 public Action Chaos_C4Chicken_Event_RoundStart(Event event, char[] name, bool dontBroadcast){

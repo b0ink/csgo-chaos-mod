@@ -124,6 +124,7 @@ int 	g_NoFallDamage = 0;
 int 	g_iC4ChickenEnt = -1;
 
 Handle 		g_NewEffect_Timer = INVALID_HANDLE;
+
 #include "ConVars.sp"
 
 ArrayList 	ChaosEffects;
@@ -247,20 +248,11 @@ enum struct effect_data{
 				return false;
 			}
 		}
-		effect_data effect;
 
-		LoopAllEffects(effect, index){
-			if(effect.Timer != INVALID_HANDLE){
-				for(int i = 0; i < GetArraySize(effect.IncompatibleEffects); i++){
-					GetArrayString(effect.IncompatibleEffects, i, effectName, sizeof(effectName));
-					if(StrEqual(effect.FunctionName, effectName)){
-						return false;
-					}
-				}
-			}
-		}
+		//TODO: trying to loop through live effects that are running, loop through incompatible, and check to see if any of those incompatibles are this.EffectName
+		// if(AreIncompatibleEffectsRunning(this.))
 
-		return true;
+		return true;	
 	}
 	void AddAlias(char[] effectName){
 		if(this.Aliases == INVALID_HANDLE){
@@ -269,6 +261,22 @@ enum struct effect_data{
 		PushArrayString(this.Aliases, effectName);
 	}
 }
+
+// bool AreIncompatibleEffectsRunning(char[] FunctionName){
+// 	effect_data effect;
+// 	char effectName[255];
+// 	LoopAllEffects(effect, index){
+// 		if(effect.Timer != INVALID_HANDLE){
+// 			for(int i = 0; i < GetArraySize(effect.IncompatibleEffects); i++){
+// 				GetArrayString(effect.IncompatibleEffects, i, effectName, sizeof(effectName));
+// 				if(StrEqual(effect.FunctionName, effectName)){
+// 					return false;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	return true;
+// }
 
 bool IsEffectRunning(char[] effectName){
 	effect_data effect;

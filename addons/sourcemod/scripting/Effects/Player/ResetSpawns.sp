@@ -7,7 +7,7 @@ public void Chaos_ResetSpawns(effect_data effect){
 }
 
 public void Chaos_ResetSpawns_INIT(){
-	HookEvent("round_start", Chaos_ResetSpawns_Event_RoundStart)
+	HookEvent("round_start", Chaos_ResetSpawns_Event_RoundStart);
 }
 
 public Action Chaos_ResetSpawns_Event_RoundStart(Event event, char[] name, bool dontBroadcast){

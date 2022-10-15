@@ -17,7 +17,7 @@ float g_RollbackAngles[MAXPLAYERS+1][g_RollbackFrames][3];
 
 
 public void Chaos_RewindTenSeconds_INIT(){
-	HookEvent("round_start", Chaos_RewindTenSeconds_Event_RoundStart)
+	HookEvent("round_start", Chaos_RewindTenSeconds_Event_RoundStart);
 }
 
 public Action Chaos_RewindTenSeconds_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
