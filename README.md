@@ -93,6 +93,7 @@ Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`
 - Agency
 - Italy
 - Assault
+- Lake
 - Iris\
 <sub>If you are running Chaos Mod on an 'unsupported' map, temporary spawn points will be generated based off players' location throughout the game</sub>
 
