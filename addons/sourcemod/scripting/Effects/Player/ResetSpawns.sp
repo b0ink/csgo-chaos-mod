@@ -1,7 +1,19 @@
+float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
+
 public void Chaos_ResetSpawns(effect_data effect){
 	effect.title = "Teleport all players back to spawn";
 	effect.AddAlias("Teleport");
 	effect.HasNoDuration = true;
+}
+
+public void Chaos_ResetSpawns_INIT(){
+	HookEvent("round_start", Chaos_ResetSpawns_Event_RoundStart)
+}
+
+public Action Chaos_ResetSpawns_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	LoopAlivePlayers(client){
+		GetClientAbsOrigin(client, g_OriginalSpawnVec[client]);
+	}
 }
 
 public void Chaos_ResetSpawns_START(){

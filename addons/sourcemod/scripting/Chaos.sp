@@ -164,7 +164,6 @@ bool 	g_bPlaySound_Debounce = false;
 bool 	g_bDisableRetryEffect = false;
 
 Handle 	Effect_History = INVALID_HANDLE;
-float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 
 bool 	g_DynamicChannel = false;
 

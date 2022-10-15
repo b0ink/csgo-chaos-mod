@@ -77,10 +77,6 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_TotalRounds++;
 
 	g_iChaos_EffectsRun_Count = 0;
-	
-	LoopAlivePlayers(client){
-		GetClientAbsOrigin(client, g_OriginalSpawnVec[client]);
-	}
 
 	CreateTimer(5.0, Timer_CreateHostage);
 	
