@@ -5,7 +5,6 @@ char 			Chaos_EventName_Buffer[64];
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	g_bCanSpawnChickens = false;
-	g_bBombPlanted = true;
 	if(!ValidBombSpawns()){
 		CreateTimer(1.0, Timer_SaveBombPosition);
 	}
@@ -56,19 +55,6 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 
 	return Plugin_Changed;
 }
-
-
-public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
-	if(!g_bChaos_Enabled) return Plugin_Continue;
-
-	int client = GetClientOfUserId(event.GetInt("userid"));
-
-	if(IsValidClient(client)){
-		ClientCommand(client, "r_screenoverlay \"\"");
-	}
-	return Plugin_Continue;
-}
-
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;

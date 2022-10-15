@@ -11,6 +11,7 @@
 //     url = "https://github.com/b3none"
 // };
 
+bool 	g_bBombPlanted = false;
 
 int bomber;
 int bombsite;
@@ -39,8 +40,12 @@ public void Chaos_AutoPlantC4(effect_data effect){
 
 public void Chaos_AutoPlantC4_INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");
+    HookEvent("bomb_planted", Chaos_AutoPlantC4_Event_BombPlanted);
 }
 
+public Action Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+	g_bBombPlanted = true;
+}
 
 public bool Chaos_AutoPlantC4_Conditions(){
     if(!ValidBombSpawns()) return false;

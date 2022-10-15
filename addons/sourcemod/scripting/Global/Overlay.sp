@@ -5,13 +5,23 @@ void Overlay_INIT(){
 	}else{
 		ClearArray(Overlay_Que);
 	}
+	HookEvent("player_death", Overlay_Event_PlayerDeath);
 }
 
+public Action Overlay_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
+	if(!g_bChaos_Enabled) return Plugin_Continue;
+	int client = GetClientOfUserId(event.GetInt("userid"));
+
+	if(IsValidClient(client)){
+		ClientCommand(client, "r_screenoverlay \"\"");
+	}
+	return Plugin_Continue;
+}
 void Clear_Overlay_Que(){
 	if(Overlay_Que != INVALID_HANDLE){
 		ClearArray(Overlay_Que);
 	}else{
-		Overlay_INIT();
+		Overlay_Que = CreateArray(256);
 	}
 	Update_Overlay();
 }

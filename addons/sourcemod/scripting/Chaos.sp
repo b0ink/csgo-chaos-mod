@@ -141,7 +141,6 @@ char g_sSkyboxes[][] = {
 	"vietnam"
 };
 
-bool 	g_bBombPlanted = false;
 
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bPlayersCanDropWeapon = true;
@@ -360,7 +359,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 #include "Global/Fog.sp"
 #include "Global/ColorCorrection.sp"
 #include "Global/Weather.sp"
-#include  "Global/Players.sp"
+#include "Global/Players.sp"
 #include "Spawns.sp"
 
 
@@ -388,7 +387,6 @@ public void OnPluginStart(){
 
 	HookEvent("round_start", 	Event_RoundStart);
 	HookEvent("round_end", 		Event_RoundEnd);	
-	HookEvent("player_death", 	Event_PlayerDeath);	
 	HookEvent("bomb_planted", 	Event_BombPlanted);
 	HookEvent("server_cvar", 	Event_Cvar, 			EventHookMode_Pre);
 
@@ -411,6 +409,7 @@ public void OnPluginStart(){
 	ParseChaosEffects();
 
 	TWITCH_INIT();
+	Overlay_INIT()l
 
 	g_MetaHistory = CreateArray(128);
 
@@ -461,7 +460,6 @@ public void OnMapStart(){
 
 	COORD_INIT();
 	WEATHER_INIT();
-	Overlay_INIT();
 
 	// Run_OnMapStart_Functions();
 
