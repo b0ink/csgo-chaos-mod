@@ -12,7 +12,6 @@ public void Chaos_RandomWeapons_START(){
 }
 
 public Action Chaos_RandomWeapons_RESET(bool HasTimerEnded){
-	g_bPlayersCanDropWeapon = true;
 	StopTimer(RandomWeapons_Timer_Repeat);
 }
 

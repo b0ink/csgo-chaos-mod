@@ -142,7 +142,6 @@ char g_sSkyboxes[][] = {
 
 
 bool 	g_bCanSpawnChickens = true;
-bool 	g_bPlayersCanDropWeapon = true;
 
 
 bool 	g_bCanSpawnEffect = true;
@@ -527,20 +526,6 @@ public void OnClientPutInServer(int client){
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
 }
-
-public Action Hook_WeaponDrop(int client,int weapon){
-	if(weapon != -1 && IsValidEntity(weapon)){
-		if(!g_bPlayersCanDropWeapon){
-			char WeaponName[32];
-			GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
-			if(StrContains(WeaponName, "c4") == -1){ //allow c4 drops
-				return Plugin_Handled; 
-			}
-		}
-	}
-	return Plugin_Changed;
-} 
-
 
 public void OnClientDisconnect(int client){
 	ToggleAim(client, false);
