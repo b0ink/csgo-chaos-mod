@@ -52,39 +52,6 @@ char[] GetChaosTitle(char[] function_name){
 
 
 
-bool PoolChaosEffects(char[] effectName = ""){
-
-	char alias[64];
-	Possible_Chaos_Effects.Clear();
-	effect_data effect;
-	LoopAllEffects(effect, index){
-		if(effectName[0]){ //* if keyword was provided
-			bool containsAlias = false;
-			if(effect.Aliases != INVALID_HANDLE){
-				for(int i = 0; i < GetArraySize(effect.Aliases); i++){
-					GetArrayString(effect.Aliases, i, alias, sizeof(alias));
-					if(StrContains(alias, effectName, false) != -1){
-						containsAlias = true;
-					}
-				}
-			}
-
-		
-			if(
-				StrContains(effect.config_name, effectName, false) != -1 ||
-				StrContains(effect.title, effectName, false) != -1 ||
-				containsAlias
-			){
-				Possible_Chaos_Effects.PushArray(effect, sizeof(effect));
-			}
-		}else{
-			Possible_Chaos_Effects.PushArray(effect, sizeof(effect)); //* Show all but may be disabled in menu
-		}
-	}
-
-	Log("Size of pooled chaos effects: %i", Possible_Chaos_Effects.Length);
-	// Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
-}
 
 stock bool IsValidClient(int client, bool nobots = false){
     if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client))) {
@@ -97,29 +64,15 @@ stock bool ValidAndAlive(int client){
 	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
 
+char multicolors[][] = {"{lightred}", "{lightblue}", "{lightgreen}", "{olive}", "{grey}", "{yellow}", "{bluegrey}", "{orchid}", "{lightred2}",
+"{purple}", "{lime}", "{orange}", "{red}", "{blue}", "{darkred}", "{darkblue}", "{default}", "{green}"};
+
 char[] RemoveMulticolors(char[] message){
 	char finalMess[256];
 	Format(finalMess, sizeof(finalMess), "%s", message);
-
-	ReplaceString(finalMess, sizeof(finalMess),"{lightred}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{lightblue}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{lightgreen}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{olive}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{grey}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{yellow}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{bluegrey}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{orchid}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{lightred2}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{purple}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{lime}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{orange}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{red}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{blue}","", false); 
-	ReplaceString(finalMess, sizeof(finalMess),"{darkred}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{darkblue}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{default}","", false);
-	ReplaceString(finalMess, sizeof(finalMess),"{green}","", false);
-
+	for(int i = 0; i < sizeof(multicolors); i++){
+		ReplaceString(finalMess, sizeof(finalMess), multicolors[i],"", false);
+	}
 	return finalMess;
 }
 
@@ -217,11 +170,11 @@ void RemoveChickens(bool removec4Chicken = false){
 				}
 			}
 		}
-		CreateTimer(5.0, timer_resetchickendebounce);
+		CreateTimer(5.0, Timer_ResetChickenDebounce);
 	}
 }  
 
-public Action timer_resetchickendebounce(Handle timer){
+public Action Timer_ResetChickenDebounce(Handle timer){
 	g_bRemovechicken_debounce = false;
 }
 
@@ -336,9 +289,6 @@ void StopTimer(Handle &timer){
 }
 
 
-
-
-
 stock void CreateHostageRescue(){
     int iEntity = -1;
     if((iEntity = FindEntityByClassname(iEntity, "func_hostage_rescue")) == -1) {
@@ -360,10 +310,6 @@ stock int GetSlotByWeaponName (int client, const char[] szName){
 	}
 	return -1;
 }
-
-
-
-
 
 bool HasMenuOpen(int client){
 	if(GetClientMenu(client) != MenuSource_None) return true;
@@ -398,27 +344,6 @@ void CheckHostageMap(){
 
 bool isHostageMap(){
 	return g_bIsHostageMap;
-}
-
-
-void SetPlayersGravity(float amount){
-	LoopAlivePlayers(i){
-		SetEntityGravity(i, amount);
-	}
-}
-
-void SetPlayersFOV(int fov){
-	LoopAlivePlayers(i){
-		SetEntProp(i, Prop_Send, "m_iFOV", fov);
-		SetEntProp(i, Prop_Send, "m_iDefaultFOV", fov);
-	}
-}
-
-void ResetPlayersFOV(){
-	LoopValidPlayers(i){
-		SetEntProp(i, Prop_Send, "m_iFOV", 0);
-		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
-	}
 }
 
 

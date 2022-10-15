@@ -547,6 +547,40 @@ bool Effect_Recently_Played(char[] effect_name){
 	return found;
 }
 
+bool PoolChaosEffects(char[] effectName = ""){
+
+	char alias[64];
+	Possible_Chaos_Effects.Clear();
+	effect_data effect;
+	LoopAllEffects(effect, index){
+		if(effectName[0]){ //* if keyword was provided
+			bool containsAlias = false;
+			if(effect.Aliases != INVALID_HANDLE){
+				for(int i = 0; i < GetArraySize(effect.Aliases); i++){
+					GetArrayString(effect.Aliases, i, alias, sizeof(alias));
+					if(StrContains(alias, effectName, false) != -1){
+						containsAlias = true;
+					}
+				}
+			}
+
+		
+			if(
+				StrContains(effect.config_name, effectName, false) != -1 ||
+				StrContains(effect.title, effectName, false) != -1 ||
+				containsAlias
+			){
+				Possible_Chaos_Effects.PushArray(effect, sizeof(effect));
+			}
+		}else{
+			Possible_Chaos_Effects.PushArray(effect, sizeof(effect)); //* Show all but may be disabled in menu
+		}
+	}
+
+	Log("Size of pooled chaos effects: %i", Possible_Chaos_Effects.Length);
+	// Log("Size of pooled chaos effects: %i", GetArraySize(Possible_Chaos_Effects));
+}
+
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
