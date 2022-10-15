@@ -13,7 +13,7 @@ public void Chaos_Thunderstorm(effect_data effect){
 int thunder_count = 0;
 
 public void Chaos_Thunderstorm_OnMapStart(){
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/thunderstorm.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/thunderstorm.raw");
 }
 
 

@@ -4,7 +4,7 @@ public void Chaos_BlackWhite(effect_data effect){
 }
 
 public void Chaos_BlackWhite_OnMapStart(){
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/blackandwhite.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/blackandwhite.raw");
 }
 
 public void Chaos_BlackWhite_START(){

@@ -3,7 +3,7 @@
 	eg.
 
 	public void Chaos_EffectName_OnMapStart(){
-		AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/xxxxxx.raw");
+		AddFileToDownloadsTable("materials/Chaos/ColorCorrection/xxxxxx.raw");
 	}
 */
 

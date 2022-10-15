@@ -4,11 +4,11 @@ public void Chaos_LSD(effect_data effect){
 }
 
 public void Chaos_LSD_OnMapStart(){
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_1.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_2.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_3.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_4.raw");
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/env_5.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_1.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_2.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_3.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_4.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_5.raw");
 }
 
 Handle g_LSD_Timer_Repeat = INVALID_HANDLE;

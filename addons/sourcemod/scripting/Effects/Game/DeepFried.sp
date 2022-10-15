@@ -4,7 +4,7 @@ public void Chaos_DeepFried(effect_data effect){
 }
 
 public void Chaos_DeepFried_OnMapStart(){
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/deepfried.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/deepfried.raw");
 }
 
 public void Chaos_DeepFried_START(){

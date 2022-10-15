@@ -4,7 +4,7 @@ public void Chaos_Saturation(effect_data effect){
 }
 
 public void Chaos_Saturation_OnMapStart(){
-	AddFileToDownloadsTable("/materials/Chaos/ColorCorrection/saturation.raw");
+	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/saturation.raw");
 }
 
 public void Chaos_Saturation_START(){
