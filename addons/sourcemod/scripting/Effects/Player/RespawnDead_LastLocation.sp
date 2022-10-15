@@ -1,8 +1,19 @@
+float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
+
 public void Chaos_RespawnDead_LastLocation(effect_data effect){
 	effect.title = "Resurrect players where they died";
 	effect.AddAlias("Respawn");
 	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;
+}
+
+public void Chaos_RespawnDead_LastLocation_INIT(){
+	HookEvent("player_death", Chaos_RespawnDead_LastLocation_Event_PlayerDeath);
+}
+
+public Action Chaos_RespawnDead_LastLocation_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
+	int client = GetClientOfUserId(event.GetInt("userid"));
+	GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
 }
 
 public void Chaos_RespawnDead_LastLocation_START(){

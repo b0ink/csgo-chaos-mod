@@ -58,8 +58,6 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 }
 
 
-
-
 public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 
@@ -67,7 +65,6 @@ public Action Event_PlayerDeath(Event event, const char[] name, bool dontBroadca
 
 	if(IsValidClient(client)){
 		ClientCommand(client, "r_screenoverlay \"\"");
-		GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
 	}
 	return Plugin_Continue;
 }

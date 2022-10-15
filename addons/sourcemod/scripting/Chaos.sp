@@ -146,7 +146,6 @@ bool 	g_bBombPlanted = false;
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bPlayersCanDropWeapon = true;
 
-float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
 bool 	g_bCanSpawnEffect = true;
 
