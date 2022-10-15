@@ -58,20 +58,13 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	if(!g_bChaos_Enabled) return Plugin_Continue;
-	
 	Log("---ROUND STARTED---");
 
-	g_bC4Chicken = false;
 	g_bCanSpawnEffect = true;
-	g_bRewind_logging_enabled = true;
-	// g_bKnifeFight = 0;
 	
 	CheckHostageMap();
-
 	ResetHud();
-	
 	ResetChaos();
-
 	CLEAR_CC();
 
 	g_TotalRounds++;

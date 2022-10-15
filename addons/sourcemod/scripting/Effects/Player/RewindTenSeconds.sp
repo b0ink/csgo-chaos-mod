@@ -16,6 +16,14 @@ float g_RollbackPositions[MAXPLAYERS+1][g_RollbackFrames][3];
 float g_RollbackAngles[MAXPLAYERS+1][g_RollbackFrames][3];
 
 
+public void Chaos_RewindTenSeconds_INIT(){
+	HookEvent("round_start", Chaos_RewindTenSeconds_Event_RoundStart)
+}
+
+public Action Chaos_RewindTenSeconds_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+	g_bRewind_logging_enabled = true;
+}
+
 public void Chaos_RewindTenSeconds_OnGameFrame(){
 	Rollback_Log();
 }
