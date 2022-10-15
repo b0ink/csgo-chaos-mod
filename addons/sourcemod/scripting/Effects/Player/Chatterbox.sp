@@ -99,3 +99,14 @@ public Action Timer_SendChatterboxCallout(Handle timer){
 public void Chaos_Chatterbox_RESET(bool HasTimerEnded){
 	g_Chatterbox = false;
 }
+
+public bool Chaos_Chatterbox_Conditions(){
+	// Seems like certain maps such as de_lake don't have callouts
+	char location[64];
+	LoopAlivePlayers(i){
+		GetEntPropString(i, Prop_Send, "m_szLastPlaceName", location, sizeof(location));
+		break;
+	}
+	if(!location[0]) return false;
+	return true;
+}
