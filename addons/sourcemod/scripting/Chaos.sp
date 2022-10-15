@@ -42,7 +42,6 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define SOUND_BELL "buttons/bell1.wav"
 #define SOUND_BLIP "buttons/blip1.wav"
 #define SOUND_COUNTDOWN "ui/beep07.wav"
-#define SOUND_MONEY "survival/money_collect_04.wav"
 
 #define DISTORTION "explosion_child_distort01b"
 #define FLASH "explosion_child_core04b"
@@ -439,7 +438,6 @@ public void OnMapStart(){
 	
 	PrecacheSound(SOUND_BELL);
 	PrecacheSound(SOUND_COUNTDOWN);
-	PrecacheSound(SOUND_MONEY);
 	PrecacheSound(SOUND_BLIP);
 
 	// ParseChaosConfigEffects();
