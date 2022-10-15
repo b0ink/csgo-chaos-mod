@@ -10,6 +10,7 @@
 [Autoplant](https://github.com/b3none) by "b3none".\
 SM Teleport by "Spazman0".\
 [LSD ColorCorrection](https://gamebanana.com/mods/80495) (.raw) files from "[SG] Paul!"\
-[Double Jump](https://forums.alliedmods.net/showthread.php?p=895212) by Paegus/NcB_Save
+[Double Jump](https://forums.alliedmods.net/showthread.php?p=895212) by Paegus/NcB_Save\
+[Turrets](https://forums.alliedmods.net/showthread.php?t=312548)
 
 Ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".
