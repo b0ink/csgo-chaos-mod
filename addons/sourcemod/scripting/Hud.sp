@@ -4,7 +4,7 @@ enum struct hud_effect_data{
 	char name[256];
 	int time;
 	bool HasNoDuration;
-	bool meta;
+	bool IsMetaEffect;
 
 	bool isMeta(){
 		return this.IsMetaEffect;

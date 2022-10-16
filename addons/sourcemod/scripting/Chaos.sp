@@ -356,7 +356,7 @@ public void OnPluginStart(){
 	ParseChaosEffects();
 
 	TWITCH_INIT();
-	Overlay_INIT()l
+	Overlay_INIT();
 
 }
 

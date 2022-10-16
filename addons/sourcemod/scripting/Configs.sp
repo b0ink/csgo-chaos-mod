@@ -31,11 +31,11 @@ public void ParseChaosEffects(){
 		Call_Finish();
 
 		Format(function_name, sizeof(function_name), "%s_START", EffectNames[i]);
-		effect.function_name_start = function_name;
+		// effect.function_name_start = function_name;
 		Function start_func = GetFunctionByName(GetMyHandle(), function_name);
 
 		Format(function_name, sizeof(function_name), "%s_RESET", EffectNames[i]);
-		effect.function_name_reset = function_name;
+		// effect.function_name_reset = function_name;
 		// Function reset_func = GetFunctionByName(GetMyHandle(), function_name);
 
 		if(start_func == INVALID_FUNCTION){

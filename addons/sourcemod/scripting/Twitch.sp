@@ -12,7 +12,7 @@ bool EnableRandomEffectOption = true;
 enum struct vote_data{
 	int votes;
 	char name[128];
-	char config_name[128];
+	char FunctionName[128];
 }
 
 void TWITCH_INIT(){

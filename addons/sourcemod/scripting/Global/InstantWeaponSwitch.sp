@@ -1,8 +1,8 @@
 
 public void GiveAndSwitchWeapon(int client, char[] weaponName){
 	
-	char playersWeapon[64];
-	GetClientWeapon(client, playersWeapon, sizeof(playersWeapon));
+    char playersWeapon[64];
+    GetClientWeapon(client, playersWeapon, sizeof(playersWeapon));
 
     StripPlayer(
         .client=client,
@@ -11,10 +11,10 @@ public void GiveAndSwitchWeapon(int client, char[] weaponName){
         .stripGrenadesOnly=false,
         .KeepGrenades=true
     );
-	int weapon = GivePlayerItem(client, weaponName);
+    int weapon = GivePlayerItem(client, weaponName);
 
-	//if player has their knife or bomb out, don't switch to new weapon
-	if(StrContains(playersWeapon, "c4") != -1 || StrContains(playersWeapon, "knife") != -1){
+    //if player has their knife or bomb out, don't switch to new weapon
+    if(StrContains(playersWeapon, "c4") != -1 || StrContains(playersWeapon, "knife") != -1){
         if(StrContains(playersWeapon, "knife") != -1){
             FakeClientCommand(client, "use %s", "weapon_knife"); //ignored by weapon_knife_karambit etc.
             InstantSwitch(client, weapon);
@@ -22,7 +22,7 @@ public void GiveAndSwitchWeapon(int client, char[] weaponName){
             FakeClientCommand(client, "use %s", playersWeapon);
             InstantSwitch(client, weapon);
         }
-	}else{
+    }else{
         FakeClientCommand(client, "use %s", weaponName);
         InstantSwitch(client, weapon);
     }
