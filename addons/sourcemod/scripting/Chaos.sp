@@ -241,6 +241,7 @@ enum struct effect_data{
 	bool IsCompatible(){
 		if(this.IncompatibleEffects == INVALID_HANDLE) return true;
 		
+		// check if this effect's incompatible effects are already running
 		char effectName[255];
 		for(int i = 0; i < GetArraySize(this.IncompatibleEffects); i++){
 			GetArrayString(this.IncompatibleEffects, i, effectName, sizeof(effectName));
@@ -249,8 +250,7 @@ enum struct effect_data{
 			}
 		}
 
-		//TODO: trying to loop through live effects that are running, loop through incompatible, and check to see if any of those incompatibles are this.EffectName
-		// if(AreIncompatibleEffectsRunning(this.))
+		if(AreIncompatibleEffectsRunning(this.FunctionName)) return false; // check if this effect is incompatible in a currently running effect
 
 		return true;	
 	}
@@ -262,21 +262,24 @@ enum struct effect_data{
 	}
 }
 
-// bool AreIncompatibleEffectsRunning(char[] FunctionName){
-// 	effect_data effect;
-// 	char effectName[255];
-// 	LoopAllEffects(effect, index){
-// 		if(effect.Timer != INVALID_HANDLE){
-// 			for(int i = 0; i < GetArraySize(effect.IncompatibleEffects); i++){
-// 				GetArrayString(effect.IncompatibleEffects, i, effectName, sizeof(effectName));
-// 				if(StrEqual(effect.FunctionName, effectName)){
-// 					return false;
-// 				}
-// 			}
-// 		}
-// 	}
-// 	return true;
-// }
+bool AreIncompatibleEffectsRunning(char[] effectName){
+	effect_data liveEffect;
+	char incompatibleEffect[128];
+
+	LoopAllEffects(liveEffect, index){
+		if(liveEffect.Timer != INVALID_HANDLE){
+			if(liveEffect.IncompatibleEffects == INVALID_HANDLE) continue;
+			for(int i = 0; i < GetArraySize(liveEffect.IncompatibleEffects); i++){
+				GetArrayString(liveEffect.IncompatibleEffects, i, incompatibleEffect, sizeof(incompatibleEffect));
+				if(StrEqual(incompatibleEffect, effectName)){
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
 
 bool IsEffectRunning(char[] effectName){
 	effect_data effect;
