@@ -117,6 +117,7 @@ int 	ChaosMapCount = 0;
 
 
 // Any variables shared by multiple plugins can be listed here
+//TODO: to be phased out
 int 	g_bNoStrafe = 0;
 int 	g_AutoBunnyhop = 0;
 int 	g_bNoForwardBack = 0;

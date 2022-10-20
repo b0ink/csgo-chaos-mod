@@ -30,11 +30,6 @@ public Action Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &iImp
 	}
 }
 
-
-public bool Chaos_BreakTime_HasNoDuration(){
-	return false;
-}
-
 public bool Chaos_BreakTime_Conditions(){
 	return true;
 }

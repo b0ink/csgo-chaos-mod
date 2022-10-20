@@ -30,10 +30,6 @@ public Action Chaos_DoubleJump_RESET(bool EndChaos){
 	g_bDoubleJump = false;
 }
 
-public bool Chaos_DoubleJump_HasNoDuration(){
-	return false;
-}
-
 
 public bool Chaos_DoubleJump_Conditions(){
 	return true;
