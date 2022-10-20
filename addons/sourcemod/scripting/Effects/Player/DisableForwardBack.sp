@@ -1,4 +1,6 @@
 
+int 	g_bNoForwardBack = 0;
+
 int Disable_WS[MAXPLAYERS+1];
 float Disable_WS_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
 

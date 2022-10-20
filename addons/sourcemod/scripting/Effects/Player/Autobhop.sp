@@ -1,3 +1,5 @@
+int 	g_AutoBunnyhop = 0;
+
 public void Chaos_Autobhop(effect_data effect){
 	effect.Title = "Are you feeling funky?";
 	effect.Duration = 30;

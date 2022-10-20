@@ -7,14 +7,12 @@ public void Chaos_GhostSlaps(effect_data effect){
 }
 
 public void Chaos_GhostSlaps_START(){
-	g_NoFallDamage++;
 	Chaos_RandomSlap_Timer = CreateTimer(g_Chaos_RandomSlap_Interval, Timer_RandomSlap, _,TIMER_REPEAT);
 }
 
 public Action Chaos_GhostSlaps_RESET(bool HasTimerEnded){
 		StopTimer(Chaos_RandomSlap_Timer);
 		// cvar("sv_falldamage_scale", "1");
-		if(g_NoFallDamage > 0) g_NoFallDamage--; //TODO:
 }
 
 float g_maxRange = 750.0;

@@ -19,8 +19,6 @@ public void Chaos_BreakTime_START(){
 public Action Chaos_BreakTime_RESET(bool HasTimerEnded){
 	BreakTime = false;
 	UnhookBlockAllGuns();
-	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
-	if(g_bNoStrafe > 0) g_bNoStrafe--;
 }
 
 public Action Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){

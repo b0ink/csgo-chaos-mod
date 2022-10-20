@@ -1,5 +1,10 @@
-bool g_bC4Chicken = false;
-bool g_bVisibleChicken = true;
+bool 	g_bC4Chicken = false;
+bool 	g_bVisibleChicken = true;
+int 	g_iC4ChickenEnt = -1;
+
+int GetChickenEntity(){
+	return g_iC4ChickenEnt;
+}
 
 public void Chaos_C4Chicken(effect_data effect){
 	effect.Title = "C4 Chicken";

@@ -159,11 +159,11 @@ void RemoveChickens(bool removec4Chicken = false){
 		LoopAllEntities(ent, GetMaxEntities(), classname){
 			if(StrEqual(classname, "chicken") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
 				if(removec4Chicken){
-					if(ent == g_iC4ChickenEnt){
+					if(ent == GetChickenEntity()){
 						RemoveEntity(ent);
 					}
 				}else{
-					if(ent != g_iC4ChickenEnt){
+					if(ent != GetChickenEntity()){
 						SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 1.0);
 						RemoveEntity(ent);
 					}

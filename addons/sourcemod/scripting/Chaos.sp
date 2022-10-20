@@ -95,10 +95,11 @@ char g_sSkyboxes[][] = {
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bCanSpawnEffect = true;
 
-int 	g_iTotalEffectsRanThisRound = 0;
-int		g_iTotalRoundsThisMap = 0;
-int		g_iEffectsSinceMeta = 0;
-int 	g_iChaosRoundTime = 0; // starts counting from round start, including freeze time
+int 	g_iTotalEffectsRanThisRound = 0; 	// Effects run in current round
+int		g_iTotalRoundsThisMap = 0;			// Round count tracker
+int		g_iEffectsSinceMeta = 0; 			// Total effects run since the last meta effect
+int 	g_iChaosRoundTime = 0;	 			// Starts counting from round start, including freeze time
+int 	ChaosMapCount = 0;					// Total effects run in the current map
 
 
 bool 	g_bMegaChaosIsActive = false;
@@ -113,16 +114,7 @@ bool 	g_bDisableRetryEffect = false;
 
 bool 	g_bDynamicChannelsEnabled = false;
 
-int 	ChaosMapCount = 0;
 
-
-// Any variables shared by multiple plugins can be listed here
-//TODO: to be phased out
-int 	g_bNoStrafe = 0;
-int 	g_AutoBunnyhop = 0;
-int 	g_bNoForwardBack = 0;
-int 	g_NoFallDamage = 0;
-int 	g_iC4ChickenEnt = -1;
 
 Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 
