@@ -40,7 +40,7 @@ public Action Timer_CheckBlindStatus(Handle timer){
 			}
 		}
 	}else{
-		if(!g_SleepyShooter) return Plugin_Stop;
+		return Plugin_Stop;
 	}
 
 	return Plugin_Continue;
