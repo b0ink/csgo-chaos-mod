@@ -1,531 +1,531 @@
 "Phrases"
 {
-    "Chaos_Meta_Mega_Title"
-    {
-        "en"    "Mega Chaos [META]"
-    }
-    "Chaos_Nothing_Title"
-    {
-        "en"    "Nothing"
-    }
-    "Chaos_Invis_Title"
-    {
-        "en"    "Where did everyone go?"
-    }
-    "Chaos_OneBulletMag_Title"
-    {
-        "en"    "One Bullet Mags"
-    }
-    "Chaos_PortalGuns_Title"
-    {
-        "en"    "Portal Guns"
-    }
-    "Chaos_NoScopeOnly_Title"
-    {
-        "en"    "No Scopes Only"
-    }
-    "Chaos_Aimbot_Title"
+    "Chaos_Aimbot"
     {
         "en"    "Aimbot"
     }
-    "Chaos_InfiniteAmmo_Title"
-    {
-        "en"    "Infinite Ammo"
-    }
-    "Chaos_RandomSkybox_Title"
-    {
-        "en"    "Random Skybox"
-    }
-    "Chaos_DecoyDodgeball_Title"
-    {
-        "en"    "Decoy Dodgeball"
-    }
-    "Chaos_RandomInvisiblePlayer_Title"
-    {
-        "en"    "Random Invisible Player"
-    }
-    "Chaos_Bankrupt_Title"
-    {
-        "en"    "Bankrupt"
-    }
-    "Chaos_Shields_Title"
-    {
-        "en"    "Shields"
-    }
-    "Chaos_BlindPlayers_Title"
-    {
-        "en"    "Blind"
-    }
-    "Chaos_AutoPlantC4_Title"
-    {
-        "en"    "Auto Plant C4"
-    }
-    "Chaos_AutoPlantC4_A_Title"
-    {
-        "en"    "Auto Plant C4 at Bombsite A"
-    }
-    "Chaos_AutoPlantC4_B_Title"
-    {
-        "en"    "Auto Plant C4 at Bombsite B"
-    }
-    "Chaos_InfiniteGrenades_Title"
-    {
-        "en"    "Infinite Grenades"
-    }
-    "Chaos_KnifeFight_Title"
-    {
-        "en"    "Knife Fight"
-    }
-    "Chaos_LowRenderDistance_Title"
-    {
-        "en"    "Low Render Distance"
-    }
-    "Chaos_RandomWeapons_Title"
-    {
-        "en"    "Random Weapons"
-    }
-    "Chaos_OHKO_Title"
-    {
-        "en"    "1 HP"
-    }
-    "Chaos_TeammateSwap_Title"
-    {
-        "en"    "Teammate Swap"
-    }
-    "Chaos_Flying_Title"
-    {
-        "en"    "Flying"
-    }
-    "Chaos_MoneyRain_Title"
-    {
-        "en"    "Make it rain"
-    }
-    "Chaos_Thirdperson_Title"
-    {
-        "en"    "Thirdperson"
-    }
-    "Chaos_C4Chicken_Title"
-    {
-        "en"    "C4 Chicken"
-    }
-    "Chaos_AlienModelKnife_Title"
+    "Chaos_AlienModelKnife"
     {
         "en"    "Alien Knife Fight"
     }
-    "Chaos_IsThisMexico_Title"
+    "Chaos_AutoPlantC4"
     {
-        "en"    "Is This What Mexico Looks Like?"
+        "en"    "Auto Plant C4"
     }
-    "Chaos_HeadshotOnly_Title"
+    "Chaos_AutoPlantC4_A"
     {
-        "en"    "Headshots Only"
+        "en"    "Auto Plant C4 at Bombsite A"
     }
-    "Chaos_RainingMolotovs_Title"
+    "Chaos_AutoPlantC4_B"
     {
-        "en"    "Raining Fire"
+        "en"    "Auto Plant C4 at Bombsite B"
     }
-    "Chaos_RandomTeleport_Title"
-    {
-        "en"    "Random Teleport"
-    }
-    "Chaos_LavaFloor_Title"
-    {
-        "en"    "THE FLOOR IS LAVA"
-    }
-    "Chaos_CrabPeople_Title"
-    {
-        "en"    "Crab People"
-    }
-    "Chaos_Spin180_Title"
-    {
-        "en"    "180 Spin"
-    }
-    "Chaos_OneWeaponOnly_Title"
-    {
-        "en"    "One weapon Only"
-    }
-    "Chaos_NoRecoil_Title"
-    {
-        "en"    "100% Weapon Accuracy"
-    }
-    "Chaos_LittleChooks_Title"
-    {
-        "en"    "Little Chooks"
-    }
-    "Chaos_BigChooks_Title"
-    {
-        "en"    "Big Chooks"
-    }
-    "Chaos_MamaChook_Title"
-    {
-        "en"    "Mama Chook"
-    }
-    "Chaos_MoonGravity_Title"
-    {
-        "en"    "Moon Gravity"
-    }
-    "Chaos_SlayRandomPlayer_Title"
-    {
-        "en"    "Slay Random Player On Each Team"
-    }
-    "Chaos_TaserParty_Title"
-    {
-        "en"    "Taser Party"
-    }
-    "Chaos_InsaneGravity_Title"
-    {
-        "en"    "Insane Gravity"
-    }
-    "Chaos_ESP_Title"
-    {
-        "en"    "Wall Hacks"
-    }
-    "Chaos_GhostSlaps_Title"
-    {
-        "en"    "Ghost Slaps"
-    }
-    "Chaos_Healthshot_Title"
-    {
-        "en"    "Healthshot"
-    }
-    "Chaos_Jackpot_Title"
-    {
-        "en"    "Jackpot"
-    }
-    "Chaos_LightsOff_Title"
-    {
-        "en"    "Who turned the lights off?"
-    }
-    "Chaos_QuakeFOV_Title"
-    {
-        "en"    "Quake FOV"
-    }
-    "Chaos_Binoculars_Title"
-    {
-        "en"    "Binoculars"
-    }
-    "Chaos_VampireHeal_Title"
-    {
-        "en"    "Vampires"
-    }
-    "Chaos_NightVision_Title"
-    {
-        "en"    "Night Vision"
-    }
-    "Chaos_SmokeStrat_Title"
-    {
-        "en"    "Smoke Strat"
-    }
-    "Chaos_ReversedMovement_Title"
-    {
-        "en"    "Reversed Movement"
-    }
-    "Chaos_Autobhop_Title"
+    "Chaos_Autobhop"
     {
         "en"    "Are you feeling funky?"
     }
-    "Chaos_IceyGround_Title"
+    "Chaos_Bankrupt"
     {
-        "en"    "Icy Ground"
+        "en"    "Bankrupt"
     }
-    "Chaos_IncreasedRecoil_Title"
+    "Chaos_BigChooks"
     {
-        "en"    "Increased Recoil"
+        "en"    "Big Chooks"
     }
-    "Chaos_ReversedRecoil_Title"
+    "Chaos_Binoculars"
     {
-        "en"    "Reversed Recoil"
+        "en"    "Binoculars"
     }
-    "Chaos_Bumpmines_Title"
-    {
-        "en"    "Bumpmines"
-    }
-    "Chaos_RespawnTheDead_Title"
-    {
-        "en"    "Resurrect dead players"
-    }
-    "Chaos_RespawnTheDead_Randomly_Title"
-    {
-        "en"    "Resurrect dead players in random locations"
-    }
-    "Chaos_RespawnDead_LastLocation_Title"
-    {
-        "en"    "Resurrect players where they died"
-    }
-    "Chaos_SlowSpeed_Title"
-    {
-        "en"    "0.5x movement speed"
-    }
-    "Chaos_FastSpeed_Title"
-    {
-        "en"    "3x Movement Speed"
-    }
-    "Chaos_IgniteAllPlayers_Title"
-    {
-        "en"    "Ignite All Players"
-    }
-    "Chaos_ChickenPlayers_Title"
-    {
-        "en"    "Make all players a chicken"
-    }
-    "Chaos_NormalWhiteFog_Title"
-    {
-        "en"    "Fog"
-    }
-    "Chaos_ExtremeWhiteFog_Title"
-    {
-        "en"    "Extreme Fog"
-    }
-    "Chaos_Earthquake_Title"
-    {
-        "en"    "Earthquake"
-    }
-    "Chaos_LockPlayersAim_Title"
-    {
-        "en"    "Lock Mouse Movement"
-    }
-    "Chaos_OneBulletOneGun_Title"
-    {
-        "en"    "One Bullet One Gun"
-    }
-    "Chaos_DiscoFog_Title"
-    {
-        "en"    "Disco Fog"
-    }
-    "Chaos_Jumping_Title"
-    {
-        "en"    "Jumping"
-    }
-    "Chaos_DisableForwardBack_Title"
-    {
-        "en"    "Disable W / S Keys"
-    }
-    "Chaos_DisableStrafe_Title"
-    {
-        "en"    "Disable A / D Keys"
-    }
-    "Chaos_ResetSpawns_Title"
-    {
-        "en"    "Teleport all players back to spawn"
-    }
-    "Chaos_SpeedShooter_Title"
-    {
-        "en"    "Speed Shooter"
-    }
-    "Chaos_ExplosiveBullets_Title"
-    {
-        "en"    "Explosive Bullets"
-    }
-    "Chaos_DiscoPlayers_Title"
-    {
-        "en"    "Random Player Colours"
-    }
-    "Chaos_SimonSays_Title"
-    {
-        "en"    "Simon Says"
-    }
-    "Chaos_RewindTenSeconds_Title"
-    {
-        "en"    "Rewind 10 Seconds"
-    }
-    "Chaos_BuyAnywhere_Title"
-    {
-        "en"    "Buy Anywhere Enabled"
-    }
-    "Chaos_HealAllPlayers_Title"
-    {
-        "en"    "Set all players health to 100"
-    }
-    "Chaos_Give100HP_Title"
-    {
-        "en"    "Give all players +100 HP"
-    }
-    "Chaos_EnemyRadar_Title"
-    {
-        "en"    "Enemy Radar"
-    }
-    "Chaos_Drugs_Title"
-    {
-        "en"    "Drugs"
-    }
-    "Chaos_SpawnExplodingBarrels_Title"
-    {
-        "en"    "Exploding Barrels"
-    }
-    "Chaos_SuperJump_Title"
-    {
-        "en"    "Super Jump"
-    }
-    "Chaos_SpawnFlashbangs_Title"
-    {
-        "en"    "Spawn Flashbangs"
-    }
-    "Chaos_NoCrosshair_Title"
-    {
-        "en"    "No Crosshair"
-    }
-    "Chaos_FakeCrash_Title"
-    {
-        "en"    "Fake Crash"
-    }
-    "Chaos_Soccerballs_Title"
-    {
-        "en"    "Soccer Balls"
-    }
-    "Chaos_FakeTeleport_Title"
-    {
-        "en"    "Fake Teleport"
-    }
-    "Chaos_TeleportFewMetres_Title"
-    {
-        "en"    "Teleport Players A Few Metres"
-    }
-    "Chaos_Impostors_Title"
-    {
-        "en"    "Impostors"
-    }
-    "Chaos_Juggernaut_Title"
-    {
-        "en"    "Juggernauts"
-    }
-    "Chaos_BreakTime_Title"
-    {
-        "en"    "Break Time"
-    }
-    "Chaos_RapidFire_Title"
-    {
-        "en"    "Rapid Fire"
-    }
-    "Chaos_DisableRadar_Title"
-    {
-        "en"    "Disable Radar"
-    }
-    "Chaos_InsaneAirSpeed_Title"
-    {
-        "en"    "Extreme Strafe Acceleration"
-    }
-    "Chaos_DropCurrentWeapon_Title"
-    {
-        "en"    "Drop Current Weapon"
-    }
-    "Chaos_DropPrimaryWeapon_Title"
-    {
-        "en"    "Drop Primary Weapon"
-    }
-	"Chaos_Thunderstorm_Title"
-    {
-        "en"    "Thunderstorm"
-    }
-    "Chaos_ForceReload_Title"
-    {
-        "en"    "Force Reload"
-    }
-    "Chaos_LooseTrigger_Title"
-    {
-        "en"    "Loose Trigger"
-    }
-    "Chaos_LSD_Title"
-    {
-        "en"    "LSD"
-    }
-    "Chaos_BlackWhite_Title"
+    "Chaos_BlackWhite"
     {
         "en"    "Black & White"
     }
-    "Chaos_Saturation_Title"
+    "Chaos_BlindPlayers"
     {
-        "en"    "Saturation"
+        "en"    "Blind"
     }
-    "Chaos_RevealEnemyLocation_Title"
+    "Chaos_BreakTime"
     {
-        "en"    "Reveal Enemy Location"
+        "en"    "Break Time"
     }
-    "Chaos_HealthRegen_Title"
+    "Chaos_Bumpmines"
     {
-        "en"    "Health Regen"
+        "en"    "Bumpmines"
     }
-    "Chaos_Lag_Title"
+    "Chaos_BuyAnywhere"
     {
-        "en"    "Lag"
+        "en"    "Buy Anywhere Enabled"
     }
-    "Chaos_Snow_Title"
+    "Chaos_C4Chicken"
     {
-        "en"    "Snow"
+        "en"    "C4 Chicken"
     }
-    "Chaos_IceSkate_Title"
+    "Chaos_Chatterbox"
     {
-        "en"    "Ice Skating"
+        "en"    "Chatterbox"
     }
-    "Chaos_ReversedStrafe_Title"
+    "Chaos_ChickenPlayers"
     {
-        "en"    "Reversed Strafe"
+        "en"    "Make all players a chicken"
     }
-    "Chaos_ExtendedGrenades_Title"
+    "Chaos_CrabPeople"
+    {
+        "en"    "Crab People"
+    }
+    "Chaos_DecoyDodgeball"
+    {
+        "en"    "Decoy Dodgeball"
+    }
+    "Chaos_DeepFried"
+    {
+        "en"    "Deep Fried"
+    }
+    "Chaos_DisableForwardBack"
+    {
+        "en"    "Disable W / S Keys"
+    }
+    "Chaos_DisableRadar"
+    {
+        "en"    "Disable Radar"
+    }
+    "Chaos_DisableStrafe"
+    {
+        "en"    "Disable A / D Keys"
+    }
+    "Chaos_DiscoFog"
+    {
+        "en"    "Disco Fog"
+    }
+    "Chaos_DiscoPlayers"
+    {
+        "en"    "Random Player Colours"
+    }
+    "Chaos_DoubleJump"
+    {
+        "en"    "Double Jump"
+    }
+    "Chaos_DropAllWeapons"
+    {
+        "en"    "Drop All Weapons"
+    }
+    "Chaos_DropCurrentWeapon"
+    {
+        "en"    "Drop Current Weapon"
+    }
+    "Chaos_DropPrimaryWeapon"
+    {
+        "en"    "Drop Primary Weapon"
+    }
+    "Chaos_Drugs"
+    {
+        "en"    "Drugs"
+    }
+    "Chaos_ESP"
+    {
+        "en"    "Wall Hacks"
+    }
+    "Chaos_Earthquake"
+    {
+        "en"    "Earthquake"
+    }
+    "Chaos_EnemyRadar"
+    {
+        "en"    "Enemy Radar"
+    }
+    "Chaos_ExplosiveBullets"
+    {
+        "en"    "Explosive Bullets"
+    }
+    "Chaos_ExtendRoundTime"
+    {
+        "en"    "Extend Round Time"
+    }
+    "Chaos_ExtendedGrenades"
     {
         "en"    "Extended Grenades"
     }
-    "Chaos_WKeyStuck_Title"
+    "Chaos_ExtremeWhiteFog"
     {
-        "en"    "Help my W key is stuck"
+        "en"    "Extreme Fog"
     }
-    "Chaos_SneakyBeaky_Title"
+    "Chaos_FakeCrash"
+    {
+        "en"    "Fake Crash"
+    }
+    "Chaos_FakeTeleport"
+    {
+        "en"    "Fake Teleport"
+    }
+    "Chaos_FastSpeed"
+    {
+        "en"    "3x Movement Speed"
+    }
+    "Chaos_FencedOff"
+    {
+        "en"    "Fenced Off"
+    }
+    "Chaos_Flying"
+    {
+        "en"    "Flying"
+    }
+    "Chaos_ForceReload"
+    {
+        "en"    "Force Reload"
+    }
+    "Chaos_GhostSlaps"
+    {
+        "en"    "Ghost Slaps"
+    }
+    "Chaos_Give100HP"
+    {
+        "en"    "Give all players +100 HP"
+    }
+    "Chaos_HeadshotOnly"
+    {
+        "en"    "Headshots Only"
+    }
+    "Chaos_HealAllPlayers"
+    {
+        "en"    "Set all players health to 100"
+    }
+    "Chaos_HealthRegen"
+    {
+        "en"    "Health Regen"
+    }
+    "Chaos_Healthshot"
+    {
+        "en"    "Healthshot"
+    }
+    "Chaos_IceSkate"
+    {
+        "en"    "Ice Skating"
+    }
+    "Chaos_IceyGround"
+    {
+        "en"    "Icy Ground"
+    }
+    "Chaos_IgniteAllPlayers"
+    {
+        "en"    "Ignite All Players"
+    }
+    "Chaos_Impostors"
+    {
+        "en"    "Impostors"
+    }
+    "Chaos_IncreasedRecoil"
+    {
+        "en"    "Increased Recoil"
+    }
+    "Chaos_InfiniteAmmo"
+    {
+        "en"    "Infinite Ammo"
+    }
+    "Chaos_InfiniteGrenades"
+    {
+        "en"    "Infinite Grenades"
+    }
+    "Chaos_InsaneAirSpeed"
+    {
+        "en"    "Extreme Strafe Acceleration"
+    }
+    "Chaos_InsaneGravity"
+    {
+        "en"    "Insane Gravity"
+    }
+    "Chaos_Invis"
+    {
+        "en"    "Where did everyone go?"
+    }
+    "Chaos_IsThisMexico"
+    {
+        "en"    "Is This What Mexico Looks Like?"
+    }
+    "Chaos_Jackpot"
+    {
+        "en"    "Jackpot"
+    }
+    "Chaos_Juggernaut"
+    {
+        "en"    "Juggernauts"
+    }
+    "Chaos_Jumping"
+    {
+        "en"    "Jumping"
+    }
+    "Chaos_KnifeFight"
+    {
+        "en"    "Knife Fight"
+    }
+    "Chaos_LSD"
+    {
+        "en"    "LSD"
+    }
+    "Chaos_Lag"
+    {
+        "en"    "Lag"
+    }
+    "Chaos_LavaFloor"
+    {
+        "en"    "THE FLOOR IS LAVA"
+    }
+    "Chaos_LightsOff"
+    {
+        "en"    "Who turned the lights off?"
+    }
+    "Chaos_LittleChooks"
+    {
+        "en"    "Little Chooks"
+    }
+    "Chaos_LockPlayersAim"
+    {
+        "en"    "Lock Mouse Movement"
+    }
+    "Chaos_LooseTrigger"
+    {
+        "en"    "Loose Trigger"
+    }
+    "Chaos_LowRenderDistance"
+    {
+        "en"    "Low Render Distance"
+    }
+    "Chaos_MamaChook"
+    {
+        "en"    "Mama Chook"
+    }
+    "Chaos_Meta_DoubleTimerSpeed"
+    {
+        "en"    "Double Timer Speed [META]"
+    }
+    "Chaos_Meta_HalfTimerSpeed"
+    {
+        "en"    "Half Timer Speed [META]"
+    }
+    "Chaos_Meta_Mega"
+    {
+        "en"    "Mega Chaos [META]"
+    }
+    "Chaos_Meta_WhatsHappening"
+    {
+        "en"    "What's Happening? [META]"
+    }
+    "Chaos_MoneyRain"
+    {
+        "en"    "Make it rain"
+    }
+    "Chaos_MoonGravity"
+    {
+        "en"    "Moon Gravity"
+    }
+    "Chaos_NightVision"
+    {
+        "en"    "Night Vision"
+    }
+    "Chaos_NoCrosshair"
+    {
+        "en"    "No Crosshair"
+    }
+    "Chaos_NoRecoil"
+    {
+        "en"    "100% Weapon Accuracy"
+    }
+    "Chaos_NoScopeOnly"
+    {
+        "en"    "No Scopes Only"
+    }
+    "Chaos_NormalWhiteFog"
+    {
+        "en"    "Fog"
+    }
+    "Chaos_Nothing"
+    {
+        "en"    "Nothing"
+    }
+    "Chaos_OHKO"
+    {
+        "en"    "1 HP"
+    }
+    "Chaos_OneBulletMag"
+    {
+        "en"    "One Bullet Mags"
+    }
+    "Chaos_OneBulletOneGun"
+    {
+        "en"    "One Bullet One Gun"
+    }
+    "Chaos_OneWeaponOnly"
+    {
+        "en"    "One weapon Only"
+    }
+    "Chaos_PigeonHole"
+    {
+        "en"    "Pigeon Hole"
+    }
+    "Chaos_PortalGuns"
+    {
+        "en"    "Portal Guns"
+    }
+    "Chaos_QuakeFOV"
+    {
+        "en"    "Quake FOV"
+    }
+    "Chaos_RainingMolotovs"
+    {
+        "en"    "Raining Fire"
+    }
+    "Chaos_RandomInvisiblePlayer"
+    {
+        "en"    "Random Invisible Player"
+    }
+    "Chaos_RandomSkybox"
+    {
+        "en"    "Random Skybox"
+    }
+    "Chaos_RandomTeleport"
+    {
+        "en"    "Random Teleport"
+    }
+    "Chaos_RandomWeapons"
+    {
+        "en"    "Random Weapons"
+    }
+    "Chaos_RapidFire"
+    {
+        "en"    "Rapid Fire"
+    }
+    "Chaos_ReducedDamage"
+    {
+        "en"    "Half Shot Damage"
+    }
+    "Chaos_ResetSpawns"
+    {
+        "en"    "Teleport all players back to spawn"
+    }
+    "Chaos_RespawnDead_LastLocation"
+    {
+        "en"    "Resurrect players where they died"
+    }
+    "Chaos_RespawnTheDead"
+    {
+        "en"    "Resurrect dead players"
+    }
+    "Chaos_RespawnTheDead_Randomly"
+    {
+        "en"    "Resurrect dead players in random locations"
+    }
+    "Chaos_RevealEnemyLocation"
+    {
+        "en"    "Reveal Enemy Location"
+    }
+    "Chaos_ReversedMovement"
+    {
+        "en"    "Reversed Movement"
+    }
+    "Chaos_ReversedRecoil"
+    {
+        "en"    "Reversed Recoil"
+    }
+    "Chaos_ReversedStrafe"
+    {
+        "en"    "Reversed Strafe"
+    }
+    "Chaos_RewindTenSeconds"
+    {
+        "en"    "Rewind 10 Seconds"
+    }
+    "Chaos_Saturation"
+    {
+        "en"    "Saturation"
+    }
+    "Chaos_Shields"
+    {
+        "en"    "Shields"
+    }
+    "Chaos_SilentFootsteps"
+    {
+        "en"    "Silent Footsteps"
+    }
+    "Chaos_SimonSays"
+    {
+        "en"    "Simon Says"
+    }
+    "Chaos_SlayRandomPlayer"
+    {
+        "en"    "Slay Random Player On Each Team"
+    }
+    "Chaos_SleepyShooter"
+    {
+        "en"    "Shoot To Stay Awake"
+    }
+    "Chaos_SlowSpeed"
+    {
+        "en"    "0.5x movement speed"
+    }
+    "Chaos_SmokeStrat"
+    {
+        "en"    "Smoke Strat"
+    }
+    "Chaos_SneakyBeaky"
     {
         "en"    "Sneaky Beaky"
     }
-    "Chaos_ReducedDamage_Title"
-	{
-		"en"    "Half Shot Damage"
+    "Chaos_Snow"
+    {
+        "en"    "Snow"
     }
-    "Chaos_PigeonHole_Title"
-	{
-		"en"    "Pigeon Hole"
+    "Chaos_Soccerballs"
+    {
+        "en"    "Soccer Balls"
     }
-    "Chaos_DoubleJump_Title"
-	{
-		"en"    "Double Jump"
+    "Chaos_SpawnExplodingBarrels"
+    {
+        "en"    "Exploding Barrels"
     }
-    "Chaos_Meta_HalfTimerSpeed_Title"
-	{
-		"en"    "Half Timer Speed [META]"
+    "Chaos_SpawnFlashbangs"
+    {
+        "en"    "Spawn Flashbangs"
     }
-    "Chaos_Meta_DoubleTimerSpeed_Title"
-	{
-		"en"    "Double Timer Speed [META]"
+    "Chaos_SpeedShooter"
+    {
+        "en"    "Speed Shooter"
     }
-    "Chaos_Meta_WhatsHappening_Title"
-	{
-		"en"    "What's Happening? [META]"
+    "Chaos_Spin180"
+    {
+        "en"    "180 Spin"
     }
-    "Chaos_SilentFootsteps_Title"
-	{
-		"en"    "Silent Footsteps"
+    "Chaos_SuperJump"
+    {
+        "en"    "Super Jump"
     }
-    "Chaos_DeepFried_Title"
-	{
-		"en"    "Deep Fried"
+    "Chaos_TaserParty"
+    {
+        "en"    "Taser Party"
     }
-    "Chaos_DropAllWeapons_Title"
-	{
-		"en"    "Drop All Weapons"
+    "Chaos_TeammateSwap"
+    {
+        "en"    "Teammate Swap"
     }
-    "Chaos_SleepyShooter_Title"
-	{
-		"en"    "Shoot To Stay Awake"
+    "Chaos_TeleportFewMetres"
+    {
+        "en"    "Teleport Players A Few Metres"
     }
-    "Chaos_Chatterbox_Title"
-	{
-		"en"    "Chatterbox"
+    "Chaos_Thirdperson"
+    {
+        "en"    "Thirdperson"
     }
-    "Chaos_Turrets_Title"
-	{
-		"en"    "Turrets"
+    "Chaos_Thunderstorm"
+    {
+        "en"    "Thunderstorm"
     }
-    "Chaos_FencedOff_Title"
-	{
-		"en"    "Fenced Off"
+    "Chaos_Turrets"
+    {
+        "en"    "Turrets"
     }
-    "Chaos_ExtendRoundTime_Title"
-	{
-		"en"    "Extend Round Time"
+    "Chaos_VampireHeal"
+    {
+        "en"    "Vampires"
+    }
+    "Chaos_WKeyStuck"
+    {
+        "en"    "Help my W key is stuck"
     }
 }

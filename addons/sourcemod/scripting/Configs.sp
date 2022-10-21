@@ -41,13 +41,11 @@ public void ParseChaosEffects(){
 		Format(effect.FunctionName, sizeof(effect.FunctionName), "%s", function_name);
 		effect.Enabled = true;
 
-		char chaos_translation_key[64];
 		char Chaos_Function_Title[64];
 
 		// If valid translation exists, use translation, else use plugin default
-		Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_Title", function_name);
-		if(TranslationPhraseExists(chaos_translation_key) && IsTranslatedForLanguage(chaos_translation_key, LANG_SERVER)){
-			Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
+		if(TranslationPhraseExists(effect.FunctionName) && IsTranslatedForLanguage(effect.FunctionName, LANG_SERVER)){
+			Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", effect.FunctionName, LANG_SERVER);
 			effect.Title = Chaos_Function_Title;
 		}
 

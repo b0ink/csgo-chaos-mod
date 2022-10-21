@@ -29,15 +29,13 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false
 //TODO: remove the need for GetChaosTitle -> use GetEffectDate and use effect.Title more instead of this jank
 char[] GetChaosTitle(char[] function_name){
 	char return_string[128];
-	char temp_title[128];
 
 	effect_data effect;
 	GetEffectData(function_name, effect);
 
 	if(StrContains(function_name, "Chaos_") != -1){
-		FormatEx(temp_title, sizeof(temp_title), "%s_Title", function_name);
-		if(TranslationPhraseExists(temp_title) && IsTranslatedForLanguage(temp_title, LANG_SERVER)){
-				FormatEx(return_string, sizeof(return_string), "%t", temp_title, LANG_SERVER);
+		if(TranslationPhraseExists(effect.FunctionName) && IsTranslatedForLanguage(effect.FunctionName, LANG_SERVER)){
+				FormatEx(return_string, sizeof(return_string), "%t", effect.FunctionName, LANG_SERVER);
 		}else{
 			FormatEx(return_string, sizeof(return_string), "%s", effect.Title);
 		}
