@@ -116,7 +116,7 @@ public void 	Chaos_EffectName_OnGameFrame();
 ## Translations
 Add the following to `addons/sourcemod/translations/chaos.phrases.txt`.
 ```
-"Chaos_EffectName_Title"
+"Chaos_EffectName"
 {
 	"en"    "Effect Name"
 }
