@@ -60,13 +60,13 @@ void UpdateFog(){
 	fog_data fog;
 	if(Fog_Stream.Length > 0){
 		Fog_Stream.GetArray(Fog_Stream.Length - 1, fog, sizeof(fog)); // Start from most recently added fog
-		if(fog.blend[0]) 		DispatchKeyValue(g_iFog, "fogblend", fog.blend);
-		if(fog.color[0]) 		DispatchKeyValue(g_iFog, "fogcolor", fog.color);
-		if(fog.color2[0]) 		DispatchKeyValue(g_iFog, "fogcolor2", fog.color2);
-		if(fog.start[0]) 		DispatchKeyValue(g_iFog, "fogstart", fog.start);
-		if(fog.end[0]) 			DispatchKeyValue(g_iFog, "fogend", fog.end);
-		if(fog.maxdensity[0]) 	DispatchKeyValue(g_iFog, "fogmaxdensity", fog.maxdensity);
-		if(fog.farz[0]) 		DispatchKeyValue(g_iFog, "farz", fog.farz);
+		if(fog.blend[0] != '\0') 		DispatchKeyValue(g_iFog, "fogblend", fog.blend);
+		if(fog.color[0] != '\0') 		DispatchKeyValue(g_iFog, "fogcolor", fog.color);
+		if(fog.color2[0] != '\0') 		DispatchKeyValue(g_iFog, "fogcolor2", fog.color2);
+		if(fog.start[0] != '\0') 		DispatchKeyValue(g_iFog, "fogstart", fog.start);
+		if(fog.end[0] != '\0') 			DispatchKeyValue(g_iFog, "fogend", fog.end);
+		if(fog.maxdensity[0] != '\0') 	DispatchKeyValue(g_iFog, "fogmaxdensity", fog.maxdensity);
+		if(fog.farz[0] != '\0') 		DispatchKeyValue(g_iFog, "farz", fog.farz);
 		// DispatchKeyValueFloat(g_iFog, "fogstart", fog.start);
 		// DispatchKeyValueFloat(g_iFog, "fogend", fog.end);
 		// DispatchKeyValueFloat(g_iFog, "fogmaxdensity", fog.maxdensity);

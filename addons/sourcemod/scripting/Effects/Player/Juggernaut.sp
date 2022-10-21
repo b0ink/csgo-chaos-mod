@@ -26,7 +26,7 @@ public Action Chaos_Juggernaut_RESET(bool HasTimerEnded){
 			if(GetEntProp(i, Prop_Send, "m_ArmorValue") > 100){
 				SetEntProp(i, Prop_Data, "m_ArmorValue", 100);
 			}
-			if(g_OriginalModels_Jugg[i][0]){
+			if(g_OriginalModels_Jugg[i][0] != '\0'){
 				SetEntityModel(i, g_OriginalModels_Jugg[i]);
 				g_OriginalModels_Jugg[i] = "";
 			}	

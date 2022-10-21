@@ -480,7 +480,7 @@ bool PoolChaosEffects(char[] effectName = ""){
 	PossibleChaosEffects.Clear();
 	effect_data effect;
 	LoopAllEffects(effect, index){
-		if(effectName[0]){ //* if keyword was provided
+		if(effectName[0] != '\0'){ //* if keyword was provided
 			bool containsAlias = false;
 			if(effect.Aliases != INVALID_HANDLE){
 				for(int i = 0; i < GetArraySize(effect.Aliases); i++){
@@ -538,7 +538,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	}
 
 
-	if(g_sForceCustomEffect[0]){ //run from menu
+	if(g_sForceCustomEffect[0] != '\0'){ //run from menu
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
 		effect_data effect;
 		LoopAllEffects(effect, index){
@@ -555,7 +555,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 
 		
-		while(!g_sLastPlayedEffect[0]){ // no longer
+		while(g_sLastPlayedEffect[0] == '\0'){ // no longer
 			attempts++;
 			do{
 				randomEffect = GetRandomInt(0, totalEffects - 1);
@@ -579,7 +579,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 					if(GetArraySize(EffectsHistory) > average) RemoveFromArray(EffectsHistory, 0);
 				}
 
-			}while(!Random_Effect[0]);
+			}while(Random_Effect[0] == '\0');
 			if(attempts > 900){
 				LogError("Clearing effect history");
 				ClearArray(EffectsHistory); //fail safe

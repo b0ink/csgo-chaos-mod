@@ -32,7 +32,7 @@ void SetChicken(int client){
 }
 
 void DisableChicken(int client){
-	if(playersModels[client][0]){
+	if(playersModels[client][0] != '\0'){
 		if(ValidAndAlive(client)){
 			SetEntityModel(client, playersModels[client]);
 		}

@@ -62,7 +62,7 @@ void SPAWN_WEATHER(WEATHER_TYPE type, char[] targetname){
     DispatchKeyValue(ent, "renderamt", "100");
     DispatchKeyValue(ent, "density", "100");
     DispatchKeyValue(ent, "rendercolor", "255 255 255");
-    if(targetname[0]) DispatchKeyValue(ent, "targetname", targetname);
+    if(targetname[0] != '\0') DispatchKeyValue(ent, "targetname", targetname);
 
     DispatchSpawn(ent);
     ActivateEntity(ent);

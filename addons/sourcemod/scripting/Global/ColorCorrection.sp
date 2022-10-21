@@ -13,7 +13,7 @@ void CLEAR_CC(char[] file = ""){
 	char classname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){
 		if(!StrEqual(classname, "color_correction")) continue;
-		if(file[0]){
+		if(file[0] != '\0'){
 			GetEntPropString(ent, Prop_Data, "m_lookupFilename", ent_filename, sizeof(ent_filename));
 			if(StrContains(ent_filename, file, false) != -1){
 				AcceptEntityInput(ent, "Disable");
@@ -37,7 +37,7 @@ void CREATE_CC(char[] filename, char[] targetname = ""){
 		DispatchKeyValue(ent, "fadeInDuration", "3.0");
 		DispatchKeyValue(ent, "fadeOutDuration", "3.0");
 		DispatchKeyValue(ent, "filename", path);
-		if(targetname[0]) DispatchKeyValue(ent, "targetname", targetname);
+		if(targetname[0] != '\0') DispatchKeyValue(ent, "targetname", targetname);
 		DispatchSpawn(ent);
 		ActivateEntity(ent);
 		AcceptEntityInput(ent, "Enable");

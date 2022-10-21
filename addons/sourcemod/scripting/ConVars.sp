@@ -23,7 +23,7 @@ int       g_ChaosEffectList_Color[4] = {37,186,255, 0};
 Handle g_SavedConvars = INVALID_HANDLE;
 
 void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] expectedPreviousValue = ""){
-	if(!cvarname[0]) return;
+	if(cvarname[0] == '\0') return;
 
 	ConVar hndl = FindConVar(cvarname);
 	if (hndl != null){
@@ -37,7 +37,7 @@ void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] exp
 				PushArrayString(g_SavedConvars, cvarname);
 			}
 		}
-		if(expectedPreviousValue[0]){
+		if(expectedPreviousValue[0] != '\0'){
 			if(StrEqual(oldValue, expectedPreviousValue, false)){
 				hndl.SetString(newValue, true);
 			}
@@ -91,7 +91,7 @@ void ResetCvar(char[] cvarName = "", char[] backupValue = "", char[] expectedPre
 		kvConfig.GetString(NULL_STRING, convarValue, sizeof(convarValue));
 		// PrintToChatAll("convar: %s value: %s", convarName, convarValue);
 
-		if(cvarName[0]){
+		if(cvarName[0] != '\0'){
 			if(StrEqual(convarName, cvarName, false)){
 				cvar(cvarName, convarValue, false);
 				changed = true;
@@ -101,11 +101,11 @@ void ResetCvar(char[] cvarName = "", char[] backupValue = "", char[] expectedPre
 		} 
 
 	} while(kvConfig.GotoNextKey(false));
-	if(!changed && cvarName[0]){
+	if(!changed && cvarName[0] != '\0'){
 		cvar(cvarName, backupValue, false, expectedPreviousValue);
 		// cvar(cvarName, backupValue, false);
 	}
-	if(!cvarName[0]){
+	if(cvarName[0] == '\0'){
 		ClearArray(g_SavedConvars);
 		DeleteFile(filePath);
 	}
@@ -207,7 +207,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		g_cvChaosEffectTimer_Color.GetString(color, 128);
 		char colorchunks[4][128];
 		int count = ExplodeString(color, " ", colorchunks, 4, 128);
-		if(count != 4 || !color[0]){ // if config wasn't set properly
+		if(count != 4 || color[0] == '\0'){ // if config wasn't set properly
 			g_ChaosEffectTimer_Color = {200,0,220, 0};
 		}else{
 			g_ChaosEffectTimer_Color[0] = StringToInt(colorchunks[0]);
@@ -222,7 +222,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 
 		char colorchunks[4][128];
 		int count = ExplodeString(color, " ", colorchunks, 4, 128);
-		if(count != 4 || !color[0]){
+		if(count != 4 || color[0] == '\0'){
 			g_ChaosEffectList_Color = {37,186,255, 0};
 		}else{
 			g_ChaosEffectList_Color[0] = StringToInt(colorchunks[0]);

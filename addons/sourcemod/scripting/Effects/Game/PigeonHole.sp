@@ -53,7 +53,7 @@ public void Chaos_PigeonHole_START(){
 }
 
 public Action Timer_SpawnNewPigeonHole(Handle timer){
-	if(lastPigeonHole[0]){
+	if(lastPigeonHole[0] != '\0'){
 		Remove_Overlay(lastPigeonHole);
 	}
 	int randomPigeonHole = -1;
@@ -70,7 +70,7 @@ public Action Timer_SpawnNewPigeonHole(Handle timer){
 
 public Action Chaos_PigeonHole_RESET(bool EndChaos){
 	StopTimer(PigeonHoleSpawnTimer);
-	if(lastPigeonHole[0]){
+	if(lastPigeonHole[0] != '\0'){
 		Remove_Overlay(lastPigeonHole);
 	}
 }

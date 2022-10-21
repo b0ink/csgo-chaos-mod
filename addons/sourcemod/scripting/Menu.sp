@@ -109,7 +109,7 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 		bool found = menu.GetItem(param2, info, sizeof(info));
 		if(found){
 			g_sSelectedChaosEffect = info;
-			if(g_sSelectedChaosEffect[0]){
+			if(g_sSelectedChaosEffect[0] != '\0'){
 				if(g_bCanSpawnEffect && g_bChaos_Enabled){
 					Format(g_sForceCustomEffect, sizeof(g_sForceCustomEffect), "%s", g_sSelectedChaosEffect);
 					ChooseEffect(null, true);
