@@ -103,10 +103,10 @@ public void Chaos_Chatterbox_RESET(bool HasTimerEnded){
 public bool Chaos_Chatterbox_Conditions(){
 	// Seems like certain maps such as de_lake don't have callouts
 	char location[64];
+	bool hasLocations = false;
 	LoopAlivePlayers(i){
 		GetEntPropString(i, Prop_Send, "m_szLastPlaceName", location, sizeof(location));
-		break;
+		if(location[0] != '\0') hasLocations = true;
 	}
-	if(!location[0]) return false;
-	return true;
+	return hasLocations;
 }
