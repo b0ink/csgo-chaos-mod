@@ -3,16 +3,6 @@ Handle g_AutoCoord_Timer = INVALID_HANDLE;
 public void ParseChaosEffects(){
 	ChaosEffects.Clear();
 
-	// Check if translations exist on the server
-	char translation_path[PLATFORM_MAX_PATH];
-	//TODO: this is only checking stock english phrases....... will need to check other languages obviously :D 
-
-	BuildPath(Path_SM, translation_path, sizeof(translation_path), "translations/chaos.phrases.txt");
-	bool translations = false;
-	if(FileExists(translation_path)){
-		translations = true;
-	}
-
 	char function_name[64];
 	int count = 0;
 	for(int i = 0; i < sizeof(EffectNames); i++)
@@ -56,11 +46,9 @@ public void ParseChaosEffects(){
 
 		// If valid translation exists, use translation, else use plugin default
 		Format(chaos_translation_key, sizeof(chaos_translation_key), "%s_Title", function_name);
-		if(translations){
-			if(TranslationPhraseExists(chaos_translation_key)){
-				Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
-				effect.Title = Chaos_Function_Title;
-			}
+		if(TranslationPhraseExists(chaos_translation_key) && IsTranslatedForLanguage(chaos_translation_key, LANG_SERVER)){
+			Format(Chaos_Function_Title, sizeof(Chaos_Function_Title), "%t", chaos_translation_key, LANG_SERVER);
+			effect.Title = Chaos_Function_Title;
 		}
 
 		ChaosEffects.PushArray(effect);
