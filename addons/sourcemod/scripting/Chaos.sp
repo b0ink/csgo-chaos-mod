@@ -166,7 +166,7 @@ enum struct effect_data{
 
 	void Reset(bool HasTimerEnded = false){
 		char function_name_reset[64];
-		Format(function_name_reset, sizeof(function_name_reset), "%_RESET", this.FunctionName);
+		Format(function_name_reset, sizeof(function_name_reset), "%s_RESET", this.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), function_name_reset);
 
 		if(func != INVALID_FUNCTION){
