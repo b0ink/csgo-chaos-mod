@@ -70,9 +70,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_iTotalEffectsRanThisRound = 0;
 
 	CreateTimer(5.0, Timer_CreateHostage);
-	
-	SetRandomSeed(GetTime()); //TODO: ?
-	
+		
 	if(!g_bChaos_Enabled) return Plugin_Continue;
 	
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){

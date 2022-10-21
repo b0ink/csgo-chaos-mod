@@ -363,6 +363,7 @@ public void OnPluginEnd(){
 }
 
 public void OnMapStart(){
+	SetRandomSeed(GetTime());
 	
 	MetaEffectsHistory.Clear();
 	if(EffectsHistory != INVALID_HANDLE){
