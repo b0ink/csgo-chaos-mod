@@ -100,21 +100,24 @@ bool IsEffectInVoteList(char[] effectName){
 }
 
 void Twitch_PoolNewVotingEffects(){
+	ArrayList Temp_ChaosEffects = ChaosEffects.Clone();
+
+	Temp_ChaosEffects.Sort(Sort_Random, Sort_String);
+
 	alternateIndex = !alternateIndex;
 	Twitch_Votes.Clear();
-	int randomEffect = -1;
 	effect_data effect;
-	do{
-		int totalEffects = ChaosEffects.Length;
-		randomEffect = GetRandomInt(0, totalEffects - 1);
-		ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
+
+	for(int i = 0; i < Temp_ChaosEffects.Length; i++){
+		Temp_ChaosEffects.GetArray(i, effect, sizeof(effect));
 		if(
 			effect.Enabled &&
 			effect.CanRunEffect() &&
 			(!Effect_Recently_Played(effect.FunctionName)) &&
 			effect.Timer == INVALID_HANDLE &&
 			effect.IsCompatible() &&
-			!IsEffectInVoteList(effect.FunctionName)
+			!IsEffectInVoteList(effect.FunctionName) &&
+			!effect.IsMetaEffect
 		){
 			// PushArrayString(VotingEffects, effect.Title);
 			vote_data vote;
@@ -128,9 +131,13 @@ void Twitch_PoolNewVotingEffects(){
 			if(GetArraySize(EffectsHistory) > average) RemoveFromArray(EffectsHistory, 0);
 		}
 		if(EnableRandomEffectOption){
-			if(Twitch_Votes.Length == 3) break;
+			if(Twitch_Votes.Length >= 3) break;
+		}else{
+			if(Twitch_Votes.Length >= 4) break;
 		}
-	}while(Twitch_Votes.Length < 4);
+	}
+
+	delete Temp_ChaosEffects;
 
 	if(EnableRandomEffectOption){
 		vote_data randomVote;

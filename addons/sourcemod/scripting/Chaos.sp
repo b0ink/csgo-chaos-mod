@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Spawn from over 100+ random effects every 15 seconds to ensue chaos towards you and your enemies"
 #define PLUGIN_VERSION "0.2.5"
 
-// #define TWITCH_ENABLED
+#define TWITCH_ENABLED
 
 
 
@@ -492,7 +492,6 @@ bool PoolChaosEffects(char[] effectName = ""){
 				}
 			}
 
-		
 			if(
 				StrContains(effect.FunctionName, effectName, false) != -1 ||
 				StrContains(effect.Title, effectName, false) != -1 ||
@@ -526,16 +525,16 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	}
 
 	if(g_bChaos_TwitchEnabled && !g_bMegaChaosIsActive && !CustomRun){
-			if(Twitch_Votes.Length != 0){
-				effect_data effect;
-				if(GetHighestVotedEffect(effect)){
-					g_sForceCustomEffect = effect.FunctionName;
-				}
-
-				if(!effect.CanRunEffect()){
-					g_sForceCustomEffect = "";
-				}
+		if(Twitch_Votes.Length != 0){
+			effect_data effect;
+			if(GetHighestVotedEffect(effect)){
+				g_sForceCustomEffect = effect.FunctionName;
 			}
+
+			if(!effect.CanRunEffect()){
+				g_sForceCustomEffect = "";
+			}
+		}
 	}
 
 
@@ -553,9 +552,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		effect_data effect;
 		int totalEffects = ChaosEffects.Length;
 
-
-
-		
 		while(g_sLastPlayedEffect[0] == '\0'){ // no longer
 			attempts++;
 			do{
