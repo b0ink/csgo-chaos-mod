@@ -4,3 +4,5 @@ archive
 
 addons/sourcemod/plugins/ChaosDebug.smx
 addons/sourcemod/scripting/ChaosDebug.sp
+
+.DS_Store
