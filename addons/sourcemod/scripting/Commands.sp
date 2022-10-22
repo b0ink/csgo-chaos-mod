@@ -1,5 +1,4 @@
 void RegisterCommands(){
-	RegAdminCmd("chaos_refreshconfig", 	Command_RefreshConfig, 	ADMFLAG_GENERIC);
 	RegAdminCmd("chaos_debug", 			Command_ChaosDebug, 	ADMFLAG_GENERIC);
 	RegAdminCmd("chaos_help", 			Command_ChaosHelp, 		ADMFLAG_GENERIC);
 
@@ -15,7 +14,6 @@ void RegisterCommands(){
 
 public Action Command_MainMenu(int client, int args){
 	ShowMenu_Main(client);
-
 	return Plugin_Handled;
 }
 
@@ -113,12 +111,6 @@ public Action Command_ChaosDebug(int client, int args){
 		cvar("mp_round_restart_delay", "7");
 	}
 	g_bChaos_Debug = !g_bChaos_Debug;
-	return Plugin_Handled;
-}
-
-public Action Command_RefreshConfig(int client, int args){
-	OnConfigsExecuted();
-
 	return Plugin_Handled;
 }
 
