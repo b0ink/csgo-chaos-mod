@@ -381,7 +381,7 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_COUNTDOWN);
 	PrecacheSound(SOUND_BLIP);
 
-	
+	g_cvChaosTwitchEnabled.SetInt(0);
 
 	// ParseChaosConfigEffects();
 
@@ -540,11 +540,10 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	}
 
 
-	if(g_sForceCustomEffect[0] != '\0'){ //run from menu
+	if(g_sForceCustomEffect[0] != '\0'){ //run from menu, or from twitch list
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
 		effect_data effect;
 		LoopAllEffects(effect, index){
-			//TODO: test conditions, return error to user?
 			if(StrEqual(effect.FunctionName, g_sForceCustomEffect, false)){
 				effect.Run();
 				break;
