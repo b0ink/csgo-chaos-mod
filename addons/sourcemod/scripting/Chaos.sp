@@ -381,6 +381,8 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_COUNTDOWN);
 	PrecacheSound(SOUND_BLIP);
 
+	
+
 	// ParseChaosConfigEffects();
 
 

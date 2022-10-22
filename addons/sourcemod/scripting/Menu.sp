@@ -283,21 +283,27 @@ void ShowMenu_ConvarIncrements(int client, char[] convar){
 
 	menu.AddItem(convar,"convar_name" , ITEMDRAW_NOTEXT);
 
+	bool showSeconds = false;
 	float current_value = editing_convar.FloatValue;
 	if(StrEqual(convar, "sm_chaos_override_duration", false)){
-		Format(title, sizeof(title), "Current Value: %.2f\nSets the duration of ALL effects.", current_value);
+		showSeconds = true;
+		Format(title, sizeof(title), "Current Value: %.2f\nSets the duration of ALL effects.\n", current_value);
 	}else if(StrEqual(convar, "sm_chaos_repeating", false)){
-		Format(title, sizeof(title), "Current Value: %.2f\nIf set to 0, only one effect will be spawned per round", current_value);
+		Format(title, sizeof(title), "Current Value: %.2f\nIf set to 0, only one effect will be spawned per round.\n", current_value);
 	}else if(StrEqual(convar, "sm_chaos_interval", false)){
-		Format(title, sizeof(title), "Current Value: %.2f\nHow often a new effect is spawned.", current_value);
+		showSeconds = true;
+		Format(title, sizeof(title), "Current Value: %.2f\nHow often a new effect is spawned.\n", current_value);
+	}else if(StrEqual(convar, "sm_chaos_twitch_enabled", false)){
+		Format(title, sizeof(title), "Current Value: %.2f\nEnable twitch voting", current_value);
 	}else{
+		showSeconds = true;
 		Format(title, sizeof(title), "Current Value: %.2f", current_value);
 	}
 	menu.AddItem(title, title, ITEMDRAW_DISABLED);
 	
 	char item_name[64];
 	for(float i = min_bound; i <= max_bound; i++){
-		Format(item_name, sizeof(item_name), "%.2f Seconds", i);
+		Format(item_name, sizeof(item_name), "%.2f%s", i, showSeconds ? " Seconds": "");
 		menu.AddItem(item_name, item_name);
 	}
 	menu.ExitButton = true;
