@@ -43,7 +43,6 @@ public Action Timer_DelayTwitchPool(Handle timer){
 }
 
 public Action Command_GetVotes(int client, int args){
-	
 	ReplyToCommand(client, "%s", GetChaosTitle(g_sLastPlayedEffect));
 
 	if(g_bChaos_TwitchEnabled){
@@ -51,7 +50,7 @@ public Action Command_GetVotes(int client, int args){
 	}else{
 		ReplyToCommand(client, "twitch-disabled");
 	}
-
+	ReplyToCommand(client, "warmup: %i", GameRules_GetProp("m_bWarmupPeriod"));
 
 	int index = 1;
 	if(alternateIndex){

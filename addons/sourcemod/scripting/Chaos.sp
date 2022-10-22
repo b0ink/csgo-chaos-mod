@@ -526,11 +526,14 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		ParseMapCoordinates("Chaos_Locations");
 	}
 
+	bool twitchEffect = false;
+
 	if(g_bChaos_TwitchEnabled && !g_bMegaChaosIsActive && !CustomRun){
 		if(Twitch_Votes.Length != 0){
 			effect_data effect;
 			if(GetHighestVotedEffect(effect)){
 				g_sForceCustomEffect = effect.FunctionName;
+				twitchEffect = true;
 			}
 
 			if(!effect.CanRunEffect()){
@@ -546,6 +549,9 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		LoopAllEffects(effect, index){
 			if(StrEqual(effect.FunctionName, g_sForceCustomEffect, false)){
 				effect.Run();
+				if(!g_bMegaChaosIsActive && twitchEffect){
+					g_iEffectsSinceMeta++;
+				}
 				break;
 			}
 		}
