@@ -97,6 +97,23 @@ Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`
 - Iris\
 <sub>If you are running Chaos Mod on an 'unsupported' map, temporary spawn points will be generated based off players' location throughout the game</sub>
 
+### Credits
+##### Multiple chaos effects have been taken and modified from publicly available plugins created by other developers in the Sourcemod community, below are all the plugins and snippets used and altered to work with CS:GO Chaos Mod
+[Rapid Fire](https://forums.alliedmods.net/showthread.php?t=175636) by "FlaminSarge (orig by EHG)".\
+[Chicken C4](https://forums.alliedmods.net/showthread.php?p=2243945) by "Mitch".\
+[ESP](https://forums.alliedmods.net/showthread.php?t=291374) by "Mitch".\
+[No Scope](https://forums.alliedmods.net/showthread.php?p=2095697) & [Juggernaut Prop_Send Data](https://forums.alliedmods.net/showthread.php?t=307674) by "Bara".\
+[Aimbot](https://forums.alliedmods.net/showthread.php?p=2423564) by "Franc1sco franug".\
+[Explosive Bullets](https:github.com/xcalvinsz/explosivebullets) by "Tak (Chaosxk)".\
+[Weapon Jump/Taser Knockback](https://forums.alliedmods.net/showthread.php?t=292151) by "Nyuu".\
+[Autoplant](https://github.com/b3none) by "b3none".\
+SM Teleport by "Spazman0".\
+[LSD ColorCorrection](https://gamebanana.com/mods/80495) (.raw) files from "[SG] Paul!"\
+[Double Jump](https://forums.alliedmods.net/showthread.php?p=895212) by "Paegus/NcB_Save".\
+[Turrets](https://forums.alliedmods.net/showthread.php?t=312548) by "e54385991".\
+And multiple ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".\
+<sub>If you see an effect that has been derived from one of your plugins, please reach out so that I can credit your work accordingly!</sub>
+
 ### Known issues:
 - Certain resolutions (mostly widescreens, and in my case 2560x1080) cut off the HUD overlay on the right side of the screen, this means the announcement texts and bar timer might not look correct, lowering your resolution should fix this.
 	- It is also recommended to **restart** CS:GO after adjusting your resolution, otherwise the HUD may appear much larger than it should be.
