@@ -50,7 +50,12 @@ public Action Command_GetVotes(int client, int args){
 	}else{
 		ReplyToCommand(client, "twitch-disabled");
 	}
-	ReplyToCommand(client, "warmup: %i", GameRules_GetProp("m_bWarmupPeriod"));
+	// ReplyToCommand(client, "warmup: %i", GameRules_GetProp("m_bWarmupPeriod"));
+	int hideEffects = 0;
+	if(GameRules_GetProp("m_bWarmupPeriod") == 1 || !g_bCanSpawnEffect){
+		hideEffects = 1;
+	}
+	ReplyToCommand(client, "hideEffects: %i", hideEffects);
 
 	int index = 1;
 	if(alternateIndex){
