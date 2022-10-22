@@ -303,7 +303,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 #include "Global/ColorCorrection.sp"
 #include "Global/Weather.sp"
 #include "Global/Players.sp"
-#include "Spawns.sp"
+#include "Global/Spawns.sp"
 
 
 #include "Effects/EffectsList.sp"
