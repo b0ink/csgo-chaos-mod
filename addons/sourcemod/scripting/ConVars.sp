@@ -11,7 +11,7 @@ ConVar 	g_cvChaosOverrideDuration;
 float       g_fChaos_OverwriteDuration = -1.0;
 
 ConVar 	g_cvChaosTwitchEnabled;
-bool       g_bChaos_TwitchEnabled = false;
+// bool       g_bChaos_TwitchEnabled = false;
 
 
 ConVar 	g_cvChaosEffectTimer_Color;
@@ -174,7 +174,7 @@ void UpdateCvars(){
 	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
 	g_fChaos_OverwriteDuration = g_cvChaosOverrideDuration.FloatValue;
 
-	g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
+	// g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
 
 }
 
@@ -199,7 +199,7 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	} else if(convar == g_cvChaosOverrideDuration){
 		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
 	} else if(convar == g_cvChaosTwitchEnabled){
-			g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
+			// g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
 	}else if(convar == g_cvChaosEffectTimer_Color){
 		char color[128];
 		g_cvChaosEffectTimer_Color.GetString(color, 128);

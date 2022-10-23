@@ -523,7 +523,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	bool twitchEffect = false;
 
-	if(g_bChaos_TwitchEnabled && !g_bMegaChaosIsActive && !CustomRun){
+	if(g_cvChaosTwitchEnabled.BoolValue && !g_bMegaChaosIsActive && !CustomRun){
 		if(Twitch_Votes.Length != 0){
 			effect_data effect;
 			if(GetHighestVotedEffect(effect)){
@@ -636,7 +636,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	bool Chaos_Repeating = g_bChaos_Repeating;
 
 	if(Chaos_Repeating){
-		if(g_bChaos_TwitchEnabled){
+		if(g_cvChaosTwitchEnabled.BoolValue){
 			Twitch_PoolNewVotingEffects(); // pull 4 effects, this WILL add them into the effect cooldown.
 		}
 		float Effect_Interval = g_fChaos_EffectInterval;

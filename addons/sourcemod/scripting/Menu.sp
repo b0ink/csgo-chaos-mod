@@ -251,7 +251,7 @@ void ShowMenu_EditConvars(int client){
 
 	#if defined TWITCH_ENABLED
 		float twitchEnabled = 0.0;
-		if(g_bChaos_TwitchEnabled){
+		if(g_cvChaosTwitchEnabled.BoolValue){
 			twitchEnabled = 1.0;
 		}
 

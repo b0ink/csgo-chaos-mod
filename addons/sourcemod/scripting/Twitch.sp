@@ -45,7 +45,7 @@ public Action Timer_DelayTwitchPool(Handle timer){
 public Action Command_GetVotes(int client, int args){
 	ReplyToCommand(client, "%s", GetChaosTitle(g_sLastPlayedEffect));
 
-	if(g_bChaos_TwitchEnabled){
+	if(g_cvChaosTwitchEnabled.BoolValue){
 		ReplyToCommand(client, "twitch-enabled");
 	}else{
 		ReplyToCommand(client, "twitch-disabled");
