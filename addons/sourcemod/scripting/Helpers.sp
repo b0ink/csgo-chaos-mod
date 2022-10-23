@@ -34,8 +34,8 @@ char[] GetChaosTitle(char[] function_name){
 	GetEffectData(function_name, effect);
 
 	if(StrContains(function_name, "Chaos_") != -1){
-		if(TranslationPhraseExists(effect.FunctionName) && IsTranslatedForLanguage(effect.FunctionName, LANG_SERVER)){
-				FormatEx(return_string, sizeof(return_string), "%t", effect.FunctionName, LANG_SERVER);
+		if(TranslationPhraseExists(function_name) && IsTranslatedForLanguage(function_name, LANG_SERVER)){
+				FormatEx(return_string, sizeof(return_string), "%t", function_name, LANG_SERVER);
 		}else{
 			FormatEx(return_string, sizeof(return_string), "%s", effect.Title);
 		}
