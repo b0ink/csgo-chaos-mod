@@ -133,8 +133,6 @@ void CreateConVars(){
 	HookConVarChange(g_cvChaosEffectList_Color, 	ConVarChanged);
 
 	HookConVarChange(g_cvChaosTwitchEnabled, 	ConVarChanged);
-
-	// AutoExecConfig(true, "ChaosMod");
 }
 
 void UpdateCvars(){

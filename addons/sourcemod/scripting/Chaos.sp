@@ -19,9 +19,6 @@
 #define TWITCH_ENABLED
 
 
-
-// #define GetRandomMapSpawn(%1) for(int %1 = 0; %1 < )
-
 public Plugin myinfo = {
 	name = PLUGIN_NAME,
 	author = "BOINK",
@@ -30,14 +27,11 @@ public Plugin myinfo = {
 	url = "https://github.com/b0ink/csgo-chaos-mod"
 };
 
-char mapName[64];
 
 char 	g_Prefix[] = "[{lime}CHAOS{default}]";
 char 	g_Prefix_HasTimerEnded[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
-
-// StringMap	Chaos_Effects;
 
 #define SOUND_BELL "buttons/bell1.wav"
 #define SOUND_BLIP "buttons/blip1.wav"
@@ -91,6 +85,7 @@ char g_sSkyboxes[][] = {
 	"sky_dust", "vietnam"
 };
 
+char mapName[64];
 
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bCanSpawnEffect = true;
