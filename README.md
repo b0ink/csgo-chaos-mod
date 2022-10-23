@@ -120,6 +120,7 @@ And multiple ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.n
 - Certain resolutions (mostly widescreens, and in my case 2560x1080) cut off the HUD overlay on the right side of the screen, this means the announcement texts and bar timer might not look correct, lowering your resolution should fix this.
 	- It is also recommended to **restart** CS:GO after adjusting your resolution, otherwise the HUD may appear much larger than it should be.
 	- 4k resolutions by default have an extremely enlarged HUD that makes the game unplayable, setting it to 1080p and restarting your game should fix this.
+	- An alternative method is to set `-w 1920 -h 1080` in your CS:GO's launch options.
 <p></p>
 
 ---
