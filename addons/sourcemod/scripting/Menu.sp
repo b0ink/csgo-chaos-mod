@@ -9,7 +9,7 @@ void ShowMenu_Main(int client){
 		style = ITEMDRAW_DEFAULT;
 	}
 
-	if(g_bChaos_Enabled){
+	if(g_cvChaosEnabled.BoolValue){
 		if(g_NewEffect_Timer == INVALID_HANDLE){
 			menu.AddItem("start-chaos-timer", "Start Timer", style);
 		}
@@ -17,7 +17,7 @@ void ShowMenu_Main(int client){
 	}else{
 		menu.AddItem("toggle-chaos", "Enable Chaos", style);
 	}
-	if(g_bCanSpawnEffect && g_bChaos_Enabled){
+	if(g_bCanSpawnEffect && g_cvChaosEnabled.BoolValue){
 		menu.AddItem("new-effect", "Spawn New Effect", style);
 	}else{
 		menu.AddItem("new-effect", "Spawn New Effect", ITEMDRAW_DISABLED);
@@ -34,7 +34,7 @@ void ShowMenu_Main(int client){
 }
 
 void ToggleChaos(int client = -1){
-	if(g_bChaos_Enabled){
+	if(g_cvChaosEnabled.BoolValue){
 		Command_StopChaos(client, 0);
 	}else{
 		Command_StartChaos(client, 0);
@@ -110,12 +110,12 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 		if(found){
 			g_sSelectedChaosEffect = info;
 			if(g_sSelectedChaosEffect[0] != '\0'){
-				if(g_bCanSpawnEffect && g_bChaos_Enabled){
+				if(g_bCanSpawnEffect && g_cvChaosEnabled.BoolValue){
 					Format(g_sForceCustomEffect, sizeof(g_sForceCustomEffect), "%s", g_sSelectedChaosEffect);
 					ChooseEffect(null, true);
 				}else{
 					ReplyToCommand(param1, "[Chaos] Sorry, no effects can be spawned in right now.");
-					if(!g_bChaos_Enabled){
+					if(!g_cvChaosEnabled.BoolValue){
 						ReplyToCommand(param1, "[Chaos] Use !startchaos to re-enable Chaos.");
 					}
 				}

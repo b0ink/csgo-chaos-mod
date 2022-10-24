@@ -189,7 +189,7 @@ enum struct effect_data{
 		if(this.HasNoDuration){
 			return -1.0;
 		}
-		float OverwriteDuration = g_fChaos_OverwriteDuration;
+		float OverwriteDuration = g_cvChaosOverrideDuration.FloatValue;
 		float duration = float(this.Duration);
 		if(raw){
 			return duration;
@@ -358,8 +358,6 @@ public void OnPluginEnd(){
 }
 
 public void OnMapStart(){
-	SetRandomSeed(GetTime());
-	
 	MetaEffectsHistory.Clear();
 	if(EffectsHistory != INVALID_HANDLE){
 		ClearArray(EffectsHistory);
@@ -415,7 +413,7 @@ public void OnMapStart(){
 
 
 public void OnMapEnd(){
-	if(!g_bChaos_Enabled) return;
+	if(!g_cvChaosEnabled.BoolValue) return;
 
 	Log("Map has ended.");
 	StopTimer(g_NewEffect_Timer);
@@ -508,7 +506,7 @@ bool PoolChaosEffects(char[] effectName = ""){
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
 	if(!g_bCanSpawnEffect) return;
-	if(!g_bChaos_Enabled && !CustomRun) return;
+	if(!g_cvChaosEnabled.BoolValue && !CustomRun) return;
 
 	char Random_Effect[64] = "-";
 	int randomEffect = -1;
@@ -633,13 +631,12 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 
 	StopTimer(g_NewEffect_Timer);
-	bool Chaos_Repeating = g_bChaos_Repeating;
 
-	if(Chaos_Repeating){
+	if(g_cvChaosRepeating.BoolValue){
 		if(g_cvChaosTwitchEnabled.BoolValue){
 			Twitch_PoolNewVotingEffects(); // pull 4 effects, this WILL add them into the effect cooldown.
 		}
-		float Effect_Interval = g_fChaos_EffectInterval;
+		float Effect_Interval = g_cvChaosEffectInterval.FloatValue;
 		if(Effect_Interval > 60 || Effect_Interval < 5){
 			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg | was set to %f", Effect_Interval);
 			Effect_Interval = 15.0;

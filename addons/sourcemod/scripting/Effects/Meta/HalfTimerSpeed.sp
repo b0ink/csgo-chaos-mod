@@ -7,17 +7,17 @@ public void Chaos_Meta_HalfTimerSpeed(effect_data effect){
 
 float HalfTimerSpeed_Original;
 public void Chaos_Meta_HalfTimerSpeed_START(){
-	HalfTimerSpeed_Original = g_fChaos_EffectInterval;
-	if((g_fChaos_EffectInterval / 2) < 5 ){
+	HalfTimerSpeed_Original = g_cvChaosEffectInterval.FloatValue;
+	if((g_cvChaosEffectInterval.FloatValue / 2) < 5 ){
 		//TODO: ChooseEffect won't like less than 5 second timer, could change in the future
-		g_fChaos_EffectInterval = 5.0;
+		g_cvChaosEffectInterval.FloatValue = 5.0;
 	}
-	g_fChaos_EffectInterval = g_fChaos_EffectInterval / 2;
+	g_cvChaosEffectInterval.FloatValue = g_cvChaosEffectInterval.FloatValue / 2;
 }
 
 public void Chaos_Meta_HalfTimerSpeed_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
-		g_fChaos_EffectInterval = HalfTimerSpeed_Original;
+		g_cvChaosEffectInterval.FloatValue = HalfTimerSpeed_Original;
 	}
 }
 

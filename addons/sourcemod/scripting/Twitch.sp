@@ -114,6 +114,12 @@ void Twitch_PoolNewVotingEffects(){
 
 	for(int i = 0; i < Temp_ChaosEffects.Length; i++){
 		Temp_ChaosEffects.GetArray(i, effect, sizeof(effect));
+		if(i < Temp_ChaosEffects.Length - 4){
+			if(GetRandomInt(0,100) < 50){
+				continue; // bit more randomisation
+			}
+		}
+
 		if(
 			effect.Enabled &&
 			effect.CanRunEffect() &&
@@ -133,6 +139,8 @@ void Twitch_PoolNewVotingEffects(){
 
 			float average = float((PossibleChaosEffects.Length / 4) * 3); //idk
 			if(GetArraySize(EffectsHistory) > average) RemoveFromArray(EffectsHistory, 0);
+		}else{
+			// PrintToChatAll("cant run %s", effect.FunctionName);
 		}
 		if(EnableRandomEffectOption){
 			if(Twitch_Votes.Length >= 3) break;

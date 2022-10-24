@@ -192,5 +192,5 @@ Action Timer_DisplayEffects(Handle timer){
 Action Timer_Display(Handle timer = null, int time){
 	g_HudTime = time;
 	PrintTimer(time);
-	if(time > 1 && g_bChaos_Enabled && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
+	if(time > 1 && g_cvChaosEnabled.BoolValue && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
 }

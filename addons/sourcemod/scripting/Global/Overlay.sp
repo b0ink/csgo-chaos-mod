@@ -9,7 +9,7 @@ void Overlay_INIT(){
 }
 
 public Action Overlay_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
-	if(!g_bChaos_Enabled) return Plugin_Continue;
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	int client = GetClientOfUserId(event.GetInt("userid"));
 
 	if(IsValidClient(client)){

@@ -25,7 +25,7 @@ public Action Command_NewChaosEffect(int client, int args){
 	char effectName[64];
 	GetCmdArg(1, effectName, sizeof(effectName));
 
-	if(!g_bChaos_Enabled){
+	if(!g_cvChaosEnabled.BoolValue){
 		ReplyToCommand(client, "[Chaos] Re-enable !chaos to run effects.");
 		return Plugin_Handled;
 	}
@@ -68,7 +68,7 @@ public Action Timer_ReEnableRetries(Handle timer){
 }
 
 public Action Command_StopChaos(int client, int args){
-	g_bChaos_Enabled = false;
+	g_cvChaosEnabled.BoolValue = false;
 
 	ResetChaos();
 
@@ -90,13 +90,13 @@ public Action Command_StartChaos(int client, int args){
 		StopTimer(g_NewEffect_Timer);
 		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
 		if(g_bDynamicChannelsEnabled){
-			Timer_Display(null, RoundToFloor(g_fChaos_EffectInterval));
+			Timer_Display(null, RoundToFloor(g_cvChaosEffectInterval.FloatValue));
 		}
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{
 		PrintToChat(client, "Chaos is already running!");
 	}
-	g_bChaos_Enabled = true;
+	g_cvChaosEnabled.BoolValue = true;
 	// StopTimer(g_NewEffect_Timer);
 	return Plugin_Handled;
 }

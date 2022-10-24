@@ -3,7 +3,7 @@ char 			Chaos_EventName_Buffer[64];
 
 
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
-	if(!g_bChaos_Enabled) return Plugin_Continue;
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	g_bCanSpawnChickens = false;
 	if(!ValidBombSpawns()){
 		CreateTimer(1.0, Timer_SaveBombPosition);
@@ -30,7 +30,7 @@ public void OnEntityCreated(int ent, const char[] classname){
 }
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-	if(!g_bChaos_Enabled) return Plugin_Continue;
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.FunctionName);
@@ -55,7 +55,10 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 }
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
-	if(!g_bChaos_Enabled) return Plugin_Continue;
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+
+	SetRandomSeed(GetTime());
+
 	Log("---ROUND STARTED---");
 
 	g_bCanSpawnEffect = true;
@@ -71,7 +74,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 	CreateTimer(5.0, Timer_CreateHostage);
 		
-	if(!g_bChaos_Enabled) return Plugin_Continue;
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
 		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
@@ -91,7 +94,7 @@ public Action Timer_UpdateRoundTime(Handle timer){
 	CreateTimer(1.0, Timer_UpdateRoundTime);
 }
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
-	if(!g_bChaos_Enabled) return Plugin_Continue;
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	g_iChaosRoundTime = -100;
 	
 	ClearFog();

@@ -1,18 +1,8 @@
 ConVar 	g_cvChaosEnabled;
-bool        g_bChaos_Enabled = true;
-
 ConVar 	g_cvChaosEffectInterval;
-float       g_fChaos_EffectInterval = 15.0;
-
 ConVar 	g_cvChaosRepeating;
-bool        g_bChaos_Repeating = true;
-
 ConVar 	g_cvChaosOverrideDuration;
-float       g_fChaos_OverwriteDuration = -1.0;
-
 ConVar 	g_cvChaosTwitchEnabled;
-// bool       g_bChaos_TwitchEnabled = false;
-
 
 ConVar 	g_cvChaosEffectTimer_Color;
 int       g_ChaosEffectTimer_Color[4] = {200,0,220, 0};
@@ -136,7 +126,6 @@ void CreateConVars(){
 }
 
 void UpdateCvars(){
-
 	char path[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Convars.cfg");
 	KeyValues kv = new KeyValues("Convars");
@@ -164,71 +153,39 @@ void UpdateCvars(){
 			g_cvChaosEffectTimer_Color.SetString(color);
 			kv.GetString("sm_chaos_effect_list_color", color, 128);
 			g_cvChaosEffectList_Color.SetString(color);
-
 		}
 	}
+}
 
 
-	g_bChaos_Enabled = g_cvChaosEnabled.BoolValue;
-	g_fChaos_EffectInterval = float(g_cvChaosEffectInterval.IntValue);
-	g_bChaos_Repeating = g_cvChaosRepeating.BoolValue;
-	g_fChaos_OverwriteDuration = g_cvChaosOverrideDuration.FloatValue;
-
-	// g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
-
+void ConvertColorStringToFloat(ConVar convar, int buffer[4], int defaultColor[4]){
+		char color[128];
+		convar.GetString(color, 128);
+		char colorchunks[4][128];
+		int count = ExplodeString(color, " ", colorchunks, 4, 128);
+		if(count != 4 || color[0] == '\0'){ // if config wasn't set properly
+			buffer = defaultColor;
+		}else{
+			buffer[0] = StringToInt(colorchunks[0]);
+			buffer[1] = StringToInt(colorchunks[1]);
+			buffer[2] = StringToInt(colorchunks[2]);
+			buffer[3] = StringToInt(colorchunks[3]);
+		}
 }
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	if(convar == g_cvChaosEnabled){
-		if(StringToInt(oldValue) == 0 && StringToInt(newValue) == 1){
-			g_bChaos_Enabled = true;
-			// ChooseEffect(null);
-		}else if(StringToInt(newValue) == 0){
-			g_bChaos_Enabled = false;
+		if(StringToInt(newValue) == 0){
 			StopTimer(g_NewEffect_Timer);
 		}
-	}else if(convar == g_cvChaosEffectInterval){
-		g_fChaos_EffectInterval = StringToFloat(newValue);
 	}else if(convar == g_cvChaosRepeating){
 		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
-			g_bChaos_Repeating = false;
 			StopTimer(g_NewEffect_Timer);
-		}else if(StringToInt(newValue) == 1){
-			g_bChaos_Repeating = true;
 		}
-	} else if(convar == g_cvChaosOverrideDuration){
-		g_fChaos_OverwriteDuration = StringToFloat(newValue); 
-	} else if(convar == g_cvChaosTwitchEnabled){
-			// g_bChaos_TwitchEnabled = g_cvChaosTwitchEnabled.BoolValue;
 	}else if(convar == g_cvChaosEffectTimer_Color){
-		char color[128];
-		g_cvChaosEffectTimer_Color.GetString(color, 128);
-		char colorchunks[4][128];
-		int count = ExplodeString(color, " ", colorchunks, 4, 128);
-		if(count != 4 || color[0] == '\0'){ // if config wasn't set properly
-			g_ChaosEffectTimer_Color = {200,0,220, 0};
-		}else{
-			g_ChaosEffectTimer_Color[0] = StringToInt(colorchunks[0]);
-			g_ChaosEffectTimer_Color[1] = StringToInt(colorchunks[1]);
-			g_ChaosEffectTimer_Color[2] = StringToInt(colorchunks[2]);
-			g_ChaosEffectTimer_Color[3] = StringToInt(colorchunks[3]);
-		}
-
+		ConvertColorStringToFloat(g_cvChaosEffectTimer_Color, g_ChaosEffectTimer_Color, {200, 0, 220, 0});
 	} else if(convar == g_cvChaosEffectList_Color){
-		char color[128];
-		g_cvChaosEffectList_Color.GetString(color, 128);
-
-		char colorchunks[4][128];
-		int count = ExplodeString(color, " ", colorchunks, 4, 128);
-		if(count != 4 || color[0] == '\0'){
-			g_ChaosEffectList_Color = {37,186,255, 0};
-		}else{
-			g_ChaosEffectList_Color[0] = StringToInt(colorchunks[0]);
-			g_ChaosEffectList_Color[1] = StringToInt(colorchunks[1]);
-			g_ChaosEffectList_Color[2] = StringToInt(colorchunks[2]);
-			g_ChaosEffectList_Color[3] = StringToInt(colorchunks[3]);
-		}
-
+		ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
 	}
 }
 
@@ -303,5 +260,4 @@ void Update_Convar_Config(){
 
 	file.WriteLine("}");
 	delete file;
-
 }
