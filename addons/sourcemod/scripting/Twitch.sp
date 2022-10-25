@@ -43,6 +43,12 @@ public Action Timer_DelayTwitchPool(Handle timer){
 }
 
 public Action Command_GetVotes(int client, int args){
+	if(GetPlayerCount() == 0){
+		g_cvChaosTwitchEnabled.SetInt(0);
+	}
+
+
+
 	ReplyToCommand(client, "%s", GetChaosTitle(g_sLastPlayedEffect));
 
 	if(g_cvChaosTwitchEnabled.BoolValue){

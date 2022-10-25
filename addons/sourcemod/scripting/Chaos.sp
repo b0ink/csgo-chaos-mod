@@ -357,6 +357,9 @@ public void OnPluginEnd(){
 	ResetChaos();
 }
 
+
+
+
 public void OnMapStart(){
 	MetaEffectsHistory.Clear();
 	if(EffectsHistory != INVALID_HANDLE){
@@ -373,10 +376,6 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_BELL);
 	PrecacheSound(SOUND_COUNTDOWN);
 	PrecacheSound(SOUND_BLIP);
-
-	g_cvChaosTwitchEnabled.SetInt(0);
-
-	// ParseChaosConfigEffects();
 
 
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);

@@ -177,8 +177,10 @@ public Action Timer_ResetChickenDebounce(Handle timer){
 
 stock int GetPlayerCount(){
 	int count = 0;
-	LoopValidPlayers(i){
-		count++;
+	LoopAllClients(i){
+		if(IsValidClient(i)){
+			count++;
+		}
 	}
 	return count;
 }
