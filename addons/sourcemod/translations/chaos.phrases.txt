@@ -250,7 +250,7 @@
     }
     "Chaos_Jumping"
     {
-        "en"    "Jumping"
+        "en"    "Jump! Jump!"
     }
     "Chaos_KnifeFight"
     {

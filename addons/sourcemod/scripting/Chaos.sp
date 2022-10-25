@@ -377,7 +377,7 @@ public void OnMapStart(){
 	PrecacheSound(SOUND_COUNTDOWN);
 	PrecacheSound(SOUND_BLIP);
 
-
+	//TODO: put all map spawn data into structs
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
 	if(bombSiteA != 		INVALID_HANDLE) ClearArray(bombSiteA);
 	if(bombSiteB != 		INVALID_HANDLE) ClearArray(bombSiteB);
