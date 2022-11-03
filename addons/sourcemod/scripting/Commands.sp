@@ -2,14 +2,13 @@ void RegisterCommands(){
 	RegAdminCmd("chaos_debug", 			Command_ChaosDebug, 	ADMFLAG_GENERIC);
 	RegAdminCmd("chaos_help", 			Command_ChaosHelp, 		ADMFLAG_GENERIC);
 
-	// RegAdminCmd("sm_chaos", 			Command_MainMenu,		ADMFLAG_GENERIC);
 	RegConsoleCmd("sm_chaos", 			Command_MainMenu);	
 	RegAdminCmd("sm_effect", 			Command_NewChaosEffect,	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
 
 	RegAdminCmd("chaos_votes", 			Command_GetVotes, 		ADMFLAG_ROOT);
-	RegAdminCmd("save_chaos_vote", 			Command_SaveVote, 		ADMFLAG_ROOT);
+	RegAdminCmd("save_chaos_vote", 		Command_SaveVote, 		ADMFLAG_ROOT);
 }
 
 public Action Command_MainMenu(int client, int args){

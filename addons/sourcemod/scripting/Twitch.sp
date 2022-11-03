@@ -2,6 +2,9 @@ ArrayList Twitch_Votes;
 bool alternateIndex = false;
 bool EnableRandomEffectOption = true;
 
+bool AppIsActive = false; // if the app does not rcon the server during a full round, the connvar will be disabled automatically.
+
+
 #define LoopAllVotes(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
 									if(%2 < Twitch_Votes.Length)\
 									if(Twitch_Votes.GetArray(%2, %1, sizeof(%1)))
@@ -23,6 +26,10 @@ void TWITCH_INIT(){
 
 public Action Twitch_RoundStart(Event event, char[] name, bool dontBroadcast){
 	CreateTimer(0.1, Timer_DelayTwitchPool);
+	if(!AppIsActive){
+		g_cvChaosTwitchEnabled.SetBool(false);
+	}
+	AppIsActive = false;
 }
 
 public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
@@ -42,7 +49,9 @@ public Action Timer_DelayTwitchPool(Handle timer){
 	Twitch_PoolNewVotingEffects(); //*start votes at the start of the round
 }
 
+
 public Action Command_GetVotes(int client, int args){
+	AppIsActive = true;
 	if(GetPlayerCount() == 0){
 		g_cvChaosTwitchEnabled.SetInt(0);
 	}
