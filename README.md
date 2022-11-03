@@ -15,11 +15,17 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 
 
 # Twitch Voting
-A very early buggy release is now available on the [CS:GO Chaos Mod Twitch Overlay Releases](https://github.com/b0ink/csgo-chaos-mod-twitch/releases/tag/v1.0.0). I plan to open source the project once the app is refined and cleaned up.
+A very early alpha release is now available on the [CS:GO Chaos Mod Twitch Overlay Releases](https://github.com/b0ink/csgo-chaos-mod-twitch/releases). I plan to open source the project once the app is refined and cleaned up.
 
 Basic instructions are also available in the [README.md](https://github.com/b0ink/csgo-chaos-mod-twitch)
 
 This app allows you to connect your Twitch account and your CS:GO server via RCON. A voting panel will pop up that can be keyed out with a green screen using OBS. Users can type a number in chat that will add to the count in the effect list.
+
+<p align="center">
+	<img src="https://csgochaosmod.com/gallery/twitch-overlay/Setup_3.PNG" 	width="250" title="Setup">
+	<img src="https://csgochaosmod.com/gallery/twitch-overlay/Voting_3.PNG" width="250" title="Voting">
+</p>
+<br>
 
 # REQUIREMENTS:
 - [Sourcemod 1.10+](https://sourcemod.net/)
