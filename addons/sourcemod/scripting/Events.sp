@@ -29,7 +29,7 @@ public void OnEntityCreated(int ent, const char[] classname){
 	}
 }
 
-public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
@@ -47,6 +47,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 			Call_PushCell(iCmdNum);
 			Call_PushCell(iTickCount);
 			Call_PushCellRef(iSeed);
+			Call_PushArrayEx(mouse, 2, SM_PARAM_COPYBACK);
 			Call_Finish();
 		}
 	}
