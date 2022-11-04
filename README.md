@@ -19,7 +19,8 @@ A very early alpha release is now available on the [CS:GO Chaos Mod Twitch Overl
 
 Basic instructions are also available in the [README.md](https://github.com/b0ink/csgo-chaos-mod-twitch)
 
-This app allows you to connect your Twitch account and your CS:GO server via RCON. A voting panel will pop up that can be keyed out with a green screen using OBS. Users can type a number in chat that will add to the count in the effect list.
+The app generates 4 random effects for your Twitch chat to choose from, the highest voted effect gets picked, or if proportional voting is enabled, each effect has a certain chance of being picked at random.
+A voting panel will pop up that can be keyed out with a green screen using OBS. Users can type a number in chat that will add to the count in the effect list.
 
 <p align="center">
 	<img src="https://csgochaosmod.com/gallery/twitch-overlay/Setup_3.PNG" 	width="250" title="Setup">
