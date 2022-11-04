@@ -7,8 +7,7 @@ void RegisterCommands(){
 	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
 
-	RegAdminCmd("chaos_votes", 			Command_GetVotes, 		ADMFLAG_ROOT);
-	RegAdminCmd("save_chaos_vote", 		Command_SaveVote, 		ADMFLAG_ROOT);
+	RegisterTwitchCommands();
 }
 
 public Action Command_MainMenu(int client, int args){

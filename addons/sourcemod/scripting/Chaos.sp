@@ -550,7 +550,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	}else{
 		effect_data effect;
 		int totalEffects = ChaosEffects.Length;
-
+	
 		while(g_sLastPlayedEffect[0] == '\0'){ // no longer
 			attempts++;
 			do{
