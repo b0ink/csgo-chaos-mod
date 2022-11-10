@@ -4,7 +4,7 @@ public void Chaos_QuakeFOV(effect_data effect){
 }
 
 public void Chaos_QuakeFOV_START(){
-	int RandomFOV = GetRandomInt(130,160);
+	int RandomFOV = GetRandomInt(140,160);
 	LoopAlivePlayers(i){
 		SetEntProp(i, Prop_Send, "m_iFOV", RandomFOV);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", RandomFOV);
