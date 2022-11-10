@@ -23,7 +23,7 @@ void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] exp
 		if(updateConfig){
 			//DONT OVERWRITE
 			if(FindStringInArray(g_SavedConvars, cvarname) == -1){
-				UpdateConfig(-1, "Chaos_OriginalConvars", "ConVars", "CVARS", cvarname, oldValue);
+				UpdateConfig(-1, "Chaos_OriginalConvars", "ConVars", "CVARS", cvarname, oldValue, .folderPath="data");
 				PushArrayString(g_SavedConvars, cvarname);
 			}
 		}
@@ -48,7 +48,7 @@ void ResetCvar(char[] cvarName = "", char[] backupValue = "", char[] expectedPre
 	 */
 	
 	char filePath[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, filePath, sizeof(filePath), "configs/Chaos/Chaos_OriginalConvars.cfg");
+	BuildPath(Path_SM, filePath, sizeof(filePath), "data/Chaos/Chaos_OriginalConvars.cfg");
 	if(!FileExists(filePath)){
 		cvar(cvarName, backupValue, false, expectedPreviousValue);
 		return;

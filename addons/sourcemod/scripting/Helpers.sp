@@ -148,7 +148,6 @@ stock bool SetClientMoney(int client, int money, bool absolute = false){
 bool g_bRemovechicken_debounce = false;
 void RemoveChickens(bool removec4Chicken = false){
 	if(!g_bRemovechicken_debounce){
-		Log("[Chaos] > Removing Chickens");
 		g_bRemovechicken_debounce = true;
 
 		char classname[64];

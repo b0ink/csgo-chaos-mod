@@ -144,10 +144,10 @@ void SaveBombPosition(){
 	FormatEx(c4_loc_string, sizeof(c4_loc_string), "%f %f %f", c4_location[0], c4_location[1], c4_location[2]);
 
 	if(site == BOMBSITE_A){
-		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombA", c4_loc_string);
+		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombA", c4_loc_string, .folderPath="data");
 		PushArrayArray(bombSiteA, c4_location);
 	}else if(site == BOMBSITE_B){
-		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombB", c4_loc_string);
+		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombB", c4_loc_string, .folderPath="data");
 		PushArrayArray(bombSiteB, c4_location);
 	}
 
@@ -174,7 +174,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 		if(!(GetClientButtons(i) & IN_DUCK) && client_vel[2] == 0.0 && GetEntityMoveType(i) == MOVETYPE_WALK && GetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue") == 1.0) { //ensure player isnt mid jump or falling down
 			FormatEx(client_vec_string, sizeof(client_vec_string), "%f %f %f", client_vec[0], client_vec[1], client_vec[2]);
 			if(GetArraySize(g_MapCoordinates) == 0){
-				UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
+				UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string, .folderPath="data");
 				PushArrayArray(g_MapCoordinates, client_vec);
 			}else{
 				float distanceToBeat = 99999.0;
@@ -186,7 +186,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 					}
 				}
 				if(distanceToBeat > 250){
-					UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string);
+					UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string, .folderPath="data");
 					PushArrayArray(g_MapCoordinates, client_vec);
 				}
 			}
@@ -243,7 +243,7 @@ void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
 
 void ParseMapCoordinates(char[] config) {
 	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/%s.cfg", config);
+	BuildPath(Path_SM, path, sizeof(path), "data/Chaos/%s.cfg", config);
 
 	if(g_MapCoordinates == INVALID_HANDLE){
 		g_MapCoordinates = CreateArray(3);
@@ -296,9 +296,10 @@ void ParseMapCoordinates(char[] config) {
 	delete kv;
 }
 
-void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] function_name, char[] key, char[] newValue){
+void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] function_name, char[] key, char[] newValue, char[] folderPath="configs"){
 	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/%s.cfg", config);
+	//TODO: for /data and /configs
+	BuildPath(Path_SM, path, sizeof(path), "%s/Chaos/%s.cfg", folderPath, config);
 
 	KeyValues kvConfig = new KeyValues(KeyValues_name);
 
@@ -341,7 +342,7 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 
 void LogEffect(char[] function_name){
 	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Statistics.cfg");
+	BuildPath(Path_SM, path, sizeof(path), "data/Chaos/Chaos_Statistics.cfg");
 
 	KeyValues kvConfig = new KeyValues("Stats");
 

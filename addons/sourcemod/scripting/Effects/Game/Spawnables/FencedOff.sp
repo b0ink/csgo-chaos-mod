@@ -101,7 +101,7 @@ void ParseFencesConfig(){
 	GetCurrentMap(map, sizeof(map));
 
 	char path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Fences.cfg");
+	BuildPath(Path_SM, path, sizeof(path), "data/Chaos/Chaos_Fences.cfg");
 	if(!FileExists(path)) return;
 
 	KeyValues kv = new KeyValues("Maps");

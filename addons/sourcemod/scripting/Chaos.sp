@@ -498,7 +498,7 @@ bool PoolChaosEffects(char[] effectName = ""){
 		}
 	}
 
-	Log("Size of pooled chaos effects: %i", PossibleChaosEffects.Length);
+	// Log("Size of pooled chaos effects: %i", PossibleChaosEffects.Length);
 }
 
 
