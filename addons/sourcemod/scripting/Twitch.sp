@@ -20,8 +20,8 @@ enum struct vote_data{
 }
 
 void RegisterTwitchCommands(){
-	RegAdminCmd("chaos_votes", 			Command_GetVotes, 		ADMFLAG_ROOT);
-	RegAdminCmd("save_chaos_vote", 		Command_SaveVote, 		ADMFLAG_ROOT);
+	RegAdminCmd("chaos_votes", 					Command_GetVotes, 		ADMFLAG_ROOT);
+	RegAdminCmd("save_chaos_vote", 				Command_SaveVote, 		ADMFLAG_ROOT);
 }
 
 void TWITCH_INIT(){
@@ -114,20 +114,34 @@ public Action Command_GetVotes(int client, int args){
 }
 
 
+
 public Action Command_SaveVote(int client, int args){
 	char sVote[2];
 	GetCmdArg(1, sVote, sizeof(sVote));
+
+	bool isBatch = false;
+	char sTotalVotes[4];
+	if(args == 2){
+		isBatch = true;
+		GetCmdArg(2, sTotalVotes, sizeof(sTotalVotes));
+	}
+	int totalvotes = StringToInt(sTotalVotes);
 
 	int vote = StringToInt(sVote);
 	if(vote != 0 && g_bCanSpawnEffect && Twitch_Votes.Length >= 4){
 		vote_data effect;
 		vote = vote - 1; //offset array index
 		Twitch_Votes.GetArray(vote, effect, sizeof(effect));
-		effect.votes = effect.votes + 1;
+
+		if(isBatch){
+			effect.votes = totalvotes;
+		}else{
+			effect.votes = effect.votes + 1;
+		}		
 		Twitch_Votes.SetArray(vote, effect);
-		ReplyToCommand(client, "success");
+		// ReplyToCommand(client, "success");
 	}else{
-		ReplyToCommand(client, "could not save vote");
+		// ReplyToCommand(client, "could not save vote");
 		// ReplyToCommand(client, "fail vote was: %i original string was %s", vote, sVote);
 	}
 
