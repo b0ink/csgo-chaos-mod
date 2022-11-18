@@ -5,15 +5,13 @@ public void Chaos_Meta_DoubleTimerSpeed(effect_data effect){
 	effect.IsMetaEffect = true;
 }
 
-float DoubleTimerSpeed_Original;
 public void Chaos_Meta_DoubleTimerSpeed_START(){
-	DoubleTimerSpeed_Original = g_cvChaosEffectInterval.FloatValue;
-	g_cvChaosEffectInterval.FloatValue = g_cvChaosEffectInterval.FloatValue * 2;
+	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue * 2;
 }
 
 public void Chaos_Meta_DoubleTimerSpeed_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
-		g_cvChaosEffectInterval.FloatValue = DoubleTimerSpeed_Original;
+		g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue;
 	}
 }
 

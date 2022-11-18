@@ -1,5 +1,6 @@
 ConVar 	g_cvChaosEnabled;
 ConVar 	g_cvChaosEffectInterval;
+int		g_ChaosEffectInterval;
 ConVar 	g_cvChaosRepeating;
 ConVar 	g_cvChaosOverrideDuration;
 ConVar 	g_cvChaosTwitchEnabled;
@@ -138,6 +139,7 @@ void UpdateCvars(){
 
 			convar_value = kv.GetNum("sm_chaos_interval", 999);
 			g_cvChaosEffectInterval.SetInt(convar_value);
+			g_ChaosEffectInterval = convar_value;
 
 			convar_value = kv.GetNum("sm_chaos_override_duration", 1);
 			g_cvChaosOverrideDuration.SetInt(convar_value);
@@ -187,6 +189,8 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 	} else if(convar == g_cvChaosEffectList_Color){
 		ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
 	}
+	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue;
+	Update_Convar_Config();
 }
 
 

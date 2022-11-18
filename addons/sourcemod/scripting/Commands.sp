@@ -88,7 +88,7 @@ public Action Command_StartChaos(int client, int args){
 		StopTimer(g_NewEffect_Timer);
 		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
 		if(g_bDynamicChannelsEnabled){
-			Timer_Display(null, RoundToFloor(g_cvChaosEffectInterval.FloatValue));
+			Timer_Display(null, g_ChaosEffectInterval);
 		}
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{

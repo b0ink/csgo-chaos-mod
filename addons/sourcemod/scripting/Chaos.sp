@@ -635,14 +635,14 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		if(g_cvChaosTwitchEnabled.BoolValue){
 			Twitch_PoolNewVotingEffects(); // pull 4 effects, this WILL add them into the effect cooldown.
 		}
-		float Effect_Interval = g_cvChaosEffectInterval.FloatValue;
+		int Effect_Interval = g_ChaosEffectInterval;
 		if(Effect_Interval > 60 || Effect_Interval < 5){
 			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg | was set to %f", Effect_Interval);
-			Effect_Interval = 15.0;
+			Effect_Interval = 15;
 		}
-		g_NewEffect_Timer = CreateTimer(Effect_Interval, ChooseEffect);
+		g_NewEffect_Timer = CreateTimer(float(Effect_Interval), ChooseEffect);
 		if(g_bDynamicChannelsEnabled){
-			Timer_Display(null, RoundToFloor(Effect_Interval));
+			Timer_Display(null, Effect_Interval);
 		}
 		g_iTotalEffectsRanThisRound++;
 	}
@@ -672,7 +672,11 @@ public Action ResetRoundChaos(Handle timer){
 
 	effect_data effect;
 	LoopAllEffects(effect, index){
-		effect.Reset(false);
+		if(effect.Timer != INVALID_HANDLE){
+			effect.Reset(true);
+		}else{
+			effect.Reset(false);
+		}
 	}
 }
 
