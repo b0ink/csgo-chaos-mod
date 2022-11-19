@@ -220,7 +220,7 @@ void ParseOverrideEffects(){
 			int enabled = kvConfig.GetNum("enabled", 1);
 			int expires = kvConfig.GetNum("duration", 15);
 
-			if(enabled != 0 || enabled != 1) enabled = 1;
+			if(enabled != 0 && enabled != 1) enabled = 1;
 
 			effect_data effect;
 
