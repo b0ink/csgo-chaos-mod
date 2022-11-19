@@ -3,6 +3,8 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 
 ### The list of effects can be found [here](https://csgochaosmod.com/effects/).
 
+##### Please note CSGO Chaos Mod is only compatible with the Competitive game mode. Some effects are designed to the last all round and may not work well in a Deathmatch game mode. There may be support for the Deathmatch game mode in the near future.
+
 # Screenshots
 <p align="center">
 	<img src="https://csgochaosmod.com/gallery/chaos_1.jpg" 	width="375" title="LSD">
