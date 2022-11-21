@@ -13,6 +13,8 @@ public void Chaos_Drugs_INIT(){
 Handle g_DrugTimers[MAXPLAYERS+1];
 float g_DrugAngles[20] = {0.0, 5.0, 10.0, 15.0, 20.0, 25.0, 20.0, 15.0, 10.0, 5.0, 0.0, -5.0, -10.0, -15.0, -20.0, -25.0, -20.0, -15.0, -10.0, -5.0};
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_Drugs_START(){
 	LoopAlivePlayers(i){
 		CreateDrug(i);

@@ -6,6 +6,8 @@ public void Chaos_IceSkate(effect_data effect){
 bool IceSkate = false;
 bool ForceJumpSkate[MAXPLAYERS+1];
 
+//TODO: Re-apply effect when player respawns
+
 /* This is used when the effect is fired */
 public void Chaos_IceSkate_START(){
 	cvar("sv_airaccelerate", "2000");

@@ -1,3 +1,5 @@
+//TODO: Re-apply effect when player respawns
+
 char chickenModel[] = "models/chicken/chicken.mdl";
 char playersModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
 

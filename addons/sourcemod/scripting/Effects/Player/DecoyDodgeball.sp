@@ -49,6 +49,8 @@ public void HookOnDecoySpawn(int iGrenade) {
 }
 
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_DecoyDodgeball_START(){
 	
 	LoopAlivePlayers(i){

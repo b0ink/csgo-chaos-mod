@@ -3,6 +3,8 @@ public void Chaos_Invis(effect_data effect){
 	effect.Duration = 30;
 }
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_Invis_START(){
 	int alpha = 50;
 

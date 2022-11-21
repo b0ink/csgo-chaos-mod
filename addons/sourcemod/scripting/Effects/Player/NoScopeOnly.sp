@@ -27,6 +27,8 @@ public Action Chaos_NoScopeOnly_Hook_OnPreThink(int client){
 	return Plugin_Continue;
 }
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_NoScopeOnly_START(){
 	
 	LoopAlivePlayers(i){

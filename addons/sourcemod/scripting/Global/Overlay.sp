@@ -8,6 +8,8 @@ void Overlay_INIT(){
 	HookEvent("player_death", Overlay_Event_PlayerDeath);
 }
 
+//TODO: Re-apply effect when player respawns
+
 public Action Overlay_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	int client = GetClientOfUserId(event.GetInt("userid"));

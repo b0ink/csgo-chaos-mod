@@ -1,3 +1,5 @@
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_Aimbot(effect_data effect){
 	effect.Title = "Aimbot";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_BlindPlayers(effect_data effect){
 	effect.Title = "Blind";
 	effect.Duration = 7;

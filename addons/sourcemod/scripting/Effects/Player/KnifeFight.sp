@@ -5,6 +5,8 @@ public void Chaos_KnifeFight(effect_data effect){
 
 
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_KnifeFight_START(){
 	HookBlockAllGuns();
 

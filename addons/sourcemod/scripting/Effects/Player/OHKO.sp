@@ -7,6 +7,8 @@ public void Chaos_OHKO(effect_data effect){
 	effect.AddAlias("One Hit Knock Out");
 }
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_OHKO_START(){
 	LoopAlivePlayers(i){
 		SetEntityHealth(i, 1);

@@ -52,6 +52,7 @@ public Action BlockAllGuns(int client, int weapon) {
  * Blocks (most) primary and secondary weapons, allows knives, grenades and c4 only.
  * If multiple effects use this, both will need to use UnhookBlockAllGuns() to releaes the lock.
  */
+//TODO: if you pick up a grenade you cant see your knife anymore
 public void HookBlockAllGuns(){
 	BlockGun_EffectCount++;
 	LoopAlivePlayers(i){

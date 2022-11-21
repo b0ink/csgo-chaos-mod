@@ -3,6 +3,8 @@ public void Chaos_SlowSpeed(effect_data effect){
 	effect.Duration = 30;
 }
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_SlowSpeed_START(){
 	LoopAlivePlayers(i){
 		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 0.5);

@@ -2,6 +2,8 @@ public void Chaos_TaserParty(effect_data effect){
 	effect.Title = "Taser Party";
 	effect.Duration = 30;
 }
+//TODO: Re-apply effect when player respawns
+
 
 public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];

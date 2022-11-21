@@ -3,6 +3,7 @@ public void Chaos_NightVision(effect_data effect){
 	effect.Duration = 30;
 } 
 
+//TODO: Re-apply effect when player respawns
 public void Chaos_NightVision_START(){
 	LoopAlivePlayers(i){
 		GivePlayerItem(i, "item_nvgs");
