@@ -1,6 +1,8 @@
 int SleepShooter_LastShot[MAXPLAYERS + 1]; 
 bool g_SleepyShooter = false;
 
+//TODO: reset timer on player spawn.
+
 public void Chaos_SleepyShooter(effect_data effect){
 	effect.Title = "Shoot To Stay Awake";
 	effect.Duration = 30;

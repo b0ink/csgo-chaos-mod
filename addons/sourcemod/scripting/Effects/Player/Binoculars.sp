@@ -1,3 +1,5 @@
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_Binoculars(effect_data effect){
 	effect.Title = "Binoculars";
 	effect.Duration = 30;

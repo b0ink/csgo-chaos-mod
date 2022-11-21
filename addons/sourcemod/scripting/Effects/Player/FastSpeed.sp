@@ -1,3 +1,5 @@
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_FastSpeed(effect_data effect){
 	effect.Title = "3x Movement Speed";
 	effect.Duration = 30;

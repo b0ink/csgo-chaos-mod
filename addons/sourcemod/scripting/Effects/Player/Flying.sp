@@ -1,3 +1,5 @@
+//TODO: Re-apply effect when player respawns
+
 bool g_bActiveNoclip = false;
 public void Chaos_Flying(effect_data effect){
 	effect.Title = "Flying";

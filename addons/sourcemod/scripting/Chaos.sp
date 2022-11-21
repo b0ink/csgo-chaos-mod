@@ -320,13 +320,9 @@ public void OnPluginStart(){
 	LoadTranslations("chaos.phrases");
 	
 	CreateConVars();
-	
 	RegisterCommands();
 
-	HookEvent("round_start", 	Event_RoundStart);
-	HookEvent("round_end", 		Event_RoundEnd);	
-	HookEvent("bomb_planted", 	Event_BombPlanted);
-	HookEvent("server_cvar", 	Event_Cvar, 			EventHookMode_Pre);
+	HookMainEvents();
 
 	for(int i = 0; i <= MaxClients; i++){
 		if(IsValidClient(i)){

@@ -1,6 +1,28 @@
 effect_data 	Chaos_EffectData_Buffer;
 char 			Chaos_EventName_Buffer[64];
 
+public void HookMainEvents(){
+	HookEvent("round_start", 	Event_RoundStart);
+	HookEvent("round_end", 		Event_RoundEnd);	
+	HookEvent("bomb_planted", 	Event_BombPlanted);
+	HookEvent("server_cvar", 	Event_Cvar, EventHookMode_Pre);
+	HookEvent("player_spawn", 	Event_PlayerSpawn);
+}
+
+public Action Event_PlayerSpawn(Handle event, char[] name, bool dontBroadcast){
+	// LoopAllEffects(Chaos_EffectData_Buffer, index){
+	// 	Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerSpawn", Chaos_EffectData_Buffer.FunctionName);
+	// 	Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
+	// 	if(func != INVALID_FUNCTION){
+	// 		Call_StartFunction(GetMyHandle(), func);
+	// 		Call_PushCell(event); 
+	// 		Call_PushString(name);
+	// 		Call_PushCell(dontBroadcast);
+	// 		Call_Finish();
+	// 	}
+	// }
+}
+
 
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;

@@ -13,6 +13,7 @@ public Action Chaos_SneakyBeaky_RESET(bool HasTimerEnded){
 	SneakyBeaky = false;
 }
 
+//TODO: remove the else-if checks
 public Action Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(SneakyBeaky){
 		if (IsPlayerAlive(client)){

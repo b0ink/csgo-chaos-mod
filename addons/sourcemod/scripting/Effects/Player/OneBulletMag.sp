@@ -26,6 +26,8 @@ public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name
 	//One bullet magazine handler
 
 
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_OneBulletMag_START(){
 	LoopAlivePlayers(i){
 		for (int j = 0; j < 2; j++){

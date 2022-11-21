@@ -6,6 +6,8 @@ public void Chaos_BreakTime(effect_data effect){
 
 
 bool BreakTime = false;
+//TODO: Re-apply effect when player respawns
+
 public void Chaos_BreakTime_START(){
 	BreakTime = true;
 	HookBlockAllGuns();

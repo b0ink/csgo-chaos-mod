@@ -2,6 +2,7 @@ public void Chaos_QuakeFOV(effect_data effect){
 	effect.Title = "Quake FOV";
 	effect.Duration = 60;
 }
+//TODO: Re-apply effect when player respawns
 
 public void Chaos_QuakeFOV_START(){
 	int RandomFOV = GetRandomInt(140,160);
