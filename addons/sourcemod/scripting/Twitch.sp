@@ -64,7 +64,7 @@ public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	LoopAllVotes(effect, i){
 		int index = FindStringInArray(EffectsHistory, effect.FunctionName);
 		if(index != -1){
-			RemoveFromArray(EffectsHistory, i);
+			RemoveFromArray(EffectsHistory, index);
 		}
 	}
 
