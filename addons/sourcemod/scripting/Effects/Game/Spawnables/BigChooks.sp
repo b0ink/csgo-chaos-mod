@@ -1,7 +1,7 @@
 public void Chaos_BigChooks(effect_data effect){
 	effect.Title = "Big Chooks";
 	effect.AddAlias("Chicken");
-	effect.HasNoDuration = true;
+	effect.Duration = 60;
 }
 
 
@@ -17,6 +17,7 @@ public void Chaos_BigChooks_START(){
 				float randomSize = GetRandomFloat(2.0, 15.0);
 				DispatchSpawn(ent);
 				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", randomSize);
+				DispatchKeyValue(ent, "targetname", "BigChooks");
 			}
 		}
 	
@@ -24,7 +25,7 @@ public void Chaos_BigChooks_START(){
 }
 
 public Action Chaos_BigChooks_RESET(bool HasTimerEnded){
-	RemoveChickens();
+	RemoveChickens(.chickenName="BigChooks");
 	g_bCanSpawnChickens = true;
 }
 

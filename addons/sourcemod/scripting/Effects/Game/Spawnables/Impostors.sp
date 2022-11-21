@@ -1,6 +1,7 @@
 public void Chaos_Impostors(effect_data effect){
 	effect.Title = "Impostors";
-	effect.HasNoDuration = true;
+	effect.Duration = 60;
+	
 	effect.AddAlias("Clones");
 }
 
@@ -10,7 +11,7 @@ public void Chaos_Impostors_START(){
 
 public Action Chaos_Impostors_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
-		RemoveChickens();
+		RemoveChickens(.chickenName="Impostors");
 	}
 }
 
@@ -37,6 +38,7 @@ void SpawnImpostors(){
 			int fakePlayer = CreateEntityByName("prop_dynamic_override");
 
 			if(chicken != -1 && fakePlayer != -1){
+				DispatchKeyValue(chicken, "targetname", "Impostors");
 				char ImpostorModel[PLATFORM_MAX_PATH];
 				int randomSkin = GetRandomInt(0, GetArraySize(OriginalPlayerModels) - 1);
 				GetArrayString(OriginalPlayerModels, randomSkin, ImpostorModel, sizeof(ImpostorModel));

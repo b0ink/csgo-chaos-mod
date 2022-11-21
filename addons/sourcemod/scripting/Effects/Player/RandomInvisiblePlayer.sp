@@ -2,6 +2,7 @@ public void Chaos_RandomInvisiblePlayer(effect_data effect){
 	effect.Title = "Random Invisible Player";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
+	//TODO: Add reset for DM config compatibility
 }
 
 public void Chaos_RandomInvisiblePlayer_START(){

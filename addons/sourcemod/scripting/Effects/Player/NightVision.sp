@@ -1,6 +1,6 @@
 public void Chaos_NightVision(effect_data effect){
 	effect.Title = "Night Vision";
-	effect.HasNoDuration = true;
+	effect.Duration = 30;
 } 
 
 public void Chaos_NightVision_START(){

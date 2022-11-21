@@ -2,7 +2,7 @@
 
 public void Chaos_Turrets(effect_data effect){
 	effect.Title = "Turrets";
-	effect.HasNoDuration = true;
+	effect.Duration = 60;
 
 	effect.AddAlias("Droneguns");
 	effect.AddAlias("Drones");
@@ -57,11 +57,27 @@ public void Chaos_Turrets_START(){
 		int dronegun = CreateEntityByName("dronegun");
 		if(!IsValidEntity(dronegun)) break;
 		SetEntData(dronegun, dronegun_collision, 2, 4, true); // no Collision
+		DispatchKeyValue(dronegun, "targetname", "Turrets");
 		TeleportEntity(dronegun, vec, NULL_VECTOR, NULL_VECTOR);
 		DispatchSpawn(dronegun);
 
 
 		if(index > 50) break; // spawn 50
+	}
+}
+
+public void Chaos_Turrets_RESET(){
+	char classname[64];
+	char targetname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, "dronegun") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
+			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
+			if(StrEqual(targetname, "Turrets", false)){
+				RemoveEntity(ent);
+			}else{
+				continue;
+			}	
+		}
 	}
 }
 

@@ -34,9 +34,10 @@ public void ParseChaosEffects(){
 		}
 		// if(start_func == INVALID_FUNCTION || reset_func == INVALID_FUNCTION) continue;
 
-		if(effect.Duration == 0 && effect.HasNoDuration == false){
-			effect.Duration = 30; // Default time
+		if(effect.Duration > 0 && effect.HasNoDuration == true){
+			effect.Duration = 0;
 		}
+		
 		Format(function_name, sizeof(function_name), EffectNames[i]);
 		Format(effect.FunctionName, sizeof(effect.FunctionName), "%s", function_name);
 		effect.Enabled = true;
@@ -229,6 +230,7 @@ void ParseOverrideEffects(){
 					effect.Enabled = view_as<bool>(enabled);
 					effect.Duration = expires;
 					ChaosEffects.SetArray(index, effect);
+					// PrintToChatAll("Found %s override and setting enabled to %i and duration to %i", Chaos_Function_Name, enabled, expires);
 				}
 			}
 		}

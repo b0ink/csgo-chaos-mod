@@ -13,7 +13,7 @@ enum struct fence_data {
 
 public void Chaos_FencedOff(effect_data effect){
 	effect.Title = "Fenced Off";
-	effect.HasNoDuration = true;
+	effect.Duration = 60;
 }
 
 public void Chaos_FencedOff_INIT(){
@@ -38,6 +38,22 @@ public void Chaos_FencedOff_START(){
 		Fences.GetArray(i, fence, sizeof(fence));
 		if(i < 7){
 			SpawnFence(fence);
+		}
+	}
+}
+
+
+public void Chaos_FencedOff_RESET(){
+	char classname[64];
+	char targetname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, "prop_dynamic") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
+			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
+			if(StrEqual(targetname, "FakeFence", false)){
+				RemoveEntity(ent);
+			}else{
+				continue;
+			}	
 		}
 	}
 }
@@ -88,6 +104,7 @@ int CreateFence(FENCE_TYPE type){
 	}
 	DispatchKeyValue(fence, "StartDisabled", "true");
 	DispatchKeyValue(fence, "Solid", "6");
+	DispatchKeyValue(fence, "targetname", "FakeFence");
 	AcceptEntityInput(fence, "EnableCollision");
 	return fence;
 }

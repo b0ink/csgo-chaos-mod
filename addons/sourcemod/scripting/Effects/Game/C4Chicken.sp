@@ -2,7 +2,7 @@ bool 	g_bC4Chicken = false;
 bool 	g_bVisibleChicken = true;
 int 	g_iC4ChickenEnt = -1;
 
-int GetChickenEntity(){
+int GetC4ChickenEntity(){
 	return g_iC4ChickenEnt;
 }
 

@@ -367,6 +367,7 @@ public void OnMapStart(){
 	}
 	UpdateCvars();
 
+	
 	CheckHostageMap();
 	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
@@ -533,7 +534,12 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			}
 		}
 	}
-
+	// effect_data test;
+	// LoopAllEffects(test, index){
+	// 	if(test.Enabled == false){
+	// 		PrintToChatAll("%s is disabled!", test.Title);
+	// 	}
+	// }
 
 	if(g_sForceCustomEffect[0] != '\0'){ //run from menu, or from twitch list
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
@@ -547,7 +553,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				break;
 			}
 		}
-	}else{
+	}else{ // running random effect!
 		effect_data effect;
 		int totalEffects = ChaosEffects.Length;
 	
@@ -607,7 +613,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		PossibleMetaEffects.Clear();
 		LoopAllMetaEffects(metaEffect, index){
 			// PrintToChatAll("%s s", metaEffect.Title);
-			if(metaEffect.CanRunEffect()){
+			if(metaEffect.CanRunEffect() && metaEffect.Enabled){
 				PossibleMetaEffects.PushArray(metaEffect, sizeof(metaEffect));
 			}
 			if(metaEffect.Timer != INVALID_HANDLE){

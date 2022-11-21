@@ -23,7 +23,7 @@ public void Chaos_ESP_START(){
 	createGlows();
 }
 
-public Action Chaos_ESP_RESET(bool HasTimerEnded){
+public void Chaos_ESP_RESET(bool HasTimerEnded){
 	ResetCvar("sv_force_transmit_players", "0", "1");
 	destroyGlows();
 }

@@ -1,6 +1,6 @@
 public void Chaos_Soccerballs(effect_data effect){
 	effect.Title = "Soccerballs";
-	effect.HasNoDuration = true;
+	effect.Duration = 60;
 }
 
 public void Chaos_Soccerballs_OnMapStart(){
@@ -29,7 +29,23 @@ public void Chaos_Soccerballs_START(){
 				AcceptEntityInput(ent, "EnableCollision");
 				SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5);
 				SetEntityMoveType(ent, MOVETYPE_VPHYSICS);
+				DispatchKeyValue(ent, "targetname", "Soccerball");
 			}
+		}
+	}
+}
+
+public void Chaos_Soccerballs_RESET(){
+	char classname[64];
+	char targetname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, "prop_physics_multiplayer") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
+			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
+			if(StrEqual(targetname, "Soccerball", false)){
+				RemoveEntity(ent);
+			}else{
+				continue;
+			}	
 		}
 	}
 }

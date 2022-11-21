@@ -146,26 +146,35 @@ stock bool SetClientMoney(int client, int money, bool absolute = false){
 } 
 
 bool g_bRemovechicken_debounce = false;
-void RemoveChickens(bool removec4Chicken = false){
+void RemoveChickens(bool removec4Chicken = false, char[] chickenName = ""){
 	if(!g_bRemovechicken_debounce){
 		g_bRemovechicken_debounce = true;
 
 		char classname[64];
+		char targetname[64];
 		LoopAllEntities(ent, GetMaxEntities(), classname){
 			if(StrEqual(classname, "chicken") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
+				GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
+				if(chickenName[0] != '\0'){
+					if(StrEqual(targetname, chickenName, false)){
+						RemoveEntity(ent);
+					}else{
+						continue;
+					}	
+				}
 				if(removec4Chicken){
-					if(ent == GetChickenEntity()){
+					if(ent == GetC4ChickenEntity()){
 						RemoveEntity(ent);
 					}
 				}else{
-					if(ent != GetChickenEntity()){
+					if(ent != GetC4ChickenEntity()){
 						SetEntPropFloat(ent, Prop_Data, "m_flModelScale", 1.0);
 						RemoveEntity(ent);
 					}
 				}
 			}
 		}
-		CreateTimer(5.0, Timer_ResetChickenDebounce);
+		CreateTimer(0.5, Timer_ResetChickenDebounce);
 	}
 }  
 

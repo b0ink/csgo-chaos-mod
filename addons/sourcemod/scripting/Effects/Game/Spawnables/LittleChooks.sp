@@ -1,6 +1,7 @@
 public void Chaos_LittleChooks(effect_data effect){
 	effect.Title = "Lil' Chooks";
-	effect.HasNoDuration = true;
+	effect.AddAlias("Chicken");
+	effect.Duration = 60;
 }
 
 public void Chaos_LittleChooks_START(){
@@ -15,6 +16,7 @@ public void Chaos_LittleChooks_START(){
 				DispatchSpawn(ent);
 				float randomSize = GetRandomFloat(0.4, 0.9);
 				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", randomSize);
+				DispatchKeyValue(ent, "targetname", "LittleChooks");
 			}
 		}
 	
@@ -22,7 +24,7 @@ public void Chaos_LittleChooks_START(){
 }
 
 public Action Chaos_LittleChooks_RESET(bool HasTimerEnded){
-	RemoveChickens();
+	RemoveChickens(.chickenName="LittleChooks");
 	g_bCanSpawnChickens = true;
 }
 

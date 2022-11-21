@@ -103,7 +103,7 @@ public void TeleportC4ToNewBombSite(){
     }
 
     int bombEnt = FindEntityByClassname(-1, "planted_c4");
-    if(GetChickenEntity() != -1) bombEnt = GetChickenEntity();
+    if(GetC4ChickenEntity() != -1) bombEnt = GetC4ChickenEntity();
     // newBombPosition[2] = newBombPosition[2] - 64;
     if(bombEnt != -1){
         TeleportEntity(bombEnt, newBombPosition, NULL_VECTOR, NULL_VECTOR);
