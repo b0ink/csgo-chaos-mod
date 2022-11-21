@@ -35,6 +35,7 @@ int playerModelsIndex[MAXPLAYERS+1] = {-1,...};
 #define EF_NOSHADOW                 (1 << 4)
 #define EF_NORECEIVESHADOW          (1 << 6)
 
+//TODO: use this for when players die/respawn?
 public void checkGlows(){
 	destroyGlows();
 	createGlows();
