@@ -149,6 +149,7 @@ void ShowMenu_Settings(int client){
 	menu.AddItem("edit-effects", "Edit Effects", style); // "Select an effect you'd like to edit" (list of ALL effects);
 	menu.AddItem("edit-convars", "Edit ConVars", style);
 	menu.AddItem("edit-effect-volume", "Adjust Bell SFX Volume");
+	menu.AddItem("edit-hud", "HUD");
 
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
@@ -166,6 +167,8 @@ public int Settings_Handler(Menu menu, MenuAction action, int param1, int param2
 				ShowMenu_EditConvars(param1);
 			}else if(StrEqual(info, "edit-effect-volume", false)){
 				ShowMenu_EditEffectVolume(param1);
+			}else if(StrEqual(info, "edit-hud", false)){
+				ShowMenu_HudSettings(param1);
 			}
 		}
 	}else if (action == MenuAction_Cancel){
@@ -176,6 +179,55 @@ public int Settings_Handler(Menu menu, MenuAction action, int param1, int param2
 		delete menu;
 	}
 }
+void ShowMenu_HudSettings(int client){
+	if(!IsValidClient(client)) return;
+	
+	Menu menu = new Menu(HudSettings_Handler);
+	menu.SetTitle("Toggle HUD Elements");
+	// char currentVolume[128];
+	// FormatEx(currentVolume, sizeof(currentVolume), "Adjust the volume of the bell sound when a new effect spawns:\nCurrent Volume: %i%%", RoundToZero(BellVolume[client] * 100.0));
+	// menu.AddItem("-", currentVolume, ITEMDRAW_DISABLED);
+
+	char TimerInfo[32];
+	char EffectListInfo[32];
+	char EffectAnnouncement[32];
+
+	FormatEx(TimerInfo, sizeof(TimerInfo), "Hide Timer: [%s]", HideTimer[client] ? "YES" : "NO");
+	FormatEx(EffectListInfo, sizeof(EffectListInfo), "Hide Effect List: [%s]", HideEffectList[client] ? "YES" : "NO");
+	FormatEx(EffectAnnouncement, sizeof(EffectAnnouncement), "Hide Announcement: [%s]", HideAnnouncement[client] ? "YES" : "NO");
+	menu.AddItem("toggle-timer", TimerInfo);
+	menu.AddItem("toggle-effectlist", EffectListInfo);
+	menu.AddItem("toggle-effectannounce", EffectAnnouncement);
+
+	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
+	menu.Display(client, 0);
+}
+
+public int HudSettings_Handler(Menu menu, MenuAction action, int param1, int param2){
+	if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		if(found){
+			if(StrEqual(info, "toggle-timer", false)){
+				HideTimer[param1] = !HideTimer[param1];
+			}else if(StrEqual(info, "toggle-effectlist", false)){
+				HideEffectList[param1] = !HideEffectList[param1];
+			}else if(StrEqual(info, "toggle-effectannounce", false)){
+				HideAnnouncement[param1] = !HideAnnouncement[param1];
+			}
+		}
+		ShowMenu_HudSettings(param1);
+	}else if (action == MenuAction_Cancel){
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_Settings(param1);
+		}
+	}else if (action == MenuAction_End){
+		delete menu;
+	}
+}
+
+
 
 void ShowMenu_EditEffectVolume(int client){
 	if(!IsValidClient(client)) return;

@@ -72,22 +72,6 @@ char[] RemoveMulticolors(char[] message){
 	return finalMess;
 }
 
-void DisplayCenterTextToAll(char[] message){
-	char finalMess[256];
-	Format(finalMess, sizeof(finalMess), "%s", RemoveMulticolors(message));
-
-	LoopValidPlayers(i){
-		SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
-		if(g_bDynamicChannelsEnabled){
-			ShowHudText(i, GetDynamicChannel(0), "%s", finalMess);
-		}else{
-			ShowHudText(i, -1, "%s", finalMess);
-			// PrintCenterText(i, "%s", finalMess);
-		}
-	}
-
-}
-
 void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, bool megaChaos = false){
 	if(!Meta_IsWhatsHappeningEnabled()){
 		char announcingMessage[128];

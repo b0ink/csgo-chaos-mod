@@ -11,6 +11,14 @@ int       g_ChaosEffectTimer_Color[4] = {200,0,220, 0};
 ConVar 	g_cvChaosEffectList_Color;
 int       g_ChaosEffectList_Color[4] = {37,186,255, 0};
 
+// ConVar 	g_cvChaosPrefix
+
+// [CHAOS] Turrets
+// [CHAOS MOD] Ignite All Players
+
+// [CHAOS] Ignite All Players
+
+
 Handle g_SavedConvars = INVALID_HANDLE;
 
 void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] expectedPreviousValue = ""){

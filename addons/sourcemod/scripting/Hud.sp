@@ -1,3 +1,7 @@
+bool  HideTimer[MAXPLAYERS+1];
+bool  HideEffectList[MAXPLAYERS+1];
+bool  HideAnnouncement[MAXPLAYERS+1];
+
 ArrayList HudData;
 
 enum struct hud_effect_data{
@@ -111,7 +115,7 @@ void PrintEffects(){
 
 	LoopValidPlayers(i){
 		if(HasMenuOpen(i)) continue;
-
+		if(HideEffectList[i]) continue;
 		//.37 y;
 		// SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
 		SetHudTextParams(0.01, 0.42, 1.5, 
@@ -150,6 +154,8 @@ void PrintEffects(){
 
 void PrintTimer(int time){
 	LoopValidPlayers(i){
+		if(HideTimer[i]) continue;
+
 		if(time > -1){
 			if(time <= 3){
 				SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
@@ -193,4 +199,23 @@ Action Timer_Display(Handle timer = null, int time){
 	g_HudTime = time;
 	PrintTimer(time);
 	if(time > 1 && g_cvChaosEnabled.BoolValue && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
+}
+
+
+void DisplayCenterTextToAll(char[] message){
+	char finalMess[256];
+	Format(finalMess, sizeof(finalMess), "%s", RemoveMulticolors(message));
+
+	LoopValidPlayers(i){
+		if(HideAnnouncement[i]) continue;
+		
+		SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
+		if(g_bDynamicChannelsEnabled){
+			ShowHudText(i, GetDynamicChannel(0), "%s", finalMess);
+		}else{
+			ShowHudText(i, -1, "%s", finalMess);
+			// PrintCenterText(i, "%s", finalMess);
+		}
+	}
+
 }
