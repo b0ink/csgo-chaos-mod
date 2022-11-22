@@ -39,5 +39,6 @@ public void Chaos_SlayRandomPlayer_START(){
 public bool Chaos_SlayRandomPlayer_Conditions(){
 	if(GetAliveCTCount() <= 4) return false;
 	if(GetAliveTCount() <= 4) return false;
+	if(g_iChaosRoundTime < 25) return false;
 	return true;
 }
