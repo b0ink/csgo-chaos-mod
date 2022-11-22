@@ -1,5 +1,6 @@
 //TODO: visualise the convar saving workflow. eg. when it is read from the config and when it's saved back to the config
 
+ConVar 	g_cvChaosPrefix;
 ConVar 	g_cvChaosEnabled;
 
 ConVar 	g_cvChaosEffectInterval;
@@ -25,6 +26,8 @@ float       g_ChaosEffectList_Position[2] = {0.01, 0.42};
 void CreateConVars(){
 	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
 
+	g_cvChaosPrefix = 				CreateConVar("sm_chaos_prefix", "[{lime}CHAOS{default}]", "Sets the Prefix of Chaos chat messages such as effect spawns (Multicolors supported)");
+
 	g_cvChaosEnabled = 				CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
 	g_cvChaosEffectInterval = 		CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
 	g_cvChaosRepeating = 			CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
@@ -37,6 +40,8 @@ void CreateConVars(){
 	g_cvChaosEffectTimer_Position = CreateConVar("sm_chaos_effect_timer_position", "-1 0.06", "Sets the xy position of the effect timer. Ranges from 0 and 1. -1 is center.");
 	g_cvChaosEffectList_Position = 	CreateConVar("sm_chaos_effect_list_position", "0.01 0.42", "Sets the xy position of the effect list. Ranges from 0 and 1. -1 is center.");
 
+
+	HookConVarChange(g_cvChaosPrefix, 				ConVarChanged);
 	HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
 	HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
 	HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
@@ -66,7 +71,8 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
 	}
 	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue;
-
+	g_cvChaosPrefix.GetString(g_Prefix, 64);
+	Format(g_Prefix, 64, "%s{default}", g_Prefix);
 	float pos[2];
 	pos[0] = -1.0;
 	pos[1] = 0.06;
@@ -221,6 +227,10 @@ void UpdateCvars(){
 			kv.GetString("sm_chaos_effect_list_position", pos, 32);
 			g_cvChaosEffectList_Position.SetString(pos);
 
+			kv.GetString("sm_chaos_prefix", g_Prefix, 32);
+			g_cvChaosPrefix.SetString(g_Prefix);
+			Format(g_Prefix, 64, "%s{default}", g_Prefix);
+
 
 			float hudpos[2];
 			hudpos[0] = -1.0;
@@ -282,8 +292,16 @@ void Update_Convar_Config(){
 	}
 	file.WriteLine("\"Convars\"");
 	file.WriteLine("{");
+
+	char prefix[64];
+	g_cvChaosPrefix.GetString(prefix, 64);
+	file.WriteLine("");
+	file.WriteLine("	// Determines whether the chaos plugin will be enabled or not.");
+	file.WriteLine("	// Setting it to 1 will activate the plugin automatically.");
+	file.WriteLine("	\"sm_chaos_prefix\"    \"%s\"", prefix);
 	file.WriteLine("");
 
+	file.WriteLine("");
 	file.WriteLine("	// Determines whether the chaos plugin will be enabled or not.");
 	file.WriteLine("	// Setting it to 1 will activate the plugin automatically.");
 	file.WriteLine("	\"sm_chaos_enabled\"    \"%i\"", g_cvChaosEnabled.IntValue);

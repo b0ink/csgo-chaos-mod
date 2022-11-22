@@ -28,7 +28,7 @@ public Plugin myinfo = {
 };
 
 
-char 	g_Prefix[] = "[{lime}CHAOS{default}]";
+char 	g_Prefix[64] = "[{lime}CHAOS{default}]";
 char 	g_Prefix_HasTimerEnded[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
@@ -415,7 +415,7 @@ public void OnMapStart(){
 }
 
 public Action Timer_Advertisement(Handle timer){
-	CPrintToChatAll("Thanks for playing {blue}CS:GO Chaos Mod{default}!\xe2\x80\xa9Visit {orange}csgochaosmod.com {default}to add this mod to your server!", g_Prefix);
+	CPrintToChatAll("Thanks for playing {blue}CS:GO Chaos Mod{default}!\xe2\x80\xa9Visit {orange}csgochaosmod.com {default}to add this mod to your server!");
 }
 
 public void OnMapEnd(){
@@ -453,6 +453,9 @@ public void OnLibraryAdded(const char[] name){
 
 public void OnClientPutInServer(int client){
 	BellVolume[client] = 0.5;
+	HideTimer[client] = false;
+	HideEffectList[client] = false;
+	HideAnnouncement[client] = false;
 	WeaponJumpConnect_Handler(client);
 
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
