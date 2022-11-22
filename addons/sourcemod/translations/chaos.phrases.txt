@@ -528,4 +528,16 @@
     {
         "en"    "Help my W key is stuck"
     }
+    "Chaos_NoManualReload"
+    {
+        "en"    "No Manual Reload"
+    }
+    "Chaos_SlowFire"
+    {
+        "en"    "Slow Weapon Fire"
+    }
+    "Chaos_OffsetCrosshair"
+    {
+        "en"    "Offset Crosshair"
+    }
 }

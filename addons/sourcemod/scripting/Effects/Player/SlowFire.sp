@@ -1,7 +1,7 @@
 bool SlowFire = false;
 
 public void Chaos_SlowFire(effect_data effect){
-	effect.Title = "Slow Fire Rate";
+	effect.Title = "Slow Weapon Fire";
 	effect.Duration = 30;
 }
 
