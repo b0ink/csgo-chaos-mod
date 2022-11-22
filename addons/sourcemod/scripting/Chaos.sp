@@ -130,6 +130,7 @@ enum struct effect_data{
 	
 	int 		Duration;
 	bool 		HasNoDuration;
+	bool		OverrideDuration;
 	bool		HasCustomAnnouncement;
 	bool		Enabled;
 	bool		IsMetaEffect;
@@ -201,9 +202,9 @@ enum struct effect_data{
 
 		if(OverwriteDuration < -1.0){
 			Log("Cvar 'OverwriteEffectDuration' set Out Of Bounds in Chaos_Settings.cfg, effects will use their durations in Chaos_Effects.cfg");
-			OverwriteDuration = - 1.0;
+			OverwriteDuration = -1.0;
 		}
-		if(OverwriteDuration != -1.0){
+		if(OverwriteDuration != -1.0 && !this.OverrideDuration){
 			duration = OverwriteDuration;
 		}else{
 			if(duration == -1.0){

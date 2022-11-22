@@ -219,7 +219,7 @@ void ParseOverrideEffects(){
 
 		if (kvConfig.GetSectionName(Chaos_Function_Name, sizeof(Chaos_Function_Name))){
 			int enabled = kvConfig.GetNum("enabled", 1);
-			int expires = kvConfig.GetNum("duration", 15);
+			int expires = kvConfig.GetNum("duration", -1);
 
 			if(enabled != 0 && enabled != 1) enabled = 1;
 
@@ -228,7 +228,13 @@ void ParseOverrideEffects(){
 			LoopAllEffects(effect, index){
 				if(StrEqual(effect.FunctionName, Chaos_Function_Name, false)){
 					effect.Enabled = view_as<bool>(enabled);
-					effect.Duration = expires;
+					if(!effect.OverrideDuration && expires > -1){
+						effect.Duration = expires;
+					}else {
+						if(expires > -1){
+							Log("Can not set duration for effect '%s' as it is controlled by the plugin.", Chaos_Function_Name);
+						}
+					}
 					ChaosEffects.SetArray(index, effect);
 					// PrintToChatAll("Found %s override and setting enabled to %i and duration to %i", Chaos_Function_Name, enabled, expires);
 				}

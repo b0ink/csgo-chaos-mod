@@ -1,6 +1,7 @@
 public void Chaos_BlindPlayers(effect_data effect){
 	effect.Title = "Blind";
 	effect.Duration = 7;
+	effect.OverrideDuration = true;
 }
 
 public void Chaos_BlindPlayers_START(){
@@ -10,6 +11,12 @@ public void Chaos_BlindPlayers_START(){
 }
 
 public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
+	LoopAlivePlayers(i){
+		PerformBlind(i, 0);
+	}
+}
+
+public Action Timer_DeactivateBlind(Handle timer){
 	LoopAlivePlayers(i){
 		PerformBlind(i, 0);
 	}
