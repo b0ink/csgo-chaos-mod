@@ -89,6 +89,7 @@
 #include "Effects/Player/MoonGravity.sp"
 #include "Effects/Player/NightVision.sp"
 #include "Effects/Player/NoCrosshair.sp"
+#include "Effects/Player/NoManualReload.sp"
 #include "Effects/Player/NoRecoil.sp"
 #include "Effects/Player/NoScopeOnly.sp"
 #include "Effects/Player/NormalWhiteFog.sp"
