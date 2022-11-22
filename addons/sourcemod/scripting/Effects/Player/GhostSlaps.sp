@@ -11,12 +11,10 @@ public void Chaos_GhostSlaps_START(){
 	LoopValidPlayers(client){
 		SDKHook(client,SDKHook_OnTakeDamage, GhostSlaps_OnTakeDamage);
 	}
-	cvar("sv_falldamage_scale", "0");
 }
 
 public Action Chaos_GhostSlaps_RESET(bool HasTimerEnded){
 	StopTimer(Chaos_RandomSlap_Timer);
-	ResetCvar("sv_falldamage_scale", "1", "0");
 	if(HasTimerEnded){
 		LoopValidPlayers(client){
 			SDKUnhook(client,SDKHook_OnTakeDamage, GhostSlaps_OnTakeDamage);
@@ -44,6 +42,7 @@ Action Timer_RandomSlap(Handle timer){
 
 
 public Action GhostSlaps_OnTakeDamage(int client, int &attacker, int &inflictor, float &damage, int &damagetype) {
+	if(Chaos_RandomSlap_Timer == INVALID_HANDLE) return Plugin_Continue;
 	if (damagetype & DMG_FALL) return Plugin_Handled;
 	return Plugin_Continue;
 }
