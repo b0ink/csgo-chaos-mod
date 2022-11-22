@@ -92,7 +92,10 @@ bool 	g_bCanSpawnEffect = true;
 
 int 	g_iTotalEffectsRanThisRound = 0; 	// Effects run in current round
 int		g_iTotalRoundsThisMap = 0;			// Round count tracker
+
 int		g_iEffectsSinceMeta = 0; 			// Total effects run since the last meta effect
+char	g_sPreviousMetaEffect[64] = "";
+
 int 	g_iChaosRoundTime = 0;	 			// Starts counting from round start, including freeze time
 int 	ChaosMapCount = 0;					// Total effects run in the current map
 
@@ -619,16 +622,25 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		LoopAllMetaEffects(metaEffect, index){
 			// PrintToChatAll("%s s", metaEffect.Title);
 			if(metaEffect.CanRunEffect() && metaEffect.Enabled){
+				if(g_sPreviousMetaEffect[0] != '\0'){
+					if(StrEqual(metaEffect.FunctionName, g_sPreviousMetaEffect)){
+						continue;
+					}
+				}
 				PossibleMetaEffects.PushArray(metaEffect, sizeof(metaEffect));
 			}
 			if(metaEffect.Timer != INVALID_HANDLE){
 				metaAlreadyRunning = true;
 			}
 		}
+
+		//TODO: have a fixed array of meta effects and scramble them, go through all effects, then rescramble
+
 		if(!metaAlreadyRunning && PossibleMetaEffects.Length > 0) {
 			int random = GetRandomInt(0, PossibleMetaEffects.Length - 1);
 			PossibleMetaEffects.GetArray(random, metaEffect, sizeof(metaEffect));
 			g_sForceCustomEffect = metaEffect.FunctionName;
+			g_sPreviousMetaEffect = g_sForceCustomEffect;
 			MetaEffectsHistory.PushArray(metaEffect);
 			ChooseEffect(null, true);
 		}
