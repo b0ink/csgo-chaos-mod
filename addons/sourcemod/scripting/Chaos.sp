@@ -609,8 +609,10 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(CustomRun) return;
 
 
-	if(!CustomRun &&  (g_iTotalRoundsThisMap >= 5 && GetRandomInt(0, 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
+	if(!CustomRun &&  ((g_iTotalRoundsThisMap >= 5 || !GameModeUsesC4())&& GetRandomInt(0, 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
 		g_iEffectsSinceMeta = 0;
+		g_iTotalRoundsThisMap = 0; // at minimum space out meta every 5 rounds
+
 		effect_data metaEffect;
 		bool metaAlreadyRunning = false;
 		PossibleMetaEffects.Clear();

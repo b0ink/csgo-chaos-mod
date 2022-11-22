@@ -1,6 +1,10 @@
+//TODO: visualise the convar saving workflow. eg. when it is read from the config and when it's saved back to the config
+
 ConVar 	g_cvChaosEnabled;
+
 ConVar 	g_cvChaosEffectInterval;
 int		g_ChaosEffectInterval;
+
 ConVar 	g_cvChaosRepeating;
 ConVar 	g_cvChaosOverrideDuration;
 ConVar 	g_cvChaosTwitchEnabled;
@@ -10,6 +14,76 @@ int       g_ChaosEffectTimer_Color[4] = {200,0,220, 0};
 
 ConVar 	g_cvChaosEffectList_Color;
 int       g_ChaosEffectList_Color[4] = {37,186,255, 0};
+
+ConVar 	g_cvChaosEffectTimer_Position;
+float       g_ChaosEffectTimer_Position[2] = {-1.0, 0.06};
+
+ConVar 	g_cvChaosEffectList_Position;
+float       g_ChaosEffectList_Position[2] = {0.01, 0.42};
+
+
+void CreateConVars(){
+	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
+
+	g_cvChaosEnabled = 				CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
+	g_cvChaosEffectInterval = 		CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
+	g_cvChaosRepeating = 			CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
+	g_cvChaosOverrideDuration = 	CreateConVar("sm_chaos_override_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
+	
+	g_cvChaosTwitchEnabled = 		CreateConVar("sm_chaos_twitch_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
+
+	g_cvChaosEffectTimer_Color = 	CreateConVar("sm_chaos_effect_timer_color", "220 0 220 0", "Set the RGB values of the Effect Timer countdown. (Default is purple)", _, false, 0.0, false, 1.0);
+	g_cvChaosEffectList_Color = 	CreateConVar("sm_chaos_effect_list_color", "220 0 220 0", "Set the RGB values of the Effect List on the side. (Default is blue)", _, false, 0.0, false, 1.0);
+	g_cvChaosEffectTimer_Position = CreateConVar("sm_chaos_effect_timer_position", "-1 0.06", "Sets the xy position of the effect timer. Ranges from 0 and 1. -1 is center.");
+	g_cvChaosEffectList_Position = 	CreateConVar("sm_chaos_effect_list_position", "0.01 0.42", "Sets the xy position of the effect list. Ranges from 0 and 1. -1 is center.");
+
+	HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
+	HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
+	HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
+	HookConVarChange(g_cvChaosOverrideDuration, 	ConVarChanged);
+
+	HookConVarChange(g_cvChaosEffectTimer_Color, 	ConVarChanged);
+	HookConVarChange(g_cvChaosEffectList_Color, 	ConVarChanged);
+
+	HookConVarChange(g_cvChaosTwitchEnabled, 		ConVarChanged);
+
+	HookConVarChange(g_cvChaosEffectTimer_Position, ConVarChanged);
+	HookConVarChange(g_cvChaosEffectList_Position, 	ConVarChanged);
+}
+
+public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
+	if(convar == g_cvChaosEnabled){
+		if(StringToInt(newValue) == 0){
+			StopTimer(g_NewEffect_Timer);
+		}
+	}else if(convar == g_cvChaosRepeating){
+		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
+			StopTimer(g_NewEffect_Timer);
+		}
+	}else if(convar == g_cvChaosEffectTimer_Color){
+		ConvertColorStringToFloat(g_cvChaosEffectTimer_Color, g_ChaosEffectTimer_Color, {200, 0, 220, 0});
+	} else if(convar == g_cvChaosEffectList_Color){
+		ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
+	}
+	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue;
+
+	float pos[2];
+	pos[0] = -1.0;
+	pos[1] = 0.06;
+
+	if(convar == g_cvChaosEffectTimer_Position){
+		pos[0] = -1.0;
+		pos[1] = 0.06;
+		ConvertCoordStringToFloat(g_cvChaosEffectTimer_Position, g_ChaosEffectTimer_Position, pos);
+	}else if(convar == g_cvChaosEffectList_Position){
+		pos[0] = 0.01;
+		pos[1] = 0.42;
+		ConvertCoordStringToFloat(g_cvChaosEffectList_Position, g_ChaosEffectList_Position, pos);
+	}
+
+	Update_Convar_Config();
+}
+
 
 // ConVar 	g_cvChaosPrefix
 
@@ -110,29 +184,6 @@ void ResetCvar(char[] cvarName = "", char[] backupValue = "", char[] expectedPre
 	}
 }
 
-void CreateConVars(){
-	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
-
-	g_cvChaosEnabled = CreateConVar("sm_chaos_enabled", "1", "Sets whether the Chaos plugin is enabled", _, true, 0.0, true, 1.0);
-	g_cvChaosEffectInterval = CreateConVar("sm_chaos_interval", "15.0", "Sets the interval for Chaos effects to run", _, true, 5.0, true, 60.0);
-	g_cvChaosRepeating = CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
-	g_cvChaosOverrideDuration = CreateConVar("sm_chaos_override_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
-
-	g_cvChaosTwitchEnabled = CreateConVar("sm_chaos_twitch_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
-
-	g_cvChaosEffectTimer_Color = CreateConVar("sm_chaos_effect_timer_color", "220 0 220 0", "Set the RGB values of the Effect Timer countdown. (Default is purple)", _, false, 0.0, false, 1.0);
-	g_cvChaosEffectList_Color = CreateConVar("sm_chaos_effect_list_color", "220 0 220 0", "Set the RGB values of the Effect List on the side. (Default is blue)", _, false, 0.0, false, 1.0);
-
-	HookConVarChange(g_cvChaosEnabled, 				ConVarChanged);
-	HookConVarChange(g_cvChaosEffectInterval, 		ConVarChanged);
-	HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
-	HookConVarChange(g_cvChaosOverrideDuration, 	ConVarChanged);
-
-	HookConVarChange(g_cvChaosEffectTimer_Color, 	ConVarChanged);
-	HookConVarChange(g_cvChaosEffectList_Color, 	ConVarChanged);
-
-	HookConVarChange(g_cvChaosTwitchEnabled, 	ConVarChanged);
-}
 
 void UpdateCvars(){
 	char path[PLATFORM_MAX_PATH];
@@ -163,6 +214,21 @@ void UpdateCvars(){
 			g_cvChaosEffectTimer_Color.SetString(color);
 			kv.GetString("sm_chaos_effect_list_color", color, 128);
 			g_cvChaosEffectList_Color.SetString(color);
+
+			char pos[32];
+			kv.GetString("sm_chaos_effect_timer_position", pos, 32);
+			g_cvChaosEffectTimer_Position.SetString(pos);
+			kv.GetString("sm_chaos_effect_list_position", pos, 32);
+			g_cvChaosEffectList_Position.SetString(pos);
+
+
+			float hudpos[2];
+			hudpos[0] = -1.0;
+			hudpos[1] = 0.06;
+			ConvertCoordStringToFloat(g_cvChaosEffectTimer_Position, g_ChaosEffectTimer_Position, hudpos);
+			hudpos[0] = 0.01;
+			hudpos[1] = 0.42;
+			ConvertCoordStringToFloat(g_cvChaosEffectList_Position, g_ChaosEffectList_Position, hudpos);
 		}
 	}
 }
@@ -174,6 +240,9 @@ void ConvertColorStringToFloat(ConVar convar, int buffer[4], int defaultColor[4]
 		char colorchunks[4][128];
 		int count = ExplodeString(color, " ", colorchunks, 4, 128);
 		if(count != 4 || color[0] == '\0'){ // if config wasn't set properly
+			Format(color, 128, "%i %i %i %i", defaultColor[0], defaultColor[1], defaultColor[2], defaultColor[3]);
+			convar.SetString(color);
+			Update_Convar_Config();
 			buffer = defaultColor;
 		}else{
 			buffer[0] = StringToInt(colorchunks[0]);
@@ -183,23 +252,24 @@ void ConvertColorStringToFloat(ConVar convar, int buffer[4], int defaultColor[4]
 		}
 }
 
-public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
-	if(convar == g_cvChaosEnabled){
-		if(StringToInt(newValue) == 0){
-			StopTimer(g_NewEffect_Timer);
-		}
-	}else if(convar == g_cvChaosRepeating){
-		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
-			StopTimer(g_NewEffect_Timer);
-		}
-	}else if(convar == g_cvChaosEffectTimer_Color){
-		ConvertColorStringToFloat(g_cvChaosEffectTimer_Color, g_ChaosEffectTimer_Color, {200, 0, 220, 0});
-	} else if(convar == g_cvChaosEffectList_Color){
-		ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
+void ConvertCoordStringToFloat(ConVar convar, float bufferPosition[2], float defaultPosition[2]){
+	char positionString[32];
+	convar.GetString(positionString, 32);
+
+	char positionBroken[2][32];
+	
+	int count = ExplodeString(positionString, " ", positionBroken, 2, 32);
+	if(count != 2 || positionBroken[0][0] == '\0'){
+		Format(positionString, 32, "%f %f", defaultPosition[0], defaultPosition[1]);
+		convar.SetString(positionString);
+		Update_Convar_Config();
+		bufferPosition = defaultPosition;
+	}else{
+		bufferPosition[0] = StringToFloat(positionBroken[0]);
+		bufferPosition[1] = StringToFloat(positionBroken[1]);
 	}
-	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue;
-	Update_Convar_Config();
 }
+
 
 
 //!When editing KeyValues, it removes all comments - this is a temp fix to re add them to assist the server owner
@@ -216,8 +286,8 @@ void Update_Convar_Config(){
 
 	file.WriteLine("	// Determines whether the chaos plugin will be enabled or not.");
 	file.WriteLine("	// Setting it to 1 will activate the plugin automatically.");
-	file.WriteLine("");
 	file.WriteLine("	\"sm_chaos_enabled\"    \"%i\"", g_cvChaosEnabled.IntValue);
+	file.WriteLine("");
 
 	file.WriteLine("");
 	file.WriteLine("	// Determines how often a new effect will be spawned.");
@@ -265,10 +335,30 @@ void Update_Convar_Config(){
 	file.WriteLine("	\"sm_chaos_effect_list_color\"    \"%s\"", colorDetails);
 	file.WriteLine("");
 
-	file.WriteLine("	// Automatically adjust the length of all the effects based off sm_chaos_interval.");
-	file.WriteLine("	// if interval = 15 seconds, effect default durations = 25;");
-	file.WriteLine("	// if interval = 20 seconds, effect default durations = 30;");
-	file.WriteLine("	// if interval = 30 seconds, effect default durations = 40;");
+
+	char posDetails[64];
+	g_cvChaosEffectTimer_Position.GetString(posDetails, 64);
+
+	file.WriteLine("");
+	file.WriteLine("	//Sets the \"x y\" position of the effect timer. Values between 0 and 1. Setting it to -1 will center it.");
+	file.WriteLine("	// Default is \"-1.0 0.06\"");
+	file.WriteLine("	// Use \"-1.0 0.085\" for Deathmatch UI (lowers it below the player icons)");
+	file.WriteLine("	\"sm_chaos_effect_timer_position\"    \"%s\"", posDetails);
+	file.WriteLine("");
+
+	g_cvChaosEffectList_Position.GetString(posDetails, 64);
+
+	file.WriteLine("");
+	file.WriteLine("	// Sets the \"x y\" position of the effect list. Values between 0 and 1. Setting it to -1 will center it.");
+	file.WriteLine("	// Default is \"0.01 0.42\"");
+	file.WriteLine("	// Use \"0.01 0.44\" for Deathmatch UI (lowers it below the bonus weapon UI)");
+	file.WriteLine("	\"sm_chaos_effect_list_position\"    \"%s\"", posDetails);
+	file.WriteLine("");
+
+	// file.WriteLine("	// Automatically adjust the length of all the effects based off sm_chaos_interval.");
+	// file.WriteLine("	// if interval = 15 seconds, effect default durations = 25;");
+	// file.WriteLine("	// if interval = 20 seconds, effect default durations = 30;");
+	// file.WriteLine("	// if interval = 30 seconds, effect default durations = 40;");
 
 	file.WriteLine("}");
 	delete file;

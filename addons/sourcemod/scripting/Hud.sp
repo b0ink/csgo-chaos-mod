@@ -118,7 +118,7 @@ void PrintEffects(){
 		if(HideEffectList[i]) continue;
 		//.37 y;
 		// SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
-		SetHudTextParams(0.01, 0.42, 1.5, 
+		SetHudTextParams(g_ChaosEffectList_Position[0], g_ChaosEffectList_Position[1], 1.5, 
 			g_ChaosEffectList_Color[0],
 			g_ChaosEffectList_Color[1],
 			g_ChaosEffectList_Color[2],
@@ -132,7 +132,7 @@ void PrintEffects(){
 
 
 
-		SetHudTextParams(0.01, 0.42, 1.5, 252, 227, 0, 0, 0, 1.0, 0.0, 0.0);
+		SetHudTextParams(g_ChaosEffectList_Position[0], g_ChaosEffectList_Position[1], 1.5, 252, 227, 0, 0, 0, 1.0, 0.0, 0.0);
 		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(2), "%s", chunk_meta);
 		}else{
@@ -158,7 +158,7 @@ void PrintTimer(int time){
 
 		if(time > -1){
 			if(time <= 3){
-				SetHudTextParams(-1.0, 0.06, 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
+				SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
 				if(g_bDynamicChannelsEnabled){
 					ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);
 				}else{
@@ -166,7 +166,7 @@ void PrintTimer(int time){
 				}
 				// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
 			}else{
-				SetHudTextParams(-1.0, 0.06, 1.5,
+				SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5,
 					g_ChaosEffectTimer_Color[0],
 					g_ChaosEffectTimer_Color[1],
 					g_ChaosEffectTimer_Color[2],
