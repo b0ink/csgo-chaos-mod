@@ -617,7 +617,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(CustomRun) return;
 
 
-	if(!CustomRun &&  ((g_iTotalRoundsThisMap >= 5 || !GameModeUsesC4())&& (GetURandomInt() % 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
+	if(!CustomRun &&  ((g_iTotalRoundsThisMap >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
 		g_iEffectsSinceMeta = 0;
 		g_iTotalRoundsThisMap = 0; // at minimum space out meta every 5 rounds
 
@@ -665,10 +665,10 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			Twitch_PoolNewVotingEffects(); // pull 4 effects, this WILL add them into the effect cooldown.
 		}
 		int Effect_Interval = g_ChaosEffectInterval;
-		if(Effect_Interval > 60 || Effect_Interval < 5){
-			Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg | was set to %f", Effect_Interval);
-			Effect_Interval = 15;
-		}
+		// if((Effect_Interval > 60 || Effect_Interval < 5) && ){
+		// 	Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg | was set to %f", Effect_Interval);
+		// 	Effect_Interval = 15;
+		// }
 		g_NewEffect_Timer = CreateTimer(float(Effect_Interval), ChooseEffect);
 		if(g_bDynamicChannelsEnabled){
 			Timer_Display(null, Effect_Interval);

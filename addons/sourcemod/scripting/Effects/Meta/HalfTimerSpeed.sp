@@ -6,10 +6,6 @@ public void Chaos_Meta_HalfTimerSpeed(effect_data effect){
 }
 
 public void Chaos_Meta_HalfTimerSpeed_START(){
-	if((g_cvChaosEffectInterval.FloatValue / 2) < 5 ){
-		//TODO: ChooseEffect won't like less than 5 second timer, could change in the future
-		g_ChaosEffectInterval = 5;
-	}
 	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue / 2;
 }
 
