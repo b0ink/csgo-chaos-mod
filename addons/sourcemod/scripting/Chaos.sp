@@ -569,7 +569,9 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		while(g_sLastPlayedEffect[0] == '\0'){ // no longer
 			attempts++;
 			do{
-				randomEffect = GetRandomInt(0, totalEffects - 1);
+				// randomEffect = GetRandomInt(0, totalEffects - 1);
+				randomEffect = GetURandomInt() % totalEffects;
+
 				ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
 				if(
 					effect.Enabled &&
@@ -615,7 +617,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(CustomRun) return;
 
 
-	if(!CustomRun &&  ((g_iTotalRoundsThisMap >= 5 || !GameModeUsesC4())&& GetRandomInt(0, 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
+	if(!CustomRun &&  ((g_iTotalRoundsThisMap >= 5 || !GameModeUsesC4())&& (GetURandomInt() % 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
 		g_iEffectsSinceMeta = 0;
 		g_iTotalRoundsThisMap = 0; // at minimum space out meta every 5 rounds
 
@@ -640,7 +642,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		//TODO: have a fixed array of meta effects and scramble them, go through all effects, then rescramble
 
 		if(!metaAlreadyRunning && PossibleMetaEffects.Length > 0) {
-			int random = GetRandomInt(0, PossibleMetaEffects.Length - 1);
+			// int random = GetRandomInt(0, PossibleMetaEffects.Length - 1);
+			int random = GetURandomInt() % PossibleMetaEffects.Length;
 			PossibleMetaEffects.GetArray(random, metaEffect, sizeof(metaEffect));
 			g_sForceCustomEffect = metaEffect.FunctionName;
 			g_sPreviousMetaEffect = g_sForceCustomEffect;

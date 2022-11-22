@@ -24,7 +24,8 @@ public void Chaos_OneBulletOneGun_Event_OnWeaponFire(Event event, const char[] n
 }
 
 public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
-	GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons) - 1)]);
+	// GiveAndSwitchWeapon(client, g_sWeapons[GetRandomInt(0, sizeof(g_sWeapons) - 1)]);
+	GiveAndSwitchWeapon(client, g_sWeapons[GetURandomInt() % sizeof(g_sWeapons)]);
 }
 
 

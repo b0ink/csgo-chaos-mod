@@ -9,7 +9,8 @@ public void Chaos_OneWeaponOnly(effect_data effect){
 public void Chaos_OneWeaponOnly_START(){
 	//TODO:; might have to handle weapon pickups?.. (players can still buy)
 	char randomWeapon[64];
-	int randomIndex = GetRandomInt(0, sizeof(g_sWeapons)-1);
+	int randomIndex = GetURandomInt() % sizeof(g_sWeapons);
+
 	randomWeapon = g_sWeapons[randomIndex];
 	LoopAlivePlayers(i){
 		StripPlayer(i);

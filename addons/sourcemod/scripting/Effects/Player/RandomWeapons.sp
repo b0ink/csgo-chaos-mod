@@ -17,7 +17,7 @@ public Action Chaos_RandomWeapons_RESET(bool HasTimerEnded){
 
 Action Timer_GiveRandomWeapon(Handle timer = null){
 	LoopAlivePlayers(i){
-		int randomWeaponIndex = GetRandomInt(0,sizeof(g_sWeapons)-1);	
+		int randomWeaponIndex = GetURandomInt() % sizeof(g_sWeapons);	
 		GiveAndSwitchWeapon(i, g_sWeapons[randomWeaponIndex]);
 	}
 }

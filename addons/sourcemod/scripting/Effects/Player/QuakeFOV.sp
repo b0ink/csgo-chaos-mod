@@ -1,6 +1,6 @@
 public void Chaos_QuakeFOV(effect_data effect){
 	effect.Title = "Quake FOV";
-	effect.Duration = 60;
+	effect.Duration = 45;
 }
 
 int QuakeFov;
