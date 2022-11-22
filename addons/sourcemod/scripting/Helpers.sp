@@ -336,5 +336,16 @@ bool isHostageMap(){
 	return g_bIsHostageMap;
 }
 
+bool GameModeUsesC4(){
+	ConVar gameType = FindConVar("game_type");
+	ConVar gameMode = FindConVar("game_mode");
+	if(gameType.IntValue == 0){
+		return true;
+	} else if(gameType.IntValue == 1 && gameMode.IntValue == 1){
+		return true;
+	}
+	return false;
+}
+
 
 #include "Global/Overlay.sp"

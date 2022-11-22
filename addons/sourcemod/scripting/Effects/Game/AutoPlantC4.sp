@@ -50,6 +50,8 @@ public Action Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, boo
 public bool Chaos_AutoPlantC4_Conditions(){
     if(!ValidBombSpawns()) return false;
     if(isHostageMap()) return false;
+    if(!GameModeUsesC4()) return false;
+    
     if(g_iChaosRoundTime <= 16) return false; // prevent a bomb plant as soon as the round starts
     if(
         (g_PlantedSite != BOMBSITE_A) && (bombSiteB == INVALID_HANDLE) &&
