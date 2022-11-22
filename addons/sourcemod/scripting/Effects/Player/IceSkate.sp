@@ -6,9 +6,6 @@ public void Chaos_IceSkate(effect_data effect){
 bool IceSkate = false;
 bool ForceJumpSkate[MAXPLAYERS+1];
 
-//TODO: Re-apply effect when player respawns
-
-/* This is used when the effect is fired */
 public void Chaos_IceSkate_START(){
 	cvar("sv_airaccelerate", "2000");
 	LoopAlivePlayers(i){
@@ -27,6 +24,12 @@ public Action Chaos_IceSkate_RESET(bool HasTimerEnded){
 	IceSkate = false;
 }
 
+public void Chaos_IceSkate_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 2.0);
+	}	
+}
+
 public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(IceSkate){
 		ForceJumpSkate[client] = !ForceJumpSkate[client];
@@ -37,7 +40,6 @@ public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpu
 		}
 	}
 }
-
 
 public Action Chaos_IceSkate_OnGameFrame(){
 	if(!IceSkate) return;
@@ -63,8 +65,7 @@ public Action Chaos_IceSkate_OnGameFrame(){
 }
 
 
-public bool TRFilter_NoPlayers(int entity, int mask, any data)
-{
+public bool TRFilter_NoPlayers(int entity, int mask, any data){
 	//return (entity != view_as<int>(data) || (entity < 1 || entity > MaxClients));
 	return !(1 <= entity <= MaxClients);
 }

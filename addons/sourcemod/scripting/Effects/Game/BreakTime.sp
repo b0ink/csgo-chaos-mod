@@ -1,12 +1,11 @@
+bool BreakTime = false;
+
+
 public void Chaos_BreakTime(effect_data effect){
 	effect.Title = "Take a Break";
 	effect.Duration = 15;
 	effect.IncompatibleWith("Chaos_WKeyStuck");
 }
-
-
-bool BreakTime = false;
-//TODO: Re-apply effect when player respawns
 
 public void Chaos_BreakTime_START(){
 	BreakTime = true;
@@ -15,6 +14,13 @@ public void Chaos_BreakTime_START(){
 	LoopAlivePlayers(i){
 		FakeClientCommand(i, "use weapon_knife");
 	}
+}
+
+public void Chaos_BreakTime_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(!BreakTime) return;
+
+	HookBlockAllGuns(client);
+	FakeClientCommand(client, "use weapon_knife");
 }
 
 

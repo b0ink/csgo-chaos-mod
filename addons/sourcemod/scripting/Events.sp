@@ -9,18 +9,24 @@ public void HookMainEvents(){
 	HookEvent("player_spawn", 	Event_PlayerSpawn);
 }
 
-public Action Event_PlayerSpawn(Handle event, char[] name, bool dontBroadcast){
-	// LoopAllEffects(Chaos_EffectData_Buffer, index){
-	// 	Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerSpawn", Chaos_EffectData_Buffer.FunctionName);
-	// 	Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
-	// 	if(func != INVALID_FUNCTION){
-	// 		Call_StartFunction(GetMyHandle(), func);
-	// 		Call_PushCell(event); 
-	// 		Call_PushString(name);
-	// 		Call_PushCell(dontBroadcast);
-	// 		Call_Finish();
-	// 	}
-	// }
+public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+
+	int client = GetClientOfUserId(event.GetInt("userid"));
+
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
+		// if(Chaos_EffectData_Buffer.Timer == INVALID_HANDLE) continue; //effect is running
+
+		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerSpawn", Chaos_EffectData_Buffer.FunctionName);
+		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
+		if(func != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), func);
+			Call_PushCell(client); 
+			Call_PushCell(Chaos_EffectData_Buffer.Timer != INVALID_HANDLE); 
+			Call_Finish();
+		}
+	}
+	return Plugin_Continue;
 }
 
 

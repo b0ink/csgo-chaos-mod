@@ -1,5 +1,3 @@
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_BlindPlayers(effect_data effect){
 	effect.Title = "Blind";
 	effect.Duration = 7;
@@ -14,6 +12,12 @@ public void Chaos_BlindPlayers_START(){
 public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		PerformBlind(i, 0);
+	}
+}
+
+public void Chaos_BlindPlayers_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		PerformBlind(client, 255);
 	}
 }
 

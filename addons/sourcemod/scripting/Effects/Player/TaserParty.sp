@@ -2,8 +2,6 @@ public void Chaos_TaserParty(effect_data effect){
 	effect.Title = "Taser Party";
 	effect.Duration = 30;
 }
-//TODO: Re-apply effect when player respawns
-
 
 public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];
@@ -24,12 +22,9 @@ public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 }
 
 public void Chaos_TaserParty_START(){
-
 	LoopAlivePlayers(i){
 		SDKHook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
 	}
-
-
 	
 	g_bTaserRound = true;
 	cvar("mp_taser_recharge_time", "0.5");
@@ -40,8 +35,15 @@ public void Chaos_TaserParty_START(){
 	}
 }
 
+public void Chaos_TaserParty_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		SDKHook(client, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
+		GivePlayerItem(client, "weapon_taser");
+		FakeClientCommand(client, "use weapon_taser");
+	}
+}
+
 public Action Chaos_TaserParty_RESET(bool HasTimerEnded){
-	
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
 	}

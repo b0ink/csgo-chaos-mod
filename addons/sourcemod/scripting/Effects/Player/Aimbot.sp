@@ -1,5 +1,3 @@
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_Aimbot(effect_data effect){
 	effect.Title = "Aimbot";
 	effect.Duration = 30;
@@ -13,6 +11,8 @@ public void Chaos_Aimbot(effect_data effect){
 /****************************************************************************************************
 BOOLS.
 *****************************************************************************************************/
+bool AimbotEnabled = false;
+
 bool g_bAimbot[MAXPLAYERS + 1] = false;
 bool g_bFlashed[MAXPLAYERS + 1] = false;
 
@@ -45,6 +45,7 @@ public void Chaos_Aimbot_INIT(){
 }
 
 public void Chaos_Aimbot_START(){
+	AimbotEnabled = true;
 	LoopAlivePlayers(i){
 		Aimbot_SDKHOOKS(i);
 		ToggleAim(i, true);
@@ -52,13 +53,19 @@ public void Chaos_Aimbot_START(){
 }
 
 public Action Chaos_Aimbot_RESET(bool HasTimerEnded){
+	AimbotEnabled = false;
 	LoopValidPlayers(i){
 		Aimbot_REMOVE_SDKHOOKS(i);
 		ToggleAim(i, false);
 	}
 }
 
+public void Chaos_Aimbot_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(!AimbotEnabled) return;
 
+	Aimbot_SDKHOOKS(client);
+	ToggleAim(client, true);
+}
 
 public bool Chaos_Aimbot_Conditions(){
 	return true;

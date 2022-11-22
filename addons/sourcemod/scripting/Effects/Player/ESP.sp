@@ -1,5 +1,3 @@
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_ESP(effect_data effect){
     effect.Title = "Wall Hacks";
     effect.Duration = 30;
@@ -22,12 +20,19 @@ public void Chaos_ESP_INIT(){
 
 public void Chaos_ESP_START(){
 	cvar("sv_force_transmit_players", "1");
-	createGlows();
+	createAllGlows();
 }
 
 public void Chaos_ESP_RESET(bool HasTimerEnded){
 	ResetCvar("sv_force_transmit_players", "0", "1");
-	destroyGlows();
+	destroyAllGlows();
+}
+
+public void Chaos_ESP_OnPlayerSpawn(int client, bool EffectIsRunning){
+    if(EffectIsRunning){
+        RemoveSkin(client);
+        AddGlow(client);
+    }
 }
 
 int playerModels[MAXPLAYERS+1] = {INVALID_ENT_REFERENCE,...};
@@ -37,10 +42,9 @@ int playerModelsIndex[MAXPLAYERS+1] = {-1,...};
 #define EF_NOSHADOW                 (1 << 4)
 #define EF_NORECEIVESHADOW          (1 << 6)
 
-//TODO: use this for when players die/respawn?
 public void checkGlows(){
-	destroyGlows();
-	createGlows();
+	destroyAllGlows();
+	createAllGlows();
 }
 
 public void SetupGlow(int entity, int color[4]) {
@@ -77,29 +81,29 @@ public void RemoveSkin(int client) {
     playerModels[client] = INVALID_ENT_REFERENCE;
     playerModelsIndex[client] = -1;
 }
-public void destroyGlows() {
+public void destroyAllGlows() {
     LoopAlivePlayers(i){
         RemoveSkin(i);
     }
 }
-
-public void createGlows() {
-    char model[PLATFORM_MAX_PATH];
-    char attachment[PLATFORM_MAX_PATH];
-    int skin = -1;
+public void createAllGlows() {
     //Loop and setup a glow on alive players.
-    attachment = "primary";
     LoopAlivePlayers(client){
-        int team = GetClientTeam(client);
-        if(team <= 1) continue;
-        //Create Skin
-        GetClientModel(client, model, sizeof(model));
-        skin = CreatePlayerModelProp(client, model, attachment, true, 1.0);
-        if(skin > MaxClients) {
-            if(SDKHookEx(skin, SDKHook_SetTransmit, OnSetTransmit_All)) setGlowTeam(skin, team);
-        } 
+        AddGlow(client);
     }
+}
 
+void AddGlow(int client){
+    char model[PLATFORM_MAX_PATH];
+    int team = GetClientTeam(client);
+    if(team <= 1) return;
+    int skin = -1;
+    //Create Skin
+    GetClientModel(client, model, sizeof(model));
+    skin = CreatePlayerModelProp(client, model, "primary", true, 1.0);
+    if(skin > MaxClients) {
+        if(SDKHookEx(skin, SDKHook_SetTransmit, OnSetTransmit_All)) setGlowTeam(skin, team);
+    } 
 }
 
 public int CreatePlayerModelProp(int client, char[] sModel, char[] attachment, bool bonemerge, float scale) {

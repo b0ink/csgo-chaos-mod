@@ -3,10 +3,6 @@ public void Chaos_KnifeFight(effect_data effect){
 	effect.Duration = 30;
 }
 
-
-
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_KnifeFight_START(){
 	HookBlockAllGuns();
 
@@ -28,6 +24,12 @@ public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
 	}
 }
 
+public void Chaos_KnifeFight_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		HookBlockAllGuns(client);
+		FakeClientCommand(client, "use weapon_knife");
+	}
+}
 
 public Action Chaos_KnifeFight_Hook_WeaponSwitch(int client, int weapon){
 	return BlockAllGuns(client, weapon);	

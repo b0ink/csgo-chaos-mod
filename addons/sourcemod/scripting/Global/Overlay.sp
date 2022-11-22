@@ -6,9 +6,8 @@ void Overlay_INIT(){
 		ClearArray(Overlay_Que);
 	}
 	HookEvent("player_death", Overlay_Event_PlayerDeath);
+	HookEvent("player_spawn", Overlay_Event_PlayerSpawn);
 }
-
-//TODO: Re-apply effect when player respawns
 
 public Action Overlay_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
@@ -19,6 +18,14 @@ public Action Overlay_Event_PlayerDeath(Event event, const char[] name, bool don
 	}
 	return Plugin_Continue;
 }
+
+public Action Overlay_Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast){
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+	Update_Overlay();
+	return Plugin_Continue;
+}
+
+
 void Clear_Overlay_Que(){
 	if(Overlay_Que != INVALID_HANDLE){
 		ClearArray(Overlay_Que);

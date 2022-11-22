@@ -4,8 +4,6 @@ public void Chaos_MoonGravity(effect_data effect){
 	effect.AddAlias("LowGravity");
 }
 
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_MoonGravity_START(){
 	LoopAlivePlayers(i){
 		SetEntityGravity(i, 0.3);
@@ -18,7 +16,8 @@ public Action Chaos_MoonGravity_RESET(bool HasTimerEnded){
 	}
 }
 
-
-
-
-
+public void Chaos_MoonGravity_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		SetEntityGravity(client, 0.3);
+	}
+}

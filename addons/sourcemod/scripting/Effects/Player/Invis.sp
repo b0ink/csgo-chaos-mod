@@ -3,16 +3,12 @@ public void Chaos_Invis(effect_data effect){
 	effect.Duration = 30;
 }
 
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_Invis_START(){
-	int alpha = 50;
-
 	cvar("sv_disable_immunity_alpha", "1");
 
 	LoopAlivePlayers(client){
 		SetEntityRenderMode(client, RENDER_TRANSCOLOR);
-		SetEntityRenderColor(client, 255, 255, 255, alpha);
+		SetEntityRenderColor(client, 255, 255, 255, 50);
 	}
 }
 
@@ -21,5 +17,9 @@ public Action Chaos_Invis_RESET(bool HasTimerEnded){
 		SetEntityRenderMode(client , RENDER_NORMAL);
 		SetEntityRenderColor(client, 255, 255, 255, 255);
 	}
+}
 
+public void Chaos_Invis_OnPlayerSpawn(int client, bool EffectIsRunning){
+	SetEntityRenderMode(client, RENDER_TRANSCOLOR);
+	SetEntityRenderColor(client, 255, 255, 255, 50);
 }

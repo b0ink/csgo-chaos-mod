@@ -7,8 +7,6 @@ public void Chaos_LockPlayersAim(effect_data effect){
 	effect.AddAlias("Lock Mouse Movement");
 }
 
-//TODO: Re-apply effect when player respawns - re-save aim on spawn
-
 public void Chaos_LockPlayersAim_OnGameFrame(){
 	LoopAlivePlayers(i){
 		if(g_bLockPlayersAim_Active) TeleportEntity(i, NULL_VECTOR, g_LockPlayersAim_Angles[i], NULL_VECTOR);
@@ -21,6 +19,12 @@ public void Chaos_LockPlayersAim_START(){
 	}
 
 	g_bLockPlayersAim_Active  = true;
+}
+
+public void Chaos_LockPlayersAim_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		GetClientEyeAngles(client, g_LockPlayersAim_Angles[client]);
+	}
 }
 
 public Action Chaos_LockPlayersAim_RESET(bool HasTimerEnded){

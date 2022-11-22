@@ -165,11 +165,13 @@ enum struct effect_data{
 		Function func = GetFunctionByName(GetMyHandle(), function_name_reset);
 
 		if(func != INVALID_FUNCTION){
+			this.Timer = INVALID_HANDLE;
+			ChaosEffects.SetArray(this.ID, this);
+			
 			Call_StartFunction(GetMyHandle(), func);
 			Call_PushCell(HasTimerEnded);
 			Call_Finish();
-			this.Timer = INVALID_HANDLE;
-			ChaosEffects.SetArray(this.ID, this);
+		
 		}
 	}
 
@@ -233,7 +235,7 @@ enum struct effect_data{
 		char effectName[255];
 		for(int i = 0; i < GetArraySize(this.IncompatibleEffects); i++){
 			GetArrayString(this.IncompatibleEffects, i, effectName, sizeof(effectName));
-			if(IsEffectRunning(effectName)){
+			if(IsChaosEffectRunning(effectName)){
 				return false;
 			}
 		}
@@ -269,7 +271,7 @@ bool AreIncompatibleEffectsRunning(char[] effectName){
 	return true;
 }
 
-bool IsEffectRunning(char[] effectName){
+bool IsChaosEffectRunning(char[] effectName){
 	effect_data effect;
 	LoopAllEffects(effect, index){
 		if(effect.Timer != INVALID_HANDLE && StrEqual(effect.FunctionName, effectName, false)){

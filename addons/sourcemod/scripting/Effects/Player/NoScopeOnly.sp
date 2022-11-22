@@ -27,8 +27,6 @@ public Action Chaos_NoScopeOnly_Hook_OnPreThink(int client){
 	return Plugin_Continue;
 }
 
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_NoScopeOnly_START(){
 	
 	LoopAlivePlayers(i){
@@ -51,4 +49,10 @@ public Action Chaos_NoScopeOnly_RESET(bool HasTimerEnded){
 		SDKUnhook(i, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
 	}
 	g_bNoscopeOnly = false;
+}
+
+public void Chaos_NoScopeOnly_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		SDKHook(client, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
+	}
 }

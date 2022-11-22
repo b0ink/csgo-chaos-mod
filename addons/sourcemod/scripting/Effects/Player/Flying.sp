@@ -1,5 +1,3 @@
-//TODO: Re-apply effect when player respawns
-
 bool g_bActiveNoclip = false;
 public void Chaos_Flying(effect_data effect){
 	effect.Title = "Flying";
@@ -15,6 +13,18 @@ public void Chaos_Flying_START(){
 		SetEntityMoveType(i, MOVETYPE_NOCLIP);
 	}
 	cvar("sv_noclipspeed", "2");
+}
+
+public void Chaos_Flying_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		SDKHook(client, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
+		SDKHook(client, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);
+		CreateTimer(0.5, Timer_EnableFlying, client);
+	}
+}
+
+public Action Timer_EnableFlying(Handle timer, int client){
+	SetEntityMoveType(client, MOVETYPE_NOCLIP);
 }
 
 public Action Chaos_Flying_RESET(bool HasTimerEnded){

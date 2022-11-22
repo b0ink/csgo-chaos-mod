@@ -1,5 +1,3 @@
-//TODO: Re-apply effect when player respawns
-
 char chickenModel[] = "models/chicken/chicken.mdl";
 char playersModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
 
@@ -19,6 +17,18 @@ public Action Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
 		LoopAlivePlayers(i){
 			DisableChicken(i);
 		}
+	}
+}
+
+public void Chaos_ChickenPlayers_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		CreateTimer(0.5, Timer_SetChickenModel, client);
+	}
+}
+
+public Action Timer_SetChickenModel(Handle timer, int client){
+	if(IsValidClient(client) && IsPlayerAlive(client)){
+		SetChicken(client);
 	}
 }
 

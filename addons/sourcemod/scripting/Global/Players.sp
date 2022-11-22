@@ -53,9 +53,16 @@ public Action BlockAllGuns(int client, int weapon) {
  * If multiple effects use this, both will need to use UnhookBlockAllGuns() to releaes the lock.
  */
 //TODO: if you pick up a grenade you cant see your knife anymore
-public void HookBlockAllGuns(){
+void HookBlockAllGuns(int client = -1){
+	if(IsValidClient(client)){
+		SDKUnhook(client, SDKHook_WeaponSwitch, BlockAllGuns);
+		SDKHook(client, SDKHook_WeaponSwitch, BlockAllGuns);
+		return;
+	}
+	
 	BlockGun_EffectCount++;
-	LoopAlivePlayers(i){
+
+	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
 	}
 	LoopAlivePlayers(i){

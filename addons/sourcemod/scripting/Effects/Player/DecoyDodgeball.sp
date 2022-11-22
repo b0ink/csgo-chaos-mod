@@ -49,8 +49,6 @@ public void HookOnDecoySpawn(int iGrenade) {
 }
 
 
-//TODO: Re-apply effect when player respawns
-
 public void Chaos_DecoyDodgeball_START(){
 	
 	LoopAlivePlayers(i){
@@ -59,18 +57,29 @@ public void Chaos_DecoyDodgeball_START(){
 
 	g_bDecoyDodgeball = true;
 	LoopAlivePlayers(i){
+		SetDecoyDodgeball(i);
+	}
+	g_DecoyDodgeball_CheckDecoyTimer = CreateTimer(5.0, Timer_CheckDecoys, _, TIMER_REPEAT);
+
+}
+
+void SetDecoyDodgeball(int client){
 		StripPlayer(
-			.client=i,
+			.client=client,
 			.knife=true,
 			.keepBomb=true,
 			.stripGrenadesOnly=true
 		);
-		GivePlayerItem(i, "weapon_decoy");
-		FakeClientCommand(i, "use weapon_decoy");
-		SetEntityHealth(i, 1);	
-	}
-	g_DecoyDodgeball_CheckDecoyTimer = CreateTimer(5.0, Timer_CheckDecoys, _, TIMER_REPEAT);
+		GivePlayerItem(client, "weapon_decoy");
+		FakeClientCommand(client, "use weapon_decoy");
+		SetEntityHealth(client, 1);	
+}
 
+public void Chaos_DecoyDodgeball_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		SDKHook(client, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
+		SetDecoyDodgeball(client);
+	}
 }
 
 public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){

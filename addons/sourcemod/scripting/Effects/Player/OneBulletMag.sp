@@ -23,10 +23,6 @@ public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name
 		}
 	}
 }
-	//One bullet magazine handler
-
-
-//TODO: Re-apply effect when player respawns
 
 public void Chaos_OneBulletMag_START(){
 	LoopAlivePlayers(i){
@@ -36,6 +32,19 @@ public void Chaos_OneBulletMag_START(){
 		}
 	}
 	g_bOneBulletMag = true;
+}
+
+public void Chaos_OneBulletMag_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		CreateTimer(0.5, Timer_StripMags, client);
+	}
+}
+
+public Action Timer_StripMags(Handle timer, int client){
+	for (int j = 0; j < 2; j++){
+		int iTempWeapon = -1;
+		if ((iTempWeapon = GetPlayerWeaponSlot(client, j)) != -1) SetClip(iTempWeapon, 1, 1);
+	}
 }
 
 public Action Chaos_OneBulletMag_RESET(bool HasTimerEnded){
