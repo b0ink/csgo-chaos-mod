@@ -8,11 +8,20 @@ public void Chaos_GhostSlaps(effect_data effect){
 
 public void Chaos_GhostSlaps_START(){
 	Chaos_RandomSlap_Timer = CreateTimer(g_Chaos_RandomSlap_Interval, Timer_RandomSlap, _,TIMER_REPEAT);
+	LoopValidPlayers(client){
+		SDKHook(client,SDKHook_OnTakeDamage, GhostSlaps_OnTakeDamage);
+	}
+	cvar("sv_falldamage_scale", "0");
 }
 
 public Action Chaos_GhostSlaps_RESET(bool HasTimerEnded){
-		StopTimer(Chaos_RandomSlap_Timer);
-		// cvar("sv_falldamage_scale", "1");
+	StopTimer(Chaos_RandomSlap_Timer);
+	ResetCvar("sv_falldamage_scale", "1", "0");
+	if(HasTimerEnded){
+		LoopValidPlayers(client){
+			SDKUnhook(client,SDKHook_OnTakeDamage, GhostSlaps_OnTakeDamage);
+		}
+	}
 }
 
 float g_maxRange = 750.0;
@@ -33,3 +42,8 @@ Action Timer_RandomSlap(Handle timer){
 	}
 }
 
+
+public Action GhostSlaps_OnTakeDamage(int client, int &attacker, int &inflictor, float &damage, int &damagetype) {
+	if (damagetype & DMG_FALL) return Plugin_Handled;
+	return Plugin_Continue;
+}
