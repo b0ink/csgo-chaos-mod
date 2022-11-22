@@ -324,6 +324,10 @@
     {
         "en"    "No Crosshair"
     }
+    "Chaos_NoManualReload"
+    {
+        "en"    "No Manual Reload"
+    }
     "Chaos_NoRecoil"
     {
         "en"    "100% Weapon Accuracy"
@@ -343,6 +347,10 @@
     "Chaos_OHKO"
     {
         "en"    "1 HP"
+    }
+    "Chaos_OffsetCrosshair"
+    {
+        "en"    "Offset Crosshair"
     }
     "Chaos_OneBulletMag"
     {
@@ -456,6 +464,10 @@
     {
         "en"    "Shoot To Stay Awake"
     }
+    "Chaos_SlowFire"
+    {
+        "en"    "Slow Weapon Fire"
+    }
     "Chaos_SlowSpeed"
     {
         "en"    "0.5x movement speed"
@@ -527,17 +539,5 @@
     "Chaos_WKeyStuck"
     {
         "en"    "Help my W key is stuck"
-    }
-    "Chaos_NoManualReload"
-    {
-        "en"    "No Manual Reload"
-    }
-    "Chaos_SlowFire"
-    {
-        "en"    "Slow Weapon Fire"
-    }
-    "Chaos_OffsetCrosshair"
-    {
-        "en"    "Offset Crosshair"
     }
 }
