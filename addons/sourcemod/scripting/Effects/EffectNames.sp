@@ -83,6 +83,7 @@
 "Chaos_NormalWhiteFog",
 "Chaos_Nothing",
 "Chaos_OHKO",
+"Chaos_OffsetCrosshair",
 "Chaos_OneBulletMag",
 "Chaos_OneBulletOneGun",
 "Chaos_OneWeaponOnly",

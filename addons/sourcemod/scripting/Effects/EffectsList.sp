@@ -15,6 +15,7 @@
 #include "Effects/Game/Lag.sp"
 #include "Effects/Game/LightsOff.sp"
 #include "Effects/Game/LowRenderDistance.sp"
+#include "Effects/Game/OffsetCrosshair.sp"
 #include "Effects/Game/PigeonHole.sp"
 #include "Effects/Game/RandomSkybox.sp"
 #include "Effects/Game/RevealEnemyLocation.sp"
