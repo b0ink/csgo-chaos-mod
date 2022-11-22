@@ -111,6 +111,7 @@
 "Chaos_SimonSays",
 "Chaos_SlayRandomPlayer",
 "Chaos_SleepyShooter",
+"Chaos_SlowFire",
 "Chaos_SlowSpeed",
 "Chaos_SmokeStrat",
 "Chaos_SneakyBeaky",
