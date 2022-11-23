@@ -23,7 +23,20 @@ ConVar 	g_cvChaosEffectList_Position;
 float       g_ChaosEffectList_Position[2] = {0.01, 0.42};
 
 
+// Stock ConVars
+ConVar g_cvGameType;
+ConVar g_cvGameMode;
+
+// Third-party ConVars
+ConVar g_cvCustomDeathmatchEnabled;
+
+
 void CreateConVars(){
+	
+	g_cvGameType = FindConVar("game_type");
+	g_cvGameMode = FindConVar("game_mode");
+	g_cvCustomDeathmatchEnabled = FindConVar("dm_enabled");
+
 	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
 
 	g_cvChaosPrefix = 				CreateConVar("sm_chaos_prefix", "[{lime}CHAOS{default}]", "Sets the Prefix of Chaos chat messages such as effect spawns (Multicolors supported)");

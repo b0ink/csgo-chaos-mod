@@ -337,11 +337,15 @@ bool isHostageMap(){
 }
 
 bool GameModeUsesC4(){
-	ConVar gameType = FindConVar("game_type");
-	ConVar gameMode = FindConVar("game_mode");
-	if(gameType.IntValue == 0){
+	if(g_cvCustomDeathmatchEnabled != null){
+		if(g_cvCustomDeathmatchEnabled.BoolValue){
+			return false;
+		}
+	}
+
+	if(g_cvGameType.IntValue == 0){
 		return true;
-	} else if(gameType.IntValue == 1 && gameMode.IntValue == 1){
+	} else if(g_cvGameType.IntValue == 1 && g_cvGameMode.IntValue == 1){
 		return true;
 	}
 	return false;
