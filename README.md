@@ -16,8 +16,8 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 </p>
 
 
-# Twitch Voting
-A very early alpha release is now available on the [CS:GO Chaos Mod Twitch Overlay Releases](https://github.com/b0ink/csgo-chaos-mod-twitch/releases). I plan to open source the project once the app is refined and cleaned up.
+# Twitch & YouTube Chat Voting
+A very early alpha release is now available on the [CS:GO Chaos Mod Voting Overlay Repo](https://github.com/b0ink/csgo-chaos-mod-twitch/releases). I plan to open source the project once the app is refined and cleaned up.
 
 Basic instructions are also available in the [README.md](https://github.com/b0ink/csgo-chaos-mod-twitch)
 
