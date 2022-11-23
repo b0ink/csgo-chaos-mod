@@ -30,12 +30,16 @@ ConVar g_cvGameMode;
 // Third-party ConVars
 ConVar g_cvCustomDeathmatchEnabled;
 
+// Called at OnAllPluginsLoaded
+void FindThirdPartyConVars(){
+	g_cvCustomDeathmatchEnabled = FindConVar("dm_enabled");
+}
+
 
 void CreateConVars(){
 	
 	g_cvGameType = FindConVar("game_type");
 	g_cvGameMode = FindConVar("game_mode");
-	g_cvCustomDeathmatchEnabled = FindConVar("dm_enabled");
 
 	CreateConVar("csgo_chaos_mod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_SPONLY | FCVAR_DONTRECORD | FCVAR_NOTIFY);
 

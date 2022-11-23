@@ -433,6 +433,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 }
 
 public void OnAllPluginsLoaded(){
+	FindThirdPartyConVars();
 	g_bDynamicChannelsEnabled = LibraryExists("DynamicChannels");
 	if(!g_bDynamicChannelsEnabled){
 		Log("Could not find plugin 'DynamicChannels.smx'. To enable HUD text for Chaos effects and timers, install the 'DynamicChannels.smx' plugin from https://github.com/Vauff/DynamicChannels");
