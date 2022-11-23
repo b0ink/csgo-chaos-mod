@@ -94,11 +94,6 @@ public void OnConfigsExecuted(){
 		warnings++;
 		Log("No valid bomb spawns were found for %s. Certain C4 effects will not run.", mapName);
 	}
-	if(warnings == 0){
-		Log("-------------------------------------NONE--------------------------------------");
-	}else{
-		Log("-------------------------------------------------------------------------------");
-	}
 	StopTimer(g_AutoCoord_Timer);
 
 	if(!ValidMapPoints()){

@@ -377,7 +377,7 @@ public void OnMapStart(){
 	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
 	GetCurrentMap(mapName, sizeof(mapName));
-	Log("New Map/Plugin Restart - Map: %s", mapName);
+	// Log("New Map/Plugin Restart - Map: %s", mapName);
 	
 	PrecacheSound(SOUND_BELL);
 	PrecacheSound(SOUND_COUNTDOWN);

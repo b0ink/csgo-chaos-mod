@@ -88,7 +88,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 	SetRandomSeed(GetTime());
 
-	Log("---ROUND STARTED---");
+	// Log("---ROUND STARTED---");
 
 	g_bCanSpawnEffect = true;
 	
@@ -128,7 +128,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	
 	ClearFog();
 	
-	Log("--ROUND ENDED--");
+	// Log("--ROUND ENDED--");
 	ResetChaos();
 	g_bCanSpawnEffect = false;
 
