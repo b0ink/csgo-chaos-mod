@@ -25,8 +25,9 @@ The app generates 4 random effects for your Twitch chat to choose from, the high
 A voting panel will pop up that can be keyed out with a green screen using OBS. Users can type a number in chat that will add to the count in the effect list.
 
 <p align="center">
-	<img src="https://csgochaosmod.com/gallery/twitch-overlay/Setup_3.PNG" 	width="250" title="Setup">
-	<img src="https://csgochaosmod.com/gallery/twitch-overlay/Voting_3.PNG" width="250" title="Voting">
+	<img src="https://csgochaosmod.com/gallery/twitch-overlay/App_1.PNG" 	width="250" title="Twitch Setup">
+	<img src="https://csgochaosmod.com/gallery/twitch-overlay/App_2.PNG" 	width="250" title="YouTube Setup">
+	<img src="https://csgochaosmod.com/gallery/twitch-overlay/Voting_3.PNG" width="250" title="Voting Panel">
 </p>
 <br>
 
@@ -68,6 +69,9 @@ More information about the Chaos config can be found here.
 - Sets whether the Chaos plugin is enabled.\
 Setting it to `1.0` will activate the interval timer and run an effect
 
+`sm_chaos_prefix` | `Default. "[{lime}CHAOS{default}]"`
+- Sets the Prefix of Chaos chat messages such as effect spawns (Multicolors supported).
+
 `sm_chaos_interval` | `Default. 30` | `Min. 5` | `Max. 60`
 - Sets how often (in seconds) a new effect will spawn
 
@@ -84,6 +88,18 @@ Set to `0.0` for infinite duration (Effect lasts the entire round).
 - Sets whether the chaos plugin can communicate with the Twitch Overlay app to allow voting for effects.\
 If set to `0`, effects will be spawned at random.\
 If set to `1`, 3 random effects will be displayed in the Twitch Overlay app and will spawn the most voted effect. (1 of the 3 effects will be spawned if there are no votes). 
+
+`sm_chaos_effect_timer_color` | `Default. "220 0 220 0"`
+- Set the RGBA values of the Effect Timer countdown. (Default is purple)
+
+`sm_chaos_effect_list_color` | `Default. "37 186 255 0"`
+- Set the RGBA values of the Effect List on the side. (Default is blue)
+
+`sm_chaos_effect_timer_position` | `Default. "-1 0.06"`
+- Sets the xy position of the effect timer. Ranges from 0 and 1. -1 is center.
+
+`sm_chaos_effect_list_position` | `Default. "0.01 0.42"`
+- Sets the xy position of the effect list. Ranges from 0 and 1. -1 is center.
 
 Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`, or alternatively through the `!chaos->Settings` menu, which will automatically updating the ConVar config.
 
