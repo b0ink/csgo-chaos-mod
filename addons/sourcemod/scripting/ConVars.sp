@@ -52,8 +52,8 @@ void CreateConVars(){
 	
 	g_cvChaosTwitchEnabled = 		CreateConVar("sm_chaos_twitch_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
 
-	g_cvChaosEffectTimer_Color = 	CreateConVar("sm_chaos_effect_timer_color", "220 0 220 0", "Set the RGB values of the Effect Timer countdown. (Default is purple)", _, false, 0.0, false, 1.0);
-	g_cvChaosEffectList_Color = 	CreateConVar("sm_chaos_effect_list_color", "220 0 220 0", "Set the RGB values of the Effect List on the side. (Default is blue)", _, false, 0.0, false, 1.0);
+	g_cvChaosEffectTimer_Color = 	CreateConVar("sm_chaos_effect_timer_color", "220 0 220 0", "Set the RGBA values of the Effect Timer countdown. (Default is purple)", _, false, 0.0, false, 1.0);
+	g_cvChaosEffectList_Color = 	CreateConVar("sm_chaos_effect_list_color", "37 186 255 0", "Set the RGBA values of the Effect List on the side. (Default is blue)", _, false, 0.0, false, 1.0);
 	g_cvChaosEffectTimer_Position = CreateConVar("sm_chaos_effect_timer_position", "-1 0.06", "Sets the xy position of the effect timer. Ranges from 0 and 1. -1 is center.");
 	g_cvChaosEffectList_Position = 	CreateConVar("sm_chaos_effect_list_position", "0.01 0.42", "Sets the xy position of the effect list. Ranges from 0 and 1. -1 is center.");
 
