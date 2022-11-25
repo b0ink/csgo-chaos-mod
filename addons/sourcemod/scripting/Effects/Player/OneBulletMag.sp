@@ -1,5 +1,4 @@
-//weapon fire
-bool g_bOneBulletMag = false;
+bool OneBulletMag = false;
 int g_iOffset_Clip1 = -1;
 
 public void Chaos_OneBulletMag(effect_data effect){
@@ -12,26 +11,27 @@ public void Chaos_OneBulletMag_INIT(){
 	HookEvent("weapon_fire", 		Chaos_OneBulletMag_Event_OnWeaponFire);
 }
 
+void SetClipsTo1(int client){
+	for (int j = 0; j < 2; j++){
+		int iTempWeapon = -1;
+		if ((iTempWeapon = GetPlayerWeaponSlot(client, j)) != -1) SetClip(iTempWeapon, 1, 1);
+	}
+}
+
 public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	if(g_bOneBulletMag){
+	if(OneBulletMag){
 		if(ValidAndAlive(client)){
-			for (int j = 0; j < 2; j++){
-				int iTempWeapon = -1;
-				if ((iTempWeapon = GetPlayerWeaponSlot(client, j)) != -1) SetClip(iTempWeapon, 1, 1);
-			}
+			SetClipsTo1(client);
 		}
 	}
 }
 
 public void Chaos_OneBulletMag_START(){
 	LoopAlivePlayers(i){
-		for (int j = 0; j < 2; j++){
-			int iTempWeapon = -1;
-			if ((iTempWeapon = GetPlayerWeaponSlot(i, j)) != -1) SetClip(iTempWeapon, 1, 1);
-		}
+		SetClipsTo1(i);
 	}
-	g_bOneBulletMag = true;
+	OneBulletMag = true;
 }
 
 public void Chaos_OneBulletMag_OnPlayerSpawn(int client, bool EffectIsRunning){
@@ -41,14 +41,12 @@ public void Chaos_OneBulletMag_OnPlayerSpawn(int client, bool EffectIsRunning){
 }
 
 public Action Timer_StripMags(Handle timer, int client){
-	for (int j = 0; j < 2; j++){
-		int iTempWeapon = -1;
-		if ((iTempWeapon = GetPlayerWeaponSlot(client, j)) != -1) SetClip(iTempWeapon, 1, 1);
-	}
+	if(!ValidAndAlive(client)) return;
+	SetClipsTo1(client);
 }
 
 public Action Chaos_OneBulletMag_RESET(bool HasTimerEnded){
-	g_bOneBulletMag = false;
+	OneBulletMag = false;
 	if(HasTimerEnded){ //don't need to do this if the round has ended, especially if the event didnt even happen
 		char currentWeapon[64];
 		LoopAlivePlayers(i){
