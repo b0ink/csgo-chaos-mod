@@ -15,19 +15,40 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
 
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		// if(Chaos_EffectData_Buffer.Timer == INVALID_HANDLE) continue; //effect is running
-
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerSpawn", Chaos_EffectData_Buffer.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_PushCell(client); 
-			Call_PushCell(Chaos_EffectData_Buffer.Timer != INVALID_HANDLE); 
-			Call_Finish();
+			// Delay function to ensure play has fully spawned
+
+			DataPack data = new DataPack();
+			data.WriteFunction(func);
+			data.WriteCell(client);
+			data.WriteCell(Chaos_EffectData_Buffer.Timer != INVALID_HANDLE);
+
+			CreateTimer(0.2, Timer_TriggerOnPlayerSpawn, data);
 		}
 	}
+	
 	return Plugin_Continue;
 }
+
+public Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
+	data.Reset();
+
+	Function func = data.ReadFunction();
+	int client = data.ReadCell();
+	bool isEffectRunning = data.ReadCell();
+
+	if(ValidAndAlive(client)){
+		Call_StartFunction(GetMyHandle(), func);
+		Call_PushCell(client); 
+		Call_PushCell(isEffectRunning); 
+		Call_Finish();
+	}
+
+	CloseHandle(data);
+}
+
 
 
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
