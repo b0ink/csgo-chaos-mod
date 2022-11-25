@@ -35,4 +35,5 @@ public Action Timer_SpawnMolotov(Handle timer){
 		DispatchSpawn(ent);
 		AcceptEntityInput(ent, "InitializeSpawnFromWorld"); 
 	}
+	return Plugin_Continue;
 }
