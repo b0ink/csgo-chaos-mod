@@ -130,4 +130,5 @@
 "Chaos_Thunderstorm",
 "Chaos_Turrets",
 "Chaos_VampireHeal",
+"Chaos_WeaponKnockback",
 "Chaos_WKeyStuck",

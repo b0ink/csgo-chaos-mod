@@ -299,7 +299,6 @@ public Action Effect_Reset(Handle timer, int effect_id){
 
 // Shared by multiple effects
 #include "Global/InstantWeaponSwitch.sp"
-#include "Global/WeaponJump.sp"
 #include "Global/Fog.sp"
 #include "Global/ColorCorrection.sp"
 #include "Global/Weather.sp"
@@ -457,7 +456,6 @@ public void OnClientPutInServer(int client){
 	HideTimer[client] = false;
 	HideEffectList[client] = false;
 	HideAnnouncement[client] = false;
-	WeaponJumpConnect_Handler(client);
 
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
@@ -465,7 +463,6 @@ public void OnClientPutInServer(int client){
 
 public void OnClientDisconnect(int client){
 	ToggleAim(client, false);
-	WeaponJumpDisconnect_Handler(client);
 }
 
 public Action Timer_CreateHostage(Handle timer){

@@ -129,5 +129,5 @@
 #include "Effects/Player/TeammateSwap.sp"
 #include "Effects/Player/TeleportFewMetres.sp"
 #include "Effects/Player/Thirdperson.sp"
+#include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/VampireHeal.sp"
-#include "Effects/Player/WKeyStuck.sp"

@@ -351,5 +351,33 @@ bool GameModeUsesC4(){
 	return false;
 }
 
+/**
+ * Knockback the player.
+ * 
+ * @param client     Client you want to knockback.
+ * @param amount     Amount of knockback force. Negative force will have an opposite knockback (push the player forward)
+ */
+void DoKnockback(int client, float amount){
+	if(!ValidAndAlive(client)) return;
+
+	float vPlayerVelocity[3];
+	float vPlayerEyeAngles[3];
+	float vPlayerForward[3];
+
+	// Get the player velocity
+	GetEntPropVector(client, Prop_Data, "m_vecVelocity", vPlayerVelocity);
+
+	// Get the player forward direction
+	GetClientEyeAngles(client, vPlayerEyeAngles);
+	GetAngleVectors(vPlayerEyeAngles, vPlayerForward, NULL_VECTOR, NULL_VECTOR);
+
+	// Compute the player weapon jump velocity
+	vPlayerVelocity[0] -= vPlayerForward[0] * amount;
+	vPlayerVelocity[1] -= vPlayerForward[1] * amount;
+	vPlayerVelocity[2] -= vPlayerForward[2] * amount;
+	vPlayerVelocity[2] += 100.0;
+	// Set the player weapon jump
+	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vPlayerVelocity);
+}
 
 #include "Global/Overlay.sp"

@@ -14,7 +14,6 @@ char g_OBOG_WeaponName[32];
 public void Chaos_OneBulletOneGun_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 	event.GetString("weapon", g_OBOG_WeaponName, sizeof(g_OBOG_WeaponName));
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	weaponJump(client, g_OBOG_WeaponName);
 
 	if(OneBulletOneGun){
 		if(StrContains(g_OBOG_WeaponName, "weapon_knife") == -1){
