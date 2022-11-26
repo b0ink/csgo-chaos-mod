@@ -540,4 +540,12 @@
     {
         "en"    "Help my W key is stuck"
     }
+    "Chaos_NoViewmodel"
+    {
+        "en"    "No Viewmodel"
+    }
+    "Chaos_GiveRandomGrenade"
+    {
+        "en"    "Give Random Grenade"
+    }
 }
