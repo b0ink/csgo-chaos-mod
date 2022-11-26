@@ -5,6 +5,7 @@
 "Chaos_Bankrupt",
 "Chaos_BigChooks",
 "Chaos_Binoculars",
+"Chaos_BlackBars",
 "Chaos_BlackWhite",
 "Chaos_BlindPlayers",
 "Chaos_BreakTime",

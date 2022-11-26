@@ -1,4 +1,5 @@
 #include "Effects/Game/AutoPlantC4.sp"
+#include "Effects/Game/BlackBars.sp"
 #include "Effects/Game/BlackWhite.sp"
 #include "Effects/Game/BreakTime.sp"
 #include "Effects/Game/BuyAnywhere.sp"

@@ -548,4 +548,8 @@
     {
         "en"    "Give Random Grenade"
     }
+    "Chaos_BlackBars"
+    {
+        "en"    "Black Bars"
+    }
 }
