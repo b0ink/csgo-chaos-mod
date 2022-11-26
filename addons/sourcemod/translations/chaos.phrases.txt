@@ -36,6 +36,10 @@
     {
         "en"    "Binoculars"
     }
+    "Chaos_BlackBars"
+    {
+        "en"    "Black Bars"
+    }
     "Chaos_BlackWhite"
     {
         "en"    "Black & White"
@@ -179,6 +183,10 @@
     "Chaos_Give100HP"
     {
         "en"    "Give all players +100 HP"
+    }
+    "Chaos_GiveRandomGrenade"
+    {
+        "en"    "Give Random Grenade"
     }
     "Chaos_HeadshotOnly"
     {
@@ -335,6 +343,10 @@
     "Chaos_NoScopeOnly"
     {
         "en"    "No Scopes Only"
+    }
+    "Chaos_NoViewmodel"
+    {
+        "en"    "No Viewmodel"
     }
     "Chaos_NormalWhiteFog"
     {
@@ -539,18 +551,6 @@
     "Chaos_WKeyStuck"
     {
         "en"    "Help my W key is stuck"
-    }
-    "Chaos_NoViewmodel"
-    {
-        "en"    "No Viewmodel"
-    }
-    "Chaos_GiveRandomGrenade"
-    {
-        "en"    "Give Random Grenade"
-    }
-    "Chaos_BlackBars"
-    {
-        "en"    "Black Bars"
     }
     "Chaos_WeaponKnockback"
     {
