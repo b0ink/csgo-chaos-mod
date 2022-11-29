@@ -16,6 +16,7 @@
 "Chaos_Chatterbox",
 "Chaos_ChickenPlayers",
 "Chaos_CrabPeople",
+"Chaos_DamageBar",
 "Chaos_DecoyDodgeball",
 "Chaos_DeepFried",
 "Chaos_DisableForwardBack",
