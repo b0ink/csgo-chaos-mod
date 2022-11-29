@@ -133,6 +133,7 @@
 "Chaos_TeleportFewMetres",
 "Chaos_Thirdperson",
 "Chaos_Thunderstorm",
+"Chaos_Tilted",
 "Chaos_Turrets",
 "Chaos_VampireHeal",
 "Chaos_WKeyStuck",
