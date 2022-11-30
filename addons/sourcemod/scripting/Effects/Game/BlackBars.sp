@@ -25,5 +25,6 @@ public Action Chaos_BlackBars_RESET(bool EndChaos){
 }
 
 public bool Chaos_BlackBars_Conditions(){
+	if(!CanRunOverlayEffect()) return false;
 	return blackBarsMaterials;
 }

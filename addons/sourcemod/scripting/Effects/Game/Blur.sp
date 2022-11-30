@@ -25,5 +25,6 @@ public Action Chaos_Blur_RESET(bool EndChaos){
 }
 
 public bool Chaos_Blur_Conditions(){
+	if(!CanRunOverlayEffect()) return false;
 	return blurMaterials;
 }

@@ -64,3 +64,10 @@ void Update_Overlay(){
 		ClientCommand(i, "r_screenoverlay \"%s\"", path);
 	}
 }
+
+bool CanRunOverlayEffect(){
+	if(GetArraySize(Overlay_Que) > 0){
+		return false;
+	}
+	return true;
+}

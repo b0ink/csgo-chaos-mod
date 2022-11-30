@@ -26,5 +26,6 @@ public Action Chaos_ExtremeBlur_RESET(bool EndChaos){
 }
 
 public bool Chaos_ExtremeBlur_Conditions(){
+	if(!CanRunOverlayEffect()) return false;
 	return extremeBlurMaterials;
 }

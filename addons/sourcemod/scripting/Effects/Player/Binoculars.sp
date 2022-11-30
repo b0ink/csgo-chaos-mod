@@ -44,5 +44,6 @@ public void Chaos_Binoculars_OnPlayerSpawn(int client, bool EffectIsRunning){
 }
 
 public bool Chaos_Binoculars_Conditions(){
+	if(!CanRunOverlayEffect()) return false;
 	return binocularsMaterials;
 }
