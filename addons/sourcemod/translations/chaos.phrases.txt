@@ -556,4 +556,20 @@
     {
         "en"    "Weapon Knockback"
     }
+    "Chaos_Blur"
+    {
+        "en"    "Blur"
+    }
+    "Chaos_ExtremeBlur"
+    {
+        "en"    "Extreme Blur"
+    }
+    "Chaos_NoHeads"
+    {
+        "en"    "No Heads"
+    }
+    "Chaos_BigHeads"
+    {
+        "en"    "Big Heads"
+    }
 }
