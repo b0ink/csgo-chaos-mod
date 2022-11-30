@@ -8,11 +8,15 @@ char originalNoHeadModels[MAXPLAYERS+1][PLATFORM_MAX_PATH];
 char NoHead_T_Path[PLATFORM_MAX_PATH] = "models/player/custom_player/legacy/tm_leet_variantk_nohead.mdl";
 char NoHead_CT_Path[PLATFORM_MAX_PATH] = "models/player/custom_player/legacy/ctm_st6_nohead.mdl";
 
-public void Chaos_NoHeads_INIT(){
+bool noHeadsMaterials = true;
+
+public void Chaos_NoHeads_OnMapStart(){
 	PrecacheModel(NoHead_T_Path, true);
 	PrecacheModel(NoHead_CT_Path, true);
 	AddFileToDownloadsTable(NoHead_CT_Path);
 	AddFileToDownloadsTable(NoHead_T_Path);
+	if(!FileExists(NoHead_T_Path)) noHeadsMaterials = false;
+	if(!FileExists(NoHead_CT_Path)) noHeadsMaterials = false;
 }
 public void Chaos_NoHeads_START(){
 	LoopAlivePlayers(i){
@@ -50,7 +54,5 @@ public void Chaos_NoHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
 }
 
 public bool Chaos_NoHeads_Conditions(){
-	if(!FileExists(NoHead_T_Path)) return false;
-	if(!FileExists(NoHead_CT_Path)) return false;
-	return true;
+	return noHeadsMaterials;
 }

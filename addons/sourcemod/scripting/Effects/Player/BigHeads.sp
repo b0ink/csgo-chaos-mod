@@ -8,11 +8,16 @@ char originalBigHeadModels[MAXPLAYERS+1][PLATFORM_MAX_PATH];
 char BigHead_T_Path[PLATFORM_MAX_PATH] =   "models/player/custom_player/eminem/big_head/tm_phoenix.mdl";
 char BigHead_CT_Path[PLATFORM_MAX_PATH] =  "models/player/custom_player/eminem/big_head/ctm_sas.mdl";
 
-public void Chaos_BigHeads_INIT(){
+bool bigHeadsMaterials = true;
+
+public void Chaos_BigHeads_OnMapStart(){
 	PrecacheModel(BigHead_T_Path, true);
 	PrecacheModel(BigHead_CT_Path, true);
 	AddFileToDownloadsTable(BigHead_CT_Path);
 	AddFileToDownloadsTable(BigHead_T_Path);
+	
+	if(!FileExists(BigHead_T_Path)) bigHeadsMaterials = false;
+	if(!FileExists(BigHead_CT_Path)) bigHeadsMaterials = false;
 }
 public void Chaos_BigHeads_START(){
 	LoopAlivePlayers(i){
@@ -50,7 +55,5 @@ public void Chaos_BigHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
 }
 
 public bool Chaos_BigHeads_Conditions(){
-	if(!FileExists(BigHead_T_Path)) return false;
-	if(!FileExists(BigHead_CT_Path)) return false;
-	return true;
+	return bigHeadsMaterials;
 }
