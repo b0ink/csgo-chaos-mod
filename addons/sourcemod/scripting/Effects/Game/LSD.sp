@@ -3,12 +3,21 @@ public void Chaos_LSD(effect_data effect){
 	effect.Duration = 30;
 }
 
+bool lsdMaterials = true;
+
 public void Chaos_LSD_OnMapStart(){
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_1.raw");
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_2.raw");
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_3.raw");
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_4.raw");
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_5.raw");
+
+	if(!FileExists("materials/Chaos/ColorCorrection/env_1.raw")) lsdMaterials = false;
+	if(!FileExists("materials/Chaos/ColorCorrection/env_2.raw")) lsdMaterials = false;
+	if(!FileExists("materials/Chaos/ColorCorrection/env_3.raw")) lsdMaterials = false;
+	if(!FileExists("materials/Chaos/ColorCorrection/env_4.raw")) lsdMaterials = false;
+	if(!FileExists("materials/Chaos/ColorCorrection/env_5.raw")) lsdMaterials = false;
+
 }
 
 Handle g_LSD_Timer_Repeat = INVALID_HANDLE;
@@ -54,4 +63,8 @@ public Action Timer_SpawnNewLSD(Handle Timer){
 		if(test == 5) CREATE_CC("env_5");
 		g_LSD_Timer_Repeat = CreateTimer(5.0, Timer_SpawnNewLSD);
 	}
+}
+
+public bool Chaos_LSD_Conditions(){
+	return lsdMaterials;
 }

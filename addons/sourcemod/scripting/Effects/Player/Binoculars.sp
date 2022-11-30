@@ -3,12 +3,18 @@ public void Chaos_Binoculars(effect_data effect){
 	effect.Duration = 30;
 }
 
+bool binocularsMaterials = true;
+
 public void Chaos_Binoculars_OnMapStart(){
 	PrecacheDecal("Chaos/binoculars.vmt", true);
 	PrecacheDecal("Chaos/binoculars.vtf", true);
 	AddFileToDownloadsTable("materials/Chaos/binoculars.vtf");
 	AddFileToDownloadsTable("materials/Chaos/binoculars.vmt");
+	
+	if(!FileExists("materials/Chaos/binoculars.vtf")) binocularsMaterials = false;
+	if(!FileExists("materials/Chaos/binoculars.vmt")) binocularsMaterials = false;
 }
+
 int binocularsFOV;
 
 public void Chaos_Binoculars_START(){
@@ -35,4 +41,8 @@ public void Chaos_Binoculars_OnPlayerSpawn(int client, bool EffectIsRunning){
 		SetEntProp(client, Prop_Send, "m_iFOV", binocularsFOV);
 		SetEntProp(client, Prop_Send, "m_iDefaultFOV", binocularsFOV);
 	}
+}
+
+public bool Chaos_Binoculars_Conditions(){
+	return binocularsMaterials;
 }

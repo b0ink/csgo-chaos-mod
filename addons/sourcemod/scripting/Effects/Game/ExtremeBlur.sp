@@ -8,9 +8,13 @@ public void Chaos_ExtremeBlur(effect_data effect){
 	effect.Duration = 30;
 }
 
+bool extremeBlurMaterials = true;
+
 public void Chaos_ExtremeBlur_OnMapStart(){
 	PrecacheDecal("Chaos/Blur_3.vmt", true);
 	AddFileToDownloadsTable("materials/Chaos/Blur_3.vmt");
+
+	if(!FileExists("materials/Chaos/Blur_3.vmt")) extremeBlurMaterials = false;
 }
 
 public void Chaos_ExtremeBlur_START(){
@@ -19,4 +23,8 @@ public void Chaos_ExtremeBlur_START(){
 
 public Action Chaos_ExtremeBlur_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/Blur_3.vmt");
+}
+
+public bool Chaos_ExtremeBlur_Conditions(){
+	return extremeBlurMaterials;
 }

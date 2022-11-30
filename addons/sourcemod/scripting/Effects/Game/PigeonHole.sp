@@ -4,44 +4,23 @@ public void Chaos_PigeonHole(effect_data effect){
 	effect.IncompatibleWith("Chaos_Binoculars");
 }
 
-/*
-	Runs on the OnMapStart function. Use this to precache any models or textures.
-*/
+bool pigeonholeMaterials = true;
+
 public void Chaos_PigeonHole_OnMapStart(){
-	PrecacheDecal("Chaos/PigeonHole/pg_1.vmt", true);
-	PrecacheDecal("Chaos/PigeonHole/pg_1.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_1.vtf");
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_1.vmt");
-
-	PrecacheDecal("Chaos/PigeonHole/pg_2.vmt", true);
-	PrecacheDecal("Chaos/PigeonHole/pg_2.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_2.vtf");
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_2.vmt");
-
-	PrecacheDecal("Chaos/PigeonHole/pg_3.vmt", true);
-	PrecacheDecal("Chaos/PigeonHole/pg_3.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_3.vtf");
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_3.vmt");
-
-	PrecacheDecal("Chaos/PigeonHole/pg_4.vmt", true);
-	PrecacheDecal("Chaos/PigeonHole/pg_4.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_4.vtf");
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_4.vmt");
-
-	PrecacheDecal("Chaos/PigeonHole/pg_5.vmt", true);
-	PrecacheDecal("Chaos/PigeonHole/pg_5.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_5.vtf");
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_5.vmt");
-
-	PrecacheDecal("Chaos/PigeonHole/pg_6.vmt", true);
-	PrecacheDecal("Chaos/PigeonHole/pg_6.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_6.vtf");
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_6.vmt");
-
-	PrecacheDecal("Chaos/PigeonHole/pg_7.vmt", true);
-	PrecacheDecal("Chaos/PigeonHole/pg_7.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_7.vtf");
-	AddFileToDownloadsTable("materials/Chaos/PigeonHole/pg_7.vmt");
+	char pathname[PLATFORM_MAX_PATH];
+	// Precache and download pg_1 - pg_7 both .vtf and .vmt
+	for(int i = 1; i <= 7; i++){
+		Format(pathname, sizeof(pathname), "Chaos/PigeonHole/pg_%i.vmt", i);
+		PrecacheDecal(pathname, true);
+		Format(pathname, sizeof(pathname), "Chaos/PigeonHole/pg_%i.vtf", i);
+		PrecacheDecal(pathname, true);
+		Format(pathname, sizeof(pathname), "materials/Chaos/PigeonHole/pg_%i.vtf", i);
+		if(!FileExists(pathname)) pigeonholeMaterials = false;
+		AddFileToDownloadsTable(pathname);
+		Format(pathname, sizeof(pathname), "materials/Chaos/PigeonHole/pg_%i.vmt", i);
+		if(!FileExists(pathname)) pigeonholeMaterials = false;
+		AddFileToDownloadsTable(pathname);
+	}
 }
 
 char lastPigeonHole[PLATFORM_MAX_PATH];
@@ -76,5 +55,5 @@ public Action Chaos_PigeonHole_RESET(bool EndChaos){
 }
 
 public bool Chaos_PigeonHole_Conditions(){
-	return true;
+	return pigeonholeMaterials;
 }
