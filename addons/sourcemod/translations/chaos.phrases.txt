@@ -572,4 +572,8 @@
     {
         "en"    "Big Heads"
     }
+    "Chaos_HighMouseSens"
+    {
+        "en"    "High Mouse Sens"
+    }
 }
