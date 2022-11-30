@@ -139,4 +139,5 @@
 "Chaos_VampireHeal",
 "Chaos_WKeyStuck",
 "Chaos_WeaponKnockback",
-"Chaos_NoHeads"
+"Chaos_NoHeads",
+"Chaos_BigHeads"

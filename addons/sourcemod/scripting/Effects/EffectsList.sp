@@ -140,3 +140,4 @@
 #include "Effects/Player/WKeyStuck.sp"
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/NoHeads.sp"
+#include "Effects/Player/BigHeads.sp"
