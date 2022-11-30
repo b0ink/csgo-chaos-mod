@@ -4,6 +4,7 @@
 "Chaos_Autobhop",
 "Chaos_Bankrupt",
 "Chaos_BigChooks",
+"Chaos_BigHeads",
 "Chaos_Binoculars",
 "Chaos_BlackBars",
 "Chaos_BlackWhite",
@@ -82,6 +83,7 @@
 "Chaos_MoonGravity",
 "Chaos_NightVision",
 "Chaos_NoCrosshair",
+"Chaos_NoHeads",
 "Chaos_NoManualReload",
 "Chaos_NoRecoil",
 "Chaos_NoScopeOnly",
@@ -139,5 +141,3 @@
 "Chaos_VampireHeal",
 "Chaos_WKeyStuck",
 "Chaos_WeaponKnockback",
-"Chaos_NoHeads",
-"Chaos_BigHeads"
