@@ -14,7 +14,7 @@ public void Chaos_Tilted_START(){
 	}
 
 	LoopAlivePlayers(i){
-		GetClientAbsAngles(i, angles);
+		GetClientEyeAngles(i, angles);
 		angles[2] = tiltedAngle;
 		TeleportEntity(i, NULL_VECTOR, angles, NULL_VECTOR);
 	}
@@ -23,7 +23,7 @@ public void Chaos_Tilted_START(){
 public void Chaos_Tilted_RESET(bool EndChaos){
 	float angles[3];
 	LoopAlivePlayers(i){
-		GetClientAbsAngles(i, angles);
+		GetClientEyeAngles(i, angles);
 		angles[2] = 0.0;
 		TeleportEntity(i, NULL_VECTOR, angles, NULL_VECTOR);
 	}
@@ -32,7 +32,7 @@ public void Chaos_Tilted_RESET(bool EndChaos){
 public void Chaos_Tilted_OnPlayerSpawn(int client, bool EffectIsRunning){
 	if(EffectIsRunning){
 		float angles[3];
-		GetClientAbsAngles(client, angles);
+		GetClientEyeAngles(client, angles);
 		angles[2] = tiltedAngle;
 		TeleportEntity(client, NULL_VECTOR, angles, NULL_VECTOR);
 	}
