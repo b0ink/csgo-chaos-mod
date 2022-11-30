@@ -30,8 +30,10 @@ public void Chaos_Tilted_RESET(bool EndChaos){
 }
 
 public void Chaos_Tilted_OnPlayerSpawn(int client, bool EffectIsRunning){
-	float angles[3];
-	GetClientAbsAngles(client, angles);
-	angles[2] = tiltedAngle;
-	TeleportEntity(client, NULL_VECTOR, angles, NULL_VECTOR);
+	if(EffectIsRunning){
+		float angles[3];
+		GetClientAbsAngles(client, angles);
+		angles[2] = tiltedAngle;
+		TeleportEntity(client, NULL_VECTOR, angles, NULL_VECTOR);
+	}
 }
