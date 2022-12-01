@@ -142,3 +142,4 @@
 "Chaos_WKeyStuck",
 "Chaos_WeaponKnockback",
 "Chaos_HighMouseSens",
+"Chaos_Trails",
