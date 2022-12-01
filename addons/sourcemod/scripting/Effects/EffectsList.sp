@@ -143,3 +143,4 @@
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/HighMouseSens.sp"
 #include "Effects/Player/Trails.sp"
+#include "Effects/Player/TeleportOnKill.sp"

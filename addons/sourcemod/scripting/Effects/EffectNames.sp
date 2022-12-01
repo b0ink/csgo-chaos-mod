@@ -143,3 +143,4 @@
 "Chaos_WeaponKnockback",
 "Chaos_HighMouseSens",
 "Chaos_Trails",
+"Chaos_TeleportOnKill",
