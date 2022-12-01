@@ -13,13 +13,17 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 
 	int client = GetClientOfUserId(event.GetInt("userid"));
+	
+	if (GameRules_GetProp("m_bWarmupPeriod") == 1){
+		CreateTimer(1.0, Timer_SendSettingsReminder, client, TIMER_FLAG_NO_MAPCHANGE);
+	}
 
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerSpawn", Chaos_EffectData_Buffer.FunctionName);
 		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
 		if(func != INVALID_FUNCTION){
-			// Delay function to ensure play has fully spawned
-
+			
+			// Delay function to ensure player has fully spawned
 			DataPack data = new DataPack();
 			data.WriteFunction(func);
 			data.WriteCell(client);
@@ -30,6 +34,20 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	}
 	
 	return Plugin_Continue;
+}
+
+int settingsReminder[MAXPLAYERS+1];
+public Action Timer_SendSettingsReminder(Handle timer, int client){
+	if(IsValidClient(client) && settingsReminder[client] % 3 == 0){
+		if(CheckCommandAccess(client, "sm_slay", ADMFLAG_CHAT)){
+			CPrintToChat(client, "%s Use !chaos in chat to adjust your HUD, Sound levels, ConVars, and Effect settings", g_Prefix);
+			PrintHintText(client, "Use !chaos in chat to adjust your HUD, Sound levels, ConVars, and Effect settings");
+		}else{
+			CPrintToChat(client, "%s Use !chaos in chat to adjust your HUD and SFX settings", g_Prefix);
+			PrintHintText(client, "Use !chaos in chat to adjust your HUD and SFX settings");
+		}
+	}
+	settingsReminder[client]++;
 }
 
 public Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
