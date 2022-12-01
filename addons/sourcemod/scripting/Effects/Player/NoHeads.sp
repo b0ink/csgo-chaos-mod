@@ -13,8 +13,17 @@ bool noHeadsMaterials = true;
 public void Chaos_NoHeads_OnMapStart(){
 	PrecacheModel(NoHead_T_Path, true);
 	PrecacheModel(NoHead_CT_Path, true);
+	
 	AddFileToDownloadsTable(NoHead_CT_Path);
 	AddFileToDownloadsTable(NoHead_T_Path);
+
+	AddFileToDownloadsTable("models/player/custom_player/legacy/ctm_st6_nohead.dx90.vtx");
+	AddFileToDownloadsTable("models/player/custom_player/legacy/ctm_st6_nohead.phy");
+	AddFileToDownloadsTable("models/player/custom_player/legacy/ctm_st6_nohead.vvd");
+	AddFileToDownloadsTable("models/player/custom_player/legacy/tm_leet_variantk_nohead.dx90.vtx");
+	AddFileToDownloadsTable("models/player/custom_player/legacy/tm_leet_variantk_nohead.phy");
+	AddFileToDownloadsTable("models/player/custom_player/legacy/tm_leet_variantk_nohead.vvd");
+
 	if(!FileExists(NoHead_T_Path)) noHeadsMaterials = false;
 	if(!FileExists(NoHead_CT_Path)) noHeadsMaterials = false;
 }

@@ -13,8 +13,17 @@ bool bigHeadsMaterials = true;
 public void Chaos_BigHeads_OnMapStart(){
 	PrecacheModel(BigHead_T_Path, true);
 	PrecacheModel(BigHead_CT_Path, true);
+	
 	AddFileToDownloadsTable(BigHead_CT_Path);
 	AddFileToDownloadsTable(BigHead_T_Path);
+
+	AddFileToDownloadsTable("models/player/custom_player/eminem/big_head/tm_phoenix.vvd");
+	AddFileToDownloadsTable("models/player/custom_player/eminem/big_head/tm_phoenix.phy");
+	AddFileToDownloadsTable("models/player/custom_player/eminem/big_head/tm_phoenix.dx90.vtx");
+	AddFileToDownloadsTable("models/player/custom_player/eminem/big_head/ctm_sas.vvd");
+	AddFileToDownloadsTable("models/player/custom_player/eminem/big_head/ctm_sas.phy");
+	AddFileToDownloadsTable("models/player/custom_player/eminem/big_head/ctm_sas.dx90.vtx");
+
 	
 	if(!FileExists(BigHead_T_Path)) bigHeadsMaterials = false;
 	if(!FileExists(BigHead_CT_Path)) bigHeadsMaterials = false;
