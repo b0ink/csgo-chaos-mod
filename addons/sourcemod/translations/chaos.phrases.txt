@@ -576,4 +576,16 @@
     {
         "en"    "High Mouse Sens"
     }
+    "Chaos_Trails"
+    {
+        "en"    "Trails"
+    }
+    "Chaos_TeleportOnKill"
+    {
+        "en"    "Teleport On Kill"
+    }
+    "Chaos_Checkers"
+    {
+        "en"    "Checkers"
+    }
 }

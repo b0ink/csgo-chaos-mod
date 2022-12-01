@@ -9,6 +9,8 @@ void Overlay_INIT(){
 	HookEvent("player_spawn", Overlay_Event_PlayerSpawn);
 }
 
+//TODO: a que for overlays isnt necessary anymore, as only one can run at a time
+
 public Action Overlay_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	int client = GetClientOfUserId(event.GetInt("userid"));
