@@ -410,6 +410,7 @@ public void OnMapStart(){
 	RemoveChickens();
 	
 	ChaosMapCount = 0;
+	g_iTotalRoundsThisMap = 0;
 }
 
 public Action Timer_Advertisement(Handle timer){
