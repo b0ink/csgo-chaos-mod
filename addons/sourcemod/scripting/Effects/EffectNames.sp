@@ -145,3 +145,4 @@
 "Chaos_VampireHeal",
 "Chaos_WKeyStuck",
 "Chaos_WeaponKnockback",
+"Chaos_IncreasedNadeDamage",
