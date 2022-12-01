@@ -4,6 +4,7 @@ int g_iOffset_Clip1 = -1;
 public void Chaos_OneBulletMag(effect_data effect){
 	effect.Title = "One Bullet Mags";
 	effect.Duration = 30;
+	effect.AddFlag("ammo");
 }
 
 public void Chaos_OneBulletMag_INIT(){

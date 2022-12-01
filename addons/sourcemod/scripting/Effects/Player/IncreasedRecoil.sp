@@ -1,6 +1,7 @@
 public void Chaos_IncreasedRecoil(effect_data effect){
 	effect.Title = "Increased Recoil";
 	effect.Duration = 30;
+	effect.AddFlag("recoil");
 }
 
 public void Chaos_IncreasedRecoil_START(){

@@ -5,6 +5,7 @@ bool SpeedShooter = false;
 public void Chaos_SpeedShooter(effect_data effect){
 	effect.Title = "Speed Shooter";
 	effect.Duration = 30;
+	effect.AddFlag("movement");
 }
 
 public void Chaos_SpeedShooter_START(){

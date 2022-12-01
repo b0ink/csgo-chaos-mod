@@ -138,6 +138,8 @@ enum struct effect_data{
 	bool		IsMetaEffect;
 
 	Handle		IncompatibleEffects;
+	Handle		IncompatibleFlags;
+
 	Handle		Aliases;
 	Handle 		Timer;
 
@@ -225,25 +227,40 @@ enum struct effect_data{
 
 		return duration;
 	}
+	//TODO: flag cache - when effect is run add all flags to a cache, ensure the next x effects dont have those flags, eventually clear after one or something
+	void AddFlag(char[] flagName){
+		if(this.IncompatibleFlags == INVALID_HANDLE){
+			this.IncompatibleFlags = CreateArray(128);
+		}
+		PushArrayString(this.IncompatibleFlags, flagName);
+	}
 	void IncompatibleWith(char[] effectName){
 		if(this.IncompatibleEffects == INVALID_HANDLE){
-			this.IncompatibleEffects = CreateArray(255);
+			this.IncompatibleEffects = CreateArray(128);
 		}
 		PushArrayString(this.IncompatibleEffects, effectName);
 	}
 	bool IsCompatible(){
-		if(this.IncompatibleEffects == INVALID_HANDLE) return true;
+		if(this.IncompatibleEffects != INVALID_HANDLE){
+			char effectName[128];
+			for(int i = 0; i < GetArraySize(this.IncompatibleEffects); i++){
+				GetArrayString(this.IncompatibleEffects, i, effectName, sizeof(effectName));
+				if(IsChaosEffectRunning(effectName)){
+					return false;
+				}
+			}
+		}
 		
-		// check if this effect's incompatible effects are already running
-		char effectName[255];
-		for(int i = 0; i < GetArraySize(this.IncompatibleEffects); i++){
-			GetArrayString(this.IncompatibleEffects, i, effectName, sizeof(effectName));
-			if(IsChaosEffectRunning(effectName)){
+		if(AreIncompatibleEffectsRunning(this.FunctionName)) return false; // check if this effect is incompatible in a currently running effect
+
+		if(this.IncompatibleFlags == INVALID_HANDLE) return true; // no flags to check
+		char flagName[128];
+		for(int i = 0; i < GetArraySize(this.IncompatibleFlags); i++){
+			GetArrayString(this.IncompatibleFlags, i, flagName, sizeof(flagName));
+			if(AreEffectsWithFlagRunning(flagName)){
 				return false;
 			}
 		}
-
-		if(AreIncompatibleEffectsRunning(this.FunctionName)) return false; // check if this effect is incompatible in a currently running effect
 
 		return true;	
 	}
@@ -265,13 +282,13 @@ bool AreIncompatibleEffectsRunning(char[] effectName){
 			for(int i = 0; i < GetArraySize(liveEffect.IncompatibleEffects); i++){
 				GetArrayString(liveEffect.IncompatibleEffects, i, incompatibleEffect, sizeof(incompatibleEffect));
 				if(StrEqual(incompatibleEffect, effectName)){
-					return false;
+					return true;
 				}
 			}
 		}
 	}
 
-	return true;
+	return false;
 }
 
 bool IsChaosEffectRunning(char[] effectName){
@@ -283,6 +300,26 @@ bool IsChaosEffectRunning(char[] effectName){
 	}
 	return false;
 }
+
+bool AreEffectsWithFlagRunning(char[] flagName){
+	effect_data effect;
+	LoopAllEffects(effect, index){
+		if(effect.Timer != INVALID_HANDLE && effect.IncompatibleFlags != INVALID_HANDLE){
+			if(FindStringInArray(effect.IncompatibleFlags, flagName) != -1){
+				return true;
+			}
+			// for(int i = 0; i < GetArraySize(effect.IncompatibleFlags); i++){
+			// 	GetArrayString(effect.IncompatibleFlags, i, effectsFlag, sizeof(effectsFlag));
+			// 	if(StrEqual(effectsFlag, flagName)){
+			// 		return true;
+			// 	}
+			// }
+		}
+	}
+
+	return false;
+}
+
 
 public Action Effect_Reset(Handle timer, int effect_id){
 	effect_data effect;

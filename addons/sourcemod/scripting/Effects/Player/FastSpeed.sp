@@ -1,6 +1,7 @@
 public void Chaos_FastSpeed(effect_data effect){
 	effect.Title = "3x Movement Speed";
 	effect.Duration = 30;
+	effect.AddFlag("movement");
 }
 
 public void Chaos_FastSpeed_START(){

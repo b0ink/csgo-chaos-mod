@@ -1,6 +1,7 @@
 public void Chaos_BlackWhite(effect_data effect){
 	effect.Title = "Black and White";
 	effect.Duration = 30;
+	effect.AddFlag("colorcorrection");
 }
 
 bool blackWhiteMaterials = true;

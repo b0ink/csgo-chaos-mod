@@ -1,3 +1,4 @@
+//TODO: change to a slap player down to 50hp
 public void Chaos_SlayRandomPlayer(effect_data effect){
 	effect.Title = "Slay Random Player On Each Team";
 	effect.Duration = 30;

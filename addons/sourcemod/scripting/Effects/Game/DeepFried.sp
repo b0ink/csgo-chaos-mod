@@ -1,6 +1,7 @@
 public void Chaos_DeepFried(effect_data effect){
 	effect.Title = "Deep Fried";
 	effect.Duration = 30;
+	effect.AddFlag("colorcorrection");
 }
 
 bool deepFriedMaterials = true;

@@ -1,6 +1,7 @@
 public void Chaos_Tilted(effect_data effect){
 	effect.Title = "Tilted";
 	effect.Duration = 30;
+	effect.IncompatibleWith("Chaos_LockPlayersAim");
 }
 
 float tiltedAngle = 30.0;

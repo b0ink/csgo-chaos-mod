@@ -2,6 +2,7 @@ public void Chaos_BigChooks(effect_data effect){
 	effect.Title = "Big Chooks";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
+	effect.AddFlag("chicken");
 }
 
 

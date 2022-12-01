@@ -2,6 +2,7 @@ public void Chaos_RespawnTheDead(effect_data effect){
 	effect.Title = "Resurrect Dead Players";
 	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;
+	effect.AddFlag("respawn");
 }
 
 public void Chaos_RespawnTheDead_START(){

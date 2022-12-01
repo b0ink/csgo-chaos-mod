@@ -1,6 +1,7 @@
 public void Chaos_DropPrimaryWeapon(effect_data effect){
 	effect.Title = "Drop Primary Weapon";
 	effect.HasNoDuration = true;
+	effect.AddFlag("dropweapon");
 }
 
 public void Chaos_DropPrimaryWeapon_START(){

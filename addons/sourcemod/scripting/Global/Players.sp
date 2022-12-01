@@ -83,6 +83,7 @@ public void UnhookBlockAllGuns(){
 
 int PreventWeaponDrop_EffectCount = 0;
 public Action PreventWeaponDrop(int client, int weapon) {
+	if(!ValidAndAlive(client)) return Plugin_Continue;
 	char WeaponName[32];
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
 	if(

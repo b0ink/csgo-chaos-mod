@@ -2,6 +2,7 @@ public void Chaos_MamaChook(effect_data effect){
 	effect.Title = "Mama Chook";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
+	effect.AddFlag("chicken");
 }
 
 public void Chaos_MamaChook_START(){

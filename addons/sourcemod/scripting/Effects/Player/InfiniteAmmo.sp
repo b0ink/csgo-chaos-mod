@@ -1,6 +1,7 @@
 public void Chaos_InfiniteAmmo(effect_data effect){
 	effect.Title = "Infinite Ammo";
 	effect.Duration = 30;
+	effect.AddFlag("ammo");
 }
 
 bool g_InfiniteAmmo = false;

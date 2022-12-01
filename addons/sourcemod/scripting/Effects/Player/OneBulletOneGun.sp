@@ -3,6 +3,7 @@ bool OneBulletOneGun = false;
 public void Chaos_OneBulletOneGun(effect_data effect){
 	effect.Title = "One Bullet One Gun";
 	effect.Duration = 30;
+	effect.AddFlag("ammo");
 }
 
 public void Chaos_OneBulletOneGun_INIT(){

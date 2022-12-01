@@ -72,7 +72,9 @@ public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
 }
 
 public Action Timer_DelayTwitchPool(Handle timer){
-	Twitch_PoolNewVotingEffects(); //*start votes at the start of the round
+	if(g_cvChaosTwitchEnabled.BoolValue){
+		Twitch_PoolNewVotingEffects(); //*start votes at the start of the round
+	}
 }
 
 

@@ -3,6 +3,7 @@ bool SneakyBeaky = false;
 public void Chaos_SneakyBeaky(effect_data effect){
 	effect.Title = "Sneaky Beaky";
 	effect.Duration = 30;
+	effect.AddFlag("movement");
 }
 
 public void Chaos_SneakyBeaky_START(){

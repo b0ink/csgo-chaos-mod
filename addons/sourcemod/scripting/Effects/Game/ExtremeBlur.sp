@@ -6,6 +6,7 @@
 public void Chaos_ExtremeBlur(effect_data effect){
 	effect.Title = "Extreme Blur";
 	effect.Duration = 30;
+	effect.AddFlag("blur");
 }
 
 bool extremeBlurMaterials = true;

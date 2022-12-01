@@ -1,6 +1,7 @@
 public void Chaos_NoRecoil(effect_data effect){
 	effect.Title = "100% Weapon Accuracy";
 	effect.Duration = 30;
+	effect.AddFlag("recoil");
 }
 
 public void Chaos_NoRecoil_START(){
