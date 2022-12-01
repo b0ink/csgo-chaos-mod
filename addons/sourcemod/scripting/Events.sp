@@ -107,8 +107,6 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 
-	SetRandomSeed(GetTime());
-
 	// Log("---ROUND STARTED---");
 
 	g_bCanSpawnEffect = true;
