@@ -8,7 +8,9 @@ public void Chaos_Trails(effect_data effect){
 }
 
 public void Chaos_Trails_OnMapStart(){
-    trailSprite = PrecacheModel("materials/sprites/laser.vmt", true);
+	trailSprite = PrecacheModel("materials/sprites/laser.vmt", true);
+	AddFileToDownloadsTable("materials/sprites/laser.vmt");
+	AddFileToDownloadsTable("materials/sprites/laser.vtf");
 }
 
 public void Chaos_Trails_START(){

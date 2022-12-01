@@ -14,7 +14,10 @@ bool extremeBlurMaterials = true;
 public void Chaos_ExtremeBlur_OnMapStart(){
 	PrecacheDecal("Chaos/Blur_3.vmt", true);
 	AddFileToDownloadsTable("materials/Chaos/Blur_3.vmt");
-
+	
+	PrecacheDecal("nature/water_coast01_normal.vtf", true);
+	AddFileToDownloadsTable("materials/nature/water_coast01_normal.vtf");
+	
 	if(!FileExists("materials/Chaos/Blur_3.vmt")) extremeBlurMaterials = false;
 }
 

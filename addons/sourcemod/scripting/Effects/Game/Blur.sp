@@ -13,6 +13,8 @@ bool blurMaterials = true;
 
 public void Chaos_Blur_OnMapStart(){
 	PrecacheDecal("Chaos/Blur_2.vmt", true);
+	PrecacheDecal("nature/water_coast01_normal.vtf", true);
+	AddFileToDownloadsTable("materials/nature/water_coast01_normal.vtf");
 	AddFileToDownloadsTable("materials/Chaos/Blur_2.vmt");
 	if(!FileExists("materials/Chaos/Blur_2.vmt")) blurMaterials = false;
 }
