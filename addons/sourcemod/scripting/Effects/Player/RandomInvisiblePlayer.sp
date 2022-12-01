@@ -2,25 +2,20 @@ public void Chaos_RandomInvisiblePlayer(effect_data effect){
 	effect.Title = "Random Invisible Player";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
-	//TODO: Add reset for DM config compatibility
+	effect.IncompatibleWith("Chaos_Invis");
 }
 
 public void Chaos_RandomInvisiblePlayer_START(){
 	cvar("sv_disable_immunity_alpha", "1");
-	Handle players_array = CreateArray(4);
-	int playerCount = -1;
-	LoopAlivePlayers(i){
-		PushArrayCell(players_array, i);
-	}
-	playerCount = GetArraySize(players_array);
-	if(playerCount <= 1) {
-		delete players_array;
-		return;
-	}
-	int target_index = GetRandomInt(0, playerCount - 1);
-	int target = GetArrayCell(players_array, target_index);
+	int target = getRandomAlivePlayer();
+	if(target == -1) return;
 
-	SetEntityRenderMode(target, RENDER_TRANSCOLOR);
+	LoopValidPlayers(i){
+		SetEntityRenderMode(i, RENDER_NORMAL);
+		SetEntityRenderColor(i, 255, 255, 255, 255);
+	}
+
+	SetEntityRenderMode(target, RENDER_NONE);
 	SetEntityRenderColor(target, 255, 255, 255, 0);
 
 	char chaosMsg[MAX_NAME_LENGTH];
@@ -28,19 +23,16 @@ public void Chaos_RandomInvisiblePlayer_START(){
 	Format(chaosMsg, 	sizeof(chaosMsg), "%s", Truncate(chaosMsg, 10));
 	Format(chaosMsg, 	sizeof(chaosMsg), "{orange}%s {default}has been made invisible", chaosMsg);
 	AnnounceChaos(chaosMsg, -1.0);
-	
-	delete players_array;
+}
+
+public void Chaos_RandomInvisiblePlayer_RESET(bool HasTimerEnded){
+	LoopValidPlayers(i){
+		SetEntityRenderMode(i, RENDER_NORMAL);
+		SetEntityRenderColor(i, 255, 255, 255, 255);
+	}
 }
 
 public bool Chaos_RandomInvisiblePlayer_Conditions(){
-	Handle players_array = CreateArray(4);
-	int playerCount = -1;
-	LoopAlivePlayers(i){
-		PushArrayCell(players_array, i);
-	}
-	playerCount = GetArraySize(players_array);
-	delete players_array;
-	if(playerCount <= 1)  return false;
-
+	if(GetAliveTCount() + GetAliveCTCount() <= 1)  return false;
 	return true;
 }
