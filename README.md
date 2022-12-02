@@ -1,4 +1,4 @@
-# Chaos Mod for CS:GO [143 EFFECTS] <sub> + YouTube & Twitch Voting</sub>
+# Chaos Mod for CS:GO [148 EFFECTS] <sub> + YouTube & Twitch Voting</sub>
 Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 100+ unique game-changing effects into your rounds such as **Portal Guns, Snow, Saturation, Auto bunnyhopping, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more! The effects are randomised and every 15 seconds a new one will spawn, keeping you and your enemies on your toes.
 
 ### The list of effects can be found [here](https://csgochaosmod.com/effects/).
@@ -146,6 +146,7 @@ And multiple ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.n
 	- It is also recommended to **restart** CS:GO after adjusting your resolution, otherwise the HUD may appear much larger than it should be.
 	- 4k resolutions by default have an extremely enlarged HUD that makes the game unplayable, setting it to 1080p and restarting your game should fix this.
 	- An alternative method is to set `-w 1920 -h 1080` in your CS:GO's launch options.
+- Experienced some issues with models showing up as error boxes, or overlays not being displayed correctly, restarting your game fixes this issue after downloading the materials.
 <p></p>
 
 ---
