@@ -146,3 +146,4 @@
 "Chaos_WKeyStuck",
 "Chaos_WeaponKnockback",
 "Chaos_IncreasedNadeDamage",
+"Chaos_ExtendedFlash",

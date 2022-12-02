@@ -142,6 +142,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 		
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	
+	//TODO: look into using the round_freeze_end event to trigger the first effect
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
 		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
 		g_NewEffect_Timer = CreateTimer(freezeTime, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
