@@ -17,3 +17,8 @@ public void Chaos_LavaFloor_START(){
 		}
 	}
 }
+
+public bool Chaos_LavaFloor_Conditions(){
+	if(g_iChaosRoundTime < 16) return false;
+	return true;
+}
