@@ -32,6 +32,10 @@
     {
         "en"    "Big Chooks"
     }
+    "Chaos_BigHeads"
+    {
+        "en"    "Big Heads"
+    }
     "Chaos_Binoculars"
     {
         "en"    "Binoculars"
@@ -47,6 +51,10 @@
     "Chaos_BlindPlayers"
     {
         "en"    "Blind"
+    }
+    "Chaos_Blur"
+    {
+        "en"    "Blur"
     }
     "Chaos_BreakTime"
     {
@@ -67,6 +75,10 @@
     "Chaos_Chatterbox"
     {
         "en"    "Chatterbox"
+    }
+    "Chaos_Checkers"
+    {
+        "en"    "Checkers"
     }
     "Chaos_ChickenPlayers"
     {
@@ -144,9 +156,17 @@
     {
         "en"    "Extend Round Time"
     }
+    "Chaos_ExtendedFlash"
+    {
+        "en"    "Extended Flashbang Effect"
+    }
     "Chaos_ExtendedGrenades"
     {
         "en"    "Extended Grenades"
+    }
+    "Chaos_ExtremeBlur"
+    {
+        "en"    "Extreme Blur"
     }
     "Chaos_ExtremeWhiteFog"
     {
@@ -204,6 +224,10 @@
     {
         "en"    "Healthshot"
     }
+    "Chaos_HighMouseSens"
+    {
+        "en"    "High Mouse Sens"
+    }
     "Chaos_IceSkate"
     {
         "en"    "Ice Skating"
@@ -219,6 +243,10 @@
     "Chaos_Impostors"
     {
         "en"    "Impostors"
+    }
+    "Chaos_IncreasedNadeDamage"
+    {
+        "en"    "Increased Nade Damage"
     }
     "Chaos_IncreasedRecoil"
     {
@@ -331,6 +359,10 @@
     "Chaos_NoCrosshair"
     {
         "en"    "No Crosshair"
+    }
+    "Chaos_NoHeads"
+    {
+        "en"    "No Heads"
     }
     "Chaos_NoManualReload"
     {
@@ -520,6 +552,10 @@
     {
         "en"    "Super Jump"
     }
+    "Chaos_SwapPlayerModels"
+    {
+        "en"    "Swap Player Models"
+    }
     "Chaos_TaserParty"
     {
         "en"    "Taser Party"
@@ -532,6 +568,10 @@
     {
         "en"    "Teleport Players A Few Metres"
     }
+    "Chaos_TeleportOnKill"
+    {
+        "en"    "Teleport On Kill"
+    }
     "Chaos_Thirdperson"
     {
         "en"    "Thirdperson"
@@ -539,6 +579,10 @@
     "Chaos_Thunderstorm"
     {
         "en"    "Thunderstorm"
+    }
+    "Chaos_Trails"
+    {
+        "en"    "Trails"
     }
     "Chaos_Turrets"
     {
@@ -555,49 +599,5 @@
     "Chaos_WeaponKnockback"
     {
         "en"    "Weapon Knockback"
-    }
-    "Chaos_Blur"
-    {
-        "en"    "Blur"
-    }
-    "Chaos_ExtremeBlur"
-    {
-        "en"    "Extreme Blur"
-    }
-    "Chaos_NoHeads"
-    {
-        "en"    "No Heads"
-    }
-    "Chaos_BigHeads"
-    {
-        "en"    "Big Heads"
-    }
-    "Chaos_HighMouseSens"
-    {
-        "en"    "High Mouse Sens"
-    }
-    "Chaos_Trails"
-    {
-        "en"    "Trails"
-    }
-    "Chaos_TeleportOnKill"
-    {
-        "en"    "Teleport On Kill"
-    }
-    "Chaos_Checkers"
-    {
-        "en"    "Checkers"
-    }
-    "Chaos_SwapPlayerModels"
-    {
-        "en"    "Swap Player Models"
-    }
-    "Chaos_ExtendedFlash"
-    {
-        "en"    "Extended Flashbang Effect"
-    }
-    "Chaos_IncreasedNadeDamage"
-    {
-        "en"    "Increased Nade Damage"
     }
 }
