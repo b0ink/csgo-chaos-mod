@@ -588,4 +588,16 @@
     {
         "en"    "Checkers"
     }
+    "Chaos_SwapPlayerModels"
+    {
+        "en"    "Swap Player Models"
+    }
+    "Chaos_ExtendedFlash"
+    {
+        "en"    "Extended Flashbang Effect"
+    }
+    "Chaos_IncreasedNadeDamage"
+    {
+        "en"    "Increased Nade Damage"
+    }
 }
