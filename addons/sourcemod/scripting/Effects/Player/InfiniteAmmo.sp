@@ -1,11 +1,11 @@
-public void Chaos_InfiniteAmmo(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Infinite Ammo";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");
 }
 
 bool g_InfiniteAmmo = false;
-public void Chaos_InfiniteAmmo_INIT(){
+INIT(){
 	HookEvent("weapon_fire", 		Chaos_InfiniteAmmo_Event_OnWeaponFire);
 }
 
@@ -33,10 +33,10 @@ public void Chaos_InfiniteAmmo_Event_OnWeaponFire(Event event, const char[] name
 }
 
 
-public void Chaos_InfiniteAmmo_START(){
+START(){
 	g_InfiniteAmmo = true;
 }
 
-public Action Chaos_InfiniteAmmo_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_InfiniteAmmo = false;
 }

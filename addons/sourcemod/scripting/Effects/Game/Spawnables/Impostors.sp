@@ -1,15 +1,15 @@
-public void Chaos_Impostors(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Impostors";
 	effect.Duration = 60;
 	
 	effect.AddAlias("Clones");
 }
 
-public void Chaos_Impostors_START(){
+START(){
 	SpawnImpostors();
 }
 
-public Action Chaos_Impostors_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		RemoveChickens(.chickenName="Impostors");
 	}

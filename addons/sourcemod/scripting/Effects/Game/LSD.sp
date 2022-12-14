@@ -1,4 +1,4 @@
-public void Chaos_LSD(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "LSD";
 	effect.Duration = 30;
 	effect.AddFlag("colorcorrection");
@@ -25,7 +25,7 @@ Handle g_LSD_Timer_Repeat = INVALID_HANDLE;
 bool g_LSD = false;
 int g_Previous_LSD = -1;
 
-public void Chaos_LSD_START(){
+START(){
 	g_LSD = true;
 	g_Previous_LSD = 1;
 	CREATE_CC("env_1");
@@ -33,7 +33,7 @@ public void Chaos_LSD_START(){
 	g_LSD_Timer_Repeat = CreateTimer(5.0, Timer_SpawnNewLSD);
 }
 
-public Action Chaos_LSD_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 		StopTimer(g_LSD_Timer_Repeat);
 		CLEAR_CC("env_1.raw");
 		CLEAR_CC("env_2.raw");
@@ -66,6 +66,6 @@ public Action Timer_SpawnNewLSD(Handle Timer){
 	}
 }
 
-public bool Chaos_LSD_Conditions(){
+CONDITIONS(){
 	return lsdMaterials;
 }

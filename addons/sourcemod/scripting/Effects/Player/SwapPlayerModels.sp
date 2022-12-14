@@ -1,4 +1,4 @@
-public void Chaos_SwapPlayerModels(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Swap Player Models";
 	effect.Duration = 30;
 }
@@ -8,7 +8,7 @@ Handle SwapPlayerModel_CT;
 
 char SwapPlayerModels_Original[MAXPLAYERS+1][PLATFORM_MAX_PATH];
 
-public void Chaos_SwapPlayerModels_INIT(){
+INIT(){
 	SwapPlayerModel_T = CreateArray(PLATFORM_MAX_PATH);
 	SwapPlayerModel_CT = CreateArray(PLATFORM_MAX_PATH);
 	Timer_GetPlayerModels(null);
@@ -36,7 +36,7 @@ public Action Timer_GetPlayerModels(Handle timer){
 }
 
 
-public void Chaos_SwapPlayerModels_START(){
+START(){
 	SwapPlayerModels();
 }
 
@@ -65,7 +65,7 @@ void SwapPlayerModels(int client = -1){
 
 
 
-public Action Chaos_SwapPlayerModels_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			if(SwapPlayerModels_Original[i][0] != '\0'){
@@ -82,7 +82,7 @@ public void Chaos_SwapPlayerModels_OnPlayerSpawn(int client, bool EffectIsRunnin
 	}
 }
 
-public bool Chaos_SwapPlayerModels_Conditions(){
+CONDITIONS(){
 	if(GetArraySize(SwapPlayerModel_CT) == 0) return false;
 	if(GetArraySize(SwapPlayerModel_T) == 0) return false;
 	return true;

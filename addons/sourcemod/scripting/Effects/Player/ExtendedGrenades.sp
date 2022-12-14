@@ -1,9 +1,9 @@
-public void Chaos_ExtendedGrenades(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Extended Grenades";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_ExtendedGrenades_START(){
+START(){
 	cvar("ammo_grenade_limit_total", "7");
 	LoopAlivePlayers(i){
 		GivePlayerItem(i, "weapon_hegrenade");
@@ -19,7 +19,7 @@ public void Chaos_ExtendedGrenades_START(){
 	}
 }
 
-public void Chaos_ExtendedGrenades_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		ResetCvar("ammo_grenade_limit_total", "4", "7");
 	}

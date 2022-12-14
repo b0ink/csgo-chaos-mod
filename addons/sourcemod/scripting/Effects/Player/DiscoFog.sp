@@ -1,19 +1,19 @@
 bool g_bDiscoFog = false;
 Handle g_DiscoFog_Timer_Repeat = INVALID_HANDLE;
 
-public void Chaos_DiscoFog(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Disco Fog";
 	effect.Duration = 30;
 	effect.AddFlag("fog");
 }
 
-public void Chaos_DiscoFog_START(){
+START(){
 	DiscoFog();
 	g_bDiscoFog = true;
 	g_DiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT);
 }
 
-public Action Chaos_DiscoFog_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	StopTimer(g_DiscoFog_Timer_Repeat);
 	g_bDiscoFog = false;
 	DiscoFog(true);

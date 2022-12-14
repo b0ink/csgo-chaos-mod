@@ -1,7 +1,7 @@
 bool g_Chatterbox = false;
 bool g_CalloutSent[MAXPLAYERS+1];
 
-public void Chaos_Chatterbox(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Chatterbox";
 	effect.Duration = 30;
 	
@@ -10,7 +10,7 @@ public void Chaos_Chatterbox(effect_data effect){
 }
 
 
-public void Chaos_Chatterbox_START(){
+START(){
 	g_Chatterbox = true;
 	CreateTimer(5.0, Timer_SendChatterboxCallout, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 	LoopAllClients(i){
@@ -96,11 +96,11 @@ public Action Timer_SendChatterboxCallout(Handle timer){
 	return Plugin_Continue;
 }
 
-public void Chaos_Chatterbox_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_Chatterbox = false;
 }
 
-public bool Chaos_Chatterbox_Conditions(){
+CONDITIONS(){
 	// Seems like certain maps such as de_lake don't have callouts
 	char location[64];
 	bool hasLocations = false;

@@ -1,11 +1,11 @@
-public void Chaos_EnemyRadar(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Enemy Radar";
 	effect.Duration = 30;
 }
-public void Chaos_EnemyRadar_START(){
+START(){
 	cvar("mp_radar_showall", "1");
 }
 
-public Action Chaos_EnemyRadar_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ResetCvar("mp_radar_showall", "0", "1");
 }

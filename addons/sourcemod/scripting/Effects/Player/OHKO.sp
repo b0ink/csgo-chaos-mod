@@ -1,4 +1,4 @@
-public void Chaos_OHKO(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "1 HP";
 	effect.Duration = 15;
 	
@@ -7,13 +7,13 @@ public void Chaos_OHKO(effect_data effect){
 	effect.AddAlias("One Hit Knock Out");
 }
 
-public void Chaos_OHKO_START(){
+START(){
 	LoopAlivePlayers(i){
 		SetEntityHealth(i, 1);
 	}
 }
 
-public Action Chaos_OHKO_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			SetEntityHealth(i, 100);

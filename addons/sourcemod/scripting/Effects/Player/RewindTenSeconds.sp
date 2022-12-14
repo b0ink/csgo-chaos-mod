@@ -1,4 +1,4 @@
-public void Chaos_RewindTenSeconds(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Rewind 10 Seconds";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
@@ -16,7 +16,7 @@ float g_RollbackPositions[MAXPLAYERS+1][g_RollbackFrames][3];
 float g_RollbackAngles[MAXPLAYERS+1][g_RollbackFrames][3];
 
 
-public void Chaos_RewindTenSeconds_INIT(){
+INIT(){
 	HookEvent("round_start", Chaos_RewindTenSeconds_Event_RoundStart);
 }
 
@@ -29,7 +29,7 @@ public void Chaos_RewindTenSeconds_OnGameFrame(){
 }
 
 
-public void Chaos_RewindTenSeconds_START(bool HasTimerEnded){
+START(){
 	g_bRewind_logging_enabled = false;
 	g_Rewinding = true;
 	g_RewindTime = 0;
@@ -45,7 +45,7 @@ public void Chaos_RewindTenSeconds_START(bool HasTimerEnded){
 }
 
 
-public Action Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bRewind_logging_enabled = true;
 	g_Rewinding = true;
 	LoopAlivePlayers(i){
@@ -53,7 +53,7 @@ public Action Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
 	}
 }
 
-public bool Chaos_RewindTenSeconds_Conditions(){
+CONDITIONS(){
 	if(g_iChaosRoundTime <= 30) return false;
 	return true;
 }

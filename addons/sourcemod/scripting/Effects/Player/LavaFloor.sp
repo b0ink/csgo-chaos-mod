@@ -1,9 +1,9 @@
-public void Chaos_LavaFloor(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "FLOOR IS LAVA";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_LavaFloor_START(){
+START(){
 	for(int i = 0; i <=  GetArraySize(g_MapCoordinates)-1; i++){
 		int spawnChance = GetRandomInt(0,100);
 		if(spawnChance <= 25){
@@ -18,7 +18,7 @@ public void Chaos_LavaFloor_START(){
 	}
 }
 
-public bool Chaos_LavaFloor_Conditions(){
+CONDITIONS(){
 	if(g_iChaosRoundTime < 16) return false;
 	return true;
 }

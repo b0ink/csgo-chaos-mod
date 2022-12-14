@@ -1,8 +1,8 @@
-public void Chaos_Bumpmines(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Bumpmines";
 	effect.HasNoDuration = true;
 }
-public void Chaos_Bumpmines_START(){
+START(){
 	LoopAlivePlayers(i){
 		GivePlayerItem(i, "weapon_bumpmine");
 	}

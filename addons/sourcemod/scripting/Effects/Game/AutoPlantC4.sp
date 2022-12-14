@@ -1,3 +1,4 @@
+#define EFFECTNAME AutoPlantC4
 
 //CREDIT:
 //https://github.com/b3none/retakes-autoplant/blob/master/scripting/retakes_autoplant.sp
@@ -29,7 +30,7 @@ enum //Bombsites
     BOMBSITE_B = 1
 }
 
-public void Chaos_AutoPlantC4(effect_data effect){
+SETUP(effect_data effect){
     effect.Title = "Auto Plant C4";
     effect.HasNoDuration = true;
 
@@ -38,7 +39,7 @@ public void Chaos_AutoPlantC4(effect_data effect){
     effect.HasCustomAnnouncement = true;
 }
 
-public void Chaos_AutoPlantC4_INIT(){
+INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");
     HookEvent("bomb_planted", Chaos_AutoPlantC4_Event_BombPlanted);
 }
@@ -47,7 +48,7 @@ public Action Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, boo
 	g_bBombPlanted = true;
 }
 
-public bool Chaos_AutoPlantC4_Conditions(){
+CONDITIONS(){
     if(!ValidBombSpawns()) return false;
     if(isHostageMap()) return false;
     if(!GameModeUsesC4()) return false;
@@ -64,7 +65,7 @@ public bool Chaos_AutoPlantC4_Conditions(){
 }
 
 
-public void Chaos_AutoPlantC4_START(){
+START(){
 	if(g_bBombPlanted){
         TeleportC4ToNewBombSite();
         return;
@@ -120,7 +121,7 @@ public void TeleportC4ToNewBombSite(){
 
 }
 
-public Action Chaos_AutoPlantC4_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	AutoPlantRoundEnd();
 }
 

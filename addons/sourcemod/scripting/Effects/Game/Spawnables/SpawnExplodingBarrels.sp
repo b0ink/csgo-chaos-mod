@@ -1,9 +1,9 @@
-public void Chaos_SpawnExplodingBarrels(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Exploding Barrels";
 	effect.Duration = 60;
 }
 
-public void Chaos_SpawnExplodingBarrels_START(){
+START(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
@@ -18,7 +18,7 @@ public void Chaos_SpawnExplodingBarrels_START(){
 	}
 }
 
-public void Chaos_SpawnExplodingBarrels_RESET(){
+RESET(bool HasTimerEnded){
 	char classname[64];
 	char targetname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){

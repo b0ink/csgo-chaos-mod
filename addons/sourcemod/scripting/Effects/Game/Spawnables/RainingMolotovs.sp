@@ -2,18 +2,18 @@ float g_RandomMolotovSpawn_Interval = 5.0; //5+ recommended for bomb plants
 
 int g_MolotovSpawn_Count = 0;
 
-public void Chaos_RainingMolotovs(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Raining Fire";
 	effect.Duration = 30;
 
 }
 
-public void Chaos_RainingMolotovs_START(){
+START(){
 	g_MolotovSpawn_Count = 0;
 	CreateTimer(g_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
 
-public Action Chaos_RainingMolotovs_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_MolotovSpawn_Count = 100; // Stop spawning any more
 }
 

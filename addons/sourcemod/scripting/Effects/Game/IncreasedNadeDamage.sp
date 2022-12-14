@@ -1,17 +1,17 @@
 bool IncreasedNadeDamage = false;
-public void Chaos_IncreasedNadeDamage(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Increased Nade Damage";
 	effect.Duration = 30;
 	effect.AddAlias("Grenade");
 }
 
 
-public void Chaos_IncreasedNadeDamage_START(){
+START(){
 	IncreasedNadeDamage = true;
 }
 
 
-public Action Chaos_IncreasedNadeDamage_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	IncreasedNadeDamage = false;
 }
 

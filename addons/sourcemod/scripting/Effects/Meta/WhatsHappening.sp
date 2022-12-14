@@ -1,21 +1,21 @@
 bool Meta_WhatsHappening = false;
 
-public void Chaos_Meta_WhatsHappening(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "What's Happening?";
 	effect.Duration = 90;
 	effect.IsMetaEffect = true;
 }
 
-public void Chaos_Meta_WhatsHappening_START(){
+START(){
 	Meta_WhatsHappening = true;
 }
 
-public void Chaos_Meta_WhatsHappening_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	Meta_WhatsHappening = false;
 }
 
 
-public bool Chaos_Meta_WhatsHappening_Conditions(){
+CONDITIONS(){
 	if(g_bMegaChaosIsActive) return false;
 	return true;
 }

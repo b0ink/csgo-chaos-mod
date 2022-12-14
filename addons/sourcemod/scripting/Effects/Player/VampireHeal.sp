@@ -1,4 +1,4 @@
-public void Chaos_VampireHeal(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Vampires";
 	effect.Duration = 30;
 }
@@ -17,14 +17,14 @@ public Action Chaos_VampireHeal_Hook_OnTakeDamage(int victim, int &attacker, int
 	}
 }
 
-public void Chaos_VampireHeal_START(){
+START(){
 	LoopAlivePlayers(i){
 		SDKHook(i, SDKHook_OnTakeDamage, Chaos_VampireHeal_Hook_OnTakeDamage);
 	}
 	g_bVampireRound = true;
 }
 
-public Action Chaos_VampireHeal_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_VampireHeal_Hook_OnTakeDamage);
 	}

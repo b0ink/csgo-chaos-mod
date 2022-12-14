@@ -1,15 +1,15 @@
 bool g_ReversedMovement = false;
 
-public void Chaos_ReversedMovement(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Reversed Movement";
 	effect.Duration = 30;
 }
 
-public void Chaos_ReversedMovement_START(){
+START(){
 	g_ReversedMovement = true;
 }
 
-public Action Chaos_ReversedMovement_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_ReversedMovement = false;
 }
 

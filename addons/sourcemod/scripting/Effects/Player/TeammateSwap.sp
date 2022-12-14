@@ -4,19 +4,19 @@ Handle CTPos = INVALID_HANDLE;
 Handle tIndex = INVALID_HANDLE;
 Handle ctIndex = INVALID_HANDLE;
 
-public void Chaos_TeammateSwap(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Teammate Swap";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_TeammateSwap_INIT(){
+INIT(){
 	if(TPos == INVALID_HANDLE) TPos = CreateArray(3);
 	if(CTPos == INVALID_HANDLE) CTPos = CreateArray(3);
 	if(tIndex == INVALID_HANDLE) tIndex = CreateArray(1);
 	if(ctIndex == INVALID_HANDLE) ctIndex = CreateArray(1);
 }
 
-public void Chaos_TeammateSwap_START(){
+START(){
 	if(TPos == INVALID_HANDLE){
 		Chaos_TeammateSwap_INIT();
 	}
@@ -54,7 +54,7 @@ public void Chaos_TeammateSwap_START(){
 	}
 }
 
-public bool Chaos_TeammateSwap_Conditions(){
+CONDITIONS(){
 	if(GetAliveCTCount() <= 1 && GetAliveTCount() <= 1) return false;
 	return true;
 }

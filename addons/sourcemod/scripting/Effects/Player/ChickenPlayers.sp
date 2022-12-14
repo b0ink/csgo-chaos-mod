@@ -1,18 +1,18 @@
 char chickenModel[] = "models/chicken/chicken.mdl";
 char playersModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
 
-public void Chaos_ChickenPlayers(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Make all players a chicken";
 	effect.Duration = 30;
 }
 
-public void Chaos_ChickenPlayers_START(){
+START(){
 	LoopAlivePlayers(i){
 		SetChicken(i);
 	}
 }
 
-public Action Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			DisableChicken(i);

@@ -1,23 +1,23 @@
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 //TODO: configure for DM
 
-public void Chaos_ResetSpawns(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Teleport all players back to spawn";
 	effect.AddAlias("Teleport");
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_ResetSpawns_INIT(){
+INIT(){
 	HookEvent("round_start", Chaos_ResetSpawns_Event_RoundStart);
 }
 
-public Action Chaos_ResetSpawns_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+RESET(bool HasTimerEnded){
 	LoopAlivePlayers(client){
 		GetClientAbsOrigin(client, g_OriginalSpawnVec[client]);
 	}
 }
 
-public void Chaos_ResetSpawns_START(){
+START(){
 	float zero_vector[3] = {0.0, 0.0, 0.0};
 	LoopAlivePlayers(i){
 		if(g_OriginalSpawnVec[i][0] != 0.0 && g_OriginalSpawnVec[i][1] != 0.0 && g_OriginalSpawnVec[i][2] != 0.0){
@@ -26,7 +26,7 @@ public void Chaos_ResetSpawns_START(){
 	}
 }
 
-public bool Chaos_ResetSpawns_Conditions(){
+CONDITIONS(){
 	if(g_iChaosRoundTime <= 25) return false;
 	return true;
 }

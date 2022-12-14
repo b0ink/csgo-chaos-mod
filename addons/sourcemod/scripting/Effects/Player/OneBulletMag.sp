@@ -1,13 +1,13 @@
 bool OneBulletMag = false;
 int g_iOffset_Clip1 = -1;
 
-public void Chaos_OneBulletMag(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "One Bullet Mags";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");
 }
 
-public void Chaos_OneBulletMag_INIT(){
+INIT(){
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 	HookEvent("weapon_fire", 		Chaos_OneBulletMag_Event_OnWeaponFire);
 }
@@ -28,7 +28,7 @@ public void Chaos_OneBulletMag_Event_OnWeaponFire(Event event, const char[] name
 	}
 }
 
-public void Chaos_OneBulletMag_START(){
+START(){
 	LoopAlivePlayers(i){
 		SetClipsTo1(i);
 	}
@@ -46,7 +46,7 @@ public Action Timer_StripMags(Handle timer, int client){
 	SetClipsTo1(client);
 }
 
-public Action Chaos_OneBulletMag_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	OneBulletMag = false;
 	if(HasTimerEnded){ //don't need to do this if the round has ended, especially if the event didnt even happen
 		char currentWeapon[64];

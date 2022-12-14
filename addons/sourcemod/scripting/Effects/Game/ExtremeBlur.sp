@@ -3,7 +3,7 @@
 	https://steamcommunity.com/id/defuj/
 */
 
-public void Chaos_ExtremeBlur(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Extreme Blur";
 	effect.Duration = 30;
 	effect.AddFlag("blur");
@@ -21,15 +21,15 @@ public void Chaos_ExtremeBlur_OnMapStart(){
 	if(!FileExists("materials/Chaos/Blur_3.vmt")) extremeBlurMaterials = false;
 }
 
-public void Chaos_ExtremeBlur_START(){
+START(){
 	Add_Overlay("/Chaos/Blur_3.vmt");
 }
 
-public Action Chaos_ExtremeBlur_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	Remove_Overlay("/Chaos/Blur_3.vmt");
 }
 
-public bool Chaos_ExtremeBlur_Conditions(){
+CONDITIONS(){
 	if(!CanRunOverlayEffect()) return false;
 	return extremeBlurMaterials;
 }

@@ -1,4 +1,4 @@
-public void Chaos_NoHeads(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "No Heads";
 	effect.Duration = 30;
 }
@@ -27,7 +27,7 @@ public void Chaos_NoHeads_OnMapStart(){
 	if(!FileExists(NoHead_T_Path)) noHeadsMaterials = false;
 	if(!FileExists(NoHead_CT_Path)) noHeadsMaterials = false;
 }
-public void Chaos_NoHeads_START(){
+START(){
 	LoopAlivePlayers(i){
 		SetNoHeadModel(i);
 	}
@@ -45,7 +45,7 @@ void SetNoHeadModel(int client){
 }
 
 
-public Action Chaos_NoHeads_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			if(originalNoHeadModels[i][0] != '\0'){
@@ -62,6 +62,6 @@ public void Chaos_NoHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public bool Chaos_NoHeads_Conditions(){
+CONDITIONS(){
 	return noHeadsMaterials;
 }

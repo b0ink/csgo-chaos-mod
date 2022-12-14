@@ -6,12 +6,12 @@ int GetC4ChickenEntity(){
 	return g_iC4ChickenEnt;
 }
 
-public void Chaos_C4Chicken(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "C4 Chicken";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_C4Chicken_INIT(){
+INIT(){
 	HookEvent("bomb_planted", 		Chaos_C4Chicken_Event_BombPlanted);
 	HookEvent("round_start", 		Chaos_C4Chicken_Event_RoundStart);
 }
@@ -20,18 +20,18 @@ public Action Chaos_C4Chicken_Event_RoundStart(Event event, char[] name, bool do
 	g_bC4Chicken = false;
 }
 
-public void Chaos_C4Chicken_START(){
+START(){
 	g_bC4Chicken = true;
 	C4Chicken();
 }
 
-public Action Chaos_C4Chicken_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bC4Chicken = false;
 	RemoveChickens();
 	g_iC4ChickenEnt = -1;
 }
 
-public bool Chaos_C4Chicken_Conditions(){
+CONDITIONS(){
 	if(g_iC4ChickenEnt != -1) return false;
 	if(isHostageMap()) return false;
 	if(!GameModeUsesC4()) return false;

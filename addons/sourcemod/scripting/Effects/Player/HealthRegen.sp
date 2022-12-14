@@ -1,15 +1,15 @@
 bool g_HealthRegen = false;
-public void Chaos_HealthRegen(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Health Regen";
 	effect.Duration = 30;
 }
 
-public void Chaos_HealthRegen_START(){
+START(){
 	g_HealthRegen = true;
 	CreateTimer(1.0, Timer_GiveHealthRegen);
 }
 
-public Action Chaos_HealthRegen_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_HealthRegen = false;
 }
 

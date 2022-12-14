@@ -1,17 +1,17 @@
 Handle RandomWeapons_Timer_Repeat = INVALID_HANDLE;
 float RandomWeapons_Interval = 5.0; //5+ recommended for bomb plants
 
-public void Chaos_RandomWeapons(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Random Weapons";
 	effect.Duration = 30;
 }
 
-public void Chaos_RandomWeapons_START(){
+START(){
 	Timer_GiveRandomWeapon();
 	RandomWeapons_Timer_Repeat = CreateTimer(RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
 }
 
-public Action Chaos_RandomWeapons_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	StopTimer(RandomWeapons_Timer_Repeat);
 }
 

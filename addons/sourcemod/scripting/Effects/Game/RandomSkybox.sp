@@ -1,13 +1,13 @@
-public void Chaos_RandomSkybox(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Random Skybox";
 	effect.HasNoDuration = true;
 }
-public void Chaos_RandomSkybox_START(){
+START(){
 	int randomSkyboxIndex = GetRandomInt(0, sizeof(g_sSkyboxes)-1);
 	DispatchKeyValue(0, "skyname", g_sSkyboxes[randomSkyboxIndex]);
 }
 
-public bool Chaos_RandomSkybox_Conditions(){
+CONDITIONS(){
 	if(StrEqual(mapName, "de_dust2")){
 		return false;
 	}

@@ -1,11 +1,11 @@
-public void Chaos_LittleChooks(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Lil' Chooks";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
 	effect.AddFlag("chicken");
 }
 
-public void Chaos_LittleChooks_START(){
+START(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
 		if(chance <= 25){ //too many chickens is a no no
@@ -24,12 +24,12 @@ public void Chaos_LittleChooks_START(){
 	}
 }
 
-public Action Chaos_LittleChooks_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="LittleChooks");
 	g_bCanSpawnChickens = true;
 }
 
-public bool Chaos_LittleChooks_Conditions(){
+CONDITIONS(){
 	if(!g_bCanSpawnChickens) return false;
 	return true;
 }

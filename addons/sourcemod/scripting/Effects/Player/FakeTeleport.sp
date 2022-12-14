@@ -1,13 +1,13 @@
 float FakeTelport_loc[MAXPLAYERS+1][3];
 
-public void Chaos_FakeTeleport(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Fake Teleport";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_EffectName");
 }
 
-public void Chaos_FakeTeleport_START(){
+START(){
 	LoopAlivePlayers(i){
 		GetClientAbsOrigin(i, FakeTelport_loc[i]);
 	}
@@ -25,7 +25,7 @@ public Action Timer_EndTeleport(Handle timer){
 	RemoveHudByName("Random Teleport  ");
 }
 
-public bool Chaos_FakeTeleport_Conditions(){
+CONDITIONS(){
 	if(!ValidMapPoints()) return false;
 	return true;
 }

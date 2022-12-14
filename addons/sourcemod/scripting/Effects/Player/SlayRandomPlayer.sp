@@ -1,11 +1,11 @@
 //TODO: change to a slap player down to 50hp
-public void Chaos_SlayRandomPlayer(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Slay Random Player On Each Team";
 	effect.Duration = 30;
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_SlayRandomPlayer_START(){
+START(){
 	int aliveCT = GetAliveCTCount();
 	int aliveT = GetAliveTCount();
 	int RandomTSlay = GetRandomInt(1, aliveT);
@@ -37,7 +37,7 @@ public void Chaos_SlayRandomPlayer_START(){
 	}
 }
 
-public bool Chaos_SlayRandomPlayer_Conditions(){
+CONDITIONS(){
 	if(GetAliveCTCount() <= 4) return false;
 	if(GetAliveTCount() <= 4) return false;
 	if(g_iChaosRoundTime < 25) return false;

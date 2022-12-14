@@ -1,4 +1,4 @@
-public void Chaos_Binoculars(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Binoculars";
 	effect.Duration = 30;
 }
@@ -17,7 +17,7 @@ public void Chaos_Binoculars_OnMapStart(){
 
 int binocularsFOV;
 
-public void Chaos_Binoculars_START(){
+START(){
 	binocularsFOV = GetRandomInt(20,30);
 	LoopAlivePlayers(i){
 		SetEntProp(i, Prop_Send, "m_iFOV", binocularsFOV);
@@ -28,7 +28,7 @@ public void Chaos_Binoculars_START(){
 
 
 
-public Action Chaos_Binoculars_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iFOV", 0);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
@@ -43,7 +43,7 @@ public void Chaos_Binoculars_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public bool Chaos_Binoculars_Conditions(){
+CONDITIONS(){
 	if(!CanRunOverlayEffect()) return false;
 	return binocularsMaterials;
 }

@@ -2,24 +2,24 @@
 
 UserMsg g_FadeUserMsgId_drugs;
 
-public void Chaos_Drugs(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Drugs";
 	effect.Duration = 30;
 }
 
-public void Chaos_Drugs_INIT(){
+INIT(){
 	g_FadeUserMsgId_drugs = GetUserMessageId("Fade");
 }
 Handle g_DrugTimers[MAXPLAYERS+1];
 float g_DrugAngles[20] = {0.0, 5.0, 10.0, 15.0, 20.0, 25.0, 20.0, 15.0, 10.0, 5.0, 0.0, -5.0, -10.0, -15.0, -20.0, -25.0, -20.0, -15.0, -10.0, -5.0};
 
-public void Chaos_Drugs_START(){
+START(){
 	LoopAlivePlayers(i){
 		CreateDrug(i);
 	}
 }
 
-public Action Chaos_Drugs_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	KillAllDrugs();
 }
 

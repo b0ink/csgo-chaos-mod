@@ -4,16 +4,16 @@ int 	g_bNoForwardBack = 0;
 int Disable_WS[MAXPLAYERS+1];
 float Disable_WS_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
 
-public void Chaos_DisableForwardBack(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Disable W / S Keys";
 	effect.Duration = 30;
 }
 
-public void Chaos_DisableForwardBack_START(){
+START(){
 	g_bNoForwardBack++;
 }
 
-public Action Chaos_DisableForwardBack_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 }
 

@@ -1,9 +1,9 @@
-public void Chaos_Shields(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Shields";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_Shields_START(){
+START(){
 	char playerWeapon[62];
 	LoopAlivePlayers(i){
 		GetClientWeapon(i, playerWeapon, sizeof(playerWeapon));

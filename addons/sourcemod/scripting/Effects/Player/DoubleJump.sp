@@ -16,22 +16,22 @@ int g_iJumpMax = 1;
 
 
 bool g_bDoubleJump = false;
-public void Chaos_DoubleJump(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Double Jump";
 	effect.Duration = 30;
 }
 
 
-public void Chaos_DoubleJump_START(){
+START(){
 	g_bDoubleJump = true;
 }
 
-public Action Chaos_DoubleJump_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	g_bDoubleJump = false;
 }
 
 
-public bool Chaos_DoubleJump_Conditions(){
+CONDITIONS(){
 	return true;
 }
 

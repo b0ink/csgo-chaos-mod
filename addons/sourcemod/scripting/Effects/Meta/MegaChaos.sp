@@ -1,4 +1,4 @@
-public void Chaos_Meta_Mega(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Mega Chaos";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
@@ -6,7 +6,7 @@ public void Chaos_Meta_Mega(effect_data effect){
 	// effect.IncompatibleWith("Chaos_EffectName");
 }
 
-public void Chaos_Meta_Mega_START(){
+START(){
 	g_bMegaChaosIsActive = true; 
 
 	AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), 15.0, false, true);
@@ -25,7 +25,7 @@ public Action Timer_CompleteMegaChaos(Handle timer){
 	g_bMegaChaosIsActive = false;
 }
 
-public bool Chaos_Meta_Mega_Conditions(){
+CONDITIONS(){
 	if(g_bMegaChaosIsActive) return false;
 	return true;
 }

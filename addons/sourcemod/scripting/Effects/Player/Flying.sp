@@ -1,10 +1,10 @@
 bool g_bActiveNoclip = false;
-public void Chaos_Flying(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Flying";
 	effect.Duration = 15;
 }
 
-public void Chaos_Flying_START(){
+START(){
 	g_bActiveNoclip = true;
 	SavePlayersLocations();
 	LoopAlivePlayers(i){
@@ -27,7 +27,7 @@ public Action Timer_EnableFlying(Handle timer, int client){
 	SetEntityMoveType(client, MOVETYPE_NOCLIP);
 }
 
-public Action Chaos_Flying_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
 		SDKUnhook(i, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);

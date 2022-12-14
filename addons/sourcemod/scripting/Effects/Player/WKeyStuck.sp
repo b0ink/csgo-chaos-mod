@@ -1,13 +1,13 @@
 bool WKeyStuck = false;
 
-public void Chaos_WKeyStuck(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Help my W key is stuck";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_BreakTime");
 }
 
 
-public void Chaos_WKeyStuck_START(){
+START(){
 	WKeyStuck = true;
 }
 
@@ -15,10 +15,10 @@ public Action Chaos_WKeyStuck_OnPlayerRunCmd(int client, int &buttons, int &iImp
 	if(WKeyStuck) fVel[0] = 400.0;
 }
 
-public void Chaos_WKeyStuck_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	WKeyStuck = false;
 }
 
-public bool Chaos_WKeyStuck_Conditions(){
+CONDITIONS(){
 	return true;
 }

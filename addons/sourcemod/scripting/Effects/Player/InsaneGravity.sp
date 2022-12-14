@@ -1,15 +1,15 @@
-public void Chaos_InsaneGravity(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Insane Gravity";
 	effect.Duration = 30;
 }
 
-public void Chaos_InsaneGravity_START(){
+START(){
 	LoopAlivePlayers(i){
 		SetEntityGravity(i, 15.0);
 	}
 }
 
-public Action Chaos_InsaneGravity_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		SetEntityGravity(i, 1.0);
 	}

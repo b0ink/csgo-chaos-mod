@@ -1,19 +1,19 @@
 Handle Chaos_RandomSlap_Timer = INVALID_HANDLE;
 float g_Chaos_RandomSlap_Interval = 7.0;
 
-public void Chaos_GhostSlaps(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Ghost Slaps";
 	effect.Duration = 30;
 }
 
-public void Chaos_GhostSlaps_START(){
+START(){
 	Chaos_RandomSlap_Timer = CreateTimer(g_Chaos_RandomSlap_Interval, Timer_RandomSlap, _,TIMER_REPEAT);
 	LoopValidPlayers(client){
 		SDKHook(client,SDKHook_OnTakeDamage, GhostSlaps_OnTakeDamage);
 	}
 }
 
-public Action Chaos_GhostSlaps_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	StopTimer(Chaos_RandomSlap_Timer);
 	if(HasTimerEnded){
 		LoopValidPlayers(client){

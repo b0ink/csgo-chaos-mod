@@ -1,16 +1,16 @@
-public void Chaos_BlindPlayers(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Blind";
 	effect.Duration = 7;
 	effect.OverrideDuration = true;
 }
 
-public void Chaos_BlindPlayers_START(){
+START(){
 	LoopAlivePlayers(i){
 		PerformBlind(i, 255);
 	}
 }
 
-public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		PerformBlind(i, 0);
 	}

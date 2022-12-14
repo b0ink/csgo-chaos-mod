@@ -1,8 +1,8 @@
-public void Chaos_IgniteAllPlayers(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Ignite All Players";
 	effect.HasNoDuration = true;
 }
-public void Chaos_IgniteAllPlayers_START(){
+START(){
 	LoopAlivePlayers(i){
 		IgniteEntity(i, 10.0);
 	}

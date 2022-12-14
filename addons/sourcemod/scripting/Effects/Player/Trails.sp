@@ -2,7 +2,7 @@ int trailSprite = -1;
 float TrailsLastLoc[MAXPLAYERS+1][3];
 bool Trails = false;
 
-public void Chaos_Trails(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Trails";
 	effect.Duration = 30;
 }
@@ -13,7 +13,7 @@ public void Chaos_Trails_OnMapStart(){
 	AddFileToDownloadsTable("materials/sprites/laser.vtf");
 }
 
-public void Chaos_Trails_START(){
+START(){
 	Trails = true;
 	LoopAlivePlayers(i){
 		GetClientAbsOrigin(i, TrailsLastLoc[i]);
@@ -24,7 +24,7 @@ public void Chaos_Trails_START(){
 }
 
 
-public void Chaos_Trails_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	Trails = false;
 }
 

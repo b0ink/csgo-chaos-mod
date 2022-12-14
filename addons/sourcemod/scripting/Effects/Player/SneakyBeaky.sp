@@ -1,16 +1,16 @@
 bool SneakyBeaky = false;
 
-public void Chaos_SneakyBeaky(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Sneaky Beaky";
 	effect.Duration = 30;
 	effect.AddFlag("movement");
 }
 
-public void Chaos_SneakyBeaky_START(){
+START(){
 	SneakyBeaky = true;
 }
 
-public Action Chaos_SneakyBeaky_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	SneakyBeaky = false;
 }
 
@@ -43,6 +43,6 @@ public Action Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iI
 	}
 }
 
-public bool Chaos_SneakyBeaky_Conditions(){
+CONDITIONS(){
 	return true;
 }

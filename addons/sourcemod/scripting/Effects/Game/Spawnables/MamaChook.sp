@@ -1,11 +1,11 @@
-public void Chaos_MamaChook(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Mama Chook";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
 	effect.AddFlag("chicken");
 }
 
-public void Chaos_MamaChook_START(){
+START(){
 	int randomIndex = GetRandomInt(0, GetArraySize(g_MapCoordinates) - 1);
 	int ent = CreateEntityByName("chicken");
 	if(ent != -1){
@@ -18,6 +18,6 @@ public void Chaos_MamaChook_START(){
 	}
 }
 
-public Action Chaos_MamaChook_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="MamaChook");
 }

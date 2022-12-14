@@ -1,12 +1,12 @@
 bool TaserParty = false;
 
-public void Chaos_TaserParty(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Taser Party";
 	effect.Duration = 30;
 	effect.AddFlag("dropweapon"); // prevent drop weapon effects from running
 }
 
-public void Chaos_TaserParty_INIT(){
+INIT(){
 	HookEvent("weapon_fire", Chaos_TaserParty_Event_OnWeaponFire);
 }
 
@@ -39,7 +39,7 @@ public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 	return Plugin_Continue;
 }
 
-public void Chaos_TaserParty_START(){
+START(){
 	HookPreventWeaponDrop();
 	LoopAlivePlayers(i){
 		SDKHook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
@@ -63,7 +63,7 @@ public void Chaos_TaserParty_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public Action Chaos_TaserParty_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	UnhookPreventWeaponDrop();
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);

@@ -1,6 +1,6 @@
 //Credit: https://forums.alliedmods.net/showthread.php?t=312548
 
-public void Chaos_Turrets(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Turrets";
 	effect.Duration = 60;
 
@@ -10,7 +10,7 @@ public void Chaos_Turrets(effect_data effect){
 
 int dronegun_collision;
 
-public void Chaos_Turrets_INIT(){
+INIT(){
 	dronegun_collision = FindSendPropInfo("CBaseEntity", "m_CollisionGroup");
 }
 
@@ -47,7 +47,7 @@ public void Chaos_Turrets_OnMapStart(){
 	PrecacheSound("sound/survival/turret_sawplayer_01.wav", true);
 }
 
-public void Chaos_Turrets_START(){
+START(){
 	ShuffleMapSpawns();
 
 	float vec[3];
@@ -66,7 +66,7 @@ public void Chaos_Turrets_START(){
 	}
 }
 
-public void Chaos_Turrets_RESET(){
+RESET(bool HasTimerEnded){
 	char classname[64];
 	char targetname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){
@@ -81,7 +81,7 @@ public void Chaos_Turrets_RESET(){
 	}
 }
 
-public bool Chaos_Turrets_Conditions(){
+CONDITIONS(){
 	if(dronegunEnt == 0) return false;
 	return true;
 }

@@ -6,7 +6,7 @@ int g_beamsprite;
 int g_halosprite;
 float g_PortalTeleports[MAXPLAYERS + 1][3];
 
-public void Chaos_PortalGuns(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Portal Guns";
 	effect.Duration = 30;
 }
@@ -16,7 +16,7 @@ public void Chaos_PortalGuns_OnMapStart(){
 	g_halosprite = PrecacheModel("materials/sprites/halo.vmt");
 }
 
-public void Chaos_PortalGuns_INIT(){
+INIT(){
 	HookEvent("weapon_fire", 		Chaos_PortalGuns_Event_OnWeaponFire); //, EventHookMode_Post);
 }
 
@@ -45,12 +45,12 @@ public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, 
 	}
 }
 
-public void Chaos_PortalGuns_START(){
+START(){
 	g_bPortalGuns = true;
 	SavePlayersLocations();
 }
 
-public void Chaos_PortalGuns_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bPortalGuns = false;
 	if(HasTimerEnded){
 		TeleportPlayersToClosestLocation();

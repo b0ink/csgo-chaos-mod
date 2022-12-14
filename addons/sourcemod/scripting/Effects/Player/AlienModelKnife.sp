@@ -1,9 +1,9 @@
-public void Chaos_AlienModelKnife(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Alien Knife Fight";
 	effect.Duration = 30;
 }
 
-public void Chaos_AlienModelKnife_START(){
+START(){
 	HookBlockAllGuns();
 
 	LoopAlivePlayers(i){
@@ -31,7 +31,7 @@ void MakeAlien(int client){
 
 
 
-public Action Chaos_AlienModelKnife_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	UnhookBlockAllGuns();
 
 	LoopAlivePlayers(i){

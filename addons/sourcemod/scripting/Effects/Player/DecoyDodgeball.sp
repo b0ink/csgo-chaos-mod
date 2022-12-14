@@ -1,4 +1,4 @@
-public void Chaos_DecoyDodgeball(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Decoy Dodgeball";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Thunderstorm");
@@ -49,7 +49,7 @@ public void HookOnDecoySpawn(int iGrenade) {
 }
 
 
-public void Chaos_DecoyDodgeball_START(){
+START(){
 	
 	LoopAlivePlayers(i){
 		SDKHook(i, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
@@ -82,7 +82,7 @@ public void Chaos_DecoyDodgeball_OnPlayerSpawn(int client, bool EffectIsRunning)
 	}
 }
 
-public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
 	}

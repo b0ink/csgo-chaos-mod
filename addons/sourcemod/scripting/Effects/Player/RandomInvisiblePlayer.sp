@@ -1,11 +1,11 @@
-public void Chaos_RandomInvisiblePlayer(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Random Invisible Player";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_Invis");
 }
 
-public void Chaos_RandomInvisiblePlayer_START(){
+START(){
 	cvar("sv_disable_immunity_alpha", "1");
 	int target = getRandomAlivePlayer();
 	if(target == -1) return;
@@ -25,14 +25,14 @@ public void Chaos_RandomInvisiblePlayer_START(){
 	AnnounceChaos(chaosMsg, -1.0);
 }
 
-public void Chaos_RandomInvisiblePlayer_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopValidPlayers(i){
 		SetEntityRenderMode(i, RENDER_NORMAL);
 		SetEntityRenderColor(i, 255, 255, 255, 255);
 	}
 }
 
-public bool Chaos_RandomInvisiblePlayer_Conditions(){
+CONDITIONS(){
 	if(GetAliveTCount() + GetAliveCTCount() <= 1)  return false;
 	return true;
 }

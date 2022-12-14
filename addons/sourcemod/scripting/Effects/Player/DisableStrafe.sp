@@ -3,17 +3,17 @@ int 	g_bNoStrafe = 0;
 
 int Disable_Strafe[MAXPLAYERS+1];
 float Disable_Strafe_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
-public void Chaos_DisableStrafe(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Disable A / D Keys";
 	effect.Duration = 30;
 }
 
 
-public void Chaos_DisableStrafe_START(){
+START(){
 	g_bNoStrafe++;
 }
 
-public Action Chaos_DisableStrafe_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(g_bNoStrafe > 0) g_bNoStrafe--;
 }
 

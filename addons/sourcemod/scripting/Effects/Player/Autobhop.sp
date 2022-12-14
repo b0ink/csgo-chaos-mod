@@ -1,6 +1,6 @@
 int 	g_AutoBunnyhop = 0;
 
-public void Chaos_Autobhop(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Are you feeling funky?";
 	effect.Duration = 30;
 	effect.AddAlias("Funky");
@@ -8,13 +8,13 @@ public void Chaos_Autobhop(effect_data effect){
 	effect.AddAlias("Autohop");
 }
 
-public void Chaos_Autobhop_START(){
+START(){
 	g_AutoBunnyhop++;
 	cvar("sv_airaccelerate", "1999");
 
 }
 
-public Action Chaos_Autobhop_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ResetCvar("sv_airaccelerate", "12", "1999");
 	if(g_AutoBunnyhop > 0) g_AutoBunnyhop--;
 }

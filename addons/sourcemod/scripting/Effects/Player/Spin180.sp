@@ -1,9 +1,9 @@
-public void Chaos_Spin180(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "180 Spin";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_Spin180_START(){
+START(){
 	float angs[3];
 	LoopAlivePlayers(i){
 		GetClientEyeAngles(i, angs);

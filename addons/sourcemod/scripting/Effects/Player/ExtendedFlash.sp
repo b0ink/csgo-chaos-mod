@@ -1,18 +1,18 @@
 bool ExtendedFlash = false;
-public void Chaos_ExtendedFlash(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Extended Flashbang Effect";
 	effect.Duration = 30;
 }
 
-public void Chaos_ExtendedFlash_INIT(){
+INIT(){
 	HookEvent("player_blind", Chaos_ExtendedFlash_Event_PlayerBlind);
 }
 
-public void Chaos_ExtendedFlash_START(){
+START(){
 	ExtendedFlash = true;
 }
 
-public void Chaos_ExtendedFlash_RESET(){
+RESET(bool HasTimerEnded){
 	ExtendedFlash = false;
 }
 

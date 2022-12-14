@@ -1,15 +1,15 @@
-public void Chaos_NoRecoil(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "100% Weapon Accuracy";
 	effect.Duration = 30;
 	effect.AddFlag("recoil");
 }
 
-public void Chaos_NoRecoil_START(){
+START(){
 	cvar("weapon_accuracy_nospread", "1");
 	cvar("weapon_recoil_scale", "0");
 }
 
-public Action Chaos_NoRecoil_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ResetCvar("weapon_accuracy_nospread", "0", "1");
 	ResetCvar("weapon_recoil_scale", "2", "0");
 }

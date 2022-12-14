@@ -1,10 +1,10 @@
-public void Chaos_DropAllWeapons(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Drop All Weapons";
 	effect.HasNoDuration = true;
 	effect.AddFlag("dropweapon");
 }
 
-public void Chaos_DropAllWeapons_START(){
+START(){
 	LoopAlivePlayers(i){
 		int weaponIndex;
 
@@ -23,6 +23,6 @@ public void Chaos_DropAllWeapons_START(){
 	}
 }
 
-public void Chaos_DropAllWeapons_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 
 }

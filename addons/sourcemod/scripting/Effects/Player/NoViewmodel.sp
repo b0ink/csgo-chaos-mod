@@ -1,17 +1,17 @@
-public void Chaos_NoViewmodel(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "No Viewmodel";
 	effect.Duration = 30;
 }
 
 
-public void Chaos_NoViewmodel_START(){
+START(){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_bDrawViewmodel", false);
 	}
 }
 
 
-public Action Chaos_NoViewmodel_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_bDrawViewmodel", true);
 	}

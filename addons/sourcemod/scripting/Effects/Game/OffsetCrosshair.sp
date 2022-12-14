@@ -1,4 +1,4 @@
-public void Chaos_OffsetCrosshair(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Offset Crosshair";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_NoCrosshair");
@@ -16,7 +16,7 @@ public void Chaos_OffsetCrosshair_OnMapStart(){
 	if(!FileExists("materials/Chaos/OffsetCrosshair.vtf")) offsetCrosshairMaterials = false;
 }
 
-public void Chaos_OffsetCrosshair_START(){
+START(){
 	Add_Overlay("/Chaos/OffsetCrosshair.vtf");
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", HIDEHUD_CROSSHAIR);
@@ -24,7 +24,7 @@ public void Chaos_OffsetCrosshair_START(){
 }
 
 
-public Action Chaos_OffsetCrosshair_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", 0);
 	}
@@ -37,7 +37,7 @@ public void Chaos_OffsetCrosshair_OnPlayerSpawn(int client, bool EffectIsRunning
 	}
 }
 
-public bool Chaos_OffsetCrosshair_Conditions(){
+CONDITIONS(){
 	if(!CanRunOverlayEffect()) return false;
 	return offsetCrosshairMaterials;
 }

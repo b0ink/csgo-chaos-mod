@@ -1,9 +1,9 @@
-public void Chaos_KnifeFight(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Knife Fight";
 	effect.Duration = 30;
 }
 
-public void Chaos_KnifeFight_START(){
+START(){
 	HookBlockAllGuns();
 
 	LoopAlivePlayers(i){
@@ -11,7 +11,7 @@ public void Chaos_KnifeFight_START(){
 	}
 }
 
-public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 
 	UnhookBlockAllGuns();
 

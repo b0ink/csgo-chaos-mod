@@ -1,4 +1,4 @@
-public void Chaos_BigChooks(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Big Chooks";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
@@ -6,7 +6,7 @@ public void Chaos_BigChooks(effect_data effect){
 }
 
 
-public void Chaos_BigChooks_START(){
+START(){
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
 		if(chance <= 25){ //too many chickens is a no no
@@ -25,12 +25,12 @@ public void Chaos_BigChooks_START(){
 	}
 }
 
-public Action Chaos_BigChooks_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="BigChooks");
 	g_bCanSpawnChickens = true;
 }
 
-public bool Chaos_BigChooks_Conditions(){
+CONDITIONS(){
 	if(!g_bCanSpawnChickens) return false;
 	return true;
 }

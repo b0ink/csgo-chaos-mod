@@ -1,4 +1,4 @@
-public void Chaos_Soccerballs(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Soccerballs";
 	effect.Duration = 60;
 }
@@ -7,7 +7,7 @@ public void Chaos_Soccerballs_OnMapStart(){
 	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
 }
 
-public void Chaos_Soccerballs_START(){
+START(){
 	cvar("sv_turbophysics", "100");
 
 	char MapName[128];
@@ -35,7 +35,7 @@ public void Chaos_Soccerballs_START(){
 	}
 }
 
-public void Chaos_Soccerballs_RESET(){
+RESET(bool HasTimerEnded){
 	char classname[64];
 	char targetname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){
@@ -50,7 +50,7 @@ public void Chaos_Soccerballs_RESET(){
 	}
 }
 
-public bool Chaos_Soccerballs_Conditions(){
+CONDITIONS(){
 	if(!ValidMapPoints()) return false;
 	return true;
 }

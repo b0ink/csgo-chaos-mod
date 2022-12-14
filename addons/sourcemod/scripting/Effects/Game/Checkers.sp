@@ -3,13 +3,13 @@ bool checkersMaterials = true;
 int checkersToggle[MAXPLAYERS+1];
 
 
-public void Chaos_Checkers(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Checkers";
 	effect.Duration = 30;
 }
 
 
-public void Chaos_Checkers_INIT(){
+INIT(){
 	HookEvent("weapon_fire", Chaos_Checkers_Event_WeaponFire);
 }
 
@@ -33,13 +33,13 @@ public void Chaos_Checkers_OnMapStart(){
 }
 
 
-public void Chaos_Checkers_START(){
+START(){
 	Add_Overlay("/Chaos/Checkers_1.vtf");
 	Checkers = true;
 }
 
 
-public Action Chaos_Checkers_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	Checkers = false;
 	Remove_Overlay("/Chaos/Checkers_1.vtf");
 	Remove_Overlay("/Chaos/Checkers_2.vtf");
@@ -56,7 +56,7 @@ public void Chaos_Checkers_Event_WeaponFire(Event event, const char[] name, bool
 }
 
 
-public bool Chaos_Checkers_Conditions(){
+CONDITIONS(){
 	if(!CanRunOverlayEffect()) return false;
 	return checkersMaterials;
 }

@@ -1,15 +1,15 @@
 bool NoManualReload = false;
 
-public void Chaos_NoManualReload(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "No Manual Reload";
 	effect.Duration = 30;
 }
 
-public void Chaos_NoManualReload_START(){
+START(){
 	NoManualReload = true;
 }
 
-public void Chaos_NoManualReload_RESET(){
+RESET(bool HasTimerEnded){
 	NoManualReload = false;
 }
 

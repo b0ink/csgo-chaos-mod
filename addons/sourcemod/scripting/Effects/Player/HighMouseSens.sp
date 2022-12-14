@@ -1,16 +1,16 @@
 
 bool HighMouseSens = false;
-public void Chaos_HighMouseSens(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "High Mouse Sens";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_LockPlayersAim");
 }
 
-public void Chaos_HighMouseSens_START(){
+START(){
 	HighMouseSens = true;
 }
 
-public void Chaos_HighMouseSens_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	HighMouseSens = false;
 }
 

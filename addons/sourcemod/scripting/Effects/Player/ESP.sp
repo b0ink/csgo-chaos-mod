@@ -1,4 +1,4 @@
-public void Chaos_ESP(effect_data effect){
+SETUP(effect_data effect){
     effect.Title = "Wall Hacks";
     effect.Duration = 30;
     
@@ -7,7 +7,7 @@ public void Chaos_ESP(effect_data effect){
 }
 
 int portal_colors[2][4];
-public void Chaos_ESP_INIT(){
+INIT(){
 	portal_colors[0][0] = 144;
 	portal_colors[0][1] = 120;
 	portal_colors[0][2] = 72;
@@ -18,12 +18,12 @@ public void Chaos_ESP_INIT(){
 }
 
 
-public void Chaos_ESP_START(){
+START(){
 	cvar("sv_force_transmit_players", "1");
 	createAllGlows();
 }
 
-public void Chaos_ESP_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ResetCvar("sv_force_transmit_players", "0", "1");
 	destroyAllGlows();
 }

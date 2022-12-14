@@ -1,12 +1,12 @@
 bool g_bNoscopeOnly = false;
 int m_flNextSecondaryAttack = -1;
 
-public void Chaos_NoScopeOnly(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "No Scopes Only";
 	effect.Duration = 30;
 }
 
-public void Chaos_NoScopeOnly_INIT(){
+INIT(){
 	m_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack");
 }
 
@@ -27,7 +27,7 @@ public Action Chaos_NoScopeOnly_Hook_OnPreThink(int client){
 	return Plugin_Continue;
 }
 
-public void Chaos_NoScopeOnly_START(){
+START(){
 	
 	LoopAlivePlayers(i){
 		SDKHook(i, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
@@ -44,7 +44,7 @@ public void Chaos_NoScopeOnly_START(){
 }
 
 
-public Action Chaos_NoScopeOnly_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
 	}

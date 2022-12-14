@@ -1,11 +1,11 @@
 bool g_bForce_Reload[MAXPLAYERS+1];
-public void Chaos_ForceReload(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Force Reload";
 	effect.HasNoDuration = true;
 }
 
 
-public void Chaos_ForceReload_START(){
+START(){
 	int iTempWeapon = -1;
 	LoopAlivePlayers(i){
 		if (GetEntPropEnt(i, Prop_Send, "m_hActiveWeapon") == GetPlayerWeaponSlot(i, CS_SLOT_PRIMARY)){
@@ -17,7 +17,7 @@ public void Chaos_ForceReload_START(){
 	}
 }
 
-public Action Chaos_ForceReload_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	//* Automatically resets when reload is activated
 	LoopAllClients(i){
 		g_bForce_Reload[i] = false;

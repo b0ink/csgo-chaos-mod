@@ -1,12 +1,12 @@
-public void Chaos_ExtremeWhiteFog(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Extreme Fog";
 	effect.Duration = 30;
 	effect.AddFlag("fog");
 }
-public void Chaos_ExtremeWhiteFog_START(){
+START(){
 	ExtremeWhiteFog();
 }
 
-public Action Chaos_ExtremeWhiteFog_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ExtremeWhiteFog(true);
 }

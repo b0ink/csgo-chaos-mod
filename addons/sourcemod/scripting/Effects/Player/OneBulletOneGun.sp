@@ -1,12 +1,12 @@
 bool OneBulletOneGun = false;
 
-public void Chaos_OneBulletOneGun(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "One Bullet One Gun";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");
 }
 
-public void Chaos_OneBulletOneGun_INIT(){
+INIT(){
 	OneBulletOneGun = false;
 	HookEvent("weapon_fire", 		Chaos_OneBulletOneGun_Event_OnWeaponFire);
 }
@@ -29,10 +29,10 @@ public Action Timer_GiveRandomWeapon_OneShotOneGun(Handle timer, int client){
 }
 
 
-public void Chaos_OneBulletOneGun_START(){
+START(){
 	OneBulletOneGun = true;
 }
 
-public Action Chaos_OneBulletOneGun_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	OneBulletOneGun = false;
 }

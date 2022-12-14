@@ -2,13 +2,13 @@
 	Keep in mind this does "pause" the game time, meaning the duration of this effect is much longer as stated
 */
 
-public void Chaos_Lag(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Lag";
 	effect.Duration = 30;
 }
 
 bool FakeLag = false;
-public void Chaos_Lag_START(){
+START(){
 	FakeLag = true;
 	CreateTimer(3.0, Timer_FakeLag);
 }
@@ -34,6 +34,6 @@ public Action Timer_FakeLag(Handle timer){
 	CreateTimer(GetRandomFloat(1.0, 5.0), Timer_FakeLag);
 }
 
-public Action Chaos_Lag_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	FakeLag = false;
 }

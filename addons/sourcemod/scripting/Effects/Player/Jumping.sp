@@ -1,15 +1,15 @@
 bool g_bJumping = false;
 bool ForceJump[MAXPLAYERS+1];
-public void Chaos_Jumping(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Jump Jump!";
 	effect.Duration = 30;
 }
 
-public void Chaos_Jumping_START(){
+START(){
 	g_bJumping = true;
 }
 
-public Action Chaos_Jumping_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bJumping = false;
 }
 

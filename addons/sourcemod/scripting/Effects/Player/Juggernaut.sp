@@ -2,12 +2,12 @@ char g_OriginalModels_Jugg[MAXPLAYERS + 1][PLATFORM_MAX_PATH+1];
 //https://forums.alliedmods.net/showthread.php?t=307674 thanks for prop_send 
 bool g_bSetJuggernaut = false;
 
-public void Chaos_Juggernaut(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Juggernauts";
 	effect.Duration = 30;
 }
 
-public void Chaos_Juggernaut_START(){
+START(){
 	cvar("mp_weapons_allow_heavyassaultsuit", "1");
 	g_bSetJuggernaut = true;
 	LoopAlivePlayers(i){
@@ -27,7 +27,7 @@ public Action Timer_SetJuggernaut(Handle timer, int client){
 	GivePlayerItem(client, "item_heavyassaultsuit");
 }
 
-public Action Chaos_Juggernaut_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(g_bSetJuggernaut){
 		g_bSetJuggernaut = false;
 		LoopAlivePlayers(i){

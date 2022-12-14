@@ -1,6 +1,6 @@
 bool ReducedDamage = false;
 
-public void Chaos_ReducedDamage(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Half Shot Damage"; 
 	effect.Duration = 30;
 	effect.AddAlias("HalfDamage");
@@ -8,14 +8,14 @@ public void Chaos_ReducedDamage(effect_data effect){
 	effect.IncompatibleWith("Chaos_VampireHeal");
 }
 
-public void Chaos_ReducedDamage_START(){
+START(){
 	LoopAlivePlayers(i){
 		SDKHook(i, SDKHook_OnTakeDamage, Chaos_ReducedDamage_Hook_OnTakeDamage);
 	}
 	ReducedDamage = true;
 }
 
-public Action Chaos_ReducedDamage_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_ReducedDamage_Hook_OnTakeDamage);
 	}
@@ -35,6 +35,6 @@ public Action Chaos_ReducedDamage_Hook_OnTakeDamage(int victim, int &attacker, i
 }
 
 
-public bool Chaos_ReducedDamage_Conditions(){
+CONDITIONS(){
 	return true;
 }

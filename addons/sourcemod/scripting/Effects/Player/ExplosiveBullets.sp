@@ -1,6 +1,6 @@
 bool g_bExplosiveBullets = false;
 
-public void Chaos_ExplosiveBullets(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Explosive Bullets";
 	effect.Duration = 30;
 }
@@ -14,17 +14,17 @@ public void Chaos_ExplosiveBullets_OnMapStart(){
 	PrecacheSound(EXPLOSION_HE);
 }
 
-public void Chaos_ExplosiveBullets_INIT(){
+INIT(){
 	HookEvent("bullet_impact", 		Chaos_ExplosiveBullets_Event_BulletImpact);
 	AddTempEntHook("Shotgun Shot", 	Chaos_ExplosiveBullets_Hook_BulletShot);
 }
 
 
-public void Chaos_ExplosiveBullets_START(){
+START(){
 	g_bExplosiveBullets = true;
 }
 
-public Action Chaos_ExplosiveBullets_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bExplosiveBullets = false;
 }
 

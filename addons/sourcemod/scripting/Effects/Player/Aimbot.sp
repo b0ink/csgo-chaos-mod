@@ -1,4 +1,4 @@
-public void Chaos_Aimbot(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Aimbot";
 	effect.Duration = 30;
 	
@@ -29,7 +29,7 @@ float g_cvFov = 20.0;
 float g_cvDistance = 10000.0;
 bool g_bCvFlashbang = true;
 
-public void Chaos_Aimbot_INIT(){
+INIT(){
 
 	g_cvPredictionConVars[0] = FindConVar("weapon_accuracy_nospread");
 	g_cvPredictionConVars[1] = FindConVar("weapon_recoil_cooldown");
@@ -44,7 +44,7 @@ public void Chaos_Aimbot_INIT(){
 	HookEventEx("player_blind", 	Chaos_Aimbot_Event_PlayerBlind, EventHookMode_Pre);
 }
 
-public void Chaos_Aimbot_START(){
+START(){
 	AimbotEnabled = true;
 	LoopAlivePlayers(i){
 		Aimbot_SDKHOOKS(i);
@@ -52,7 +52,7 @@ public void Chaos_Aimbot_START(){
 	}
 }
 
-public Action Chaos_Aimbot_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	AimbotEnabled = false;
 	LoopValidPlayers(i){
 		Aimbot_REMOVE_SDKHOOKS(i);
@@ -67,7 +67,7 @@ public void Chaos_Aimbot_OnPlayerSpawn(int client, bool EffectIsRunning){
 	ToggleAim(client, true);
 }
 
-public bool Chaos_Aimbot_Conditions(){
+CONDITIONS(){
 	return true;
 }
 

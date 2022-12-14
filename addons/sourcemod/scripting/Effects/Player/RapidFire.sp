@@ -1,12 +1,12 @@
 bool RapidFire = false;
 
-public void Chaos_RapidFire(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Rapid Fire";
 	effect.Duration = 30;
 	effect.AddFlag("firerate");
 }
 
-public void Chaos_RapidFire_INIT(){
+INIT(){
 	HookEvent("weapon_fire", Chaos_RapidFire_WeaponFire);
 }
 
@@ -20,13 +20,13 @@ public void SetRapidFire(int userid){
 	FirePostFrame(userid, 1.8);
 }
 
-public void Chaos_RapidFire_START(){
+START(){
 	RapidFire = true;
 	cvar("weapon_accuracy_nospread", "1");
 	cvar("weapon_recoil_scale", "0.5");
 }
 
-public Action Chaos_RapidFire_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ResetCvar("weapon_accuracy_nospread", "0", "1");
 	ResetCvar("weapon_recoil_scale", "2", "0.5");
 	RapidFire = false;

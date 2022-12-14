@@ -1,14 +1,14 @@
 bool ReversedStrafe = false;
-public void Chaos_ReversedStrafe(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Reversed Strafe";
 	effect.Duration = 30;
 }
 
-public void Chaos_ReversedStrafe_START(){
+START(){
 	ReversedStrafe = true;
 }
 
-public Action Chaos_ReversedStrafe_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ReversedStrafe = false;
 }
 

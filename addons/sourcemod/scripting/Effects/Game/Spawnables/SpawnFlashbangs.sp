@@ -1,9 +1,9 @@
-public void Chaos_SpawnFlashbangs(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Flashbangs";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_SpawnFlashbangs_START(){
+START(){
 	ShuffleMapSpawns();
 	float vec[3];
 	LoopAllMapSpawns(vec, i){
@@ -17,7 +17,7 @@ public void Chaos_SpawnFlashbangs_START(){
 	}
 }
 
-public bool Chaos_SpawnFlashbangs_Conditions(){
+CONDITIONS(){
 	if(!ValidMapPoints()) return false;
 	return true;
 }

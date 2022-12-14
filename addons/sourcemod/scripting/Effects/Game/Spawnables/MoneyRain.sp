@@ -1,10 +1,10 @@
-public void Chaos_MoneyRain(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Make it Rain";
 	effect.HasNoDuration = true;
 }
 
 
-public void Chaos_MoneyRain_START(){
+START(){
 	cvar("sv_dz_cash_bundle_size", "500");
 
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
@@ -32,11 +32,11 @@ void SpawnItemCash(float vec[3]){
 }
 
 
-public Action Chaos_MoneyRain_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ResetCvar("sv_dz_cash_bundle_size", "50", "500");
 }
 
-public bool Chaos_MoneyRain_Conditions(){
+CONDITIONS(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
 	if(GetArraySize(g_MapCoordinates) == 0) return false;
 	return true;

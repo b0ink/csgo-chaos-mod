@@ -1,10 +1,10 @@
-public void Chaos_Earthquake(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Earthquake";
 	effect.HasNoDuration = true;
 }
 
 float g_Earthquake_Duration = 7.0;
-public void Chaos_Earthquake_START(){
+START(){
 	LoopAlivePlayers(i){
 		ScreenShake(i, _, g_Earthquake_Duration);
 	}

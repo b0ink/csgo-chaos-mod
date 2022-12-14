@@ -11,12 +11,12 @@ enum struct fence_data {
 	bool wide;
 }
 
-public void Chaos_FencedOff(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Fenced Off";
 	effect.Duration = 60;
 }
 
-public void Chaos_FencedOff_INIT(){
+INIT(){
 	Fences = new ArrayList(sizeof(fence_data));
 }
 
@@ -29,7 +29,7 @@ public void Chaos_FencedOff_OnMapStart(){
 	ParseFencesConfig();
 }
 
-public void Chaos_FencedOff_START(){
+START(){
 	Fences.Sort(Sort_Random, Sort_Float);
 
 	fence_data fence;
@@ -43,7 +43,7 @@ public void Chaos_FencedOff_START(){
 }
 
 
-public void Chaos_FencedOff_RESET(){
+RESET(bool HasTimerEnded){
 	char classname[64];
 	char targetname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){
@@ -153,7 +153,7 @@ void ParseFencesConfig(){
 	delete kv;
 }
 
-public bool Chaos_FencedOff_Conditions(){
+CONDITIONS(){
 	if(Fences.Length == 0) return false;
 	return true;
 }

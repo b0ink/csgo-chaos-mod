@@ -1,4 +1,4 @@
-public void Chaos_BigHeads(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Big Heads";
 	effect.Duration = 30;
 }
@@ -28,7 +28,7 @@ public void Chaos_BigHeads_OnMapStart(){
 	if(!FileExists(BigHead_T_Path)) bigHeadsMaterials = false;
 	if(!FileExists(BigHead_CT_Path)) bigHeadsMaterials = false;
 }
-public void Chaos_BigHeads_START(){
+START(){
 	LoopAlivePlayers(i){
 		SetBigHeadModel(i);
 	}
@@ -46,7 +46,7 @@ void SetBigHeadModel(int client){
 }
 
 
-public Action Chaos_BigHeads_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			if(originalBigHeadModels[i][0] != '\0'){
@@ -63,6 +63,6 @@ public void Chaos_BigHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public bool Chaos_BigHeads_Conditions(){
+CONDITIONS(){
 	return bigHeadsMaterials;
 }

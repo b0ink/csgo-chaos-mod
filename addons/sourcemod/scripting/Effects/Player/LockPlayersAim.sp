@@ -1,7 +1,7 @@
 bool g_bLockPlayersAim_Active = false;
 float g_LockPlayersAim_Angles[MAXPLAYERS+1][3];
 
-public void Chaos_LockPlayersAim(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Lock Mouse Movement";
 	effect.Duration = 30;
 	effect.AddAlias("Lock Mouse Movement");
@@ -13,7 +13,7 @@ public void Chaos_LockPlayersAim_OnGameFrame(){
 	}
 }
 
-public void Chaos_LockPlayersAim_START(){
+START(){
 	LoopAlivePlayers(i){
 		GetClientEyeAngles(i, g_LockPlayersAim_Angles[i]);
 	}
@@ -27,6 +27,6 @@ public void Chaos_LockPlayersAim_OnPlayerSpawn(int client, bool EffectIsRunning)
 	}
 }
 
-public Action Chaos_LockPlayersAim_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bLockPlayersAim_Active = false;
 }

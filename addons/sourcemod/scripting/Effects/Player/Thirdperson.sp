@@ -1,16 +1,16 @@
-public void Chaos_Thirdperson(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Thirdperson";
 	effect.Duration = 30;
 }
 
-public void Chaos_Thirdperson_START(){
+START(){
 	cvar("sv_allow_thirdperson", "1");
 	LoopAlivePlayers(i){
 		ClientCommand(i, "thirdperson");
 	}
 }
 
-public Action Chaos_Thirdperson_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		ClientCommand(i, "firstperson");
 	}

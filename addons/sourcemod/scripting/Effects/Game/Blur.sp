@@ -1,9 +1,11 @@
+#define EFFECTNAME Blur
+
 /*
 	Thanks to @defuj for providing the blur .vmt materials 
 	https://steamcommunity.com/id/defuj/
 */
 
-public void Chaos_Blur(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Blur";
 	effect.Duration = 30;
 	effect.AddFlag("blur");
@@ -19,15 +21,15 @@ public void Chaos_Blur_OnMapStart(){
 	if(!FileExists("materials/Chaos/Blur_2.vmt")) blurMaterials = false;
 }
 
-public void Chaos_Blur_START(){
+START(){
 	Add_Overlay("/Chaos/Blur_2.vmt");
 }
 
-public Action Chaos_Blur_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	Remove_Overlay("/Chaos/Blur_2.vmt");
 }
 
-public bool Chaos_Blur_Conditions(){
+CONDITIONS(){
 	if(!CanRunOverlayEffect()) return false;
 	return blurMaterials;
 }

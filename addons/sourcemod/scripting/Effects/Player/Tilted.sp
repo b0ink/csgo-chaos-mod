@@ -1,11 +1,11 @@
-public void Chaos_Tilted(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Tilted";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_LockPlayersAim");
 }
 
 float tiltedAngle = 30.0;
-public void Chaos_Tilted_START(){
+START(){
 	float angles[3];
 
 	if(GetURandomInt() % 2 == 0){
@@ -21,7 +21,7 @@ public void Chaos_Tilted_START(){
 	}
 }
 
-public void Chaos_Tilted_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	float angles[3];
 	LoopAlivePlayers(i){
 		GetClientEyeAngles(i, angles);

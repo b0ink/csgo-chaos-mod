@@ -1,4 +1,4 @@
-public void Chaos_PigeonHole(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Pigeon Hole";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Binoculars");
@@ -26,7 +26,7 @@ public void Chaos_PigeonHole_OnMapStart(){
 char lastPigeonHole[PLATFORM_MAX_PATH];
 int lastPigeonHoleIndex = -1;
 Handle PigeonHoleSpawnTimer;
-public void Chaos_PigeonHole_START(){
+START(){
 	Timer_SpawnNewPigeonHole(null);
 	PigeonHoleSpawnTimer = CreateTimer(5.0, Timer_SpawnNewPigeonHole, _, TIMER_REPEAT);
 }
@@ -47,14 +47,14 @@ public Action Timer_SpawnNewPigeonHole(Handle timer){
 	Add_Overlay(lastPigeonHole);
 }
 
-public Action Chaos_PigeonHole_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	StopTimer(PigeonHoleSpawnTimer);
 	if(lastPigeonHole[0] != '\0'){
 		Remove_Overlay(lastPigeonHole);
 	}
 }
 
-public bool Chaos_PigeonHole_Conditions(){
+CONDITIONS(){
 	if(!CanRunOverlayEffect()) return false;
 	return pigeonholeMaterials;
 }

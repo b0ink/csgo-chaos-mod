@@ -1,4 +1,4 @@
-public void Chaos_Thunderstorm(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Thunderstorm";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_DecoyDodgeball");
@@ -18,7 +18,7 @@ public void Chaos_Thunderstorm_OnMapStart(){
 
 
 bool Thunderstorm = false;
-public void Chaos_Thunderstorm_START(){
+START(){
 	thunder_count = 0;
 
 	Thunderstorm = true;
@@ -42,7 +42,7 @@ public void Chaos_Thunderstorm_START(){
 	}
 }
 
-public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	CLEAR_CC("thunderstorm.raw");
 	
 	Thunderstorm = false;
@@ -61,7 +61,7 @@ public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	// Fog_OFF();
 }
 
-public bool Chaos_Thunderstorm_Conditions(){
+CONDITIONS(){
 	return true;
 }
 

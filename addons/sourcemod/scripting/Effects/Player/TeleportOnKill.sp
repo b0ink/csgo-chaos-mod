@@ -1,19 +1,19 @@
 bool TeleportOnKill = false;
-public void Chaos_TeleportOnKill(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Teleport On Kill";
 	effect.Duration = 30;
 }
 
-public void Chaos_TeleportOnKill_INIT(){
+INIT(){
 	HookEvent("player_death", Chaos_TeleportOnKill_Event_PlayerDeath, EventHookMode_Pre);
 }
 
-public void Chaos_TeleportOnKill_START(){
+START(){
 	TeleportOnKill = true;
 }
 
 
-public void Chaos_TeleportOnKill_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	TeleportOnKill = false;
 }
 

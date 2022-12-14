@@ -1,4 +1,4 @@
-public void Chaos_GiveRandomGrenade(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Give Random Grenade";
 	
 	effect.HasCustomAnnouncement = true;
@@ -15,7 +15,7 @@ char grenades[][] = {
 	"weapon_diversion",
 };
 
-public void Chaos_GiveRandomGrenade_START(){
+START(){
 	char grenadeAnnounce[64];
 	int rand = GetURandomInt() % 6;
 	switch(rand){

@@ -4,12 +4,12 @@
 
 bool DamageBar = false;
 
-public void Chaos_DamageBar(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Damage Bar";
 	effect.Duration = 30;
 }
 
-public void Chaos_DamageBar_INIT(){
+INIT(){
 	HookEvent("player_hurt", Chaos_DamageBar_Event_PlayerHurt);
 }
 
@@ -32,10 +32,10 @@ public void Chaos_DamageBar_Event_PlayerHurt(Event event, const char[] name, boo
 }
 
 
-public void Chaos_DamageBar_START(){
+START(){
 	DamageBar = true;
 }
 
-public void Chaos_DamageBar_RESET(bool EndChaos){
+RESET(bool HasTimerEnded){
 	DamageBar = false;
 }

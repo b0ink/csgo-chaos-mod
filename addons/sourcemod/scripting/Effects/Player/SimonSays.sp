@@ -10,24 +10,24 @@ bool g_bPlayersToDamage[MAXPLAYERS+1];
 #define SS_CROUCH 2;
 
 
-public void Chaos_SimonSays(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Simon Says";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_SimonSays_START(){
+START(){
 	float duration = 10.0;
 	GenerateSimonOrder(duration);
 	StartMessageTimer();
 	g_bSimon_Active = true;
 }
 
-public Action Chaos_SimonSays_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bSimon_Active = false;
 	KillMessageTimer();
 }
 
-public bool Chaos_SimonSays_Conditions(){
+CONDITIONS(){
 	return true;
 }
 

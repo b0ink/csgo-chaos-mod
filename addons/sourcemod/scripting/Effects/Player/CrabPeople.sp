@@ -1,13 +1,13 @@
 bool g_bForceCrouch = false;
-public void Chaos_CrabPeople(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Crab People";
 	effect.Duration = 30;
 }
-public void Chaos_CrabPeople_START(){
+START(){
 	g_bForceCrouch = true;
 }
 
-public Action Chaos_CrabPeople_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_bForceCrouch = false;
 }
 

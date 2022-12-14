@@ -3,7 +3,7 @@ bool g_SleepyShooter = false;
 
 //TODO: reset timer on player spawn.
 
-public void Chaos_SleepyShooter(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Shoot To Stay Awake";
 	effect.Duration = 30;
 
@@ -15,7 +15,7 @@ public void Chaos_SleepyShooter(effect_data effect){
 	effect.IncompatibleWith("Chaos_Blind");
 }
 
-public void Chaos_SleepyShooter_INIT(){
+INIT(){
 	HookEvent("weapon_fire", Chaos_SleepyShooter_Event_OnWeaponFire);
 }
 
@@ -26,7 +26,7 @@ public void Chaos_SleepyShooter_Event_OnWeaponFire(Event event, const char[] nam
 	SleepShooter_LastShot[client] = 0;
 }
 
-public void Chaos_SleepyShooter_START(){
+START(){
 	g_SleepyShooter = true;
 	CreateTimer(1.0, Timer_CheckBlindStatus, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
@@ -48,7 +48,7 @@ public Action Timer_CheckBlindStatus(Handle timer){
 	return Plugin_Continue;
 }
 
-public void Chaos_SleepyShooter_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	g_SleepyShooter = false;
 	LoopAlivePlayers(i){
 		PerformBlind(i, 0);

@@ -1,4 +1,4 @@
-public void Chaos_IceSkate(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Ice Skating";
 	effect.Duration = 30;
 }
@@ -6,7 +6,7 @@ public void Chaos_IceSkate(effect_data effect){
 bool IceSkate = false;
 bool ForceJumpSkate[MAXPLAYERS+1];
 
-public void Chaos_IceSkate_START(){
+START(){
 	cvar("sv_airaccelerate", "2000");
 	LoopAlivePlayers(i){
 		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 2.0);
@@ -14,7 +14,7 @@ public void Chaos_IceSkate_START(){
 	IceSkate = true;
 }
 
-public Action Chaos_IceSkate_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	ResetCvar("sv_airaccelerate", "12", "2000");
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){

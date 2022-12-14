@@ -1,4 +1,4 @@
-public void Chaos_OneWeaponOnly(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "One Weapon Only";
 	effect.Duration = 30;
 	effect.HasNoDuration = false;
@@ -6,7 +6,7 @@ public void Chaos_OneWeaponOnly(effect_data effect){
 	effect.IncompatibleWith("Chaos_EffectName");
 }
 
-public void Chaos_OneWeaponOnly_START(){
+START(){
 	//TODO:; might have to handle weapon pickups?.. (players can still buy)
 	char randomWeapon[64];
 	int randomIndex = GetURandomInt() % sizeof(g_sWeapons);
@@ -25,10 +25,10 @@ public void Chaos_OneWeaponOnly_START(){
 
 }
 
-public Action Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 
 }
 
-public bool Chaos_OneWeaponOnly_Conditions(){
+CONDITIONS(){
 	return true;
 }

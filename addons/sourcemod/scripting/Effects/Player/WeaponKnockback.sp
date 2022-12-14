@@ -1,20 +1,20 @@
 bool WeaponKnockback = false;
 
-public void Chaos_WeaponKnockback(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Weapon Knockback";
 	effect.Duration = 30;
 	effect.AddAlias("Push");
 }
 
-public void Chaos_WeaponKnockback_START(){
+START(){
 	WeaponKnockback = true;
 }
 
-public void Chaos_WeaponKnockback_RESET(){
+RESET(bool HasTimerEnded){
 	WeaponKnockback = false;
 }
 
-public void Chaos_WeaponKnockback_INIT(){
+INIT(){
 	HookEvent("weapon_fire", Chaos_WeaponKnockback_Event_OnWeaponFire);
 }
 

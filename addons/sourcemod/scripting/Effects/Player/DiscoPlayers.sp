@@ -1,17 +1,17 @@
 Handle DiscoPlayers_TimerRepeat = INVALID_HANDLE;
 bool DiscoPlayers = false;
-public void Chaos_DiscoPlayers(effect_data effect){
+SETUP(effect_data effect){
 	effect.Title = "Disco Players";
 	effect.Duration = 30;
 }
-public void Chaos_DiscoPlayers_START(){
+START(){
 	DiscoPlayers = true;
 	Timer_DiscoPlayers();
 	DiscoPlayers_TimerRepeat = CreateTimer(1.0, Timer_DiscoPlayers, _, TIMER_REPEAT);
 
 }
 
-public Action Chaos_DiscoPlayers_RESET(bool HasTimerEnded){
+RESET(bool HasTimerEnded){
 	StopTimer(DiscoPlayers_TimerRepeat);
 	DiscoPlayers = false;
 }
