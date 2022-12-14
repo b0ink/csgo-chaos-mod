@@ -1,3 +1,5 @@
+#define EFFECTNAME RainingMolotovs
+
 float g_RandomMolotovSpawn_Interval = 5.0; //5+ recommended for bomb plants
 
 int g_MolotovSpawn_Count = 0;

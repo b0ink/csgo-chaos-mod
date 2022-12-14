@@ -1,3 +1,5 @@
+#define EFFECTNAME NightVision
+
 SETUP(effect_data effect){
 	effect.Title = "Night Vision";
 	effect.Duration = 30;

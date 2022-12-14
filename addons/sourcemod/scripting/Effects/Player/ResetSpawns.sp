@@ -1,3 +1,5 @@
+#define EFFECTNAME ResetSpawns
+
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 //TODO: configure for DM
 
@@ -11,7 +13,7 @@ INIT(){
 	HookEvent("round_start", Chaos_ResetSpawns_Event_RoundStart);
 }
 
-RESET(bool HasTimerEnded){
+public Action Chaos_ResetSpawns_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	LoopAlivePlayers(client){
 		GetClientAbsOrigin(client, g_OriginalSpawnVec[client]);
 	}

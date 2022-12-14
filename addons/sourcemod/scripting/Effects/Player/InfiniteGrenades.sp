@@ -1,3 +1,5 @@
+#define EFFECTNAME InfiniteGrenades
+
 SETUP(effect_data effect){
 	effect.Title = "Infinite Grenades";
 	effect.Duration = 30;

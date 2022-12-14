@@ -1,3 +1,5 @@
+#define EFFECTNAME OHKO
+
 SETUP(effect_data effect){
 	effect.Title = "1 HP";
 	effect.Duration = 15;

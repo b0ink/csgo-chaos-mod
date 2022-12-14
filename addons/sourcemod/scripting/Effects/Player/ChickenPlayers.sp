@@ -1,3 +1,5 @@
+#define EFFECTNAME ChickenPlayers
+
 char chickenModel[] = "models/chicken/chicken.mdl";
 char playersModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
 

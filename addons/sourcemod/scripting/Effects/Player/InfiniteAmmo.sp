@@ -1,3 +1,5 @@
+#define EFFECTNAME InfiniteAmmo
+
 SETUP(effect_data effect){
 	effect.Title = "Infinite Ammo";
 	effect.Duration = 30;

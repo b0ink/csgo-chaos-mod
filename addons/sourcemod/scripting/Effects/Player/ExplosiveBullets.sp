@@ -1,3 +1,5 @@
+#define EFFECTNAME ExplosiveBullets
+
 bool g_bExplosiveBullets = false;
 
 SETUP(effect_data effect){

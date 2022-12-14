@@ -1,3 +1,5 @@
+#define EFFECTNAME RespawnTheDead_Randomly
+
 SETUP(effect_data effect){
 	effect.Title = "Resurrect dead players in random locations";
 	effect.AddAlias("Respawn");

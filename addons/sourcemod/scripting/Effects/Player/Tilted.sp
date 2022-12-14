@@ -1,3 +1,5 @@
+#define EFFECTNAME Tilted
+
 SETUP(effect_data effect){
 	effect.Title = "Tilted";
 	effect.Duration = 30;

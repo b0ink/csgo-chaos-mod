@@ -1,3 +1,5 @@
+#define EFFECTNAME SilentFootsteps
+
 SETUP(effect_data effect){
 	effect.Title = "Silent Footsteps";
 	effect.Duration = 30;

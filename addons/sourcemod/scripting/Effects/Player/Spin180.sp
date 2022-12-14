@@ -1,3 +1,5 @@
+#define EFFECTNAME Spin180
+
 SETUP(effect_data effect){
 	effect.Title = "180 Spin";
 	effect.HasNoDuration = true;

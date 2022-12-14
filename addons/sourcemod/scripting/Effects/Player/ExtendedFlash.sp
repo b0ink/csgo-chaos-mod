@@ -1,3 +1,5 @@
+#define EFFECTNAME ExtendedFlash
+
 bool ExtendedFlash = false;
 SETUP(effect_data effect){
 	effect.Title = "Extended Flashbang Effect";

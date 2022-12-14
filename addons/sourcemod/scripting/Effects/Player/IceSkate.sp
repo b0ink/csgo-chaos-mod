@@ -1,3 +1,5 @@
+#define EFFECTNAME IceSkate
+
 SETUP(effect_data effect){
 	effect.Title = "Ice Skating";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#define EFFECTNAME SneakyBeaky
+
 bool SneakyBeaky = false;
 
 SETUP(effect_data effect){

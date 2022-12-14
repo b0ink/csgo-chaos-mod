@@ -1,3 +1,5 @@
+#define EFFECTNAME DropCurrentWeapon
+
 SETUP(effect_data effect){
 	effect.Title = "Drop Current Weapon";
 	effect.HasNoDuration = true;

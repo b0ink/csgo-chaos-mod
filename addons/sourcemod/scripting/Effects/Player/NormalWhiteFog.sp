@@ -1,3 +1,5 @@
+#define EFFECTNAME NormalWhiteFog
+
 SETUP(effect_data effect){
 	effect.Title = "Fog";
 	effect.Duration = 45;

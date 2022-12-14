@@ -1,3 +1,5 @@
+#define EFFECTNAME RapidFire
+
 bool RapidFire = false;
 
 SETUP(effect_data effect){

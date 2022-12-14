@@ -1,3 +1,5 @@
+#define EFFECTNAME ReversedRecoil
+
 SETUP(effect_data effect){
 	effect.Title = "Reversed Recoil";
 	effect.Duration = 30;

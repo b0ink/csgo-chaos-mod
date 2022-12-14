@@ -1,3 +1,5 @@
+#define EFFECTNAME FastSpeed
+
 SETUP(effect_data effect){
 	effect.Title = "3x Movement Speed";
 	effect.Duration = 30;

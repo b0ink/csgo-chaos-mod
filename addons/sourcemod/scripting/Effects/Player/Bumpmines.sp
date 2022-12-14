@@ -1,3 +1,5 @@
+#define EFFECTNAME Bumpmines
+
 SETUP(effect_data effect){
 	effect.Title = "Bumpmines";
 	effect.HasNoDuration = true;

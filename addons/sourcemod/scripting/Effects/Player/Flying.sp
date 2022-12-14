@@ -1,3 +1,5 @@
+#define EFFECTNAME Flying
+
 bool g_bActiveNoclip = false;
 SETUP(effect_data effect){
 	effect.Title = "Flying";

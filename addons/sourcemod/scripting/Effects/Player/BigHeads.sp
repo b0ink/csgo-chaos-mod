@@ -1,3 +1,5 @@
+#define EFFECTNAME BigHeads
+
 SETUP(effect_data effect){
 	effect.Title = "Big Heads";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#define EFFECTNAME OneWeaponOnly
+
 SETUP(effect_data effect){
 	effect.Title = "One Weapon Only";
 	effect.Duration = 30;

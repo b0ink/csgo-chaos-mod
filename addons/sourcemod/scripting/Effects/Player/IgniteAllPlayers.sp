@@ -1,3 +1,5 @@
+#define EFFECTNAME IgniteAllPlayers
+
 SETUP(effect_data effect){
 	effect.Title = "Ignite All Players";
 	effect.HasNoDuration = true;

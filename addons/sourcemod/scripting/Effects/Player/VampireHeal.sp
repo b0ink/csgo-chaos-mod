@@ -1,3 +1,5 @@
+#define EFFECTNAME VampireHeal
+
 SETUP(effect_data effect){
 	effect.Title = "Vampires";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#define EFFECTNAME Drugs
+
 //taken from base sourcemod
 
 UserMsg g_FadeUserMsgId_drugs;

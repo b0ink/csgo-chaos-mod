@@ -1,3 +1,5 @@
+#define EFFECTNAME OneBulletMag
+
 bool OneBulletMag = false;
 int g_iOffset_Clip1 = -1;
 

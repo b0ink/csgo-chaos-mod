@@ -1,3 +1,5 @@
+#define EFFECTNAME GiveRandomGrenade
+
 SETUP(effect_data effect){
 	effect.Title = "Give Random Grenade";
 	

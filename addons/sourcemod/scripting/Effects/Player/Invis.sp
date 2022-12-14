@@ -1,3 +1,5 @@
+#define EFFECTNAME Invis
+
 SETUP(effect_data effect){
 	effect.Title = "Where did everyone go?";
 	effect.Duration = 30;

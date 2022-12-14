@@ -1,3 +1,5 @@
+#define EFFECTNAME PigeonHole
+
 SETUP(effect_data effect){
 	effect.Title = "Pigeon Hole";
 	effect.Duration = 30;

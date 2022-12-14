@@ -1,3 +1,5 @@
+#define EFFECTNAME RespawnDead_LastLocation
+
 float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
 SETUP(effect_data effect){

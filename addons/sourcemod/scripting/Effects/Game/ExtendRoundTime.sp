@@ -1,3 +1,5 @@
+#define EFFECTNAME ExtendRoundTime
+
 SETUP(effect_data effect){
 	effect.Title = "Extend Round Time";
 	effect.HasNoDuration = true;	

@@ -1,3 +1,5 @@
+#define EFFECTNAME OffsetCrosshair
+
 SETUP(effect_data effect){
 	effect.Title = "Offset Crosshair";
 	effect.Duration = 30;

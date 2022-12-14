@@ -1,3 +1,5 @@
+#define EFFECTNAME HalfTimerSpeed
+
 
 SETUP(effect_data effect){
 	effect.Title = "Half Timer Speed";

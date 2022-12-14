@@ -1,3 +1,5 @@
+#define EFFECTNAME Thirdperson
+
 SETUP(effect_data effect){
 	effect.Title = "Thirdperson";
 	effect.Duration = 30;

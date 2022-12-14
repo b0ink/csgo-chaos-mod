@@ -1,3 +1,5 @@
+#define EFFECTNAME Bankrupt
+
 SETUP(effect_data effect){
 	effect.Title = "Bankrupt";
 	effect.HasNoDuration = true;

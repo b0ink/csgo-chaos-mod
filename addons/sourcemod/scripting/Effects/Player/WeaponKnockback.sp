@@ -1,3 +1,5 @@
+#define EFFECTNAME WeaponKnockback
+
 bool WeaponKnockback = false;
 
 SETUP(effect_data effect){

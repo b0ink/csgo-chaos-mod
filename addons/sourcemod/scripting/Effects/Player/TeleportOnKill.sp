@@ -1,3 +1,5 @@
+#define EFFECTNAME TeleportOnKill
+
 bool TeleportOnKill = false;
 SETUP(effect_data effect){
 	effect.Title = "Teleport On Kill";

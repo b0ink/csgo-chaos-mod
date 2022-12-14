@@ -1,3 +1,5 @@
+#define EFFECTNAME BigChooks
+
 SETUP(effect_data effect){
 	effect.Title = "Big Chooks";
 	effect.AddAlias("Chicken");

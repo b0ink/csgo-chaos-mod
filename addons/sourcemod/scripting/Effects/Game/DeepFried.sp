@@ -1,3 +1,5 @@
+#define EFFECTNAME DeepFried
+
 SETUP(effect_data effect){
 	effect.Title = "Deep Fried";
 	effect.Duration = 30;

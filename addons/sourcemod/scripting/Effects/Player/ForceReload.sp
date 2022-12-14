@@ -1,3 +1,5 @@
+#define EFFECTNAME ForceReload
+
 bool g_bForce_Reload[MAXPLAYERS+1];
 SETUP(effect_data effect){
 	effect.Title = "Force Reload";

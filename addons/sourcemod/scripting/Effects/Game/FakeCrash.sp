@@ -1,3 +1,5 @@
+#define EFFECTNAME FakeCrash
+
 SETUP(effect_data effect){
 	effect.Title = "Fake Crash";
 	effect.HasNoDuration = true;

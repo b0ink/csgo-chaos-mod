@@ -1,3 +1,5 @@
+#define EFFECTNAME SpawnExplodingBarrels
+
 SETUP(effect_data effect){
 	effect.Title = "Exploding Barrels";
 	effect.Duration = 60;

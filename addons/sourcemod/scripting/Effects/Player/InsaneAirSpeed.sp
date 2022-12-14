@@ -1,3 +1,5 @@
+#define EFFECTNAME InsaneAirSpeed
+
 SETUP(effect_data effect){
 	effect.Title = "Extreme Strafe Acceleration";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#define EFFECTNAME TeleportFewMetres
+
 SETUP(effect_data effect){
 	effect.Title = "Teleport Players A Few Metres";
 	effect.Duration = 30;

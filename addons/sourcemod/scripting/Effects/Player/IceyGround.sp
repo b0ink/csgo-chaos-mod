@@ -1,3 +1,5 @@
+#define EFFECTNAME IceyGround
+
 SETUP(effect_data effect){
 	effect.Title = "Icy Ground";
 	effect.Duration = 30;

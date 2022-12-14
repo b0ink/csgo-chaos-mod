@@ -1,3 +1,5 @@
+#define EFFECTNAME SmokeStrat
+
 SETUP(effect_data effect){
 	effect.Title = "Smoke Strat";
 	effect.HasNoDuration = true;

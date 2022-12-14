@@ -1,3 +1,5 @@
+#define EFFECTNAME Turrets
+
 //Credit: https://forums.alliedmods.net/showthread.php?t=312548
 
 SETUP(effect_data effect){

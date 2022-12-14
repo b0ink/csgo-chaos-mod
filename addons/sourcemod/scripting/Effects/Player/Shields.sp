@@ -1,3 +1,5 @@
+#define EFFECTNAME Shields
+
 SETUP(effect_data effect){
 	effect.Title = "Shields";
 	effect.HasNoDuration = true;

@@ -1,3 +1,5 @@
+#define EFFECTNAME NoViewmodel
+
 SETUP(effect_data effect){
 	effect.Title = "No Viewmodel";
 	effect.Duration = 30;

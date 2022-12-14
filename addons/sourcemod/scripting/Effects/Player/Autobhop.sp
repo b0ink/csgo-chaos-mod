@@ -1,3 +1,5 @@
+#define EFFECTNAME Autobhop
+
 int 	g_AutoBunnyhop = 0;
 
 SETUP(effect_data effect){

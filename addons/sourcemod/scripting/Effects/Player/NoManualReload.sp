@@ -1,3 +1,5 @@
+#define EFFECTNAME NoManualReload
+
 bool NoManualReload = false;
 
 SETUP(effect_data effect){

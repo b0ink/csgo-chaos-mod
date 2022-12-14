@@ -1,3 +1,5 @@
+#define EFFECTNAME ExtremeWhiteFog
+
 SETUP(effect_data effect){
 	effect.Title = "Extreme Fog";
 	effect.Duration = 30;

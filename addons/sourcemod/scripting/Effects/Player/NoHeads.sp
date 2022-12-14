@@ -1,3 +1,5 @@
+#define EFFECTNAME NoHeads
+
 SETUP(effect_data effect){
 	effect.Title = "No Heads";
 	effect.Duration = 30;

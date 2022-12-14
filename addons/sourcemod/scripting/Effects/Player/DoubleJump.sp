@@ -1,3 +1,5 @@
+#define EFFECTNAME DoubleJump
+
 /*
 Original by:
 	* Contact:

@@ -1,3 +1,5 @@
+#define EFFECTNAME LooseTrigger
+
 bool g_bLoose_Trigger = false;
 bool ShouldAttack[MAXPLAYERS+1];
 

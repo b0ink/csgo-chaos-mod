@@ -1,3 +1,5 @@
+#define EFFECTNAME FakeTeleport
+
 float FakeTelport_loc[MAXPLAYERS+1][3];
 
 SETUP(effect_data effect){

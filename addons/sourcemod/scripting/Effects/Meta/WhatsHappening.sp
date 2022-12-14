@@ -1,3 +1,5 @@
+#define EFFECTNAME WhatsHappening
+
 bool Meta_WhatsHappening = false;
 
 SETUP(effect_data effect){

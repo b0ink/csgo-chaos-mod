@@ -1,3 +1,5 @@
+#define EFFECTNAME RespawnTheDead
+
 SETUP(effect_data effect){
 	effect.Title = "Resurrect Dead Players";
 	effect.AddAlias("Respawn");

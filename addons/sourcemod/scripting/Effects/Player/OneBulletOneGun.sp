@@ -1,3 +1,5 @@
+#define EFFECTNAME OneBulletOneGun
+
 bool OneBulletOneGun = false;
 
 SETUP(effect_data effect){

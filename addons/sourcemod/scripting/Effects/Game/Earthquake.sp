@@ -1,3 +1,5 @@
+#define EFFECTNAME Earthquake
+
 SETUP(effect_data effect){
 	effect.Title = "Earthquake";
 	effect.HasNoDuration = true;

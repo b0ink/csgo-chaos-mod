@@ -1,3 +1,5 @@
+#define EFFECTNAME AlienModelKnife
+
 SETUP(effect_data effect){
 	effect.Title = "Alien Knife Fight";
 	effect.Duration = 30;

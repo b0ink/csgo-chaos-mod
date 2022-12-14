@@ -1,3 +1,5 @@
+#define EFFECTNAME RandomWeapons
+
 Handle RandomWeapons_Timer_Repeat = INVALID_HANDLE;
 float RandomWeapons_Interval = 5.0; //5+ recommended for bomb plants
 

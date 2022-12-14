@@ -1,3 +1,5 @@
+#define EFFECTNAME RewindTenSeconds
+
 SETUP(effect_data effect){
 	effect.Title = "Rewind 10 Seconds";
 	effect.HasNoDuration = true;

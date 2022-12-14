@@ -1,3 +1,5 @@
+#define EFFECTNAME Impostors
+
 SETUP(effect_data effect){
 	effect.Title = "Impostors";
 	effect.Duration = 60;

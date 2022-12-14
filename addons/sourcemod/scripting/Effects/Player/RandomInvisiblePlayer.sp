@@ -1,3 +1,5 @@
+#define EFFECTNAME RandomInvisiblePlayer
+
 SETUP(effect_data effect){
 	effect.Title = "Random Invisible Player";
 	effect.HasNoDuration = true;

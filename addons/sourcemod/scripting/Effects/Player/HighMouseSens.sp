@@ -1,3 +1,5 @@
+#define EFFECTNAME HighMouseSens
+
 
 bool HighMouseSens = false;
 SETUP(effect_data effect){

@@ -1,3 +1,5 @@
+#define EFFECTNAME FencedOff
+
 enum FENCE_TYPE {
 	FENCE_WIDE,
 	FENCE_THIN

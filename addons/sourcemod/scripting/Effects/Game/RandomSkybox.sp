@@ -1,3 +1,5 @@
+#define EFFECTNAME RandomSkybox
+
 SETUP(effect_data effect){
 	effect.Title = "Random Skybox";
 	effect.HasNoDuration = true;

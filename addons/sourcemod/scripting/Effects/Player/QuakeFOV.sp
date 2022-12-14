@@ -1,3 +1,5 @@
+#define EFFECTNAME QuakeFOV
+
 SETUP(effect_data effect){
 	effect.Title = "Quake FOV";
 	effect.Duration = 45;

@@ -1,3 +1,5 @@
+#define EFFECTNAME ReversedMovement
+
 bool g_ReversedMovement = false;
 
 SETUP(effect_data effect){

@@ -1,3 +1,5 @@
+#define EFFECTNAME InsaneGravity
+
 SETUP(effect_data effect){
 	effect.Title = "Insane Gravity";
 	effect.Duration = 30;

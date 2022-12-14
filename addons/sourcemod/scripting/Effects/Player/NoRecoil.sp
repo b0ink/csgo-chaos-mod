@@ -1,3 +1,5 @@
+#define EFFECTNAME NoRecoil
+
 SETUP(effect_data effect){
 	effect.Title = "100% Weapon Accuracy";
 	effect.Duration = 30;

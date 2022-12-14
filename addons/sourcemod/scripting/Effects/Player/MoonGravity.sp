@@ -1,3 +1,5 @@
+#define EFFECTNAME MoonGravity
+
 SETUP(effect_data effect){
 	effect.Title = "Low Gravity";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#define EFFECTNAME MoneyRain
+
 SETUP(effect_data effect){
 	effect.Title = "Make it Rain";
 	effect.HasNoDuration = true;

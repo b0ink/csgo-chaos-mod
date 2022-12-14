@@ -1,3 +1,5 @@
+#define EFFECTNAME Soccerballs
+
 SETUP(effect_data effect){
 	effect.Title = "Soccerballs";
 	effect.Duration = 60;

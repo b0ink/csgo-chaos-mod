@@ -1,3 +1,5 @@
+#define EFFECTNAME SwapPlayerModels
+
 SETUP(effect_data effect){
 	effect.Title = "Swap Player Models";
 	effect.Duration = 30;

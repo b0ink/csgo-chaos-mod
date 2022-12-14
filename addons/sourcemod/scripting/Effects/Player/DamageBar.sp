@@ -1,3 +1,5 @@
+#define EFFECTNAME DamageBar
+
 /*
 	Thanks to https://github.com/Natanel-Shitrit/Damage-Bar
 */

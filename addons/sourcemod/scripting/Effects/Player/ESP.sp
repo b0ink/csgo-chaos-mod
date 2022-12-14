@@ -1,3 +1,5 @@
+#define EFFECTNAME ESP
+
 SETUP(effect_data effect){
     effect.Title = "Wall Hacks";
     effect.Duration = 30;

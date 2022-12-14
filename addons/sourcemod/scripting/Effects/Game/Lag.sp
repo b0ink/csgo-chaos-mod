@@ -1,3 +1,5 @@
+#define EFFECTNAME Lag
+
 /*
 	Keep in mind this does "pause" the game time, meaning the duration of this effect is much longer as stated
 */

@@ -1,3 +1,5 @@
+#define EFFECTNAME DoubleTimerSpeed
+
 
 SETUP(effect_data effect){
 	effect.Title = "Double Timer Speed";

@@ -1,3 +1,5 @@
+#define EFFECTNAME Trails
+
 int trailSprite = -1;
 float TrailsLastLoc[MAXPLAYERS+1][3];
 bool Trails = false;

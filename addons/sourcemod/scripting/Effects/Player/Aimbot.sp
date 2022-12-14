@@ -1,3 +1,5 @@
+#define EFFECTNAME Aimbot
+
 SETUP(effect_data effect){
 	effect.Title = "Aimbot";
 	effect.Duration = 30;

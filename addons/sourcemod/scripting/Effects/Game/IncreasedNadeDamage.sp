@@ -1,3 +1,5 @@
+#define EFFECTNAME IncreasedNadeDamage
+
 bool IncreasedNadeDamage = false;
 SETUP(effect_data effect){
 	effect.Title = "Increased Nade Damage";

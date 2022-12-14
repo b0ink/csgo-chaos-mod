@@ -1,3 +1,5 @@
+#define EFFECTNAME IncreasedRecoil
+
 SETUP(effect_data effect){
 	effect.Title = "Increased Recoil";
 	effect.Duration = 30;

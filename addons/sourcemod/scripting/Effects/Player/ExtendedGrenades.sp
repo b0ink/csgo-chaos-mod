@@ -1,3 +1,5 @@
+#define EFFECTNAME ExtendedGrenades
+
 SETUP(effect_data effect){
 	effect.Title = "Extended Grenades";
 	effect.HasNoDuration = true;

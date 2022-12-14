@@ -1,3 +1,5 @@
+#define EFFECTNAME Saturation
+
 SETUP(effect_data effect){
 	effect.Title = "Saturation";
 	effect.Duration = 30;

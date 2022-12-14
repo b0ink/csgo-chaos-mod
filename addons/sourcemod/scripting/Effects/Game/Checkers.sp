@@ -1,3 +1,5 @@
+#define EFFECTNAME Checkers
+
 bool Checkers = false;
 bool checkersMaterials = true;
 int checkersToggle[MAXPLAYERS+1];

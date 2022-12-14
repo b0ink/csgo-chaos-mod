@@ -1,3 +1,5 @@
+#define EFFECTNAME LSD
+
 SETUP(effect_data effect){
 	effect.Title = "LSD";
 	effect.Duration = 30;

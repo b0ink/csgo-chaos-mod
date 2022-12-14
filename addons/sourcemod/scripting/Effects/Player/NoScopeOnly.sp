@@ -1,3 +1,5 @@
+#define EFFECTNAME NoScopeOnly
+
 bool g_bNoscopeOnly = false;
 int m_flNextSecondaryAttack = -1;
 

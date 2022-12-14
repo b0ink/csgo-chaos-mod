@@ -1,3 +1,5 @@
+#define EFFECTNAME Thunderstorm
+
 SETUP(effect_data effect){
 	effect.Title = "Thunderstorm";
 	effect.Duration = 30;

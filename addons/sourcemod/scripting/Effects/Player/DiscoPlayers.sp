@@ -1,3 +1,5 @@
+#define EFFECTNAME DiscoPlayers
+
 Handle DiscoPlayers_TimerRepeat = INVALID_HANDLE;
 bool DiscoPlayers = false;
 SETUP(effect_data effect){

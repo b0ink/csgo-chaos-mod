@@ -1,3 +1,5 @@
+#define EFFECTNAME LowRenderDistance
+
 SETUP(effect_data effect){
 	effect.Title = "Low Render Distance";
 	effect.Duration = 30;

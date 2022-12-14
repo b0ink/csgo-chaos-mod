@@ -1,3 +1,5 @@
+#define EFFECTNAME PortalGuns
+
 
 //weappon fire
 

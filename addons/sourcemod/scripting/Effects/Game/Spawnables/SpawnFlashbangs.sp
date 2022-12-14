@@ -1,3 +1,5 @@
+#define EFFECTNAME SpawnFlashbangs
+
 SETUP(effect_data effect){
 	effect.Title = "Flashbangs";
 	effect.HasNoDuration = true;

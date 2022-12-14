@@ -1,3 +1,5 @@
+#define EFFECTNAME BreakTime
+
 bool BreakTime = false;
 
 

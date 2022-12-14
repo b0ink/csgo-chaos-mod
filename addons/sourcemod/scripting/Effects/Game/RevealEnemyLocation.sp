@@ -1,3 +1,5 @@
+#define EFFECTNAME RevealEnemyLocation
+
 SETUP(effect_data effect){
 	effect.Title = "Reveal Enemy Location";
 	effect.HasNoDuration = true;
@@ -12,10 +14,10 @@ START(){
 	}
 }
 
-RESET(bool HasTimerEnded){
+public Action Timer_ResetRadar(Handle timer){
 	cvar("mp_radar_showall", "0");
 }
 
-CONDITIONS(){
+// CONDITIONS(){
 // 	return true;
 // }

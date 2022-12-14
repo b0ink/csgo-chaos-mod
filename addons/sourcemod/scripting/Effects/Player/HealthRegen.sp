@@ -1,3 +1,5 @@
+#define EFFECTNAME HealthRegen
+
 bool g_HealthRegen = false;
 SETUP(effect_data effect){
 	effect.Title = "Health Regen";

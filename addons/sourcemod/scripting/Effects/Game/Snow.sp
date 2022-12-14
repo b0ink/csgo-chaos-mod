@@ -1,3 +1,5 @@
+#define EFFECTNAME Snow
+
 SETUP(effect_data effect){
 	effect.Title = "Snow";
 	effect.Duration = 45;

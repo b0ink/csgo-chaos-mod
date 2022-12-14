@@ -1,3 +1,5 @@
+#define EFFECTNAME BlindPlayers
+
 SETUP(effect_data effect){
 	effect.Title = "Blind";
 	effect.Duration = 7;

@@ -1,3 +1,5 @@
+#define EFFECTNAME DecoyDodgeball
+
 SETUP(effect_data effect){
 	effect.Title = "Decoy Dodgeball";
 	effect.Duration = 30;

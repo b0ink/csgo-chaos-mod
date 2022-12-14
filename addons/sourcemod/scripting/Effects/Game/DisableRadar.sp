@@ -1,3 +1,5 @@
+#define EFFECTNAME DisableRadar
+
 SETUP(effect_data effect){
 	effect.Title = "Disable Radar";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#define EFFECTNAME Healthshot
+
 SETUP(effect_data effect){
 	effect.Title = "Healthshot";
 	effect.HasNoDuration = true;

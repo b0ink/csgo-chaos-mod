@@ -1,3 +1,5 @@
+#define EFFECTNAME Binoculars
+
 SETUP(effect_data effect){
 	effect.Title = "Binoculars";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#define EFFECTNAME TaserParty
+
 bool TaserParty = false;
 
 SETUP(effect_data effect){

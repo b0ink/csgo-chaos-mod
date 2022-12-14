@@ -1,3 +1,5 @@
+#define EFFECTNAME TeammateSwap
+
 
 Handle TPos = INVALID_HANDLE;
 Handle CTPos = INVALID_HANDLE;

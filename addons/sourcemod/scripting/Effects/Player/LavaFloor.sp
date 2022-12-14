@@ -1,3 +1,5 @@
+#define EFFECTNAME LavaFloor
+
 SETUP(effect_data effect){
 	effect.Title = "FLOOR IS LAVA";
 	effect.HasNoDuration = true;

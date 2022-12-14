@@ -1,3 +1,5 @@
+#define EFFECTNAME WKeyStuck
+
 bool WKeyStuck = false;
 
 SETUP(effect_data effect){

@@ -1,3 +1,5 @@
+#define EFFECTNAME DisableStrafe
+
 
 int 	g_bNoStrafe = 0;
 

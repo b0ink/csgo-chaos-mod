@@ -1,3 +1,5 @@
+#define EFFECTNAME ReversedStrafe
+
 bool ReversedStrafe = false;
 SETUP(effect_data effect){
 	effect.Title = "Reversed Strafe";

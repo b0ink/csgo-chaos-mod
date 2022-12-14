@@ -1,3 +1,5 @@
+#define EFFECTNAME SlowFire
+
 bool SlowFire = false;
 
 SETUP(effect_data effect){

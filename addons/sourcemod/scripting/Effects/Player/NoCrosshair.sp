@@ -1,3 +1,5 @@
+#define EFFECTNAME NoCrosshair
+
 SETUP(effect_data effect){
 	effect.Title = "No Crosshair";
 	effect.Duration = 30;

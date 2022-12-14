@@ -1,3 +1,5 @@
+#define EFFECTNAME Jackpot
+
 
 SETUP(effect_data effect){
 	effect.Title = "Jackpot";

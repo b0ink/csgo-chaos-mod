@@ -1,3 +1,5 @@
+#define EFFECTNAME CrabPeople
+
 bool g_bForceCrouch = false;
 SETUP(effect_data effect){
 	effect.Title = "Crab People";

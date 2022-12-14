@@ -1,3 +1,5 @@
+#define EFFECTNAME SlayRandomPlayer
+
 //TODO: change to a slap player down to 50hp
 SETUP(effect_data effect){
 	effect.Title = "Slay Random Player On Each Team";

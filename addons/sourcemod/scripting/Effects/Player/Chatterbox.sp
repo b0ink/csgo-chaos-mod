@@ -1,3 +1,5 @@
+#define EFFECTNAME Chatterbox
+
 bool g_Chatterbox = false;
 bool g_CalloutSent[MAXPLAYERS+1];
 

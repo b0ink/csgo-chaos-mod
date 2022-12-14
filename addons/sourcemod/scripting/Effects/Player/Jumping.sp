@@ -1,3 +1,5 @@
+#define EFFECTNAME Jumping
+
 bool g_bJumping = false;
 bool ForceJump[MAXPLAYERS+1];
 SETUP(effect_data effect){

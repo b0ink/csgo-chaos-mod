@@ -1,3 +1,5 @@
+#define EFFECTNAME ReducedDamage
+
 bool ReducedDamage = false;
 
 SETUP(effect_data effect){

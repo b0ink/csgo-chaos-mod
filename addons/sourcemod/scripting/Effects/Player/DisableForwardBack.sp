@@ -1,3 +1,5 @@
+#define EFFECTNAME DisableForwardBack
+
 
 int 	g_bNoForwardBack = 0;
 

@@ -1,3 +1,5 @@
+#define EFFECTNAME HeadshotOnly
+
 SETUP(effect_data effect){
 	effect.Title = "Headshots Only";
 	effect.Duration = 30;

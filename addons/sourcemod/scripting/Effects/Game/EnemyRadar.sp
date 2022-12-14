@@ -1,3 +1,5 @@
+#define EFFECTNAME EnemyRadar
+
 SETUP(effect_data effect){
 	effect.Title = "Enemy Radar";
 	effect.Duration = 30;

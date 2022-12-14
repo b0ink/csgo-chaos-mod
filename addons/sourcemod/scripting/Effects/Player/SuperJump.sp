@@ -1,3 +1,5 @@
+#define EFFECTNAME SuperJump
+
 SETUP(effect_data effect){
 	effect.Title = "Super Jump";
 	effect.Duration = 30;

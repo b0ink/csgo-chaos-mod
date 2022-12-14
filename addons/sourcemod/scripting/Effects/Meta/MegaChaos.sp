@@ -1,3 +1,5 @@
+#define EFFECTNAME MegaChaos
+
 SETUP(effect_data effect){
 	effect.Title = "Mega Chaos";
 	effect.HasNoDuration = true;
