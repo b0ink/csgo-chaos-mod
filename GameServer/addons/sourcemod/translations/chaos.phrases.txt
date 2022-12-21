@@ -1,0 +1,603 @@
+"Phrases"
+{
+    "Chaos_Aimbot"
+    {
+        "en"    "Aimbot"
+    }
+    "Chaos_AlienModelKnife"
+    {
+        "en"    "Alien Knife Fight"
+    }
+    "Chaos_AutoPlantC4"
+    {
+        "en"    "Auto Plant C4"
+    }
+    "Chaos_AutoPlantC4_A"
+    {
+        "en"    "Auto Plant C4 at Bombsite A"
+    }
+    "Chaos_AutoPlantC4_B"
+    {
+        "en"    "Auto Plant C4 at Bombsite B"
+    }
+    "Chaos_Autobhop"
+    {
+        "en"    "Are you feeling funky?"
+    }
+    "Chaos_Bankrupt"
+    {
+        "en"    "Bankrupt"
+    }
+    "Chaos_BigChooks"
+    {
+        "en"    "Big Chooks"
+    }
+    "Chaos_BigHeads"
+    {
+        "en"    "Big Heads"
+    }
+    "Chaos_Binoculars"
+    {
+        "en"    "Binoculars"
+    }
+    "Chaos_BlackBars"
+    {
+        "en"    "Black Bars"
+    }
+    "Chaos_BlackWhite"
+    {
+        "en"    "Black & White"
+    }
+    "Chaos_BlindPlayers"
+    {
+        "en"    "Blind"
+    }
+    "Chaos_Blur"
+    {
+        "en"    "Blur"
+    }
+    "Chaos_BreakTime"
+    {
+        "en"    "Break Time"
+    }
+    "Chaos_Bumpmines"
+    {
+        "en"    "Bumpmines"
+    }
+    "Chaos_BuyAnywhere"
+    {
+        "en"    "Buy Anywhere Enabled"
+    }
+    "Chaos_C4Chicken"
+    {
+        "en"    "C4 Chicken"
+    }
+    "Chaos_Chatterbox"
+    {
+        "en"    "Chatterbox"
+    }
+    "Chaos_Checkers"
+    {
+        "en"    "Checkers"
+    }
+    "Chaos_ChickenPlayers"
+    {
+        "en"    "Make all players a chicken"
+    }
+    "Chaos_CrabPeople"
+    {
+        "en"    "Crab People"
+    }
+    "Chaos_DecoyDodgeball"
+    {
+        "en"    "Decoy Dodgeball"
+    }
+    "Chaos_DeepFried"
+    {
+        "en"    "Deep Fried"
+    }
+    "Chaos_DisableForwardBack"
+    {
+        "en"    "Disable W / S Keys"
+    }
+    "Chaos_DisableRadar"
+    {
+        "en"    "Disable Radar"
+    }
+    "Chaos_DisableStrafe"
+    {
+        "en"    "Disable A / D Keys"
+    }
+    "Chaos_DiscoFog"
+    {
+        "en"    "Disco Fog"
+    }
+    "Chaos_DiscoPlayers"
+    {
+        "en"    "Random Player Colours"
+    }
+    "Chaos_DoubleJump"
+    {
+        "en"    "Double Jump"
+    }
+    "Chaos_DropAllWeapons"
+    {
+        "en"    "Drop All Weapons"
+    }
+    "Chaos_DropCurrentWeapon"
+    {
+        "en"    "Drop Current Weapon"
+    }
+    "Chaos_DropPrimaryWeapon"
+    {
+        "en"    "Drop Primary Weapon"
+    }
+    "Chaos_Drugs"
+    {
+        "en"    "Drugs"
+    }
+    "Chaos_ESP"
+    {
+        "en"    "Wall Hacks"
+    }
+    "Chaos_Earthquake"
+    {
+        "en"    "Earthquake"
+    }
+    "Chaos_EnemyRadar"
+    {
+        "en"    "Enemy Radar"
+    }
+    "Chaos_ExplosiveBullets"
+    {
+        "en"    "Explosive Bullets"
+    }
+    "Chaos_ExtendRoundTime"
+    {
+        "en"    "Extend Round Time"
+    }
+    "Chaos_ExtendedFlash"
+    {
+        "en"    "Extended Flashbang Effect"
+    }
+    "Chaos_ExtendedGrenades"
+    {
+        "en"    "Extended Grenades"
+    }
+    "Chaos_ExtremeBlur"
+    {
+        "en"    "Extreme Blur"
+    }
+    "Chaos_ExtremeWhiteFog"
+    {
+        "en"    "Extreme Fog"
+    }
+    "Chaos_FakeCrash"
+    {
+        "en"    "Fake Crash"
+    }
+    "Chaos_FakeTeleport"
+    {
+        "en"    "Fake Teleport"
+    }
+    "Chaos_FastSpeed"
+    {
+        "en"    "3x Movement Speed"
+    }
+    "Chaos_FencedOff"
+    {
+        "en"    "Fenced Off"
+    }
+    "Chaos_Flying"
+    {
+        "en"    "Flying"
+    }
+    "Chaos_ForceReload"
+    {
+        "en"    "Force Reload"
+    }
+    "Chaos_GhostSlaps"
+    {
+        "en"    "Ghost Slaps"
+    }
+    "Chaos_Give100HP"
+    {
+        "en"    "Give all players +100 HP"
+    }
+    "Chaos_GiveRandomGrenade"
+    {
+        "en"    "Give Random Grenade"
+    }
+    "Chaos_HeadshotOnly"
+    {
+        "en"    "Headshots Only"
+    }
+    "Chaos_HealAllPlayers"
+    {
+        "en"    "Set all players health to 100"
+    }
+    "Chaos_HealthRegen"
+    {
+        "en"    "Health Regen"
+    }
+    "Chaos_Healthshot"
+    {
+        "en"    "Healthshot"
+    }
+    "Chaos_HighMouseSens"
+    {
+        "en"    "High Mouse Sens"
+    }
+    "Chaos_IceSkate"
+    {
+        "en"    "Ice Skating"
+    }
+    "Chaos_IceyGround"
+    {
+        "en"    "Icy Ground"
+    }
+    "Chaos_IgniteAllPlayers"
+    {
+        "en"    "Ignite All Players"
+    }
+    "Chaos_Impostors"
+    {
+        "en"    "Impostors"
+    }
+    "Chaos_IncreasedNadeDamage"
+    {
+        "en"    "Increased Nade Damage"
+    }
+    "Chaos_IncreasedRecoil"
+    {
+        "en"    "Increased Recoil"
+    }
+    "Chaos_InfiniteAmmo"
+    {
+        "en"    "Infinite Ammo"
+    }
+    "Chaos_InfiniteGrenades"
+    {
+        "en"    "Infinite Grenades"
+    }
+    "Chaos_InsaneAirSpeed"
+    {
+        "en"    "Extreme Strafe Acceleration"
+    }
+    "Chaos_InsaneGravity"
+    {
+        "en"    "Insane Gravity"
+    }
+    "Chaos_Invis"
+    {
+        "en"    "Where did everyone go?"
+    }
+    "Chaos_IsThisMexico"
+    {
+        "en"    "Is This What Mexico Looks Like?"
+    }
+    "Chaos_Jackpot"
+    {
+        "en"    "Jackpot"
+    }
+    "Chaos_Juggernaut"
+    {
+        "en"    "Juggernauts"
+    }
+    "Chaos_Jumping"
+    {
+        "en"    "Jump! Jump!"
+    }
+    "Chaos_KnifeFight"
+    {
+        "en"    "Knife Fight"
+    }
+    "Chaos_LSD"
+    {
+        "en"    "LSD"
+    }
+    "Chaos_Lag"
+    {
+        "en"    "Lag"
+    }
+    "Chaos_LavaFloor"
+    {
+        "en"    "THE FLOOR IS LAVA"
+    }
+    "Chaos_LightsOff"
+    {
+        "en"    "Who turned the lights off?"
+    }
+    "Chaos_LittleChooks"
+    {
+        "en"    "Little Chooks"
+    }
+    "Chaos_LockPlayersAim"
+    {
+        "en"    "Lock Mouse Movement"
+    }
+    "Chaos_LooseTrigger"
+    {
+        "en"    "Loose Trigger"
+    }
+    "Chaos_LowRenderDistance"
+    {
+        "en"    "Low Render Distance"
+    }
+    "Chaos_MamaChook"
+    {
+        "en"    "Mama Chook"
+    }
+    "Chaos_Meta_DoubleTimerSpeed"
+    {
+        "en"    "Double Timer Speed [META]"
+    }
+    "Chaos_Meta_HalfTimerSpeed"
+    {
+        "en"    "Half Timer Speed [META]"
+    }
+    "Chaos_Meta_Mega"
+    {
+        "en"    "Mega Chaos [META]"
+    }
+    "Chaos_Meta_WhatsHappening"
+    {
+        "en"    "What's Happening? [META]"
+    }
+    "Chaos_MoneyRain"
+    {
+        "en"    "Make it rain"
+    }
+    "Chaos_MoonGravity"
+    {
+        "en"    "Moon Gravity"
+    }
+    "Chaos_NightVision"
+    {
+        "en"    "Night Vision"
+    }
+    "Chaos_NoCrosshair"
+    {
+        "en"    "No Crosshair"
+    }
+    "Chaos_NoHeads"
+    {
+        "en"    "No Heads"
+    }
+    "Chaos_NoManualReload"
+    {
+        "en"    "No Manual Reload"
+    }
+    "Chaos_NoRecoil"
+    {
+        "en"    "100% Weapon Accuracy"
+    }
+    "Chaos_NoScopeOnly"
+    {
+        "en"    "No Scopes Only"
+    }
+    "Chaos_NoViewmodel"
+    {
+        "en"    "No Viewmodel"
+    }
+    "Chaos_NormalWhiteFog"
+    {
+        "en"    "Fog"
+    }
+    "Chaos_Nothing"
+    {
+        "en"    "Nothing"
+    }
+    "Chaos_OHKO"
+    {
+        "en"    "1 HP"
+    }
+    "Chaos_OffsetCrosshair"
+    {
+        "en"    "Offset Crosshair"
+    }
+    "Chaos_OneBulletMag"
+    {
+        "en"    "One Bullet Mags"
+    }
+    "Chaos_OneBulletOneGun"
+    {
+        "en"    "One Bullet One Gun"
+    }
+    "Chaos_OneWeaponOnly"
+    {
+        "en"    "One weapon Only"
+    }
+    "Chaos_PigeonHole"
+    {
+        "en"    "Pigeon Hole"
+    }
+    "Chaos_PortalGuns"
+    {
+        "en"    "Portal Guns"
+    }
+    "Chaos_QuakeFOV"
+    {
+        "en"    "Quake FOV"
+    }
+    "Chaos_RainingMolotovs"
+    {
+        "en"    "Raining Fire"
+    }
+    "Chaos_RandomInvisiblePlayer"
+    {
+        "en"    "Random Invisible Player"
+    }
+    "Chaos_RandomSkybox"
+    {
+        "en"    "Random Skybox"
+    }
+    "Chaos_RandomTeleport"
+    {
+        "en"    "Random Teleport"
+    }
+    "Chaos_RandomWeapons"
+    {
+        "en"    "Random Weapons"
+    }
+    "Chaos_RapidFire"
+    {
+        "en"    "Rapid Fire"
+    }
+    "Chaos_ReducedDamage"
+    {
+        "en"    "Half Shot Damage"
+    }
+    "Chaos_ResetSpawns"
+    {
+        "en"    "Teleport all players back to spawn"
+    }
+    "Chaos_RespawnDead_LastLocation"
+    {
+        "en"    "Resurrect players where they died"
+    }
+    "Chaos_RespawnTheDead"
+    {
+        "en"    "Resurrect dead players"
+    }
+    "Chaos_RespawnTheDead_Randomly"
+    {
+        "en"    "Resurrect dead players in random locations"
+    }
+    "Chaos_RevealEnemyLocation"
+    {
+        "en"    "Reveal Enemy Location"
+    }
+    "Chaos_ReversedMovement"
+    {
+        "en"    "Reversed Movement"
+    }
+    "Chaos_ReversedRecoil"
+    {
+        "en"    "Reversed Recoil"
+    }
+    "Chaos_ReversedStrafe"
+    {
+        "en"    "Reversed Strafe"
+    }
+    "Chaos_RewindTenSeconds"
+    {
+        "en"    "Rewind 10 Seconds"
+    }
+    "Chaos_Saturation"
+    {
+        "en"    "Saturation"
+    }
+    "Chaos_Shields"
+    {
+        "en"    "Shields"
+    }
+    "Chaos_SilentFootsteps"
+    {
+        "en"    "Silent Footsteps"
+    }
+    "Chaos_SimonSays"
+    {
+        "en"    "Simon Says"
+    }
+    "Chaos_SlayRandomPlayer"
+    {
+        "en"    "Slay Random Player On Each Team"
+    }
+    "Chaos_SleepyShooter"
+    {
+        "en"    "Shoot To Stay Awake"
+    }
+    "Chaos_SlowFire"
+    {
+        "en"    "Slow Weapon Fire"
+    }
+    "Chaos_SlowSpeed"
+    {
+        "en"    "0.5x movement speed"
+    }
+    "Chaos_SmokeStrat"
+    {
+        "en"    "Smoke Strat"
+    }
+    "Chaos_SneakyBeaky"
+    {
+        "en"    "Sneaky Beaky"
+    }
+    "Chaos_Snow"
+    {
+        "en"    "Snow"
+    }
+    "Chaos_Soccerballs"
+    {
+        "en"    "Soccer Balls"
+    }
+    "Chaos_SpawnExplodingBarrels"
+    {
+        "en"    "Exploding Barrels"
+    }
+    "Chaos_SpawnFlashbangs"
+    {
+        "en"    "Spawn Flashbangs"
+    }
+    "Chaos_SpeedShooter"
+    {
+        "en"    "Speed Shooter"
+    }
+    "Chaos_Spin180"
+    {
+        "en"    "180 Spin"
+    }
+    "Chaos_SuperJump"
+    {
+        "en"    "Super Jump"
+    }
+    "Chaos_SwapPlayerModels"
+    {
+        "en"    "Swap Player Models"
+    }
+    "Chaos_TaserParty"
+    {
+        "en"    "Taser Party"
+    }
+    "Chaos_TeammateSwap"
+    {
+        "en"    "Teammate Swap"
+    }
+    "Chaos_TeleportFewMetres"
+    {
+        "en"    "Teleport Players A Few Metres"
+    }
+    "Chaos_TeleportOnKill"
+    {
+        "en"    "Teleport On Kill"
+    }
+    "Chaos_Thirdperson"
+    {
+        "en"    "Thirdperson"
+    }
+    "Chaos_Thunderstorm"
+    {
+        "en"    "Thunderstorm"
+    }
+    "Chaos_Trails"
+    {
+        "en"    "Trails"
+    }
+    "Chaos_Turrets"
+    {
+        "en"    "Turrets"
+    }
+    "Chaos_VampireHeal"
+    {
+        "en"    "Vampires"
+    }
+    "Chaos_WKeyStuck"
+    {
+        "en"    "Help my W key is stuck"
+    }
+    "Chaos_WeaponKnockback"
+    {
+        "en"    "Weapon Knockback"
+    }
+}
