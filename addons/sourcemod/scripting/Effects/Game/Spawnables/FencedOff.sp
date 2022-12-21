@@ -25,7 +25,7 @@ INIT(){
 #define FENCEMODEL_A "models/props_c17/fence02a.mdl"
 #define FENCEMODEL_B "models/props_c17/fence02b.mdl"
 
-public void Chaos_FencedOff_OnMapStart(){
+ONMAPSTART(){
 	PrecacheModel(FENCEMODEL_A, true);
 	PrecacheModel(FENCEMODEL_B, true);
 	ParseFencesConfig();

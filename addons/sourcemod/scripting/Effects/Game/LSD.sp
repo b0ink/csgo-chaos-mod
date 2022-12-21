@@ -8,7 +8,7 @@ SETUP(effect_data effect){
 
 bool lsdMaterials = true;
 
-public void Chaos_LSD_OnMapStart(){
+ONMAPSTART(){
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_1.raw");
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_2.raw");
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_3.raw");

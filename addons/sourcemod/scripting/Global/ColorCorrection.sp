@@ -2,7 +2,7 @@
 	.raw files can be added to the downloads table in the OnMapStart function.
 	eg.
 
-	public void Chaos_EffectName_OnMapStart(){
+ONMAPSTART(){
 		AddFileToDownloadsTable("materials/Chaos/ColorCorrection/xxxxxx.raw");
 	}
 */

@@ -8,7 +8,7 @@ SETUP(effect_data effect){
 
 bool offsetCrosshairMaterials = true;
 
-public void Chaos_OffsetCrosshair_OnMapStart(){
+ONMAPSTART(){
 	PrecacheDecal("Chaos/OffsetCrosshair.vmt", true);
 	PrecacheDecal("Chaos/OffsetCrosshair.vtf", true);
 	AddFileToDownloadsTable("materials/Chaos/OffsetCrosshair.vtf");

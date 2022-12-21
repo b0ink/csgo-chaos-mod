@@ -5,7 +5,7 @@ SETUP(effect_data effect){
 	effect.Duration = 60;
 }
 
-public void Chaos_Soccerballs_OnMapStart(){
+ONMAPSTART(){
 	PrecacheModel("models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl", true);
 }
 

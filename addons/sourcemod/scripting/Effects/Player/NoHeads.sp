@@ -12,7 +12,7 @@ char NoHead_CT_Path[PLATFORM_MAX_PATH] = "models/player/custom_player/legacy/ctm
 
 bool noHeadsMaterials = true;
 
-public void Chaos_NoHeads_OnMapStart(){
+ONMAPSTART(){
 	PrecacheModel(NoHead_T_Path, true);
 	PrecacheModel(NoHead_CT_Path, true);
 	

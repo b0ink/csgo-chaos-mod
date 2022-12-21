@@ -12,7 +12,7 @@ char BigHead_CT_Path[PLATFORM_MAX_PATH] =  "models/player/custom_player/eminem/b
 
 bool bigHeadsMaterials = true;
 
-public void Chaos_BigHeads_OnMapStart(){
+ONMAPSTART(){
 	PrecacheModel(BigHead_T_Path, true);
 	PrecacheModel(BigHead_CT_Path, true);
 	

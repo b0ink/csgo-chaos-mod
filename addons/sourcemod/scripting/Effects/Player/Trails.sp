@@ -9,7 +9,7 @@ SETUP(effect_data effect){
 	effect.Duration = 30;
 }
 
-public void Chaos_Trails_OnMapStart(){
+ONMAPSTART(){
 	trailSprite = PrecacheModel("materials/sprites/laser.vmt", true);
 	AddFileToDownloadsTable("materials/sprites/laser.vmt");
 	AddFileToDownloadsTable("materials/sprites/laser.vtf");

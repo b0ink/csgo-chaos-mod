@@ -7,7 +7,7 @@ SETUP(effect_data effect){
 	effect.Duration = 30;
 }
 
-public void Chaos_ExplosiveBullets_OnMapStart(){
+ONMAPSTART(){
 	PrecacheEffect("ParticleEffect");
 	PrecacheParticleEffect(DISTORTION);
 	PrecacheParticleEffect(FLASH);

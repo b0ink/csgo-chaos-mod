@@ -16,7 +16,7 @@ INIT(){
 }
 
 
-public void Chaos_Checkers_OnMapStart(){
+ONMAPSTART(){
 	PrecacheDecal("Chaos/Checkers_1.vmt", true);
 	PrecacheDecal("Chaos/Checkers_1.vtf", true);
 	AddFileToDownloadsTable("materials/Chaos/Checkers_1.vtf");

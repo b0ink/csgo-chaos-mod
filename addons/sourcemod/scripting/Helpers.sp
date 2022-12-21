@@ -261,7 +261,7 @@ void GetWeaponClassname(int weapon, char[] buffer, int size) {
 
 
 
-bool CreateParticle(char []particle, float[3] vec){
+bool CreateParticle(char[] particle, float vec[3]){
 	int ent = CreateEntityByName("info_particle_system");
 	DispatchKeyValue(ent , "start_active", "0");
 	DispatchKeyValue(ent, "effect_name", particle);

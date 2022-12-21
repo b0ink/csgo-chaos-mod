@@ -6,7 +6,7 @@ SETUP(effect_data effect){
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_Jackpot_OnMapStart(){
+ONMAPSTART(){
 	PrecacheSound("survival/money_collect_04.wav");
 }
 START(){

@@ -13,7 +13,7 @@ SETUP(effect_data effect){
 
 bool extremeBlurMaterials = true;
 
-public void Chaos_ExtremeBlur_OnMapStart(){
+ONMAPSTART(){
 	PrecacheDecal("Chaos/Blur_3.vmt", true);
 	AddFileToDownloadsTable("materials/Chaos/Blur_3.vmt");
 	

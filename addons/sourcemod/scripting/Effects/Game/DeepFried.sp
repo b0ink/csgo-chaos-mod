@@ -8,7 +8,7 @@ SETUP(effect_data effect){
 
 bool deepFriedMaterials = true;
 
-public void Chaos_DeepFried_OnMapStart(){
+ONMAPSTART(){
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/deepfried.raw");
 	if(!FileExists("materials/Chaos/ColorCorrection/deepfried.raw")) deepFriedMaterials = false;
 }

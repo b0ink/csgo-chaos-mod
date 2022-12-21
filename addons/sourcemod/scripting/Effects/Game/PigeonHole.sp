@@ -8,7 +8,7 @@ SETUP(effect_data effect){
 
 bool pigeonholeMaterials = true;
 
-public void Chaos_PigeonHole_OnMapStart(){
+ONMAPSTART(){
 	char pathname[PLATFORM_MAX_PATH];
 	// Precache and download pg_1 - pg_7 both .vtf and .vmt
 	for(int i = 1; i <= 7; i++){

@@ -8,7 +8,7 @@ SETUP(effect_data effect){
 
 bool saturationMaterials = true;
 
-public void Chaos_Saturation_OnMapStart(){
+ONMAPSTART(){
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/saturation.raw");
 	if(!FileExists("materials/Chaos/ColorCorrection/saturation.raw")) saturationMaterials = false;
 }

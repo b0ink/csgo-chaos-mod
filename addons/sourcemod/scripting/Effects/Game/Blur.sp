@@ -13,7 +13,7 @@ SETUP(effect_data effect){
 
 bool blurMaterials = true;
 
-public void Chaos_Blur_OnMapStart(){
+ONMAPSTART(){
 	PrecacheDecal("Chaos/Blur_2.vmt", true);
 	PrecacheDecal("nature/water_coast01_normal.vtf", true);
 	AddFileToDownloadsTable("materials/nature/water_coast01_normal.vtf");

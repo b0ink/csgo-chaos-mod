@@ -18,7 +18,7 @@ INIT(){
 
 int dronegunEnt = 0;
 
-public void Chaos_Turrets_OnMapStart(){
+ONMAPSTART(){
 	dronegunEnt = 0;
 
 	dronegunEnt = PrecacheModel("models/props_survival/dronegun/dronegun.mdl", true);

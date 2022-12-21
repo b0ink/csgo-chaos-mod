@@ -7,7 +7,7 @@ SETUP(effect_data effect){
 
 bool binocularsMaterials = true;
 
-public void Chaos_Binoculars_OnMapStart(){
+ONMAPSTART(){
 	PrecacheDecal("Chaos/binoculars.vmt", true);
 	PrecacheDecal("Chaos/binoculars.vtf", true);
 	AddFileToDownloadsTable("materials/Chaos/binoculars.vtf");

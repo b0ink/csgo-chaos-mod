@@ -13,7 +13,7 @@ SETUP(effect_data effect){
 	effect.Duration = 30;
 }
 
-public void Chaos_PortalGuns_OnMapStart(){
+ONMAPSTART(){
 	g_beamsprite = PrecacheModel("materials/sprites/laserbeam.vmt");
 	g_halosprite = PrecacheModel("materials/sprites/halo.vmt");
 }
