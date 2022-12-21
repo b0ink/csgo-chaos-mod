@@ -1,8 +1,0 @@
-"Refract"
-{
-	"$refractamount" ".5"
-	"$bluramount" "1"
-	"$ignorez" "1"
-	"$scale" "[1 1]"
-	"$normalmap" "nature/water_coast01_normal"
-}

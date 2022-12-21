@@ -1,4 +1,7 @@
 archive
+
+node_modules
+
 .VSCodeCounter
 .vscode
 
@@ -6,3 +9,5 @@ addons/sourcemod/plugins/ChaosDebug.smx
 addons/sourcemod/scripting/ChaosDebug.sp
 
 .DS_Store
+
+PreCompiler/csgo-chaos-mod/
