@@ -613,11 +613,11 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
 				if(
 					effect.Enabled &&
-					effect.CanRunEffect() &&
 					(!Effect_Recently_Played(effect.FunctionName) || CustomRun) &&
 					effect.Timer == INVALID_HANDLE &&
 					effect.IsCompatible() &&
-					!effect.IsMetaEffect
+					!effect.IsMetaEffect &&
+					effect.CanRunEffect()
 				){
 					Random_Effect = effect.FunctionName;
 					effect.Run();
