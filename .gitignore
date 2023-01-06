@@ -10,4 +10,4 @@ addons/sourcemod/scripting/ChaosDebug.sp
 
 .DS_Store
 
-PreCompiler/csgo-chaos-mod/
+PreCompiler/csgo-chaos-mod/*
