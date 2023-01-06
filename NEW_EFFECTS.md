@@ -6,7 +6,9 @@ Name your file following the convention of `EffectName.sp` and place it in the r
 `Player` is for effects that directly affect the player.\
 `Game` is for effects that manipulates the environment, such as weather, image overlays, color corrections, etc.\
 These are only used for organisation purposes.
-```c++
+
+The `public` keyword must be used as the functions are remotely called via `GetFunctionByName` and `Call_StartFunction`.
+```c
 
 /*
 	Any instances of 'EffectName' should be replaced with an appropriate name for you effect.
@@ -20,28 +22,25 @@ public void Chaos_EffectName(effect_data effect){
 	effect.Title = "Effect Name";
 	effect.Duration = 30;
 	
-	/*
-	
-	Optional configs: 
+	/* Optional configs: */
 
-	effect.HasNoDuration = troe; // Use this if your effect isn't timed, eg. spawning models
+	effect.HasNoDuration = true; // Use this if your effect isn't timed, eg. spawning models
 
 	effect.AddAlias("SearchTerm"); // Allow the effect to show up when using "!effect searchterm"
 	effect.IncompatibleWith("Chaos_DifferentEffectName"); // Prevents the effect running the same time with other effects
+	effect.AddFlag("NoMovement"); // Prevents this effect running at the same time with other effects containing the same flag.
 
 	// Prevents the plugin from announcing the effect name, and does not get added to the effect list (HUD).
-	// Useful if you want to delay the Announcement -> use AnnounceChaos() manually
+	// Useful if you want to delay the Announcement -> use AnnounceChaos() manually within the _START function
 	effect.HasCustomAnnouncement = true; 
 
 	effect.IsMetaEffect = true; // Marks the effect as a meta effect (rarely run)
-	
-	*/
 }
 
 public void Chaos_EffectName_INIT(){
 	/*
 	
-	Runs on plugin start. Use this to Hook Events. This will only run ONCE.
+	Runs on plugin start. Use this to Hook Events. This will only run once like it does in OnPluginStart().
 	eg. 
 		HookEvent("bullet_impact", Chaos_EffectName_Event_BulletImpact);
 	*/
@@ -60,48 +59,48 @@ public void Chaos_EffectName_OnMapStart(){
 
 public void Chaos_EffectName_START(){
 	g_EffectName = true;
-	// Runs when the effect is selected and
+	// Runs when the effect is selected and announced
 }
 
 public void Chaos_EffectName_RESET(bool HasTimerEnded){
 	// Runs when the effect is reset, also runs when the round ends/map changes/plugin reloaded
 	// Use HasTimerEnded to strictly check if the effect has expired/used up its duration.
-	/*
-	eg.
-		Reset any bools here..
+
+	
+	if(HasTimerEnded){
+		// Teleport players, set their movement speed, switch to a different weapon, etc.
+		// Avoid resetting things outside of this function that would be reset by default on round change.
+	}
+
+
+	g_EffectName = false;
+
 		
-		g_EffectName = false;
-		if(HasTimerEnded){
-			// Teleport players, set their movement speed, switch to a different weapon, etc.
-			// Avoid resetting things outside of this function that would be reset by default on round change.
-		}
-		
-	*/
 }
 
 public bool Chaos_EffectName_Conditions(){
 	/*
 		Check conditions to deterimne whether the effect can be run or not. This is the last final check before the effect is about to run. If returned false, 			another effect will be selected.
-		
-		If you're using map spawns to teleport to, you may want to use the following:
-		if(!ValidMapPoints()) return false;
-		
-		Available checks:
-		ValidMapPoints();
-		isHostageMap();
-		ValidBombSpawns();
-		
-		You can run custom checks such as:
-		if(StrEqual(mapName, "de_dust2")){
-			return false;
-		}
-		
 	*/
+	
+	// if you're using map spawns to teleport to, you may want to use the following:
+	if(!ValidMapPoints()) return false;
+	
+	/* Available checks: */
+	ValidMapPoints(); // Returns true if spawn points are available in the map to use
+	isHostageMap(); // Returns true if a hostage is found on the map
+	ValidBombSpawns(); // Returns true if custom bomb spawns have been saved to use
+	
+	// You can run additional custom checks such restricting your effects from running on certain maps that aren't compatible
+	if(StrEqual(mapName, "de_dust2")){
+		return false;
+	}
+		
 	
 	return true;
 }
 
-// Additional functions: (Run automatically if the correct naming convention is used)
+// Additional functions: (Run automatically if the correct naming convention is used). This is done to allow all components of an effect to be localised to one file (EffectName.sp).
 
 public void 	Chaos_EffectName_OnEntityCreated(int ent, const char[] classname);
 
@@ -115,7 +114,7 @@ public void 	Chaos_EffectName_OnGameFrame();
 
 ## Translations
 Add the following to `addons/sourcemod/translations/chaos.phrases.txt`.
-```
+```json
 "Chaos_EffectName"
 {
 	"en"    "Effect Name"
@@ -125,15 +124,15 @@ If translations are missing on the server, the `effect.Title` will be used by th
 
 ## Including your effect
 Include your `EffectName.sp` inside of `addons/sourcemod/scripting/Effects/EffectsList.sp`
-```c++
+```c
 #include "Effects/Player/EffectName.sp"
 ```
 Ensure that the contents of `EffectsList.sp` is sorted alphabetically in descending order.\
 Add the name of your function to `addons/sourcemod/scripting/Effects/EffectNames.sp`. This is used to call your function and add your effect.
-```c++
+```c
 "Chaos_EffectName",
 ```
 This should match the name of your function that sets up your effect:
-```c++
+```c
 public void Chaos_EffectName(effect_data effect)
 ```
