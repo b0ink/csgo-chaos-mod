@@ -9,6 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 const fsExtra = require('fs-extra');
+const watch = require('node-watch');
 
 const SOURCE_DIR =   '../GameServer/addons/sourcemod/scripting/';
 const SOURCE_ENTRY = '../GameServer/addons/sourcemod/scripting/Chaos.sp';
@@ -20,11 +21,33 @@ var chunk = ''; // Final chunk to save to Chaos_Full
 var chunks = {}; // Chunks to keep track of 'sourcemap'
 
 
-const DEV = true; // Set false to compress src and remove whitespace. Set true to preserve line count and indentation.
-const sourcemap = true; // Set false to generate a single Chaos.sp (production), set true to recreate file & folder structure (Debug sourcemod errors)
+var DEV = true; // Set false to compress src and remove whitespace. Set true to preserve line count and indentation.
+var sourcemap = true; // Set false to generate a single Chaos.sp (production), set true to recreate file & folder structure (Debug sourcemod errors)
 
 
-async function compile(){
+let watcher = watch(SOURCE_DIR, { recursive: true }, function(evt, name) {
+	console.log(`${name} changed.`);
+	precompile()
+});
+
+const params = process.argv.length;
+process.argv.forEach(function (val, index, array) {
+	console.log(index + ': ' + val);
+	if(val == '--dev'){
+		DEV = true;
+		sourcemap = true;
+	}
+	if(val == '--prod'){
+		DEV = false;
+		sourcemap = false;
+		watcher.close();
+	}
+	if(index == params - 1){
+		precompile();
+	}
+});
+
+async function precompile(){
 	await fsExtra.emptyDir(OUTPUT);
 	setTimeout(() => {
 		parseFile(SOURCE_ENTRY);
@@ -32,7 +55,6 @@ async function compile(){
 }
 
 
-compile();
 
 
 async function parseFile(path, options = {}){
