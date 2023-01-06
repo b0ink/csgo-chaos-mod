@@ -2,6 +2,8 @@ bool  HideTimer[MAXPLAYERS+1];
 bool  HideEffectList[MAXPLAYERS+1];
 bool  HideAnnouncement[MAXPLAYERS+1];
 
+bool  UseHtmlHud[MAXPLAYERS+1];
+
 ArrayList HudData;
 
 enum struct hud_effect_data{
@@ -132,6 +134,7 @@ void PrintEffects(){
 
 
 
+
 		SetHudTextParams(g_ChaosEffectList_Position[0], g_ChaosEffectList_Position[1], 1.5, 252, 227, 0, 0, 0, 1.0, 0.0, 0.0);
 		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(2), "%s", chunk_meta);
@@ -153,36 +156,59 @@ void PrintEffects(){
 
 
 void PrintTimer(int time){
+	if(time <= 3){
+		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
+		// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
+	}else{
+		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5,
+			g_ChaosEffectTimer_Color[0],
+			g_ChaosEffectTimer_Color[1],
+			g_ChaosEffectTimer_Color[2],
+			g_ChaosEffectTimer_Color[3], 0, 1.0, 0.0, 0.0);
+	}
+
 	LoopValidPlayers(i){
+		if(IsFakeClient(i)) continue;
 		if(HideTimer[i]) continue;
 
 		if(time > -1){
-			if(time <= 3){
-				SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
-				if(g_bDynamicChannelsEnabled){
-					ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);
-				}else{
-					ShowHudText(i, -1, "New effect in:\n%i", time);
-				}
-				// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
+			if(g_bDynamicChannelsEnabled){
+				ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
 			}else{
-				SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5,
-					g_ChaosEffectTimer_Color[0],
-					g_ChaosEffectTimer_Color[1],
-					g_ChaosEffectTimer_Color[2],
-					g_ChaosEffectTimer_Color[3], 0, 1.0, 0.0, 0.0);
-				
-				if(g_bDynamicChannelsEnabled){
-					ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
-				}else{
-					ShowHudText(i, -1, "New effect in:\n%i", time);	
-				}
-	
+				ShowHudText(i, -1, "New effect in:\n%i", time);	
 			}
 		}
 	}
 }
 
+void PrintHTML(char[] message){
+	Event newevent_message = CreateEvent("cs_win_panel_round");
+	char htmlMsg[1024];
+	FormatEx(htmlMsg, sizeof(htmlMsg), "<b><font size='15' color='#1BD508'>%s</font></b>", RemoveMulticolors(message));
+	newevent_message.SetString("funfact_token", htmlMsg);
+
+	LoopValidPlayers(i){
+		if(!IsFakeClient(i) && UseHtmlHud[i]){
+			newevent_message.FireToClient(i);
+		}
+	}
+	newevent_message.Cancel(); 
+
+	CreateTimer(3.9, Timer_ClearHTML); // 3.9 to allow a safe 1 second buffer if the effect interval is 5.0 seconds
+}
+
+Action Timer_ClearHTML(Handle timer){
+	Event newevent_message = CreateEvent("cs_win_panel_round");
+	newevent_message.SetString("funfact_token", "");
+	
+	LoopValidPlayers(i){
+		if(!IsFakeClient(i)){
+			newevent_message.FireToClient(i);
+		}
+	}
+									
+	newevent_message.Cancel(); 
+}
 
 Action Timer_DisplayEffects(Handle timer){
 	hud_effect_data effect;

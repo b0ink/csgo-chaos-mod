@@ -191,13 +191,19 @@ void ShowMenu_HudSettings(int client){
 	char TimerInfo[32];
 	char EffectListInfo[32];
 	char EffectAnnouncement[32];
+	char UseHtmlHudInfo[32];
 
 	FormatEx(TimerInfo, sizeof(TimerInfo), "Hide Timer: [%s]", HideTimer[client] ? "YES" : "NO");
 	FormatEx(EffectListInfo, sizeof(EffectListInfo), "Hide Effect List: [%s]", HideEffectList[client] ? "YES" : "NO");
 	FormatEx(EffectAnnouncement, sizeof(EffectAnnouncement), "Hide Announcement: [%s]", HideAnnouncement[client] ? "YES" : "NO");
+	FormatEx(UseHtmlHudInfo, sizeof(UseHtmlHudInfo), "Alternate Announcement: [%s]", UseHtmlHud[client] ? "YES" : "NO");
 	menu.AddItem("toggle-timer", TimerInfo);
 	menu.AddItem("toggle-effectlist", EffectListInfo);
 	menu.AddItem("toggle-effectannounce", EffectAnnouncement);
+	menu.AddItem("toggle-usehtmlhud", UseHtmlHudInfo);
+	menu.AddItem("alternate-hud-info", "Resolutions larger than 1080p will scale the HUD incorrectly.", ITEMDRAW_DISABLED);
+	menu.AddItem("alternate-hud-info", "Use Alternate Announcement if you have this issue. Or start CS:GO at 1080p.", ITEMDRAW_DISABLED);
+	// menu.AddItem("alternate-hud-info", "Starting CS:GO with a 1080p resolution will fix this issue.", ITEMDRAW_DISABLED);
 
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
@@ -215,6 +221,8 @@ public int HudSettings_Handler(Menu menu, MenuAction action, int param1, int par
 				HideEffectList[param1] = !HideEffectList[param1];
 			}else if(StrEqual(info, "toggle-effectannounce", false)){
 				HideAnnouncement[param1] = !HideAnnouncement[param1];
+			}else if(StrEqual(info, "toggle-usehtmlhud", false)){
+				UseHtmlHud[param1] = !UseHtmlHud[param1];
 			}
 		}
 		ShowMenu_HudSettings(param1);

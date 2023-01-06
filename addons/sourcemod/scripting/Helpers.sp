@@ -85,12 +85,14 @@ void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, b
 			Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix, message);
 		}
 		CPrintToChatAll(announcingMessage);
+		PrintHTML(message);
 	}
 
 
 	//TODO: what if hud was purely based off which timers are active. .Run() would save the current game time to predict how long is left
 	char EffectName[256];
 	FormatEx(EffectName, sizeof(EffectName), "%s", RemoveMulticolors(message));
+
 	if(!endingChaos && EffectTime > -2.0){
 		if(g_bDynamicChannelsEnabled){
 			if(EffectTime == 0.0){

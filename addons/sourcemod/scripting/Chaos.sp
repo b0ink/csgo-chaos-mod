@@ -149,6 +149,8 @@ enum struct effect_data{
 		Function func = GetFunctionByName(GetMyHandle(), function_name_start);
 
 		if(func != INVALID_FUNCTION){
+			Log("Playing effect: %s", this.FunctionName);
+
 			Call_StartFunction(GetMyHandle(), func);
 			Call_Finish();
 
@@ -493,6 +495,7 @@ public void OnClientPutInServer(int client){
 	HideTimer[client] = false;
 	HideEffectList[client] = false;
 	HideAnnouncement[client] = false;
+	UseHtmlHud[client] = false;
 
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
