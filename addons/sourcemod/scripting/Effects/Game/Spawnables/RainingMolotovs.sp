@@ -13,7 +13,7 @@ public void Chaos_RainingMolotovs_START(){
 	CreateTimer(g_RandomMolotovSpawn_Interval, Timer_SpawnMolotov, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
 
-public Action Chaos_RainingMolotovs_RESET(bool HasTimerEnded){
+public void Chaos_RainingMolotovs_RESET(bool HasTimerEnded){
 	g_MolotovSpawn_Count = 100; // Stop spawning any more
 }
 

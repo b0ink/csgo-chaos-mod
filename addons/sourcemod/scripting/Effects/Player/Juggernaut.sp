@@ -25,9 +25,10 @@ public void Chaos_Juggernaut_OnPlayerSpawn(int client, bool EffectIsRunning){
 public Action Timer_SetJuggernaut(Handle timer, int client){
 	GetClientModel(client, g_OriginalModels_Jugg[client], sizeof(g_OriginalModels_Jugg[]));
 	GivePlayerItem(client, "item_heavyassaultsuit");
+	return Plugin_Continue;
 }
 
-public Action Chaos_Juggernaut_RESET(bool HasTimerEnded){
+public void Chaos_Juggernaut_RESET(bool HasTimerEnded){
 	if(g_bSetJuggernaut){
 		g_bSetJuggernaut = false;
 		LoopAlivePlayers(i){

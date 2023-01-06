@@ -10,7 +10,7 @@ public void Chaos_NightVision_START(){
 	}
 }
 
-public Action Chaos_NightVision_RESET(bool HasTimerEnded){
+public void Chaos_NightVision_RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		SetEntProp(i, Prop_Send, "m_bNightVisionOn", 0);
 	}

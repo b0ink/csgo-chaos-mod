@@ -9,7 +9,7 @@ public void Chaos_InsaneGravity_START(){
 	}
 }
 
-public Action Chaos_InsaneGravity_RESET(bool HasTimerEnded){
+public void Chaos_InsaneGravity_RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		SetEntityGravity(i, 1.0);
 	}

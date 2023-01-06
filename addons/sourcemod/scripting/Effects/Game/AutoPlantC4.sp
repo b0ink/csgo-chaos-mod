@@ -43,7 +43,7 @@ public void Chaos_AutoPlantC4_INIT(){
     HookEvent("bomb_planted", Chaos_AutoPlantC4_Event_BombPlanted);
 }
 
-public Action Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+public void Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	g_bBombPlanted = true;
 }
 
@@ -120,7 +120,7 @@ public void TeleportC4ToNewBombSite(){
 
 }
 
-public Action Chaos_AutoPlantC4_RESET(bool HasTimerEnded){
+public void Chaos_AutoPlantC4_RESET(bool HasTimerEnded){
 	AutoPlantRoundEnd();
 }
 
@@ -134,6 +134,7 @@ public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
 	}else{
 		AnnounceChaos(GetChaosTitle("Chaos_AutoPlantC4"), -1.0);
 	}
+	return Plugin_Continue;
 }
 
 
@@ -187,6 +188,7 @@ void AutoPlantC4(bool ForcedRetry = false){
 
 public Action Timer_RetryAutoPlant(Handle timer){
     AutoPlantC4(true);
+    return Plugin_Continue;
 }
 
 public void AutoPlantRoundEnd(){
@@ -208,13 +210,14 @@ public Action PlantBomb(Handle timer, int client){
             SendBombPlanted(client);
 
             if (DispatchSpawn(bombEntity)){
-				ActivateEntity(bombEntity);
-				TeleportEntity(bombEntity, bombPosition, NULL_VECTOR, NULL_VECTOR);
-				GroundEntity(bombEntity);
-				g_bBombPlanted = true;
+                ActivateEntity(bombEntity);
+                TeleportEntity(bombEntity, bombPosition, NULL_VECTOR, NULL_VECTOR);
+                GroundEntity(bombEntity);
+                g_bBombPlanted = true;
             }
         }
     }
+    return Plugin_Continue;
 }
 
 public void SendBombPlanted(int client){

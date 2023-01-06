@@ -12,9 +12,11 @@ public Action Chaos_VampireHeal_Hook_OnTakeDamage(int victim, int &attacker, int
 				health = health + RoundFloat(damage);
 				if(health > 100) health = 100;
 				SetEntityHealth(inflictor, health);
+				return Plugin_Changed;
 			}
 		}
 	}
+	return Plugin_Continue;
 }
 
 public void Chaos_VampireHeal_START(){
@@ -24,7 +26,7 @@ public void Chaos_VampireHeal_START(){
 	g_bVampireRound = true;
 }
 
-public Action Chaos_VampireHeal_RESET(bool HasTimerEnded){
+public void Chaos_VampireHeal_RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_VampireHeal_Hook_OnTakeDamage);
 	}

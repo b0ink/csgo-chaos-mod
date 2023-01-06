@@ -9,7 +9,7 @@ public void Chaos_Impostors_START(){
 	SpawnImpostors();
 }
 
-public Action Chaos_Impostors_RESET(bool HasTimerEnded){
+public void Chaos_Impostors_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		RemoveChickens(.chickenName="Impostors");
 	}

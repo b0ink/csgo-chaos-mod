@@ -19,4 +19,5 @@ stock int ScreenShake(int iClient, float fAmplitude = 50.0, float duration = 7.0
 	PbSetFloat(hMessage, "duration", duration);
 	
 	EndMessage();
+	return 0;
 }

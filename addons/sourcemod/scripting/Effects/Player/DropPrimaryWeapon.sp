@@ -17,4 +17,5 @@ public Action Timer_DropPrimary(Handle timer){
 	LoopAlivePlayers(i){
 		ClientCommand(i, "drop");
 	}
+	return Plugin_Continue;
 }

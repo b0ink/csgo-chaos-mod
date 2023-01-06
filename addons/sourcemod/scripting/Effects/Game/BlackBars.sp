@@ -20,7 +20,7 @@ public void Chaos_BlackBars_START(){
 }
 
 
-public Action Chaos_BlackBars_RESET(bool EndChaos){
+public void Chaos_BlackBars_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/BlackBars.vtf");
 }
 

@@ -42,7 +42,7 @@ public void Chaos_Thunderstorm_START(){
 	}
 }
 
-public Action Chaos_Thunderstorm_RESET(bool HasTimerEnded){
+public void Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	CLEAR_CC("thunderstorm.raw");
 	
 	Thunderstorm = false;
@@ -67,7 +67,7 @@ public bool Chaos_Thunderstorm_Conditions(){
 
 public Action Timer_LightningStrike(Handle timer) {
 	if (!Thunderstorm) {
-		return;
+		return Plugin_Continue;
 	}
 	
 
@@ -118,4 +118,5 @@ public Action Timer_LightningStrike(Handle timer) {
 	}
 
 	CreateTimer(0.1, Timer_LightningStrike);
+	return Plugin_Continue;
 }

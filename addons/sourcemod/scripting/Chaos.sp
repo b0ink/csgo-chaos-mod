@@ -6,7 +6,7 @@
 
 #undef REQUIRE_PLUGIN
 #include <DynamicChannels>
-#include <smac> // Protection for SMAC users (SM Aimbot).
+// #include <smac> // Protection for SMAC users (SM Aimbot).
 #define REQUIRE_PLUGIN
 
 #pragma newdecls required
@@ -41,6 +41,22 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define SMOKE "impact_dirt_child_smoke_puff"
 #define DIRT "impact_dirt_child_clumps"
 #define EXPLOSION_HE "weapons/hegrenade/explode5.wav"
+
+
+// Hud Element hiding flags
+#define HIDEHUD_WEAPONSELECTION     (1 << 0)	// Hide ammo count & weapon selection
+#define HIDEHUD_FLASHLIGHT          (1 << 1)
+#define HIDEHUD_ALL                 (1 << 2)
+#define HIDEHUD_HEALTH              (1 << 3)	// Hide health & armor / suit battery
+#define HIDEHUD_PLAYERDEAD          (1 << 4)	// Hide when local player's dead
+#define HIDEHUD_NEEDSUIT            (1 << 5)	// Hide when the local player doesn't have the HEV suit
+#define HIDEHUD_MISCSTATUS          (1 << 6)	// Hide miscellaneous status elements (trains, pickup history, death notices, etc)
+#define HIDEHUD_CHAT                (1 << 7)	// Hide all communication elements (saytext, voice icon, etc)
+#define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
+#define HIDEHUD_VEHICLE_CROSSHAIR   (1 << 9)	// Hide vehicle crosshair
+#define HIDEHUD_INVEHICLE           (1 << 10)
+#define HIDEHUD_BONUS_PROGRESS      (1 << 11)	// Hide bonus progress display (for bonus map challenges)
+#define HIDEHUD_BITCOUNT            12
 
 // #define LoopAllEntities(%1,%2) for(int %1 = 0; %1 < %2;%1++)
 // 								if(IsValidEntity(%1) && IsValidEdict(%1))
@@ -332,6 +348,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 			break;
 		}
 	}
+	return Plugin_Continue;
 }
 
 
@@ -345,10 +362,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 
 
 #include "Effects/EffectsList.sp"
-
-char EffectNames[][] = {
-	#include "Effects/EffectNames.sp"
-};
+#include "Effects/EffectNames.sp"
 
 float BellVolume[MAXPLAYERS+1] = {0.5, ...};
 
@@ -454,6 +468,7 @@ public void OnMapStart(){
 
 public Action Timer_Advertisement(Handle timer){
 	CPrintToChatAll("Thanks for playing {blue}CS:GO Chaos Mod{default}!\xe2\x80\xa9Visit {orange}csgochaosmod.com {default}to add this mod to your server!");
+	return Plugin_Continue;
 }
 
 public void OnMapEnd(){
@@ -507,6 +522,7 @@ public void OnClientDisconnect(int client){
 
 public Action Timer_CreateHostage(Handle timer){
 	CreateHostageRescue();
+	return Plugin_Continue;
 }
 
 bool Effect_Recently_Played(char[] effect_name){
@@ -517,7 +533,7 @@ bool Effect_Recently_Played(char[] effect_name){
 	return found;
 }
 
-bool PoolChaosEffects(char[] effectName = ""){
+void PoolChaosEffects(char[] effectName = ""){
 
 	char alias[64];
 	PossibleChaosEffects.Clear();
@@ -552,8 +568,8 @@ bool PoolChaosEffects(char[] effectName = ""){
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
-	if(!g_bCanSpawnEffect) return;
-	if(!g_cvChaosEnabled.BoolValue && !CustomRun) return;
+	if(!g_bCanSpawnEffect) return Plugin_Continue;
+	if(!g_cvChaosEnabled.BoolValue && !CustomRun) return Plugin_Continue;
 
 	char Random_Effect[64] = "-";
 	int randomEffect = -1;
@@ -652,7 +668,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
 
-	if(CustomRun) return;
+	if(CustomRun) return Plugin_Continue;
 
 
 	if(!CustomRun &&  ((g_iTotalRoundsThisMap >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
@@ -713,10 +729,12 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		}
 		g_iTotalEffectsRanThisRound++;
 	}
+	return Plugin_Continue;
 }
 
 public Action Timer_ResetPlaySound(Handle timer){
 	g_bPlaySound_Debounce = false;
+	return Plugin_Continue;
 }
 
 //Used if there's no map data found for the map that renders the event useless
@@ -745,6 +763,7 @@ public Action ResetRoundChaos(Handle timer){
 			effect.Reset(false);
 		}
 	}
+	return Plugin_Continue;
 }
 
 

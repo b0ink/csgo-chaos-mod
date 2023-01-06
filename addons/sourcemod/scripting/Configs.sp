@@ -156,7 +156,7 @@ void SaveBombPosition(){
 
 public Action Timer_SaveCoordinates(Handle timer){
 		
-	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return;
+	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return Plugin_Continue;
 
 	float client_vec[3];
 	float client_vel[3];
@@ -189,6 +189,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 
 		}
 	}
+	return Plugin_Continue;
 }
 
 

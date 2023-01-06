@@ -26,7 +26,7 @@ public void Chaos_DoubleJump_START(){
 	g_bDoubleJump = true;
 }
 
-public Action Chaos_DoubleJump_RESET(bool EndChaos){
+public void Chaos_DoubleJump_RESET(bool EndChaos){
 	g_bDoubleJump = false;
 }
 

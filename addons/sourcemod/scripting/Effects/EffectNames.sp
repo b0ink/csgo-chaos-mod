@@ -1,3 +1,4 @@
+char EffectNames[][] = {
 "Chaos_Aimbot",
 "Chaos_AlienModelKnife",
 "Chaos_AutoPlantC4",
@@ -148,3 +149,4 @@
 "Chaos_VampireHeal",
 "Chaos_WKeyStuck",
 "Chaos_WeaponKnockback",
+};

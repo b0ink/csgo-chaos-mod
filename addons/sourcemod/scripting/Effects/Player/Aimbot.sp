@@ -13,8 +13,8 @@ BOOLS.
 *****************************************************************************************************/
 bool AimbotEnabled = false;
 
-bool g_bAimbot[MAXPLAYERS + 1] = false;
-bool g_bFlashed[MAXPLAYERS + 1] = false;
+bool g_bAimbot[MAXPLAYERS + 1] = {false, ...};
+bool g_bFlashed[MAXPLAYERS + 1] = {false, ...};
 
 
 /****************************************************************************************************
@@ -52,7 +52,7 @@ public void Chaos_Aimbot_START(){
 	}
 }
 
-public Action Chaos_Aimbot_RESET(bool HasTimerEnded){
+public void Chaos_Aimbot_RESET(bool HasTimerEnded){
 	AimbotEnabled = false;
 	LoopValidPlayers(i){
 		Aimbot_REMOVE_SDKHOOKS(i);
@@ -308,19 +308,15 @@ public bool Base_TraceFilter(int iEntity, int iContentsMask, int iData){
 	return iEntity == iData;
 }
 
-public Action SMAC_OnCheatDetected(int iClient, const char[] chModule, DetectionType dType){
-	if (!g_bAimbot[iClient]) return Plugin_Continue;
-	if (dType == Detection_Aimbot || dType == Detection_Eyeangles) return Plugin_Handled;
-	return Plugin_Continue;
-
-}
+// public Action SMAC_OnCheatDetected(int iClient, const char[] chModule, DetectionType dType){
+// 	if (!g_bAimbot[iClient]) return Plugin_Continue;
+// 	if (dType == Detection_Aimbot || dType == Detection_Eyeangles) return Plugin_Handled;
+// 	return Plugin_Continue;
+// }
 
 stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, float distance = 0.0, bool heightcheck = true, bool negativeangle = false){
-	// if (angle > 360.0)
 	angle = 360.0;
-	
-	if (angle < 0.0)
-		return false;
+	if (angle < 0.0) return false;
 	
 	float clientpos[3];
 	float targetpos[3];
@@ -333,14 +329,13 @@ stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, floa
 	anglevector[0] = anglevector[2] = 0.0;
 	GetAngleVectors(anglevector, anglevector, NULL_VECTOR, NULL_VECTOR);
 	NormalizeVector(anglevector, anglevector);
-	if (negativeangle)
-		NegateVector(anglevector);
+
+	if (negativeangle) NegateVector(anglevector);
 	
 	GetClientAbsOrigin(client, clientpos);
 	GetClientAbsOrigin(target, targetpos);
 	
-	if (heightcheck && distance > 0)
-		resultdistance = GetVectorDistance(clientpos, targetpos);
+	if (heightcheck && distance > 0) resultdistance = GetVectorDistance(clientpos, targetpos);
 	
 	clientpos[2] = targetpos[2] = 0.0;
 	MakeVectorFromPoints(clientpos, targetpos, targetvector);
@@ -348,40 +343,37 @@ stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, floa
 	
 	resultangle = RadToDeg(ArcCosine(GetVectorDotProduct(targetvector, anglevector)));
 	
-	if (resultangle <= angle / 2)
-	{
-		if (distance > 0)
-		{
-			if (!heightcheck)
-				resultdistance = GetVectorDistance(clientpos, targetpos);
+	if (resultangle <= angle / 2){
+		if (distance > 0){
+			if (!heightcheck) resultdistance = GetVectorDistance(clientpos, targetpos);
 			
-			if (distance >= resultdistance)
+			if (distance >= resultdistance){
 				return true;
-			else return false;
+			}else{
+				return false;
+			}
+		}else{
+			 return true;
 		}
-		else return true;
 	}
 	
 	return false;
 }
 
-public Action Chaos_Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool dontBroadcast)
-{
-	
+public void Chaos_Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
 	if(!g_bAimbot[client]) return;
 	
-	if (GetEntPropFloat(client, Prop_Send, "m_flFlashMaxAlpha") >= 180.0)
-	{
+	if (GetEntPropFloat(client, Prop_Send, "m_flFlashMaxAlpha") >= 180.0){
 		float duration = GetEntPropFloat(client, Prop_Send, "m_flFlashDuration");
-		if (duration >= 1.5)
-		{
+		if (duration >= 1.5){
 			g_bFlashed[client] = true;
-			CreateTimer(duration, UnFlashed_Timer, client);
+			CreateTimer(duration, Timer_UnFlashed, client);
 		}
 	}
 }
 
-public Action UnFlashed_Timer(Handle timer, int client){
+public Action Timer_UnFlashed(Handle timer, int client){
 	g_bFlashed[client] = false;
+	return Plugin_Continue;
 }

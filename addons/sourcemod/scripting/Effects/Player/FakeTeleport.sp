@@ -23,6 +23,7 @@ public Action Timer_EndTeleport(Handle timer){
 	}
 	AnnounceChaos(GetChaosTitle("Chaos_FakeTeleport"), -1.0);
 	RemoveHudByName("Random Teleport  ");
+	return Plugin_Continue;
 }
 
 public bool Chaos_FakeTeleport_Conditions(){

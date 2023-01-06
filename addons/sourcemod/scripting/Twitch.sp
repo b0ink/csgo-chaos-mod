@@ -40,7 +40,7 @@ public Action Twitch_RoundStart(Event event, char[] name, bool dontBroadcast){
 #if defined DEBUG_TWITCH_VOTES
 	CreateTimer(2.5, Timer_FakeTwitchVotes, _, TIMER_REPEAT);
 #endif
-
+	return Plugin_Continue;
 }
 
 #if defined DEBUG_TWITCH_VOTES
@@ -69,12 +69,14 @@ public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	}
 
 	Twitch_Votes.Clear();
+	return Plugin_Continue;
 }
 
 public Action Timer_DelayTwitchPool(Handle timer){
 	if(g_cvChaosTwitchEnabled.BoolValue){
 		Twitch_PoolNewVotingEffects(); //*start votes at the start of the round
 	}
+	return Plugin_Continue;
 }
 
 

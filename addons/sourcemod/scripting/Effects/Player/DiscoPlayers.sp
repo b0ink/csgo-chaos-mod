@@ -11,7 +11,7 @@ public void Chaos_DiscoPlayers_START(){
 
 }
 
-public Action Chaos_DiscoPlayers_RESET(bool HasTimerEnded){
+public void Chaos_DiscoPlayers_RESET(bool HasTimerEnded){
 	StopTimer(DiscoPlayers_TimerRepeat);
 	DiscoPlayers = false;
 }
@@ -31,4 +31,5 @@ Action Timer_DiscoPlayers(Handle timer = null){
 	}else{
 		StopTimer(DiscoPlayers_TimerRepeat);
 	}
+	return Plugin_Continue;
 }

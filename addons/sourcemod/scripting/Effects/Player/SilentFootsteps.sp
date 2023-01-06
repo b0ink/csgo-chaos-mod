@@ -8,7 +8,7 @@ public void Chaos_SilentFootsteps_START(){
 	cvar("sv_min_jump_landing_sound", "999");
 }
 
-public Action Chaos_SilentFootsteps_RESET(bool HasTimerEnded){
+public void Chaos_SilentFootsteps_RESET(bool HasTimerEnded){
 	ResetCvar("sv_footsteps", "1", "0");
 	ResetCvar("sv_min_jump_landing_sound", "260", "999");
 }

@@ -114,7 +114,7 @@ int CreateFence(FENCE_TYPE type){
 void ParseFencesConfig(){
 	Fences.Clear();
 	
-	char map[MAX_MAPNAME_LENGTH];
+	char map[PLATFORM_MAX_PATH];
 	GetCurrentMap(map, sizeof(map));
 
 	char path[PLATFORM_MAX_PATH];

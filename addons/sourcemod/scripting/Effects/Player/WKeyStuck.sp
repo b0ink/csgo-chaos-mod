@@ -11,7 +11,7 @@ public void Chaos_WKeyStuck_START(){
 	WKeyStuck = true;
 }
 
-public Action Chaos_WKeyStuck_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_WKeyStuck_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(WKeyStuck) fVel[0] = 400.0;
 }
 

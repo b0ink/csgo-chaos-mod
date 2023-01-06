@@ -13,7 +13,7 @@ public void Chaos_OHKO_START(){
 	}
 }
 
-public Action Chaos_OHKO_RESET(bool HasTimerEnded){
+public void Chaos_OHKO_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			SetEntityHealth(i, 100);

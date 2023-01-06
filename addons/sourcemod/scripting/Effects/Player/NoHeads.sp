@@ -45,7 +45,7 @@ void SetNoHeadModel(int client){
 }
 
 
-public Action Chaos_NoHeads_RESET(bool HasTimerEnded){
+public void Chaos_NoHeads_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			if(originalNoHeadModels[i][0] != '\0'){

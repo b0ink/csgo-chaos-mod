@@ -46,7 +46,7 @@ void SetBigHeadModel(int client){
 }
 
 
-public Action Chaos_BigHeads_RESET(bool HasTimerEnded){
+public void Chaos_BigHeads_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			if(originalBigHeadModels[i][0] != '\0'){

@@ -11,7 +11,7 @@ public void Chaos_RespawnDead_LastLocation_INIT(){
 	HookEvent("player_death", Chaos_RespawnDead_LastLocation_Event_PlayerDeath);
 }
 
-public Action Chaos_RespawnDead_LastLocation_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
+public void Chaos_RespawnDead_LastLocation_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	GetClientAbsOrigin(client, g_PlayerDeathLocations[client]);
 }

@@ -8,7 +8,7 @@ public void Chaos_BuyAnywhere_START(){
 	cvar("mp_buytime", "999");
 }
 
-public Action Chaos_BuyAnywhere_RESET(bool HasTimerEnded){
+public void Chaos_BuyAnywhere_RESET(bool HasTimerEnded){
 	ResetCvar("mp_buy_anywhere", "0", "1");
 	ResetCvar("mp_buytime", "20", "999");
 }

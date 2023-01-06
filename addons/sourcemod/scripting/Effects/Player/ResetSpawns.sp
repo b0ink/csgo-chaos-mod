@@ -11,7 +11,7 @@ public void Chaos_ResetSpawns_INIT(){
 	HookEvent("round_start", Chaos_ResetSpawns_Event_RoundStart);
 }
 
-public Action Chaos_ResetSpawns_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+public void Chaos_ResetSpawns_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	LoopAlivePlayers(client){
 		GetClientAbsOrigin(client, g_OriginalSpawnVec[client]);
 	}

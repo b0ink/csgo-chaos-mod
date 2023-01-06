@@ -20,7 +20,7 @@ public void Chaos_RewindTenSeconds_INIT(){
 	HookEvent("round_start", Chaos_RewindTenSeconds_Event_RoundStart);
 }
 
-public Action Chaos_RewindTenSeconds_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+public void Chaos_RewindTenSeconds_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_bRewind_logging_enabled = true;
 }
 
@@ -45,7 +45,7 @@ public void Chaos_RewindTenSeconds_START(bool HasTimerEnded){
 }
 
 
-public Action Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
+public void Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
 	g_bRewind_logging_enabled = true;
 	g_Rewinding = true;
 	LoopAlivePlayers(i){

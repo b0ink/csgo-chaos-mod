@@ -11,7 +11,7 @@ public void Chaos_RandomWeapons_START(){
 	RandomWeapons_Timer_Repeat = CreateTimer(RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
 }
 
-public Action Chaos_RandomWeapons_RESET(bool HasTimerEnded){
+public void Chaos_RandomWeapons_RESET(bool HasTimerEnded){
 	StopTimer(RandomWeapons_Timer_Repeat);
 }
 
@@ -20,4 +20,5 @@ Action Timer_GiveRandomWeapon(Handle timer = null){
 		int randomWeaponIndex = GetURandomInt() % sizeof(g_sWeapons);	
 		GiveAndSwitchWeapon(i, g_sWeapons[randomWeaponIndex]);
 	}
+	return Plugin_Continue;
 }

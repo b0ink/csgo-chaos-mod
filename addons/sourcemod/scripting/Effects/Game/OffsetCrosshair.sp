@@ -24,7 +24,7 @@ public void Chaos_OffsetCrosshair_START(){
 }
 
 
-public Action Chaos_OffsetCrosshair_RESET(bool EndChaos){
+public void Chaos_OffsetCrosshair_RESET(bool EndChaos){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", 0);
 	}

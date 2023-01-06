@@ -16,7 +16,7 @@ public void Chaos_C4Chicken_INIT(){
 	HookEvent("round_start", 		Chaos_C4Chicken_Event_RoundStart);
 }
 
-public Action Chaos_C4Chicken_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
+public void Chaos_C4Chicken_Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_bC4Chicken = false;
 }
 
@@ -25,7 +25,7 @@ public void Chaos_C4Chicken_START(){
 	C4Chicken();
 }
 
-public Action Chaos_C4Chicken_RESET(bool HasTimerEnded){
+public void Chaos_C4Chicken_RESET(bool HasTimerEnded){
 	g_bC4Chicken = false;
 	RemoveChickens();
 	g_iC4ChickenEnt = -1;
@@ -72,6 +72,6 @@ void C4Chicken(){
 }
 
 
-public Action Chaos_C4Chicken_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
+public void Chaos_C4Chicken_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	C4Chicken();
 }

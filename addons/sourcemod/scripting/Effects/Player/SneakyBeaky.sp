@@ -10,11 +10,11 @@ public void Chaos_SneakyBeaky_START(){
 	SneakyBeaky = true;
 }
 
-public Action Chaos_SneakyBeaky_RESET(bool HasTimerEnded){
+public void Chaos_SneakyBeaky_RESET(bool HasTimerEnded){
 	SneakyBeaky = false;
 }
 
-public Action Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(SneakyBeaky){
 		if (IsPlayerAlive(client)){
 			if (buttons & IN_FORWARD ){

@@ -63,6 +63,7 @@ public Action Command_NewChaosEffect(int client, int args){
 
 public Action Timer_ReEnableRetries(Handle timer){
 	g_bDisableRetryEffect = false;
+	return Plugin_Continue;
 }
 
 public Action Command_StopChaos(int client, int args){

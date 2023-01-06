@@ -10,7 +10,7 @@ public void Chaos_MoonGravity_START(){
 	}
 }
 
-public Action Chaos_MoonGravity_RESET(bool HasTimerEnded){
+public void Chaos_MoonGravity_RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		SetEntityGravity(i, 1.0);
 	}

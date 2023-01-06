@@ -24,6 +24,6 @@ public void Chaos_SlowFire_START(){
 	SlowFire = true;
 }
 
-public Action Chaos_SlowFire_RESET(bool HasTimerEnded){
+public void Chaos_SlowFire_RESET(bool HasTimerEnded){
 	SlowFire = false;
 }

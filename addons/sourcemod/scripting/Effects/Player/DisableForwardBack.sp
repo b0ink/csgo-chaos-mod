@@ -13,11 +13,11 @@ public void Chaos_DisableForwardBack_START(){
 	g_bNoForwardBack++;
 }
 
-public Action Chaos_DisableForwardBack_RESET(bool HasTimerEnded){
+public void Chaos_DisableForwardBack_RESET(bool HasTimerEnded){
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 }
 
-public Action Chaos_DisableForwardBack_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_DisableForwardBack_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	Disable_WS[client] = 0;
 	if(g_bNoForwardBack > 0){
 		if(buttons & IN_FORWARD){

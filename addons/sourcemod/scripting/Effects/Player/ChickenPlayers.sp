@@ -12,7 +12,7 @@ public void Chaos_ChickenPlayers_START(){
 	}
 }
 
-public Action Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
+public void Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			DisableChicken(i);
@@ -30,6 +30,7 @@ public Action Timer_SetChickenModel(Handle timer, int client){
 	if(IsValidClient(client) && IsPlayerAlive(client)){
 		SetChicken(client);
 	}
+	return Plugin_Continue;
 }
 
 void SetChicken(int client){

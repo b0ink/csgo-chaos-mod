@@ -10,7 +10,7 @@ public void Chaos_BlindPlayers_START(){
 	}
 }
 
-public Action Chaos_BlindPlayers_RESET(bool HasTimerEnded){
+public void Chaos_BlindPlayers_RESET(bool HasTimerEnded){
 	LoopAlivePlayers(i){
 		PerformBlind(i, 0);
 	}
@@ -20,6 +20,7 @@ public Action Timer_DeactivateBlind(Handle timer){
 	LoopAlivePlayers(i){
 		PerformBlind(i, 0);
 	}
+	return Plugin_Continue;
 }
 
 public void Chaos_BlindPlayers_OnPlayerSpawn(int client, bool EffectIsRunning){

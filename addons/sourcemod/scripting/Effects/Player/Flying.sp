@@ -25,9 +25,10 @@ public void Chaos_Flying_OnPlayerSpawn(int client, bool EffectIsRunning){
 
 public Action Timer_EnableFlying(Handle timer, int client){
 	SetEntityMoveType(client, MOVETYPE_NOCLIP);
+	return Plugin_Continue;
 }
 
-public Action Chaos_Flying_RESET(bool HasTimerEnded){
+public void Chaos_Flying_RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
 		SDKUnhook(i, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);
@@ -44,8 +45,10 @@ public Action Chaos_Flying_RESET(bool HasTimerEnded){
 
 public Action Chaos_Flying_Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype) {
 	if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_WALK);
+	return Plugin_Continue;
 }
 
 public Action Chaos_Flying_Hook_OnTakeDamagePost(int victim, int attacker){
-    if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
-}	//ontake
+	if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
+	return Plugin_Continue;
+}

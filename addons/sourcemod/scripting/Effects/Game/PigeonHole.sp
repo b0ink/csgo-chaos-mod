@@ -45,9 +45,10 @@ public Action Timer_SpawnNewPigeonHole(Handle timer){
 
 	Format(lastPigeonHole, sizeof(lastPigeonHole), "/Chaos/PigeonHole/pg_%i.vtf", randomPigeonHole);
 	Add_Overlay(lastPigeonHole);
+	return Plugin_Continue;
 }
 
-public Action Chaos_PigeonHole_RESET(bool EndChaos){
+public void Chaos_PigeonHole_RESET(bool EndChaos){
 	StopTimer(PigeonHoleSpawnTimer);
 	if(lastPigeonHole[0] != '\0'){
 		Remove_Overlay(lastPigeonHole);

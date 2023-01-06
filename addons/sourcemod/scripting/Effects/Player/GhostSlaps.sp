@@ -13,7 +13,7 @@ public void Chaos_GhostSlaps_START(){
 	}
 }
 
-public Action Chaos_GhostSlaps_RESET(bool HasTimerEnded){
+public void Chaos_GhostSlaps_RESET(bool HasTimerEnded){
 	StopTimer(Chaos_RandomSlap_Timer);
 	if(HasTimerEnded){
 		LoopValidPlayers(client){
@@ -38,6 +38,7 @@ Action Timer_RandomSlap(Handle timer){
 		TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vec); 
 		CPrintToChat(client, "What was that?");
 	}
+	return Plugin_Continue;
 }
 
 

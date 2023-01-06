@@ -25,7 +25,7 @@ public void Chaos_ExtremeBlur_START(){
 	Add_Overlay("/Chaos/Blur_3.vmt");
 }
 
-public Action Chaos_ExtremeBlur_RESET(bool EndChaos){
+public void Chaos_ExtremeBlur_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/Blur_3.vmt");
 }
 

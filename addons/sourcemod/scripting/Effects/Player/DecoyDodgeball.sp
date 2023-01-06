@@ -82,7 +82,7 @@ public void Chaos_DecoyDodgeball_OnPlayerSpawn(int client, bool EffectIsRunning)
 	}
 }
 
-public Action Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
+public void Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
 	}
@@ -127,4 +127,5 @@ Action Timer_CheckDecoys(Handle timer){
 			}
 		}
 	}
+	return Plugin_Continue;
 }

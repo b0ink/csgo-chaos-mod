@@ -25,7 +25,7 @@ public void Chaos_OneWeaponOnly_START(){
 
 }
 
-public Action Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
+public void Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
 
 }
 

@@ -11,7 +11,7 @@ public void Chaos_NoViewmodel_START(){
 }
 
 
-public Action Chaos_NoViewmodel_RESET(bool EndChaos){
+public void Chaos_NoViewmodel_RESET(bool EndChaos){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_bDrawViewmodel", true);
 	}

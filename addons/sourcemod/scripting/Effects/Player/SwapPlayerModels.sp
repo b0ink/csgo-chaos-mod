@@ -33,6 +33,7 @@ public Action Timer_GetPlayerModels(Handle timer){
 			PushArrayString(SwapPlayerModel_CT, modelName);
 		}
 	}
+	return Plugin_Continue;
 }
 
 
@@ -65,7 +66,7 @@ void SwapPlayerModels(int client = -1){
 
 
 
-public Action Chaos_SwapPlayerModels_RESET(bool HasTimerEnded){
+public void Chaos_SwapPlayerModels_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			if(SwapPlayerModels_Original[i][0] != '\0'){

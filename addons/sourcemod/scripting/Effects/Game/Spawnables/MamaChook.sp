@@ -18,6 +18,6 @@ public void Chaos_MamaChook_START(){
 	}
 }
 
-public Action Chaos_MamaChook_RESET(bool HasTimerEnded){
+public void Chaos_MamaChook_RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="MamaChook");
 }

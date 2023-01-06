@@ -9,11 +9,11 @@ public void Chaos_Jumping_START(){
 	g_bJumping = true;
 }
 
-public Action Chaos_Jumping_RESET(bool HasTimerEnded){
+public void Chaos_Jumping_RESET(bool HasTimerEnded){
 	g_bJumping = false;
 }
 
-public Action Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(g_bJumping){
 		ForceJump[client] = !ForceJump[client];
 		if(ForceJump[client]){

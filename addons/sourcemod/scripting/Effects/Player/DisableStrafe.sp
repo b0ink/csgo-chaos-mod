@@ -13,11 +13,11 @@ public void Chaos_DisableStrafe_START(){
 	g_bNoStrafe++;
 }
 
-public Action Chaos_DisableStrafe_RESET(bool HasTimerEnded){
+public void Chaos_DisableStrafe_RESET(bool HasTimerEnded){
 	if(g_bNoStrafe > 0) g_bNoStrafe--;
 }
 
-public Action Chaos_DisableStrafe_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_DisableStrafe_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	Disable_Strafe[client] = 0;
 
 	if(g_bNoStrafe > 0){

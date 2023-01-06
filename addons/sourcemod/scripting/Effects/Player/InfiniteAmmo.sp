@@ -37,6 +37,6 @@ public void Chaos_InfiniteAmmo_START(){
 	g_InfiniteAmmo = true;
 }
 
-public Action Chaos_InfiniteAmmo_RESET(bool HasTimerEnded){
+public void Chaos_InfiniteAmmo_RESET(bool HasTimerEnded){
 	g_InfiniteAmmo = false;
 }

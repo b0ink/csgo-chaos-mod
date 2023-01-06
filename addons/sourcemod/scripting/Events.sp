@@ -48,6 +48,7 @@ public Action Timer_SendSettingsReminder(Handle timer, int client){
 		}
 	}
 	settingsReminder[client]++;
+	return Plugin_Continue;
 }
 
 public Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
@@ -64,7 +65,8 @@ public Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
 		Call_Finish();
 	}
 
-	CloseHandle(data);
+	delete data;
+	return Plugin_Continue;
 }
 
 
@@ -80,6 +82,7 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 
 public Action Timer_SaveBombPosition(Handle timer){
 	SaveBombPosition();
+	return Plugin_Continue;
 }
 
 
@@ -155,10 +158,11 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 public Action Timer_UpdateRoundTime(Handle timer){
 	if(g_iChaosRoundTime < -50){
-		return;
+		return Plugin_Continue;
 	}
 	g_iChaosRoundTime++;	
 	CreateTimer(1.0, Timer_UpdateRoundTime);
+	return Plugin_Continue;
 }
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;

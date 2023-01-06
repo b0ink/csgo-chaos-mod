@@ -14,7 +14,7 @@ public void Chaos_IceSkate_START(){
 	IceSkate = true;
 }
 
-public Action Chaos_IceSkate_RESET(bool HasTimerEnded){
+public void Chaos_IceSkate_RESET(bool HasTimerEnded){
 	ResetCvar("sv_airaccelerate", "12", "2000");
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
@@ -30,7 +30,7 @@ public void Chaos_IceSkate_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}	
 }
 
-public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if(IceSkate){
 		ForceJumpSkate[client] = !ForceJumpSkate[client];
 		if(ForceJumpSkate[client]){
@@ -41,7 +41,7 @@ public Action Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpu
 	}
 }
 
-public Action Chaos_IceSkate_OnGameFrame(){
+public void Chaos_IceSkate_OnGameFrame(){
 	if(!IceSkate) return;
 
 	// trace down, see if there's 8 distance or less to ground

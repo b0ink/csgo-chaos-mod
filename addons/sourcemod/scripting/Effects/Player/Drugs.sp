@@ -19,7 +19,7 @@ public void Chaos_Drugs_START(){
 	}
 }
 
-public Action Chaos_Drugs_RESET(bool HasTimerEnded){
+public void Chaos_Drugs_RESET(bool HasTimerEnded){
 	KillAllDrugs();
 }
 

@@ -63,7 +63,7 @@ public void Chaos_TaserParty_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public Action Chaos_TaserParty_RESET(bool HasTimerEnded){
+public void Chaos_TaserParty_RESET(bool HasTimerEnded){
 	UnhookPreventWeaponDrop();
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);

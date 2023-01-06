@@ -22,7 +22,7 @@ public void Chaos_SimonSays_START(){
 	g_bSimon_Active = true;
 }
 
-public Action Chaos_SimonSays_RESET(bool HasTimerEnded){
+public void Chaos_SimonSays_RESET(bool HasTimerEnded){
 	g_bSimon_Active = false;
 	KillMessageTimer();
 }
@@ -138,6 +138,7 @@ public Action Timer_ShowAction(Handle timer){
 			KillMessageTimer();
 		}
 	}
+	return Plugin_Continue;
 }
 
 void KillMessageTimer(){

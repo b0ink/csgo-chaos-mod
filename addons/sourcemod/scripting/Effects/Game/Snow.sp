@@ -14,7 +14,7 @@ public void Chaos_Snow_START(){
 	MinimalFog();
 }
 
-public Action Chaos_Snow_RESET(bool HasTimerEnded){
+public void Chaos_Snow_RESET(bool HasTimerEnded){
 	char classname[64];
 	char targetname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){

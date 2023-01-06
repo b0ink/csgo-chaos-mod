@@ -9,7 +9,7 @@ public void Chaos_HealthRegen_START(){
 	CreateTimer(1.0, Timer_GiveHealthRegen);
 }
 
-public Action Chaos_HealthRegen_RESET(bool HasTimerEnded){
+public void Chaos_HealthRegen_RESET(bool HasTimerEnded){
 	g_HealthRegen = false;
 }
 
@@ -22,5 +22,6 @@ public Action Timer_GiveHealthRegen(Handle timer){
 		}
 		CreateTimer(1.0, Timer_GiveHealthRegen);
 	}
+	return Plugin_Continue;
 }
 

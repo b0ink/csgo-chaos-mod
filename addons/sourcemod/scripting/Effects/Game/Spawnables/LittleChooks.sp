@@ -24,7 +24,7 @@ public void Chaos_LittleChooks_START(){
 	}
 }
 
-public Action Chaos_LittleChooks_RESET(bool HasTimerEnded){
+public void Chaos_LittleChooks_RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="LittleChooks");
 	g_bCanSpawnChickens = true;
 }

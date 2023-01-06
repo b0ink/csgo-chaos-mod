@@ -39,7 +39,7 @@ public void Chaos_Checkers_START(){
 }
 
 
-public Action Chaos_Checkers_RESET(bool EndChaos){
+public void Chaos_Checkers_RESET(bool EndChaos){
 	Checkers = false;
 	Remove_Overlay("/Chaos/Checkers_1.vtf");
 	Remove_Overlay("/Chaos/Checkers_2.vtf");

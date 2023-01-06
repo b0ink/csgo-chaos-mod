@@ -17,14 +17,14 @@ public void Chaos_ForceReload_START(){
 	}
 }
 
-public Action Chaos_ForceReload_RESET(bool HasTimerEnded){
+public void Chaos_ForceReload_RESET(bool HasTimerEnded){
 	//* Automatically resets when reload is activated
 	LoopAllClients(i){
 		g_bForce_Reload[i] = false;
 	}
 }
 
-public Action Chaos_ForceReload_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_ForceReload_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if (g_bForce_Reload[client]) {
 		buttons |= IN_RELOAD;
 		g_bForce_Reload[client] = false;

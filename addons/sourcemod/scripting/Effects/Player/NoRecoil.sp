@@ -9,7 +9,7 @@ public void Chaos_NoRecoil_START(){
 	cvar("weapon_recoil_scale", "0");
 }
 
-public Action Chaos_NoRecoil_RESET(bool HasTimerEnded){
+public void Chaos_NoRecoil_RESET(bool HasTimerEnded){
 	ResetCvar("weapon_accuracy_nospread", "0", "1");
 	ResetCvar("weapon_recoil_scale", "2", "0");
 }

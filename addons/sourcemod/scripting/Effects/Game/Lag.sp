@@ -14,7 +14,7 @@ public void Chaos_Lag_START(){
 }
 
 public Action Timer_FakeLag(Handle timer){
-	if(!FakeLag) return;
+	if(!FakeLag) return Plugin_Continue;
 	ServerCommand("sv_cheats 1");
 
 	int amount = 1;
@@ -32,8 +32,9 @@ public Action Timer_FakeLag(Handle timer){
 
 	ServerCommand("sv_cheats 0");
 	CreateTimer(GetRandomFloat(1.0, 5.0), Timer_FakeLag);
+	return Plugin_Continue;
 }
 
-public Action Chaos_Lag_RESET(bool HasTimerEnded){
+public void Chaos_Lag_RESET(bool HasTimerEnded){
 	FakeLag = false;
 }

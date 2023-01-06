@@ -9,7 +9,7 @@ public void Chaos_NoCrosshair_START(){
 	}
 }
 
-public Action Chaos_NoCrosshair_RESET(bool HasTimerEnded){
+public void Chaos_NoCrosshair_RESET(bool HasTimerEnded){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", 0);
 	}

@@ -11,7 +11,7 @@ public void Chaos_IncreasedNadeDamage_START(){
 }
 
 
-public Action Chaos_IncreasedNadeDamage_RESET(bool EndChaos){
+public void Chaos_IncreasedNadeDamage_RESET(bool EndChaos){
 	IncreasedNadeDamage = false;
 }
 
@@ -36,4 +36,5 @@ public Action Timer_ChangeGrenadeDamage(Handle timer, int grenade){
 	
 	SetEntPropFloat(grenade, Prop_Send, "m_flDamage", (flGrenadePower*1.4)); // 1.3 default
 	SetEntPropFloat(grenade, Prop_Send, "m_DmgRadius", (flGrenadeRadius*3.0)); // 2.5 default
+	return Plugin_Continue;
 }

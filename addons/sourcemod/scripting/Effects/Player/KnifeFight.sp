@@ -11,7 +11,7 @@ public void Chaos_KnifeFight_START(){
 	}
 }
 
-public Action Chaos_KnifeFight_RESET(bool HasTimerEnded){
+public void Chaos_KnifeFight_RESET(bool HasTimerEnded){
 
 	UnhookBlockAllGuns();
 
@@ -32,5 +32,5 @@ public void Chaos_KnifeFight_OnPlayerSpawn(int client, bool EffectIsRunning){
 }
 
 public Action Chaos_KnifeFight_Hook_WeaponSwitch(int client, int weapon){
-	return BlockAllGuns(client, weapon);	
+	return BlockAllGuns(client, weapon);
 }

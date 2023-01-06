@@ -10,7 +10,7 @@ public void Chaos_FastSpeed_START(){
 	}
 }
 
-public Action Chaos_FastSpeed_RESET(bool HasTimerEnded){
+public void Chaos_FastSpeed_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);	

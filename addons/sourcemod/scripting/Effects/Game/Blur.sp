@@ -23,7 +23,7 @@ public void Chaos_Blur_START(){
 	Add_Overlay("/Chaos/Blur_2.vmt");
 }
 
-public Action Chaos_Blur_RESET(bool EndChaos){
+public void Chaos_Blur_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/Blur_2.vmt");
 }
 

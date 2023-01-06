@@ -42,11 +42,12 @@ public void Chaos_OneBulletMag_OnPlayerSpawn(int client, bool EffectIsRunning){
 }
 
 public Action Timer_StripMags(Handle timer, int client){
-	if(!ValidAndAlive(client)) return;
+	if(!ValidAndAlive(client)) return Plugin_Continue;
 	SetClipsTo1(client);
+	return Plugin_Continue;
 }
 
-public Action Chaos_OneBulletMag_RESET(bool HasTimerEnded){
+public void Chaos_OneBulletMag_RESET(bool HasTimerEnded){
 	OneBulletMag = false;
 	if(HasTimerEnded){ //don't need to do this if the round has ended, especially if the event didnt even happen
 		char currentWeapon[64];

@@ -24,11 +24,11 @@ public void Chaos_ExplosiveBullets_START(){
 	g_bExplosiveBullets = true;
 }
 
-public Action Chaos_ExplosiveBullets_RESET(bool HasTimerEnded){
+public void Chaos_ExplosiveBullets_RESET(bool HasTimerEnded){
 	g_bExplosiveBullets = false;
 }
 
-public Action Chaos_ExplosiveBullets_Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
+public void Chaos_ExplosiveBullets_Event_BulletImpact(Event event, const char[] name, bool dontBroadcast){
 	if (!g_bExplosiveBullets) return;
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	
@@ -43,7 +43,7 @@ public Action Chaos_ExplosiveBullets_Event_BulletImpact(Event event, const char[
 }
 
 public Action Chaos_ExplosiveBullets_Hook_BulletShot(const char[] te_name, const int[] Players, int numClients, float delay){
-	if (!g_bExplosiveBullets) return;
+	if (!g_bExplosiveBullets) return Plugin_Continue;
 		
 	int client = TE_ReadNum("m_iPlayer") + 1;
 	
@@ -62,7 +62,7 @@ public Action Chaos_ExplosiveBullets_Hook_BulletShot(const char[] te_name, const
 	delete trace;
 	//Play the explosion sound
 	EmitAmbientSound(EXPLOSION_HE, endpos, SOUND_FROM_WORLD, SNDLEVEL_NORMAL, SND_NOFLAGS, 0.5, SNDPITCH_HIGH);
-	return;
+	return Plugin_Continue;
 }
 
 public bool TR_DontHitSelf(int target, int mask, int client){

@@ -13,7 +13,7 @@ public void Chaos_DiscoFog_START(){
 	g_DiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT);
 }
 
-public Action Chaos_DiscoFog_RESET(bool HasTimerEnded){
+public void Chaos_DiscoFog_RESET(bool HasTimerEnded){
 	StopTimer(g_DiscoFog_Timer_Repeat);
 	g_bDiscoFog = false;
 	DiscoFog(true);
@@ -28,4 +28,5 @@ public Action Timer_NewFogColor(Handle timer){
 	}else{
 		StopTimer(g_DiscoFog_Timer_Repeat);
 	}
+	return Plugin_Continue;
 }

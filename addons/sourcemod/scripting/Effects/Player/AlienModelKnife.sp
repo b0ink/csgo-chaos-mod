@@ -31,7 +31,7 @@ void MakeAlien(int client){
 
 
 
-public Action Chaos_AlienModelKnife_RESET(bool HasTimerEnded){
+public void Chaos_AlienModelKnife_RESET(bool HasTimerEnded){
 	UnhookBlockAllGuns();
 
 	LoopAlivePlayers(i){

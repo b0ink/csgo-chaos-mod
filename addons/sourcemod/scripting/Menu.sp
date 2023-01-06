@@ -65,6 +65,7 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 void ShowMenu_Effects(int client, bool AllowRandom = false){
@@ -131,6 +132,7 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 
@@ -178,7 +180,9 @@ public int Settings_Handler(Menu menu, MenuAction action, int param1, int param2
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
+
 void ShowMenu_HudSettings(int client){
 	if(!IsValidClient(client)) return;
 	
@@ -233,6 +237,7 @@ public int HudSettings_Handler(Menu menu, MenuAction action, int param1, int par
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 
@@ -281,6 +286,7 @@ public int EditEffectVolume_Handler(Menu menu, MenuAction action, int param1, in
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 void ShowMenu_EditConvars(int client){
@@ -403,6 +409,7 @@ public int ConvarIncrements_Handler(Menu menu, MenuAction action, int param1, in
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 void ToggleCvar(char[] cvar){
@@ -431,6 +438,7 @@ public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int par
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 
@@ -467,6 +475,7 @@ public int EditAllEffects_Handler(Menu menu, MenuAction action, int param1, int 
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 void ShowMenu_EffectSetting(int client, char[] function_name){
@@ -536,6 +545,7 @@ public int EffectSetting_Handler(Menu menu, MenuAction action, int param1, int p
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }
 
 void ShowMenu_SetDuration(int client, char[] function_name){
@@ -590,4 +600,5 @@ public int SetDuration_Handler(Menu menu, MenuAction action, int param1, int par
 	}else if (action == MenuAction_End){
 		delete menu;
 	}
+	return 0;
 }

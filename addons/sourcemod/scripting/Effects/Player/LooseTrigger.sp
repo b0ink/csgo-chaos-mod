@@ -10,11 +10,11 @@ public void Chaos_LooseTrigger_START(){
 	g_bLoose_Trigger = true;
 }
 
-public Action Chaos_LooseTrigger_RESET(bool HasTimerEnded){
+public void Chaos_LooseTrigger_RESET(bool HasTimerEnded){
 	g_bLoose_Trigger = false;
 }
 
-public Action Chaos_LooseTrigger_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_LooseTrigger_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
 	if (g_bLoose_Trigger) {
 		ShouldAttack[client] = !ShouldAttack[client];
 		if(ShouldAttack[client]){
