@@ -7,6 +7,8 @@ public void Chaos_ExtremeBlur(effect_data effect){
 	effect.Title = "Extreme Blur";
 	effect.Duration = 30;
 	effect.AddFlag("blur");
+	effect.AddAlias("Overlay");
+	effect.AddAlias("Visual");
 }
 
 bool extremeBlurMaterials = true;

@@ -2,9 +2,7 @@ public void Chaos_Snow(effect_data effect){
 	effect.Title = "Snow";
 	effect.Duration = 45;
 	effect.AddFlag("fog");
-}
-public void Chaos_Snow_INIT(){
-	
+	effect.AddAlias("Visual");
 }
 
 public void Chaos_Snow_START(){

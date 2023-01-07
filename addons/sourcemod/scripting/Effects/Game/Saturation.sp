@@ -2,6 +2,7 @@ public void Chaos_Saturation(effect_data effect){
 	effect.Title = "Saturation";
 	effect.Duration = 30;
 	effect.AddFlag("colorcorrection");
+	effect.AddAlias("Visual");
 }
 
 bool saturationMaterials = true;

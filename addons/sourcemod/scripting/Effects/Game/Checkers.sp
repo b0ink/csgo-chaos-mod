@@ -6,6 +6,8 @@ int checkersToggle[MAXPLAYERS+1];
 public void Chaos_Checkers(effect_data effect){
 	effect.Title = "Checkers";
 	effect.Duration = 30;
+	effect.AddAlias("Overlay");
+	effect.AddAlias("Visual");
 }
 
 

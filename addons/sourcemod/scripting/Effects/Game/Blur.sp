@@ -7,6 +7,7 @@ public void Chaos_Blur(effect_data effect){
 	effect.Title = "Blur";
 	effect.Duration = 30;
 	effect.AddFlag("blur");
+	effect.AddAlias("Visual");
 }
 
 bool blurMaterials = true;

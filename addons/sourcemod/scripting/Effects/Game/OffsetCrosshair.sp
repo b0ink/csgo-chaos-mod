@@ -2,6 +2,7 @@ public void Chaos_OffsetCrosshair(effect_data effect){
 	effect.Title = "Offset Crosshair";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_NoCrosshair");
+	effect.AddAlias("Overlay");
 }
 
 bool offsetCrosshairMaterials = true;

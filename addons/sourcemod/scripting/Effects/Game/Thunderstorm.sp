@@ -1,23 +1,25 @@
+/*
+	Effect by Ozai
+*/
+
+bool Thunderstorm = false;
+int thunder_count = 0;
+
 public void Chaos_Thunderstorm(effect_data effect){
 	effect.Title = "Thunderstorm";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_DecoyDodgeball");
 	effect.IncompatibleWith("Chaos_OHKO");
 	effect.AddAlias("Weather");
+	effect.AddAlias("Visual");
 }
 
-/*
-	Effect by Ozai
-*/
-
-int thunder_count = 0;
 
 public void Chaos_Thunderstorm_OnMapStart(){
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/thunderstorm.raw");
 }
 
 
-bool Thunderstorm = false;
 public void Chaos_Thunderstorm_START(){
 	thunder_count = 0;
 

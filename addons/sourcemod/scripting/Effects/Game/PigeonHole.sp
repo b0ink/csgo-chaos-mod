@@ -2,6 +2,8 @@ public void Chaos_PigeonHole(effect_data effect){
 	effect.Title = "Pigeon Hole";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Binoculars");
+	effect.AddAlias("Overlay");
+	effect.AddAlias("Visual");
 }
 
 bool pigeonholeMaterials = true;

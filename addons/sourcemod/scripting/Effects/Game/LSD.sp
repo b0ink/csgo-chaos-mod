@@ -2,6 +2,7 @@ public void Chaos_LSD(effect_data effect){
 	effect.Title = "LSD";
 	effect.Duration = 30;
 	effect.AddFlag("colorcorrection");
+	effect.AddAlias("Visual");
 }
 
 bool lsdMaterials = true;
