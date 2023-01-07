@@ -32,7 +32,7 @@ A voting panel will pop up that can be keyed out with a green screen using OBS. 
 <br>
 
 # REQUIREMENTS:
-- [Sourcemod 1.10+](https://sourcemod.net/)
+- [Sourcemod 1.11+](https://sourcemod.net/)
 - [Dynamic Channels](https://github.com/Vauff/DynamicChannels) (Included in this repo)
 - [DHooks](https://forums.alliedmods.net/showpost.php?p=2588686&postcount=589)
 
