@@ -188,6 +188,7 @@ enum struct effect_data{
 		Function func = GetFunctionByName(GetMyHandle(), function_name_reset);
 
 		if(func != INVALID_FUNCTION){
+			StopTimer(this.Timer);
 			this.Timer = INVALID_HANDLE;
 			ChaosEffects.SetArray(this.ID, this);
 			
