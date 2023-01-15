@@ -1,4 +1,5 @@
 # Credits
+##### Multiple chaos effects have been taken and modified from publicly available plugins created by other developers in the Sourcemod community, below are all the plugins and snippets used and altered to work with CS:GO Chaos Mod
 
 [Rapid Fire](https://forums.alliedmods.net/showthread.php?t=175636) by "FlaminSarge (orig by EHG)".\
 [Chicken C4](https://forums.alliedmods.net/showthread.php?p=2243945) by "Mitch".\
@@ -12,6 +13,8 @@ SM Teleport by "Spazman0".\
 [LSD ColorCorrection](https://gamebanana.com/mods/80495) (.raw) files from "[SG] Paul!"\
 [Double Jump](https://forums.alliedmods.net/showthread.php?p=895212) by "Paegus/NcB_Save".\
 [Turrets](https://forums.alliedmods.net/showthread.php?t=312548) by "e54385991/xnet".\
-[Blur](https://steamcommunity.com/id/defuj/) by "defuJ"\
+[Blur & No Head models](https://steamcommunity.com/id/defuj/) by "defuJ"
 
 Multiple ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".
+
+<sub>If you see an effect that has been derived from one of your plugins, please reach out so that I can credit your work fairly!</sub>
