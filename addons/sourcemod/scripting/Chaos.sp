@@ -35,49 +35,17 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define SOUND_BELL "buttons/bell1.wav"
 #define SOUND_BLIP "buttons/blip1.wav"
 #define SOUND_COUNTDOWN "ui/beep07.wav"
-
 #define DISTORTION "explosion_child_distort01b"
 #define FLASH "explosion_child_core04b"
 #define SMOKE "impact_dirt_child_smoke_puff"
 #define DIRT "impact_dirt_child_clumps"
 #define EXPLOSION_HE "weapons/hegrenade/explode5.wav"
 
-
-// Hud Element hiding flags
-#define HIDEHUD_WEAPONSELECTION     (1 << 0)	// Hide ammo count & weapon selection
-#define HIDEHUD_FLASHLIGHT          (1 << 1)
-#define HIDEHUD_ALL                 (1 << 2)
-#define HIDEHUD_HEALTH              (1 << 3)	// Hide health & armor / suit battery
-#define HIDEHUD_PLAYERDEAD          (1 << 4)	// Hide when local player's dead
-#define HIDEHUD_NEEDSUIT            (1 << 5)	// Hide when the local player doesn't have the HEV suit
-#define HIDEHUD_MISCSTATUS          (1 << 6)	// Hide miscellaneous status elements (trains, pickup history, death notices, etc)
-#define HIDEHUD_CHAT                (1 << 7)	// Hide all communication elements (saytext, voice icon, etc)
 #define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
-#define HIDEHUD_VEHICLE_CROSSHAIR   (1 << 9)	// Hide vehicle crosshair
-#define HIDEHUD_INVEHICLE           (1 << 10)
-#define HIDEHUD_BONUS_PROGRESS      (1 << 11)	// Hide bonus progress display (for bonus map challenges)
-#define HIDEHUD_BITCOUNT            12
 
-// #define LoopAllEntities(%1,%2) for(int %1 = 0; %1 < %2;%1++)
-// 								if(IsValidEntity(%1) && IsValidEdict(%1))
-
-#define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++)\
-		if(IsValidEntity(%1) && IsValidEdict(%1))\
-		if(GetEdictClassname(%1, %3, 64))
-
-// If i revert on the 2nd param being the index, index/i is accessible in the loop as its a define, but for clarity ill leave it..
-#define LoopAllEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
-		if(%2 < ChaosEffects.Length)\
-		if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
-
-#define LoopAllMetaEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++)\
-		if(%2 < ChaosEffects.Length)\
-		if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))\
-		if(%1.IsMetaEffect)
-
-		
-
-// Already checks if they are on a valid team
+#define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++) if(IsValidEntity(%1) && IsValidEdict(%1)) if(GetEdictClassname(%1, %3, 64))
+#define LoopAllEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
+#define LoopAllMetaEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1))) if(%1.IsMetaEffect)
 #define LoopAllClients(%1) 		for(int %1 = 0; %1 <= MaxClients; %1++)
 #define LoopValidPlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(IsValidClient(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
 #define LoopAlivePlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
@@ -588,14 +556,17 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(g_cvChaosTwitchEnabled.BoolValue && !g_bMegaChaosIsActive && !CustomRun){
 		if(Twitch_Votes.Length != 0){
 			effect_data effect;
-			if(GetHighestVotedEffect(effect)){
+			if(GetEffectData(g_sForceCustomEffect, effect)){
 				g_sForceCustomEffect = effect.FunctionName;
 				twitchEffect = true;
-			}
-
-			if(!effect.CanRunEffect()){
+				
+				if(!effect.CanRunEffect()){
+					g_sForceCustomEffect = "";
+				}
+			}else{
 				g_sForceCustomEffect = "";
 			}
+
 		}
 	}
 	// effect_data test;
@@ -648,6 +619,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				}
 
 			}while(Random_Effect[0] == '\0');
+
 			if(attempts > 900){
 				LogError("Clearing effect history");
 				ClearArray(EffectsHistory); //fail safe
@@ -718,19 +690,29 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(g_cvChaosRepeating.BoolValue){
 		if(g_cvChaosTwitchEnabled.BoolValue){
 			Twitch_PoolNewVotingEffects(); // pull 4 effects, this WILL add them into the effect cooldown.
+			expectedTimeForNewEffect = GetTime() + g_ChaosEffectInterval + 2;
+			CreateTimer(2.0, Timer_DelayNewInterval);
+		}else{
+			g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
+			expectedTimeForNewEffect =  GetTime() + g_ChaosEffectInterval;
+			if(g_bDynamicChannelsEnabled){
+				Timer_Display(null, g_ChaosEffectInterval);
+			}
 		}
-		int Effect_Interval = g_ChaosEffectInterval;
-		// if((Effect_Interval > 60 || Effect_Interval < 5) && ){
-		// 	Log("Cvar 'EffectInterval' Out Of Bounds. Resetting to 15 seconds - Chaos_Settings.cfg | was set to %f", Effect_Interval);
-		// 	Effect_Interval = 15;
-		// }
-		g_NewEffect_Timer = CreateTimer(float(Effect_Interval), ChooseEffect);
-		if(g_bDynamicChannelsEnabled){
-			Timer_Display(null, Effect_Interval);
-		}
+
+
 		g_iTotalEffectsRanThisRound++;
 	}
 	return Plugin_Continue;
+}
+
+public Action Timer_DelayNewInterval(Handle timer){
+	StopTimer(g_NewEffect_Timer);
+	g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
+	if(g_bDynamicChannelsEnabled){
+		Timer_Display(null, g_ChaosEffectInterval);
+	}
+	return Plugin_Stop;
 }
 
 public Action Timer_ResetPlaySound(Handle timer){

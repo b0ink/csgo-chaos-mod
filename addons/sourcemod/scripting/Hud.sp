@@ -156,6 +156,7 @@ void PrintEffects(){
 
 
 void PrintTimer(int time){
+	//TODO: now that there is a delay between ChooseEffect() and creating a new timer, clear the text here during that delay
 	if(time <= 3){
 		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
 		// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);

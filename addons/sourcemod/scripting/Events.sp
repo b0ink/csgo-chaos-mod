@@ -147,8 +147,10 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	
 	//TODO: look into using the round_freeze_end event to trigger the first effect
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
-		float freezeTime = float(FindConVar("mp_freezetime").IntValue);
-		g_NewEffect_Timer = CreateTimer(freezeTime, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
+		int freezeTime = FindConVar("mp_freezetime").IntValue;
+		g_NewEffect_Timer = CreateTimer(float(freezeTime), ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
+		Timer_Display(null, freezeTime);
+		expectedTimeForNewEffect =  GetTime() + freezeTime;
 	}
 
 	g_iChaosRoundTime = 0;
@@ -166,6 +168,7 @@ public Action Timer_UpdateRoundTime(Handle timer){
 }
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+	expectedTimeForNewEffect = -1;
 	g_iChaosRoundTime = -100;
 	
 	ClearFog();
