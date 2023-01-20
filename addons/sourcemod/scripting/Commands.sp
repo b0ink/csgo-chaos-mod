@@ -6,8 +6,14 @@ void RegisterCommands(){
 	RegAdminCmd("sm_effect", 			Command_NewChaosEffect,	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
-
+	
+	RegAdminCmd("chaos_version", 		Command_Version, 		ADMFLAG_ROOT);
 	RegisterTwitchCommands();
+}
+
+public Action Command_Version(int client, int args){
+	ReplyToCommand(client, ">>%s<<", PLUGIN_VERSION);
+	return Plugin_Handled;
 }
 
 public Action Command_MainMenu(int client, int args){
