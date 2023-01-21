@@ -10,7 +10,7 @@ public Plugin myinfo =
 	name = "Dynamic Game_Text Channels",
 	author = "Vauff",
 	description = "Provides a native for plugins to implement that handles automatic game_text channel assignment based on current map channels",
-	version = "2.1",
+	version = "2.1.1",
 	url = "https://github.com/Vauff/DynamicChannels"
 };
 
@@ -21,9 +21,9 @@ int g_iGroupChannels[] = {-1, -1, -1, -1, -1, -1};
 
 bool g_bChannelsOverflowing = false;
 bool g_bBadMapChannels = false;
-bool g_bMapChannels[6] = false;
-bool g_bNotifiedBadChans[MAXPLAYERS + 1] = false;
-bool g_bNotifiedOverflow[MAXPLAYERS + 1] = false;
+bool g_bMapChannels[6];
+bool g_bNotifiedBadChans[MAXPLAYERS + 1];
+bool g_bNotifiedOverflow[MAXPLAYERS + 1];
 
 public void OnPluginStart()
 {
@@ -91,12 +91,25 @@ public void OnEntityCreated(int entity, const char[] classname)
 	DHookEntity(g_hAcceptInput, true, entity);
 
 	// Get channel from the game_text when it spawns
-	SDKHook(entity, SDKHook_SpawnPost, GameTextSpawn);
+	//SDKHook(entity, SDKHook_SpawnPost, GameTextSpawn);
+
+	// Workaround for entities created in CS:GO VScript (CreateByClassname) having no way to dispatch Spawn, thanks Valve..?
+	CreateTimer(0.1, Timer_GameTextSpawn, EntIndexToEntRef(entity));
 }
 
-public Action GameTextSpawn(int entity)
+/*public Action GameTextSpawn(int entity)
 {
 	AddMapChannel(GetEntProp(entity, Prop_Data, "m_textParms.channel"));
+}*/
+
+public Action Timer_GameTextSpawn(Handle timer, int entityRef)
+{
+	int entity = EntRefToEntIndex(entityRef);
+
+	if (entity != -1)
+		AddMapChannel(GetEntProp(entity, Prop_Data, "m_textParms.channel"));
+
+	return Plugin_Stop;
 }
 
 public MRESReturn AcceptInput(int pThis, Handle hReturn, Handle hParams)
