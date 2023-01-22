@@ -12,11 +12,13 @@ public void Chaos_PortalGuns(effect_data effect){
 }
 
 char BuzzSfx[] = "buttons/button18.wav";
+char PortalBlipSfx[] = "buttons/blip1.wav";
 
 public void Chaos_PortalGuns_OnMapStart(){
 	g_beamsprite = PrecacheModel("materials/sprites/laserbeam.vmt");
 	g_halosprite = PrecacheModel("materials/sprites/halo.vmt");
 	PrecacheSound(BuzzSfx);
+	PrecacheSound(PortalBlipSfx);
 }
 
 public void Chaos_PortalGuns_INIT(){
@@ -49,7 +51,7 @@ public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, 
 			if(!ValidAndAlive(target)){
 				SetTeleportEndPoint(client);
 				PerformTeleport(client, g_PortalTeleports[client]);
-				EmitSoundToClient(client, SOUND_BLIP, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
+				EmitSoundToClient(client, PortalBlipSfx, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
 			}
 		}
 	}

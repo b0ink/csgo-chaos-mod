@@ -5,13 +5,19 @@ public void Chaos_ExplosiveBullets(effect_data effect){
 	effect.Duration = 30;
 }
 
+char expolosiveBulletsDistortionFX[] = "explosion_child_distort01b"
+char expolosiveBulletsFlashFX[] = "explosion_child_core04b"
+char expolosiveBulletsSmokeFX[] = "impact_dirt_child_smoke_puff"
+char expolosiveBulletsDirtFX[] = "impact_dirt_child_clumps"
+char expolosiveBulletsHeSFX[] = "weapons/hegrenade/explode5.wav"
+
 public void Chaos_ExplosiveBullets_OnMapStart(){
 	PrecacheEffect("ParticleEffect");
-	PrecacheParticleEffect(DISTORTION);
-	PrecacheParticleEffect(FLASH);
-	PrecacheParticleEffect(SMOKE);
-	PrecacheParticleEffect(DIRT);
-	PrecacheSound(EXPLOSION_HE);
+	PrecacheParticleEffect(expolosiveBulletsDistortionFX);
+	PrecacheParticleEffect(expolosiveBulletsFlashFX);
+	PrecacheParticleEffect(expolosiveBulletsSmokeFX);
+	PrecacheParticleEffect(expolosiveBulletsDirtFX);
+	PrecacheSound(expolosiveBulletsHeSFX);
 }
 
 public void Chaos_ExplosiveBullets_INIT(){
@@ -61,7 +67,7 @@ public Action Chaos_ExplosiveBullets_Hook_BulletShot(const char[] te_name, const
 	}
 	delete trace;
 	//Play the explosion sound
-	EmitAmbientSound(EXPLOSION_HE, endpos, SOUND_FROM_WORLD, SNDLEVEL_NORMAL, SND_NOFLAGS, 0.5, SNDPITCH_HIGH);
+	EmitAmbientSound(expolosiveBulletsHeSFX, endpos, SOUND_FROM_WORLD, SNDLEVEL_NORMAL, SND_NOFLAGS, 0.5, SNDPITCH_HIGH);
 	return Plugin_Continue;
 }
 
@@ -71,10 +77,10 @@ public bool TR_DontHitSelf(int target, int mask, int client){
 
 void CS_CreateExplosion(int attacker, int weapon, float damage, float radius, float pos[3]){
 	//Create temp entity particle explosion effects
-	TE_DispatchEffect(DISTORTION, pos);
-	TE_DispatchEffect(FLASH, pos);
-	TE_DispatchEffect(SMOKE, pos);
-	TE_DispatchEffect(DIRT, pos);
+	TE_DispatchEffect(expolosiveBulletsDistortionFX, pos);
+	TE_DispatchEffect(expolosiveBulletsFlashFX, pos);
+	TE_DispatchEffect(expolosiveBulletsSmokeFX, pos);
+	TE_DispatchEffect(expolosiveBulletsDirtFX, pos);
 	
 	//Hurt the players in the area of explosion
 	float victim_pos[3];

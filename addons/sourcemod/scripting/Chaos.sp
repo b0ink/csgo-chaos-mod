@@ -35,11 +35,6 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define SOUND_BELL "buttons/bell1.wav"
 #define SOUND_BLIP "buttons/blip1.wav"
 #define SOUND_COUNTDOWN "ui/beep07.wav"
-#define DISTORTION "explosion_child_distort01b"
-#define FLASH "explosion_child_core04b"
-#define SMOKE "impact_dirt_child_smoke_puff"
-#define DIRT "impact_dirt_child_clumps"
-#define EXPLOSION_HE "weapons/hegrenade/explode5.wav"
 
 #define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
 

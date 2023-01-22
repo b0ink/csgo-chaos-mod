@@ -15,8 +15,11 @@ public void Chaos_Thunderstorm(effect_data effect){
 }
 
 
+char ThunderstormExplosionSFX[] = "weapons/hegrenade/explode5.wav";
+
 public void Chaos_Thunderstorm_OnMapStart(){
 	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/thunderstorm.raw");
+	PrecacheSound(ThunderstormExplosionSFX);
 }
 
 
@@ -92,7 +95,7 @@ public Action Timer_LightningStrike(Handle timer) {
 	TE_SendToAll();
 
 	if(GetRandomInt(0, 100) <= 50) { // 50/50 chance for slay or superslay boom
-		EmitAmbientSound(EXPLOSION_HE, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.25); // regular slay from os but much more quiet
+		EmitAmbientSound(ThunderstormExplosionSFX, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.25); // regular slay from os but much more quiet
 	} else {
 		EmitAmbientSound(SOUND_SUPERSLAY, endpos, SOUND_FROM_PLAYER, SNDLEVEL_TRAFFIC, SND_NOFLAGS, 0.25); // one singular superslay boom
 	}
