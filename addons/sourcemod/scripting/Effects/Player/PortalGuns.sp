@@ -135,7 +135,7 @@ public bool TraceEntityFilterPlayer(int entity, int contentsMask){
 
 
 /*
-	https://forums.alliedmods.net/showpost.php?p=1981566&postcount=8
+	https://forums.alliedmods.net/showpost.php?p=2678142&postcount=12
 */
 
 bool IsLookingAtSkybox(int client){
