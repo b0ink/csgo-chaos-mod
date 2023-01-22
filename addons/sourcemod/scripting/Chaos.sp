@@ -33,7 +33,6 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 
 #define SOUND_BELL "buttons/bell1.wav"
-#define SOUND_BLIP "buttons/blip1.wav"
 #define SOUND_COUNTDOWN "ui/beep07.wav"
 
 #define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
@@ -396,7 +395,6 @@ public void OnMapStart(){
 	
 	PrecacheSound(SOUND_BELL);
 	PrecacheSound(SOUND_COUNTDOWN);
-	PrecacheSound(SOUND_BLIP);
 
 	//TODO: put all map spawn data into structs
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
