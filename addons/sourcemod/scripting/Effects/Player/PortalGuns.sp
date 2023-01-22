@@ -11,9 +11,12 @@ public void Chaos_PortalGuns(effect_data effect){
 	effect.Duration = 30;
 }
 
+char BuzzSfx[] = "buttons/button18.wav";
+
 public void Chaos_PortalGuns_OnMapStart(){
 	g_beamsprite = PrecacheModel("materials/sprites/laserbeam.vmt");
 	g_halosprite = PrecacheModel("materials/sprites/halo.vmt");
+	PrecacheSound(BuzzSfx);
 }
 
 public void Chaos_PortalGuns_INIT(){
@@ -22,11 +25,18 @@ public void Chaos_PortalGuns_INIT(){
 
 public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 
-	if(g_bPortalGuns){
+	if(g_bPortalGuns ){
 		//TODO: if player is further than the closest spawn point by x units, tp them back?
 		char szWeaponName[32];
 		event.GetString("weapon", szWeaponName, sizeof(szWeaponName));
 		int client = GetClientOfUserId(event.GetInt("userid"));
+
+		/* Dont teleport player out of skybox */
+		if(IsLookingAtSkybox(client)){
+			EmitSoundToClient(client, BuzzSfx, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
+			return;
+		}
+		
 	// thatn x units away from the closest marked location, tp them back?
 		//ignore grenades
 		int target = GetClientAimTarget(client);
@@ -120,3 +130,33 @@ public void PerformTeleport(int target, float pos[3]){
 public bool TraceEntityFilterPlayer(int entity, int contentsMask){
 	return entity > MaxClients || !entity;
 } 
+
+
+/*
+	https://forums.alliedmods.net/showpost.php?p=1981566&postcount=8
+*/
+
+bool IsLookingAtSkybox(int client){
+	float eyeAng[3], eyePos[3], fwdVec[3];
+	
+	GetClientEyeAngles(client, eyeAng);
+	GetClientEyePosition(client, eyePos);
+	
+	GetAngleVectors(eyeAng, fwdVec, NULL_VECTOR, NULL_VECTOR);
+	GetVectorAngles(fwdVec, fwdVec);
+
+	TR_TraceRayFilter(eyePos, fwdVec, MASK_SOLID, RayType_Infinite, TraceDontHitSelf, client);
+	if (TR_DidHit()){
+		char surface[64];
+		TR_GetSurfaceName(null, surface, sizeof(surface));
+		if(StrContains(surface, "skybox", false) != -1){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+bool TraceDontHitSelf(int entity, any data){
+    return entity == data;
+}
