@@ -121,7 +121,7 @@ public Action Timer_UpdateCompass(Handle timer, any data){
 				// Distance to feet
 				dist = dist * 3.2808399;
 
-				Format(textToPrint, sizeof(textToPrint), "%s\n(%.0f feet)\n%N", directionString, textToPrint, dist, nearest);
+				Format(textToPrint, sizeof(textToPrint), "%s\n(%.0f feet)\n%N", directionString, dist, nearest);
 				PrintHintText(client, textToPrint);
 			}
 		}
