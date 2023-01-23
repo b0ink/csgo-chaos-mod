@@ -148,3 +148,4 @@
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WKeyStuck.sp"
 #include "Effects/Player/WeaponKnockback.sp"
+#include "Effects/Player/Compass.sp"
