@@ -152,6 +152,7 @@
 #include "Effects/Player/TeleportOnKill.sp"
 #include "Effects/Player/Thirdperson.sp"
 #include "Effects/Player/Tilted.sp"
+#include "Effects/Player/TradeLives.sp"
 #include "Effects/Player/Trails.sp"
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WeaponKnockback.sp"
