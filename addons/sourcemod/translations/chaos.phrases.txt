@@ -592,12 +592,40 @@
     {
         "en"    "Vampires"
     }
-    "Chaos_WKeyStuck"
+    "Chaos_KeyStuckW"
     {
         "en"    "Help my W key is stuck"
+    }
+    "Chaos_KeyStuckA"
+    {
+        "en"    "Help my A key is stuck"
+    }
+    "Chaos_KeyStuckS"
+    {
+        "en"    "Help my S key is stuck"
+    }
+    "Chaos_KeyStuckD"
+    {
+        "en"    "Help my D key is stuck"
     }
     "Chaos_WeaponKnockback"
     {
         "en"    "Weapon Knockback"
+    }
+    "Chaos_NoComms"
+    {
+        "en"    "No Comms"
+    }
+    "Chaos_PunishMisfire"
+    {
+        "en"    "Take Damage For Missed Shots"
+    }
+    "Chaos_Boxing"
+    {
+        "en"    "Boxing"
+    }
+    "Chaos_Compass"
+    {
+        "en"    "Player Compass"
     }
 }
