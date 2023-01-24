@@ -70,6 +70,7 @@
 #include "Effects/Player/DropPrimaryWeapon.sp"
 #include "Effects/Player/Drugs.sp"
 #include "Effects/Player/ESP.sp"
+#include "Effects/Player/ExoJump.sp"
 #include "Effects/Player/ExplosiveBullets.sp"
 #include "Effects/Player/ExtendedFlash.sp"
 #include "Effects/Player/ExtendedGrenades.sp"

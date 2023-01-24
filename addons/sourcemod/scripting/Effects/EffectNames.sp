@@ -38,6 +38,7 @@ char EffectNames[][] = {
 "Chaos_ESP",
 "Chaos_Earthquake",
 "Chaos_EnemyRadar",
+"Chaos_ExoJump",
 "Chaos_ExplosiveBullets",
 "Chaos_ExtendRoundTime",
 "Chaos_ExtendedFlash",
