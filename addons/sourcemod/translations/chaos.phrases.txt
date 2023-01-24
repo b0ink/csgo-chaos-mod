@@ -628,4 +628,16 @@
     {
         "en"    "Player Compass"
     }
+    "Chaos_ExoJump"
+    {
+        "en"    "ExoJump Boots"
+    }
+    "Chaos_AntiFlash"
+    {
+        "en"    "Anti Flash"
+    }
+    "Chaos_TradeLives"
+    {
+        "en"    "Respawn Teammate On Enemy Kill"
+    }
 }
