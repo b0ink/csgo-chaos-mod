@@ -11,6 +11,7 @@ char EffectNames[][] = {
 "Chaos_BlackWhite",
 "Chaos_BlindPlayers",
 "Chaos_Blur",
+"Chaos_Boxing",
 "Chaos_BreakTime",
 "Chaos_Bumpmines",
 "Chaos_BuyAnywhere",
@@ -18,6 +19,7 @@ char EffectNames[][] = {
 "Chaos_Chatterbox",
 "Chaos_Checkers",
 "Chaos_ChickenPlayers",
+"Chaos_Compass",
 "Chaos_CrabPeople",
 "Chaos_DamageBar",
 "Chaos_DecoyDodgeball",
@@ -149,5 +151,4 @@ char EffectNames[][] = {
 "Chaos_VampireHeal",
 "Chaos_WKeyStuck",
 "Chaos_WeaponKnockback",
-"Chaos_Compass",
 };

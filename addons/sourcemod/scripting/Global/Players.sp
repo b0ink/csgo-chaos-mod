@@ -31,6 +31,7 @@ public Action BlockAllGuns(int client, int weapon) {
 	char WeaponName[32];
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
 	if(
+		StrContains(WeaponName, "fists") == -1 &&
 		StrContains(WeaponName, "knife") == -1 &&
 		StrContains(WeaponName, "c4") == -1 &&
 		StrContains(WeaponName, "grenade") == -1 &&
