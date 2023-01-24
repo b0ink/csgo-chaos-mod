@@ -8,6 +8,10 @@
     {
         "en"    "Alien Knife Fight"
     }
+    "Chaos_AntiFlash"
+    {
+        "en"    "Anti Flash"
+    }
     "Chaos_AutoPlantC4"
     {
         "en"    "Auto Plant C4"
@@ -56,6 +60,10 @@
     {
         "en"    "Blur"
     }
+    "Chaos_Boxing"
+    {
+        "en"    "Boxing"
+    }
     "Chaos_BreakTime"
     {
         "en"    "Break Time"
@@ -83,6 +91,10 @@
     "Chaos_ChickenPlayers"
     {
         "en"    "Make all players a chicken"
+    }
+    "Chaos_Compass"
+    {
+        "en"    "Player Compass"
     }
     "Chaos_CrabPeople"
     {
@@ -147,6 +159,10 @@
     "Chaos_EnemyRadar"
     {
         "en"    "Enemy Radar"
+    }
+    "Chaos_ExoJump"
+    {
+        "en"    "ExoJump Boots"
     }
     "Chaos_ExplosiveBullets"
     {
@@ -288,6 +304,22 @@
     {
         "en"    "Jump! Jump!"
     }
+    "Chaos_KeyStuckA"
+    {
+        "en"    "Help my A key is stuck"
+    }
+    "Chaos_KeyStuckD"
+    {
+        "en"    "Help my D key is stuck"
+    }
+    "Chaos_KeyStuckS"
+    {
+        "en"    "Help my S key is stuck"
+    }
+    "Chaos_KeyStuckW"
+    {
+        "en"    "Help my W key is stuck"
+    }
     "Chaos_KnifeFight"
     {
         "en"    "Knife Fight"
@@ -356,6 +388,10 @@
     {
         "en"    "Night Vision"
     }
+    "Chaos_NoComms"
+    {
+        "en"    "No Comms"
+    }
     "Chaos_NoCrosshair"
     {
         "en"    "No Crosshair"
@@ -415,6 +451,10 @@
     "Chaos_PortalGuns"
     {
         "en"    "Portal Guns"
+    }
+    "Chaos_PunishMisfire"
+    {
+        "en"    "Take Damage For Missed Shots"
     }
     "Chaos_QuakeFOV"
     {
@@ -580,6 +620,10 @@
     {
         "en"    "Thunderstorm"
     }
+    "Chaos_TradeLives"
+    {
+        "en"    "Respawn Teammate On Enemy Kill"
+    }
     "Chaos_Trails"
     {
         "en"    "Trails"
@@ -592,52 +636,8 @@
     {
         "en"    "Vampires"
     }
-    "Chaos_KeyStuckW"
-    {
-        "en"    "Help my W key is stuck"
-    }
-    "Chaos_KeyStuckA"
-    {
-        "en"    "Help my A key is stuck"
-    }
-    "Chaos_KeyStuckS"
-    {
-        "en"    "Help my S key is stuck"
-    }
-    "Chaos_KeyStuckD"
-    {
-        "en"    "Help my D key is stuck"
-    }
     "Chaos_WeaponKnockback"
     {
         "en"    "Weapon Knockback"
-    }
-    "Chaos_NoComms"
-    {
-        "en"    "No Comms"
-    }
-    "Chaos_PunishMisfire"
-    {
-        "en"    "Take Damage For Missed Shots"
-    }
-    "Chaos_Boxing"
-    {
-        "en"    "Boxing"
-    }
-    "Chaos_Compass"
-    {
-        "en"    "Player Compass"
-    }
-    "Chaos_ExoJump"
-    {
-        "en"    "ExoJump Boots"
-    }
-    "Chaos_AntiFlash"
-    {
-        "en"    "Anti Flash"
-    }
-    "Chaos_TradeLives"
-    {
-        "en"    "Respawn Teammate On Enemy Kill"
     }
 }
