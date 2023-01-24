@@ -115,6 +115,7 @@
 #include "Effects/Player/OneBulletOneGun.sp"
 #include "Effects/Player/OneWeaponOnly.sp"
 #include "Effects/Player/PortalGuns.sp"
+#include "Effects/Player/PunishMisfire.sp"
 #include "Effects/Player/QuakeFOV.sp"
 #include "Effects/Player/RandomInvisiblePlayer.sp"
 #include "Effects/Player/RandomTeleport.sp"

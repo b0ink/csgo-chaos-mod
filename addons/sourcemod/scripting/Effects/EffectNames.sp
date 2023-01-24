@@ -105,6 +105,7 @@ char EffectNames[][] = {
 "Chaos_OneWeaponOnly",
 "Chaos_PigeonHole",
 "Chaos_PortalGuns",
+"Chaos_PunishMisfire",
 "Chaos_QuakeFOV",
 "Chaos_RainingMolotovs",
 "Chaos_RandomInvisiblePlayer",
