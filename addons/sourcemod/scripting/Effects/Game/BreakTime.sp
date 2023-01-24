@@ -4,7 +4,10 @@ bool BreakTime = false;
 public void Chaos_BreakTime(effect_data effect){
 	effect.Title = "Take a Break";
 	effect.Duration = 15;
-	effect.IncompatibleWith("Chaos_WKeyStuck");
+	effect.IncompatibleWith("Chaos_KeyStuckA");
+	effect.IncompatibleWith("Chaos_KeyStuckD");
+	effect.IncompatibleWith("Chaos_KeyStuckS");
+	effect.IncompatibleWith("Chaos_KeyStuckW");
 	effect.AddFlag("movement");
 }
 
