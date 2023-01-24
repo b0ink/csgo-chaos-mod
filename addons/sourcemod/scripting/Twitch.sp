@@ -97,9 +97,6 @@ public Action Command_GetVotes(int client, int args){
 	
 	char json[1024];
 
-	//TODO: Add the timestamp when the next effect will be played, using GameTime() and effect interval data
-	//		Twitch app will freeze for one second before effect starts, then submit final votes
-	
 	Format(json, sizeof(json), "{");
 	Format(json, sizeof(json), "%s\"lastPlayedEffect\":\"%s\",", json, g_sLastPlayedEffect);
 	Format(json, sizeof(json), "%s\"twitchEnabled\":%s,", json, g_cvChaosTwitchEnabled.BoolValue ? "true" : "false");

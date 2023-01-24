@@ -156,7 +156,6 @@ void PrintEffects(){
 
 
 void PrintTimer(int time){
-	//TODO: now that there is a delay between ChooseEffect() and creating a new timer, clear the text here during that delay
 	if(time <= 3){
 		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
 		// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
@@ -172,11 +171,17 @@ void PrintTimer(int time){
 		if(IsFakeClient(i)) continue;
 		if(HideTimer[i]) continue;
 
-		if(time > -1){
+		if(time > 0){
 			if(g_bDynamicChannelsEnabled){
 				ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
 			}else{
 				ShowHudText(i, -1, "New effect in:\n%i", time);	
+			}
+		}else{
+			if(g_bDynamicChannelsEnabled){
+				ShowHudText(i, GetDynamicChannel(3), "");	
+			}else{
+				ShowHudText(i, -1, "");	
 			}
 		}
 	}
@@ -227,7 +232,7 @@ Action Timer_DisplayEffects(Handle timer){
 Action Timer_Display(Handle timer = null, int time){
 	g_HudTime = time;
 	PrintTimer(time);
-	if(time > 1 && g_cvChaosEnabled.BoolValue && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
+	if(time > 0 && g_cvChaosEnabled.BoolValue && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
 	return Plugin_Continue;
 }
 
