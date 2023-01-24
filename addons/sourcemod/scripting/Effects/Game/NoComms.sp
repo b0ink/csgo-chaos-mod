@@ -7,13 +7,13 @@ public void Chaos_NoComms(effect_data effect){
 }
 
 public void Chaos_NoComms_INIT(){
-	AddCommandListener(Boxing_SayListener, "say");
-	AddCommandListener(Boxing_SayListener, "say_team");
-	AddCommandListener(Boxing_SayListener, "player_ping");
-	AddCommandListener(Boxing_SayListener, "chatwheel_ping");
+	AddCommandListener(NoComms_SayListener, "say");
+	AddCommandListener(NoComms_SayListener, "say_team");
+	AddCommandListener(NoComms_SayListener, "player_ping");
+	AddCommandListener(NoComms_SayListener, "chatwheel_ping");
 }
 
-public Action Boxing_SayListener(int client, const char[] command, int argc){
+public Action NoComms_SayListener(int client, const char[] command, int argc){
 	if(NoComms){
 		return Plugin_Handled;
 	}
