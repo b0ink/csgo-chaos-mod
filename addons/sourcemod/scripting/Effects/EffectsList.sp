@@ -46,6 +46,7 @@
 #include "Effects/Meta/WhatsHappening.sp"
 #include "Effects/Player/Aimbot.sp"
 #include "Effects/Player/AlienModelKnife.sp"
+#include "Effects/Player/AntiFlash.sp"
 #include "Effects/Player/Autobhop.sp"
 #include "Effects/Player/Bankrupt.sp"
 #include "Effects/Player/BigHeads.sp"
