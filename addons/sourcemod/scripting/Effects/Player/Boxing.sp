@@ -15,23 +15,27 @@ public void Chaos_Boxing_OnMapStart(){
 
 public void Chaos_Boxing_START(){
 	LoopAlivePlayers(i){
-		int knife = GetPlayerWeaponSlot(i, CS_SLOT_KNIFE);
-		if(IsValidEntity(knife)){
-			RemovePlayerItem(i, knife);
-		}
-
-		int fists = CreateEntityByName("weapon_fists");
-		DispatchSpawn(fists);
-		EquipPlayerWeapon(i, fists);
-		FakeClientCommand(i, "use weapon_fists");
-
-		SDKUnhook(i, SDKHook_WeaponSwitch, Boxing_BlockGuns);
-		SDKHook(i, SDKHook_WeaponSwitch, Boxing_BlockGuns);
+		Boxing_GiveFists(i);
 	}
 
 	CreateTimer(0.2, Boxing_PlaySound, _, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(0.4, Boxing_PlaySound, _, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(0.6, Boxing_PlaySound, _, TIMER_FLAG_NO_MAPCHANGE);
+}
+
+void Boxing_GiveFists(int client){
+	int knife = GetPlayerWeaponSlot(client, CS_SLOT_KNIFE);
+	if(IsValidEntity(knife)){
+		RemovePlayerItem(client, knife);
+	}
+
+	int fists = CreateEntityByName("weapon_fists");
+	DispatchSpawn(fists);
+	EquipPlayerWeapon(client, fists);
+	FakeClientCommand(client, "use weapon_fists");
+
+	SDKUnhook(client, SDKHook_WeaponSwitch, Boxing_BlockGuns);
+	SDKHook(client, SDKHook_WeaponSwitch, Boxing_BlockGuns);
 }
 
 public Action Boxing_BlockGuns(int client, int weapon) {
@@ -68,6 +72,12 @@ public void Chaos_Boxing_RESET(bool HasTimerEnded){
 				FakeClientCommand(i, "use weapon_knife");
 			}
 		}
+	}
+}
+
+public void Chaos_Boxing_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		Boxing_GiveFists(client);
 	}
 }
 
