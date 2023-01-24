@@ -89,6 +89,7 @@ char EffectNames[][] = {
 "Chaos_MoneyRain",
 "Chaos_MoonGravity",
 "Chaos_NightVision",
+"Chaos_NoComms",
 "Chaos_NoCrosshair",
 "Chaos_NoHeads",
 "Chaos_NoManualReload",
