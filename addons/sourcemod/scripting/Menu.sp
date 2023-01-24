@@ -321,8 +321,8 @@ void ShowMenu_EditConvars(int client){
 			twitchEnabled = 1.0;
 		}
 
-		FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_twitch_enabled: %s", twitchEnabled ? "YES" : "NO");
-		menu.AddItem("sm_chaos_twitch_enabled", ItemTitle);
+		FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_voting_enabled: %s", twitchEnabled ? "YES" : "NO");
+		menu.AddItem("sm_chaos_voting_enabled", ItemTitle);
 	#endif
 
 
@@ -359,7 +359,7 @@ void ShowMenu_ConvarIncrements(int client, char[] convar){
 	}else if(StrEqual(convar, "sm_chaos_interval", false)){
 		showSeconds = true;
 		Format(title, sizeof(title), "Current Value: %.2f\nHow often a new effect is spawned.\n", current_value);
-	}else if(StrEqual(convar, "sm_chaos_twitch_enabled", false)){
+	}else if(StrEqual(convar, "sm_chaos_voting_enabled", false)){
 		Format(title, sizeof(title), "Current Value: %.2f\nEnable twitch voting", current_value);
 	}else{
 		showSeconds = true;

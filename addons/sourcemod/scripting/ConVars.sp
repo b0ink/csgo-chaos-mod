@@ -50,7 +50,7 @@ void CreateConVars(){
 	g_cvChaosRepeating = 			CreateConVar("sm_chaos_repeating", "1", "Sets whether effects will continue to spawn after the first one of the round", _, true, 0.0, true, 1.0);
 	g_cvChaosOverrideDuration = 	CreateConVar("sm_chaos_override_duration", "-1", "Sets the duration for ALL effects, use -1 to use Chaos_Effects.cfg durations, use 0.0 for no expiration.", _, true, -1.0, true, 120.0);
 	
-	g_cvChaosTwitchEnabled = 		CreateConVar("sm_chaos_twitch_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
+	g_cvChaosTwitchEnabled = 		CreateConVar("sm_chaos_voting_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
 
 	g_cvChaosEffectTimer_Color = 	CreateConVar("sm_chaos_effect_timer_color", "220 0 220 0", "Set the RGBA values of the Effect Timer countdown. (Default is purple)", _, false, 0.0, false, 1.0);
 	g_cvChaosEffectList_Color = 	CreateConVar("sm_chaos_effect_list_color", "37 186 255 0", "Set the RGBA values of the Effect List on the side. (Default is blue)", _, false, 0.0, false, 1.0);
@@ -229,7 +229,7 @@ void UpdateCvars(){
 			convar_value = kv.GetNum("sm_chaos_repeating", 1);
 			g_cvChaosRepeating.SetInt(convar_value);
 
-			convar_value = kv.GetNum("sm_chaos_twitch_enabled", 1);
+			convar_value = kv.GetNum("sm_chaos_voting_enabled", 1);
 			g_cvChaosTwitchEnabled.SetInt(convar_value);
 
 			char color[128];
@@ -350,7 +350,7 @@ void Update_Convar_Config(){
 	file.WriteLine("	// Determines whether effects will be pooled in for twitch voting.");
 	file.WriteLine("	// If you are using the twitch overlay app, set this to 1.");
 	file.WriteLine("	// This setting will be set to 0 by default on each map change.");
-	file.WriteLine("	\"sm_chaos_twitch_enabled\"    \"%i\"", g_cvChaosTwitchEnabled.IntValue);
+	file.WriteLine("	\"sm_chaos_voting_enabled\"    \"%i\"", g_cvChaosTwitchEnabled.IntValue);
 	file.WriteLine("");
 	
 	char colorDetails[64];
