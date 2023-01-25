@@ -30,6 +30,7 @@ char EffectNames[][] = {
 "Chaos_DisableStrafe",
 "Chaos_DiscoFog",
 "Chaos_DiscoPlayers",
+"Chaos_DoorStuck",
 "Chaos_DoubleJump",
 "Chaos_DropAllWeapons",
 "Chaos_DropCurrentWeapon",

@@ -64,6 +64,7 @@
 #include "Effects/Player/DisableStrafe.sp"
 #include "Effects/Player/DiscoFog.sp"
 #include "Effects/Player/DiscoPlayers.sp"
+#include "Effects/Player/DoorStuck.sp"
 #include "Effects/Player/DoubleJump.sp"
 #include "Effects/Player/DropAllWeapons.sp"
 #include "Effects/Player/DropCurrentWeapon.sp"

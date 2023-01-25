@@ -640,4 +640,8 @@
     {
         "en"    "Weapon Knockback"
     }
+    "Chaos_DoorStuck"
+    {
+        "en"    "DOOR STUCK!"
+    }
 }
