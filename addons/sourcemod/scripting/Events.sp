@@ -99,6 +99,19 @@ public void OnEntityCreated(int ent, const char[] classname){
 	}
 }
 
+
+public void OnEntityDestroyed(int ent){
+	LoopAllEffects(Chaos_EffectData_Buffer, index){
+		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityDestroyed", Chaos_EffectData_Buffer.FunctionName);
+		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
+		if(func != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), func);
+			Call_PushCell(ent); 
+			Call_Finish();
+		}
+	}
+}
+
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	

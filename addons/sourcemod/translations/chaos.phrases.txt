@@ -656,4 +656,8 @@
     {
         "en"    "Melon Guns"
     }
+    "Chaos_ThrowingKnives"
+    {
+        "en"    "Throwing Knives"
+    }
 }

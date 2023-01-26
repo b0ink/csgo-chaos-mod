@@ -156,6 +156,7 @@ char EffectNames[][] = {
 "Chaos_TeleportFewMetres",
 "Chaos_TeleportOnKill",
 "Chaos_Thirdperson",
+"Chaos_ThrowingKnives",
 "Chaos_Thunderstorm",
 "Chaos_Tilted",
 "Chaos_TradeLives",
