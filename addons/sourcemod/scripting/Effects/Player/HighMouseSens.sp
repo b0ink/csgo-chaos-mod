@@ -19,7 +19,7 @@ public Action Chaos_HighMouseSens_OnPlayerRunCmd(int client, int &buttons, int &
 		if(mouse[0] != 0 || mouse[1] != 0){
 			float newAngles[3];
 			newAngles = fAngles;
-			newAngles[0] += (mouse[1] / 1.5);
+			newAngles[0] += (mouse[1] * 1.5);
 			newAngles[1] -= (mouse[0] * 1.5);
 			TeleportEntity(client, NULL_VECTOR, newAngles, NULL_VECTOR);
 			return Plugin_Changed;
