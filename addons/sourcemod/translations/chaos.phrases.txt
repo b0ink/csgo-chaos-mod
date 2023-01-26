@@ -644,4 +644,8 @@
     {
         "en"    "DOOR STUCK!"
     }
+    "Chaos_TearGas"
+    {
+        "en"    "Tear Gas"
+    }
 }
