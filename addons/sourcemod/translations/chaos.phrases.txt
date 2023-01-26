@@ -648,4 +648,8 @@
     {
         "en"    "Tear Gas"
     }
+    "Chaos_QuickMath"
+    {
+        "en"    "Quick Math"
+    }
 }

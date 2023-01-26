@@ -12,7 +12,7 @@ public void Chaos_SleepyShooter(effect_data effect){
 	effect.AddAlias("Blind");
 	effect.AddAlias("Awake");
 
-	effect.IncompatibleWith("Chaos_Blind");
+	effect.IncompatibleWith("Chaos_BlindPlayers");
 }
 
 public void Chaos_SleepyShooter_INIT(){

@@ -160,3 +160,4 @@
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/TearGas.sp"
+#include "Effects/Game/QuickMath.sp"
