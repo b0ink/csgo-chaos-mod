@@ -652,4 +652,8 @@
     {
         "en"    "Quick Math"
     }
+    "Chaos_PropShooterMelon"
+    {
+        "en"    "Melon Guns"
+    }
 }
