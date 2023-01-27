@@ -660,4 +660,12 @@
     {
         "en"    "Throwing Knives"
     }
+    "Chaos_OilDrums"
+    {
+        "en"    "Exploding Oil Drums"
+    }
+    "Chaos_Armageddon"
+    {
+        "en"    "Armageddon"
+    }
 }

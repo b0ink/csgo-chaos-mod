@@ -1,3 +1,4 @@
+#include "Effects/Game/Armageddon.sp"
 #include "Effects/Game/AutoPlantC4.sp"
 #include "Effects/Game/BlackBars.sp"
 #include "Effects/Game/BlackWhite.sp"
@@ -34,6 +35,7 @@
 #include "Effects/Game/Spawnables/LittleChooks.sp"
 #include "Effects/Game/Spawnables/MamaChook.sp"
 #include "Effects/Game/Spawnables/MoneyRain.sp"
+#include "Effects/Game/Spawnables/OilDrums.sp"
 #include "Effects/Game/Spawnables/RainingMolotovs.sp"
 #include "Effects/Game/Spawnables/SmokeStrat.sp"
 #include "Effects/Game/Spawnables/Soccerballs.sp"

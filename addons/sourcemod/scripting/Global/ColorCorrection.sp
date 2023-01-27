@@ -25,7 +25,7 @@ void CLEAR_CC(char[] file = ""){
 	}
 }
 
-void CREATE_CC(char[] filename, char[] targetname = ""){
+void CREATE_CC(char[] filename, char[] targetname = "", float fadeIn = 3.0, float fadeOut = 3.0){
 	char path[PLATFORM_MAX_PATH];
 	FormatEx(path, sizeof(path), "materials/Chaos/ColorCorrection/%s.raw", filename);
 	int ent = CreateEntityByName("color_correction");
@@ -34,8 +34,8 @@ void CREATE_CC(char[] filename, char[] targetname = ""){
 		DispatchKeyValue(ent, "maxweight", "1.0");
 		DispatchKeyValue(ent, "maxfalloff", "-1.0");
 		DispatchKeyValue(ent, "minfalloff", "-1.0");
-		DispatchKeyValue(ent, "fadeInDuration", "3.0");
-		DispatchKeyValue(ent, "fadeOutDuration", "3.0");
+		DispatchKeyValueFloat(ent, "fadeInDuration", fadeIn);
+		DispatchKeyValueFloat(ent, "fadeOutDuration", fadeOut);
 		DispatchKeyValue(ent, "filename", path);
 		if(targetname[0] != '\0') DispatchKeyValue(ent, "targetname", targetname);
 		DispatchSpawn(ent);

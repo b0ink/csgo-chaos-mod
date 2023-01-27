@@ -177,6 +177,24 @@ void MinimalFog(bool removeFog = false){
 
 }
 
+void ArmageddonFog(bool removeFog = false){
+	if(removeFog){
+		RemoveFog("ArmageddonFog");
+		return;
+	}
+	fog_data fog;
+	fog.effectName = "ArmageddonFog";
+	fog.SetDefault();
+	fog.color = "50 78 75";
+	fog.end = "800.0";
+	fog.start = "200.0";
+	fog.maxdensity = "1.0";
+
+	Fog_Stream.PushArray(fog, sizeof(fog));
+	UpdateFog();
+
+}
+
 void ResetRenderDistance(){
 	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
 }
@@ -215,6 +233,7 @@ void Mexico(bool removeFog = false){
 	fog.effectName = "Mexico";
 	fog.SetDefault();
 	fog.color = "138 86 22";
+	fog.start = "0.0";
 	fog.end = "0.0";
 	fog.maxdensity = "0.75";
 
@@ -232,6 +251,7 @@ void LightsOff(bool removeFog = false){
 	fog.effectName = "LightsOff";
 	fog.SetDefault();
 	fog.color = "0 0 0";
+	fog.start = "0.0";
 	fog.end = "0.0";
 	fog.maxdensity = "0.99";
 

@@ -70,9 +70,18 @@ public bool Chaos_Thunderstorm_Conditions(){
 	return true;
 }
 
+/* Used in Chaos_Armageddon() */
+void EnableThunderstorm(){
+	Thunderstorm = true;
+}
+
+void DisableThunderstorm(){
+	Thunderstorm = false;
+}
+
 public Action Timer_LightningStrike(Handle timer) {
 	if (!Thunderstorm) {
-		return Plugin_Continue;
+		return Plugin_Stop;
 	}
 	
 
