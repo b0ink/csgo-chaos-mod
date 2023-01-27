@@ -34,6 +34,10 @@ public void Chaos_Armageddon_START(){
 	EnableThunderstorm();
 	
 	CREATE_CC("wasteland");
+	SPAWN_WEATHER(RAIN, "Armageddon");
+	SPAWN_WEATHER(SNOWFALL, "Armageddon");
+	SPAWN_WEATHER(SNOW, "Armageddon");
+	SPAWN_WEATHER(ASH, "Armageddon");
 
 	ArmageddonFog();
 
@@ -72,6 +76,18 @@ public void Chaos_Armageddon_RESET(bool HasTimerEnded){
 	if(HasTimerEnded){
 		LoopAlivePlayers(i){
 			GivePlayerItem(i, "weapon_healthshot");
+		}
+	}
+
+
+	char classname[64];
+	char targetname[64];
+	LoopAllEntities(ent, GetMaxEntities(), classname){
+		if(StrEqual(classname, "func_precipitation")){
+			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
+			if(StrEqual(targetname, "Armageddon")){
+				RemoveEntity(ent);
+			}
 		}
 	}
 }
