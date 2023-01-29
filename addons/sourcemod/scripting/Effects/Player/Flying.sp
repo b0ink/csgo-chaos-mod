@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bActiveNoclip = false;
 public void Chaos_Flying(effect_data effect){
 	effect.Title = "Flying";

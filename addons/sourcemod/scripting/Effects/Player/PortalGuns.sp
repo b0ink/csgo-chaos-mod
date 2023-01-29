@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 //weappon fire
 

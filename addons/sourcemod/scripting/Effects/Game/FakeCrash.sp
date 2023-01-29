@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_FakeCrash(effect_data effect){
 	effect.Title = "Fake Crash";
 	effect.HasNoDuration = true;

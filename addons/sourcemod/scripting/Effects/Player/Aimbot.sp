@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Aimbot(effect_data effect){
 	effect.Title = "Aimbot";
 	effect.Duration = 30;

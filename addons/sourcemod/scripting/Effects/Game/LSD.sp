@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_LSD(effect_data effect){
 	effect.Title = "LSD";
 	effect.Duration = 30;

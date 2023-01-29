@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool RapidFire = false;
 
 public void Chaos_RapidFire(effect_data effect){

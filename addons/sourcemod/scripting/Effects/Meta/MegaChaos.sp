@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Meta_Mega(effect_data effect){
 	effect.Title = "Mega Chaos";
 	effect.HasNoDuration = true;

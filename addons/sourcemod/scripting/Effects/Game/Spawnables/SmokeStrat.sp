@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_SmokeStrat(effect_data effect){
 	effect.Title = "Smoke Strat";
 	effect.HasNoDuration = true;

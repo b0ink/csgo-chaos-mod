@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	Keep in mind this does "pause" the game time, meaning the duration of this effect is much longer as stated
 */

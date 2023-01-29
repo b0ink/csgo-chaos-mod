@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Invis(effect_data effect){
 	effect.Title = "Where did everyone go?";
 	effect.Duration = 30;

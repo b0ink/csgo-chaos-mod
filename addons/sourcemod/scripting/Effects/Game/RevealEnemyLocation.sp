@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_RevealEnemyLocation(effect_data effect){
 	effect.Title = "Reveal Enemy Location";
 	effect.HasNoDuration = true;

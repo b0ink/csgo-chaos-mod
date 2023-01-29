@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 #include "Effects/Game/Armageddon.sp"
 #include "Effects/Game/AutoPlantC4.sp"
 #include "Effects/Game/BlackBars.sp"

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_EnemyRadar(effect_data effect){
 	effect.Title = "Enemy Radar";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bForceCrouch = false;
 public void Chaos_CrabPeople(effect_data effect){
 	effect.Title = "Crab People";

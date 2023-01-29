@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_LowRenderDistance(effect_data effect){
 	effect.Title = "Low Render Distance";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_ExtendRoundTime(effect_data effect){
 	effect.Title = "Extend Round Time";
 	effect.HasNoDuration = true;	

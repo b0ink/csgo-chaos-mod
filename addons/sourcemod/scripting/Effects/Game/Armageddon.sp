@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	- Raining Explosive barrels
 	- Raining Molotovs

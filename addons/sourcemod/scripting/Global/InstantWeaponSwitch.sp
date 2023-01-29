@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 public void GiveAndSwitchWeapon(int client, char[] weaponName){
 	

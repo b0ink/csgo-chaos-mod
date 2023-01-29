@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_InsaneGravity(effect_data effect){
 	effect.Title = "Insane Gravity";
 	effect.Duration = 30;

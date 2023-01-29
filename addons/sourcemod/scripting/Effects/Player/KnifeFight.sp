@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_KnifeFight(effect_data effect){
 	effect.Title = "Knife Fight";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_Chatterbox = false;
 bool g_CalloutSent[MAXPLAYERS+1];
 

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool QuickMath = false;
 
 int QuickMathAnswer = 0;

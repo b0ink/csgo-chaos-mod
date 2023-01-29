@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Binoculars(effect_data effect){
 	effect.Title = "Binoculars";
 	effect.Duration = 30;

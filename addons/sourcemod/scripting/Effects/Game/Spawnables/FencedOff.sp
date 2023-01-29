@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 enum FENCE_TYPE {
 	FENCE_WIDE,
 	FENCE_THIN

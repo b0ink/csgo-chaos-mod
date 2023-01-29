@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_BigHeads(effect_data effect){
 	effect.Title = "Big Heads";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 Handle DiscoPlayers_TimerRepeat = INVALID_HANDLE;
 bool DiscoPlayers = false;
 public void Chaos_DiscoPlayers(effect_data effect){

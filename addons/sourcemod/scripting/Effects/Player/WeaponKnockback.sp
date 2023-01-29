@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool WeaponKnockback = false;
 
 public void Chaos_WeaponKnockback(effect_data effect){

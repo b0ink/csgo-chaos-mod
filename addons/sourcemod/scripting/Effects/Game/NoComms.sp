@@ -1,7 +1,9 @@
+#pragma semicolon 1
+
 bool NoComms = false;
 
 public void Chaos_NoComms(effect_data effect){
-	effect.Title = "No Comms"
+	effect.Title = "No Comms";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Chatterbox");
 }

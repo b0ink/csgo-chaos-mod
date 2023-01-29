@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 //CREDIT:
 //https://github.com/b3none/retakes-autoplant/blob/master/scripting/retakes_autoplant.sp

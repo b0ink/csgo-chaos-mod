@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool Meta_WhatsHappening = false;
 
 public void Chaos_Meta_WhatsHappening(effect_data effect){

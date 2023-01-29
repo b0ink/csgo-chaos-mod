@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Bankrupt(effect_data effect){
 	effect.Title = "Bankrupt";
 	effect.HasNoDuration = true;

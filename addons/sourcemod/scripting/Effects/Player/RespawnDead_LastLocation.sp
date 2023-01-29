@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
 public void Chaos_RespawnDead_LastLocation(effect_data effect){

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_OffsetCrosshair(effect_data effect){
 	effect.Title = "Offset Crosshair";
 	effect.Duration = 30;

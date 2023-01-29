@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_PigeonHole(effect_data effect){
 	effect.Title = "Pigeon Hole";
 	effect.Duration = 30;

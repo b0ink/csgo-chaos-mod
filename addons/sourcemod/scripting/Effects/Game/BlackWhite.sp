@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_BlackWhite(effect_data effect){
 	effect.Title = "Black and White";
 	effect.Duration = 30;

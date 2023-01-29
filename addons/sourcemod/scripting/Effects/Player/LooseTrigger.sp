@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bLoose_Trigger = false;
 bool ShouldAttack[MAXPLAYERS+1];
 

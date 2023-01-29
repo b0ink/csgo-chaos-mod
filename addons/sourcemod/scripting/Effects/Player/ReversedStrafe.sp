@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool ReversedStrafe = false;
 public void Chaos_ReversedStrafe(effect_data effect){
 	effect.Title = "Reversed Strafe";

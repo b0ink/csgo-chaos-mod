@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_HealthRegen = false;
 public void Chaos_HealthRegen(effect_data effect){
 	effect.Title = "Health Regen";

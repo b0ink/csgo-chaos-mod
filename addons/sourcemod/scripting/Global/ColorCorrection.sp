@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	.raw files can be added to the downloads table in the OnMapStart function.
 	eg.

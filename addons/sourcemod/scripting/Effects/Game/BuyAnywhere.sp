@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_BuyAnywhere(effect_data effect){
 	effect.Title = "Buy Anyhere Enabled";
 	effect.Duration = 30;

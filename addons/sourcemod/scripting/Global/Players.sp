@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 //TODO: Similar to how Fog.sp's Fog_Stream Queue is handled, the same should be done to player data, eg:
 /*
 	enum struct player_data{

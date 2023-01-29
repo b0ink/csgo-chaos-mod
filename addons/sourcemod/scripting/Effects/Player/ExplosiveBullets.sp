@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bExplosiveBullets = false;
 
 public void Chaos_ExplosiveBullets(effect_data effect){
@@ -5,11 +7,11 @@ public void Chaos_ExplosiveBullets(effect_data effect){
 	effect.Duration = 30;
 }
 
-char expolosiveBulletsDistortionFX[] = "explosion_child_distort01b"
-char expolosiveBulletsFlashFX[] = "explosion_child_core04b"
-char expolosiveBulletsSmokeFX[] = "impact_dirt_child_smoke_puff"
-char expolosiveBulletsDirtFX[] = "impact_dirt_child_clumps"
-char expolosiveBulletsHeSFX[] = "weapons/hegrenade/explode5.wav"
+char expolosiveBulletsDistortionFX[] = "explosion_child_distort01b";
+char expolosiveBulletsFlashFX[] = "explosion_child_core04b";
+char expolosiveBulletsSmokeFX[] = "impact_dirt_child_smoke_puff";
+char expolosiveBulletsDirtFX[] = "impact_dirt_child_clumps";
+char expolosiveBulletsHeSFX[] = "weapons/hegrenade/explode5.wav";
 
 public void Chaos_ExplosiveBullets_OnMapStart(){
 	PrecacheEffect("ParticleEffect");

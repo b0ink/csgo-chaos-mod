@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_ReversedMovement = false;
 
 public void Chaos_ReversedMovement(effect_data effect){

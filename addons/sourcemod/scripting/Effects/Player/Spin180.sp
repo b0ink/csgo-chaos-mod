@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Spin180(effect_data effect){
 	effect.Title = "180 Spin";
 	effect.HasNoDuration = true;

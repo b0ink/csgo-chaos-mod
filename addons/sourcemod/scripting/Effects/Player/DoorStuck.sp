@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_DoorStuck(effect_data effect){
 	effect.Title = "DOOR STUCK!";
 	effect.Duration = 30;	
@@ -38,8 +40,8 @@ void SpawnDoor(int client){
 
 	float clientAngles[3];
 	float clientPosition[3];
-	GetClientAbsAngles(client, clientAngles)
-	GetClientAbsOrigin(client, clientPosition)
+	GetClientAbsAngles(client, clientAngles);
+	GetClientAbsOrigin(client, clientPosition);
 
 	float direction[3], newPosition[3];
 

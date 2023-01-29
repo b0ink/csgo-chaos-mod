@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_SpawnExplodingBarrels(effect_data effect){
 	effect.Title = "Exploding Barrels";
 	effect.Duration = 60;

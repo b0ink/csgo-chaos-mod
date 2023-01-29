@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_MoonGravity(effect_data effect){
 	effect.Title = "Low Gravity";
 	effect.Duration = 30;

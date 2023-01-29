@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 int 	g_AutoBunnyhop = 0;
 
 public void Chaos_Autobhop(effect_data effect){

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bDiscoFog = false;
 Handle g_DiscoFog_Timer_Repeat = INVALID_HANDLE;
 

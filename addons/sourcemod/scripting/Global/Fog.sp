@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 int 	g_iFog = -1;
 
 

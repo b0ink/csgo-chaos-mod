@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
 public void ParseChaosEffects(){

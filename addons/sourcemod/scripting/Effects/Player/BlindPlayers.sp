@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_BlindPlayers(effect_data effect){
 	effect.Title = "Blind";
 	effect.Duration = 7;

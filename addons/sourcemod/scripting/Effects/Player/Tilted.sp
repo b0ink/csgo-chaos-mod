@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Tilted(effect_data effect){
 	effect.Title = "Tilted";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Snow(effect_data effect){
 	effect.Title = "Snow";
 	effect.Duration = 45;

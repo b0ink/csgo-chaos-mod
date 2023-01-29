@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_NoCrosshair(effect_data effect){
 	effect.Title = "No Crosshair";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 char PrecipitationModel[128];
 
 #define SOUND_SUPERSLAY  "weapons/hegrenade/hegrenade_detonate_02.wav"

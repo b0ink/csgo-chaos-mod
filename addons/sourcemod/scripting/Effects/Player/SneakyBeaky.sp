@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool SneakyBeaky = false;
 
 public void Chaos_SneakyBeaky(effect_data effect){

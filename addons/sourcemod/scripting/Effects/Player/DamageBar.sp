@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	Thanks to https://github.com/Natanel-Shitrit/Damage-Bar
 */

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 Handle TPos = INVALID_HANDLE;
 Handle CTPos = INVALID_HANDLE;

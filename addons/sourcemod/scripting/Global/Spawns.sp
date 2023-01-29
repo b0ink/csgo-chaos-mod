@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 Handle 	g_MapCoordinates = INVALID_HANDLE;
 Handle 	g_UnusedCoordinates = INVALID_HANDLE;
 Handle 	bombSiteA = INVALID_HANDLE;

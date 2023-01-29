@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_ESP(effect_data effect){
     effect.Title = "Wall Hacks";
     effect.Duration = 30;

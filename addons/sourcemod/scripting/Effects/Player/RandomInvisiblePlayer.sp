@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_RandomInvisiblePlayer(effect_data effect){
 	effect.Title = "Random Invisible Player";
 	effect.HasNoDuration = true;

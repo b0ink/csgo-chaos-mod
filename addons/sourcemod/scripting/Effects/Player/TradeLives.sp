@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool TradeLives = false;
 
 public void Chaos_TradeLives(effect_data effect){

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 void RegisterCommands(){
 	RegAdminCmd("chaos_debug", 			Command_ChaosDebug, 	ADMFLAG_GENERIC);
 	RegAdminCmd("chaos_help", 			Command_ChaosHelp, 		ADMFLAG_GENERIC);

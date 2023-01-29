@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_IncreasedRecoil(effect_data effect){
 	effect.Title = "Increased Recoil";
 	effect.Duration = 30;

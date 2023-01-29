@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool  HideTimer[MAXPLAYERS+1];
 bool  HideEffectList[MAXPLAYERS+1];
 bool  HideAnnouncement[MAXPLAYERS+1];

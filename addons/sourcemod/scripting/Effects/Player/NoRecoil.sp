@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_NoRecoil(effect_data effect){
 	effect.Title = "100% Weapon Accuracy";
 	effect.Duration = 30;

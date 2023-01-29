@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool Checkers = false;
 bool checkersMaterials = true;
 int checkersToggle[MAXPLAYERS+1];

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool ReducedDamage = false;
 
 public void Chaos_ReducedDamage(effect_data effect){

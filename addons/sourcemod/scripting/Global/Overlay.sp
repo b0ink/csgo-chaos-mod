@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 Handle Overlay_Que = INVALID_HANDLE;
 void Overlay_INIT(){
 	if(Overlay_Que == INVALID_HANDLE){

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_DecoyDodgeball(effect_data effect){
 	effect.Title = "Decoy Dodgeball";
 	effect.Duration = 30;

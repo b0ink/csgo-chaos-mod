@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_OneWeaponOnly(effect_data effect){
 	effect.Title = "One Weapon Only";
 	effect.Duration = 30;

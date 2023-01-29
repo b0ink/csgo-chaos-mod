@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 effect_data 	Chaos_EffectData_Buffer;
 char 			Chaos_EventName_Buffer[64];
 

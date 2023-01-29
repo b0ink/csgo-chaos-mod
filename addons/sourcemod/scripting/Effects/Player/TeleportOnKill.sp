@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool TeleportOnKill = false;
 public void Chaos_TeleportOnKill(effect_data effect){
 	effect.Title = "Teleport On Kill";

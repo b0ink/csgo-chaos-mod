@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 //TODO: configure for DM
 

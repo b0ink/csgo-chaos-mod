@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 //Credit: https://forums.alliedmods.net/showthread.php?t=312548
 
 public void Chaos_Turrets(effect_data effect){

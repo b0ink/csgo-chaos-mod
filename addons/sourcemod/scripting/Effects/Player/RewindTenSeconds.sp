@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_RewindTenSeconds(effect_data effect){
 	effect.Title = "Rewind 10 Seconds";
 	effect.HasNoDuration = true;

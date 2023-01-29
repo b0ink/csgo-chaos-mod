@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 //taken from base sourcemod
 
 UserMsg g_FadeUserMsgId_drugs;

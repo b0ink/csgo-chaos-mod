@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool AKeyStuck = false;
 
 public void Chaos_KeyStuckA(effect_data effect){

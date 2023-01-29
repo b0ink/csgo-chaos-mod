@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	Thanks to @defuj for providing the blur .vmt materials 
 	https://steamcommunity.com/id/defuj/

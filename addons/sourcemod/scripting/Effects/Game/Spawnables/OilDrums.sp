@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool OilDrums = false;
 bool OilDrumModelFound = true;
 

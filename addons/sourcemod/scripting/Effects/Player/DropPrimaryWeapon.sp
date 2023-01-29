@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_DropPrimaryWeapon(effect_data effect){
 	effect.Title = "Drop Primary Weapon";
 	effect.HasNoDuration = true;

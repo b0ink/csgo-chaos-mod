@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_DeepFried(effect_data effect){
 	effect.Title = "Deep Fried";
 	effect.Duration = 30;

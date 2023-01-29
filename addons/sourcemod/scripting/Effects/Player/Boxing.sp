@@ -1,4 +1,6 @@
-char BoxingBellSfx[] = "ambient/misc/brass_bell_e.wav"
+#pragma semicolon 1
+
+char BoxingBellSfx[] = "ambient/misc/brass_bell_e.wav";
 
 public void Chaos_Boxing(effect_data effect){
 	effect.Title = "Boxing";

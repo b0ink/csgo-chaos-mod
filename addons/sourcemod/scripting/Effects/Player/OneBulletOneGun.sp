@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool OneBulletOneGun = false;
 
 public void Chaos_OneBulletOneGun(effect_data effect){

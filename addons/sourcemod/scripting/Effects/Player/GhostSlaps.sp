@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 Handle Chaos_RandomSlap_Timer = INVALID_HANDLE;
 float g_Chaos_RandomSlap_Interval = 7.0;
 

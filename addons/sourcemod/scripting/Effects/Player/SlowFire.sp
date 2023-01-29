@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool SlowFire = false;
 
 public void Chaos_SlowFire(effect_data effect){

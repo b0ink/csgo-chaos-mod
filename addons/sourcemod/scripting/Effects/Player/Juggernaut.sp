@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 char g_OriginalModels_Jugg[MAXPLAYERS + 1][PLATFORM_MAX_PATH+1];
 //https://forums.alliedmods.net/showthread.php?t=307674 thanks for prop_send 
 bool g_bSetJuggernaut = false;

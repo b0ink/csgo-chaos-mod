@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_SilentFootsteps(effect_data effect){
 	effect.Title = "Silent Footsteps";
 	effect.Duration = 30;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_TeleportFewMetres(effect_data effect){
 	effect.Title = "Teleport Players A Few Metres";
 	effect.Duration = 30;

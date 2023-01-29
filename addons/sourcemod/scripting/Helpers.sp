@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 
 bool GetEffectData(char[] function_name, effect_data return_data){

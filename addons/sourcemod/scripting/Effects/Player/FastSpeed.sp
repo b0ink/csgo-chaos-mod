@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_FastSpeed(effect_data effect){
 	effect.Title = "3x Movement Speed";
 	effect.Duration = 30;

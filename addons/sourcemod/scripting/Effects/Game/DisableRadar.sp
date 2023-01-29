@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_DisableRadar(effect_data effect){
 	effect.Title = "Disable Radar";
 	effect.Duration = 30;

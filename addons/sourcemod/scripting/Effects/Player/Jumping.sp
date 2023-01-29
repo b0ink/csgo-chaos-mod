@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bJumping = false;
 bool ForceJump[MAXPLAYERS+1];
 public void Chaos_Jumping(effect_data effect){

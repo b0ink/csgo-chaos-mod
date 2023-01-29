@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool SpeedShooter = false;
 
 //TODO:, if someone has speed once this ends, they still have speed

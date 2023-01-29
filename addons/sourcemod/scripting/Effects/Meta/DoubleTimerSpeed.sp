@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 public void Chaos_Meta_DoubleTimerSpeed(effect_data effect){
 	effect.Title = "Double Timer Speed";

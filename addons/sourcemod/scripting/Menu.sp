@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 void ShowMenu_Main(int client){
 	if(!IsValidClient(client)) return;
 	Menu menu = new Menu(Main_Handler);

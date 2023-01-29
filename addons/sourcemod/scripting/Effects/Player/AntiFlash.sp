@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool AntiFlash = false;
 
 public void Chaos_AntiFlash(effect_data effect){

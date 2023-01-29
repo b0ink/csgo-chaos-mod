@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 ArrayList Twitch_Votes;
 bool alternateIndex = false;
 bool EnableRandomEffectOption = true;

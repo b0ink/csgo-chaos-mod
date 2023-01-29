@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 //TODO: visualise the convar saving workflow. eg. when it is read from the config and when it's saved back to the config
 
 ConVar 	g_cvChaosPrefix;

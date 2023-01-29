@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Earthquake(effect_data effect){
 	effect.Title = "Earthquake";
 	effect.HasNoDuration = true;

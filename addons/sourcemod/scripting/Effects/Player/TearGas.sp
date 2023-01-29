@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	https://forums.alliedmods.net/showthread.php?p=923823
 */
@@ -16,7 +18,7 @@ public void TearGas_Event_SmokeDetonate(Event event, const char[] name, bool don
 	if(!TearGas) return;
 
 	int client = GetClientOfUserId(GetEventInt(event,"userid"));
-	if(!IsValidClient(client)) return
+	if(!IsValidClient(client)) return;
 
 	int hurt = CreateEntityByName("point_hurt");
 	if(hurt == -1) return;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 bool HighMouseSens = false;
 public void Chaos_HighMouseSens(effect_data effect){

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_NightVision(effect_data effect){
 	effect.Title = "Night Vision";
 	effect.Duration = 30;

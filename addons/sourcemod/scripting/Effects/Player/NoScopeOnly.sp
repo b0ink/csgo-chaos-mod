@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bNoscopeOnly = false;
 int m_flNextSecondaryAttack = -1;
 

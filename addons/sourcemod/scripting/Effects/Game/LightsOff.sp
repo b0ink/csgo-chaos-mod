@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_LightsOff(effect_data effect){
 	effect.Title = "Who turned the lights off?";
 	effect.Duration = 30;

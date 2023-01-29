@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	https://github.com/Rachnus/Propshooter-Sourcemod-CS-GO-/
 */

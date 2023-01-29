@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Thirdperson(effect_data effect){
 	effect.Title = "Thirdperson";
 	effect.Duration = 30;

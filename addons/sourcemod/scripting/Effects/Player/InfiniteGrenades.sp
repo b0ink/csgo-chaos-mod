@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_InfiniteGrenades(effect_data effect){
 	effect.Title = "Infinite Grenades";
 	effect.Duration = 30;

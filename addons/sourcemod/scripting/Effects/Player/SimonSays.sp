@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 Handle 	g_SimonSays_Timer = INVALID_HANDLE;
 bool 	g_bSimon_Active = false;
 bool 	g_bSimon_Says = false; // whether to say simon says or not

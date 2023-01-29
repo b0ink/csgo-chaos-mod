@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_BigChooks(effect_data effect){
 	effect.Title = "Big Chooks";
 	effect.AddAlias("Chicken");

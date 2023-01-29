@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 char EffectNames[][] = {
 "Chaos_Aimbot",
 "Chaos_AlienModelKnife",

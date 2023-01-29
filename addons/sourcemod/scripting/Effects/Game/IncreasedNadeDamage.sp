@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool IncreasedNadeDamage = false;
 public void Chaos_IncreasedNadeDamage(effect_data effect){
 	effect.Title = "Increased Nade Damage";

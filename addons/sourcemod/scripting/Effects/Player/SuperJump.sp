@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_SuperJump(effect_data effect){
 	effect.Title = "Super Jump";
 	effect.Duration = 30;

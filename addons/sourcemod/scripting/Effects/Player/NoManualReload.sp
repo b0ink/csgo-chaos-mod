@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool NoManualReload = false;
 
 public void Chaos_NoManualReload(effect_data effect){

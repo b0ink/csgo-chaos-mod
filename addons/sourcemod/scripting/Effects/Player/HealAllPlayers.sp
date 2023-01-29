@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_HealAllPlayers(effect_data effect){
 	effect.Title = "Heal All Players";
 	effect.HasNoDuration = true;

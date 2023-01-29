@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_ReversedRecoil(effect_data effect){
 	effect.Title = "Reversed Recoil";
 	effect.Duration = 30;

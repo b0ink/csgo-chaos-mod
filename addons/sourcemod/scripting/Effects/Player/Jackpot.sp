@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 
 public void Chaos_Jackpot(effect_data effect){
 	effect.Title = "Jackpot";

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 float FakeTelport_loc[MAXPLAYERS+1][3];
 
 public void Chaos_FakeTeleport(effect_data effect){

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bLockPlayersAim_Active = false;
 float g_LockPlayersAim_Angles[MAXPLAYERS+1][3];
 

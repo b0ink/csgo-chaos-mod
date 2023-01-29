@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_MoneyRain(effect_data effect){
 	effect.Title = "Make it Rain";
 	effect.HasNoDuration = true;

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool 	g_bC4Chicken = false;
 bool 	g_bVisibleChicken = true;
 int 	g_iC4ChickenEnt = -1;

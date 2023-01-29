@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 /*
 	Thanks!
 	https://forums.alliedmods.net/showthread.php?t=254258

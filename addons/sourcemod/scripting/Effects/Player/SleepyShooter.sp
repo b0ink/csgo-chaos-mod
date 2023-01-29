@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 int SleepShooter_LastShot[MAXPLAYERS + 1]; 
 bool g_SleepyShooter = false;
 

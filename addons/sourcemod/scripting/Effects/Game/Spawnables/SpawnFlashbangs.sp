@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_SpawnFlashbangs(effect_data effect){
 	effect.Title = "Flashbangs";
 	effect.HasNoDuration = true;

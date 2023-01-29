@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool g_bForce_Reload[MAXPLAYERS+1];
 public void Chaos_ForceReload(effect_data effect){
 	effect.Title = "Force Reload";

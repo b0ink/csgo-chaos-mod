@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Shields(effect_data effect){
 	effect.Title = "Shields";
 	effect.HasNoDuration = true;

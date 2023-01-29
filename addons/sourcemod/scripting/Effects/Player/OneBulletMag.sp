@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool OneBulletMag = false;
 int g_iOffset_Clip1 = -1;
 

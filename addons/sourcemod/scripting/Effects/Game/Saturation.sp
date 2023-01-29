@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_Saturation(effect_data effect){
 	effect.Title = "Saturation";
 	effect.Duration = 30;

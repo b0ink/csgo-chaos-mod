@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 public void Chaos_GiveRandomGrenade(effect_data effect){
 	effect.Title = "Give Random Grenade";
 	

@@ -1,3 +1,5 @@
+#pragma semicolon 1
+
 bool TaserParty = false;
 
 public void Chaos_TaserParty(effect_data effect){
