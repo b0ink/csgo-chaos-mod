@@ -59,7 +59,7 @@ enum struct effect_data{
 	}
 
 	void Reset(bool HasTimerEnded = false){
-		if(this.RESET){
+		if(this.RESET != INVALID_FUNCTION){
 			StopTimer(this.Timer);
 			this.Timer = INVALID_HANDLE;
 			ChaosEffects.SetArray(this.ID, this);
