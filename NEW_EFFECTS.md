@@ -81,7 +81,15 @@ public void Chaos_EffectName_RESET(bool HasTimerEnded){
 public bool Chaos_EffectName_Conditions(bool EffectRunRandomly){
 	/*
 		Check conditions to deterimne whether the effect can be run or not. This is the last final check before the effect is about to run. If returned false, 			another effect will be selected.
+
+		EffectRunRandomly is false when the effect is manually called from the menu.
+		The EffectRunRandomly should be used for checks that won't break the server, eg:
 	*/
+	if(EffectRunRandomly){
+		// Prevent effect from running if round time is less than x seconds
+	}
+
+	// Prevent effect from running if it may cause serious issues (material/models missing, missing map data etc.)
 	
 	// if you're using map spawns to teleport to, you may want to use the following:
 	if(!ValidMapPoints()) return false;
