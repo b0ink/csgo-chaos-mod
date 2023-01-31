@@ -96,7 +96,7 @@ public bool Chaos_EffectName_Conditions(bool EffectRunRandomly){
 	
 	/* Available checks: */
 	ValidMapPoints(); // Returns true if spawn points are available in the map to use
-	isHostageMap(); // Returns true if a hostage is found on the map
+	IsHostageMap(); // Returns true if a hostage is found on the map
 	ValidBombSpawns(); // Returns true if custom bomb spawns have been saved to use
 	
 	// You can run additional custom checks such restricting your effects from running on certain maps that aren't compatible

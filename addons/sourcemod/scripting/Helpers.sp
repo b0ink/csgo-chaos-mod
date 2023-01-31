@@ -222,21 +222,13 @@ char[] Truncate(char[] str, int length, int reverse = 0){
 	return return_string;
 } 
 
-bool g_bIsHostageMap = false;
-void CheckHostageMap(){
-	g_bIsHostageMap = false;
-	int index = -1;
-	index = FindEntityByClassname(index, "hostage_entity");
-	if(index != -1){
-		g_bIsHostageMap = true;
-		return;
-	}
-	g_bIsHostageMap = false;
+bool IsHostageMap(){
+	int index = FindEntityByClassname(-1, "hostage_entity");
+	if(index != -1) return true;
+	return false;
 }
 
-bool isHostageMap(){
-	return g_bIsHostageMap;
-}
+
 
 bool GameModeUsesC4(){
 	if(g_cvCustomDeathmatchEnabled != null){

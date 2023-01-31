@@ -35,7 +35,7 @@ public void Chaos_C4Chicken_RESET(bool HasTimerEnded){
 
 public bool Chaos_C4Chicken_Conditions(bool EffectRunRandomly){
 	if(g_iC4ChickenEnt != -1) return false;
-	if(isHostageMap()) return false;
+	if(IsHostageMap()) return false;
 	if(!GameModeUsesC4()) return false;
 	return true;
 }

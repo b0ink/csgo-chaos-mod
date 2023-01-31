@@ -105,7 +105,7 @@ public void OnConfigsExecuted(){
 	}else{
 		Log("MAP SPAWNS FOUND.");
 	}
-	if(isHostageMap()){
+	if(IsHostageMap()){
 		warnings++;
 		Log("WARNING: %s has been flagged as a hostage map, certain C4 effects will be disabled.", g_sCurrentMapName);
 	}

@@ -98,7 +98,6 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 	g_bCanSpawnEffect = true;
 	
-	CheckHostageMap();
 	ResetHud();
 	ResetChaos();
 	CLEAR_CC();

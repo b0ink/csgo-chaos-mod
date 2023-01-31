@@ -45,9 +45,6 @@ public void OnMapStart(){
 	}
 	UpdateCvars();
 
-	
-	CheckHostageMap();
-
 	CreateTimer(60.0 * 10.0, Timer_Advertisement, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
