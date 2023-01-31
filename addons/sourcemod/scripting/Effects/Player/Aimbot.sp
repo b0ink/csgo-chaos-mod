@@ -96,7 +96,7 @@ stock void ToggleAim(int iClient, bool bEnabled = false)
 	g_bAimbot[iClient] = bEnabled;
 	
 	// Ignore bots or clients that are not ingame from here.
-	if (IsFakeClient(iClient) || !IsClientInGame(iClient)) return;
+	if (IsFakeClient(iClient) || !IsValidClient(iClient)) return;
 	
 	// Fix some prediction issues.
 	char chValues[10];
@@ -180,7 +180,7 @@ public void Aimbot_OnClientThink(int iClient){
 
 
 public Action Chaos_Aimbot_OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-	if (!IsClientInGame(iClient) || !g_bAimbot[iClient] || !IsPlayerAlive(iClient)) return Plugin_Continue;
+	if (!IsValidClient(iClient) || !g_bAimbot[iClient] || !IsPlayerAlive(iClient)) return Plugin_Continue;
 	
 	int iActiveWeapon = GetEntPropEnt(iClient, Prop_Send, "m_hActiveWeapon");
 	

@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 void ShowMenu_Main(int client){
-	if(!IsClientInGame(client)) return;
+	if(!IsValidClient(client)) return;
 	Menu menu = new Menu(Main_Handler);
 
 	menu.SetTitle("CS:GO Chaos Mod"); //?
@@ -71,7 +71,7 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 }
 
 void ShowMenu_Effects(int client, bool AllowRandom = false){
-	if(!IsClientInGame(client)) return;
+	if(!IsValidClient(client)) return;
 
 	Menu menu = new Menu(Effect_Selection);
 	menu.SetTitle("Select Chaos Effect");
@@ -140,7 +140,7 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 
 
 void ShowMenu_Settings(int client){
-	if(!IsClientInGame(client)) return;
+	if(!IsValidClient(client)) return;
 
 	int style = ITEMDRAW_DISABLED;
 
@@ -186,7 +186,7 @@ public int Settings_Handler(Menu menu, MenuAction action, int param1, int param2
 }
 
 void ShowMenu_HudSettings(int client){
-	if(!IsClientInGame(client)) return;
+	if(!IsValidClient(client)) return;
 	
 	Menu menu = new Menu(HudSettings_Handler);
 	menu.SetTitle("Toggle HUD Elements");
@@ -245,7 +245,7 @@ public int HudSettings_Handler(Menu menu, MenuAction action, int param1, int par
 
 
 void ShowMenu_EditEffectVolume(int client){
-	if(!IsClientInGame(client)) return;
+	if(!IsValidClient(client)) return;
 	
 	Menu menu = new Menu(EditEffectVolume_Handler);
 	menu.SetTitle("New Effect SFX Volume");

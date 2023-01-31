@@ -53,7 +53,7 @@ public Action Timer_UpdateCompass(Handle timer, any data){
 
 			// Get closest enemy
 			for (int search = 1; search <= MaxClients; search++){
-				if (IsClientInGame(search) && IsPlayerAlive(search) && search != client && (GetClientTeam(client) != GetClientTeam(search))){
+				if (IsValidClient(search) && IsPlayerAlive(search) && search != client && (GetClientTeam(client) != GetClientTeam(search))){
 					GetClientAbsOrigin(search, searchOrigin);
 					distance = GetVectorDistance(clientOrigin, searchOrigin);
 

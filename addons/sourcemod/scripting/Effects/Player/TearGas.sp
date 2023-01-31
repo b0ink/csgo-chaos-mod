@@ -18,7 +18,7 @@ public void TearGas_Event_SmokeDetonate(Event event, const char[] name, bool don
 	if(!TearGas) return;
 
 	int client = GetClientOfUserId(GetEventInt(event,"userid"));
-	if(!IsClientInGame(client)) return;
+	if(!IsValidClient(client)) return;
 
 	int hurt = CreateEntityByName("point_hurt");
 	if(hurt == -1) return;

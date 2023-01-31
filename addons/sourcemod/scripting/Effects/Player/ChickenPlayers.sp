@@ -29,7 +29,7 @@ public void Chaos_ChickenPlayers_OnPlayerSpawn(int client, bool EffectIsRunning)
 }
 
 public Action Timer_SetChickenModel(Handle timer, int client){
-	if(IsClientInGame(client) && IsPlayerAlive(client)){
+	if(IsValidClient(client) && IsPlayerAlive(client)){
 		SetChicken(client);
 	}
 	return Plugin_Continue;

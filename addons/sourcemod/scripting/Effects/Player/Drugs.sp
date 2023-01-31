@@ -83,7 +83,7 @@ void KillDrugTimer(int client){
 void KillAllDrugs(){
 	LoopAllClients(i){
 		if (g_DrugTimers[i] != null){
-			if(IsClientInGame(i)){
+			if(IsValidClient(i)){
 				KillDrug(i);
 			}else{
 				KillDrugTimer(i);
@@ -93,7 +93,7 @@ void KillAllDrugs(){
 }
 
 public Action Timer_Drug(Handle timer, any client){
-	if (!IsClientInGame(client)){
+	if (!IsValidClient(client)){
 		KillDrugTimer(client);
 		return Plugin_Handled;
 	}

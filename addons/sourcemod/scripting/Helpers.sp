@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 stock bool ValidAndAlive(int client){
-	return (client > 0 && IsClientInGame(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
+	return (client > 0 && IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
 
 char multicolors[][] = {
@@ -20,7 +20,7 @@ char[] RemoveMulticolors(char[] message){
 
 
 stock bool SetClientMoney(int client, int money, bool absolute = false){
-	if(IsClientInGame(client)){
+	if(IsValidClient(client)){
 		if(absolute){
 			SetEntProp(client, Prop_Send, "m_iAccount", money);
 		}else{
@@ -86,7 +86,7 @@ public Action Timer_ResetChickenDebounce(Handle timer){
 stock int GetPlayerCount(){
 	int count = 0;
 	for(int i = 1; i <= MaxClients; i++){
-		if(IsClientInGame(i)){
+		if(IsValidClient(i)){
 			count++;
 		}
 	}
@@ -338,5 +338,9 @@ stock int EffectsSinceLastMeta(){
 	return g_iEffectsSinceMeta;
 }
 
+bool IsValidClient(int client){
+	if (client <= 0 || client > MaxClients) return false;
+	return IsClientInGame(client);
+}
 
 #include "Global/Overlay.sp"

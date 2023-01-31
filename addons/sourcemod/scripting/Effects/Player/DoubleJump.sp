@@ -36,7 +36,7 @@ public void Chaos_DoubleJump_RESET(bool EndChaos){
 public void Chaos_DoubleJump_OnGameFrame(){
 	if (g_bDoubleJump) {
 		for (int i = 1; i <= MaxClients; i++) {
-			if ( IsClientInGame(i) && IsPlayerAlive(i)) {
+			if ( IsValidClient(i) && IsPlayerAlive(i)) {
 				DoubleJump_DoubleJump(i);
 			}
 		}

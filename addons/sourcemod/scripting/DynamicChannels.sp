@@ -249,7 +249,7 @@ public Action MsgAdminTimer(Handle timer)
 
 	for (int client = 1; client <= MaxClients; client++)
 	{
-		if (!IsClientInGame(client) || !CheckCommandAccess(client, "", ADMFLAG_ROOT))
+		if (!IsValidClient(client) || !CheckCommandAccess(client, "", ADMFLAG_ROOT))
 			continue;
 
 		if (g_bChannelsOverflowing && !g_bNotifiedOverflow[client])
@@ -298,5 +298,5 @@ bool IsValidClient(int client, bool nobots = false)
 	if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client)))
 		return false;
 
-	return IsClientInGame(client);
+	return IsValidClient(client);
 }

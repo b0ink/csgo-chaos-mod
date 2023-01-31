@@ -342,7 +342,7 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 
 	if(kvConfig.ExportToFile(path)){
 
-		if(client > 0 && IsClientInGame(client)){
+		if(IsValidClient(client)){
 			PrintToChatAll("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 			Log("Effect '%s' modified in config. Key '%s' has been set to '%s'", function_name, key, newValue);
 		}
@@ -351,7 +351,7 @@ void UpdateConfig(int client = -1, char[] config, char[] KeyValues_name, char[] 
 			ParseOverrideEffects();
 		}
 	}else{
-		if(client > 0 && IsClientInGame(client)){
+		if(IsValidClient(client)){
 			PrintToChat(client, "[Chaos] Failed to update config.");
 		}
 	}
