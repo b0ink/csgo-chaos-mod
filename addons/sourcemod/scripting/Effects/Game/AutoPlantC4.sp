@@ -18,7 +18,6 @@ bool 	g_bBombPlanted = false;
 int bomber;
 int bombsite;
 
-bool g_bHasBombBeenDeleted;
 float bombPosition[3];
 int bombTicking;
 int g_PlantedSite = -1;
@@ -34,10 +33,8 @@ enum //Bombsites
 public void Chaos_AutoPlantC4(effect_data effect){
     effect.Title = "Auto Plant C4";
     effect.HasNoDuration = true;
-
-    effect.AddAlias("Bomb");
-
     effect.HasCustomAnnouncement = true;
+    effect.AddAlias("Bomb");
 }
 
 public void Chaos_AutoPlantC4_INIT(){
@@ -45,14 +42,14 @@ public void Chaos_AutoPlantC4_INIT(){
     HookEvent("bomb_planted", Chaos_AutoPlantC4_Event_BombPlanted);
 }
 
+
 public void Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	g_bBombPlanted = true;
 }
 
+
 public bool Chaos_AutoPlantC4_Conditions(bool EffectRunRandomly){
-    if(!ValidBombSpawns()) return false;
-    if(isHostageMap()) return false;
-    if(!GameModeUsesC4()) return false;
+    if(!ValidBombSpawns() || isHostageMap() || !GameModeUsesC4()) return false;
     
     if(GetRoundTime() <= 16 && EffectRunRandomly) return false; // prevent a bomb plant as soon as the round starts
     if(
@@ -72,7 +69,7 @@ public void Chaos_AutoPlantC4_START(){
         return;
 	}
 	AutoPlantC4();
-	CreateTimer(0.6, Timer_EnsureSpawnedAutoPlant);
+	CreateTimer(0.1, Timer_EnsureSpawnedAutoPlant);
 }
 
 
@@ -118,14 +115,8 @@ public void TeleportC4ToNewBombSite(){
     }else{
         g_PlantedSite = -1; //fooked up
     }
-    RetryEffect();
 
 }
-
-public void Chaos_AutoPlantC4_RESET(bool HasTimerEnded){
-	AutoPlantRoundEnd();
-}
-
 
 
 public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
@@ -140,58 +131,52 @@ public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
 }
 
 
-
-
-
-
-
-
-
-void AutoPlantC4(bool ForcedRetry = false){
-    g_bHasBombBeenDeleted = false;
+void AutoPlantC4(){
     bomber = GetBomber();
     
-    if (IsValidClient(bomber)){
+    if(IsValidClient(bomber)){
         float pos[3];
         GetClientAbsOrigin(bomber, pos);
         bombsite = GetNearestBombsite(pos);
-        g_PlantedSite = bombsite;
-        if(bombsite == BOMBSITE_A && bombSiteA != INVALID_HANDLE){
-            int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
-            GetArrayArray(bombSiteA, randomCoord, bombPosition);
-        }
-        if(bombsite == BOMBSITE_B && bombSiteB != INVALID_HANDLE){
-            int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
-            GetArrayArray(bombSiteB, randomCoord, bombPosition);
-        }
-
-        int bomb = GetPlayerWeaponSlot(bomber, 4);
-        g_bHasBombBeenDeleted = SafeRemoveWeapon(bomber, bomb);
-        PlantBomb(INVALID_HANDLE, bomber);
-
-    }else if(!ForcedRetry){
-        
-        char classname[64];
-        LoopAllEntities(ent, GetMaxEntities(), classname){
-            if(StrEqual(classname, "weapon_c4") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
-                RemoveEntity(ent);
-            }
-        }
-
-        LoopAlivePlayers(i){
-            if(GetClientTeam(i) == CS_TEAM_T){
-                GivePlayerItem(i, "weapon_c4");
-                CreateTimer(0.5, Timer_RetryAutoPlant);
-                break;
-            }
+    }else{
+        if((GetURandomInt() % 100) < 50){
+            bombsite = BOMBSITE_A;
+        }else{
+            bombsite = BOMBSITE_B;
         }
     }
+
+    g_PlantedSite = bombsite;
+
+    if(bombsite == BOMBSITE_A){
+        int randomCoord = GetRandomInt(0, GetArraySize(bombSiteA)-1);
+        GetArrayArray(bombSiteA, randomCoord, bombPosition);
+    }
+
+    if(bombsite == BOMBSITE_B){
+        int randomCoord = GetRandomInt(0, GetArraySize(bombSiteB)-1);
+        GetArrayArray(bombSiteB, randomCoord, bombPosition);
+    }
+
+    int bombEntity = CreateEntityByName("planted_c4");
+
+    GameRules_SetProp("m_bBombPlanted", 1);
+    SetEntData(bombEntity, bombTicking, 1, 1, true);
+    if(IsValidClient(bomber)){
+        SendBombPlanted(bomber);
+    }else{
+        SendBombPlanted(getRandomAlivePlayer());
+    }
+
+    if (DispatchSpawn(bombEntity)){
+        ActivateEntity(bombEntity);
+        TeleportEntity(bombEntity, bombPosition, NULL_VECTOR, NULL_VECTOR);
+        GroundEntity(bombEntity);
+        g_bBombPlanted = true;
+    }
+
 }
 
-public Action Timer_RetryAutoPlant(Handle timer){
-    AutoPlantC4(true);
-    return Plugin_Continue;
-}
 
 public void AutoPlantRoundEnd(){
     if(g_bBombPlanted){
@@ -201,26 +186,6 @@ public void AutoPlantRoundEnd(){
     }
 }
 
-
-public Action PlantBomb(Handle timer, int client){
-    if (IsValidClient(client) || !g_bHasBombBeenDeleted){
-        if (g_bHasBombBeenDeleted){
-            int bombEntity = CreateEntityByName("planted_c4");
-
-            GameRules_SetProp("m_bBombPlanted", 1);
-            SetEntData(bombEntity, bombTicking, 1, 1, true);
-            SendBombPlanted(client);
-
-            if (DispatchSpawn(bombEntity)){
-                ActivateEntity(bombEntity);
-                TeleportEntity(bombEntity, bombPosition, NULL_VECTOR, NULL_VECTOR);
-                GroundEntity(bombEntity);
-                g_bBombPlanted = true;
-            }
-        }
-    }
-    return Plugin_Continue;
-}
 
 public void SendBombPlanted(int client){
     Event event = CreateEvent("bomb_planted");
@@ -242,22 +207,29 @@ stock bool SafeRemoveWeapon(int client, int weapon){
     if (HasEntProp(weapon, Prop_Send, "m_hWeaponWorldModel")){
         int worldModel = GetEntPropEnt(weapon, Prop_Send, "m_hWeaponWorldModel");
         if (IsValidEdict(worldModel) && IsValidEntity(worldModel)){
-            if (!AcceptEntityInput(worldModel, "Kill")) return false;
+            if (!RemoveEntity(worldModel)) return false;
         }
     }
-    
-    return AcceptEntityInput(weapon, "Kill");
+    RemoveEntity(weapon);
+    return true;
 }
 
-stock int GetBomber(){
-    LoopAlivePlayers(i){
-        if(HasBomb(i)) return i;
+int GetBomber(){
+    int bomb = -1;
+    int owner = -1;
+    while((bomb = FindEntityByClassname(bomb, "weapon_c4")) != -1){
+        if(IsValidEntity(bomb)){
+            int ent = GetEntPropEnt(bomb, Prop_Send, "m_hOwnerEntity");
+            if(IsValidClient(ent)){
+                owner = ent;
+                SafeRemoveWeapon(owner, bomb);
+            }else{
+                RemoveEntity(bomb);
+            }
+        }
     }
-    return -1;
-}
 
-stock bool HasBomb(int client){
-    return GetPlayerWeaponSlot(client, 4) != -1;
+    return owner;
 }
 
 
