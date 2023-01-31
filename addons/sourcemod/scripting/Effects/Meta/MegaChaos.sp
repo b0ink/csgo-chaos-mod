@@ -25,7 +25,7 @@ public void Chaos_Meta_Mega_START(){
 	CreateTimer(1.5, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(2.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 
-	CreateTimer(5.1, Timer_CompleteMegaChaos);
+	CreateTimer(2.1, Timer_CompleteMegaChaos);
 }
 
 public Action Timer_CompleteMegaChaos(Handle timer){
