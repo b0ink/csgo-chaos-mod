@@ -71,11 +71,14 @@ void HookBlockAllGuns(int client = -1){
 	}
 }
 
-public void UnhookBlockAllGuns(){
+void UnhookBlockAllGuns(bool SwitchToGun = true){
 	if(BlockGun_EffectCount > 0) BlockGun_EffectCount--;
 	if(BlockGun_EffectCount == 0){
 		LoopAlivePlayers(i){
 			SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
+			if(!HasMenuOpen(i) && SwitchToGun){
+				ClientCommand(i, "slot2;slot1");
+			}
 		}
 	}
 }
