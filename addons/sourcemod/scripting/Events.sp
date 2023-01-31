@@ -1,5 +1,6 @@
 #pragma semicolon 1
 
+Handle	g_iRoundTime_Timer = INVALID_HANDLE;
 
 public void HookMainEvents(){
 	HookEvent("round_start", 		Event_RoundStart);
@@ -20,13 +21,11 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	}
 
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerSpawn", Chaos_EffectData_Buffer.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
-		if(func != INVALID_FUNCTION){
+		if(Chaos_EffectData_Buffer.OnPlayerSpawn != INVALID_FUNCTION){
 			
 			// Delay function to ensure player has fully spawned
 			DataPack data = new DataPack();
-			data.WriteFunction(func);
+			data.WriteFunction(Chaos_EffectData_Buffer.OnPlayerSpawn);
 			data.WriteCell(client);
 			data.WriteCell(Chaos_EffectData_Buffer.Timer != INVALID_HANDLE);
 
@@ -147,14 +146,14 @@ public Action Event_Cvar(Event event, const char[] name, bool dontBroadcast){
 }
 
 public Action Event_RoundFreezeEnd(Event event, const char[] name, bool dontBroadcast){
-	StopTimer(g_iChaosRoundTime_Timer);
-	g_iChaosRoundTime = 0;
-	g_iChaosRoundTime_Timer = CreateTimer(1.0, Timer_UpdateRoundTime, _, TIMER_REPEAT);
+	StopTimer(g_iRoundTime_Timer);
+	g_iRoundTime = 0;
+	g_iRoundTime_Timer = CreateTimer(1.0, Timer_UpdateRoundTime, _, TIMER_REPEAT);
 	return Plugin_Continue;
 }
 
 public Action Timer_UpdateRoundTime(Handle timer){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
-	g_iChaosRoundTime++;	
+	g_iRoundTime++;	
 	return Plugin_Continue;
 }

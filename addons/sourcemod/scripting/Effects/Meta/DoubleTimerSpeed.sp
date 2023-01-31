@@ -19,6 +19,6 @@ public void Chaos_Meta_DoubleTimerSpeed_RESET(bool HasTimerEnded){
 
 
 public bool Chaos_Meta_DoubleTimerSpeed_Conditions(bool EffectRunRandomly){
-	if(g_bMegaChaosIsActive) return false;
+	if(MegaChaosIsActive()) return false;
 	return true;
 }

@@ -1,3 +1,5 @@
+effect_data 	Chaos_EffectData_Buffer;
+
 public void OnPluginStart(){
 	LoadTranslations("chaos.phrases");
 	
@@ -146,7 +148,6 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.FunctionName);
 		if(Chaos_EffectData_Buffer.OnPlayerRunCmd != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnPlayerRunCmd);
 			Call_PushCell(client); 
@@ -171,7 +172,6 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 public void OnGameFrame(){
 	if (!g_cvChaosEnabled.BoolValue) return;
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnGameFrame", Chaos_EffectData_Buffer.FunctionName);
 		if(Chaos_EffectData_Buffer.OnGameFrame != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnGameFrame);
 			Call_Finish();
@@ -182,7 +182,6 @@ public void OnGameFrame(){
 
 public void OnEntityCreated(int ent, const char[] classname){
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityCreated", Chaos_EffectData_Buffer.FunctionName);
 		if(Chaos_EffectData_Buffer.OnEntityCreated != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnEntityCreated);
 			Call_PushCell(ent); 
@@ -195,7 +194,6 @@ public void OnEntityCreated(int ent, const char[] classname){
 
 public void OnEntityDestroyed(int ent){
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityDestroyed", Chaos_EffectData_Buffer.FunctionName);
 		if(Chaos_EffectData_Buffer.OnEntityDestroyed != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnEntityDestroyed);
 			Call_PushCell(ent); 

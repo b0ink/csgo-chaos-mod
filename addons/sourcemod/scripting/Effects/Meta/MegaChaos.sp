@@ -1,5 +1,11 @@
 #pragma semicolon 1
 
+bool 	g_bMegaChaosIsActive = false;
+
+bool MegaChaosIsActive(){
+	return g_bMegaChaosIsActive;
+}
+
 public void Chaos_Meta_Mega(effect_data effect){
 	effect.Title = "Mega Chaos";
 	effect.HasNoDuration = true;
@@ -13,22 +19,22 @@ public void Chaos_Meta_Mega_START(){
 
 	AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), 15.0, false, true);
 
-	g_bDisableRetryEffect = false;
 	CreateTimer(0.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(0.5, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(1.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(1.5, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(2.0, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
-	CreateTimer(2.5, Timer_CompleteMegaChaos);
+
+	CreateTimer(5.1, Timer_CompleteMegaChaos);
 }
 
 public Action Timer_CompleteMegaChaos(Handle timer){
-	AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), -1.0, true, true);
+	// AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), -1.0, true, true);
 	g_bMegaChaosIsActive = false;
 	return Plugin_Continue;
 }
 
 public bool Chaos_Meta_Mega_Conditions(bool EffectRunRandomly){
-	if(g_bMegaChaosIsActive) return false;
+	if(MegaChaosIsActive()) return false;
 	return true;
 }

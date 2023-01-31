@@ -18,7 +18,7 @@ public void Chaos_Meta_WhatsHappening_RESET(bool HasTimerEnded){
 
 
 public bool Chaos_Meta_WhatsHappening_Conditions(bool EffectRunRandomly){
-	if(g_bMegaChaosIsActive) return false;
+	if(MegaChaosIsActive()) return false;
 	return true;
 }
 

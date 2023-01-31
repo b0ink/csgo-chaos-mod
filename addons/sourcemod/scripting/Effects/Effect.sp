@@ -39,6 +39,8 @@ enum struct effect_data{
 	Function OnEntityCreated;
 	Function OnEntityDestroyed;
 
+	Function OnPlayerSpawn;
+
 	void Run(){
 		if(this.START != INVALID_FUNCTION){
 			Log("Playing effect: %s", this.FunctionName);
@@ -302,12 +304,10 @@ void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, b
 	FormatEx(EffectName, sizeof(EffectName), "%s", RemoveMulticolors(message));
 
 	if(!endingChaos && EffectTime > -2.0){
-		if(g_bDynamicChannelsEnabled){
-			if(EffectTime == 0.0){
-				AddEffectToHud(EffectName, 9999.0, megaChaos);
-			}else{
-				AddEffectToHud(EffectName, EffectTime, megaChaos);
-			}
+		if(EffectTime == 0.0){
+			AddEffectToHud(EffectName, 9999.0, megaChaos);
+		}else{
+			AddEffectToHud(EffectName, EffectTime, megaChaos);
 		}
 	}
 }

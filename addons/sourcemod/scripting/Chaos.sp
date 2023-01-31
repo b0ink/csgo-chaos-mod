@@ -39,6 +39,7 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++) if(IsValidEntity(%1) && IsValidEdict(%1)) if(GetEdictClassname(%1, %3, 64))
 #define LoopAllEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
 #define LoopAllMetaEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1))) if(%1.IsMetaEffect)
+
 #define LoopAllClients(%1) 		for(int %1 = 1; %1 <= MaxClients; %1++)
 #define LoopValidPlayers(%1) 	for(int %1 = 1; %1 <= MaxClients; %1++) if(IsValidClient(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
 #define LoopAlivePlayers(%1) 	for(int %1 = 1; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
@@ -56,31 +57,17 @@ char 	g_sCurrentMapName[64];
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bCanSpawnEffect = true;
 
-int 	g_iTotalEffectsRanThisRound = 0; 	// Effects run in current round
+int		g_iEffectsSinceMeta = 0;
+int 	g_iTotalEffectsRanThisRound = 0;
+int 	g_iRoundTime = 0;
+int 	g_iTotalEffectsRunThisMap = 0;
 
-int		g_iEffectsSinceMeta = 0; 			// Total effects run since the last meta effect
 char	g_sPreviousMetaEffect[64] = "";
-
-Handle	g_iChaosRoundTime_Timer = INVALID_HANDLE;
-int 	g_iChaosRoundTime = 0;	 			// Starts counting from round start, including freeze time
-int 	g_iTotalEffectsRunThisMap = 0;					// Total effects run in the current map
-
-
-bool 	g_bMegaChaosIsActive = false;
-
 char 	g_sSelectedChaosEffect[64] = "";
 char 	g_sForceCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
 bool 	g_bPlaySound_Debounce = false;
-bool 	g_bDisableRetryEffect = false;
-
-
-bool 	g_bDynamicChannelsEnabled = false;
-
-
-effect_data 	Chaos_EffectData_Buffer;
-char 			Chaos_EventName_Buffer[64];
 
 
 Handle 		g_NewEffect_Timer = INVALID_HANDLE;
@@ -141,7 +128,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	bool twitchEffect = false;
 
-	if(g_cvChaosTwitchEnabled.BoolValue && !g_bMegaChaosIsActive && !CustomRun){
+	if(g_cvChaosTwitchEnabled.BoolValue && !MegaChaosIsActive() && !CustomRun){
 		if(Twitch_Votes.Length != 0){
 			effect_data effect;
 			if(GetEffectData(g_sForceCustomEffect, effect)){
@@ -170,7 +157,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		LoopAllEffects(effect, index){
 			if(StrEqual(effect.FunctionName, g_sForceCustomEffect, false)){
 				effect.Run();
-				if(!g_bMegaChaosIsActive && twitchEffect){
+				if(!MegaChaosIsActive() && twitchEffect){
 					g_iEffectsSinceMeta++;
 				}
 				break;
@@ -197,7 +184,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				){
 					Random_Effect = effect.FunctionName;
 					effect.Run();
-					if(!g_bMegaChaosIsActive){ // just in case?
+					if(!MegaChaosIsActive()){ // just in case?
 						g_iEffectsSinceMeta++;
 					}
 					PushArrayString(EffectsHistory, effect.FunctionName);
@@ -283,9 +270,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		}else{
 			g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
 			expectedTimeForNewEffect =  GetTime() + g_ChaosEffectInterval;
-			if(g_bDynamicChannelsEnabled){
-				Timer_Display(null, g_ChaosEffectInterval);
-			}
+			Timer_Display(null, g_ChaosEffectInterval);
 		}
 
 
@@ -297,9 +282,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 public Action Timer_DelayNewInterval(Handle timer){
 	StopTimer(g_NewEffect_Timer);
 	g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
-	if(g_bDynamicChannelsEnabled){
-		Timer_Display(null, g_ChaosEffectInterval);
-	}
+	Timer_Display(null, g_ChaosEffectInterval);
 	return Plugin_Stop;
 }
 
@@ -308,19 +291,6 @@ public Action Timer_ResetPlaySound(Handle timer){
 	return Plugin_Continue;
 }
 
-//Used if there's no map data found for the map that renders the event useless
-//TODO: to be removed, some like AutoPlant still rely on it as its difficult to make those checks
-public void RetryEffect(){
-	Log("RETRYING EVENT..");
-	if(g_bDisableRetryEffect){
-		Log("Retries are currently disabled.");
-		return;
-	}
-	StopTimer(g_NewEffect_Timer);
-	g_sForceCustomEffect = "";
-	g_sSelectedChaosEffect = "";
-	ChooseEffect(INVALID_HANDLE);
-}
 
 public Action ResetRoundChaos(Handle timer){
 	RemoveChickens(false);

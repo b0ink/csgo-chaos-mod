@@ -1,5 +1,7 @@
 #pragma semicolon 1
 
+bool 	g_bDynamicChannelsEnabled = false;
+
 bool  HideTimer[MAXPLAYERS+1];
 bool  HideEffectList[MAXPLAYERS+1];
 bool  HideAnnouncement[MAXPLAYERS+1];

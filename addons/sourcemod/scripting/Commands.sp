@@ -36,7 +36,6 @@ public Action Command_NewChaosEffect(int client, int args){
 		return Plugin_Handled;
 	}
 
-	g_bDisableRetryEffect = true;
 	if(g_bCanSpawnEffect){
 		if(args >= 1){
 			if(strlen(effectName) >=3){
@@ -62,17 +61,10 @@ public Action Command_NewChaosEffect(int client, int args){
 		return Plugin_Handled;
 	}
 
-	CreateTimer(1.0, Timer_ReEnableRetries);
 	g_sSelectedChaosEffect = "";
 	return Plugin_Handled;
 }
 
-
-
-public Action Timer_ReEnableRetries(Handle timer){
-	g_bDisableRetryEffect = false;
-	return Plugin_Continue;
-}
 
 public Action Command_StopChaos(int client, int args){
 	g_cvChaosEnabled.BoolValue = false;
@@ -96,9 +88,7 @@ public Action Command_StartChaos(int client, int args){
 		// CreateTimer(0.1, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 		StopTimer(g_NewEffect_Timer);
 		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
-		if(g_bDynamicChannelsEnabled){
-			Timer_Display(null, g_ChaosEffectInterval);
-		}
+		Timer_Display(null, g_ChaosEffectInterval);
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{
 		PrintToChat(client, "Chaos is already running!");

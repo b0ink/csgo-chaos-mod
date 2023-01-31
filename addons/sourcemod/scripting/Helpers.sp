@@ -1,8 +1,5 @@
 #pragma semicolon 1
 
-stock bool ValidAndAlive(int client){
-	return (client > 0 && IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
-}
 
 char multicolors[][] = {
 	"{lightred}", "{lightblue}", "{lightgreen}", "{olive}", "{grey}", "{yellow}", "{bluegrey}", "{orchid}", "{lightred2}", "{purple}", "{lime}", "{orange}", "{red}", "{blue}", "{darkred}", "{darkblue}", "{default}", "{green}"
@@ -305,7 +302,7 @@ stock int GetTotalRoundsPlayed(){
  * @return     Return description
  */
 stock int GetRoundTime(){
-	return g_iChaosRoundTime;
+	return g_iRoundTime;
 }
 
 
@@ -342,5 +339,10 @@ bool IsValidClient(int client){
 	if (client <= 0 || client > MaxClients) return false;
 	return IsClientInGame(client);
 }
+
+stock bool ValidAndAlive(int client){
+	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
+}
+
 
 #include "Global/Overlay.sp"
