@@ -3,7 +3,7 @@
 bool g_bActiveNoclip = false;
 public void Chaos_Flying(effect_data effect){
 	effect.Title = "Flying";
-	effect.Duration = 15;
+	effect.Duration = 10;
 }
 
 public void Chaos_Flying_START(){
