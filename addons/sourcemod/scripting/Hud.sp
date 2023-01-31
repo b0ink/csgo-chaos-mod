@@ -158,6 +158,17 @@ void PrintEffects(){
 	}
 }
 
+void ClearEffectList(int client){
+	if(g_bDynamicChannelsEnabled){
+		ShowHudText(client, GetDynamicChannel(2), "");
+		ShowHudText(client, GetDynamicChannel(1), "");
+	}else{
+		ShowHudText(client, -1, "");
+	}
+}
+
+
+
 
 void PrintTimer(int time){
 	if(time <= 3){

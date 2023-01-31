@@ -2,7 +2,10 @@
 
 void ShowMenu_Main(int client){
 	if(!IsValidClient(client)) return;
+
 	Menu menu = new Menu(Main_Handler);
+
+	ClearEffectList(client);
 
 	menu.SetTitle("CS:GO Chaos Mod"); //?
 	int style = ITEMDRAW_DISABLED;
@@ -72,6 +75,8 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 
 void ShowMenu_Effects(int client, bool AllowRandom = false){
 	if(!IsValidClient(client)) return;
+
+	ClearEffectList(client);
 
 	Menu menu = new Menu(Effect_Selection);
 	menu.SetTitle("Select Chaos Effect");
