@@ -70,6 +70,6 @@ public Action Timer_SpawnNewLSD(Handle Timer){
 	return Plugin_Continue;
 }
 
-public bool Chaos_LSD_Conditions(){
+public bool Chaos_LSD_Conditions(bool EffectRunRandomly){
 	return lsdMaterials;
 }

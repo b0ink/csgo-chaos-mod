@@ -29,9 +29,6 @@ public void Chaos_SimonSays_RESET(bool HasTimerEnded){
 	KillMessageTimer();
 }
 
-public bool Chaos_SimonSays_Conditions(){
-	return true;
-}
 
 void GenerateSimonOrder(float duration){
 	g_Simon_Says_Action = GetRandomInt(1,4);

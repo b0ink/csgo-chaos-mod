@@ -20,7 +20,7 @@ public void Chaos_LavaFloor_START(){
 	}
 }
 
-public bool Chaos_LavaFloor_Conditions(){
-	if(g_iChaosRoundTime < 16) return false;
+public bool Chaos_LavaFloor_Conditions(bool EffectRunRandomly){
+	if(g_iChaosRoundTime < 10 && EffectRunRandomly) return false;
 	return true;
 }

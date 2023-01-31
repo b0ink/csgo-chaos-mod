@@ -85,6 +85,6 @@ void SpawnOilDrum(bool explosive, float pos[3]) {
 	IgniteEntity(ent, 10.0);
 }
 
-public bool Chaos_OilDrums_Conditions(){
+public bool Chaos_OilDrums_Conditions(bool EffectRunRandomly){
 	return OilDrumModelFound;
 }

@@ -22,6 +22,6 @@ public void Chaos_Saturation_RESET(bool HasTimerEnded){
 	CLEAR_CC("saturation.raw");
 }
 
-public bool Chaos_Saturation_Conditions(){
+public bool Chaos_Saturation_Conditions(bool EffectRunRandomly){
 	return saturationMaterials;
 }

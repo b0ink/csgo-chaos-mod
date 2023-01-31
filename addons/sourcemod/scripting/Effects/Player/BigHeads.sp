@@ -65,6 +65,6 @@ public void Chaos_BigHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public bool Chaos_BigHeads_Conditions(){
+public bool Chaos_BigHeads_Conditions(bool EffectRunRandomly){
 	return bigHeadsMaterials;
 }

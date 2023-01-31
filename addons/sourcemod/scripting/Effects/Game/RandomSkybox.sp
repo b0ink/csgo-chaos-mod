@@ -11,8 +11,8 @@ public void Chaos_RandomSkybox_START(){
 	DispatchKeyValue(0, "skyname", g_sSkyboxes[randomSkyboxIndex]);
 }
 
-public bool Chaos_RandomSkybox_Conditions(){
-	if(StrEqual(mapName, "de_dust2")){
+public bool Chaos_RandomSkybox_Conditions(bool EffectRunRandomly){
+	if(StrEqual(mapName, "de_dust2") && EffectRunRandomly){
 		return false;
 	}
 	return true;

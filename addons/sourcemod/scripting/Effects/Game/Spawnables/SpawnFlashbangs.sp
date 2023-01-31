@@ -19,7 +19,7 @@ public void Chaos_SpawnFlashbangs_START(){
 	}
 }
 
-public bool Chaos_SpawnFlashbangs_Conditions(){
+public bool Chaos_SpawnFlashbangs_Conditions(bool EffectRunRandomly){
 	if(!ValidMapPoints()) return false;
 	return true;
 }

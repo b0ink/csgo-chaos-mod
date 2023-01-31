@@ -156,7 +156,7 @@ void Twitch_PoolNewVotingEffects(){
 			effect.IsCompatible() &&
 			!IsEffectInVoteList(effect.FunctionName) &&
 			!effect.IsMetaEffect &&
-			effect.CanRunEffect()
+			effect.CanRunEffect(true)
 		){
 			// PushArrayString(VotingEffects, effect.Title);
 			vote_data vote;

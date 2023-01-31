@@ -85,7 +85,7 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 	for(int i = 0; i < PossibleChaosEffects.Length; i++){ //should contain all 102 all time
 		PossibleChaosEffects.GetArray(i, effect, sizeof(effect));
 		Format(function_title, sizeof(function_title), "%s", GetChaosTitle(effect.FunctionName));
-		if(effect.CanRunEffect()){
+		if(effect.CanRunEffect(false)){
 			menu.AddItem(effect.FunctionName, function_title);
 		}else{
 			menu.AddItem(effect.FunctionName, function_title, ITEMDRAW_DISABLED);

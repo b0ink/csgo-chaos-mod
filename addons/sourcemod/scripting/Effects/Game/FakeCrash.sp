@@ -24,7 +24,7 @@ public Action Timer_AnnounceFakeCrash(Handle timer){
 	return Plugin_Continue;
 }
 
-public bool Chaos_FakeCrash_Conditions(){
-	if(g_iChaosRoundTime < 30) return false; 
+public bool Chaos_FakeCrash_Conditions(bool EffectRunRandomly){
+	if(g_iChaosRoundTime < 30 && EffectRunRandomly) return false; 
 	return true;
 }

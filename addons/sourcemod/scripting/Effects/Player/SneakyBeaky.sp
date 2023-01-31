@@ -44,7 +44,3 @@ public void Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iImp
 		}
 	}
 }
-
-public bool Chaos_SneakyBeaky_Conditions(){
-	return true;
-}

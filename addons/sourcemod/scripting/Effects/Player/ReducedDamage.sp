@@ -35,8 +35,3 @@ public Action Chaos_ReducedDamage_Hook_OnTakeDamage(int victim, int &attacker, i
 	}
 	return Plugin_Continue;
 }
-
-
-public bool Chaos_ReducedDamage_Conditions(){
-	return true;
-}

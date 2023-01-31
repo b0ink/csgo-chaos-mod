@@ -30,7 +30,3 @@ public void Chaos_OneWeaponOnly_START(){
 public void Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
 
 }
-
-public bool Chaos_OneWeaponOnly_Conditions(){
-	return true;
-}

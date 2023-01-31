@@ -155,7 +155,7 @@ void ParseFencesConfig(){
 	delete kv;
 }
 
-public bool Chaos_FencedOff_Conditions(){
+public bool Chaos_FencedOff_Conditions(bool EffectRunRandomly){
 	if(Fences.Length == 0) return false;
 	return true;
 }

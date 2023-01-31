@@ -28,7 +28,7 @@ public Action Timer_EndTeleport(Handle timer){
 	return Plugin_Continue;
 }
 
-public bool Chaos_FakeTeleport_Conditions(){
+public bool Chaos_FakeTeleport_Conditions(bool EffectRunRandomly){
 	if(!ValidMapPoints()) return false;
 	return true;
 }

@@ -85,7 +85,7 @@ public void Chaos_SwapPlayerModels_OnPlayerSpawn(int client, bool EffectIsRunnin
 	}
 }
 
-public bool Chaos_SwapPlayerModels_Conditions(){
+public bool Chaos_SwapPlayerModels_Conditions(bool EffectRunRandomly){
 	if(GetArraySize(SwapPlayerModel_CT) == 0) return false;
 	if(GetArraySize(SwapPlayerModel_T) == 0) return false;
 	return true;

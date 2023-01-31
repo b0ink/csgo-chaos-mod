@@ -149,7 +149,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				g_sForceCustomEffect = effect.FunctionName;
 				twitchEffect = true;
 				
-				if(!effect.CanRunEffect()){
+				if(!effect.CanRunEffect(true)){
 					g_sForceCustomEffect = "";
 				}
 			}else{
@@ -194,7 +194,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 					effect.Timer == INVALID_HANDLE &&
 					effect.IsCompatible() &&
 					!effect.IsMetaEffect &&
-					effect.CanRunEffect()
+					effect.CanRunEffect(true)
 				){
 					Random_Effect = effect.FunctionName;
 					effect.Run();
@@ -242,7 +242,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		PossibleMetaEffects.Clear();
 		LoopAllMetaEffects(metaEffect, index){
 			// PrintToChatAll("%s s", metaEffect.Title);
-			if(metaEffect.CanRunEffect() && metaEffect.Enabled){
+			if(metaEffect.CanRunEffect(true) && metaEffect.Enabled){
 				if(g_sPreviousMetaEffect[0] != '\0'){
 					if(StrEqual(metaEffect.FunctionName, g_sPreviousMetaEffect)){
 						continue;

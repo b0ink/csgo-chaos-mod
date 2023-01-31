@@ -38,7 +38,7 @@ public void Chaos_MoneyRain_RESET(bool HasTimerEnded){
 	ResetCvar("sv_dz_cash_bundle_size", "50", "500");
 }
 
-public bool Chaos_MoneyRain_Conditions(){
+public bool Chaos_MoneyRain_Conditions(bool EffectRunRandomly){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
 	if(GetArraySize(g_MapCoordinates) == 0) return false;
 	return true;

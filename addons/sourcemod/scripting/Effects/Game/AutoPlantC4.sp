@@ -49,12 +49,12 @@ public void Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, bool 
 	g_bBombPlanted = true;
 }
 
-public bool Chaos_AutoPlantC4_Conditions(){
+public bool Chaos_AutoPlantC4_Conditions(bool EffectRunRandomly){
     if(!ValidBombSpawns()) return false;
     if(isHostageMap()) return false;
     if(!GameModeUsesC4()) return false;
     
-    if(g_iChaosRoundTime <= 16) return false; // prevent a bomb plant as soon as the round starts
+    if(g_iChaosRoundTime <= 16 && EffectRunRandomly) return false; // prevent a bomb plant as soon as the round starts
     if(
         (g_PlantedSite != BOMBSITE_A) && (bombSiteB == INVALID_HANDLE) &&
         (g_PlantedSite != BOMBSITE_B) && (bombSiteA == INVALID_HANDLE) &&

@@ -69,10 +69,6 @@ public void Chaos_Aimbot_OnPlayerSpawn(int client, bool EffectIsRunning){
 	ToggleAim(client, true);
 }
 
-public bool Chaos_Aimbot_Conditions(){
-	return true;
-}
-
 
 	
 // g_cvRecoilMode = CreateConVar("sm_aimbot_norecoil", "1", "Aimbot recoil control - 0 = disable, 1 = remove recoil, 2 = recoil control system");

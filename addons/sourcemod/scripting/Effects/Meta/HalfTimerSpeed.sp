@@ -18,7 +18,7 @@ public void Chaos_Meta_HalfTimerSpeed_RESET(bool HasTimerEnded){
 }
 
 
-public bool Chaos_Meta_HalfTimerSpeed_Conditions(){
+public bool Chaos_Meta_HalfTimerSpeed_Conditions(bool EffectRunRandomly){
 	if(g_bMegaChaosIsActive) return false;
 	return true;
 }

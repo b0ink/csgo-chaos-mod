@@ -56,7 +56,7 @@ public void Chaos_TeammateSwap_START(){
 	}
 }
 
-public bool Chaos_TeammateSwap_Conditions(){
+public bool Chaos_TeammateSwap_Conditions(bool EffectRunRandomly){
 	if(GetAliveCTCount() <= 1 && GetAliveTCount() <= 1) return false;
 	return true;
 }

@@ -52,7 +52,7 @@ public void Chaos_Soccerballs_RESET(){
 	}
 }
 
-public bool Chaos_Soccerballs_Conditions(){
+public bool Chaos_Soccerballs_Conditions(bool EffectRunRandomly){
 	if(!ValidMapPoints()) return false;
 	return true;
 }

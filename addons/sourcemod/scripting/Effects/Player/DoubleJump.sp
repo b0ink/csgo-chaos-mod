@@ -33,10 +33,6 @@ public void Chaos_DoubleJump_RESET(bool EndChaos){
 }
 
 
-public bool Chaos_DoubleJump_Conditions(){
-	return true;
-}
-
 public void Chaos_DoubleJump_OnGameFrame(){
 	if (g_bDoubleJump) {
 		for (int i = 1; i <= MaxClients; i++) {

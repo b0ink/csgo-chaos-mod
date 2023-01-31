@@ -146,9 +146,9 @@ public Action Timer_SpawnArmageddonMolotovs(Handle timer){
 	return Plugin_Continue;
 }
 
-public bool Chaos_Armageddon_Conditions(){
+public bool Chaos_Armageddon_Conditions(bool EffectRunRandomly){
 	// 25% chance of running
-	if((GetURandomInt() % 100) > 75) return false;
+	if((GetURandomInt() % 100) > 75 && EffectRunRandomly) return false;
 	// also checks for oildrum models
-	return armageddonMaterials && Chaos_OilDrums_Conditions();
+	return armageddonMaterials && Chaos_OilDrums_Conditions(false);
 }

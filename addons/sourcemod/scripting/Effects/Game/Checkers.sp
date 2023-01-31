@@ -60,7 +60,7 @@ public void Chaos_Checkers_Event_WeaponFire(Event event, const char[] name, bool
 }
 
 
-public bool Chaos_Checkers_Conditions(){
-	if(!CanRunOverlayEffect()) return false;
+public bool Chaos_Checkers_Conditions(bool EffectRunRandomly){
+	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return checkersMaterials;
 }

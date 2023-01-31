@@ -28,7 +28,7 @@ public void Chaos_ResetSpawns_START(){
 	}
 }
 
-public bool Chaos_ResetSpawns_Conditions(){
-	if(g_iChaosRoundTime <= 25) return false;
+public bool Chaos_ResetSpawns_Conditions(bool EffectRunRandomly){
+	if(g_iChaosRoundTime <= 15 && EffectRunRandomly) return false;
 	return true;
 }

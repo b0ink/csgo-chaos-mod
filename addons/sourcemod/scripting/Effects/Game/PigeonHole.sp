@@ -59,7 +59,7 @@ public void Chaos_PigeonHole_RESET(bool EndChaos){
 	}
 }
 
-public bool Chaos_PigeonHole_Conditions(){
-	if(!CanRunOverlayEffect()) return false;
+public bool Chaos_PigeonHole_Conditions(bool EffectRunRandomly){
+	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return pigeonholeMaterials;
 }

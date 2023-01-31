@@ -68,7 +68,7 @@ public void Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	// Fog_OFF();
 }
 
-public bool Chaos_Thunderstorm_Conditions(){
+public bool Chaos_Thunderstorm_Conditions(bool EffectRunRandomly){
 	return true;
 }
 

@@ -28,7 +28,7 @@ public Action Timer_CompleteMegaChaos(Handle timer){
 	return Plugin_Continue;
 }
 
-public bool Chaos_Meta_Mega_Conditions(){
+public bool Chaos_Meta_Mega_Conditions(bool EffectRunRandomly){
 	if(g_bMegaChaosIsActive) return false;
 	return true;
 }

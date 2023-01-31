@@ -64,6 +64,6 @@ public void Chaos_NoHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public bool Chaos_NoHeads_Conditions(){
+public bool Chaos_NoHeads_Conditions(bool EffectRunRandomly){
 	return noHeadsMaterials;
 }

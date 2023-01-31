@@ -30,7 +30,7 @@ public void Chaos_Blur_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/Blur_2.vmt");
 }
 
-public bool Chaos_Blur_Conditions(){
-	if(!CanRunOverlayEffect()) return false;
+public bool Chaos_Blur_Conditions(bool EffectRunRandomly){
+	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return blurMaterials;
 }

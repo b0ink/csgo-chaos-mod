@@ -15,7 +15,7 @@ public void Chaos_RespawnTheDead_START(){
 	}
 }
 
-public bool Chaos_RespawnTheDead_Conditions(){
-	if(g_iChaosRoundTime <= 30) return false;
+public bool Chaos_RespawnTheDead_Conditions(bool EffectRunRandomly){
+	if(g_iChaosRoundTime <= 30 && EffectRunRandomly) return false;
 	return true;
 }

@@ -26,7 +26,7 @@ public void Chaos_BlackBars_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/BlackBars.vtf");
 }
 
-public bool Chaos_BlackBars_Conditions(){
-	if(!CanRunOverlayEffect()) return false;
+public bool Chaos_BlackBars_Conditions(bool EffectRunRandomly){
+	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return blackBarsMaterials;
 }

@@ -31,7 +31,7 @@ public void Chaos_LittleChooks_RESET(bool HasTimerEnded){
 	g_bCanSpawnChickens = true;
 }
 
-public bool Chaos_LittleChooks_Conditions(){
-	if(!g_bCanSpawnChickens) return false;
+public bool Chaos_LittleChooks_Conditions(bool EffectRunRandomly){
+	if(!g_bCanSpawnChickens && EffectRunRandomly) return false;
 	return true;
 }

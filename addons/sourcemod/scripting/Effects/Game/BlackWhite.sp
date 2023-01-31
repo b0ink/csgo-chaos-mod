@@ -22,6 +22,6 @@ public void Chaos_BlackWhite_RESET(bool HasTimerEnded){
 	CLEAR_CC("blackandwhite.raw");
 }
 
-public bool Chaos_BlackWhite_Conditions(){
+public bool Chaos_BlackWhite_Conditions(bool EffectRunRandomly){
 	return blackWhiteMaterials;
 }

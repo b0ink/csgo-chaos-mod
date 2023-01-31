@@ -22,6 +22,6 @@ public void Chaos_DeepFried_RESET(bool HasTimerEnded){
 	CLEAR_CC("deepfried.raw");
 }
 
-public bool Chaos_DeepFried_Conditions(){
+public bool Chaos_DeepFried_Conditions(bool EffectRunRandomly){
 	return deepFriedMaterials;
 }

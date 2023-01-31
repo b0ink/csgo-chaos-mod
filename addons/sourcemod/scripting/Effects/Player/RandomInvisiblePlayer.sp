@@ -34,7 +34,7 @@ public void Chaos_RandomInvisiblePlayer_RESET(bool HasTimerEnded){
 	}
 }
 
-public bool Chaos_RandomInvisiblePlayer_Conditions(){
+public bool Chaos_RandomInvisiblePlayer_Conditions(bool EffectRunRandomly){
 	if(GetAliveTCount() + GetAliveCTCount() <= 1)  return false;
 	return true;
 }

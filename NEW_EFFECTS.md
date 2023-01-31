@@ -78,7 +78,7 @@ public void Chaos_EffectName_RESET(bool HasTimerEnded){
 		
 }
 
-public bool Chaos_EffectName_Conditions(){
+public bool Chaos_EffectName_Conditions(bool EffectRunRandomly){
 	/*
 		Check conditions to deterimne whether the effect can be run or not. This is the last final check before the effect is about to run. If returned false, 			another effect will be selected.
 	*/

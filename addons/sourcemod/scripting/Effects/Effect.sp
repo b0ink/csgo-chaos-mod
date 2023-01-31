@@ -71,15 +71,19 @@ enum struct effect_data{
 		}
 	}
 
-	bool CanRunEffect(){
+
+	bool CanRunEffect(bool EffectRunRandomly){
 		//TODO: slowly remove conditions and check .IsCompatible
 		bool response = true;
 		if(this.Conditions != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), this.Conditions);
+			Call_PushCell(EffectRunRandomly);
 			Call_Finish(response);
 		}
 		return response;
 	}
+
+
 	float GetDuration(bool raw = false){
 		if(this.HasNoDuration){
 			return -1.0;
@@ -115,6 +119,8 @@ enum struct effect_data{
 
 		return duration;
 	}
+
+	
 	//TODO: flag cache - when effect is run add all flags to a cache, ensure the next x effects dont have those flags, eventually clear after one or something
 	void AddFlag(char[] flagName){
 		if(this.IncompatibleFlags == INVALID_HANDLE){
@@ -122,12 +128,16 @@ enum struct effect_data{
 		}
 		PushArrayString(this.IncompatibleFlags, flagName);
 	}
+	
+
 	void IncompatibleWith(char[] effectName){
 		if(this.IncompatibleEffects == INVALID_HANDLE){
 			this.IncompatibleEffects = CreateArray(128);
 		}
 		PushArrayString(this.IncompatibleEffects, effectName);
 	}
+
+
 	bool IsCompatible(){
 		if(this.IncompatibleEffects != INVALID_HANDLE){
 			char effectName[128];
@@ -152,6 +162,8 @@ enum struct effect_data{
 
 		return true;	
 	}
+
+
 	void AddAlias(char[] effectName){
 		if(this.Aliases == INVALID_HANDLE){
 			this.Aliases = CreateArray(255);

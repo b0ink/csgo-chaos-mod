@@ -33,7 +33,7 @@ public void Chaos_ExtremeBlur_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/Blur_3.vmt");
 }
 
-public bool Chaos_ExtremeBlur_Conditions(){
-	if(!CanRunOverlayEffect()) return false;
+public bool Chaos_ExtremeBlur_Conditions(bool EffectRunRandomly){
+	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return extremeBlurMaterials;
 }

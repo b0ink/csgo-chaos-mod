@@ -55,8 +55,8 @@ public void Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
 	}
 }
 
-public bool Chaos_RewindTenSeconds_Conditions(){
-	if(g_iChaosRoundTime <= 30) return false;
+public bool Chaos_RewindTenSeconds_Conditions(bool EffectRunRandomly){
+	if(g_iChaosRoundTime <= 30 && EffectRunRandomly) return false;
 	return true;
 }
 

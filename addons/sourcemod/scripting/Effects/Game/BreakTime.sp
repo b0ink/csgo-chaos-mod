@@ -42,8 +42,8 @@ public void Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &iImpul
 	}
 }
 
-public bool Chaos_BreakTime_Conditions(){
-	if(g_iChaosRoundTime < 15){
+public bool Chaos_BreakTime_Conditions(bool EffectRunRandomly){
+	if(g_iChaosRoundTime < 15 && EffectRunRandomly){
 		return false;
 	}
 	return true;

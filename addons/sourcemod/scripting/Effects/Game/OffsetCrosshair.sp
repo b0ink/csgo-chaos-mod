@@ -40,7 +40,7 @@ public void Chaos_OffsetCrosshair_OnPlayerSpawn(int client, bool EffectIsRunning
 	}
 }
 
-public bool Chaos_OffsetCrosshair_Conditions(){
-	if(!CanRunOverlayEffect()) return false;
+public bool Chaos_OffsetCrosshair_Conditions(bool EffectRunRandomly){
+	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return offsetCrosshairMaterials;
 }

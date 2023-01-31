@@ -102,7 +102,7 @@ public void Chaos_Chatterbox_RESET(bool HasTimerEnded){
 	g_Chatterbox = false;
 }
 
-public bool Chaos_Chatterbox_Conditions(){
+public bool Chaos_Chatterbox_Conditions(bool EffectRunRandomly){
 	// Seems like certain maps such as de_lake don't have callouts
 	char location[64];
 	bool hasLocations = false;
