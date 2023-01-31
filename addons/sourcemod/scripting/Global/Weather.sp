@@ -44,7 +44,7 @@ void WEATHER_INIT(){
 
     LIGHTNING_sprite = PrecacheModel(LIGHTNING_EFFECT);
 
-    Format(PrecipitationModel, sizeof(PrecipitationModel), "maps/%s.bsp", mapName);
+    Format(PrecipitationModel, sizeof(PrecipitationModel), "maps/%s.bsp", g_sCurrentMapName);
     PrecacheModel(PrecipitationModel, true);
     GetEntPropVector(0, Prop_Data, "m_WorldMins", map_minbounds); // rain shit
     GetEntPropVector(0, Prop_Data, "m_WorldMaxs", map_maxbounds);

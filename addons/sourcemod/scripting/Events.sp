@@ -81,11 +81,11 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	return Plugin_Continue;
 }
 
+
 public Action Timer_SaveBombPosition(Handle timer){
 	SaveBombPosition();
 	return Plugin_Continue;
 }
-
 
 
 
@@ -100,8 +100,6 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	ResetHud();
 	ResetChaos();
 	CLEAR_CC();
-
-	g_iTotalRoundsThisMap++;
 
 	g_iTotalEffectsRanThisRound = 0;
 
@@ -160,6 +158,3 @@ public Action Timer_UpdateRoundTime(Handle timer){
 	g_iChaosRoundTime++;	
 	return Plugin_Continue;
 }
-
-
-//TODO: round count: 	PrintToChatAll("value %i", GameRules_GetProp("m_totalRoundsPlayed"));

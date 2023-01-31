@@ -49,8 +49,8 @@ public void OnMapStart(){
 	CreateTimer(60.0 * 10.0, Timer_Advertisement, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 	CreateTimer(1.0, Timer_DisplayEffects, _, TIMER_FLAG_NO_MAPCHANGE | TIMER_REPEAT);
 
-	GetCurrentMap(mapName, sizeof(mapName));
-	// Log("New Map/Plugin Restart - Map: %s", mapName);
+	GetCurrentMap(g_sCurrentMapName, sizeof(g_sCurrentMapName));
+	// Log("New Map/Plugin Restart - Map: %s", g_sCurrentMapName);
 	
 	PrecacheSound(SOUND_BELL);
 	PrecacheSound(SOUND_COUNTDOWN);
@@ -83,8 +83,7 @@ public void OnMapStart(){
 
 	RemoveChickens();
 	
-	ChaosMapCount = 0;
-	g_iTotalRoundsThisMap = 0;
+	g_iTotalEffectsRunThisMap = 0;
 }
 
 

@@ -54,7 +54,7 @@ public bool Chaos_AutoPlantC4_Conditions(bool EffectRunRandomly){
     if(isHostageMap()) return false;
     if(!GameModeUsesC4()) return false;
     
-    if(g_iChaosRoundTime <= 16 && EffectRunRandomly) return false; // prevent a bomb plant as soon as the round starts
+    if(GetRoundTime() <= 16 && EffectRunRandomly) return false; // prevent a bomb plant as soon as the round starts
     if(
         (g_PlantedSite != BOMBSITE_A) && (bombSiteB == INVALID_HANDLE) &&
         (g_PlantedSite != BOMBSITE_B) && (bombSiteA == INVALID_HANDLE) &&

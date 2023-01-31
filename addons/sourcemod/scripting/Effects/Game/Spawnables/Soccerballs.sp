@@ -12,8 +12,6 @@ public void Chaos_Soccerballs_OnMapStart(){
 public void Chaos_Soccerballs_START(){
 	cvar("sv_turbophysics", "100");
 
-	char MapName[128];
-	GetCurrentMap(MapName, sizeof(MapName));
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];

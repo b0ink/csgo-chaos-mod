@@ -98,17 +98,17 @@ public void OnConfigsExecuted(){
 	Log("---------------------------------CONFIGS EXECUTED---------------------------------");
 	if(!ValidMapPoints()){
 		warnings++;
-		Log("ERROR: No valid spawn points were found for %s. Certain effects will not run.", mapName);
+		Log("ERROR: No valid spawn points were found for %s. Certain effects will not run.", g_sCurrentMapName);
 	}else{
 		Log("MAP SPAWNS FOUND.");
 	}
 	if(isHostageMap()){
 		warnings++;
-		Log("WARNING: %s has been flagged as a hostage map, certain C4 effects will be disabled.", mapName);
+		Log("WARNING: %s has been flagged as a hostage map, certain C4 effects will be disabled.", g_sCurrentMapName);
 	}
 	if(!ValidBombSpawns()){
 		warnings++;
-		Log("No valid bomb spawns were found for %s. Certain C4 effects will not run.", mapName);
+		Log("No valid bomb spawns were found for %s. Certain C4 effects will not run.", g_sCurrentMapName);
 	}
 	StopTimer(g_AutoCoord_Timer);
 
@@ -156,10 +156,10 @@ void SaveBombPosition(){
 	FormatEx(c4_loc_string, sizeof(c4_loc_string), "%f %f %f", c4_location[0], c4_location[1], c4_location[2]);
 
 	if(site == BOMBSITE_A){
-		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombA", c4_loc_string, .folderPath="data");
+		UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, "bombA", c4_loc_string, .folderPath="data");
 		PushArrayArray(bombSiteA, c4_location);
 	}else if(site == BOMBSITE_B){
-		UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, "bombB", c4_loc_string, .folderPath="data");
+		UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, "bombB", c4_loc_string, .folderPath="data");
 		PushArrayArray(bombSiteB, c4_location);
 	}
 
@@ -186,7 +186,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 		if(!(GetClientButtons(i) & IN_DUCK) && client_vel[2] == 0.0 && GetEntityMoveType(i) == MOVETYPE_WALK && GetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue") == 1.0) { //ensure player isnt mid jump or falling down
 			FormatEx(client_vec_string, sizeof(client_vec_string), "%f %f %f", client_vec[0], client_vec[1], client_vec[2]);
 			if(GetArraySize(g_MapCoordinates) == 0){
-				UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string, .folderPath="data");
+				UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, client_vec_string, client_vec_string, .folderPath="data");
 				PushArrayArray(g_MapCoordinates, client_vec);
 			}else{
 				float distanceToBeat = 99999.0;
@@ -198,7 +198,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 					}
 				}
 				if(distanceToBeat > 250){
-					UpdateConfig(-1, "Chaos_TempLocations", "Maps", mapName, client_vec_string, client_vec_string, .folderPath="data");
+					UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, client_vec_string, client_vec_string, .folderPath="data");
 					PushArrayArray(g_MapCoordinates, client_vec);
 				}
 			}
@@ -282,8 +282,7 @@ void ParseMapCoordinates(char[] config) {
 		return;
 	}
 	
-	char MapName[128];
-	GetCurrentMap(MapName, sizeof(MapName));
+	GetCurrentMap(g_sCurrentMapName, sizeof(g_sCurrentMapName));
 
 	KeyValues kv = new KeyValues("Maps");
 	
@@ -292,8 +291,8 @@ void ParseMapCoordinates(char[] config) {
 		return;
 	}
 	//jump to key of map name
-	if(!kv.JumpToKey(MapName)){
-		Log("Unable to find %s Key from %s", MapName, path);
+	if(!kv.JumpToKey(g_sCurrentMapName)){
+		Log("Unable to find %s Key from %s", g_sCurrentMapName, path);
 		return;
 	}
 

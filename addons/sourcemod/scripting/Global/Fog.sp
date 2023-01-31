@@ -90,9 +90,9 @@ void Find_Fog(){
 
 	int ent = -1;
 	if(
-		StrEqual(mapName, "cs_office", false) ||
-		StrEqual(mapName, "de_vertigo", false) ||
-		StrEqual(mapName, "de_cache", false)
+		StrEqual(g_sCurrentMapName, "cs_office", false) ||
+		StrEqual(g_sCurrentMapName, "de_vertigo", false) ||
+		StrEqual(g_sCurrentMapName, "de_cache", false)
 	){
 		int index = -1;
 		while ((index = FindEntityByClassname(index, "env_fog_controller")) != -1){

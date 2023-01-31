@@ -42,6 +42,6 @@ public void Chaos_SlayRandomPlayer_START(){
 public bool Chaos_SlayRandomPlayer_Conditions(bool EffectRunRandomly){
 	if(GetAliveCTCount() <= 4) return false;
 	if(GetAliveTCount() <= 4) return false;
-	if(g_iChaosRoundTime < 25 && EffectRunRandomly) return false;
+	if(GetRoundTime() < 25 && EffectRunRandomly) return false;
 	return true;
 }

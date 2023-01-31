@@ -256,6 +256,8 @@ bool GameModeUsesC4(){
 	return false;
 }
 
+
+
 /**
  * Knockback the player.
  * 
@@ -284,5 +286,57 @@ void DoKnockback(int client, float amount){
 	// Set the player weapon jump
 	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vPlayerVelocity);
 }
+
+
+
+/**
+ * Gets total rounds played in the current map
+ * 
+ * @return     Return description
+ */
+stock int GetTotalRoundsPlayed(){
+	return GameRules_GetProp("m_totalRoundsPlayed");
+}
+
+
+/**
+ * Gets amount of time (in seconds) since round_freeze_end (after freeze time ends)
+ * 
+ * @return     Return description
+ */
+stock int GetRoundTime(){
+	return g_iChaosRoundTime;
+}
+
+
+/**
+ * Gets amount of effects triggered in the map. Resets to 0 on map change.
+ * 
+ * @return     Return description
+ */
+stock int TotalEffectsRunThisMap(){
+	return g_iTotalEffectsRunThisMap;
+}
+
+
+/**
+ * Gets amount of effects run in the current map. Resets on round start.
+ * 
+ * @return     Return description
+ */
+stock int TotalEFfectsRunThisRound(){
+	return g_iTotalEffectsRanThisRound;
+}
+
+
+/**
+ * Effects run since the last meta effect
+ * 
+ * @return     Return description
+ */
+stock int EffectsSinceLastMeta(){
+	return g_iEffectsSinceMeta;
+}
+
 
 #include "Global/Overlay.sp"

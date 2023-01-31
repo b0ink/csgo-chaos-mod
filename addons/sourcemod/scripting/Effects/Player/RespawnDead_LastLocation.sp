@@ -30,6 +30,6 @@ public void Chaos_RespawnDead_LastLocation_START(){
 }
 
 public bool Chaos_RespawnDead_LastLocation_Conditions(bool EffectRunRandomly){
-	if(g_iChaosRoundTime <= 30 && EffectRunRandomly) return false;
+	if(GetRoundTime() <= 30 && EffectRunRandomly) return false;
 	return true;
 }

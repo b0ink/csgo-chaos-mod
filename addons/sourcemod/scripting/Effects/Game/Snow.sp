@@ -28,7 +28,7 @@ public void Chaos_Snow_RESET(bool HasTimerEnded){
 }
 
 public bool Chaos_Snow_Conditions(bool EffectRunRandomly){
-	if(StrEqual(mapName, "de_dust2", false) && EffectRunRandomly){
+	if(StrEqual(g_sCurrentMapName, "de_dust2", false) && EffectRunRandomly){
 		return false; //doesnt work on dust2
 	}
 	return true;

@@ -12,7 +12,7 @@ public void Chaos_RandomSkybox_START(){
 }
 
 public bool Chaos_RandomSkybox_Conditions(bool EffectRunRandomly){
-	if(StrEqual(mapName, "de_dust2") && EffectRunRandomly){
+	if(StrEqual(g_sCurrentMapName, "de_dust2") && EffectRunRandomly){
 		return false;
 	}
 	return true;

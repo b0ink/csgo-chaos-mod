@@ -51,20 +51,19 @@ char g_sSkyboxes[][] = {
 	"cs_baggage_skybox_", "cs_tibet", "embassy", "italy", "jungle", "office", "sky_cs15_daylight01_hdr", "sky_cs15_daylight02_hdr", "sky_cs15_daylight03_hdr", "sky_cs15_daylight04_hdr", "sky_day02_05", "nukeblank", "sky_venice", "sky_csgo_cloudy01", "sky_csgo_night02", "sky_csgo_night02b", "vertigo", "vertigoblue_hdr", "sky_dust", "vietnam"
 };
 
-char mapName[64];
+char 	g_sCurrentMapName[64];
 
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bCanSpawnEffect = true;
 
 int 	g_iTotalEffectsRanThisRound = 0; 	// Effects run in current round
-int		g_iTotalRoundsThisMap = 0;			// Round count tracker
 
 int		g_iEffectsSinceMeta = 0; 			// Total effects run since the last meta effect
 char	g_sPreviousMetaEffect[64] = "";
 
 Handle	g_iChaosRoundTime_Timer = INVALID_HANDLE;
 int 	g_iChaosRoundTime = 0;	 			// Starts counting from round start, including freeze time
-int 	ChaosMapCount = 0;					// Total effects run in the current map
+int 	g_iTotalEffectsRunThisMap = 0;					// Total effects run in the current map
 
 
 bool 	g_bMegaChaosIsActive = false;
@@ -233,9 +232,9 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(CustomRun) return Plugin_Continue;
 
 
-	if(!CustomRun &&  ((g_iTotalRoundsThisMap >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && g_iEffectsSinceMeta >= 20 && g_iChaosRoundTime < 30)){
+	if(!CustomRun &&  ((GetTotalRoundsPlayed() >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && EffectsSinceLastMeta() >= 20 && GetRoundTime() < 30)){
 		g_iEffectsSinceMeta = 0;
-		g_iTotalRoundsThisMap = 0; // at minimum space out meta every 5 rounds
+		// g_iTotalRoundsThisMap = 0; // at minimum space out meta every 5 rounds
 
 		effect_data metaEffect;
 		bool metaAlreadyRunning = false;

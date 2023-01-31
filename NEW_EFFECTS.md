@@ -100,7 +100,7 @@ public bool Chaos_EffectName_Conditions(bool EffectRunRandomly){
 	ValidBombSpawns(); // Returns true if custom bomb spawns have been saved to use
 	
 	// You can run additional custom checks such restricting your effects from running on certain maps that aren't compatible
-	if(StrEqual(mapName, "de_dust2")){
+	if(StrEqual(g_sCurrentMapName, "de_dust2")){
 		return false;
 	}
 		

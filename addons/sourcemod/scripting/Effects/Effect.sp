@@ -53,7 +53,7 @@ enum struct effect_data{
 				AnnounceChaos(this.Title, this.GetDuration(), _, this.IsMetaEffect);
 			}
 			g_sLastPlayedEffect = this.FunctionName;
-			ChaosMapCount++;
+			g_iTotalEffectsRunThisMap++;
 			ChaosEffects.SetArray(this.ID, this); // save timer
 		}
 	}
