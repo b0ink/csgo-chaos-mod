@@ -49,7 +49,7 @@ public Action Timer_FakeTwitchVotes(Handle timer){
 	ServerCommand("save_chaos_vote %i", rand);
 	ServerCommand("save_chaos_vote %i", rand);
 	ServerCommand("save_chaos_vote %i", rand);
-	if(!g_bCanSpawnEffect){
+	if(!CanSpawnNewEffect()){
 		return Plugin_Stop;
 	}
 	return Plugin_Continue;
@@ -103,7 +103,7 @@ public Action Command_GetVotes(int client, int args){
 	Format(json, sizeof(json), "%s\"lastPlayedEffect\":\"%s\",", json, g_sLastPlayedEffect);
 	Format(json, sizeof(json), "%s\"twitchEnabled\":%s,", json, g_cvChaosTwitchEnabled.BoolValue ? "true" : "false");
 	Format(json, sizeof(json), "%s\"newEffectTime\":%i,", json, expectedTimeForNewEffect);
-	Format(json, sizeof(json), "%s\"hideEffectList\":%s,", json, (GameRules_GetProp("m_bWarmupPeriod") == 1 || !g_bCanSpawnEffect) ? "true" : "false");
+	Format(json, sizeof(json), "%s\"hideEffectList\":%s,", json, (GameRules_GetProp("m_bWarmupPeriod") == 1 || !CanSpawnNewEffect()) ? "true" : "false");
 	Format(json, sizeof(json), "%s\"effects\":[", json);
 	
 	vote_data effect;

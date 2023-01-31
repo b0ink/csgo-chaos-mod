@@ -36,7 +36,7 @@ public Action Command_NewChaosEffect(int client, int args){
 		return Plugin_Handled;
 	}
 
-	if(g_bCanSpawnEffect){
+	if(CanSpawnNewEffect()){
 		if(args >= 1){
 			if(strlen(effectName) >=3){
 					PoolChaosEffects(effectName);

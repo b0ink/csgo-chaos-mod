@@ -28,10 +28,9 @@ public void Chaos_LittleChooks_START(){
 
 public void Chaos_LittleChooks_RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="LittleChooks");
-	g_bCanSpawnChickens = true;
 }
 
 public bool Chaos_LittleChooks_Conditions(bool EffectRunRandomly){
-	if(!g_bCanSpawnChickens && EffectRunRandomly) return false;
+	if(!CanSpawnChickens() && EffectRunRandomly) return false;
 	return true;
 }

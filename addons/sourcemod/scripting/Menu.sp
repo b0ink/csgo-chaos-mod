@@ -19,7 +19,7 @@ void ShowMenu_Main(int client){
 	}else{
 		menu.AddItem("toggle-chaos", "Enable Chaos", style);
 	}
-	if(g_bCanSpawnEffect && g_cvChaosEnabled.BoolValue){
+	if(CanSpawnNewEffect() && g_cvChaosEnabled.BoolValue){
 		menu.AddItem("new-effect", "Spawn New Effect", style);
 	}else{
 		menu.AddItem("new-effect", "Spawn New Effect", ITEMDRAW_DISABLED);
@@ -113,7 +113,7 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 		if(found){
 			g_sSelectedChaosEffect = info;
 			if(g_sSelectedChaosEffect[0] != '\0'){
-				if(g_bCanSpawnEffect && g_cvChaosEnabled.BoolValue){
+				if(CanSpawnNewEffect() && g_cvChaosEnabled.BoolValue){
 					Format(g_sForceCustomEffect, sizeof(g_sForceCustomEffect), "%s", g_sSelectedChaosEffect);
 					ChooseEffect(null, true);
 				}else{
@@ -278,7 +278,7 @@ public int EditEffectVolume_Handler(Menu menu, MenuAction action, int param1, in
 		if(found){
 			float volume = StringToFloat(info) / 10;
 			BellVolume[param1] = volume;
-			EmitSoundToClient(param1, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[param1]);
+			EmitSoundToClient(param1, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[param1]);
 		}
 		ShowMenu_EditEffectVolume(param1);
 	}else if (action == MenuAction_Cancel){

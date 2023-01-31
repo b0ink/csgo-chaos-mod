@@ -31,11 +31,6 @@ char 	g_Prefix_HasTimerEnded[] = "<<{darkred}Ended{default}>>";
 char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 
 
-#define SOUND_BELL "buttons/bell1.wav"
-#define SOUND_COUNTDOWN "ui/beep07.wav"
-
-#define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
-
 #define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++) if(IsValidEntity(%1) && IsValidEdict(%1)) if(GetEdictClassname(%1, %3, 64))
 #define LoopAllEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
 #define LoopAllMetaEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1))) if(%1.IsMetaEffect)
@@ -54,19 +49,19 @@ char g_sSkyboxes[][] = {
 
 char 	g_sCurrentMapName[64];
 
-bool 	g_bCanSpawnChickens = true;
-bool 	g_bCanSpawnEffect = true;
-
 int		g_iEffectsSinceMeta = 0;
 int 	g_iTotalEffectsRanThisRound = 0;
 int 	g_iRoundTime = 0;
 int 	g_iTotalEffectsRunThisMap = 0;
+
+
 
 char	g_sPreviousMetaEffect[64] = "";
 char 	g_sSelectedChaosEffect[64] = "";
 char 	g_sForceCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
+float 	BellVolume[MAXPLAYERS+1] = {0.5, ...};
 bool 	g_bPlaySound_Debounce = false;
 
 
@@ -87,7 +82,6 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 #include "Effects/EffectsList.sp"
 #include "Effects/EffectNames.sp"
 
-float BellVolume[MAXPLAYERS+1] = {0.5, ...};
 
 
 #include "Commands.sp"
@@ -95,7 +89,6 @@ float BellVolume[MAXPLAYERS+1] = {0.5, ...};
 #include "Configs.sp"
 #include "Menu.sp"
 #include "Twitch.sp"
-
 #include "Forwards.sp"
 
 
@@ -112,7 +105,7 @@ public Action Timer_CreateHostage(Handle timer){
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
-	if(!g_bCanSpawnEffect) return Plugin_Continue;
+	if(!CanSpawnNewEffect()) return Plugin_Continue;
 	if(!g_cvChaosEnabled.BoolValue && !CustomRun) return Plugin_Continue;
 
 	char Random_Effect[64] = "-";
@@ -144,12 +137,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 		}
 	}
-	// effect_data test;
-	// LoopAllEffects(test, index){
-	// 	if(test.Enabled == false){
-	// 		PrintToChatAll("%s is disabled!", test.Title);
-	// 	}
-	// }
+
 
 	if(g_sForceCustomEffect[0] != '\0'){ //run from menu, or from twitch list
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
@@ -211,23 +199,23 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		//Prevent overlapping sounds
 		g_bPlaySound_Debounce = true;
 		LoopValidPlayers(i){
-			EmitSoundToClient(i, SOUND_BELL, _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[i]);
+			EmitSoundToClient(i, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[i]);
 		}	
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
 
 	if(CustomRun) return Plugin_Continue;
 
-
+	/* Meta Effect Trigger */
+	//TODO: have a fixed array of meta effects and scramble them, go through all effects, then rescramble
 	if(!CustomRun &&  ((GetTotalRoundsPlayed() >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && EffectsSinceLastMeta() >= 20 && GetRoundTime() < 30)){
 		g_iEffectsSinceMeta = 0;
-		// g_iTotalRoundsThisMap = 0; // at minimum space out meta every 5 rounds
 
 		effect_data metaEffect;
 		bool metaAlreadyRunning = false;
 		PossibleMetaEffects.Clear();
+
 		LoopAllMetaEffects(metaEffect, index){
-			// PrintToChatAll("%s s", metaEffect.Title);
 			if(metaEffect.CanRunEffect(true) && metaEffect.Enabled){
 				if(g_sPreviousMetaEffect[0] != '\0'){
 					if(StrEqual(metaEffect.FunctionName, g_sPreviousMetaEffect)){
@@ -236,15 +224,13 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				}
 				PossibleMetaEffects.PushArray(metaEffect, sizeof(metaEffect));
 			}
+
 			if(metaEffect.Timer != INVALID_HANDLE){
 				metaAlreadyRunning = true;
 			}
 		}
 
-		//TODO: have a fixed array of meta effects and scramble them, go through all effects, then rescramble
-
 		if(!metaAlreadyRunning && PossibleMetaEffects.Length > 0) {
-			// int random = GetRandomInt(0, PossibleMetaEffects.Length - 1);
 			int random = GetURandomInt() % PossibleMetaEffects.Length;
 			PossibleMetaEffects.GetArray(random, metaEffect, sizeof(metaEffect));
 			g_sForceCustomEffect = metaEffect.FunctionName;
@@ -252,6 +238,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			MetaEffectsHistory.PushArray(metaEffect);
 			ChooseEffect(null, true);
 		}
+
 		// History too full, clear it to allow old ones to be spawned.
 		if(MetaEffectsHistory.Length > PossibleMetaEffects.Length - 1){
 			MetaEffectsHistory.Clear();
@@ -272,7 +259,6 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			expectedTimeForNewEffect =  GetTime() + g_ChaosEffectInterval;
 			Timer_Display(null, g_ChaosEffectInterval);
 		}
-
 
 		g_iTotalEffectsRanThisRound++;
 	}

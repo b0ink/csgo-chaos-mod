@@ -1,6 +1,8 @@
 #pragma semicolon 1
 
 Handle	g_iRoundTime_Timer = INVALID_HANDLE;
+bool 	g_bCanSpawnChickens = true;
+bool 	g_bCanSpawnEffect = true;
 
 public void HookMainEvents(){
 	HookEvent("round_start", 		Event_RoundStart);
@@ -73,7 +75,8 @@ public Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
 
 public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
-	g_bCanSpawnChickens = false;
+	// See `stock int CanSpawnChickens;` in `Helpers.sp`
+	// g_bCanSpawnChickens = false;
 	if(!ValidBombSpawns()){
 		CreateTimer(1.0, Timer_SaveBombPosition);
 	}

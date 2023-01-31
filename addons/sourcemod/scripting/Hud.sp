@@ -162,7 +162,7 @@ void PrintEffects(){
 void PrintTimer(int time){
 	if(time <= 3){
 		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
-		// if(time > 0) EmitSoundToClient(i, SOUND_COUNTDOWN, _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
+		// if(time > 0) EmitSoundToClient(i, "ui/beep07.wav", _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
 	}else{
 		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5,
 			g_ChaosEffectTimer_Color[0],
@@ -236,7 +236,7 @@ Action Timer_DisplayEffects(Handle timer){
 Action Timer_Display(Handle timer = null, int time){
 	g_HudTime = time;
 	PrintTimer(time);
-	if(time > 0 && g_cvChaosEnabled.BoolValue && g_bCanSpawnEffect) CreateTimer(1.0, Timer_Display, time - 1);
+	if(time > 0 && g_cvChaosEnabled.BoolValue && CanSpawnNewEffect()) CreateTimer(1.0, Timer_Display, time - 1);
 	return Plugin_Continue;
 }
 

@@ -1,5 +1,7 @@
 #pragma semicolon 1
 
+#define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
+
 public void Chaos_OffsetCrosshair(effect_data effect){
 	effect.Title = "Offset Crosshair";
 	effect.Duration = 30;

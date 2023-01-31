@@ -335,6 +335,20 @@ stock int EffectsSinceLastMeta(){
 	return g_iEffectsSinceMeta;
 }
 
+/*
+	This was used previously when i thought chickens were involved in a notorious crash involving with c4's and chicken.
+	The crash has long since been fixed (unrelated to either c4's or chickens).
+	This used to return true if a bomb has been planted. (not anymore since this comment)
+	Consider this function deprecated, and will completely nuke it in later versions if there are no issues with chickens.
+*/
+stock int CanSpawnChickens(){
+	return g_bCanSpawnChickens;
+}
+
+stock int CanSpawnNewEffect(){
+	return g_bCanSpawnEffect;
+}
+
 bool IsValidClient(int client){
 	if (client <= 0 || client > MaxClients) return false;
 	return IsClientInGame(client);

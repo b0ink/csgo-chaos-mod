@@ -29,10 +29,9 @@ public void Chaos_BigChooks_START(){
 
 public void Chaos_BigChooks_RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="BigChooks");
-	g_bCanSpawnChickens = true;
 }
 
 public bool Chaos_BigChooks_Conditions(bool EffectRunRandomly){
-	if(!g_bCanSpawnChickens && EffectRunRandomly) return false;
+	if(!CanSpawnChickens() && EffectRunRandomly) return false;
 	return true;
 }

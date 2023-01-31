@@ -54,8 +54,8 @@ public void OnMapStart(){
 	GetCurrentMap(g_sCurrentMapName, sizeof(g_sCurrentMapName));
 	// Log("New Map/Plugin Restart - Map: %s", g_sCurrentMapName);
 	
-	PrecacheSound(SOUND_BELL);
-	PrecacheSound(SOUND_COUNTDOWN);
+	PrecacheSound("buttons/bell1.wav");
+	PrecacheSound("ui/beep07.wav");
 
 	//TODO: put all map spawn data into structs
 	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
