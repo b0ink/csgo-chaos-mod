@@ -1,56 +1,5 @@
 #pragma semicolon 1
 
-
-
-bool GetEffectData(char[] function_name, effect_data return_data){
-	effect_data effect;
-	bool found = false;
-	LoopAllEffects(effect, index){
-		if(StrEqual(effect.FunctionName, function_name, false)){
-			found = true;
-			break;
-		}
-	}
-
-	if(found) return_data = effect;
-	return found;
-	// return null;
-}
-
-float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false){
-	float expire = defaultTime;
-	effect_data effect;
-	if(GetEffectData(EffectName, effect)){
-		expire = effect.GetDuration(raw);
-	}else{
-		Log("[CONFIG] Could not find configuration for Effect: %s, using default of %f", EffectName, defaultTime);
-	}
-	return expire;
-}
-
-//TODO: remove the need for GetChaosTitle -> use GetEffectDate and use effect.Title more instead of this jank
-char[] GetChaosTitle(char[] function_name){
-	char return_string[128];
-
-	effect_data effect;
-	GetEffectData(function_name, effect);
-
-	if(StrContains(function_name, "Chaos_") != -1){
-		if(TranslationPhraseExists(function_name) && IsTranslatedForLanguage(function_name, LANG_SERVER)){
-				FormatEx(return_string, sizeof(return_string), "%t", function_name, LANG_SERVER);
-		}else{
-			FormatEx(return_string, sizeof(return_string), "%s", effect.Title);
-		}
-	}else{
-		FormatEx(return_string, sizeof(return_string), "%s", function_name);
-	}
-
-	return return_string;
-}
-
-
-
-
 stock bool IsValidClient(int client, bool nobots = false){
     if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client))) {
         return false;
@@ -62,8 +11,9 @@ stock bool ValidAndAlive(int client){
 	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
 
-char multicolors[][] = {"{lightred}", "{lightblue}", "{lightgreen}", "{olive}", "{grey}", "{yellow}", "{bluegrey}", "{orchid}", "{lightred2}",
-"{purple}", "{lime}", "{orange}", "{red}", "{blue}", "{darkred}", "{darkblue}", "{default}", "{green}"};
+char multicolors[][] = {
+	"{lightred}", "{lightblue}", "{lightgreen}", "{olive}", "{grey}", "{yellow}", "{bluegrey}", "{orchid}", "{lightred2}", "{purple}", "{lime}", "{orange}", "{red}", "{blue}", "{darkred}", "{darkblue}", "{default}", "{green}"
+};
 
 char[] RemoveMulticolors(char[] message){
 	char finalMess[256];
@@ -73,39 +23,6 @@ char[] RemoveMulticolors(char[] message){
 	}
 	return finalMess;
 }
-
-void AnnounceChaos(char[] message, float EffectTime, bool endingChaos = false, bool megaChaos = false){
-	if(!Meta_IsWhatsHappeningEnabled()){
-		char announcingMessage[128];
-		if(megaChaos){
-			DisplayCenterTextToAll(message);
-			Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_MegaChaos, message);
-		}else if(endingChaos){
-			Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix_HasTimerEnded, message);
-		}else{
-			DisplayCenterTextToAll(message);
-			Format(announcingMessage, sizeof(announcingMessage), "%s %s", g_Prefix, message);
-		}
-		CPrintToChatAll(announcingMessage);
-		PrintHTML(message);
-	}
-
-
-	//TODO: what if hud was purely based off which timers are active. .Run() would save the current game time to predict how long is left
-	char EffectName[256];
-	FormatEx(EffectName, sizeof(EffectName), "%s", RemoveMulticolors(message));
-
-	if(!endingChaos && EffectTime > -2.0){
-		if(g_bDynamicChannelsEnabled){
-			if(EffectTime == 0.0){
-				AddEffectToHud(EffectName, 9999.0, megaChaos);
-			}else{
-				AddEffectToHud(EffectName, EffectTime, megaChaos);
-			}
-		}
-	}
-}
-
 
 
 
@@ -146,7 +63,7 @@ void RemoveChickens(bool removec4Chicken = false, char[] chickenName = ""){
 				GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
 				if(chickenName[0] != '\0'){
 					if(StrEqual(targetname, chickenName, false)){
-						RemoveEntity(ent);
+						RemoveEntity(ent);	
 					}else{
 						continue;
 					}	
@@ -175,8 +92,8 @@ public Action Timer_ResetChickenDebounce(Handle timer){
 
 stock int GetPlayerCount(){
 	int count = 0;
-	LoopAllClients(i){
-		if(IsValidClient(i)){
+	for(int i = 1; i <= MaxClients; i++){
+		if(IsClientInGame(i)){
 			count++;
 		}
 	}
@@ -200,7 +117,6 @@ stock int GetAliveCTCount(){
 }
 
 
-
 public int getRandomAlivePlayer(){
 	Handle players = CreateArray(4);
 	LoopAlivePlayers(i){
@@ -212,8 +128,7 @@ public int getRandomAlivePlayer(){
 	return target;
 }
 
-stock void Log(const char[] format, any ...)
-{
+stock void Log(const char[] format, any ...){
 	char buffer[254];
 	VFormat(buffer, sizeof(buffer), format, 2);
 	char sLogPath[PLATFORM_MAX_PATH];
@@ -245,14 +160,6 @@ void StripPlayer(int client, bool knife = true, bool keepBomb = true, bool strip
 
 
 
-float SanitizeTime(float time){
-	if(time <= 0) return 0.0;
-	if(time < 5) return 5.0;
-	if(time > 120) return 0.0;
-	return time;
-}
-
-
 void GetWeaponClassname(int weapon, char[] buffer, int size) {
 	switch(GetEntProp(weapon, Prop_Send, "m_iItemDefinitionIndex")) {
 		case 60: Format(buffer, size, "weapon_m4a1_silencer");
@@ -262,7 +169,6 @@ void GetWeaponClassname(int weapon, char[] buffer, int size) {
 		default: GetEntityClassname(weapon, buffer, size);
 	}
 }
-
 
 
 

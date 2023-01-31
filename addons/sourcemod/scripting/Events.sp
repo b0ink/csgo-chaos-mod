@@ -1,14 +1,13 @@
 #pragma semicolon 1
 
-effect_data 	Chaos_EffectData_Buffer;
-char 			Chaos_EventName_Buffer[64];
 
 public void HookMainEvents(){
-	HookEvent("round_start", 	Event_RoundStart);
-	HookEvent("round_end", 		Event_RoundEnd);	
-	HookEvent("bomb_planted", 	Event_BombPlanted);
-	HookEvent("server_cvar", 	Event_Cvar, EventHookMode_Pre);
-	HookEvent("player_spawn", 	Event_PlayerSpawn);
+	HookEvent("round_start", 		Event_RoundStart);
+	HookEvent("round_end", 			Event_RoundEnd);	
+	HookEvent("bomb_planted", 		Event_BombPlanted);
+	HookEvent("server_cvar", 		Event_Cvar, EventHookMode_Pre);
+	HookEvent("player_spawn", 		Event_PlayerSpawn);
+	HookEvent("round_freeze_end", 	Event_RoundFreezeEnd);
 }
 
 public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
@@ -88,57 +87,7 @@ public Action Timer_SaveBombPosition(Handle timer){
 }
 
 
-public void OnEntityCreated(int ent, const char[] classname){
-	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityCreated", Chaos_EffectData_Buffer.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_PushCell(ent); 
-			Call_PushString(classname);
-			Call_Finish();
-		}
-	}
-}
 
-
-public void OnEntityDestroyed(int ent){
-	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnEntityDestroyed", Chaos_EffectData_Buffer.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_PushCell(ent); 
-			Call_Finish();
-		}
-	}
-}
-
-public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
-	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
-	
-	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnPlayerRunCmd", Chaos_EffectData_Buffer.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_PushCell(client); 
-			Call_PushCellRef(buttons);
-			Call_PushCell(iImpulse);
-			Call_PushArrayEx(fVel, 3, SM_PARAM_COPYBACK);
-			Call_PushArrayEx(fAngles, 3, SM_PARAM_COPYBACK);
-			Call_PushCell(iWeapon);
-			Call_PushCell(iSubType);
-			Call_PushCell(iCmdNum);
-			Call_PushCell(iTickCount);
-			Call_PushCellRef(iSeed);
-			Call_PushArrayEx(mouse, 2, SM_PARAM_COPYBACK);
-			Call_Finish();
-		}
-	}
-
-	return Plugin_Changed;
-}
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
@@ -160,7 +109,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 		
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	
-	//TODO: look into using the round_freeze_end event to trigger the first effect
+	// round_freeze_end is not used because of starting the timer countdown (value of mp_freezetime)
 	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
 		int freezeTime = FindConVar("mp_freezetime").IntValue;
 		g_NewEffect_Timer = CreateTimer(float(freezeTime), ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
@@ -168,27 +117,16 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 		expectedTimeForNewEffect =  GetTime() + freezeTime;
 	}
 
-	g_iChaosRoundTime = 0;
-	CreateTimer(1.0, Timer_UpdateRoundTime);
 	return Plugin_Continue;
 }
 
-public Action Timer_UpdateRoundTime(Handle timer){
-	if(g_iChaosRoundTime < -50){
-		return Plugin_Continue;
-	}
-	g_iChaosRoundTime++;	
-	CreateTimer(1.0, Timer_UpdateRoundTime);
-	return Plugin_Continue;
-}
+
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	expectedTimeForNewEffect = -1;
-	g_iChaosRoundTime = -100;
 	
 	ClearFog();
 	
-	// Log("--ROUND ENDED--");
 	ResetChaos();
 	g_bCanSpawnEffect = false;
 
@@ -204,20 +142,24 @@ void ResetChaos(){
 	CreateTimer(0.1, ResetRoundChaos);
 }
 
-public void OnGameFrame(){
-	if (!g_cvChaosEnabled.BoolValue) return;
-	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		Format(Chaos_EventName_Buffer, sizeof(Chaos_EventName_Buffer), "%s_OnGameFrame", Chaos_EffectData_Buffer.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), Chaos_EventName_Buffer);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_Finish();
-		}
-	}
-}
-
 
 public Action Event_Cvar(Event event, const char[] name, bool dontBroadcast){
 	if (!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	return Plugin_Handled;
 }
+
+public Action Event_RoundFreezeEnd(Event event, const char[] name, bool dontBroadcast){
+	StopTimer(g_iChaosRoundTime_Timer);
+	g_iChaosRoundTime = 0;
+	g_iChaosRoundTime_Timer = CreateTimer(1.0, Timer_UpdateRoundTime, _, TIMER_REPEAT);
+	return Plugin_Continue;
+}
+
+public Action Timer_UpdateRoundTime(Handle timer){
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+	g_iChaosRoundTime++;	
+	return Plugin_Continue;
+}
+
+
+//TODO: round count: 	PrintToChatAll("value %i", GameRules_GetProp("m_totalRoundsPlayed"));

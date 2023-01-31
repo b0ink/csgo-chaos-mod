@@ -23,14 +23,25 @@ public void ParseChaosEffects(){
 		Call_Finish();
 
 		Format(function_name, sizeof(function_name), "%s_START", EffectNames[i]);
-		// effect.function_name_start = function_name;
-		Function start_func = GetFunctionByName(GetMyHandle(), function_name);
+		effect.START = GetFunctionByName(GetMyHandle(), function_name);
 
 		Format(function_name, sizeof(function_name), "%s_RESET", EffectNames[i]);
-		// effect.function_name_reset = function_name;
-		// Function reset_func = GetFunctionByName(GetMyHandle(), function_name);
+		effect.RESET = GetFunctionByName(GetMyHandle(), function_name);
 
-		if(start_func == INVALID_FUNCTION){
+		Format(function_name, sizeof(function_name), "%s_OnGameFrame", EffectNames[i]);
+		effect.OnGameFrame = GetFunctionByName(GetMyHandle(), function_name);
+
+		Format(function_name, sizeof(function_name), "%s_OnPlayerRunCmd", EffectNames[i]);
+		effect.OnPlayerRunCmd = GetFunctionByName(GetMyHandle(), function_name);
+
+		Format(function_name, sizeof(function_name), "%s_OnEntityCreated", EffectNames[i]);
+		effect.OnEntityCreated = GetFunctionByName(GetMyHandle(), function_name);
+
+		Format(function_name, sizeof(function_name), "%s_OnEntityDestroyed", EffectNames[i]);
+		effect.OnEntityDestroyed = GetFunctionByName(GetMyHandle(), function_name);
+
+
+		if(effect.START == INVALID_FUNCTION){
 			Log("Could not find start function for %s", EffectNames[i]);
 			continue;
 		}
