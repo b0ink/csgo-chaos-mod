@@ -33,20 +33,17 @@ enum struct effect_data{
 	Function START;
 	Function RESET;
 
+	Function Conditions;
 	Function OnGameFrame;
 	Function OnPlayerRunCmd;
 	Function OnEntityCreated;
 	Function OnEntityDestroyed;
 
 	void Run(){
-		char function_name_start[64];
-		Format(function_name_start, sizeof(function_name_start), "%s_START", this.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), function_name_start);
-
-		if(func != INVALID_FUNCTION){
+		if(this.START != INVALID_FUNCTION){
 			Log("Playing effect: %s", this.FunctionName);
 
-			Call_StartFunction(GetMyHandle(), func);
+			Call_StartFunction(GetMyHandle(), this.START);
 			Call_Finish();
 
 			float duration = this.GetDuration(); 
@@ -62,16 +59,12 @@ enum struct effect_data{
 	}
 
 	void Reset(bool HasTimerEnded = false){
-		char function_name_reset[64];
-		Format(function_name_reset, sizeof(function_name_reset), "%s_RESET", this.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), function_name_reset);
-
-		if(func != INVALID_FUNCTION){
+		if(this.RESET){
 			StopTimer(this.Timer);
 			this.Timer = INVALID_HANDLE;
 			ChaosEffects.SetArray(this.ID, this);
 			
-			Call_StartFunction(GetMyHandle(), func);
+			Call_StartFunction(GetMyHandle(), this.RESET);
 			Call_PushCell(HasTimerEnded);
 			Call_Finish();
 		
@@ -81,11 +74,8 @@ enum struct effect_data{
 	bool CanRunEffect(){
 		//TODO: slowly remove conditions and check .IsCompatible
 		bool response = true;
-		char condition_check[64];
-		FormatEx(condition_check, sizeof(condition_check), "%s_Conditions", this.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), condition_check);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
+		if(this.Conditions != INVALID_FUNCTION){
+			Call_StartFunction(GetMyHandle(), this.Conditions);
 			Call_Finish(response);
 		}
 		return response;

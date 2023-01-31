@@ -40,6 +40,9 @@ public void ParseChaosEffects(){
 		Format(function_name, sizeof(function_name), "%s_OnEntityDestroyed", EffectNames[i]);
 		effect.OnEntityDestroyed = GetFunctionByName(GetMyHandle(), function_name);
 
+		Format(function_name, sizeof(function_name), "%s_Conditions", EffectNames[i]);
+		effect.Conditions = GetFunctionByName(GetMyHandle(), function_name);
+
 
 		if(effect.START == INVALID_FUNCTION){
 			Log("Could not find start function for %s", EffectNames[i]);
