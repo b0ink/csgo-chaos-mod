@@ -80,7 +80,6 @@ void ShootProp(int client, char[] propModel){
 }
 
 public Action MelonHit(int melon, int other){
-	PrintToChatAll("%N", other);
 	if(ValidAndAlive(other)){
 		SlapPlayer(other, 15, false);
 	}

@@ -14,8 +14,11 @@ public void Chaos_AntiFlash_INIT(){
 public Action AntiFlash_Event_PlayerBlind(Event event, const char[] name, bool dontBroadcast){
 	if(!AntiFlash) return Plugin_Continue;
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
-	SetEntPropFloat(client, Prop_Send, "m_flFlashMaxAlpha", 0.5);
-	return Plugin_Changed;	
+	if(ValidAndAlive(client)){
+		SetEntPropFloat(client, Prop_Send, "m_flFlashMaxAlpha", 0.5);
+		return Plugin_Changed;
+	}
+	return Plugin_Continue;
 }
 
 public void Chaos_AntiFlash_START(){
