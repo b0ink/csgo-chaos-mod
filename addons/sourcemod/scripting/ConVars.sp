@@ -127,7 +127,8 @@ void cvar(char[] cvarname, char[] newValue, bool updateConfig = true, char[] exp
 	if (hndl != null){
 
 		char oldValue[64];
-		IntToString(hndl.IntValue, oldValue, sizeof(oldValue));
+		hndl.GetString(oldValue, 64);
+		// IntToString(hndl.IntValue, oldValue, sizeof(oldValue));
 		if(updateConfig){
 			//DONT OVERWRITE
 			if(FindStringInArray(g_SavedConvars, cvarname) == -1){
