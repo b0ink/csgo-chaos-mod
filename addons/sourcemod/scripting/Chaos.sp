@@ -62,7 +62,6 @@ char 	g_sForceCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
 float 	BellVolume[MAXPLAYERS+1] = {0.5, ...};
-bool 	g_bPlaySound_Debounce = false;
 
 
 Handle 		g_NewEffect_Timer = INVALID_HANDLE;
@@ -195,14 +194,10 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	PrintEffects();
 	g_sForceCustomEffect  = "";
-	if(g_bPlaySound_Debounce == false){
-		//Prevent overlapping sounds
-		g_bPlaySound_Debounce = true;
-		LoopValidPlayers(i){
-			EmitSoundToClient(i, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[i]);
-		}	
-		CreateTimer(0.2, Timer_ResetPlaySound);
-	}
+
+	LoopValidPlayers(i){
+		EmitSoundToClient(i, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[i]);
+	}	
 
 	if(CustomRun) return Plugin_Continue;
 
@@ -270,11 +265,6 @@ public Action Timer_DelayNewInterval(Handle timer){
 	g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
 	Timer_Display(null, g_ChaosEffectInterval);
 	return Plugin_Stop;
-}
-
-public Action Timer_ResetPlaySound(Handle timer){
-	g_bPlaySound_Debounce = false;
-	return Plugin_Continue;
 }
 
 
