@@ -14,71 +14,64 @@ public void Chaos_Aimbot(effect_data effect){
 BOOLS.
 *****************************************************************************************************/
 bool AimbotEnabled = false;
-
-bool g_bAimbot[MAXPLAYERS + 1] = {false, ...};
 bool g_bFlashed[MAXPLAYERS + 1] = {false, ...};
 
-
-/****************************************************************************************************
-CONVARS.
-*****************************************************************************************************/
-
-ConVar g_cvPredictionConVars[9] = {null, ...};
-
-int g_cvAimbotAutoAim = 1;
 int g_cvRecoilMode = 1;
-float g_cvFov = 20.0;
-float g_cvDistance = 10000.0;
+float g_cvFov = 360.0;
 bool g_bCvFlashbang = true;
 
 public void Chaos_Aimbot_INIT(){
-
-	g_cvPredictionConVars[0] = FindConVar("weapon_accuracy_nospread");
-	g_cvPredictionConVars[1] = FindConVar("weapon_recoil_cooldown");
-	g_cvPredictionConVars[2] = FindConVar("weapon_recoil_decay1_exp");
-	g_cvPredictionConVars[3] = FindConVar("weapon_recoil_decay2_exp");
-	g_cvPredictionConVars[4] = FindConVar("weapon_recoil_decay2_lin");
-	g_cvPredictionConVars[5] = FindConVar("weapon_recoil_scale");
-	g_cvPredictionConVars[6] = FindConVar("weapon_recoil_suppression_shots");
-	g_cvPredictionConVars[7] = FindConVar("weapon_recoil_variance");
-	g_cvPredictionConVars[8] = FindConVar("weapon_recoil_view_punch_extra");
 	HookEventEx("weapon_fire", 		Chaos_Aimbot_Event_WeaponFire, EventHookMode_Pre);
 	HookEventEx("player_blind", 	Chaos_Aimbot_Event_PlayerBlind, EventHookMode_Pre);
 }
 
 public void Chaos_Aimbot_START(){
 	AimbotEnabled = true;
+
+	cvar("weapon_accuracy_nospread", "1");
+	cvar("weapon_recoil_cooldown", "0");
+	cvar("weapon_recoil_decay1_exp", "99999");
+	cvar("weapon_recoil_decay2_exp", "99999");
+	cvar("weapon_recoil_decay2_lin", "99999");
+	cvar("weapon_recoil_scale", "0");
+	cvar("weapon_recoil_suppression_shots", "500");
+	cvar("weapon_recoil_variance", "0");
+	cvar("weapon_recoil_view_punch_extra", "0");
+	
 	LoopAlivePlayers(i){
 		Aimbot_SDKHOOKS(i);
-		ToggleAim(i, true);
 	}
 }
 
 public void Chaos_Aimbot_RESET(bool HasTimerEnded){
 	AimbotEnabled = false;
+	
+	ResetCvar("weapon_accuracy_nospread", "0", "1");
+	ResetCvar("weapon_recoil_cooldown", "0.55", "0");
+	ResetCvar("weapon_recoil_decay1_exp", "3.5", "99999");
+	ResetCvar("weapon_recoil_decay2_exp", "8", "99999");
+	ResetCvar("weapon_recoil_decay2_lin", "18", "99999");
+	ResetCvar("weapon_recoil_scale", "2", "0");
+	ResetCvar("weapon_recoil_suppression_shots", "4", "500");
+	ResetCvar("weapon_recoil_variance", "0.55", "0");
+	ResetCvar("weapon_recoil_view_punch_extra", "0.055", "0");
+
 	LoopValidPlayers(i){
 		Aimbot_REMOVE_SDKHOOKS(i);
-		ToggleAim(i, false);
 	}
 }
 
 public void Chaos_Aimbot_OnPlayerSpawn(int client, bool EffectIsRunning){
 	if(!AimbotEnabled) return;
-
 	Aimbot_SDKHOOKS(client);
-	ToggleAim(client, true);
 }
 
-
-	
-// g_cvRecoilMode = CreateConVar("sm_aimbot_norecoil", "1", "Aimbot recoil control - 0 = disable, 1 = remove recoil, 2 = recoil control system");
 
 public void Aimbot_SDKHOOKS(int iClient){
 	SDKHook(iClient, SDKHook_PreThink, Aimbot_OnClientThink);
 	SDKHook(iClient, SDKHook_PreThinkPost, Aimbot_OnClientThink);
 	SDKHook(iClient, SDKHook_PostThink, Aimbot_OnClientThink);
 	SDKHook(iClient, SDKHook_PostThinkPost, Aimbot_OnClientThink);
-	// ToggleAim(iClient, g_cvAimbotEveryone.BoolValue);
 }
 
 public void Aimbot_REMOVE_SDKHOOKS(int iClient){
@@ -86,77 +79,19 @@ public void Aimbot_REMOVE_SDKHOOKS(int iClient){
 	SDKUnhook(iClient, SDKHook_PreThinkPost, Aimbot_OnClientThink);
 	SDKUnhook(iClient, SDKHook_PostThink, Aimbot_OnClientThink);
 	SDKUnhook(iClient, SDKHook_PostThinkPost, Aimbot_OnClientThink);
-	// ToggleAim(iClient, g_cvAimbotEveryone.BoolValue);
 }
 
-
-stock void ToggleAim(int iClient, bool bEnabled = false)
-{
-	// Toggle aimbot.
-	g_bAimbot[iClient] = bEnabled;
-	
-	// Ignore bots or clients that are not ingame from here.
-	if (IsFakeClient(iClient) || !IsValidClient(iClient)) return;
-	
-	// Fix some prediction issues.
-	char chValues[10];
-	
-	if (g_cvPredictionConVars[0] != null){
-		IntToString(((g_bAimbot[iClient] && g_cvRecoilMode == 1)) ? 1 : g_cvPredictionConVars[0].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[0], chValues);
-	}
-	
-	if (g_cvPredictionConVars[1] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[1].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[1], chValues);
-	}
-	
-	if (g_cvPredictionConVars[2] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[2].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[2], chValues);
-	}
-	
-	if (g_cvPredictionConVars[3] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[3].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[3], chValues);
-	}
-	
-	if (g_cvPredictionConVars[4] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 99999 : g_cvPredictionConVars[4].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[4], chValues);
-	}
-	
-	if (g_cvPredictionConVars[5] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[5].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[5], chValues);
-	}
-	
-	if (g_cvPredictionConVars[6] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 500 : g_cvPredictionConVars[6].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[6], chValues);
-	}
-	
-	if (g_cvPredictionConVars[7] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[7].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[7], chValues);
-	}
-	
-	if (g_cvPredictionConVars[8] != null){
-		IntToString((g_bAimbot[iClient] && g_cvRecoilMode == 1) ? 0 : g_cvPredictionConVars[8].IntValue, chValues, 10);
-		SendConVarValue(iClient, g_cvPredictionConVars[8], chValues);
-	}
-}
 
 public Action Chaos_Aimbot_Event_WeaponFire(Event hEvent, const char[] chName, bool g_bbDontBroadcast){
+	if (!AimbotEnabled) return Plugin_Continue;
 	int iClient = GetClientOfUserId(hEvent.GetInt("userid"));
-	if (!g_bAimbot[iClient]) return Plugin_Continue;
 	int iTarget = GetClosestClient(iClient);
 	if (iTarget > 0) LookAtClient(iClient, iTarget);
 	return Plugin_Continue;
 }
 
 public void Aimbot_OnClientThink(int iClient){
-	if (!g_bAimbot[iClient] || !IsPlayerAlive(iClient)) return;
+	if (!AimbotEnabled || !IsPlayerAlive(iClient)) return;
 	
 	int iActiveWeapon = GetEntPropEnt(iClient, Prop_Send, "m_hActiveWeapon");
 	
@@ -180,18 +115,16 @@ public void Aimbot_OnClientThink(int iClient){
 
 
 public Action Chaos_Aimbot_OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
-	if (!IsValidClient(iClient) || !g_bAimbot[iClient] || !IsPlayerAlive(iClient)) return Plugin_Continue;
+	if (!IsValidClient(iClient) || !AimbotEnabled || !IsPlayerAlive(iClient)) return Plugin_Continue;
 	
 	int iActiveWeapon = GetEntPropEnt(iClient, Prop_Send, "m_hActiveWeapon");
 	
 	if (!IsValidEdict(iActiveWeapon) || iActiveWeapon == -1) return Plugin_Continue;
 	
-	if ((iButtons & IN_ATTACK) == IN_ATTACK || g_cvAimbotAutoAim){
-		int iTarget = GetClosestClient(iClient);
-		int iClipAmmo = GetEntProp(iActiveWeapon, Prop_Send, "m_iClip1");
-		
-		if (iClipAmmo > 0 && iTarget > 0) LookAtClient(iClient, iTarget);
-	}
+	int iTarget = GetClosestClient(iClient);
+	int iClipAmmo = GetEntProp(iActiveWeapon, Prop_Send, "m_iClip1");
+	
+	if (iClipAmmo > 0 && iTarget > 0) LookAtClient(iClient, iTarget);
 	
 	// No Spread Addition
 	iSeed = 0;
@@ -211,21 +144,21 @@ stock void LookAtClient(int iClient, int iTarget){
 	GetVectorAngles(fFinalPos, fFinalPos);
 	
 	//Recoil Control System
-	if (g_cvRecoilMode == 2){
-		float vecPunchAngle[3];
+	// if (g_cvRecoilMode == 2){
+	// 	float vecPunchAngle[3];
 		
-		if (GetEngineVersion() == Engine_CSGO || GetEngineVersion() == Engine_CSS){
-			GetEntPropVector(iClient, Prop_Send, "m_aimPunchAngle", vecPunchAngle);
-		} else{
-			GetEntPropVector(iClient, Prop_Send, "m_vecPunchAngle", vecPunchAngle);
-		}
+	// 	if (GetEngineVersion() == Engine_CSGO || GetEngineVersion() == Engine_CSS){
+	// 		GetEntPropVector(iClient, Prop_Send, "m_aimPunchAngle", vecPunchAngle);
+	// 	} else{
+	// 		GetEntPropVector(iClient, Prop_Send, "m_vecPunchAngle", vecPunchAngle);
+	// 	}
 		
-		if(g_cvPredictionConVars[5] != null)
-		{
-			fFinalPos[0] -= vecPunchAngle[0] * GetConVarFloat(g_cvPredictionConVars[5]);
-			fFinalPos[1] -= vecPunchAngle[1] * GetConVarFloat(g_cvPredictionConVars[5]);
-		}
-	}
+	// 	if(g_cvPredictionConVars[5] != null)
+	// 	{
+	// 		fFinalPos[0] -= vecPunchAngle[0] * GetConVarFloat(g_cvPredictionConVars[5]);
+	// 		fFinalPos[1] -= vecPunchAngle[1] * GetConVarFloat(g_cvPredictionConVars[5]);
+	// 	}
+	// }
 
 	TeleportEntity(iClient, NULL_VECTOR, fFinalPos, NULL_VECTOR);
 }
@@ -262,16 +195,17 @@ stock int GetClosestClient(int iClient){
 
 		if (fTargetDistance > fClosestDistance && fClosestDistance > -1.0) continue;
 
-		if (!ClientCanSeeTarget(iClient, i)) continue;
+		if (ClientCanSeeTarget(iClient, i)){
+			if(!IsTargetInSightRange(iClient, i, g_cvFov, 10000.0)) continue;
+		}else{
+			// Auto aim through walls only at a closer distance
+			if(!IsTargetInSightRange(iClient, i, g_cvFov, 400.0)) continue;
+		}
 
 		if (GetEngineVersion() == Engine_CSGO){
 			if (GetEntPropFloat(i, Prop_Send, "m_fImmuneToGunGameDamageTime") > 0.0) continue;
 		}
 
-		// if (g_cvDistance != 0.0 && fTargetDistance > g_cvDistance) continue;
-		if (g_cvFov != 0.0 && !IsTargetInSightRange(iClient, i, g_cvFov, g_cvDistance)) continue;
-		if (g_bCvFlashbang && g_bFlashed[iClient]) continue;
-		
 		fClosestDistance = fTargetDistance;
 		iClosestTarget = i;
 	}
@@ -288,7 +222,8 @@ stock bool ClientCanSeeTarget(int iClient, int iTarget, float fDistance = 0.0, f
 	GetClientEyePosition(iTarget, fTargetPosition);
 	
 	if (fDistance == 0.0 || GetVectorDistance(fClientPosition, fTargetPosition, false) < fDistance){
-		Handle hTrace = TR_TraceRayFilterEx(fClientPosition, fTargetPosition, MASK_SOLID_BRUSHONLY, RayType_EndPoint, Base_TraceFilter);
+		// Handle hTrace = TR_TraceRayFilterEx(fClientPosition, fTargetPosition, MASK_SOLID_BRUSHONLY, RayType_EndPoint, Base_TraceFilter);
+		Handle hTrace = TR_TraceRayFilterEx(fClientPosition, fTargetPosition, MASK_SOLID, RayType_EndPoint, Base_TraceFilter);
 		
 		if (TR_DidHit(hTrace)){
 			delete hTrace;
@@ -360,7 +295,7 @@ stock bool IsTargetInSightRange(int client, int target, float angle = 90.0, floa
 
 public void Chaos_Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
-	if(!g_bAimbot[client]) return;
+	if(!AimbotEnabled) return;
 	
 	if (GetEntPropFloat(client, Prop_Send, "m_flFlashMaxAlpha") >= 180.0){
 		float duration = GetEntPropFloat(client, Prop_Send, "m_flFlashDuration");

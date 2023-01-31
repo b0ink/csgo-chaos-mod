@@ -34,6 +34,7 @@ public void OnPluginStart(){
 
 public void OnPluginEnd(){
 	ResetCvar();
+	ResetRoundChaos(INVALID_HANDLE);
 	ResetChaos();
 }
 
@@ -137,7 +138,7 @@ public void OnClientPutInServer(int client){
 
 
 public void OnClientDisconnect(int client){
-	ToggleAim(client, false);
+	
 }
 
 
