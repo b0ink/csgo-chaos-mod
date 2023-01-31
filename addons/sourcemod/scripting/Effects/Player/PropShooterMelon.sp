@@ -52,7 +52,7 @@ void ShootProp(int client, char[] propModel){
 	ScaleVector(propVecs, 9999999.0);
 	
 	int prop = CreateEntityByName("prop_physics_multiplayer");
-	
+	if(prop == -1) return;
 	DispatchKeyValue(prop, "model", propModel);
 	DispatchKeyValueFloat(prop, "physdamagescale", 50.0);
 	DispatchKeyValueFloat(prop, "Damagetype", 1.0);
@@ -75,7 +75,17 @@ void ShootProp(int client, char[] propModel){
 
 	TeleportEntity(prop, propStart, NULL_VECTOR,  propVecs);
 	
+	SDKHookEx(prop, SDKHook_Touch, MelonHit);
 	CreateTimer(2.0, Destroy_Prop, EntIndexToEntRef(prop));
+}
+
+public Action MelonHit(int melon, int other){
+	PrintToChatAll("%N", other);
+	if(ValidAndAlive(other)){
+		SlapPlayer(other, 15, false);
+	}
+
+	return Plugin_Continue;
 }
 
 public Action Destroy_Prop(Handle timer, int entity){
@@ -84,6 +94,8 @@ public Action Destroy_Prop(Handle timer, int entity){
 	if(IsValidEntity(prop)){
 		RemoveEntity(prop);
 	}
+	SDKUnhook(prop, SDKHook_Touch, MelonHit);
+
 
 	return Plugin_Stop;
 }
