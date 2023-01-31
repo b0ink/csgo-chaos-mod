@@ -249,7 +249,7 @@ public Action MsgAdminTimer(Handle timer)
 
 	for (int client = 1; client <= MaxClients; client++)
 	{
-		if (!IsValidClient(client) || !CheckCommandAccess(client, "", ADMFLAG_ROOT))
+		if (!IsClientInGame(client) || !CheckCommandAccess(client, "", ADMFLAG_ROOT))
 			continue;
 
 		if (g_bChannelsOverflowing && !g_bNotifiedOverflow[client])

@@ -151,7 +151,7 @@ void AutoPlantC4(bool ForcedRetry = false){
     g_bHasBombBeenDeleted = false;
     bomber = GetBomber();
     
-    if (IsValidClient(bomber)){
+    if (IsClientInGame(bomber)){
         float pos[3];
         GetClientAbsOrigin(bomber, pos);
         bombsite = GetNearestBombsite(pos);
@@ -203,7 +203,7 @@ public void AutoPlantRoundEnd(){
 
 
 public Action PlantBomb(Handle timer, int client){
-    if (IsValidClient(client) || !g_bHasBombBeenDeleted){
+    if (IsClientInGame(client) || !g_bHasBombBeenDeleted){
         if (g_bHasBombBeenDeleted){
             int bombEntity = CreateEntityByName("planted_c4");
 

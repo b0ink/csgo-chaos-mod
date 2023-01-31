@@ -39,7 +39,7 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 
 int settingsReminder[MAXPLAYERS+1];
 public Action Timer_SendSettingsReminder(Handle timer, int client){
-	if(IsValidClient(client) && settingsReminder[client] % 3 == 0){
+	if(IsClientInGame(client) && settingsReminder[client] % 3 == 0){
 		if(CheckCommandAccess(client, "sm_slay", ADMFLAG_CHAT)){
 			CPrintToChat(client, "%s Use !chaos in chat to adjust your HUD, Sound levels, ConVars, and Effect settings", g_Prefix);
 			PrintHintText(client, "Use !chaos in chat to adjust your HUD, Sound levels, ConVars, and Effect settings");

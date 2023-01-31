@@ -30,7 +30,7 @@ public void Chaos_TeammateSwap_START(){
 	
 	float vec[3];
 	
-	for(int i = 0; i <= MaxClients; i++){
+	for(int i = 1; i <= MaxClients; i++){
 		if(ValidAndAlive(i)){
 			GetClientAbsOrigin(i, vec);
 			if(GetClientTeam(i) == CS_TEAM_T) 	PushArrayArray(TPos, vec);
@@ -38,7 +38,7 @@ public void Chaos_TeammateSwap_START(){
 		}
 	}
 
-	for(int i = MaxClients; i >= 0; i--){
+	for(int i = MaxClients; i > 0; i--){
 		if(ValidAndAlive(i)){
 			if(GetClientTeam(i) == CS_TEAM_T) 	PushArrayCell(tIndex, i);
 			if(GetClientTeam(i) == CS_TEAM_CT) 	PushArrayCell(ctIndex, i);

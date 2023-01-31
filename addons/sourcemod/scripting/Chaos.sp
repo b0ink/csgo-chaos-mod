@@ -39,9 +39,9 @@ char 	g_Prefix_MegaChaos[] = "\n<<{orange}C H A O S{default}>>";
 #define LoopAllEntities(%1,%2,%3) for(int %1 = 0; %1 < %2;%1++) if(IsValidEntity(%1) && IsValidEdict(%1)) if(GetEdictClassname(%1, %3, 64))
 #define LoopAllEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1)))
 #define LoopAllMetaEffects(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < ChaosEffects.Length) if(ChaosEffects.GetArray(%2, %1, sizeof(%1))) if(%1.IsMetaEffect)
-#define LoopAllClients(%1) 		for(int %1 = 0; %1 <= MaxClients; %1++)
-#define LoopValidPlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(IsValidClient(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
-#define LoopAlivePlayers(%1) 	for(int %1 = 0; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
+#define LoopAllClients(%1) 		for(int %1 = 1; %1 <= MaxClients; %1++)
+#define LoopValidPlayers(%1) 	for(int %1 = 1; %1 <= MaxClients; %1++) if(IsClientInGame(%1) && (GetClientTeam(%1) == CS_TEAM_T || GetClientTeam(%1) == CS_TEAM_CT))
+#define LoopAlivePlayers(%1) 	for(int %1 = 1; %1 <= MaxClients; %1++) if(ValidAndAlive(%1))
 
 char g_sWeapons[][64] = {
 	"weapon_glock", "weapon_p250", "weapon_fiveseven", "weapon_deagle", "weapon_elite", "weapon_hkp2000", "weapon_tec9", "weapon_nova", "weapon_xm1014", "weapon_sawedoff", "weapon_m249", "weapon_negev", "weapon_mag7", "weapon_mp7", "weapon_ump45", "weapon_p90", "weapon_bizon", "weapon_mp9", "weapon_mac10", "weapon_famas", "weapon_m4a1", "weapon_aug", "weapon_galilar", "weapon_ak47", "weapon_sg556", "weapon_ssg08", "weapon_awp", "weapon_scar20", "weapon_g3sg1",

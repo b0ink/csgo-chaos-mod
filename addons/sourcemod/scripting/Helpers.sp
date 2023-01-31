@@ -1,14 +1,7 @@
 #pragma semicolon 1
 
-stock bool IsValidClient(int client, bool nobots = false){
-    if (client <= 0 || client > MaxClients || !IsClientConnected(client) || (nobots && IsFakeClient(client))) {
-        return false;
-    }
-    return IsClientInGame(client);
-}
-
 stock bool ValidAndAlive(int client){
-	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
+	return (client > 0 && IsClientInGame(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
 
 char multicolors[][] = {
@@ -27,7 +20,7 @@ char[] RemoveMulticolors(char[] message){
 
 
 stock bool SetClientMoney(int client, int money, bool absolute = false){
-	if(IsValidClient(client)){
+	if(IsClientInGame(client)){
 		if(absolute){
 			SetEntProp(client, Prop_Send, "m_iAccount", money);
 		}else{

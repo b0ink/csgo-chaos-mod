@@ -55,7 +55,7 @@ public Action BlockAllGuns(int client, int weapon) {
  */
 //TODO: if you pick up a grenade you cant see your knife anymore
 void HookBlockAllGuns(int client = -1){
-	if(IsValidClient(client)){
+	if(IsClientInGame(client)){
 		SDKUnhook(client, SDKHook_WeaponSwitch, BlockAllGuns);
 		SDKHook(client, SDKHook_WeaponSwitch, BlockAllGuns);
 		return;
@@ -98,7 +98,7 @@ public Action PreventWeaponDrop(int client, int weapon) {
 }
 
 void HookPreventWeaponDrop(int client = -1){
-	if(IsValidClient(client)){
+	if(IsClientInGame(client)){
 		SDKUnhook(client, SDKHook_WeaponDrop, PreventWeaponDrop);
 		SDKHook(client, SDKHook_WeaponDrop, PreventWeaponDrop);
 		return;

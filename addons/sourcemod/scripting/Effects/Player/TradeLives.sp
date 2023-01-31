@@ -24,7 +24,7 @@ public void TradeLives_Event_PlayerDeath(Event event, const char[] name, bool do
 	int victim = GetClientOfUserId(event.GetInt("userid"));
 	int attacker = GetClientOfUserId(event.GetInt("attacker"));
 
-	if(IsValidClient(victim) && IsValidClient(attacker)){
+	if(IsClientInGame(victim) && IsClientInGame(attacker)){
 		int teamToRevive = GetClientTeam(victim) == CS_TEAM_CT ? CS_TEAM_T : CS_TEAM_CT;
 		LoopValidPlayers(i){
 			if(!IsPlayerAlive(i) && GetClientTeam(i) == teamToRevive){

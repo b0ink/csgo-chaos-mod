@@ -21,7 +21,7 @@ public void Chaos_TeleportOnKill_RESET(bool HasTimerEnded){
 
 public void Chaos_TeleportOnKill_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	int victim = GetClientOfUserId(event.GetInt("userid"));
-	if(!TeleportOnKill || !IsValidClient(victim)) return;
+	if(!TeleportOnKill || !IsClientInGame(victim)) return;
 	
 	float location[3];
 	GetClientAbsOrigin(victim, location);

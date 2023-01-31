@@ -6,8 +6,8 @@ public void OnPluginStart(){
 
 	HookMainEvents();
 
-	for(int i = 0; i <= MaxClients; i++){
-		if(IsValidClient(i)){
+	for(int i = 1; i <= MaxClients; i++){
+		if(IsClientInGame(i)){
 			OnClientPutInServer(i);
 		}
 	}

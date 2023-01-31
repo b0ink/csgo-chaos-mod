@@ -46,11 +46,11 @@ public void Chaos_Flying_RESET(bool HasTimerEnded){
 }
 
 public Action Chaos_Flying_Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype) {
-	if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_WALK);
+	if (IsClientInGame(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_WALK);
 	return Plugin_Continue;
 }
 
 public Action Chaos_Flying_Hook_OnTakeDamagePost(int victim, int attacker){
-	if (IsValidClient(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
+	if (IsClientInGame(victim) && g_bActiveNoclip) SetEntityMoveType(victim, MOVETYPE_NOCLIP);
 	return Plugin_Continue;
 }

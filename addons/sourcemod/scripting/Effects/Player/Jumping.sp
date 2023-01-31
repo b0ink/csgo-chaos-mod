@@ -30,7 +30,7 @@ public void Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &iImpulse
 
 // public Action Timer_ForceJump(Handle timer){
 // 	if(g_bJumping){
-// 		for(int i = 0; i <= MaxClients; i++){
+// 		for(int i = 1; i <= MaxClients; i++){
 // 			if(ValidAndAlive(i)){
 // 				float vec[3];
 // 				GetEntPropVector(i, Prop_Data, "m_vecVelocity", vec);

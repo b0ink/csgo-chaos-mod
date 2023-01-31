@@ -8,7 +8,7 @@ public void Chaos_VampireHeal(effect_data effect){
 bool g_bVampireRound = false;
 public Action Chaos_VampireHeal_Hook_OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype){
 	if(g_bVampireRound){
-		if(IsValidClient(victim) && IsValidClient(inflictor)){
+		if(IsClientInGame(victim) && IsClientInGame(inflictor)){
 			if(GetClientTeam(victim) != GetClientTeam(inflictor)){ //ensure opposite teams
 				int health = GetEntProp(inflictor, Prop_Send, "m_iHealth");
 				health = health + RoundFloat(damage);
