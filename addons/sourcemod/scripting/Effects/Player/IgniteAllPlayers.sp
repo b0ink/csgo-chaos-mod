@@ -6,6 +6,6 @@ public void Chaos_IgniteAllPlayers(effect_data effect){
 }
 public void Chaos_IgniteAllPlayers_START(){
 	LoopAlivePlayers(i){
-		IgniteEntity(i, 10.0);
+		IgniteEntity(i, 5.0);
 	}
 }
