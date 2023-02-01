@@ -96,7 +96,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CanSpawnNewEffect()) return Plugin_Continue;
 	if(!g_cvChaosEnabled.BoolValue && !CustomRun) return Plugin_Continue;
 
-	char Random_Effect[64] = "-";
+	char Random_Effect[64];
 	int randomEffect = -1;
 	int attempts = 0;
 	g_sLastPlayedEffect = "";
@@ -141,7 +141,9 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		}
 	}else{ // running random effect!
 		effect_data effect;
-		int totalEffects = ChaosEffects.Length;
+		PossibleChaosEffects.Sort(Sort_Random, Sort_String);
+
+		int totalEffects = PossibleChaosEffects.Length;
 	
 		while(g_sLastPlayedEffect[0] == '\0'){ // no longer
 			attempts++;
@@ -149,7 +151,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				// randomEffect = GetRandomInt(0, totalEffects - 1);
 				randomEffect = GetURandomInt() % totalEffects;
 
-				ChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
+				PossibleChaosEffects.GetArray(randomEffect, effect, sizeof(effect));
 				if(
 					effect.Enabled &&
 					(!Effect_Recently_Played(effect.FunctionName) || CustomRun) &&
