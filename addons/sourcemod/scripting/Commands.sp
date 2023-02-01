@@ -6,6 +6,8 @@ void RegisterCommands(){
 
 	RegConsoleCmd("sm_chaos", 			Command_MainMenu);	
 	RegAdminCmd("sm_effect", 			Command_NewChaosEffect,	ADMFLAG_GENERIC);
+	RegAdminCmd("sm_randomeffect", 		Command_TriggerRandomEffect,	ADMFLAG_GENERIC);
+
 	RegAdminCmd("sm_startchaos", 		Command_StartChaos, 	ADMFLAG_GENERIC);
 	RegAdminCmd("sm_stopchaos", 		Command_StopChaos, 		ADMFLAG_GENERIC);
 	
@@ -65,6 +67,29 @@ public Action Command_NewChaosEffect(int client, int args){
 	return Plugin_Handled;
 }
 
+
+public Action Command_TriggerRandomEffect(int client, int args){
+	if(!g_cvChaosEnabled.BoolValue){
+		if(IsValidClient(client)){
+			ReplyToCommand(client, "[Chaos] Re-enable !chaos to run effects.");
+		}else{
+			PrintToServer("[Chaos] Re-enable !chaos to run effects.");
+		}
+		return Plugin_Handled;
+	}
+
+	if(CanSpawnNewEffect()){
+		ChooseEffect(null, true);
+	}else{
+		if(IsValidClient(client)){
+			ReplyToCommand(client, "[Chaos] You can't spawn new effects right now, please wait until the round starts.");
+		}else{
+			PrintToServer("[Chaos] You can't spawn new effects right now, please wait until the round starts.");
+		}
+	}
+
+	return Plugin_Handled;
+}
 
 public Action Command_StopChaos(int client, int args){
 	g_cvChaosEnabled.BoolValue = false;
