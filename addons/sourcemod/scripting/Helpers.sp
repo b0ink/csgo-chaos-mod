@@ -16,6 +16,14 @@ char[] RemoveMulticolors(char[] message){
 
 
 
+/**
+ * Sets players cash.
+ * 
+ * @param client       Client index.
+ * @param money        Amount of money to give. (Negative value if deducting cash)
+ * @param absolute     Set false to relatively add money amount. True if setting amount.
+ * @return             Return true on success.
+ */
 stock bool SetClientMoney(int client, int money, bool absolute = false){
 	if(IsValidClient(client)){
 		if(absolute){
@@ -80,6 +88,11 @@ public Action Timer_ResetChickenDebounce(Handle timer){
 }
 
 
+/**
+ * Gets total count of valid players in-game.
+ * 
+ * @return     Number of players.
+ */
 stock int GetPlayerCount(){
 	int count = 0;
 	for(int i = 1; i <= MaxClients; i++){
@@ -90,6 +103,11 @@ stock int GetPlayerCount(){
 	return count;
 }
 
+/**
+ * Gets total count of alive Terrorists.
+ * 
+ * @return     Number of alive Terrorists.
+ */
 stock int GetAliveTCount(){
 	int count = 0;
 	LoopAlivePlayers(i){
@@ -98,6 +116,11 @@ stock int GetAliveTCount(){
 	return count;
 }
 
+/**
+ * Gets a total count of alive Counter-Terrorists.
+ * 
+ * @return     Number of alive Counter-Terrorists.
+ */
 stock int GetAliveCTCount(){
 	int count = 0;
 	LoopAlivePlayers(i){
@@ -107,7 +130,13 @@ stock int GetAliveCTCount(){
 }
 
 
-int getRandomAlivePlayer(int team = CS_TEAM_NONE){
+/**
+ * Gets random alive player. Set team paramater to limit random player by team.
+ * 
+ * @param team     Param description
+ * @return         Return description
+ */
+int GetRandomAlivePlayer(int team = CS_TEAM_NONE){
 	Handle players = CreateArray(4);
 	LoopAlivePlayers(i){
 		if(team != CS_TEAM_NONE){
@@ -187,17 +216,14 @@ void StopTimer(Handle &timer){
 }
 
 
-stock void CreateHostageRescue(){
-    int iEntity = -1;
-    if((iEntity = FindEntityByClassname(iEntity, "func_hostage_rescue")) == -1) {
-        int iHostageRescueEnt = CreateEntityByName("func_hostage_rescue");
-        DispatchKeyValue(iHostageRescueEnt, "targetname", "fake_hostage_rescue");
-        // DispatchKeyValue(iHostageRescueEnt, "origin", "-3141 -5926 -5358");
-        DispatchSpawn(iHostageRescueEnt);
-    }
-}
-
-stock int GetSlotByWeaponName (int client, const char[] szName){
+/**
+ * Finds slot index using weapon name
+ * 
+ * @param client     Client index to search
+ * @param szName     Name of weapon to find
+ * @return           Weapon Slot index. -1 if no weapon found with szName.
+ */
+stock int GetSlotByWeaponName(int client, const char[] szName){
 	char szClassname[36];
 	int entity = -1;
 	for (int i; i <= 20; i++){
@@ -209,6 +235,13 @@ stock int GetSlotByWeaponName (int client, const char[] szName){
 	return -1;
 }
 
+
+/**
+ * Checks if the client currently has a menu open
+ * 
+ * @param client     Client index to check
+ * @return           Return true if player has menu open.
+ */
 bool HasMenuOpen(int client){
 	if(GetClientMenu(client) != MenuSource_None) return true;
 	return false;

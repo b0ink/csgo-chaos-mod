@@ -119,6 +119,16 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	return Plugin_Continue;
 }
 
+public Action Timer_CreateHostage(Handle timer){
+	int iEntity = -1;
+	if((iEntity = FindEntityByClassname(iEntity, "func_hostage_rescue")) == -1) {
+		int iHostageRescueEnt = CreateEntityByName("func_hostage_rescue");
+		DispatchKeyValue(iHostageRescueEnt, "targetname", "fake_hostage_rescue");
+		// DispatchKeyValue(iHostageRescueEnt, "origin", "-3141 -5926 -5358");
+		DispatchSpawn(iHostageRescueEnt);
+	}
+	return Plugin_Continue;
+}
 
 public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;

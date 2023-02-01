@@ -107,7 +107,7 @@ void SpawnImpostors(){
 				SetEntityRenderMode(chicken, RENDER_NONE);
 
 				//causes those annoying messages when your chicken dies if i set the leader
-				// SetEntPropEnt(chicken, Prop_Send, "m_leader", getRandomAlivePlayer());
+				// SetEntPropEnt(chicken, Prop_Send, "m_leader", GetRandomAlivePlayer());
 
 			}
 		}

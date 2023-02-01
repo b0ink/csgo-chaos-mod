@@ -91,17 +91,6 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 #include "Forwards.sp"
 
 
-public Action Timer_Advertisement(Handle timer){
-	CPrintToChatAll("Thanks for playing {lightblue}CS:GO Chaos Mod{default}!\xe2\x80\xa9Visit {orange}csgochaosmod.com {default}to add this mod to your server!");
-	return Plugin_Continue;
-}
-
-public Action Timer_CreateHostage(Handle timer){
-	CreateHostageRescue();
-	return Plugin_Continue;
-}
-
-
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
 	if(!CanSpawnNewEffect()) return Plugin_Continue;

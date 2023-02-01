@@ -9,7 +9,7 @@ public void Chaos_RandomInvisiblePlayer(effect_data effect){
 
 public void Chaos_RandomInvisiblePlayer_START(){
 	cvar("sv_disable_immunity_alpha", "1");
-	int target = getRandomAlivePlayer();
+	int target = GetRandomAlivePlayer();
 	if(target == -1) return;
 
 	LoopValidPlayers(i){

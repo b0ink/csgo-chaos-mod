@@ -165,7 +165,7 @@ void AutoPlantC4(){
     if(IsValidClient(bomber)){
         SendBombPlanted(bomber);
     }else{
-        SendBombPlanted(getRandomAlivePlayer(CS_TEAM_T));
+        SendBombPlanted(GetRandomAlivePlayer(CS_TEAM_T));
     }
 
     if (DispatchSpawn(bombEntity)){

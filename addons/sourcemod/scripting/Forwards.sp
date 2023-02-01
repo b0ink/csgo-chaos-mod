@@ -87,6 +87,12 @@ public void OnMapStart(){
 }
 
 
+public Action Timer_Advertisement(Handle timer){
+	CPrintToChatAll("Thanks for playing {lightblue}CS:GO Chaos Mod{default}!\xe2\x80\xa9Visit {orange}csgochaosmod.com {default}to add this mod to your server!");
+	return Plugin_Continue;
+}
+
+
 public void OnMapEnd(){
 	if(!g_cvChaosEnabled.BoolValue) return;
 
