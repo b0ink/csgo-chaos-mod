@@ -107,10 +107,16 @@ stock int GetAliveCTCount(){
 }
 
 
-public int getRandomAlivePlayer(){
+int getRandomAlivePlayer(int team = CS_TEAM_NONE){
 	Handle players = CreateArray(4);
 	LoopAlivePlayers(i){
-		PushArrayCell(players, i);
+		if(team != CS_TEAM_NONE){
+			if(GetClientTeam(i) == team){
+				PushArrayCell(players, i);
+			}
+		}else{
+			PushArrayCell(players, i);
+		}
 	}
 	int random = GetRandomInt(0, GetArraySize(players) - 1);
 	int target = GetArrayCell(players, random);
