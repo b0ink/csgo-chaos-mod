@@ -34,3 +34,8 @@ public void Chaos_SpawnExplodingBarrels_RESET(){
 		}
 	}
 }
+
+public bool Chaos_SpawnExplodingBarrels_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
+	return true;
+}

@@ -21,6 +21,7 @@ public void Chaos_LavaFloor_START(){
 }
 
 public bool Chaos_LavaFloor_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
 	if(GetRoundTime() < 10 && EffectRunRandomly) return false;
 	return true;
 }

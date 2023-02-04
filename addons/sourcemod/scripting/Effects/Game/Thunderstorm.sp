@@ -68,10 +68,6 @@ public void Chaos_Thunderstorm_RESET(bool HasTimerEnded){
 	// Fog_OFF();
 }
 
-public bool Chaos_Thunderstorm_Conditions(bool EffectRunRandomly){
-	return true;
-}
-
 /* Used in Chaos_Armageddon() */
 void EnableThunderstorm(){
 	Thunderstorm = true;
@@ -135,4 +131,10 @@ public Action Timer_LightningStrike(Handle timer) {
 
 	CreateTimer(0.1, Timer_LightningStrike);
 	return Plugin_Continue;
+}
+
+
+public bool Chaos_Thunderstorm_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
+	return true;
 }

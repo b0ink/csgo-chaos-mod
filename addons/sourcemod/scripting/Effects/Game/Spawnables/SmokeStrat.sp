@@ -14,3 +14,8 @@ public void Chaos_SmokeStrat_START(){
 		}
 	}
 }
+
+public bool Chaos_SmokeStrat_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
+	return true;
+}

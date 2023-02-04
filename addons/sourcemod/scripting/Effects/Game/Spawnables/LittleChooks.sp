@@ -31,6 +31,7 @@ public void Chaos_LittleChooks_RESET(bool HasTimerEnded){
 }
 
 public bool Chaos_LittleChooks_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
 	if(!CanSpawnChickens() && EffectRunRandomly) return false;
 	return true;
 }
