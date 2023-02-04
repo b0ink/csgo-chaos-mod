@@ -1,0 +1,41 @@
+"Games"
+{
+    "csgo"
+    {
+        "Addresses"
+        {
+            "g_CSViewVectors"
+            {
+                "windows"
+                {
+                    "signature" "g_pGameRules"
+                    "read" "18"     // g_pGameRules
+                    "read" "0"      // CCSGameRules object
+                    "read" "0"      // CCSGameRules vtable
+                    "read" "120"    // CCSGameRules::GetViewVectors()
+                    "read" "1"      // g_CSViewVectors
+                }
+                "linux"
+                {
+                    "signature" "g_pGameRules"
+                    "read" "13"
+                    "read" "0"
+                    "read" "0"
+                    "read" "124"    // Offset in VEC_DUCK_HULL_MIN in CBasePlayer::Restore
+                    "read" "2"
+                }
+            }
+        }
+        
+        "Signatures"
+        {
+            // "CBaseEntity::TakeDamage:  with inputInfo.GetDamageForce() == vec3_origin"
+            "g_pGameRules"
+            {
+                "library"    "server"
+                "windows"    "\x55\x8B\xEC\x83\xE4\xF8\x81\xEC\x90\x00\x00\x00\x56\x57\x8B\xF9\x8B\x0D\x2A\x2A\x2A\x2A"
+                "linux"      "\x55\x89\xE5\x57\x56\x53\x81\xEC\x9C\x00\x00\x00\xA1\x2A\x2A\x2A\x2A\x8B\x75\x2A"
+            }
+        }
+    }
+}
