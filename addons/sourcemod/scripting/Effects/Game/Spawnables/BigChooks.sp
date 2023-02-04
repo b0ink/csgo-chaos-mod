@@ -32,6 +32,7 @@ public void Chaos_BigChooks_RESET(bool HasTimerEnded){
 }
 
 public bool Chaos_BigChooks_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
 	if(!CanSpawnChickens() && EffectRunRandomly) return false;
 	return true;
 }

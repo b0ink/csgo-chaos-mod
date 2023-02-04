@@ -114,3 +114,8 @@ void SpawnImpostors(){
 	}
 	delete OriginalPlayerModels;
 }
+
+public bool Chaos_Impostors_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
+	return true;
+}

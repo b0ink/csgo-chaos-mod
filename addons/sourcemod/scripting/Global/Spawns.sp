@@ -146,7 +146,11 @@ int DistanceToClosestEntity(float vec[3], char[] entity){
 	return RoundToFloor(dist);
 }
 
-
+/**
+ * Checks if there are valid map spawn points.
+ * 
+ * @return     Returns true if there is atleast 4 available spawn points for EVERY player.
+ */
 bool ValidMapPoints(){
 	if(g_MapCoordinates == INVALID_HANDLE) return false;
 	if(GetArraySize(g_MapCoordinates) == 0) return false;
@@ -154,10 +158,14 @@ bool ValidMapPoints(){
 	return true;
 }
 
+/**
+ * Checks if there are valid bomb spawn points.
+ * 
+ * @return     Returns true if there is atleast one spawn point for BOTH bomsite A & B
+ */
 bool ValidBombSpawns(){
 	if(bombSiteA == INVALID_HANDLE) return false;
 	if(bombSiteB == INVALID_HANDLE) return false;
 	if(GetArraySize(bombSiteA) == 0 || GetArraySize(bombSiteB) == 0) return false;
 	return true;
 }
-

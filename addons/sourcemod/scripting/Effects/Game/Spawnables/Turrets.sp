@@ -84,6 +84,7 @@ public void Chaos_Turrets_RESET(){
 }
 
 public bool Chaos_Turrets_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
 	if(dronegunEnt == 0) return false;
 	return true;
 }

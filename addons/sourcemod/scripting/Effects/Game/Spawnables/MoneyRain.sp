@@ -39,7 +39,7 @@ public void Chaos_MoneyRain_RESET(bool HasTimerEnded){
 }
 
 public bool Chaos_MoneyRain_Conditions(bool EffectRunRandomly){
-	if(g_MapCoordinates == INVALID_HANDLE) return false;
+	if(!ValidMapPoints()) return false;
 	if(GetArraySize(g_MapCoordinates) == 0) return false;
 	return true;
 }

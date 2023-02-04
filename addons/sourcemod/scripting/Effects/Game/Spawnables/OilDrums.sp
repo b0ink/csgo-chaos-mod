@@ -86,5 +86,6 @@ void SpawnOilDrum(bool explosive, float pos[3]) {
 }
 
 public bool Chaos_OilDrums_Conditions(bool EffectRunRandomly){
+	if(!ValidMapPoints()) return false;
 	return OilDrumModelFound;
 }

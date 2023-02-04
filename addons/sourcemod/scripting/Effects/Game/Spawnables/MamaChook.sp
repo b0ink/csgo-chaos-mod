@@ -23,3 +23,8 @@ public void Chaos_MamaChook_START(){
 public void Chaos_MamaChook_RESET(bool HasTimerEnded){
 	RemoveChickens(.chickenName="MamaChook");
 }
+
+public bool Chaos_MamaChook_Conditions(){
+	if(!ValidMapPoints()) return false;
+	return true;
+}
