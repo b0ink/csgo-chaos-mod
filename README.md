@@ -7,10 +7,10 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 
 # Screenshots
 <p align="center">
-	<img src="https://csgochaosmod.com/gallery/chaos_1.jpg" 	width="375" title="LSD">
+	<img src="https://csgochaosmod.com/gallery/chaos_13.jpg" 	width="375" title="LSD">
 	<img src="https://csgochaosmod.com/gallery/chaos_2.jpg" 	width="375" title="Extreme Fog">
-	<img src="https://csgochaosmod.com/gallery/chaos_5.jpg" 	width="375" title="Alien Knife Fight">
-	<img src="https://csgochaosmod.com/gallery/chaos_7.jpg" 	width="375" title="Thunderstorm">
+	<img src="https://csgochaosmod.com/gallery/chaos_14.jpg" 	width="375" title="Extreme Blur">
+	<img src="https://csgochaosmod.com/gallery/chaos_12.jpg" 	width="375" title="Armageddon">
 	<img src="https://csgochaosmod.com/gallery/chaos_9.jpg" 	width="375" title="Binoculars">
 	<img src="https://csgochaosmod.com/gallery/chaos_10.jpg" 	width="375" title="Deep Fried">
 </p>
@@ -37,10 +37,10 @@ Open source, Instructions & Download to the [CS:GO Chaos Mod Voting Overlay](htt
 - Copy the contents from `addons/sourcemod/` into your server's `csgo/addons/sourcemod/` folder.
 - Copy the contents from `materials/` into your server's `csgo/materials/` folder.
 - Copy the contents from `models/` into your server's `csgo/models/` folder.
-- You may also need a [Fast DL](https://steamcommunity.com/sharedfiles/filedetails/?id=486331092) setup for other players to download the assets off your server. The `FastDL/` folder contains all the compressed assets to be placed on your Fast DL.
+- You may also need a [Fast DL](https://steamcommunity.com/sharedfiles/filedetails/?id=486331092) setup for other players to download the assets off your server. The `FastDL/` folder contains all the compressed assets to be placed on your Fast DL, otherwise all players will require to download the assets into their `csgo/` game directory.
 - Restart your server/load the plugin.
 
-If you encounter any errors please check your error files as well as the plugin's generated `chaos_logs.log` file found in `/addons/sourcemod/logs`, and double check that the config files are in the correct location.
+If you encounter any errors please check your sourcemod error log files as well as the plugin's generated `chaos_logs.log` file found in `/addons/sourcemod/logs`, and double check that you have copied over all the files required for the plugin.
 
 ## Available Commands:
 `sm_chaos`
@@ -53,6 +53,9 @@ If you encounter any errors please check your error files as well as the plugin'
   
 `sm_effect <Effect Name | Search Term>`
 - Brings up a menu of any effects containing the search term.
+
+`sm_randomeffect`
+- Instantly spawns a new effect, if allowed.
 
 ## Config
 You can adjust the effect's duration and enable/disable it by using the "!chaos" command, and selecting `Settings -> Effects`.
@@ -103,8 +106,8 @@ If set to `1`, 3 random effects will be displayed in the Twitch Overlay app and 
 Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`, or alternatively through the `!chaos->Settings` menu, which will automatically update the ConVar config.
 
 
-## Currently supported maps with working spawns
-<sub>Spawns defined in [Chaos_Locations.cfg](addons/sourcemod/configs/Chaos_Locations.cfg) are used for teleporting players and spawning props. Running Chaos on an unsupported map will mean various effects will not run.</sub>
+## Spawn Points
+Several effects rely on map-specific spawn points to spawn items and teleport players, here are a list of maps that currently have spawn points saved for and defined in [Chaos_Locations.cfg](addons/sourcemod/data/Chaos_Locations.cfg). **However,** if a map does not currently have any spawn points, the Chaos plugin will automatically [save markers](addons/sourcemod/scripting/Configs.sp#L176-L212) based on player positions as they move around the map. Most effects that depend on spawn points require a minimum set amount of spawns, and will automatically activate once enough spawn points are generated. This means the Chaos plugin should work on any custom maps.
 - Dust 2
 - Mirage
 - Inferno
@@ -120,15 +123,13 @@ Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`
 - Italy
 - Assault
 - Lake
-- Iris\
-<sub>If you are running Chaos Mod on an 'unsupported' map, temporary spawn points will be generated based off players' location throughout the game</sub>
+- Iris
 
 ### Known issues:
 - Certain resolutions (mostly widescreens, and in my case 2560x1080) cut off the HUD overlay on the right side of the screen, this means the announcement texts and bar timer might not look correct, lowering your resolution should fix this.
 	- It is also recommended to **restart** CS:GO after adjusting your resolution, otherwise the HUD may appear much larger than it should be.
 	- 4k resolutions by default have an extremely enlarged HUD that makes the game unplayable, setting it to 1080p and restarting your game should fix this.
 	- An alternative method is to set `-w 1920 -h 1080` in your CS:GO's launch options.
-- Experienced some issues with models showing up as error boxes, or overlays not being displayed correctly, restarting your game fixes this issue after downloading the materials.
 <p></p>
 
 ---
