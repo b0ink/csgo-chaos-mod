@@ -9,7 +9,8 @@ bool PunishMisfire = false;
 bool PlayerShot[MAXPLAYERS+1];
 
 public void Chaos_PunishMisfire(effect_data effect){
-	effect.Title = "Take Damage For Missed Shots";
+	// effect.Title = "Take Damage For Missed Shots";
+	effect.Title = "Don't miss or you lose HP";
 	effect.Duration = 30;
 }
 
@@ -52,6 +53,12 @@ public void CheckFire(int client){
 	if(PlayerShot[client]){
 		int health = GetEntProp(client, Prop_Send, "m_iHealth");
 		health -= 15;
+		if(GetRandomInt(0, 1) == 0){
+			ClientCommand(client, "playgamesound player/damage3.wav");
+		}else{
+			ClientCommand(client, "playgamesound player/damage1.wav");
+		}
+		ClientCommand(client, "playgamesound player/pl_pain5.wav");
 		if(health <= 0){
 			SlapPlayer(client, 10, false);
 		}else{

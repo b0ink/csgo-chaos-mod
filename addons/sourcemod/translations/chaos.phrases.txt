@@ -454,7 +454,7 @@
     }
     "Chaos_PunishMisfire"
     {
-        "en"    "Take Damage For Missed Shots"
+        "en"    "Don't miss or you lose HP"
     }
     "Chaos_QuakeFOV"
     {
