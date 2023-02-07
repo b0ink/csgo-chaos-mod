@@ -668,4 +668,16 @@
     {
         "en"    "Armageddon"
     }
+    "Chaos_TinyPlayers"
+    {
+        "en"    "Tiny Players"
+    }
+    "Chaos_DamageBar"
+    {
+        "en"    "Damage Bar"
+    }
+    "Chaos_Tilted"
+    {
+        "en"    "Tilted"
+    }
 }
