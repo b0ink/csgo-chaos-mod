@@ -43,6 +43,7 @@ public void Chaos_Armageddon_START(){
 
 	ArmageddonFog();
 
+	CreateTimer(0.1, Timer_FlashWastelandCC, _,TIMER_FLAG_NO_MAPCHANGE);
 	CreateTimer(5.0, Timer_FlashWastelandCC, _,TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
 	CreateTimer(0.1, Timer_LightningStrike);
