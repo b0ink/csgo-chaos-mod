@@ -76,6 +76,7 @@ bool tinyPlayerModels = true;
 public void Chaos_TinyPlayers(effect_data effect){
 	effect.Title = "Tiny Players";
 	effect.Duration = 30;
+	effect.AddFlag("playermodel");
 }
 
 public void Chaos_TinyPlayers_OnMapStart(){

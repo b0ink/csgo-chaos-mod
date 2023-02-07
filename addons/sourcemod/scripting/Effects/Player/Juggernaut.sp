@@ -7,6 +7,7 @@ bool g_bSetJuggernaut = false;
 public void Chaos_Juggernaut(effect_data effect){
 	effect.Title = "Juggernauts";
 	effect.Duration = 30;
+	effect.AddFlag("playermodel");
 }
 
 public void Chaos_Juggernaut_START(){

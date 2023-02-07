@@ -170,6 +170,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 					float average = float((PossibleChaosEffects.Length / 4) * 3); //idk
 					if(GetArraySize(EffectsHistory) > average) RemoveFromArray(EffectsHistory, 0);
+				}else{
+					PrintToServer("Could not run: %s", effect.FunctionName);
 				}
 
 			}while(Random_Effect[0] == '\0');

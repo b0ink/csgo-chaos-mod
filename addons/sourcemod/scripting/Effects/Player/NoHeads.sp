@@ -3,6 +3,7 @@
 public void Chaos_NoHeads(effect_data effect){
 	effect.Title = "No Heads";
 	effect.Duration = 30;
+	effect.AddFlag("playermodel");
 }
 
 char originalNoHeadModels[MAXPLAYERS+1][PLATFORM_MAX_PATH];

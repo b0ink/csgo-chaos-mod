@@ -6,6 +6,7 @@ char playersModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
 public void Chaos_ChickenPlayers(effect_data effect){
 	effect.Title = "Make all players a chicken";
 	effect.Duration = 30;
+	effect.AddFlag("playermodel");
 }
 
 public void Chaos_ChickenPlayers_START(){
