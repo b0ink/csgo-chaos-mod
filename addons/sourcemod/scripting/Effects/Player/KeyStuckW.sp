@@ -21,3 +21,10 @@ public void Chaos_KeyStuckW_OnPlayerRunCmd(int client, int &buttons, int &iImpul
 public void Chaos_KeyStuckW_RESET(bool HasTimerEnded){
 	WKeyStuck = false;
 }
+
+public bool Chaos_KeyStuckW_Conditions(bool EffectRunRandomly){
+	if(EffectRunRandomly){
+		return CanRunKeyStuckEffect();
+	}
+	return true;
+}

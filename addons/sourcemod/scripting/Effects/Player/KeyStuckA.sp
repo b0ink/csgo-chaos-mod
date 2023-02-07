@@ -1,6 +1,7 @@
 #pragma semicolon 1
 
 bool AKeyStuck = false;
+int timeSinceLastKeyStuckEffect = -1;
 
 public void Chaos_KeyStuckA(effect_data effect){
 	effect.Title = "Help my A key is stuck";
@@ -20,4 +21,20 @@ public void Chaos_KeyStuckA_OnPlayerRunCmd(int client, int &buttons, int &iImpul
 
 public void Chaos_KeyStuckA_RESET(bool HasTimerEnded){
 	AKeyStuck = false;
+}
+
+public bool Chaos_KeyStuckA_Conditions(bool EffectRunRandomly){
+	if(EffectRunRandomly){
+		return CanRunKeyStuckEffect();
+	}
+	return true;
+}
+
+//TODO: merge this into the .AddFlag() system
+bool CanRunKeyStuckEffect(){
+	if((GetTime() - timeSinceLastKeyStuckEffect) > 200){
+		timeSinceLastKeyStuckEffect = GetTime();
+		return true;
+	}
+	return false;
 }
