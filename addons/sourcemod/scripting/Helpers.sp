@@ -19,30 +19,33 @@ char[] RemoveMulticolors(char[] message){
 /**
  * Sets players cash.
  * 
- * @param client       Client index.
- * @param money        Amount of money to give. (Negative value if deducting cash)
- * @param absolute     Set false to relatively add money amount. True if setting amount.
+ * @param client       		Client index.
+ * @param money        		Amount of money to give. (Negative value if deducting cash)
+ * @param absolute     		Set false to relatively add money amount. True if setting amount.
+ * @param skipDepositUI     Set false to display the amount deposited into your cash before changing its value.
  * @return             Return true on success.
  */
-stock bool SetClientMoney(int client, int money, bool absolute = false){
+stock bool SetClientMoney(int client, int money, bool absolute = false, bool skipDepositUI = false){
 	if(IsValidClient(client)){
 		if(absolute){
 			SetEntProp(client, Prop_Send, "m_iAccount", money);
 		}else{
 			SetEntProp(client, Prop_Send, "m_iAccount", GetEntProp(client, Prop_Send, "m_iAccount")+money);
 		}
-		int entity = CreateEntityByName("game_money");
-		if(entity != INVALID_ENT_REFERENCE){
-			DispatchKeyValue(entity, "AwardText", "");
-			DispatchSpawn(entity);
-			SetVariantInt(0);
-			AcceptEntityInput(entity, "SetMoneyAmount");
-			SetVariantInt(client);
-			AcceptEntityInput(entity, "AddMoneyPlayer");
-			AcceptEntityInput(entity, "Kill");
-			return true;
+		if(!skipDepositUI){
+			int entity = CreateEntityByName("game_money");
+			if(entity != INVALID_ENT_REFERENCE){
+				DispatchKeyValue(entity, "AwardText", "");
+				DispatchSpawn(entity);
+				SetVariantInt(0);
+				AcceptEntityInput(entity, "SetMoneyAmount");
+				SetVariantInt(client);
+				AcceptEntityInput(entity, "AddMoneyPlayer");
+				AcceptEntityInput(entity, "Kill");
+				return true;
+			}
 		}
-		
+
 		return false;
 	}else{
 		return false;

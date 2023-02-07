@@ -167,3 +167,4 @@
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/TinyPlayers.sp"
 #include "Effects/Player/RadioChatter.sp"
+#include "Effects/Player/Nice.sp"
