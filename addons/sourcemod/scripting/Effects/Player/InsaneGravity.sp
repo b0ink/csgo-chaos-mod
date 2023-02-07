@@ -7,7 +7,7 @@ public void Chaos_InsaneGravity(effect_data effect){
 
 public void Chaos_InsaneGravity_START(){
 	LoopAlivePlayers(i){
-		SetEntityGravity(i, 15.0);
+		SetEntityGravity(i, 8.0);
 	}
 }
 
