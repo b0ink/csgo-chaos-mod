@@ -166,3 +166,4 @@
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/TinyPlayers.sp"
+#include "Effects/Player/RadioChatter.sp"
