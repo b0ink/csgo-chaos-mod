@@ -16,7 +16,7 @@ public void Chaos_LowPitch_INIT(){
 }
 
 
-public void Chaos_LowPitch_S(){
+public void Chaos_LowPitch_START(){
 	LowPitch = true;
 }
 
