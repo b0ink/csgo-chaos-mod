@@ -78,6 +78,11 @@ public void Chaos_EffectName_RESET(int ResetType){
 		
 }
 
+public void Chaos_EffectName_OnPlayerSpawn(int client){
+	/* Re-apply the effect here. This function is called when a player spawns AND when the effect is active. */
+}
+
+
 public bool Chaos_EffectName_Conditions(bool EffectRunRandomly){
 	/*
 		Check conditions to deterimne whether the effect can be run or not. This is the last final check before the effect is about to run. If returned false, 			another effect will be selected.
@@ -114,7 +119,7 @@ public void 	Chaos_EffectName_OnEntityCreated(int ent, const char[] classname);
 
 public void 	Chaos_EffectName_OnEntityDestroyed(int ent);
 
-public Action 	Chaos_EffectName_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed);
+public Action 	Chaos_EffectName_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]);
 
 public void 	Chaos_EffectName_OnGameFrame();
 
