@@ -25,6 +25,8 @@
 #include "Effects/Game/OffsetCrosshair.sp"
 #include "Effects/Game/PigeonHole.sp"
 #include "Effects/Game/QuickMath.sp"
+#include "Effects/Game/HighPitch.sp"
+#include "Effects/Game/LowPitch.sp"
 #include "Effects/Game/RandomSkybox.sp"
 #include "Effects/Game/RevealEnemyLocation.sp"
 #include "Effects/Game/Saturation.sp"

@@ -680,4 +680,8 @@
     {
         "en"    "Tilted"
     }
+    "Chaos_Nice"
+    {
+        "en"    "Nice"
+    }
 }
