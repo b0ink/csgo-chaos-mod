@@ -74,6 +74,9 @@ public void Chaos_QuickMath_RESET(bool HasTimerEnded){
 }
 
 public bool Chaos_QuickMath_Conditions(bool EffectRunRandomly){
-	if(TotalEffectsRunThisMap() < 5 && EffectRunRandomly) return false;
+	if(EffectRunRandomly){
+		if(TotalEffectsRunThisMap() < 5) return false;
+		if(GetRoundTime() > 30) return false;
+	}
 	return true;
 }
