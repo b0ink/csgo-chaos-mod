@@ -684,4 +684,12 @@
     {
         "en"    "Nice"
     }
+	"Chaos_LowPitch"
+    {
+        "en"    "Low Pitch"
+    }
+	"Chaos_HighPitch"
+    {
+        "en"    "Low Pitch"
+    }
 }
