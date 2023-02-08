@@ -114,7 +114,7 @@ public void Aimbot_OnClientThink(int iClient){
 }
 
 
-public Action Chaos_Aimbot_OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public Action Chaos_Aimbot_OnPlayerRunCmd(int iClient, int &iButtons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if (!IsValidClient(iClient) || !AimbotEnabled || !IsPlayerAlive(iClient)) return Plugin_Continue;
 	
 	int iActiveWeapon = GetEntPropEnt(iClient, Prop_Send, "m_hActiveWeapon");

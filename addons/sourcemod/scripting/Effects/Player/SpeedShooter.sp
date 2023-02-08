@@ -23,7 +23,7 @@ public void Chaos_SpeedShooter_RESET(int ResetType){
 	}
 }
 
-public void Chaos_SpeedShooter_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_SpeedShooter_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if(SpeedShooter && buttons & IN_ATTACK){
 		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 5.0);
 	}else if(SpeedShooter){

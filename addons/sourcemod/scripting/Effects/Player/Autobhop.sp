@@ -22,7 +22,7 @@ public void Chaos_Autobhop_RESET(int ResetType){
 }
 
 float funky_Velocity[3];
-public void Chaos_Autobhop_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_Autobhop_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if(g_AutoBunnyhop > 0){
 		if(ValidAndAlive(client) && GetEntityFlags(client) & FL_ONGROUND && buttons & IN_JUMP){
 			GetEntPropVector(client, Prop_Data, "m_vecVelocity", funky_Velocity);

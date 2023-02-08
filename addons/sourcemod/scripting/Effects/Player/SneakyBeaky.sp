@@ -16,7 +16,7 @@ public void Chaos_SneakyBeaky_RESET(int ResetType){
 	SneakyBeaky = false;
 }
 
-public void Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if(SneakyBeaky){
 		if (IsPlayerAlive(client)){
 			if (buttons & IN_FORWARD ){

@@ -154,13 +154,13 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnPlayerRunCmd);
 			Call_PushCell(client); 
 			Call_PushCellRef(buttons);
-			Call_PushCell(iImpulse);
+			Call_PushCellRef(iImpulse);
 			Call_PushArrayEx(fVel, 3, SM_PARAM_COPYBACK);
 			Call_PushArrayEx(fAngles, 3, SM_PARAM_COPYBACK);
-			Call_PushCell(iWeapon);
-			Call_PushCell(iSubType);
-			Call_PushCell(iCmdNum);
-			Call_PushCell(iTickCount);
+			Call_PushCellRef(iWeapon);
+			Call_PushCellRef(iSubType);
+			Call_PushCellRef(iCmdNum);
+			Call_PushCellRef(iTickCount);
 			Call_PushCellRef(iSeed);
 			Call_PushArrayEx(mouse, 2, SM_PARAM_COPYBACK);
 			Call_Finish();

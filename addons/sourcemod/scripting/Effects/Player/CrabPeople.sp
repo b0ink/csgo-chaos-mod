@@ -13,6 +13,6 @@ public void Chaos_CrabPeople_RESET(int ResetType){
 	g_bForceCrouch = false;
 }
 
-public void Chaos_CrabPeople_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){
+public void Chaos_CrabPeople_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if(g_bForceCrouch) buttons |= IN_DUCK;
 }
