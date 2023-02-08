@@ -58,13 +58,11 @@ public void Chaos_TaserParty_START(){
 	}
 }
 
-public void Chaos_TaserParty_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		HookPreventWeaponDrop(client);
-		SDKHook(client, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
-		GivePlayerItem(client, "weapon_taser");
-		FakeClientCommand(client, "use weapon_taser");
-	}
+public void Chaos_TaserParty_OnPlayerSpawn(int client){
+	HookPreventWeaponDrop(client);
+	SDKHook(client, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
+	GivePlayerItem(client, "weapon_taser");
+	FakeClientCommand(client, "use weapon_taser");
 }
 
 public void Chaos_TaserParty_RESET(int ResetType){

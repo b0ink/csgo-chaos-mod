@@ -36,10 +36,8 @@ public void Chaos_OffsetCrosshair_RESET(bool EndChaos){
 	Remove_Overlay("/Chaos/OffsetCrosshair.vtf");
 }
 
-public void Chaos_OffsetCrosshair_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntProp(client, Prop_Send, "m_iHideHUD", HIDEHUD_CROSSHAIR);
-	}
+public void Chaos_OffsetCrosshair_OnPlayerSpawn(int client){
+	SetEntProp(client, Prop_Send, "m_iHideHUD", HIDEHUD_CROSSHAIR);
 }
 
 public bool Chaos_OffsetCrosshair_Conditions(bool EffectRunRandomly){

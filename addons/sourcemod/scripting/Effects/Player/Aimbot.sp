@@ -61,7 +61,7 @@ public void Chaos_Aimbot_RESET(int ResetType){
 	}
 }
 
-public void Chaos_Aimbot_OnPlayerSpawn(int client, bool EffectIsRunning){
+public void Chaos_Aimbot_OnPlayerSpawn(int client){
 	if(!AimbotEnabled) return;
 	Aimbot_SDKHOOKS(client);
 }

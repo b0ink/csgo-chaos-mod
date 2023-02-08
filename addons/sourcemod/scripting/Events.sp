@@ -26,13 +26,13 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	}
 
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
-		if(Chaos_EffectData_Buffer.OnPlayerSpawn != INVALID_FUNCTION){
+		// Only trigger playerspawn function if effect is active
+		if(Chaos_EffectData_Buffer.OnPlayerSpawn != INVALID_FUNCTION && Chaos_EffectData_Buffer.Timer != INVALID_HANDLE){
 			
 			// Delay function to ensure player has fully spawned
 			DataPack data = new DataPack();
 			data.WriteFunction(Chaos_EffectData_Buffer.OnPlayerSpawn);
 			data.WriteCell(client);
-			data.WriteCell(Chaos_EffectData_Buffer.Timer != INVALID_HANDLE);
 
 			CreateTimer(0.2, Timer_TriggerOnPlayerSpawn, data);
 		}

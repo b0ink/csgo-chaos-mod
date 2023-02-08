@@ -23,10 +23,8 @@ public void Chaos_LockPlayersAim_START(){
 	g_bLockPlayersAim_Active  = true;
 }
 
-public void Chaos_LockPlayersAim_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		GetClientEyeAngles(client, g_LockPlayersAim_Angles[client]);
-	}
+public void Chaos_LockPlayersAim_OnPlayerSpawn(int client){
+	GetClientEyeAngles(client, g_LockPlayersAim_Angles[client]);
 }
 
 public void Chaos_LockPlayersAim_RESET(int ResetType){

@@ -17,8 +17,6 @@ public void Chaos_InsaneGravity_RESET(int ResetType){
 	}
 }
 
-public void Chaos_InsaneGravity_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntityGravity(client, 15.0);
-	}
+public void Chaos_InsaneGravity_OnPlayerSpawn(int client){
+	SetEntityGravity(client, 15.0);
 }

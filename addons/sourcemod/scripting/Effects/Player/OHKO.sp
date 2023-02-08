@@ -30,8 +30,6 @@ public void Chaos_OHKO_RESET(int ResetType){
 	}
 }
 
-public void Chaos_OHKO_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntityHealth(client, 1);
-	}
+public void Chaos_OHKO_OnPlayerSpawn(int client){
+	SetEntityHealth(client, 1);
 }

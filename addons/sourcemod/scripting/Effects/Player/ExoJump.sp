@@ -19,8 +19,6 @@ public void Chaos_ExoJump_RESET(int ResetType){
 	}
 }
 
-public void Chaos_ExoJump_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntProp(client, Prop_Send, "m_passiveItems", 1, 1, 1);
-	}
+public void Chaos_ExoJump_OnPlayerSpawn(int client){
+	SetEntProp(client, Prop_Send, "m_passiveItems", 1, 1, 1);
 }

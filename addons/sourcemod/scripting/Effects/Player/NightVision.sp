@@ -19,9 +19,7 @@ public void Chaos_NightVision_RESET(int ResetType){
 	}
 }
 
-public void Chaos_NightVision_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		GivePlayerItem(client, "item_nvgs");
-		SetEntProp(client, Prop_Send, "m_bNightVisionOn", 1);
-	}
+public void Chaos_NightVision_OnPlayerSpawn(int client){
+	GivePlayerItem(client, "item_nvgs");
+	SetEntProp(client, Prop_Send, "m_bNightVisionOn", 1);
 }

@@ -17,12 +17,10 @@ public void Chaos_Flying_START(){
 	cvar("sv_noclipspeed", "2");
 }
 
-public void Chaos_Flying_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SDKHook(client, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
-		SDKHook(client, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);
-		CreateTimer(0.5, Timer_EnableFlying, client);
-	}
+public void Chaos_Flying_OnPlayerSpawn(int client){
+	SDKHook(client, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
+	SDKHook(client, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);
+	CreateTimer(0.5, Timer_EnableFlying, client);
 }
 
 public Action Timer_EnableFlying(Handle timer, int client){

@@ -20,8 +20,6 @@ public void Chaos_NoViewmodel_RESET(bool EndChaos){
 }
 
 
-public void Chaos_NoViewmodel_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntProp(client, Prop_Send, "m_bDrawViewmodel", false);
-	}
+public void Chaos_NoViewmodel_OnPlayerSpawn(int client){
+	SetEntProp(client, Prop_Send, "m_bDrawViewmodel", false);
 }

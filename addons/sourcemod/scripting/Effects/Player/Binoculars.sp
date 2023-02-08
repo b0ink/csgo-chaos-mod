@@ -38,11 +38,9 @@ public void Chaos_Binoculars_RESET(int ResetType){
 	Remove_Overlay("/Chaos/binoculars.vtf");
 }
 
-public void Chaos_Binoculars_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntProp(client, Prop_Send, "m_iFOV", binocularsFOV);
-		SetEntProp(client, Prop_Send, "m_iDefaultFOV", binocularsFOV);
-	}
+public void Chaos_Binoculars_OnPlayerSpawn(int client){
+	SetEntProp(client, Prop_Send, "m_iFOV", binocularsFOV);
+	SetEntProp(client, Prop_Send, "m_iDefaultFOV", binocularsFOV);
 }
 
 public bool Chaos_Binoculars_Conditions(bool EffectRunRandomly){

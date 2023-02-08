@@ -53,8 +53,6 @@ public void Chaos_NoScopeOnly_RESET(int ResetType){
 	g_bNoscopeOnly = false;
 }
 
-public void Chaos_NoScopeOnly_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SDKHook(client, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
-	}
+public void Chaos_NoScopeOnly_OnPlayerSpawn(int client){
+	SDKHook(client, SDKHook_PreThink, Chaos_NoScopeOnly_Hook_OnPreThink);
 }

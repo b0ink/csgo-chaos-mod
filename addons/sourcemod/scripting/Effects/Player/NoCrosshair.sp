@@ -19,8 +19,6 @@ public void Chaos_NoCrosshair_RESET(int ResetType){
 	}
 }
 
-public void Chaos_NoCrosshair_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntProp(client, Prop_Send, "m_iHideHUD", HIDEHUD_CROSSHAIR);
-	}
+public void Chaos_NoCrosshair_OnPlayerSpawn(int client){
+	SetEntProp(client, Prop_Send, "m_iHideHUD", HIDEHUD_CROSSHAIR);
 }

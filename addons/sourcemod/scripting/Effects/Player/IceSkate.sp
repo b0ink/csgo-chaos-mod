@@ -26,10 +26,8 @@ public void Chaos_IceSkate_RESET(int ResetType){
 	IceSkate = false;
 }
 
-public void Chaos_IceSkate_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 2.0);
-	}	
+public void Chaos_IceSkate_OnPlayerSpawn(int client){
+	SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 2.0);
 }
 
 public void Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){

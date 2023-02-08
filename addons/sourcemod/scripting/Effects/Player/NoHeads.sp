@@ -59,10 +59,8 @@ public void Chaos_NoHeads_RESET(int ResetType){
 }
 
 
-public void Chaos_NoHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetNoHeadModel(client);
-	}
+public void Chaos_NoHeads_OnPlayerSpawn(int client){
+	SetNoHeadModel(client);
 }
 
 public bool Chaos_NoHeads_Conditions(bool EffectRunRandomly){

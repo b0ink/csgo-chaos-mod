@@ -13,10 +13,8 @@ public void Chaos_KnifeFight_RESET(int ResetType){
 	UnhookBlockAllGuns(ResetType);
 }
 
-public void Chaos_KnifeFight_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		HookBlockAllGuns(client);
-	}
+public void Chaos_KnifeFight_OnPlayerSpawn(int client){
+	HookBlockAllGuns(client);
 }
 
 // public Action Chaos_KnifeFight_Hook_WeaponSwitch(int client, int weapon){

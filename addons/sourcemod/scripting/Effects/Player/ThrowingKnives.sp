@@ -23,12 +23,10 @@ public void Chaos_ThrowingKnives_INIT(){
 }
 
 
-public void Chaos_ThrowingKnives_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		HookBlockAllGuns(client);
-		SDKUnhook(client, SDKHook_OnTakeDamage, ThrowingKnives_OnTakeDamage);
-		SDKHook(client, SDKHook_OnTakeDamage, ThrowingKnives_OnTakeDamage);
-	}
+public void Chaos_ThrowingKnives_OnPlayerSpawn(int client){
+	HookBlockAllGuns(client);
+	SDKUnhook(client, SDKHook_OnTakeDamage, ThrowingKnives_OnTakeDamage);
+	SDKHook(client, SDKHook_OnTakeDamage, ThrowingKnives_OnTakeDamage);
 }
 
 

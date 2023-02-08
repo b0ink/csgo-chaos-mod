@@ -153,10 +153,8 @@ void SetTinyPlayer(int client){
 }
 
 
-public void Chaos_TinyPlayers_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetTinyPlayer(client);
-	}
+public void Chaos_TinyPlayers_OnPlayerSpawn(int client){
+	SetTinyPlayer(client);
 }
 public void Chaos_TinyPlayers_RESET(int ResetType){
 	TinyPlayers = false;

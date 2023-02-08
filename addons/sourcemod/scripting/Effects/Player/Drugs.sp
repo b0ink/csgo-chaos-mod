@@ -25,10 +25,8 @@ public void Chaos_Drugs_RESET(int ResetType){
 	KillAllDrugs();
 }
 
-public void Chaos_Drugs_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		CreateDrug(client);
-	}
+public void Chaos_Drugs_OnPlayerSpawn(int client){
+	CreateDrug(client);
 }
 
 void CreateDrug(int client){

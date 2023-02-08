@@ -17,10 +17,8 @@ public void Chaos_Juggernaut_START(){
 	}
 }
 
-public void Chaos_Juggernaut_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		CreateTimer(0.5, Timer_SetJuggernaut, client);
-	}
+public void Chaos_Juggernaut_OnPlayerSpawn(int client){
+	CreateTimer(0.5, Timer_SetJuggernaut, client);
 }
 
 public Action Timer_SetJuggernaut(Handle timer, int client){

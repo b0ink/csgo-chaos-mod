@@ -25,10 +25,8 @@ public Action Timer_DeactivateBlind(Handle timer){
 	return Plugin_Continue;
 }
 
-public void Chaos_BlindPlayers_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		PerformBlind(client, 255);
-	}
+public void Chaos_BlindPlayers_OnPlayerSpawn(int client){
+	PerformBlind(client, 255);
 }
 
 // UserMessageId for Fade.

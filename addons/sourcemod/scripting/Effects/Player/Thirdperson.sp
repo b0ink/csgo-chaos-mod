@@ -19,8 +19,6 @@ public void Chaos_Thirdperson_RESET(int ResetType){
 	ResetCvar("sv_allow_thirdperson", "0", "1");
 }
 
-public void Chaos_Thirdperson_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		ClientCommand(client, "thirdperson");
-	}
+public void Chaos_Thirdperson_OnPlayerSpawn(int client){
+	ClientCommand(client, "thirdperson");
 }

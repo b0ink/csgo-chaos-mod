@@ -59,10 +59,8 @@ public void Chaos_BigHeads_RESET(int ResetType){
 }
 
 
-public void Chaos_BigHeads_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetBigHeadModel(client);
-	}
+public void Chaos_BigHeads_OnPlayerSpawn(int client){
+	SetBigHeadModel(client);
 }
 
 public bool Chaos_BigHeads_Conditions(bool EffectRunRandomly){

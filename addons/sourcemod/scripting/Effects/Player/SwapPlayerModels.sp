@@ -80,10 +80,8 @@ public void Chaos_SwapPlayerModels_RESET(int ResetType){
 }
 
 
-public void Chaos_SwapPlayerModels_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SwapPlayerModels(client);
-	}
+public void Chaos_SwapPlayerModels_OnPlayerSpawn(int client){
+	SwapPlayerModels(client);
 }
 
 public bool Chaos_SwapPlayerModels_Conditions(bool EffectRunRandomly){

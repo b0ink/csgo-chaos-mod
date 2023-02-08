@@ -36,10 +36,8 @@ public void Chaos_SleepyShooter_RESET(int ResetType){
 	}
 }
 
-public void Chaos_SleepyShooter_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SleepShooter_LastShot[client] = 0;
-	}
+public void Chaos_SleepyShooter_OnPlayerSpawn(int client){
+	SleepShooter_LastShot[client] = 0;
 }
 
 public void Chaos_SleepyShooter_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){

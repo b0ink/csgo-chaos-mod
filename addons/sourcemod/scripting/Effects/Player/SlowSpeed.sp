@@ -18,8 +18,6 @@ public void Chaos_SlowSpeed_RESET(int ResetType){
 	}
 }
 
-public void Chaos_SlowSpeed_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 0.5);
-	}
+public void Chaos_SlowSpeed_OnPlayerSpawn(int client){
+	SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 0.5);
 }

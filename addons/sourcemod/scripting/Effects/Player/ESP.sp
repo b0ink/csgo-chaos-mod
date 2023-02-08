@@ -30,11 +30,9 @@ public void Chaos_ESP_RESET(int ResetType){
 	destroyAllGlows();
 }
 
-public void Chaos_ESP_OnPlayerSpawn(int client, bool EffectIsRunning){
-    if(EffectIsRunning){
-        RemoveSkin(client);
-        AddGlow(client);
-    }
+public void Chaos_ESP_OnPlayerSpawn(int client){
+	RemoveSkin(client);
+	AddGlow(client);
 }
 
 int playerModels[MAXPLAYERS+1] = {INVALID_ENT_REFERENCE,...};

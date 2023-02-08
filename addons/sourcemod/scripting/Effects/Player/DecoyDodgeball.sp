@@ -77,11 +77,9 @@ void SetDecoyDodgeball(int client){
 		SetEntityHealth(client, 1);	
 }
 
-public void Chaos_DecoyDodgeball_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SDKHook(client, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
-		SetDecoyDodgeball(client);
-	}
+public void Chaos_DecoyDodgeball_OnPlayerSpawn(int client){
+	SDKHook(client, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
+	SetDecoyDodgeball(client);
 }
 
 public void Chaos_DecoyDodgeball_RESET(int ResetType){

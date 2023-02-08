@@ -22,9 +22,7 @@ public void Chaos_QuakeFOV_RESET(int ResetType){
 	}
 }
 
-public void Chaos_QuakeFOV_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntProp(client, Prop_Send, "m_iFOV", QuakeFov);
-		SetEntProp(client, Prop_Send, "m_iDefaultFOV", QuakeFov);
-	}
+public void Chaos_QuakeFOV_OnPlayerSpawn(int client){
+	SetEntProp(client, Prop_Send, "m_iFOV", QuakeFov);
+	SetEntProp(client, Prop_Send, "m_iDefaultFOV", QuakeFov);
 }

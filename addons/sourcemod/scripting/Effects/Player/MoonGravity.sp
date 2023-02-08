@@ -18,8 +18,6 @@ public void Chaos_MoonGravity_RESET(int ResetType){
 	}
 }
 
-public void Chaos_MoonGravity_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntityGravity(client, 0.3);
-	}
+public void Chaos_MoonGravity_OnPlayerSpawn(int client){
+	SetEntityGravity(client, 0.3);
 }

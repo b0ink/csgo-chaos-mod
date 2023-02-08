@@ -22,7 +22,7 @@ public void Chaos_BreakTime_START(){
 	}
 }
 
-public void Chaos_BreakTime_OnPlayerSpawn(int client, bool EffectIsRunning){
+public void Chaos_BreakTime_OnPlayerSpawn(int client){
 	if(!BreakTime) return;
 
 	HookBlockAllGuns(client);

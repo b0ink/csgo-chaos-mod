@@ -77,10 +77,8 @@ public void Chaos_Boxing_RESET(int ResetType){
 	}
 }
 
-public void Chaos_Boxing_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		Boxing_GiveFists(client);
-	}
+public void Chaos_Boxing_OnPlayerSpawn(int client){
+	Boxing_GiveFists(client);
 }
 
 Action Boxing_PlaySound(Handle timer){

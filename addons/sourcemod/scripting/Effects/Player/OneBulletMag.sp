@@ -37,10 +37,8 @@ public void Chaos_OneBulletMag_START(){
 	OneBulletMag = true;
 }
 
-public void Chaos_OneBulletMag_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		CreateTimer(0.5, Timer_StripMags, client);
-	}
+public void Chaos_OneBulletMag_OnPlayerSpawn(int client){
+	CreateTimer(0.5, Timer_StripMags, client);
 }
 
 public Action Timer_StripMags(Handle timer, int client){

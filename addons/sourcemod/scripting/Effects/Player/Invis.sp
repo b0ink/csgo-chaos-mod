@@ -20,9 +20,7 @@ public void Chaos_Invis_RESET(int ResetType){
 	}
 }
 
-public void Chaos_Invis_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		SetEntityRenderMode(client, RENDER_TRANSCOLOR);
-		SetEntityRenderColor(client, 255, 255, 255, 50);
-	}
+public void Chaos_Invis_OnPlayerSpawn(int client){
+	SetEntityRenderMode(client, RENDER_TRANSCOLOR);
+	SetEntityRenderColor(client, 255, 255, 255, 50);
 }

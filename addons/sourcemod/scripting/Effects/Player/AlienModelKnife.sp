@@ -13,11 +13,9 @@ public void Chaos_AlienModelKnife_START(){
 	}
 }
 
-public void Chaos_AlienModelKnife_OnPlayerSpawn(int client, bool EffectIsRunning){
-	if(EffectIsRunning){
-		HookBlockAllGuns(client);
-		MakeAlien(client);
-	}
+public void Chaos_AlienModelKnife_OnPlayerSpawn(int client){
+	HookBlockAllGuns(client);
+	MakeAlien(client);
 }
 
 
