@@ -54,12 +54,12 @@ public Action Boxing_BlockGuns(int client, int weapon) {
 	return Plugin_Continue;
 }
 
-public void Chaos_Boxing_RESET(bool HasTimerEnded){
+public void Chaos_Boxing_RESET(int ResetType){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Boxing_BlockGuns);
 	}
 
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		char classname[64];
 		LoopAlivePlayers(i){
 			int fists = GetPlayerWeaponSlot(i, CS_SLOT_KNIFE);

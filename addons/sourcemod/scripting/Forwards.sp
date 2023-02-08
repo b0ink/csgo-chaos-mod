@@ -34,8 +34,7 @@ public void OnPluginStart(){
 
 public void OnPluginEnd(){
 	ResetCvar();
-	ResetRoundChaos(INVALID_HANDLE);
-	ResetChaos();
+	ResetChaos(RESET_PLUGINEND);
 }
 
 
@@ -150,7 +149,6 @@ public void OnClientDisconnect(int client){
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
-	
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		if(Chaos_EffectData_Buffer.OnPlayerRunCmd != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnPlayerRunCmd);

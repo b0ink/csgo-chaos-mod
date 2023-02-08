@@ -13,7 +13,7 @@ public void Chaos_DiscoPlayers_START(){
 
 }
 
-public void Chaos_DiscoPlayers_RESET(bool HasTimerEnded){
+public void Chaos_DiscoPlayers_RESET(int ResetType){
 	StopTimer(DiscoPlayers_TimerRepeat);
 	DiscoPlayers = false;
 }

@@ -62,12 +62,12 @@ public void Chaos_EffectName_START(){
 	// Runs when the effect is selected and announced
 }
 
-public void Chaos_EffectName_RESET(bool HasTimerEnded){
+public void Chaos_EffectName_RESET(int ResetType){
 	// Runs when the effect is reset, also runs when the round ends/map changes/plugin reloaded
 	// Use HasTimerEnded to strictly check if the effect has expired/used up its duration.
 
 	
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		// Teleport players, set their movement speed, switch to a different weapon, etc.
 		// Avoid resetting things outside of this function that would be reset by default on round change.
 	}

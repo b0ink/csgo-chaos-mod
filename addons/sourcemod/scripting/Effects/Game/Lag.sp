@@ -37,6 +37,6 @@ public Action Timer_FakeLag(Handle timer){
 	return Plugin_Continue;
 }
 
-public void Chaos_Lag_RESET(bool HasTimerEnded){
+public void Chaos_Lag_RESET(int ResetType){
 	FakeLag = false;
 }

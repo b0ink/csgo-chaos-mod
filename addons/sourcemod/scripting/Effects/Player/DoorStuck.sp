@@ -17,7 +17,7 @@ public void Chaos_DoorStuck_START(){
 	}
 }
 
-public void Chaos_DoorStuck_RESET(bool HasTimerEnded){
+public void Chaos_DoorStuck_RESET(int ResetType){
 	char classname[64];
 	char targetname[64];
 	LoopAllEntities(ent, GetMaxEntities(), classname){

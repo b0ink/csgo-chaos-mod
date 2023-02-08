@@ -12,7 +12,7 @@ public void Chaos_Thirdperson_START(){
 	}
 }
 
-public void Chaos_Thirdperson_RESET(bool HasTimerEnded){
+public void Chaos_Thirdperson_RESET(int ResetType){
 	LoopAlivePlayers(i){
 		ClientCommand(i, "firstperson");
 	}

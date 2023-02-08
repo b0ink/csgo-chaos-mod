@@ -32,7 +32,7 @@ public Action Timer_RadioChatter(Handle timer){
 	return Plugin_Continue;
 }
 
-public void Chaos_RadioChatter_RESET(bool HasTimerEnded){
+public void Chaos_RadioChatter_RESET(int ResetType){
 	 RadioChatter = false;
 }
 

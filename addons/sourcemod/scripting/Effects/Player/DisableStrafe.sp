@@ -15,7 +15,7 @@ public void Chaos_DisableStrafe_START(){
 	g_bNoStrafe++;
 }
 
-public void Chaos_DisableStrafe_RESET(bool HasTimerEnded){
+public void Chaos_DisableStrafe_RESET(int ResetType){
 	if(g_bNoStrafe > 0) g_bNoStrafe--;
 }
 

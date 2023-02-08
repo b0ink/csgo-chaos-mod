@@ -28,7 +28,7 @@ public void Chaos_VampireHeal_START(){
 	g_bVampireRound = true;
 }
 
-public void Chaos_VampireHeal_RESET(bool HasTimerEnded){
+public void Chaos_VampireHeal_RESET(int ResetType){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_VampireHeal_Hook_OnTakeDamage);
 	}

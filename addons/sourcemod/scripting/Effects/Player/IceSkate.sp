@@ -16,9 +16,9 @@ public void Chaos_IceSkate_START(){
 	IceSkate = true;
 }
 
-public void Chaos_IceSkate_RESET(bool HasTimerEnded){
+public void Chaos_IceSkate_RESET(int ResetType){
 	ResetCvar("sv_airaccelerate", "12", "2000");
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
 		}

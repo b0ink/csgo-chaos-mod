@@ -6,7 +6,7 @@ public void Chaos_ExtendedGrenades(effect_data effect){
 }
 
 public void Chaos_ExtendedGrenades_START(){
-	cvar("ammo_grenade_limit_total", "7");
+	cvar("ammo_grenade_limit_total", "8");
 	LoopAlivePlayers(i){
 		GivePlayerItem(i, "weapon_hegrenade");
 		GivePlayerItem(i, "weapon_molotov");
@@ -21,8 +21,8 @@ public void Chaos_ExtendedGrenades_START(){
 	}
 }
 
-public void Chaos_ExtendedGrenades_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
-		ResetCvar("ammo_grenade_limit_total", "4", "7");
+public void Chaos_ExtendedGrenades_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
+		ResetCvar("ammo_grenade_limit_total", "4", "8");
 	}
 }

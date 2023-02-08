@@ -12,8 +12,8 @@ public void Chaos_FastSpeed_START(){
 	}
 }
 
-public void Chaos_FastSpeed_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_FastSpeed_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);	
 		}

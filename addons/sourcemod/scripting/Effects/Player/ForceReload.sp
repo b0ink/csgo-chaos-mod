@@ -19,7 +19,7 @@ public void Chaos_ForceReload_START(){
 	}
 }
 
-public void Chaos_ForceReload_RESET(bool HasTimerEnded){
+public void Chaos_ForceReload_RESET(int ResetType){
 	//* Automatically resets when reload is activated
 	LoopAllClients(i){
 		g_bForce_Reload[i] = false;

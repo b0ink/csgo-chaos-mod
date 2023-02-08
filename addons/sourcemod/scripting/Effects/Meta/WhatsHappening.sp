@@ -12,7 +12,7 @@ public void Chaos_Meta_WhatsHappening_START(){
 	Meta_WhatsHappening = true;
 }
 
-public void Chaos_Meta_WhatsHappening_RESET(bool HasTimerEnded){
+public void Chaos_Meta_WhatsHappening_RESET(int ResetType){
 	Meta_WhatsHappening = false;
 }
 

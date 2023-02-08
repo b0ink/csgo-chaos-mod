@@ -49,9 +49,9 @@ public Action Timer_StripMags(Handle timer, int client){
 	return Plugin_Continue;
 }
 
-public void Chaos_OneBulletMag_RESET(bool HasTimerEnded){
+public void Chaos_OneBulletMag_RESET(int ResetType){
 	OneBulletMag = false;
-	if(HasTimerEnded){ //don't need to do this if the round has ended, especially if the event didnt even happen
+	if(ResetType & RESET_EXPIRED){ //don't need to do this if the round has ended, especially if the event didnt even happen
 		char currentWeapon[64];
 		LoopAlivePlayers(i){
 			GetClientWeapon(i, currentWeapon, sizeof(currentWeapon));

@@ -30,9 +30,9 @@ public void Chaos_BreakTime_OnPlayerSpawn(int client, bool EffectIsRunning){
 }
 
 
-public void Chaos_BreakTime_RESET(bool HasTimerEnded){
+public void Chaos_BreakTime_RESET(int ResetType){
 	BreakTime = false;
-	UnhookBlockAllGuns();
+	UnhookBlockAllGuns(ResetType);
 }
 
 public void Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed){

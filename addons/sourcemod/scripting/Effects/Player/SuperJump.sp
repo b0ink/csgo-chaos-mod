@@ -9,6 +9,6 @@ public void Chaos_SuperJump_START(){
 	cvar("sv_jump_impulse", "590");
 }
 
-public void Chaos_SuperJump_RESET(bool HasTimerEnded){
+public void Chaos_SuperJump_RESET(int ResetType){
 	ResetCvar("sv_jump_impulse", "301", "590");
 }

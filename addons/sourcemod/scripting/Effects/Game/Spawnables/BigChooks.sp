@@ -27,7 +27,7 @@ public void Chaos_BigChooks_START(){
 	}
 }
 
-public void Chaos_BigChooks_RESET(bool HasTimerEnded){
+public void Chaos_BigChooks_RESET(int ResetType){
 	RemoveChickens(.chickenName="BigChooks");
 }
 

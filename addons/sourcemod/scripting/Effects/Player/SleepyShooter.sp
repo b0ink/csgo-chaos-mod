@@ -17,8 +17,29 @@ public void Chaos_SleepyShooter(effect_data effect){
 	effect.IncompatibleWith("Chaos_BlindPlayers");
 }
 
+
 public void Chaos_SleepyShooter_INIT(){
 	HookEvent("weapon_fire", Chaos_SleepyShooter_Event_OnWeaponFire);
+}
+
+
+public void Chaos_SleepyShooter_START(){
+	g_SleepyShooter = true;
+	CreateTimer(1.0, Timer_CheckBlindStatus, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
+}
+
+
+public void Chaos_SleepyShooter_RESET(int ResetType){
+	g_SleepyShooter = false;
+	LoopAlivePlayers(i){
+		PerformBlind(i, 0);
+	}
+}
+
+public void Chaos_SleepyShooter_OnPlayerSpawn(int client, bool EffectIsRunning){
+	if(EffectIsRunning){
+		SleepShooter_LastShot[client] = 0;
+	}
 }
 
 public void Chaos_SleepyShooter_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
@@ -28,10 +49,6 @@ public void Chaos_SleepyShooter_Event_OnWeaponFire(Event event, const char[] nam
 	SleepShooter_LastShot[client] = 0;
 }
 
-public void Chaos_SleepyShooter_START(){
-	g_SleepyShooter = true;
-	CreateTimer(1.0, Timer_CheckBlindStatus, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
-}
 
 public Action Timer_CheckBlindStatus(Handle timer){
 	if(g_SleepyShooter){
@@ -48,11 +65,4 @@ public Action Timer_CheckBlindStatus(Handle timer){
 	}
 
 	return Plugin_Continue;
-}
-
-public void Chaos_SleepyShooter_RESET(bool HasTimerEnded){
-	g_SleepyShooter = false;
-	LoopAlivePlayers(i){
-		PerformBlind(i, 0);
-	}
 }

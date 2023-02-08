@@ -12,7 +12,7 @@ public void Chaos_HighMouseSens_START(){
 	HighMouseSens = true;
 }
 
-public void Chaos_HighMouseSens_RESET(bool HasTimerEnded){
+public void Chaos_HighMouseSens_RESET(int ResetType){
 	HighMouseSens = false;
 }
 

@@ -84,18 +84,13 @@ public void Chaos_DecoyDodgeball_OnPlayerSpawn(int client, bool EffectIsRunning)
 	}
 }
 
-public void Chaos_DecoyDodgeball_RESET(bool HasTimerEnded){
+public void Chaos_DecoyDodgeball_RESET(int ResetType){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
 	}
 	
-	if(g_bDecoyDodgeball && HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
-			StripPlayer(i,
-				.knife=true,
-				.keepBomb=true,
-				.stripGrenadesOnly=true
-			);
 			SetEntityHealth(i, 100);
 			if(!HasMenuOpen(i)){
 				ClientCommand(i, "slot2");

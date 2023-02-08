@@ -48,8 +48,8 @@ void SetBigHeadModel(int client){
 }
 
 
-public void Chaos_BigHeads_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_BigHeads_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			if(originalBigHeadModels[i][0] != '\0'){
 				SetEntityModel(i, originalBigHeadModels[i]);

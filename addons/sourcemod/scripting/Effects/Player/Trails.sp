@@ -26,7 +26,7 @@ public void Chaos_Trails_START(){
 }
 
 
-public void Chaos_Trails_RESET(bool EndChaos){
+public void Chaos_Trails_RESET(int ResetType){
 	Trails = false;
 }
 

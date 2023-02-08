@@ -69,8 +69,8 @@ void SwapPlayerModels(int client = -1){
 
 
 
-public void Chaos_SwapPlayerModels_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_SwapPlayerModels_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			if(SwapPlayerModels_Original[i][0] != '\0'){
 				SetEntityModel(i, SwapPlayerModels_Original[i]);

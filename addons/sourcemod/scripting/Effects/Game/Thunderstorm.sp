@@ -49,7 +49,7 @@ public void Chaos_Thunderstorm_START(){
 	}
 }
 
-public void Chaos_Thunderstorm_RESET(bool HasTimerEnded){
+public void Chaos_Thunderstorm_RESET(int ResetType){
 	CLEAR_CC("thunderstorm.raw");
 	
 	Thunderstorm = false;

@@ -67,7 +67,7 @@ public Action Timer_ArmageddonEarthquake(Handle timer){
 }
 
 
-public void Chaos_Armageddon_RESET(bool HasTimerEnded){
+public void Chaos_Armageddon_RESET(int ResetType){
 	Armageddon = false;
 	DisableThunderstorm();
 	DisableOilDrums();
@@ -76,7 +76,7 @@ public void Chaos_Armageddon_RESET(bool HasTimerEnded){
 	CLEAR_CC("wasteland2.raw");
 	
 	ArmageddonFog(true);
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			GivePlayerItem(i, "weapon_healthshot");
 		}

@@ -11,7 +11,7 @@ public void Chaos_NoRecoil_START(){
 	cvar("weapon_recoil_scale", "0");
 }
 
-public void Chaos_NoRecoil_RESET(bool HasTimerEnded){
+public void Chaos_NoRecoil_RESET(int ResetType){
 	ResetCvar("weapon_accuracy_nospread", "0", "1");
 	ResetCvar("weapon_recoil_scale", "2", "0");
 }

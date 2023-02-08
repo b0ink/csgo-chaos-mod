@@ -11,8 +11,8 @@ public void Chaos_Impostors_START(){
 	SpawnImpostors();
 }
 
-public void Chaos_Impostors_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_Impostors_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		RemoveChickens(.chickenName="Impostors");
 	}
 }

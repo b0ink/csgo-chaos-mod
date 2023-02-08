@@ -60,17 +60,19 @@ Action Timer_PrintQuickMathPrompt(Handle timer){
 	return Plugin_Continue;
 }
 
-public void Chaos_QuickMath_RESET(bool HasTimerEnded){
+public void Chaos_QuickMath_RESET(int ResetType){
+
 	QuickMath = false;
 	LoopAlivePlayers(i){
 		PerformBlind(i, 0);
-		if(HasTimerEnded){
+		if(ResetType & RESET_EXPIRED && !(ResetType & RESET_ROUNDEND)){
 			if(!QuickMathSolved[i]){
 				SlapPlayer(i, 50);
 			}
 		}
 		QuickMathSolved[i] = true;
-	}	
+	}
+
 }
 
 public bool Chaos_QuickMath_Conditions(bool EffectRunRandomly){

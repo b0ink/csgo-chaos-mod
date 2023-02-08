@@ -272,13 +272,18 @@ public Action Timer_DelayNewInterval(Handle timer){
 }
 
 
-public Action ResetRoundChaos(Handle timer){
+public Action ResetRoundChaos(Handle timer, int resetflags){
 	RemoveChickens(false);
 	Fog_OFF();
 
 	effect_data effect;
 	LoopAllEffects(effect, index){
-		effect.Reset(effect.Timer != INVALID_HANDLE);
+		int flags;
+		flags |= resetflags;
+		if(effect.Timer != INVALID_HANDLE){
+			flags |= RESET_EXPIRED;
+		}
+		effect.Reset(flags);
 	}
 	return Plugin_Continue;
 }

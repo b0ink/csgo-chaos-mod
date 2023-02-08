@@ -10,6 +10,6 @@ public void Chaos_NormalWhiteFog_START(){
 	NormalWhiteFog();
 }
 
-public void Chaos_NormalWhiteFog_RESET(bool HasTimerEnded){
+public void Chaos_NormalWhiteFog_RESET(int ResetType){
 	NormalWhiteFog(true);
 }

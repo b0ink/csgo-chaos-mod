@@ -15,7 +15,7 @@ public void Chaos_DisableForwardBack_START(){
 	g_bNoForwardBack++;
 }
 
-public void Chaos_DisableForwardBack_RESET(bool HasTimerEnded){
+public void Chaos_DisableForwardBack_RESET(int ResetType){
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
 }
 

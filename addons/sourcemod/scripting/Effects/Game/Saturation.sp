@@ -18,7 +18,7 @@ public void Chaos_Saturation_START(){
 	CREATE_CC("saturation");
 }
 
-public void Chaos_Saturation_RESET(bool HasTimerEnded){
+public void Chaos_Saturation_RESET(int ResetType){
 	CLEAR_CC("saturation.raw");
 }
 

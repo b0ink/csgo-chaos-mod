@@ -98,7 +98,7 @@ public Action Timer_SendChatterboxCallout(Handle timer){
 	return Plugin_Continue;
 }
 
-public void Chaos_Chatterbox_RESET(bool HasTimerEnded){
+public void Chaos_Chatterbox_RESET(int ResetType){
 	g_Chatterbox = false;
 }
 

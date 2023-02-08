@@ -9,6 +9,15 @@ Handle 		EffectsHistory = INVALID_HANDLE;
 ArrayList 	PossibleMetaEffects;
 ArrayList	MetaEffectsHistory;
 
+/*
+	Reset flags that are passed through to _RESET() functions
+	Here are the 5 events can trigger the _RESET() function of an effect.
+*/
+#define RESET_COMMAND    		(1 << 0) /** Chaos was disabled via command or menu - resetting effects */
+#define RESET_EXPIRED    		(1 << 0) /** Effect timer has expired */
+#define RESET_ROUNDSTART        (1 << 1) /** Round start */
+#define RESET_ROUNDEND          (1 << 2) /** Round End */
+#define RESET_PLUGINEND         (1 << 3) /** Plugin was unloaded */
 
 enum struct effect_data{
 	char 		Title[64]; // 0th index for ease of sorting in configs.sp
@@ -60,14 +69,14 @@ enum struct effect_data{
 		}
 	}
 
-	void Reset(bool HasTimerEnded = false){
+	void Reset(int ResetFlags){
 		if(this.RESET != INVALID_FUNCTION){
 			StopTimer(this.Timer);
 			this.Timer = INVALID_HANDLE;
 			ChaosEffects.SetArray(this.ID, this);
 			
 			Call_StartFunction(GetMyHandle(), this.RESET);
-			Call_PushCell(HasTimerEnded);
+			Call_PushCell(ResetFlags);
 			Call_Finish();
 		
 		}
@@ -227,7 +236,7 @@ public Action Effect_Reset(Handle timer, int effect_id){
 	effect_data effect;
 	LoopAllEffects(effect, index){
 		if(effect.ID == effect_id){
-			effect.Reset(true);
+			effect.Reset(RESET_EXPIRED);
 			ChaosEffects.SetArray(index, effect);
 			break;
 		}

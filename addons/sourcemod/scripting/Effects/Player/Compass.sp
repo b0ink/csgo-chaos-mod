@@ -21,7 +21,7 @@ public void Chaos_Compass_START(){
 }
 
 
-public void Chaos_Compass_RESET(bool HasTimerEnded){
+public void Chaos_Compass_RESET(int ResetType){
 	PlayerCompass = false;
 	StopTimer(CompassTimer);
 }

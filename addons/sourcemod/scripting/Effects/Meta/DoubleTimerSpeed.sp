@@ -11,8 +11,8 @@ public void Chaos_Meta_DoubleTimerSpeed_START(){
 	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue * 2;
 }
 
-public void Chaos_Meta_DoubleTimerSpeed_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_Meta_DoubleTimerSpeed_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue;
 	}
 }

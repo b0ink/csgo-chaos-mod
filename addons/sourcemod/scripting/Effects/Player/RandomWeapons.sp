@@ -13,7 +13,7 @@ public void Chaos_RandomWeapons_START(){
 	RandomWeapons_Timer_Repeat = CreateTimer(RandomWeapons_Interval, Timer_GiveRandomWeapon, _, TIMER_REPEAT);
 }
 
-public void Chaos_RandomWeapons_RESET(bool HasTimerEnded){
+public void Chaos_RandomWeapons_RESET(int ResetType){
 	StopTimer(RandomWeapons_Timer_Repeat);
 }
 

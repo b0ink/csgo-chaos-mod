@@ -30,12 +30,12 @@ public Action Timer_EnableFlying(Handle timer, int client){
 	return Plugin_Continue;
 }
 
-public void Chaos_Flying_RESET(bool HasTimerEnded){
+public void Chaos_Flying_RESET(int ResetType){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_Flying_Hook_OnTakeDamage);
 		SDKUnhook(i, SDKHook_OnTakeDamagePost, Chaos_Flying_Hook_OnTakeDamagePost);
 	}
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			SetEntityMoveType(i, MOVETYPE_WALK);
 		}

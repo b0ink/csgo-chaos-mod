@@ -23,7 +23,7 @@ public void Chaos_Tilted_START(){
 	}
 }
 
-public void Chaos_Tilted_RESET(bool EndChaos){
+public void Chaos_Tilted_RESET(int ResetType){
 	float angles[3];
 	LoopAlivePlayers(i){
 		GetClientEyeAngles(i, angles);

@@ -35,13 +35,13 @@ public Action BlockAllGuns(int client, int weapon) {
 	if(
 		StrContains(WeaponName, "fists") == -1 &&
 		StrContains(WeaponName, "knife") == -1 &&
-		StrContains(WeaponName, "c4") == -1 &&
-		StrContains(WeaponName, "grenade") == -1 &&
-		StrContains(WeaponName, "molotov") == -1 &&
-		StrContains(WeaponName, "flashbang") == -1 &&
-		StrContains(WeaponName, "decoy") == -1 &&
-		StrContains(WeaponName, "snowball") == -1 &&
-		StrContains(WeaponName, "diversion") == -1
+		StrContains(WeaponName, "c4") == -1 
+		// StrContains(WeaponName, "grenade") == -1 &&
+		// StrContains(WeaponName, "molotov") == -1 &&
+		// StrContains(WeaponName, "flashbang") == -1 &&
+		// StrContains(WeaponName, "decoy") == -1 &&
+		// StrContains(WeaponName, "snowball") == -1 &&
+		// StrContains(WeaponName, "diversion") == -1
 		){
 			FakeClientCommand(client, "use weapon_knife");
 			return Plugin_Handled;
@@ -58,25 +58,32 @@ void HookBlockAllGuns(int client = -1){
 	if(IsValidClient(client)){
 		SDKUnhook(client, SDKHook_WeaponSwitch, BlockAllGuns);
 		SDKHook(client, SDKHook_WeaponSwitch, BlockAllGuns);
+		FakeClientCommand(client, "use weapon_knife");
+		ClientCommand(client, "slot3");
 		return;
 	}
-	
-	BlockGun_EffectCount++;
+
 
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
 	}
 	LoopAlivePlayers(i){
+		if(BlockGun_EffectCount <= 0){
+			FakeClientCommand(client, "use weapon_knife");
+			ClientCommand(client, "slot3");
+		}
 		SDKHook(i, SDKHook_WeaponSwitch, BlockAllGuns);
 	}
+	BlockGun_EffectCount++;
+
 }
 
-void UnhookBlockAllGuns(bool SwitchToGun = true){
+void UnhookBlockAllGuns(int ResetTypeFlags){
 	if(BlockGun_EffectCount > 0) BlockGun_EffectCount--;
 	if(BlockGun_EffectCount == 0){
 		LoopAlivePlayers(i){
 			SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
-			if(!HasMenuOpen(i) && SwitchToGun){
+			if(!HasMenuOpen(i) && (ResetTypeFlags & RESET_EXPIRED)){
 				ClientCommand(i, "slot2;slot1");
 			}
 		}

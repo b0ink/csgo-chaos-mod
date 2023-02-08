@@ -27,7 +27,7 @@ public void Chaos_RandomInvisiblePlayer_START(){
 	AnnounceChaos(chaosMsg, -1.0);
 }
 
-public void Chaos_RandomInvisiblePlayer_RESET(bool HasTimerEnded){
+public void Chaos_RandomInvisiblePlayer_RESET(int ResetType){
 	LoopValidPlayers(i){
 		SetEntityRenderMode(i, RENDER_NORMAL);
 		SetEntityRenderColor(i, 255, 255, 255, 255);

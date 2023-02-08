@@ -9,6 +9,6 @@ public void Chaos_HeadshotOnly_START(){
 	//?: through SM
 }
 
-public void Chaos_HeadshotOnly_RESET(bool HasTimerEnded){
+public void Chaos_HeadshotOnly_RESET(int ResetType){
 	ResetCvar("mp_damage_headshot_only", "0", "1");
 }

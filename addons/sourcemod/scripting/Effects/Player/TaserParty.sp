@@ -29,11 +29,13 @@ public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 	if(TaserParty){
 		//if any other weapon than a taser or a knife, bring out taser
 		if(	StrContains(WeaponName, "taser") == -1 && 
-			StrContains(WeaponName, "knife") == -1 &&
-			StrContains(WeaponName, "c4") == -1    &&
-			StrContains(WeaponName, "grenade") == -1){
-				FakeClientCommand(client, "use weapon_taser");
-				return Plugin_Handled;
+			StrContains(WeaponName, "fist") == -1  && 
+			// StrContains(WeaponName, "knife") == -1 &&
+			StrContains(WeaponName, "c4") == -1    
+			// StrContains(WeaponName, "grenade") == -1)
+		){
+			FakeClientCommand(client, "use weapon_taser");
+			return Plugin_Handled;
 		}else{
 			return Plugin_Continue;
 		}
@@ -65,7 +67,7 @@ public void Chaos_TaserParty_OnPlayerSpawn(int client, bool EffectIsRunning){
 	}
 }
 
-public void Chaos_TaserParty_RESET(bool HasTimerEnded){
+public void Chaos_TaserParty_RESET(int ResetType){
 	UnhookPreventWeaponDrop();
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Chaos_TaserParty_Hook_WeaponSwitch);
@@ -74,7 +76,7 @@ public void Chaos_TaserParty_RESET(bool HasTimerEnded){
 	ResetCvar("mp_taser_recharge_time", "-1", "0.5");
 	ResetCvar("sv_party_mode", "0", "1");
 	TaserParty = false;
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			if(!HasMenuOpen(i)){
 				ClientCommand(i, "slot2;slot1");

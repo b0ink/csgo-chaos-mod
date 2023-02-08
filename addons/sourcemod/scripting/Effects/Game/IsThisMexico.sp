@@ -11,6 +11,6 @@ public void Chaos_IsThisMexico_START(){
 	Mexico();
 }
 
-public void Chaos_IsThisMexico_RESET(bool HasTimerEnded){
+public void Chaos_IsThisMexico_RESET(int ResetType){
 	Mexico(true);
 }

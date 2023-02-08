@@ -12,7 +12,7 @@ public void Chaos_LooseTrigger_START(){
 	g_bLoose_Trigger = true;
 }
 
-public void Chaos_LooseTrigger_RESET(bool HasTimerEnded){
+public void Chaos_LooseTrigger_RESET(int ResetType){
 	g_bLoose_Trigger = false;
 }
 

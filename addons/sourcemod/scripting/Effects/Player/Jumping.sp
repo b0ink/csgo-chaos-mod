@@ -11,7 +11,7 @@ public void Chaos_Jumping_START(){
 	g_bJumping = true;
 }
 
-public void Chaos_Jumping_RESET(bool HasTimerEnded){
+public void Chaos_Jumping_RESET(int ResetType){
 	g_bJumping = false;
 }
 

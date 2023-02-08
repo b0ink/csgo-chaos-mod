@@ -12,7 +12,7 @@ public void Chaos_InsaneAirSpeed_START(){
 
 }
 
-public void Chaos_InsaneAirSpeed_RESET(bool HasTimerEnded){
+public void Chaos_InsaneAirSpeed_RESET(int ResetType){
 	ResetCvar("sv_air_max_wishspeed", "30", "2000");
 	ResetCvar("sv_airaccelerate", "12", "2000");
 }

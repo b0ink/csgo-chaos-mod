@@ -11,6 +11,6 @@ public void Chaos_ExtremeWhiteFog_START(){
 	ExtremeWhiteFog();
 }
 
-public void Chaos_ExtremeWhiteFog_RESET(bool HasTimerEnded){
+public void Chaos_ExtremeWhiteFog_RESET(int ResetType){
 	ExtremeWhiteFog(true);
 }

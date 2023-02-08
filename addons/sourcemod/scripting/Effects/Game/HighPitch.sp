@@ -21,7 +21,7 @@ public void Chaos_HighPitch_START(){
 }
 
 
-public void Chaos_HighPitch_RESET(bool HasTimerEnded){
+public void Chaos_HighPitch_RESET(int ResetType){
 	HighPitch = false;
 }
 

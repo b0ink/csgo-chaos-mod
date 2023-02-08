@@ -17,7 +17,7 @@ public void Chaos_ReducedDamage_START(){
 	ReducedDamage = true;
 }
 
-public void Chaos_ReducedDamage_RESET(bool HasTimerEnded){
+public void Chaos_ReducedDamage_RESET(int ResetType){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, Chaos_ReducedDamage_Hook_OnTakeDamage);
 	}

@@ -158,7 +158,7 @@ public void Chaos_TinyPlayers_OnPlayerSpawn(int client, bool EffectIsRunning){
 		SetTinyPlayer(client);
 	}
 }
-public void Chaos_TinyPlayers_RESET(bool HasTimerEnded){
+public void Chaos_TinyPlayers_RESET(int ResetType){
 	TinyPlayers = false;
 	ResetCvar("sv_jump_impulse", "301", "275");
 	
@@ -167,7 +167,7 @@ public void Chaos_TinyPlayers_RESET(bool HasTimerEnded){
 	}
 	
 	LoopAlivePlayers(i){
-		if(HasTimerEnded){
+		if(ResetType & RESET_EXPIRED){
 			if(defaultTinyModels[i][0] != '\0'){
 				SetEntityModel(i, defaultTinyModels[i]);
 			}

@@ -32,7 +32,7 @@ public void Chaos_ExplosiveBullets_START(){
 	g_bExplosiveBullets = true;
 }
 
-public void Chaos_ExplosiveBullets_RESET(bool HasTimerEnded){
+public void Chaos_ExplosiveBullets_RESET(int ResetType){
 	g_bExplosiveBullets = false;
 }
 

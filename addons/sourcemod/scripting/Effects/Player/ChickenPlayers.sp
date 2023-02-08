@@ -15,8 +15,8 @@ public void Chaos_ChickenPlayers_START(){
 	}
 }
 
-public void Chaos_ChickenPlayers_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_ChickenPlayers_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			DisableChicken(i);
 		}

@@ -48,8 +48,8 @@ void SetNoHeadModel(int client){
 }
 
 
-public void Chaos_NoHeads_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_NoHeads_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			if(originalNoHeadModels[i][0] != '\0'){
 				SetEntityModel(i, originalNoHeadModels[i]);

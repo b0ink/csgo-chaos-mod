@@ -18,7 +18,7 @@ public void Chaos_DeepFried_START(){
 	CREATE_CC("deepfried");
 }
 
-public void Chaos_DeepFried_RESET(bool HasTimerEnded){
+public void Chaos_DeepFried_RESET(int ResetType){
 	CLEAR_CC("deepfried.raw");
 }
 

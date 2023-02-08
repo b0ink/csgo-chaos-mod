@@ -15,7 +15,7 @@ public void Chaos_TeleportOnKill_START(){
 }
 
 
-public void Chaos_TeleportOnKill_RESET(bool HasTimerEnded){
+public void Chaos_TeleportOnKill_RESET(int ResetType){
 	TeleportOnKill = false;
 }
 

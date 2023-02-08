@@ -19,7 +19,7 @@ public void Chaos_KeyStuckA_OnPlayerRunCmd(int client, int &buttons, int &iImpul
 	if(AKeyStuck) fVel[1] = -400.0;
 }
 
-public void Chaos_KeyStuckA_RESET(bool HasTimerEnded){
+public void Chaos_KeyStuckA_RESET(int ResetType){
 	AKeyStuck = false;
 }
 

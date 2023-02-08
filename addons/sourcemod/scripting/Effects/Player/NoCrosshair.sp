@@ -13,7 +13,7 @@ public void Chaos_NoCrosshair_START(){
 	}
 }
 
-public void Chaos_NoCrosshair_RESET(bool HasTimerEnded){
+public void Chaos_NoCrosshair_RESET(int ResetType){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", 0);
 	}

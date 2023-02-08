@@ -36,6 +36,6 @@ public void Chaos_OneBulletOneGun_START(){
 	OneBulletOneGun = true;
 }
 
-public void Chaos_OneBulletOneGun_RESET(bool HasTimerEnded){
+public void Chaos_OneBulletOneGun_RESET(int ResetType){
 	OneBulletOneGun = false;
 }

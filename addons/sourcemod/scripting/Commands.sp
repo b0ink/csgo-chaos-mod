@@ -94,7 +94,7 @@ public Action Command_TriggerRandomEffect(int client, int args){
 public Action Command_StopChaos(int client, int args){
 	g_cvChaosEnabled.BoolValue = false;
 
-	ResetChaos();
+	ResetChaos(RESET_COMMAND);
 
 	g_cvChaosEnabled.SetString("0", true, true);
 	Update_Convar_Config();

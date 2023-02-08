@@ -21,12 +21,12 @@ public void Chaos_OneWeaponOnly_START(){
 	for(int i = 0; i < sizeof(randomWeapon); i++) randomWeapon[i] = CharToUpper(randomWeapon[i]);
 
 	char chaosMsg[128];
-	FormatEx(chaosMsg, sizeof(chaosMsg), "%s's Only", randomWeapon[7]); //strip weapon_ from name;
+	FormatEx(chaosMsg, sizeof(chaosMsg), "Give %s's", randomWeapon[7]); //strip weapon_ from name;
 	// chaosMsg[0] = CharToUpper(chaosMsg[0]);
 	AnnounceChaos(chaosMsg,  GetChaosTime("Chaos_OneWeaponOnly", 25.0));
 
 }
 
-public void Chaos_OneWeaponOnly_RESET(bool HasTimerEnded){
+public void Chaos_OneWeaponOnly_RESET(int ResetType){
 
 }

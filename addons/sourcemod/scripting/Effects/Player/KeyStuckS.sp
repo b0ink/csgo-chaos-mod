@@ -18,7 +18,7 @@ public void Chaos_KeyStuckS_OnPlayerRunCmd(int client, int &buttons, int &iImpul
 	if(SKeyStuck) fVel[0] = -400.0;
 }
 
-public void Chaos_KeyStuckS_RESET(bool HasTimerEnded){
+public void Chaos_KeyStuckS_RESET(int ResetType){
 	SKeyStuck = false;
 }
 

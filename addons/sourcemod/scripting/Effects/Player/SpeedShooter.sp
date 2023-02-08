@@ -14,9 +14,9 @@ public void Chaos_SpeedShooter_START(){
 	SpeedShooter = true;
 }
 
-public void Chaos_SpeedShooter_RESET(bool HasTimerEnded){
+public void Chaos_SpeedShooter_RESET(int ResetType){
 	SpeedShooter = false;
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
 		}

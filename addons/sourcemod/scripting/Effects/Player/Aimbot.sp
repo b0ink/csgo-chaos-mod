@@ -43,7 +43,7 @@ public void Chaos_Aimbot_START(){
 	}
 }
 
-public void Chaos_Aimbot_RESET(bool HasTimerEnded){
+public void Chaos_Aimbot_RESET(int ResetType){
 	AimbotEnabled = false;
 	
 	ResetCvar("weapon_accuracy_nospread", "0", "1");

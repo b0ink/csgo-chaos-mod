@@ -21,7 +21,7 @@ public void Chaos_LowPitch_S(){
 }
 
 
-public void Chaos_LowPitch_RESET(bool HasTimerEnded){
+public void Chaos_LowPitch_RESET(int ResetType){
 	LowPitch = false;
 }
 

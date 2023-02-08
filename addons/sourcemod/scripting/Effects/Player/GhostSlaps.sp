@@ -15,9 +15,9 @@ public void Chaos_GhostSlaps_START(){
 	}
 }
 
-public void Chaos_GhostSlaps_RESET(bool HasTimerEnded){
+public void Chaos_GhostSlaps_RESET(int ResetType){
 	StopTimer(Chaos_RandomSlap_Timer);
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		LoopValidPlayers(client){
 			SDKUnhook(client,SDKHook_OnTakeDamage, GhostSlaps_OnTakeDamage);
 		}

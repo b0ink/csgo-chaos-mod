@@ -24,7 +24,7 @@ public void Chaos_SimonSays_START(){
 	g_bSimon_Active = true;
 }
 
-public void Chaos_SimonSays_RESET(bool HasTimerEnded){
+public void Chaos_SimonSays_RESET(int ResetType){
 	g_bSimon_Active = false;
 	KillMessageTimer();
 }
@@ -37,10 +37,10 @@ void GenerateSimonOrder(float duration){
 	// 	g_bSimon_Says = false;
 	// }
 	if(g_Simon_Says_Action == 1){
-		g_Simon_ActionText = "Strafe.";
+		g_Simon_ActionText = "Strafe left or right.";
 	}
 	if(g_Simon_Says_Action == 2){
-		g_Simon_ActionText = "Move Forwards/Backwards.";
+		g_Simon_ActionText = "Move Forwards or Backwards.";
 	}
 	if(g_Simon_Says_Action == 3){
 		g_Simon_ActionText = "Don't Jump.";

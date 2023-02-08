@@ -15,7 +15,7 @@ public void Chaos_DiscoFog_START(){
 	g_DiscoFog_Timer_Repeat = CreateTimer(1.0, Timer_NewFogColor, _,TIMER_REPEAT);
 }
 
-public void Chaos_DiscoFog_RESET(bool HasTimerEnded){
+public void Chaos_DiscoFog_RESET(int ResetType){
 	StopTimer(g_DiscoFog_Timer_Repeat);
 	g_bDiscoFog = false;
 	DiscoFog(true);

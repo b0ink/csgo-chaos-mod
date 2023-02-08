@@ -21,7 +21,7 @@ public void Chaos_Drugs_START(){
 	}
 }
 
-public void Chaos_Drugs_RESET(bool HasTimerEnded){
+public void Chaos_Drugs_RESET(int ResetType){
 	KillAllDrugs();
 }
 

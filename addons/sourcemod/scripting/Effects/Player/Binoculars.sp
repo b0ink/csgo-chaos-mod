@@ -30,7 +30,7 @@ public void Chaos_Binoculars_START(){
 
 
 
-public void Chaos_Binoculars_RESET(bool HasTimerEnded){
+public void Chaos_Binoculars_RESET(int ResetType){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iFOV", 0);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);

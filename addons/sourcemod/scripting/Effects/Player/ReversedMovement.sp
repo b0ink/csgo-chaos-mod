@@ -11,7 +11,7 @@ public void Chaos_ReversedMovement_START(){
 	g_ReversedMovement = true;
 }
 
-public void Chaos_ReversedMovement_RESET(bool HasTimerEnded){
+public void Chaos_ReversedMovement_RESET(int ResetType){
 	g_ReversedMovement = false;
 }
 

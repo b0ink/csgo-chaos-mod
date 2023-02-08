@@ -43,8 +43,8 @@ public void Chaos_ThrowingKnives_START(){
 }
 
 
-public void Chaos_ThrowingKnives_RESET(bool HasTimerEnded){
-	UnhookBlockAllGuns();
+public void Chaos_ThrowingKnives_RESET(int ResetType){
+	UnhookBlockAllGuns(ResetType);
 	LoopAlivePlayers(i){
 		SDKUnhook(i, SDKHook_OnTakeDamage, ThrowingKnives_OnTakeDamage);
 	}

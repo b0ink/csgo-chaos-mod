@@ -12,7 +12,7 @@ public void Chaos_SneakyBeaky_START(){
 	SneakyBeaky = true;
 }
 
-public void Chaos_SneakyBeaky_RESET(bool HasTimerEnded){
+public void Chaos_SneakyBeaky_RESET(int ResetType){
 	SneakyBeaky = false;
 }
 

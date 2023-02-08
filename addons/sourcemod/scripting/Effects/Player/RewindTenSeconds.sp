@@ -31,7 +31,7 @@ public void Chaos_RewindTenSeconds_OnGameFrame(){
 }
 
 
-public void Chaos_RewindTenSeconds_START(bool HasTimerEnded){
+public void Chaos_RewindTenSeconds_START(int ResetType){
 	g_bRewind_logging_enabled = false;
 	g_Rewinding = true;
 	g_RewindTime = 0;
@@ -47,7 +47,7 @@ public void Chaos_RewindTenSeconds_START(bool HasTimerEnded){
 }
 
 
-public void Chaos_RewindTenSeconds_RESET(bool HasTimerEnded){
+public void Chaos_RewindTenSeconds_RESET(int ResetType){
 	g_bRewind_logging_enabled = true;
 	g_Rewinding = true;
 	LoopAlivePlayers(i){

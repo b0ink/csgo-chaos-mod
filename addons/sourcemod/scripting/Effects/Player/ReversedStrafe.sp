@@ -10,7 +10,7 @@ public void Chaos_ReversedStrafe_START(){
 	ReversedStrafe = true;
 }
 
-public void Chaos_ReversedStrafe_RESET(bool HasTimerEnded){
+public void Chaos_ReversedStrafe_RESET(int ResetType){
 	ReversedStrafe = false;
 }
 

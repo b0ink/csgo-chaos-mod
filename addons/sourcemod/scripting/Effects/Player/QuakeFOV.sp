@@ -15,7 +15,7 @@ public void Chaos_QuakeFOV_START(){
 	}
 }
 
-public void Chaos_QuakeFOV_RESET(bool HasTimerEnded){
+public void Chaos_QuakeFOV_RESET(int ResetType){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iFOV", 0);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);

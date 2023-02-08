@@ -12,11 +12,9 @@ public void Chaos_SlowSpeed_START(){
 	}
 }
 
-public void Chaos_SlowSpeed_RESET(bool HasTimerEnded){
-	if(HasTimerEnded) {
-		LoopAlivePlayers(i){
-			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-		}
+public void Chaos_SlowSpeed_RESET(int ResetType){
+	LoopAlivePlayers(i){
+		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
 }
 

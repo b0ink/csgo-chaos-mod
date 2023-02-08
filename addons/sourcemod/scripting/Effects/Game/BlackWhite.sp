@@ -18,7 +18,7 @@ public void Chaos_BlackWhite_START(){
 	CREATE_CC("blackandwhite");
 }
 
-public void Chaos_BlackWhite_RESET(bool HasTimerEnded){
+public void Chaos_BlackWhite_RESET(int ResetType){
 	CLEAR_CC("blackandwhite.raw");
 }
 

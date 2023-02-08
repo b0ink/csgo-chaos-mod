@@ -48,6 +48,6 @@ public void Chaos_TearGas_START(){
 	TearGas = true;	
 }
 
-public void Chaos_TearGas_RESET(bool HasTimerEnded){
+public void Chaos_TearGas_RESET(int ResetType){
 	TearGas = false;	
 }

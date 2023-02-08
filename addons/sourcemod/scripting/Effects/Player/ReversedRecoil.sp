@@ -10,6 +10,6 @@ public void Chaos_ReversedRecoil_START(){
 	cvar("weapon_recoil_scale", "-5");
 }
 
-public void Chaos_ReversedRecoil_RESET(bool HasTimerEnded){
+public void Chaos_ReversedRecoil_RESET(int ResetType){
 	ResetCvar("weapon_recoil_scale", "2", "-5");
 }

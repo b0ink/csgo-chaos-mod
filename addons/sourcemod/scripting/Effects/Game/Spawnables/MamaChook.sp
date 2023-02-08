@@ -20,7 +20,7 @@ public void Chaos_MamaChook_START(){
 	}
 }
 
-public void Chaos_MamaChook_RESET(bool HasTimerEnded){
+public void Chaos_MamaChook_RESET(int ResetType){
 	RemoveChickens(.chickenName="MamaChook");
 }
 

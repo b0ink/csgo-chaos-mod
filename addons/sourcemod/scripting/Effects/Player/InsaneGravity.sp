@@ -11,7 +11,7 @@ public void Chaos_InsaneGravity_START(){
 	}
 }
 
-public void Chaos_InsaneGravity_RESET(bool HasTimerEnded){
+public void Chaos_InsaneGravity_RESET(int ResetType){
 	LoopAlivePlayers(i){
 		SetEntityGravity(i, 1.0);
 	}

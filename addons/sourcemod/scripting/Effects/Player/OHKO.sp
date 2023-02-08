@@ -22,8 +22,8 @@ public void Chaos_OHKO_START(){
 	}
 }
 
-public void Chaos_OHKO_RESET(bool HasTimerEnded){
-	if(HasTimerEnded){
+public void Chaos_OHKO_RESET(int ResetType){
+	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			SetEntityHealth(i, 100);
 		}

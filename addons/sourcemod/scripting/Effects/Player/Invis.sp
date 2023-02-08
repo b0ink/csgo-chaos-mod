@@ -13,7 +13,7 @@ public void Chaos_Invis_START(){
 	}
 }
 
-public void Chaos_Invis_RESET(bool HasTimerEnded){
+public void Chaos_Invis_RESET(int ResetType){
 	LoopAlivePlayers(client){
 		SetEntityRenderMode(client , RENDER_NORMAL);
 		SetEntityRenderColor(client, 255, 255, 255, 255);

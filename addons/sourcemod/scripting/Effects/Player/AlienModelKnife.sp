@@ -20,6 +20,8 @@ public void Chaos_AlienModelKnife_OnPlayerSpawn(int client, bool EffectIsRunning
 	}
 }
 
+
+//TODO: this sucks, this was originally supposed to be the small players -> might as well bring in an alien player model now
 void MakeAlien(int client){
 	//!this makes hitboxes tiny and innacurate, but knives work fine
 	SetEntPropFloat(client, Prop_Send, "m_flModelScale", 0.5);
@@ -33,13 +35,10 @@ void MakeAlien(int client){
 
 
 
-public void Chaos_AlienModelKnife_RESET(bool HasTimerEnded){
-	UnhookBlockAllGuns();
+public void Chaos_AlienModelKnife_RESET(int ResetType){
+	UnhookBlockAllGuns(ResetType);
 
 	LoopAlivePlayers(i){
-		if(HasTimerEnded){
-			if(!HasMenuOpen(i)) ClientCommand(i, "slot1");
-		}
 		SetEntPropFloat(i, Prop_Send, "m_flModelScale", 1.0);
 		SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
 		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);

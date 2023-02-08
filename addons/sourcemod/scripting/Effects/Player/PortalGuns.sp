@@ -64,9 +64,9 @@ public void Chaos_PortalGuns_START(){
 	SavePlayersLocations();
 }
 
-public void Chaos_PortalGuns_RESET(bool HasTimerEnded){
+public void Chaos_PortalGuns_RESET(int ResetType){
 	g_bPortalGuns = false;
-	if(HasTimerEnded){
+	if(ResetType & RESET_EXPIRED){
 		TeleportPlayersToClosestLocation();
 	}
 

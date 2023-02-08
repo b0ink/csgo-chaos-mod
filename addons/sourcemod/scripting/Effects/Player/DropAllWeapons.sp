@@ -25,7 +25,3 @@ public void Chaos_DropAllWeapons_START(){
 		} 
 	}
 }
-
-public void Chaos_DropAllWeapons_RESET(bool HasTimerEnded){
-
-}

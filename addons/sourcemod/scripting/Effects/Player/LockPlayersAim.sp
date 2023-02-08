@@ -29,6 +29,6 @@ public void Chaos_LockPlayersAim_OnPlayerSpawn(int client, bool EffectIsRunning)
 	}
 }
 
-public void Chaos_LockPlayersAim_RESET(bool HasTimerEnded){
+public void Chaos_LockPlayersAim_RESET(int ResetType){
 	g_bLockPlayersAim_Active = false;
 }

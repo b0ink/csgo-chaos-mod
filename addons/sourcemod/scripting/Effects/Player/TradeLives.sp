@@ -15,7 +15,7 @@ public void Chaos_TradeLives_START(){
 	TradeLives = true;
 }
 
-public void Chaos_TradeLives_RESET(bool HasTimerEnded){
+public void Chaos_TradeLives_RESET(int ResetType){
 	TradeLives = false;
 }
 

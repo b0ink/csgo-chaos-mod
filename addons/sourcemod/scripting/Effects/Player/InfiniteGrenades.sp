@@ -15,6 +15,6 @@ public void Chaos_InfiniteGrenades_START(){
 	}
 }
 
-public void Chaos_InfiniteGrenades_RESET(bool HasTimerEnded){
+public void Chaos_InfiniteGrenades_RESET(int ResetType){
 	ResetCvar("sv_infinite_ammo", "0", "2");
 }

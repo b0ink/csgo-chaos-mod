@@ -9,7 +9,7 @@ public void Chaos_CrabPeople_START(){
 	g_bForceCrouch = true;
 }
 
-public void Chaos_CrabPeople_RESET(bool HasTimerEnded){
+public void Chaos_CrabPeople_RESET(int ResetType){
 	g_bForceCrouch = false;
 }
 

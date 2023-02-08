@@ -9,6 +9,6 @@ public void Chaos_LightsOff_START(){
 	LightsOff();
 }
 
-public void Chaos_LightsOff_RESET(bool HasTimerEnded){
+public void Chaos_LightsOff_RESET(int ResetType){
 	LightsOff(true);
 }

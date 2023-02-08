@@ -4,6 +4,9 @@ Handle	g_iRoundTime_Timer = INVALID_HANDLE;
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bCanSpawnEffect = true;
 
+
+
+
 public void HookMainEvents(){
 	HookEvent("round_start", 		Event_RoundStart);
 	HookEvent("round_end", 			Event_RoundEnd);	
@@ -99,7 +102,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_bCanSpawnEffect = true;
 	
 	ResetHud();
-	ResetChaos();
+	ResetChaos(RESET_ROUNDSTART);
 	CLEAR_CC();
 
 	g_iTotalEffectsRanThisRound = 0;
@@ -136,7 +139,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	
 	ClearFog();
 	
-	ResetChaos();
+	ResetChaos(RESET_ROUNDEND);
 	g_bCanSpawnEffect = false;
 
 	Clear_Overlay_Que();
@@ -144,11 +147,12 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	return Plugin_Continue;
 }
 
-void ResetChaos(){
+void ResetChaos(int resetflags){
 	HUD_ROUNDEND();
 	Clear_Overlay_Que();
 	StopTimer(g_NewEffect_Timer);
-	CreateTimer(0.1, ResetRoundChaos);
+	ResetRoundChaos(null, resetflags);
+	// CreateTimer(0.1, ResetRoundChaos, resetflags);
 }
 
 
