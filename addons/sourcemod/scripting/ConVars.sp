@@ -241,6 +241,10 @@ void UpdateCvars(){
 			kv.GetString("sm_chaos_effect_list_color", color, 128);
 			g_cvChaosEffectList_Color.SetString(color);
 
+			ConvertColorStringToFloat(g_cvChaosEffectTimer_Color, g_ChaosEffectTimer_Color, {200, 0, 220, 0});
+			ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
+
+
 			char pos[32];
 			kv.GetString("sm_chaos_effect_timer_position", pos, 32);
 			g_cvChaosEffectTimer_Position.SetString(pos);
