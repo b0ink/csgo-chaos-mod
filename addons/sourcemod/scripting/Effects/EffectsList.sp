@@ -6,6 +6,7 @@
 #include "Effects/Game/Blur.sp"
 #include "Effects/Game/BreakTime.sp"
 #include "Effects/Game/BuyAnywhere.sp"
+#include "Effects/Game/NearMiss.sp"
 #include "Effects/Game/C4Chicken.sp"
 #include "Effects/Game/Checkers.sp"
 #include "Effects/Game/DeepFried.sp"
