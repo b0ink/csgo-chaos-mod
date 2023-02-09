@@ -6,6 +6,7 @@ public void Chaos_PigeonHole(effect_data effect){
 	effect.IncompatibleWith("Chaos_Binoculars");
 	effect.AddAlias("Overlay");
 	effect.AddAlias("Visual");
+	effect.AddFlag("r_screenoverlay");
 }
 
 bool pigeonholeMaterials = true;
@@ -36,30 +37,33 @@ public void Chaos_PigeonHole_START(){
 }
 
 public Action Timer_SpawnNewPigeonHole(Handle timer){
-	if(lastPigeonHole[0] != '\0'){
-		Remove_Overlay(lastPigeonHole);
-	}
 	int randomPigeonHole = -1;
-	do
-	{
+	do{
 		randomPigeonHole = GetRandomInt(1, 7);
 	}
 	while(randomPigeonHole == lastPigeonHoleIndex);
 	lastPigeonHoleIndex = randomPigeonHole;
 
 	Format(lastPigeonHole, sizeof(lastPigeonHole), "/ChaosMod/PigeonHole/pg_%i.vtf", randomPigeonHole);
-	Add_Overlay(lastPigeonHole);
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"%s\"", lastPigeonHole);
+	}
 	return Plugin_Continue;
 }
 
+
+public void Chaos_PigeonHole_OnPlayerSpawn(int client){
+	ClientCommand(client, "r_screenoverlay \"%s\"", lastPigeonHole);
+}
+
+
 public void Chaos_PigeonHole_RESET(bool EndChaos){
 	StopTimer(PigeonHoleSpawnTimer);
-	if(lastPigeonHole[0] != '\0'){
-		Remove_Overlay(lastPigeonHole);
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"\"");
 	}
 }
 
 public bool Chaos_PigeonHole_Conditions(bool EffectRunRandomly){
-	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return pigeonholeMaterials;
 }

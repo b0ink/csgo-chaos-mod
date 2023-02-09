@@ -13,6 +13,7 @@ public void HookMainEvents(){
 	HookEvent("bomb_planted", 		Event_BombPlanted);
 	HookEvent("server_cvar", 		Event_Cvar, EventHookMode_Pre);
 	HookEvent("player_spawn", 		Event_PlayerSpawn);
+	HookEvent("player_death", 		Event_PlayerDeath);
 	HookEvent("round_freeze_end", 	Event_RoundFreezeEnd);
 }
 
@@ -20,6 +21,10 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 
 	int client = GetClientOfUserId(event.GetInt("userid"));
+
+	if(IsValidClient(client)){
+		ClientCommand(client, "r_screenoverlay \"\"");
+	}
 	
 	if (GameRules_GetProp("m_bWarmupPeriod") == 1){
 		CreateTimer(1.0, Timer_SendSettingsReminder, client, TIMER_FLAG_NO_MAPCHANGE);
@@ -36,6 +41,17 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 
 			CreateTimer(0.2, Timer_TriggerOnPlayerSpawn, data);
 		}
+	}
+	
+	return Plugin_Continue;
+}
+
+public Action Event_PlayerDeath(Event event, char[] name, bool dontBroadcast){
+	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+	int client = GetClientOfUserId(event.GetInt("userid"));
+
+	if(IsValidClient(client)){
+		ClientCommand(client, "r_screenoverlay \"\"");
 	}
 	
 	return Plugin_Continue;
@@ -140,14 +156,12 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	ResetChaos(RESET_ROUNDEND);
 	g_bCanSpawnEffect = false;
 
-	Clear_Overlay_Que();
 
 	return Plugin_Continue;
 }
 
 void ResetChaos(int resetflags){
 	HUD_ROUNDEND();
-	Clear_Overlay_Que();
 	StopTimer(g_NewEffect_Timer);
 	ResetRoundChaos(null, resetflags);
 	// CreateTimer(0.1, ResetRoundChaos, resetflags);

@@ -71,7 +71,6 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 #include "Effects/Effect.sp"
 
 // Shared by multiple effects
-#include "Global/InstantWeaponSwitch.sp"
 #include "Global/Fog.sp"
 #include "Global/ColorCorrection.sp"
 #include "Global/Weather.sp"
@@ -81,7 +80,6 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 
 #include "Effects/EffectsList.sp"
 #include "Effects/EffectNames.sp"
-
 
 
 #include "Commands.sp"

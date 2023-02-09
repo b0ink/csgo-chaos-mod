@@ -3,9 +3,12 @@
 public void Chaos_Binoculars(effect_data effect){
 	effect.Title = "Binoculars";
 	effect.Duration = 30;
+	effect.AddAlias("Overlay");
+	effect.AddFlag("r_screenoverlay");
 }
 
 bool binocularsMaterials = true;
+int binocularsFOV;
 
 public void Chaos_Binoculars_OnMapStart(){
 	PrecacheDecal("ChaosMod/binoculars.vmt", true);
@@ -17,7 +20,6 @@ public void Chaos_Binoculars_OnMapStart(){
 	if(!FileExists("materials/ChaosMod/binoculars.vmt")) binocularsMaterials = false;
 }
 
-int binocularsFOV;
 
 public void Chaos_Binoculars_START(){
 	binocularsFOV = GetRandomInt(20,30);
@@ -25,7 +27,9 @@ public void Chaos_Binoculars_START(){
 		SetEntProp(i, Prop_Send, "m_iFOV", binocularsFOV);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", binocularsFOV);
 	}
-	Add_Overlay("/ChaosMod/binoculars.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"/ChaosMod/binoculars.vtf\"");
+	}
 }
 
 
@@ -35,15 +39,19 @@ public void Chaos_Binoculars_RESET(int ResetType){
 		SetEntProp(i, Prop_Send, "m_iFOV", 0);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
 	}
-	Remove_Overlay("/ChaosMod/binoculars.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"\"");
+	}
 }
+
 
 public void Chaos_Binoculars_OnPlayerSpawn(int client){
 	SetEntProp(client, Prop_Send, "m_iFOV", binocularsFOV);
 	SetEntProp(client, Prop_Send, "m_iDefaultFOV", binocularsFOV);
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/binoculars.vtf\"");
 }
 
+
 public bool Chaos_Binoculars_Conditions(bool EffectRunRandomly){
-	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return binocularsMaterials;
 }

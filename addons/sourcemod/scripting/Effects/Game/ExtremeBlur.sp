@@ -11,6 +11,7 @@ public void Chaos_ExtremeBlur(effect_data effect){
 	effect.AddFlag("blur");
 	effect.AddAlias("Overlay");
 	effect.AddAlias("Visual");
+	effect.AddFlag("r_screenoverlay");
 }
 
 bool extremeBlurMaterials = true;
@@ -26,14 +27,21 @@ public void Chaos_ExtremeBlur_OnMapStart(){
 }
 
 public void Chaos_ExtremeBlur_START(){
-	Add_Overlay("/ChaosMod/Blur_3.vmt");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"/ChaosMod/Blur_3.vmt\"");
+	}
+}
+
+public void Chaos_ExtremeBlur_OnPlayerSpawn(int client){
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/Blur_3.vmt\"");
 }
 
 public void Chaos_ExtremeBlur_RESET(bool EndChaos){
-	Remove_Overlay("/ChaosMod/Blur_3.vmt");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"\"");
+	}
 }
 
 public bool Chaos_ExtremeBlur_Conditions(bool EffectRunRandomly){
-	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return extremeBlurMaterials;
 }

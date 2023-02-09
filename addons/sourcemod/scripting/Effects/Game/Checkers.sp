@@ -10,6 +10,7 @@ public void Chaos_Checkers(effect_data effect){
 	effect.Duration = 30;
 	effect.AddAlias("Overlay");
 	effect.AddAlias("Visual");
+	effect.AddFlag("r_screenoverlay");
 }
 
 
@@ -38,15 +39,22 @@ public void Chaos_Checkers_OnMapStart(){
 
 
 public void Chaos_Checkers_START(){
-	Add_Overlay("/ChaosMod/Checkers_1.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"/ChaosMod/Checkers_1.vtf\"");
+	}
 	Checkers = true;
+}
+
+public void Chaos_Checkers_OnPlayerSpawn(int client){
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/Checkers_1.vtf\"");
 }
 
 
 public void Chaos_Checkers_RESET(bool EndChaos){
 	Checkers = false;
-	Remove_Overlay("/ChaosMod/Checkers_1.vtf");
-	Remove_Overlay("/ChaosMod/Checkers_2.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"\"");
+	}
 }
 
 
@@ -61,6 +69,5 @@ public void Chaos_Checkers_Event_WeaponFire(Event event, const char[] name, bool
 
 
 public bool Chaos_Checkers_Conditions(bool EffectRunRandomly){
-	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return checkersMaterials;
 }

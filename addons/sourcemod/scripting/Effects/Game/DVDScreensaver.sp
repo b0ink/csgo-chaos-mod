@@ -5,6 +5,7 @@ public void Chaos_DVDScreensaver(effect_data effect){
 	effect.Duration = 30;
 	effect.AddAlias("Overlay");
 	effect.AddAlias("Visual");
+	effect.AddFlag("r_screenoverlay");
 }
 
 public void Chaos_DVDScreensaver_OnMapStart(){
@@ -18,15 +19,23 @@ public void Chaos_DVDScreensaver_OnMapStart(){
 }
 
 public void Chaos_DVDScreensaver_START(){
-	Add_Overlay("/ChaosMod/DVDScreensaver.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"/ChaosMod/DVDScreensaver.vtf\"");
+	}
+}
+
+
+public void Chaos_DVDScreensaver_OnPlayerSpawn(int client){
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/Checkers_1.vtf\"");
 }
 
 
 public void Chaos_DVDScreensaver_RESET(int ResetType){
-	Remove_Overlay("/ChaosMod/DVDScreensaver.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"\"");
+	}
 }
 
 public bool DVDScreensaver_Conditions(bool EffectRunRandomly){
-	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return DVDScreensaverMaterials;
 }

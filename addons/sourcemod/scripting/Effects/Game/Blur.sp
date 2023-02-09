@@ -10,6 +10,7 @@ public void Chaos_Blur(effect_data effect){
 	effect.Duration = 30;
 	effect.AddFlag("blur");
 	effect.AddAlias("Visual");
+	effect.AddFlag("r_screenoverlay");
 }
 
 bool blurMaterials = true;
@@ -23,14 +24,22 @@ public void Chaos_Blur_OnMapStart(){
 }
 
 public void Chaos_Blur_START(){
-	Add_Overlay("/ChaosMod/Blur_2.vmt");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"/ChaosMod/Blur_2.vmt\"");
+	}
 }
 
+public void Chaos_Blur_OnPlayerSpawn(int client){
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/Blur_2.vmt\"");
+}
+
+
 public void Chaos_Blur_RESET(bool EndChaos){
-	Remove_Overlay("/ChaosMod/Blur_2.vmt");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"\"");
+	}
 }
 
 public bool Chaos_Blur_Conditions(bool EffectRunRandomly){
-	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return blurMaterials;
 }

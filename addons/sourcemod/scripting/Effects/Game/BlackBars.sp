@@ -3,6 +3,7 @@
 public void Chaos_BlackBars(effect_data effect){
 	effect.Title = "Black Bars";
 	effect.Duration = 30;
+	effect.AddFlag("r_screenoverlay");
 }
 
 bool blackBarsMaterials = true;
@@ -18,15 +19,22 @@ public void Chaos_BlackBars_OnMapStart(){
 }
 
 public void Chaos_BlackBars_START(){
-	Add_Overlay("/ChaosMod/BlackBars.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"/ChaosMod/BlackBars.vtf\"");
+	}
+}
+
+public void Chaos_BlackBars_OnPlayerSpawn(int client){
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/BlackBars.vtf\"");
 }
 
 
 public void Chaos_BlackBars_RESET(bool EndChaos){
-	Remove_Overlay("/ChaosMod/BlackBars.vtf");
+	LoopValidPlayers(i){
+		ClientCommand(i, "r_screenoverlay \"\"");
+	}
 }
 
 public bool Chaos_BlackBars_Conditions(bool EffectRunRandomly){
-	if(!CanRunOverlayEffect() && EffectRunRandomly) return false;
 	return blackBarsMaterials;
 }
