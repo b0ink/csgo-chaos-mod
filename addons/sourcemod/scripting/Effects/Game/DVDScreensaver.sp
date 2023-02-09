@@ -26,7 +26,7 @@ public void Chaos_DVDScreensaver_START(){
 
 
 public void Chaos_DVDScreensaver_OnPlayerSpawn(int client){
-	ClientCommand(client, "r_screenoverlay \"/ChaosMod/Checkers_1.vtf\"");
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/DVDScreensaver.vtf\"");
 }
 
 
