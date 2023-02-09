@@ -61,12 +61,10 @@ public Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
 
 	Function func = data.ReadFunction();
 	int client = data.ReadCell();
-	bool isEffectRunning = data.ReadCell();
 
 	if(ValidAndAlive(client)){
 		Call_StartFunction(GetMyHandle(), func);
 		Call_PushCell(client); 
-		Call_PushCell(isEffectRunning); 
 		Call_Finish();
 	}
 
