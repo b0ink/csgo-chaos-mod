@@ -13,7 +13,7 @@ public void Chaos_Autobhop(effect_data effect){
 public void Chaos_Autobhop_START(){
 	g_AutoBunnyhop++;
 	cvar("sv_airaccelerate", "1999");
-
+	PrintHintTextToAll("Hold space!");
 }
 
 public void Chaos_Autobhop_RESET(int ResetType){

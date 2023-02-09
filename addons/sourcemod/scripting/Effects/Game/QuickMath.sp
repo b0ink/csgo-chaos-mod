@@ -47,6 +47,12 @@ public void Chaos_QuickMath_START(){
 	QuickMathAnswer = QuickMathNum1 + QuickMathNum2;
 	QuickMath = true;
 
+	CPrintToChatAll("%s Type the answer of [{orange}%i {default}+ {orange}%i{default}] in chat to see again!",g_Prefix, QuickMathNum1, QuickMathNum2);
+	CPrintToChatAll("%s Type the answer of [{orange}%i {default}+ {orange}%i{default}] in chat to see again!",g_Prefix, QuickMathNum1, QuickMathNum2);
+	CPrintToChatAll("%s Type the answer of [{orange}%i {default}+ {orange}%i{default}] in chat to see again!",g_Prefix, QuickMathNum1, QuickMathNum2);
+	CPrintToChatAll("%s Type the answer of [{orange}%i {default}+ {orange}%i{default}] in chat to see again!",g_Prefix, QuickMathNum1, QuickMathNum2);
+	CPrintToChatAll("%s Type the answer of [{orange}%i {default}+ {orange}%i{default}] in chat to see again!",g_Prefix, QuickMathNum1, QuickMathNum2);
+
 	CreateTimer(1.0, Timer_PrintQuickMathPrompt, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
 
