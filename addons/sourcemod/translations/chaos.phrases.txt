@@ -12,6 +12,10 @@
     {
         "en"    "Anti Flash"
     }
+    "Chaos_Armageddon"
+    {
+        "en"    "Armageddon"
+    }
     "Chaos_AutoPlantC4"
     {
         "en"    "Auto Plant C4"
@@ -100,6 +104,14 @@
     {
         "en"    "Crab People"
     }
+    "Chaos_DVDScreensaver"
+    {
+        "en"    "DVD Screensaver"
+    }
+    "Chaos_DamageBar"
+    {
+        "en"    "Damage Bar"
+    }
     "Chaos_DecoyDodgeball"
     {
         "en"    "Decoy Dodgeball"
@@ -127,6 +139,10 @@
     "Chaos_DiscoPlayers"
     {
         "en"    "Random Player Colours"
+    }
+    "Chaos_DoorStuck"
+    {
+        "en"    "DOOR STUCK!"
     }
     "Chaos_DoubleJump"
     {
@@ -167,6 +183,10 @@
     "Chaos_ExplosiveBullets"
     {
         "en"    "Explosive Bullets"
+    }
+    "Chaos_ExtendC4Timer"
+    {
+        "en"    "Extend C4 Timer"
     }
     "Chaos_ExtendRoundTime"
     {
@@ -243,6 +263,10 @@
     "Chaos_HighMouseSens"
     {
         "en"    "High Mouse Sens"
+    }
+    "Chaos_HighPitch"
+    {
+        "en"    "High Pitch"
     }
     "Chaos_IceSkate"
     {
@@ -352,6 +376,10 @@
     {
         "en"    "Loose Trigger"
     }
+    "Chaos_LowPitch"
+    {
+        "en"    "Low Pitch"
+    }
     "Chaos_LowRenderDistance"
     {
         "en"    "Low Render Distance"
@@ -383,6 +411,14 @@
     "Chaos_MoonGravity"
     {
         "en"    "Moon Gravity"
+    }
+    "Chaos_NearMiss"
+    {
+        "en"    "Near Miss"
+    }
+    "Chaos_Nice"
+    {
+        "en"    "Nice"
     }
     "Chaos_NightVision"
     {
@@ -432,6 +468,10 @@
     {
         "en"    "Offset Crosshair"
     }
+    "Chaos_OilDrums"
+    {
+        "en"    "Exploding Oil Drums"
+    }
     "Chaos_OneBulletMag"
     {
         "en"    "One Bullet Mags"
@@ -452,13 +492,25 @@
     {
         "en"    "Portal Guns"
     }
+    "Chaos_PropShooterMelon"
+    {
+        "en"    "Melon Guns"
+    }
     "Chaos_PunishMisfire"
     {
-        "en"    "Take Damage For Missed Shots"
+        "en"    "Don't miss or you lose HP"
     }
     "Chaos_QuakeFOV"
     {
         "en"    "Quake FOV"
+    }
+    "Chaos_QuickMath"
+    {
+        "en"    "Quick Math"
+    }
+    "Chaos_RadioChatter"
+    {
+        "en"    "Radio Chatter"
     }
     "Chaos_RainingMolotovs"
     {
@@ -604,6 +656,10 @@
     {
         "en"    "Teammate Swap"
     }
+    "Chaos_TearGas"
+    {
+        "en"    "Tear Gas"
+    }
     "Chaos_TeleportFewMetres"
     {
         "en"    "Teleport Players A Few Metres"
@@ -616,9 +672,21 @@
     {
         "en"    "Thirdperson"
     }
+    "Chaos_ThrowingKnives"
+    {
+        "en"    "Throwing Knives"
+    }
     "Chaos_Thunderstorm"
     {
         "en"    "Thunderstorm"
+    }
+    "Chaos_Tilted"
+    {
+        "en"    "Tilted"
+    }
+    "Chaos_TinyPlayers"
+    {
+        "en"    "Tiny Players"
     }
     "Chaos_TradeLives"
     {
