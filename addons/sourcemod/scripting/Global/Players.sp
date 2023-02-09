@@ -69,8 +69,8 @@ void HookBlockAllGuns(int client = -1){
 	}
 	LoopAlivePlayers(i){
 		if(BlockGun_EffectCount <= 0){
-			FakeClientCommand(client, "use weapon_knife");
-			ClientCommand(client, "slot3");
+			FakeClientCommand(i, "use weapon_knife");
+			ClientCommand(i, "slot3");
 		}
 		SDKHook(i, SDKHook_WeaponSwitch, BlockAllGuns);
 	}

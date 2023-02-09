@@ -454,7 +454,7 @@
     }
     "Chaos_PunishMisfire"
     {
-        "en"    "Don't miss or you lose HP"
+        "en"    "Take Damage For Missed Shots"
     }
     "Chaos_QuakeFOV"
     {
@@ -639,69 +639,5 @@
     "Chaos_WeaponKnockback"
     {
         "en"    "Weapon Knockback"
-    }
-    "Chaos_DoorStuck"
-    {
-        "en"    "DOOR STUCK!"
-    }
-    "Chaos_TearGas"
-    {
-        "en"    "Tear Gas"
-    }
-    "Chaos_QuickMath"
-    {
-        "en"    "Quick Math"
-    }
-    "Chaos_PropShooterMelon"
-    {
-        "en"    "Melon Guns"
-    }
-    "Chaos_ThrowingKnives"
-    {
-        "en"    "Throwing Knives"
-    }
-    "Chaos_OilDrums"
-    {
-        "en"    "Exploding Oil Drums"
-    }
-    "Chaos_Armageddon"
-    {
-        "en"    "Armageddon"
-    }
-    "Chaos_TinyPlayers"
-    {
-        "en"    "Tiny Players"
-    }
-    "Chaos_DamageBar"
-    {
-        "en"    "Damage Bar"
-    }
-    "Chaos_Tilted"
-    {
-        "en"    "Tilted"
-    }
-    "Chaos_Nice"
-    {
-        "en"    "Nice"
-    }
-	"Chaos_LowPitch"
-    {
-        "en"    "Low Pitch"
-    }
-	"Chaos_HighPitch"
-    {
-        "en"    "High Pitch"
-    }
-    "Chaos_DVDScreensaver"
-    {
-        "en"    "DVD Screensaver"
-    }
-    "Chaos_NearMiss"
-    {
-        "en"    "Near Miss"
-    }
-    "Chaos_ExtendC4Timer"
-    {
-        "en"    "Extend C4 Timer"
     }
 }
