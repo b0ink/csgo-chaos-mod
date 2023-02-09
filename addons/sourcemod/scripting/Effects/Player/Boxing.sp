@@ -8,6 +8,7 @@ public void Chaos_Boxing(EffectData effect){
 
 	effect.IncompatibleWith("Chaos_KnifeFight");
 	effect.IncompatibleWith("Chaos_AlienKnifeFight");
+	effect.IncompatibleWith("Chaos_TaserParty");
 }
 
 
