@@ -259,7 +259,11 @@ void DisplayCenterTextToAll(char[] message){
 	LoopValidPlayers(i){
 		if(HideAnnouncement[i]) continue;
 		
-		SetHudTextParams(-1.0, 0.75, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
+		if(IsPlayerAlive(i)){
+			SetHudTextParams(-1.0, 0.8, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
+		}else{
+			SetHudTextParams(-1.0, 0.75, 3.0, 255, 255, 255, 0, 0, 1.0, 0.5, 0.5);
+		}
 		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(0), "%s", finalMess);
 		}else{
