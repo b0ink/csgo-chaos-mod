@@ -700,4 +700,8 @@
     {
         "en"    "Near Miss"
     }
+    "Chaos_ExtendC4Timer"
+    {
+        "en"    "Extend C4 Timer"
+    }
 }

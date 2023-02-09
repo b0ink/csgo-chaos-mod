@@ -1,5 +1,3 @@
-#pragma semicolon 1
-
 char EffectNames[][] = {
 "Chaos_Aimbot",
 "Chaos_AlienModelKnife",
@@ -25,6 +23,7 @@ char EffectNames[][] = {
 "Chaos_ChickenPlayers",
 "Chaos_Compass",
 "Chaos_CrabPeople",
+"Chaos_DVDScreensaver",
 "Chaos_DamageBar",
 "Chaos_DecoyDodgeball",
 "Chaos_DeepFried",
@@ -44,6 +43,7 @@ char EffectNames[][] = {
 "Chaos_EnemyRadar",
 "Chaos_ExoJump",
 "Chaos_ExplosiveBullets",
+"Chaos_ExtendC4Timer",
 "Chaos_ExtendRoundTime",
 "Chaos_ExtendedFlash",
 "Chaos_ExtendedGrenades",
@@ -100,6 +100,7 @@ char EffectNames[][] = {
 "Chaos_Meta_WhatsHappening",
 "Chaos_MoneyRain",
 "Chaos_MoonGravity",
+"Chaos_NearMiss",
 "Chaos_Nice",
 "Chaos_NightVision",
 "Chaos_NoComms",
@@ -173,6 +174,4 @@ char EffectNames[][] = {
 "Chaos_Turrets",
 "Chaos_VampireHeal",
 "Chaos_WeaponKnockback",
-"Chaos_DVDScreensaver",
-"Chaos_NearMiss",
 };
