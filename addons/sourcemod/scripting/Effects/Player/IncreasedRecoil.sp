@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_IncreasedRecoil(effect_data effect){
+public void Chaos_IncreasedRecoil(EffectData effect){
 	effect.Title = "Increased Recoil";
 	effect.Duration = 30;
 	effect.AddFlag("recoil");

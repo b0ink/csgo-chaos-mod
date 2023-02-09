@@ -5,7 +5,7 @@ bool checkersMaterials = true;
 int checkersToggle[MAXPLAYERS+1];
 
 
-public void Chaos_Checkers(effect_data effect){
+public void Chaos_Checkers(EffectData effect){
 	effect.Title = "Checkers";
 	effect.Duration = 30;
 	effect.AddAlias("Overlay");

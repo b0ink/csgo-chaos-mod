@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_NoRecoil(effect_data effect){
+public void Chaos_NoRecoil(EffectData effect){
 	effect.Title = "100% Weapon Accuracy";
 	effect.Duration = 30;
 	effect.AddFlag("recoil");

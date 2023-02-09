@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 bool g_HealthRegen = false;
-public void Chaos_HealthRegen(effect_data effect){
+public void Chaos_HealthRegen(EffectData effect){
 	effect.Title = "Health Regen";
 	effect.Duration = 30;
 }

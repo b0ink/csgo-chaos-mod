@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_DecoyDodgeball(effect_data effect){
+public void Chaos_DecoyDodgeball(EffectData effect){
 	effect.Title = "Decoy Dodgeball";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Thunderstorm");

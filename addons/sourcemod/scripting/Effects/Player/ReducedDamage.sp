@@ -2,7 +2,7 @@
 
 bool ReducedDamage = false;
 
-public void Chaos_ReducedDamage(effect_data effect){
+public void Chaos_ReducedDamage(EffectData effect){
 	effect.Title = "Half Shot Damage"; 
 	effect.Duration = 30;
 	effect.AddAlias("HalfDamage");

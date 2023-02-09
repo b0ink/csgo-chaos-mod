@@ -4,7 +4,7 @@ bool SpeedShooter = false;
 
 //TODO:, if someone has speed once this ends, they still have speed
 // > try saving their old speed but itll still be fucky
-public void Chaos_SpeedShooter(effect_data effect){
+public void Chaos_SpeedShooter(EffectData effect){
 	effect.Title = "Speed Shooter";
 	effect.Duration = 30;
 	effect.AddFlag("movement");

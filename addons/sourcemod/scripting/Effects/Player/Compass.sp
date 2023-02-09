@@ -8,7 +8,7 @@
 
 Handle CompassTimer = INVALID_HANDLE;
 bool PlayerCompass = false;
-public void Chaos_Compass(effect_data effect){
+public void Chaos_Compass(EffectData effect){
 	effect.Title = "Player Compass";
 	effect.Duration = 30;
 }

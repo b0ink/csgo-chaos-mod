@@ -4,7 +4,7 @@
 	Keep in mind this does "pause" the game time, meaning the duration of this effect is much longer as stated
 */
 
-public void Chaos_Lag(effect_data effect){
+public void Chaos_Lag(EffectData effect){
 	effect.Title = "Lag";
 	effect.Duration = 30;
 }

@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_HeadshotOnly(effect_data effect){
+public void Chaos_HeadshotOnly(EffectData effect){
 	effect.Title = "Headshots Only";
 	effect.Duration = 30;
 }

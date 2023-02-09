@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 bool g_bForceCrouch = false;
-public void Chaos_CrabPeople(effect_data effect){
+public void Chaos_CrabPeople(EffectData effect){
 	effect.Title = "Crab People";
 	effect.Duration = 30;
 }

@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_NoViewmodel(effect_data effect){
+public void Chaos_NoViewmodel(EffectData effect){
 	effect.Title = "No Viewmodel";
 	effect.Duration = 30;
 }

@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_SmokeStrat(effect_data effect){
+public void Chaos_SmokeStrat(EffectData effect){
 	effect.Title = "Smoke Strat";
 	effect.HasNoDuration = true;
 }

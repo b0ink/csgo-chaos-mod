@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Earthquake(effect_data effect){
+public void Chaos_Earthquake(EffectData effect){
 	effect.Title = "Earthquake";
 	effect.HasNoDuration = true;
 }

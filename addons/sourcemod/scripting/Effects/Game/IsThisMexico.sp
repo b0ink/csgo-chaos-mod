@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_IsThisMexico(effect_data effect){
+public void Chaos_IsThisMexico(EffectData effect){
 	effect.Title = "Is This What Mexico Looks Like?";
 	effect.Duration = 30;
 	effect.AddFlag("fog");

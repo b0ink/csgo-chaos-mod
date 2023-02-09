@@ -8,7 +8,7 @@ int QuickMathNum2 = 0;
 
 bool QuickMathSolved[MAXPLAYERS+1];
 
-public void Chaos_QuickMath(effect_data effect){
+public void Chaos_QuickMath(EffectData effect){
 	effect.Title = "Quick Math";
 	effect.Duration = 10;
 	effect.IncompatibleWith("Chaos_BlindPlayers");

@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_BlackWhite(effect_data effect){
+public void Chaos_BlackWhite(EffectData effect){
 	effect.Title = "Black and White";
 	effect.Duration = 30;
 	effect.AddFlag("colorcorrection");

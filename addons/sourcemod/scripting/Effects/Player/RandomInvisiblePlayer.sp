@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_RandomInvisiblePlayer(effect_data effect){
+public void Chaos_RandomInvisiblePlayer(EffectData effect){
 	effect.Title = "Random Invisible Player";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;

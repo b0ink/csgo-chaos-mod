@@ -3,7 +3,7 @@
 */
 
 bool LowPitch = false;
-public void Chaos_LowPitch(effect_data effect){
+public void Chaos_LowPitch(EffectData effect){
 	effect.Title = "Low Pitch";
 	effect.Duration = 30;
 	effect.AddFlag("pitch");

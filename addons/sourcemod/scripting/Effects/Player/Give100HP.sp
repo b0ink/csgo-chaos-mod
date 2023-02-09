@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Give100HP(effect_data effect){
+public void Chaos_Give100HP(EffectData effect){
 	effect.Title = "Give all players +100 HP";
 	effect.Duration = 30;
 	effect.HasNoDuration = true;

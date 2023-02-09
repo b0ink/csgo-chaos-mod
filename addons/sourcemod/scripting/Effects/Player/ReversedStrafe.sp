@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 bool ReversedStrafe = false;
-public void Chaos_ReversedStrafe(effect_data effect){
+public void Chaos_ReversedStrafe(EffectData effect){
 	effect.Title = "Reversed Strafe";
 	effect.Duration = 30;
 }

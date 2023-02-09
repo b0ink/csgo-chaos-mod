@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_LavaFloor(effect_data effect){
+public void Chaos_LavaFloor(EffectData effect){
 	effect.Title = "FLOOR IS LAVA";
 	effect.HasNoDuration = true;
 }

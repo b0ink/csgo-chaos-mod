@@ -3,7 +3,7 @@
 bool OilDrums = false;
 bool OilDrumModelFound = true;
 
-public void Chaos_OilDrums(effect_data effect){
+public void Chaos_OilDrums(EffectData effect){
 	effect.Title = "Exploding Oil Drums";
 	effect.Duration = 45;
 }

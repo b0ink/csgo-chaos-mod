@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_SlowSpeed(effect_data effect){
+public void Chaos_SlowSpeed(EffectData effect){
 	effect.Title = "Slow Speed";
 	effect.Duration = 30;
 	effect.AddFlag("movement");

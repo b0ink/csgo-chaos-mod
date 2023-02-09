@@ -7,7 +7,7 @@
 bool Thunderstorm = false;
 int thunder_count = 0;
 
-public void Chaos_Thunderstorm(effect_data effect){
+public void Chaos_Thunderstorm(EffectData effect){
 	effect.Title = "Thunderstorm";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_DecoyDodgeball");

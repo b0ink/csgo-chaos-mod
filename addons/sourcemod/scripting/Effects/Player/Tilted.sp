@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Tilted(effect_data effect){
+public void Chaos_Tilted(EffectData effect){
 	effect.Title = "Tilted";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_LockPlayersAim");

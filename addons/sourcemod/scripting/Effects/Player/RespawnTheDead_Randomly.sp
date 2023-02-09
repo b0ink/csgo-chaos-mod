@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_RespawnTheDead_Randomly(effect_data effect){
+public void Chaos_RespawnTheDead_Randomly(EffectData effect){
 	effect.Title = "Resurrect dead players in random locations";
 	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;

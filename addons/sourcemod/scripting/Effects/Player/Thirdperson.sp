@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Thirdperson(effect_data effect){
+public void Chaos_Thirdperson(EffectData effect){
 	effect.Title = "Thirdperson";
 	effect.Duration = 30;
 }

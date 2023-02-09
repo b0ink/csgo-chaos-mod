@@ -30,7 +30,7 @@ enum //Bombsites
     BOMBSITE_B = 1
 }
 
-public void Chaos_AutoPlantC4(effect_data effect){
+public void Chaos_AutoPlantC4(EffectData effect){
     effect.Title = "Auto Plant C4";
     effect.HasNoDuration = true;
     effect.HasCustomAnnouncement = true;

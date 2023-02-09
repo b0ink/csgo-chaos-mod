@@ -2,7 +2,7 @@
 
 char BoxingBellSfx[] = "ambient/misc/brass_bell_e.wav";
 
-public void Chaos_Boxing(effect_data effect){
+public void Chaos_Boxing(EffectData effect){
 	effect.Title = "Boxing";
 	effect.Duration = 30;
 

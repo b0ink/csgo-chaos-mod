@@ -2,7 +2,7 @@
 
 bool AntiFlash = false;
 
-public void Chaos_AntiFlash(effect_data effect){
+public void Chaos_AntiFlash(EffectData effect){
 	effect.Title = "Anti Flash";
 	effect.Duration = 30;
 }

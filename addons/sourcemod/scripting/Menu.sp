@@ -86,7 +86,7 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 
 	if(AllowRandom) PoolChaosEffects();
 	
-	effect_data effect;
+	EffectData effect;
 	for(int i = 0; i < PossibleChaosEffects.Length; i++){ //should contain all 102 all time
 		PossibleChaosEffects.GetArray(i, effect, sizeof(effect));
 		Format(function_title, sizeof(function_title), "%s", GetChaosTitle(effect.FunctionName));
@@ -196,7 +196,7 @@ void ShowMenu_HudSettings(int client){
 	Menu menu = new Menu(HudSettings_Handler);
 	menu.SetTitle("Toggle HUD Elements");
 	// char currentVolume[128];
-	// FormatEx(currentVolume, sizeof(currentVolume), "Adjust the volume of the bell sound when a new effect spawns:\nCurrent Volume: %i%%", RoundToZero(BellVolume[client] * 100.0));
+	// FormatEx(currentVolume, sizeof(currentVolume), "Adjust the volume of the bell sound when a new effect spawns:\nCurrent Volume: %i%%", RoundToZero(g_fBellVolume[client] * 100.0));
 	// menu.AddItem("-", currentVolume, ITEMDRAW_DISABLED);
 
 	char TimerInfo[32];
@@ -255,7 +255,7 @@ void ShowMenu_EditEffectVolume(int client){
 	Menu menu = new Menu(EditEffectVolume_Handler);
 	menu.SetTitle("New Effect SFX Volume");
 	char currentVolume[128];
-	FormatEx(currentVolume, sizeof(currentVolume), "Adjust the volume of the bell sound when a new effect spawns:\nCurrent Volume: %i%%", RoundToZero(BellVolume[client] * 100.0));
+	FormatEx(currentVolume, sizeof(currentVolume), "Adjust the volume of the bell sound when a new effect spawns:\nCurrent Volume: %i%%", RoundToZero(g_fBellVolume[client] * 100.0));
 	menu.AddItem("-", currentVolume, ITEMDRAW_DISABLED);
 
 	char displayText[32];
@@ -264,7 +264,7 @@ void ShowMenu_EditEffectVolume(int client){
 		Format(infoText, sizeof(infoText), "%i", i);
 		Format(displayText, sizeof(displayText), "%i%%", i*10);
 		float volumeCheck = float(i) / 10;
-		if(volumeCheck == BellVolume[client]){
+		if(volumeCheck == g_fBellVolume[client]){
 			Format(displayText, sizeof(displayText), "%s <", displayText);
 			menu.AddItem(infoText, displayText, ITEMDRAW_DISABLED);
 		}else{
@@ -282,8 +282,8 @@ public int EditEffectVolume_Handler(Menu menu, MenuAction action, int param1, in
 		bool found = menu.GetItem(param2, info, sizeof(info));
 		if(found){
 			float volume = StringToFloat(info) / 10;
-			BellVolume[param1] = volume;
-			EmitSoundToClient(param1, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[param1]);
+			g_fBellVolume[param1] = volume;
+			EmitSoundToClient(param1, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, g_fBellVolume[param1]);
 		}
 		ShowMenu_EditEffectVolume(param1);
 	}else if (action == MenuAction_Cancel){
@@ -455,7 +455,7 @@ void ShowMenu_EditAllEffects(int client){
 	menu.SetTitle("Select an effect to edit.");
 
 	char name[128];
-	effect_data effect;
+	EffectData effect;
 	LoopAllEffects(effect, index){
 		Format(name, sizeof(name), "%s", GetChaosTitle(effect.FunctionName));
 		bool enabled = effect.Enabled;
@@ -487,7 +487,7 @@ public int EditAllEffects_Handler(Menu menu, MenuAction action, int param1, int 
 
 void ShowMenu_EffectSetting(int client, char[] function_name){
 
-	effect_data effect;
+	EffectData effect;
 	GetEffectData(function_name, effect);
 
 	char enabled_status[128];
@@ -533,7 +533,7 @@ public int EffectSetting_Handler(Menu menu, MenuAction action, int param1, int p
 		bool found = menu.GetItem(param2, info, sizeof(info));
 		if(found){
 			if(StrEqual(info, "setting-enabled", false)){
-				effect_data effect;
+				EffectData effect;
 				GetEffectData(function_name, effect);
 				if(effect.Enabled){
 					UpdateConfig(param1, "Chaos_Override", "Effects", function_name, "enabled", "0");

@@ -2,7 +2,7 @@
 
 bool RapidFire = false;
 
-public void Chaos_RapidFire(effect_data effect){
+public void Chaos_RapidFire(EffectData effect){
 	effect.Title = "Rapid Fire";
 	effect.Duration = 30;
 	effect.AddFlag("firerate");

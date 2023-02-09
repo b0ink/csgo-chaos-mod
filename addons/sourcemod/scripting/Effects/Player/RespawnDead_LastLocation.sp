@@ -2,7 +2,7 @@
 
 float 	g_PlayerDeathLocations[MAXPLAYERS+1][3];
 
-public void Chaos_RespawnDead_LastLocation(effect_data effect){
+public void Chaos_RespawnDead_LastLocation(EffectData effect){
 	effect.Title = "Resurrect players where they died";
 	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;

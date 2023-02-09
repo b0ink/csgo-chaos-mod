@@ -2,7 +2,7 @@
 
 //Credit: https://forums.alliedmods.net/showthread.php?t=312548
 
-public void Chaos_Turrets(effect_data effect){
+public void Chaos_Turrets(EffectData effect){
 	effect.Title = "Turrets";
 	effect.Duration = 60;
 

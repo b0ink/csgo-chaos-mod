@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Nice(effect_data effect){
+public void Chaos_Nice(EffectData effect){
 	effect.Title = "Nice";
 	// effect.Title = "Nice ( ͡° ͜ʖ ͡°)";
 	effect.HasNoDuration = true;

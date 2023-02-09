@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_GiveRandomGrenade(effect_data effect){
+public void Chaos_GiveRandomGrenade(EffectData effect){
 	effect.Title = "Give Random Grenade";
 	
 	effect.HasCustomAnnouncement = true;

@@ -2,7 +2,7 @@
 
 bool TaserParty = false;
 
-public void Chaos_TaserParty(effect_data effect){
+public void Chaos_TaserParty(EffectData effect){
 	effect.Title = "Taser Party";
 	effect.Duration = 30;
 	effect.AddFlag("dropweapon"); // prevent drop weapon effects from running

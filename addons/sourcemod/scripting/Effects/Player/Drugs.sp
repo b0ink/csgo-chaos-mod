@@ -4,7 +4,7 @@
 
 UserMsg g_FadeUserMsgId_drugs;
 
-public void Chaos_Drugs(effect_data effect){
+public void Chaos_Drugs(EffectData effect){
 	effect.Title = "Drugs";
 	effect.Duration = 30;
 }

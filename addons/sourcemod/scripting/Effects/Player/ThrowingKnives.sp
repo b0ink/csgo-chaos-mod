@@ -10,7 +10,7 @@ Handle ThrownKnives; // Store thrown knives
 
 #define DMG_HEADSHOT		(1 << 30)
 
-public void Chaos_ThrowingKnives(effect_data effect){
+public void Chaos_ThrowingKnives(EffectData effect){
 	effect.Title = "Throwing Knives";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Boxing");

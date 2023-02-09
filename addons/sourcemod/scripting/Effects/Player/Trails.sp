@@ -4,7 +4,7 @@ int trailSprite = -1;
 float TrailsLastLoc[MAXPLAYERS+1][3];
 bool Trails = false;
 
-public void Chaos_Trails(effect_data effect){
+public void Chaos_Trails(EffectData effect){
 	effect.Title = "Trails";
 	effect.Duration = 30;
 }

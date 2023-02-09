@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 bool TeleportOnKill = false;
-public void Chaos_TeleportOnKill(effect_data effect){
+public void Chaos_TeleportOnKill(EffectData effect){
 	effect.Title = "Teleport On Kill";
 	effect.Duration = 30;
 }

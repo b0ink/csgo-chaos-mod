@@ -5,7 +5,7 @@
 */
 
 bool TearGas = false;
-public void Chaos_TearGas(effect_data effect){
+public void Chaos_TearGas(EffectData effect){
 	effect.Title = "Tear Gas";
 	effect.Duration = 45;
 }

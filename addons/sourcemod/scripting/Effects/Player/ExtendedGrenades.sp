@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_ExtendedGrenades(effect_data effect){
+public void Chaos_ExtendedGrenades(EffectData effect){
 	effect.Title = "Extended Grenades";
 	effect.HasNoDuration = true;
 }

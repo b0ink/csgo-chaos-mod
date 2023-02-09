@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Healthshot(effect_data effect){
+public void Chaos_Healthshot(EffectData effect){
 	effect.Title = "Healthshot";
 	effect.HasNoDuration = true;
 }

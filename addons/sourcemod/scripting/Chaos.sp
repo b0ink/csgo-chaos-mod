@@ -61,7 +61,7 @@ char 	g_sSelectedChaosEffect[64] = "";
 char 	g_sForceCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
 
-float 	BellVolume[MAXPLAYERS+1] = {0.5, ...};
+float 	g_fBellVolume[MAXPLAYERS+1] = {0.5, ...};
 bool 	g_bPlaySound_Debounce = false;
 
 
@@ -110,7 +110,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	if(g_cvChaosTwitchEnabled.BoolValue && !MegaChaosIsActive() && !CustomRun){
 		if(Twitch_Votes.Length != 0){
-			effect_data effect;
+			EffectData effect;
 			if(GetEffectData(g_sForceCustomEffect, effect)){
 				g_sForceCustomEffect = effect.FunctionName;
 				twitchEffect = true;
@@ -128,7 +128,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 
 	if(g_sForceCustomEffect[0] != '\0'){ //run from menu, or from twitch list
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
-		effect_data effect;
+		EffectData effect;
 		LoopAllEffects(effect, index){
 			if(StrEqual(effect.FunctionName, g_sForceCustomEffect, false)){
 				effect.Run();
@@ -139,7 +139,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			}
 		}
 	}else{ // running random effect!
-		effect_data effect;
+		EffectData effect;
 		PossibleChaosEffects.Sort(Sort_Random, Sort_String);
 
 		int totalEffects = PossibleChaosEffects.Length;
@@ -191,7 +191,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		//Prevent overlapping sounds
 		g_bPlaySound_Debounce = true;
 		LoopValidPlayers(i){
-			EmitSoundToClient(i, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, BellVolume[i]);
+			EmitSoundToClient(i, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, g_fBellVolume[i]);
 		}	
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
@@ -203,7 +203,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun &&  ((GetTotalRoundsPlayed() >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && EffectsSinceLastMeta() >= 20 && GetRoundTime() < 30)){
 		g_iEffectsSinceMeta = 0;
 
-		effect_data metaEffect;
+		EffectData metaEffect;
 		bool metaAlreadyRunning = false;
 		PossibleMetaEffects.Clear();
 
@@ -274,7 +274,7 @@ public Action ResetRoundChaos(Handle timer, int resetflags){
 	RemoveChickens(false);
 	Fog_OFF();
 
-	effect_data effect;
+	EffectData effect;
 	LoopAllEffects(effect, index){
 		int flags;
 		flags |= resetflags;

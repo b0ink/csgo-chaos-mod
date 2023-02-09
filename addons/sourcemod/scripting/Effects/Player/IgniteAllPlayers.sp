@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_IgniteAllPlayers(effect_data effect){
+public void Chaos_IgniteAllPlayers(EffectData effect){
 	effect.Title = "Ignite All Players";
 	effect.HasNoDuration = true;
 }

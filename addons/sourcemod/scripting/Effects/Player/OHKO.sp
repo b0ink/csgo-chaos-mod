@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_OHKO(effect_data effect){
+public void Chaos_OHKO(EffectData effect){
 	effect.Title = "1 HP";
 	effect.Duration = 10;
 	

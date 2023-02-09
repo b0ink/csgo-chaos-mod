@@ -1,6 +1,6 @@
 bool DVDScreensaverMaterials = true;
 
-public void Chaos_DVDScreensaver(effect_data effect){
+public void Chaos_DVDScreensaver(EffectData effect){
 	effect.Title = "DVD Screensaver";
 	effect.Duration = 30;
 	effect.AddAlias("Overlay");

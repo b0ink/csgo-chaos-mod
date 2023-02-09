@@ -5,7 +5,7 @@ int 	g_bNoStrafe = 0;
 
 int Disable_Strafe[MAXPLAYERS+1];
 float Disable_Strafe_DisableKeys_OriginalPos[MAXPLAYERS+1][3];
-public void Chaos_DisableStrafe(effect_data effect){
+public void Chaos_DisableStrafe(EffectData effect){
 	effect.Title = "Disable A / D Keys";
 	effect.Duration = 30;
 }

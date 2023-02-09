@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_BlackBars(effect_data effect){
+public void Chaos_BlackBars(EffectData effect){
 	effect.Title = "Black Bars";
 	effect.Duration = 30;
 	effect.AddFlag("r_screenoverlay");

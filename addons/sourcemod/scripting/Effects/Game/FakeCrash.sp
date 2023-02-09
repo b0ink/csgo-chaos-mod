@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_FakeCrash(effect_data effect){
+public void Chaos_FakeCrash(EffectData effect){
 	effect.Title = "Fake Crash";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;

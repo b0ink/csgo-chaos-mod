@@ -18,7 +18,7 @@ int g_iJumpMax = 1;
 
 
 bool g_bDoubleJump = false;
-public void Chaos_DoubleJump(effect_data effect){
+public void Chaos_DoubleJump(EffectData effect){
 	effect.Title = "Double Jump";
 	effect.Duration = 30;
 }

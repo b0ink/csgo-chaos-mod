@@ -2,7 +2,7 @@
 
 bool NoManualReload = false;
 
-public void Chaos_NoManualReload(effect_data effect){
+public void Chaos_NoManualReload(EffectData effect){
 	effect.Title = "No Manual Reload";
 	effect.Duration = 30;
 }

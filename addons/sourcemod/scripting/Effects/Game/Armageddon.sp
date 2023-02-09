@@ -13,7 +13,7 @@
 
 bool armageddonMaterials = true;
 bool Armageddon = false;
-public void Chaos_Armageddon(effect_data effect){
+public void Chaos_Armageddon(EffectData effect){
 	effect.Title = "Armageddon";
 	effect.Duration = 25;
 	effect.IncompatibleWith("Chaos_Thunderstorm");

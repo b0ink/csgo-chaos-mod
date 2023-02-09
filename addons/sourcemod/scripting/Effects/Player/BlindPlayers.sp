@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_BlindPlayers(effect_data effect){
+public void Chaos_BlindPlayers(EffectData effect){
 	effect.Title = "Blind";
 	effect.Duration = 7;
 	effect.OverrideDuration = true;

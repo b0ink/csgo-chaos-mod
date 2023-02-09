@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_DropPrimaryWeapon(effect_data effect){
+public void Chaos_DropPrimaryWeapon(EffectData effect){
 	effect.Title = "Drop Primary Weapon";
 	effect.HasNoDuration = true;
 	effect.AddFlag("dropweapon");

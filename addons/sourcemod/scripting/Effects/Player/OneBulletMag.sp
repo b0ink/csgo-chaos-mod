@@ -3,7 +3,7 @@
 bool OneBulletMag = false;
 int g_iOffset_Clip1 = -1;
 
-public void Chaos_OneBulletMag(effect_data effect){
+public void Chaos_OneBulletMag(EffectData effect){
 	effect.Title = "One Bullet Mags";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");

@@ -11,7 +11,7 @@ bool AppIsActive = false; // if the app does not rcon the server during a full r
 
 #define LoopAllVotes(%1,%2) for(int %2 = 0; %2 < 999; %2++) if(%2 < Twitch_Votes.Length) if(Twitch_Votes.GetArray(%2, %1, sizeof(%1)))
 
-enum struct vote_data{
+enum struct VoteData{
 	int votes;
 	char name[128];
 	char FunctionName[128];
@@ -24,7 +24,7 @@ void RegisterTwitchCommands(){
 }
 
 void TWITCH_INIT(){
-	Twitch_Votes = new ArrayList(sizeof(vote_data));
+	Twitch_Votes = new ArrayList(sizeof(VoteData));
 	HookEvent("round_start", 	Twitch_RoundStart);
 	HookEvent("round_end", 		Twitch_RoundEnd);
 }
@@ -58,7 +58,7 @@ public Action Timer_FakeTwitchVotes(Handle timer){
 
 public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	//* Remove current items from the history/cooldown, as we can assume those effects have not been run.
-	vote_data effect;
+	VoteData effect;
 	LoopAllVotes(effect, i){
 		int index = FindStringInArray(EffectsHistory, effect.FunctionName);
 		if(index != -1){
@@ -106,7 +106,7 @@ public Action Command_GetVotes(int client, int args){
 	Format(json, sizeof(json), "%s\"hideEffectList\":%s,", json, (GameRules_GetProp("m_bWarmupPeriod") == 1 || !CanSpawnNewEffect()) ? "true" : "false");
 	Format(json, sizeof(json), "%s\"effects\":[", json);
 	
-	vote_data effect;
+	VoteData effect;
 	for(int i = 0; i < Twitch_Votes.Length; i++){
 		Twitch_Votes.GetArray(i, effect, sizeof(effect));
 		Format(json, sizeof(json), "%s%s{\"index\":%i,\"name\":\"%s\", \"function\":\"%s\"}", json, (i > 0) ? "," : "", index, effect.name, effect.FunctionName);
@@ -123,7 +123,7 @@ public Action Command_GetVotes(int client, int args){
 }
 
 bool IsEffectInVoteList(char[] effectName){
-	vote_data effect;
+	VoteData effect;
 	LoopAllVotes(effect, index){
 		if(StrEqual(effect.name, effectName, false)){
 			return true;
@@ -139,7 +139,7 @@ void Twitch_PoolNewVotingEffects(){
 
 	alternateIndex = !alternateIndex;
 	Twitch_Votes.Clear();
-	effect_data effect;
+	EffectData effect;
 
 	for(int i = 0; i < Temp_ChaosEffects.Length; i++){
 		Temp_ChaosEffects.GetArray(i, effect, sizeof(effect));
@@ -159,7 +159,7 @@ void Twitch_PoolNewVotingEffects(){
 			effect.CanRunEffect(true)
 		){
 			// PushArrayString(VotingEffects, effect.Title);
-			vote_data vote;
+			VoteData vote;
 			vote.name = effect.Title;
 			vote.votes = 0;
 			vote.FunctionName = effect.FunctionName;
@@ -181,7 +181,7 @@ void Twitch_PoolNewVotingEffects(){
 	delete Temp_ChaosEffects;
 
 	if(EnableRandomEffectOption){
-		vote_data randomVote;
+		VoteData randomVote;
 		randomVote.name = "Random Effect";
 		randomVote.votes = 0;
 		randomVote.FunctionName = "RANDOMEFFECT";

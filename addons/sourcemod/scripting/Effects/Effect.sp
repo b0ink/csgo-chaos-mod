@@ -19,7 +19,7 @@ ArrayList	MetaEffectsHistory;
 #define RESET_ROUNDEND          (1 << 2) /** Round End */
 #define RESET_PLUGINEND         (1 << 3) /** Plugin was unloaded */
 
-enum struct effect_data{
+enum struct EffectData{
 	char 		Title[64]; // 0th index for ease of sorting in configs.sp
 	int 		ID;
 	char 		FunctionName[64];
@@ -184,7 +184,7 @@ enum struct effect_data{
 }
 
 bool AreIncompatibleEffectsRunning(char[] effectName){
-	effect_data liveEffect;
+	EffectData liveEffect;
 	char incompatibleEffect[128];
 
 	LoopAllEffects(liveEffect, index){
@@ -203,7 +203,7 @@ bool AreIncompatibleEffectsRunning(char[] effectName){
 }
 
 bool IsChaosEffectRunning(char[] effectName){
-	effect_data effect;
+	EffectData effect;
 	LoopAllEffects(effect, index){
 		if(effect.Timer != INVALID_HANDLE && StrEqual(effect.FunctionName, effectName, false)){
 			return true;
@@ -213,7 +213,7 @@ bool IsChaosEffectRunning(char[] effectName){
 }
 
 bool AreEffectsWithFlagRunning(char[] flagName){
-	effect_data effect;
+	EffectData effect;
 	LoopAllEffects(effect, index){
 		if(effect.Timer != INVALID_HANDLE && effect.IncompatibleFlags != INVALID_HANDLE){
 			if(FindStringInArray(effect.IncompatibleFlags, flagName) != -1){
@@ -233,7 +233,7 @@ bool AreEffectsWithFlagRunning(char[] flagName){
 
 
 public Action Effect_Reset(Handle timer, int effect_id){
-	effect_data effect;
+	EffectData effect;
 	LoopAllEffects(effect, index){
 		if(effect.ID == effect_id){
 			effect.Reset(RESET_EXPIRED);
@@ -244,8 +244,8 @@ public Action Effect_Reset(Handle timer, int effect_id){
 	return Plugin_Continue;
 }
 
-bool GetEffectData(char[] function_name, effect_data return_data){
-	effect_data effect;
+bool GetEffectData(char[] function_name, EffectData return_data){
+	EffectData effect;
 	bool found = false;
 	LoopAllEffects(effect, index){
 		if(StrEqual(effect.FunctionName, function_name, false)){
@@ -261,7 +261,7 @@ bool GetEffectData(char[] function_name, effect_data return_data){
 
 float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false){
 	float expire = defaultTime;
-	effect_data effect;
+	EffectData effect;
 	if(GetEffectData(EffectName, effect)){
 		expire = effect.GetDuration(raw);
 	}else{
@@ -274,7 +274,7 @@ float GetChaosTime(char[] EffectName, float defaultTime = 15.0, bool raw = false
 char[] GetChaosTitle(char[] function_name){
 	char return_string[128];
 
-	effect_data effect;
+	EffectData effect;
 	GetEffectData(function_name, effect);
 
 	if(StrContains(function_name, "Chaos_") != -1){
@@ -342,7 +342,7 @@ void PoolChaosEffects(char[] effectName = ""){
 
 	char alias[64];
 	PossibleChaosEffects.Clear();
-	effect_data effect;
+	EffectData effect;
 	LoopAllEffects(effect, index){
 		if(effectName[0] != '\0'){ //* if keyword was provided
 			bool containsAlias = false;

@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_LSD(effect_data effect){
+public void Chaos_LSD(EffectData effect){
 	effect.Title = "LSD";
 	effect.Duration = 30;
 	effect.AddFlag("colorcorrection");

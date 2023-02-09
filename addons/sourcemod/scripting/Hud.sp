@@ -10,7 +10,7 @@ bool  UseHtmlHud[MAXPLAYERS+1];
 
 ArrayList HudData;
 
-enum struct hud_effect_data{
+enum struct EffectHudData{
 	char name[256];
 	int time;
 	bool HasNoDuration;
@@ -24,7 +24,7 @@ enum struct hud_effect_data{
 
 int g_HudTime = -1;
 void HUD_INIT(){
-	HudData = new ArrayList(sizeof(hud_effect_data));
+	HudData = new ArrayList(sizeof(EffectHudData));
 }
 
 
@@ -43,7 +43,7 @@ void ResetHud(){
 //15 seconds for all times with -1 (healthshots, etc.)
 
 void AddEffectToHud(char[] message, float time = -1.0, bool isMeta){
-	hud_effect_data effect;
+	EffectHudData effect;
 	Format(effect.name, sizeof(effect.name), "%s", message);
 
 	if(time == -1.0){
@@ -59,7 +59,7 @@ void AddEffectToHud(char[] message, float time = -1.0, bool isMeta){
 }
 
 void RemoveHudByName(char[] EffectName){
-	hud_effect_data effect;
+	EffectHudData effect;
 	for(int i = 0; i < HudData.Length; i++){
 		HudData.GetArray(i, effect, sizeof(effect));
 		if(StrEqual(effect.name, EffectName, false)){
@@ -75,7 +75,7 @@ void PrintEffects(){
 	char chunk_meta[2048];
 	int EffectTime = -1;
 
-	hud_effect_data effect;
+	EffectHudData effect;
 
 	for(int i = 0; i < HudData.Length; i++){
 		HudData.GetArray(i, effect, sizeof(effect));
@@ -233,7 +233,7 @@ Action Timer_ClearHTML(Handle timer){
 }
 
 Action Timer_DisplayEffects(Handle timer){
-	hud_effect_data effect;
+	EffectHudData effect;
 	for(int i = 0; i < HudData.Length; i++){
 		HudData.GetArray(i, effect, sizeof(effect));
 		effect.time = effect.time - 1;

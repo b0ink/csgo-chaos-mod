@@ -5,7 +5,7 @@
 	https://steamcommunity.com/id/defuj/
 */
 
-public void Chaos_Blur(effect_data effect){
+public void Chaos_Blur(EffectData effect){
 	effect.Title = "Blur";
 	effect.Duration = 30;
 	effect.AddFlag("blur");

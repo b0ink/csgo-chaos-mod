@@ -2,7 +2,7 @@
 
 bool g_bJumping = false;
 bool ForceJump[MAXPLAYERS+1];
-public void Chaos_Jumping(effect_data effect){
+public void Chaos_Jumping(EffectData effect){
 	effect.Title = "Jump Jump!";
 	effect.Duration = 30;
 }

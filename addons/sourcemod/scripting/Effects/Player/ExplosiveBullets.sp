@@ -2,7 +2,7 @@
 
 bool g_bExplosiveBullets = false;
 
-public void Chaos_ExplosiveBullets(effect_data effect){
+public void Chaos_ExplosiveBullets(EffectData effect){
 	effect.Title = "Explosive Bullets";
 	effect.Duration = 30;
 }

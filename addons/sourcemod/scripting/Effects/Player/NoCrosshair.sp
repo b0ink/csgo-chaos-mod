@@ -2,7 +2,7 @@
 
 #define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
 
-public void Chaos_NoCrosshair(effect_data effect){
+public void Chaos_NoCrosshair(EffectData effect){
 	effect.Title = "No Crosshair";
 	effect.Duration = 30;
 }

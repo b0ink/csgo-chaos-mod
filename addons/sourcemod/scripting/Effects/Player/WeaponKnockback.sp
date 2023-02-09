@@ -2,7 +2,7 @@
 
 bool WeaponKnockback = false;
 
-public void Chaos_WeaponKnockback(effect_data effect){
+public void Chaos_WeaponKnockback(EffectData effect){
 	effect.Title = "Weapon Knockback";
 	effect.Duration = 30;
 	effect.AddAlias("Push");

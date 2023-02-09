@@ -7,19 +7,19 @@ enum FENCE_TYPE {
 
 ArrayList Fences;
 
-enum struct fence_data {
+enum struct FenceData {
 	float location[3];
 	float rotation_y;
 	bool wide;
 }
 
-public void Chaos_FencedOff(effect_data effect){
+public void Chaos_FencedOff(EffectData effect){
 	effect.Title = "Fenced Off";
 	effect.Duration = 60;
 }
 
 public void Chaos_FencedOff_INIT(){
-	Fences = new ArrayList(sizeof(fence_data));
+	Fences = new ArrayList(sizeof(FenceData));
 }
 
 #define FENCEMODEL_A "models/props_c17/fence02a.mdl"
@@ -34,7 +34,7 @@ public void Chaos_FencedOff_OnMapStart(){
 public void Chaos_FencedOff_START(){
 	Fences.Sort(Sort_Random, Sort_Float);
 
-	fence_data fence;
+	FenceData fence;
 
 	for(int i = 0; i < Fences.Length; i++){
 		Fences.GetArray(i, fence, sizeof(fence));
@@ -60,7 +60,7 @@ public void Chaos_FencedOff_RESET(){
 	}
 }
 
-void SpawnFence(fence_data fenceData){
+void SpawnFence(FenceData fenceData){
 	int fence = CreateFence(FENCE_WIDE);
 	float rot[3];
 	rot[1] = fenceData.rotation_y;
@@ -134,7 +134,7 @@ void ParseFencesConfig(){
 		char rawLocationSplit[4][128];
 		kv.GetString(NULL_STRING, rawLocation, sizeof(rawLocation));
 		if(ExplodeString(rawLocation, " ", rawLocationSplit, 4, 128) == 4){
-			fence_data fence;
+			FenceData fence;
 
 			fence.location[0] = StringToFloat(rawLocationSplit[0]);
 			fence.location[1] = StringToFloat(rawLocationSplit[1]);

@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 
-public void Chaos_Jackpot(effect_data effect){
+public void Chaos_Jackpot(EffectData effect){
 	effect.Title = "Jackpot";
 	effect.HasNoDuration = true;
 }

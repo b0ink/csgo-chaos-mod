@@ -9,7 +9,7 @@ float mapFogEnd = 800.0;
 // float mapFogEnd = 175.0;
 float mapFogDensity = 0.995;
 
-enum struct fog_data{
+enum struct FogData{
 	char effectName[64];
 
 	char blend[32];
@@ -44,7 +44,7 @@ void ClearFog(){
 }
 
 void RemoveFog(char[] effectName, bool allInstances = false){
-	fog_data fog;
+	FogData fog;
 	for(int i = 0; i < Fog_Stream.Length; i++){
 		Fog_Stream.GetArray(i, fog, sizeof(fog));
 		if(StrEqual(fog.effectName, effectName, false)){
@@ -59,7 +59,7 @@ void RemoveFog(char[] effectName, bool allInstances = false){
 }
 
 void UpdateFog(){
-	fog_data fog;
+	FogData fog;
 	if(Fog_Stream.Length > 0){
 		Fog_Stream.GetArray(Fog_Stream.Length - 1, fog, sizeof(fog)); // Start from most recently added fog
 		if(fog.blend[0] != '\0') 		DispatchKeyValue(g_iFog, "fogblend", fog.blend);
@@ -83,7 +83,7 @@ void UpdateFog(){
 void Find_Fog(){
 
 	if(Fog_Stream == INVALID_HANDLE){
-		Fog_Stream = new ArrayList(sizeof(fog_data));
+		Fog_Stream = new ArrayList(sizeof(FogData));
 	}else{
 		Fog_Stream.Clear();
 	}
@@ -136,7 +136,7 @@ void ExtremeWhiteFog(bool removeFog = false){
 		RemoveFog("ExtremeWhiteFog");
 		return;
 	}
-	fog_data fog;
+	FogData fog;
 	fog.effectName = "ExtremeWhiteFog";
 	fog.SetDefault();
 	fog.color = "255 255 255";
@@ -151,7 +151,7 @@ void NormalWhiteFog(bool removeFog = false){
 		RemoveFog("NormalWhiteFog");
 		return;
 	}
-	fog_data fog;
+	FogData fog;
 	fog.effectName = "NormalWhiteFog";
 	fog.SetDefault();
 	fog.color = "255 255 255";
@@ -167,7 +167,7 @@ void MinimalFog(bool removeFog = false){
 		RemoveFog("MinimalFog");
 		return;
 	}
-	fog_data fog;
+	FogData fog;
 	fog.effectName = "MinimalFog";
 	fog.SetDefault();
 	fog.color = "255 255 255";
@@ -184,7 +184,7 @@ void ArmageddonFog(bool removeFog = false){
 		RemoveFog("ArmageddonFog");
 		return;
 	}
-	fog_data fog;
+	FogData fog;
 	fog.effectName = "ArmageddonFog";
 	fog.SetDefault();
 	fog.color = "50 78 75";
@@ -214,7 +214,7 @@ void DiscoFog(bool removeFog = false){
 	char color[32];
 	FormatEx(color, sizeof(color), "%i %i %i", GetRandomInt(0,255), GetRandomInt(0,255), GetRandomInt(0,255));
 	
-	fog_data fog;
+	FogData fog;
 	fog.effectName = "DiscoFog";
 	fog.SetDefault();
 	fog.color = color;
@@ -231,7 +231,7 @@ void Mexico(bool removeFog = false){
 		return;
 	}
 
-	fog_data fog;
+	FogData fog;
 	fog.effectName = "Mexico";
 	fog.SetDefault();
 	fog.color = "138 86 22";
@@ -249,7 +249,7 @@ void LightsOff(bool removeFog = false){
 		return;
 	}
 
-	fog_data fog;
+	FogData fog;
 	fog.effectName = "LightsOff";
 	fog.SetDefault();
 	fog.color = "0 0 0";

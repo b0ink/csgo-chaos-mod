@@ -5,7 +5,7 @@ bool g_SleepyShooter = false;
 
 //TODO: reset timer on player spawn.
 
-public void Chaos_SleepyShooter(effect_data effect){
+public void Chaos_SleepyShooter(EffectData effect){
 	effect.Title = "Shoot To Stay Awake";
 	effect.Duration = 30;
 

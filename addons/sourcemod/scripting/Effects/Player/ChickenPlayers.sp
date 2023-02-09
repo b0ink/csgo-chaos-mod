@@ -3,7 +3,7 @@
 char chickenModel[] = "models/chicken/chicken.mdl";
 char playersModels[MAXPLAYERS + 1][PLATFORM_MAX_PATH];
 
-public void Chaos_ChickenPlayers(effect_data effect){
+public void Chaos_ChickenPlayers(EffectData effect){
 	effect.Title = "Make all players a chicken";
 	effect.Duration = 30;
 	effect.AddFlag("playermodel");

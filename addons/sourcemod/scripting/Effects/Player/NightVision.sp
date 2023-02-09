@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_NightVision(effect_data effect){
+public void Chaos_NightVision(EffectData effect){
 	effect.Title = "Night Vision";
 	effect.Duration = 30;
 	effect.AddAlias("Visual");

@@ -3,7 +3,7 @@
 Handle RandomWeapons_Timer_Repeat = INVALID_HANDLE;
 float RandomWeapons_Interval = 5.0; //5+ recommended for bomb plants
 
-public void Chaos_RandomWeapons(effect_data effect){
+public void Chaos_RandomWeapons(EffectData effect){
 	effect.Title = "Random Weapons";
 	effect.Duration = 30;
 }

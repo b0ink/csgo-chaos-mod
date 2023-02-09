@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_InfiniteAmmo(effect_data effect){
+public void Chaos_InfiniteAmmo(EffectData effect){
 	effect.Title = "Infinite Ammo";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");

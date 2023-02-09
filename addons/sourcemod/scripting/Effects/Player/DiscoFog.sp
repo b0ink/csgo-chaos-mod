@@ -3,7 +3,7 @@
 bool g_bDiscoFog = false;
 Handle g_DiscoFog_Timer_Repeat = INVALID_HANDLE;
 
-public void Chaos_DiscoFog(effect_data effect){
+public void Chaos_DiscoFog(EffectData effect){
 	effect.Title = "Disco Fog";
 	effect.Duration = 30;
 	effect.AddFlag("fog");

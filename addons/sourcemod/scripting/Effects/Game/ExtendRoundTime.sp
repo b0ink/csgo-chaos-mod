@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_ExtendRoundTime(effect_data effect){
+public void Chaos_ExtendRoundTime(EffectData effect){
 	effect.Title = "Extend Round Time";
 	effect.HasNoDuration = true;	
 }

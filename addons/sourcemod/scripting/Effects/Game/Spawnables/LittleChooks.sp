@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_LittleChooks(effect_data effect){
+public void Chaos_LittleChooks(EffectData effect){
 	effect.Title = "Lil' Chooks";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;

@@ -3,7 +3,7 @@
 char g_OriginalModels_Jugg[MAXPLAYERS + 1][PLATFORM_MAX_PATH+1];
 //https://forums.alliedmods.net/showthread.php?t=307674 thanks for prop_send 
 
-public void Chaos_Juggernaut(effect_data effect){
+public void Chaos_Juggernaut(EffectData effect){
 	effect.Title = "Juggernauts";
 	effect.Duration = 30;
 	effect.AddFlag("playermodel");

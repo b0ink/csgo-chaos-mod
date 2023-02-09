@@ -7,7 +7,7 @@
 bool PropShooterMelon = false;
 char WatermelonModel[] = "models/props_junk/watermelon01.mdl";
 
-public void Chaos_PropShooterMelon(effect_data effect){
+public void Chaos_PropShooterMelon(EffectData effect){
 	effect.Title = "Melon Guns";
 	effect.Duration = 30;
 }

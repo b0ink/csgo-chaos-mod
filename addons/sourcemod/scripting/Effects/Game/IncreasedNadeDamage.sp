@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 bool IncreasedNadeDamage = false;
-public void Chaos_IncreasedNadeDamage(effect_data effect){
+public void Chaos_IncreasedNadeDamage(EffectData effect){
 	effect.Title = "Increased Nade Damage";
 	effect.Duration = 30;
 	effect.AddAlias("Grenade");

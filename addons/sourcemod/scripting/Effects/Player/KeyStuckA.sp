@@ -3,7 +3,7 @@
 bool AKeyStuck = false;
 int timeSinceLastKeyStuckEffect = -1;
 
-public void Chaos_KeyStuckA(effect_data effect){
+public void Chaos_KeyStuckA(EffectData effect){
 	effect.Title = "Help my A key is stuck";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_BreakTime");

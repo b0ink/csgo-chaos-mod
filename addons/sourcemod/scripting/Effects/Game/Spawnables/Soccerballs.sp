@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Soccerballs(effect_data effect){
+public void Chaos_Soccerballs(EffectData effect){
 	effect.Title = "Soccerballs";
 	effect.Duration = 60;
 }

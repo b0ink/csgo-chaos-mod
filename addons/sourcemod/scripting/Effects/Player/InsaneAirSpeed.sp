@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_InsaneAirSpeed(effect_data effect){
+public void Chaos_InsaneAirSpeed(EffectData effect){
 	effect.Title = "Extreme Strafe Acceleration";
 	effect.Duration = 30;
 	effect.AddAlias("Wish");

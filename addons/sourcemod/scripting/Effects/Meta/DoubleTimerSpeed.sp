@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 
-public void Chaos_Meta_DoubleTimerSpeed(effect_data effect){
+public void Chaos_Meta_DoubleTimerSpeed(EffectData effect){
 	effect.Title = "Double Timer Speed";
 	effect.Duration = 90;
 	effect.IsMetaEffect = true;

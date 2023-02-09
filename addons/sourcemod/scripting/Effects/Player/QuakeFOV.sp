@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_QuakeFOV(effect_data effect){
+public void Chaos_QuakeFOV(EffectData effect){
 	effect.Title = "Quake FOV";
 	effect.Duration = 45;
 }

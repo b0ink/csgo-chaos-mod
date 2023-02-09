@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 bool ExtendedFlash = false;
-public void Chaos_ExtendedFlash(effect_data effect){
+public void Chaos_ExtendedFlash(EffectData effect){
 	effect.Title = "Extended Flashbang Effect";
 	effect.Duration = 30;
 }

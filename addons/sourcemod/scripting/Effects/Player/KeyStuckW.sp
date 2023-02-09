@@ -2,7 +2,7 @@
 
 bool WKeyStuck = false;
 
-public void Chaos_KeyStuckW(effect_data effect){
+public void Chaos_KeyStuckW(EffectData effect){
 	effect.Title = "Help my W key is stuck";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_BreakTime");

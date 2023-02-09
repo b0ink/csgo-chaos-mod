@@ -3,7 +3,7 @@
 Handle Chaos_RandomSlap_Timer = INVALID_HANDLE;
 float g_Chaos_RandomSlap_Interval = 7.0;
 
-public void Chaos_GhostSlaps(effect_data effect){
+public void Chaos_GhostSlaps(EffectData effect){
 	effect.Title = "Ghost Slaps";
 	effect.Duration = 30;
 }

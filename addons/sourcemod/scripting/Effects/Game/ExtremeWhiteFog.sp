@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_ExtremeWhiteFog(effect_data effect){
+public void Chaos_ExtremeWhiteFog(EffectData effect){
 	effect.Title = "Extreme Fog";
 	effect.Duration = 30;
 	effect.AddFlag("fog");

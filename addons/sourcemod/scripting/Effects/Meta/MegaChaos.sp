@@ -6,7 +6,7 @@ bool MegaChaosIsActive(){
 	return g_bMegaChaosIsActive;
 }
 
-public void Chaos_Meta_Mega(effect_data effect){
+public void Chaos_Meta_Mega(EffectData effect){
 	effect.Title = "Mega Chaos";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;

@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Binoculars(effect_data effect){
+public void Chaos_Binoculars(EffectData effect){
 	effect.Title = "Binoculars";
 	effect.Duration = 30;
 	effect.AddAlias("Overlay");

@@ -3,7 +3,7 @@
 bool g_bLockPlayersAim_Active = false;
 float g_LockPlayersAim_Angles[MAXPLAYERS+1][3];
 
-public void Chaos_LockPlayersAim(effect_data effect){
+public void Chaos_LockPlayersAim(EffectData effect){
 	effect.Title = "Lock Mouse Movement";
 	effect.Duration = 30;
 	effect.AddAlias("Lock Mouse Movement");

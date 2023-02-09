@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_AlienModelKnife(effect_data effect){
+public void Chaos_AlienModelKnife(EffectData effect){
 	effect.Title = "Alien Knife Fight";
 	effect.Duration = 30;
 }

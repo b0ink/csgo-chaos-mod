@@ -1,4 +1,4 @@
-effect_data 	Chaos_EffectData_Buffer;
+EffectData 	Chaos_EffectData_Buffer;
 
 public void OnPluginStart(){
 	LoadTranslations("chaos.phrases");
@@ -14,15 +14,15 @@ public void OnPluginStart(){
 		}
 	}
 
-	PossibleChaosEffects = new ArrayList(sizeof(effect_data));
+	PossibleChaosEffects = new ArrayList(sizeof(EffectData));
 	EffectsHistory = CreateArray(64);
 
-	PossibleMetaEffects = new ArrayList(sizeof(effect_data));
-	MetaEffectsHistory = new ArrayList(sizeof(effect_data));
+	PossibleMetaEffects = new ArrayList(sizeof(EffectData));
+	MetaEffectsHistory = new ArrayList(sizeof(EffectData));
 
 	g_SavedConvars  = CreateArray(64);
 
-	ChaosEffects = new ArrayList(sizeof(effect_data));
+	ChaosEffects = new ArrayList(sizeof(EffectData));
 
 	ParseChaosEffects();
 
@@ -129,7 +129,7 @@ public void OnLibraryAdded(const char[] name){
 
 
 public void OnClientPutInServer(int client){
-	BellVolume[client] = 0.5;
+	g_fBellVolume[client] = 0.5;
 	HideTimer[client] = false;
 	HideEffectList[client] = false;
 	HideAnnouncement[client] = false;

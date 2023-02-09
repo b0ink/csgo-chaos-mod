@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_ESP(effect_data effect){
+public void Chaos_ESP(EffectData effect){
     effect.Title = "Wall Hacks";
     effect.Duration = 30;
     

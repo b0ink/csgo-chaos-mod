@@ -3,7 +3,7 @@
 bool BreakTime = false;
 
 
-public void Chaos_BreakTime(effect_data effect){
+public void Chaos_BreakTime(EffectData effect){
 	effect.Title = "Take a Break";
 	effect.Duration = 15;
 	effect.IncompatibleWith("Chaos_KeyStuckA");

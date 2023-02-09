@@ -12,7 +12,7 @@ bool g_bPlayersToDamage[MAXPLAYERS+1];
 #define SS_CROUCH 2;
 
 
-public void Chaos_SimonSays(effect_data effect){
+public void Chaos_SimonSays(EffectData effect){
 	effect.Title = "Simon Says";
 	effect.HasNoDuration = true;
 }

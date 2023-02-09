@@ -9,7 +9,7 @@ public void ParseChaosEffects(){
 	int count = 0;
 	for(int i = 0; i < sizeof(EffectNames); i++)
 	{
-		effect_data effect; // Ensures a new object every time
+		EffectData effect; // Ensures a new object every time
 		Function effect_function = GetFunctionByName(GetMyHandle(), EffectNames[i]);
 
 		if(effect_function == INVALID_FUNCTION){
@@ -75,7 +75,7 @@ public void ParseChaosEffects(){
 
 	ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
 
-	effect_data effect;
+	EffectData effect;
 	char init_function[64];
 	LoopAllEffects(effect, index){
 		Format(init_function, sizeof(init_function), "%s_INIT", effect.FunctionName);
@@ -127,7 +127,7 @@ public void OnConfigsExecuted(){
 
 
 void Run_OnMapStart_Functions(){
-	effect_data effect;
+	EffectData effect;
 	char init_function[64];
 	LoopAllEffects(effect, index){
 		Format(init_function, sizeof(init_function), "%s_OnMapStart", effect.FunctionName);
@@ -238,7 +238,7 @@ void ParseOverrideEffects(){
 
 			if(enabled != 0 && enabled != 1) enabled = 1;
 
-			effect_data effect;
+			EffectData effect;
 
 			LoopAllEffects(effect, index){
 				if(StrEqual(effect.FunctionName, Chaos_Function_Name, false)){

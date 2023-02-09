@@ -18,7 +18,7 @@ The `public` keyword must be used as the functions are remotely called via `GetF
 
 g_EffectName = false;
 
-public void Chaos_EffectName(effect_data effect){
+public void Chaos_EffectName(EffectData effect){
 	effect.Title = "Effect Name";
 	effect.Duration = 30;
 	
@@ -149,5 +149,5 @@ Add the name of your function to `addons/sourcemod/scripting/Effects/EffectNames
 ```
 This should match the name of your function that sets up your effect:
 ```c
-public void Chaos_EffectName(effect_data effect)
+public void Chaos_EffectName(EffectData effect)
 ```

@@ -3,7 +3,7 @@
 */
 
 bool HighPitch = false;
-public void Chaos_HighPitch(effect_data effect){
+public void Chaos_HighPitch(EffectData effect){
 	effect.Title = "High Pitch";
 	effect.Duration = 30;
 	effect.AddFlag("pitch");

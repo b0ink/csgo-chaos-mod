@@ -1,7 +1,7 @@
 ArrayList voiceOverList;
 bool RadioChatter = false;
 
-public void Chaos_RadioChatter(effect_data effect){
+public void Chaos_RadioChatter(EffectData effect){
 	effect.Title = "Radio Chatter";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_NoComms");

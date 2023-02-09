@@ -8,7 +8,7 @@ int GetC4ChickenEntity(){
 	return g_iC4ChickenEnt;
 }
 
-public void Chaos_C4Chicken(effect_data effect){
+public void Chaos_C4Chicken(EffectData effect){
 	effect.Title = "C4 Chicken";
 	effect.HasNoDuration = true;
 }

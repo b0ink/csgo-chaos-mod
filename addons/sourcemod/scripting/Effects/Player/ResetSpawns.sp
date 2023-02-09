@@ -3,7 +3,7 @@
 float 	g_OriginalSpawnVec[MAXPLAYERS+1][3];
 //TODO: configure for DM
 
-public void Chaos_ResetSpawns(effect_data effect){
+public void Chaos_ResetSpawns(EffectData effect){
 	effect.Title = "Teleport all players back to spawn";
 	effect.AddAlias("Teleport");
 	effect.HasNoDuration = true;

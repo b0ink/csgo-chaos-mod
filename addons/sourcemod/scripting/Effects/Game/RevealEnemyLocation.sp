@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_RevealEnemyLocation(effect_data effect){
+public void Chaos_RevealEnemyLocation(EffectData effect){
 	effect.Title = "Reveal Enemy Location";
 	effect.HasNoDuration = true;
 }

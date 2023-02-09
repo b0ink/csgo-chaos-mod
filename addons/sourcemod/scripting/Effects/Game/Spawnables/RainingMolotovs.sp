@@ -4,7 +4,7 @@ float g_RandomMolotovSpawn_Interval = 5.0; //5+ recommended for bomb plants
 
 int g_MolotovSpawn_Count = 0;
 
-public void Chaos_RainingMolotovs(effect_data effect){
+public void Chaos_RainingMolotovs(EffectData effect){
 	effect.Title = "Raining Fire";
 	effect.Duration = 30;
 

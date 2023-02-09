@@ -2,7 +2,7 @@
 
 bool Meta_WhatsHappening = false;
 
-public void Chaos_Meta_WhatsHappening(effect_data effect){
+public void Chaos_Meta_WhatsHappening(EffectData effect){
 	effect.Title = "What's Happening?";
 	effect.Duration = 90;
 	effect.IsMetaEffect = true;

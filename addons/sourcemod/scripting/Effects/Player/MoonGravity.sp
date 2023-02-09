@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_MoonGravity(effect_data effect){
+public void Chaos_MoonGravity(EffectData effect){
 	effect.Title = "Low Gravity";
 	effect.Duration = 30;
 	effect.AddAlias("LowGravity");

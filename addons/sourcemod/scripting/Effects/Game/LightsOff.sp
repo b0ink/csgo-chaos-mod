@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_LightsOff(effect_data effect){
+public void Chaos_LightsOff(EffectData effect){
 	effect.Title = "Who turned the lights off?";
 	effect.Duration = 30;
 }

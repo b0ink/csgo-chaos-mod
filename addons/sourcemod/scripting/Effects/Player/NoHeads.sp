@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_NoHeads(effect_data effect){
+public void Chaos_NoHeads(EffectData effect){
 	effect.Title = "No Heads";
 	effect.Duration = 30;
 	effect.AddFlag("playermodel");

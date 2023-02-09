@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 //TODO: change to a slap player down to 50hp
-public void Chaos_SlayRandomPlayer(effect_data effect){
+public void Chaos_SlayRandomPlayer(EffectData effect){
 	effect.Title = "Slay Random Player On Each Team";
 	effect.Duration = 30;
 	effect.HasNoDuration = true;

@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_RandomSkybox(effect_data effect){
+public void Chaos_RandomSkybox(EffectData effect){
 	effect.Title = "Random Skybox";
 	effect.HasNoDuration = true;
 	effect.AddAlias("Visual");

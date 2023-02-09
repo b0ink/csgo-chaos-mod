@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_DeepFried(effect_data effect){
+public void Chaos_DeepFried(EffectData effect){
 	effect.Title = "Deep Fried";
 	effect.Duration = 30;
 	effect.AddFlag("colorcorrection");

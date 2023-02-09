@@ -8,7 +8,7 @@
 bool PunishMisfire = false;
 bool PlayerShot[MAXPLAYERS+1];
 
-public void Chaos_PunishMisfire(effect_data effect){
+public void Chaos_PunishMisfire(EffectData effect){
 	// effect.Title = "Take Damage For Missed Shots";
 	effect.Title = "Don't miss or you lose HP";
 	effect.Duration = 30;

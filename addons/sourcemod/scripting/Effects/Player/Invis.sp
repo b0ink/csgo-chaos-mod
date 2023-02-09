@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_Invis(effect_data effect){
+public void Chaos_Invis(EffectData effect){
 	effect.Title = "Where did everyone go?";
 	effect.Duration = 30;
 }

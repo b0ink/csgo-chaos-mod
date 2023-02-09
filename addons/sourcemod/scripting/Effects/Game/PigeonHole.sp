@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_PigeonHole(effect_data effect){
+public void Chaos_PigeonHole(EffectData effect){
 	effect.Title = "Pigeon Hole";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Binoculars");

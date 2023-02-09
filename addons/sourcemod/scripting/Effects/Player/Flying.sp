@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 bool g_bActiveNoclip = false;
-public void Chaos_Flying(effect_data effect){
+public void Chaos_Flying(EffectData effect){
 	effect.Title = "Flying";
 	effect.Duration = 10;
 }

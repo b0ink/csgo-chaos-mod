@@ -6,7 +6,7 @@
 
 bool DamageBar = false;
 
-public void Chaos_DamageBar(effect_data effect){
+public void Chaos_DamageBar(EffectData effect){
 	effect.Title = "Damage Bar";
 	effect.Duration = 30;
 }

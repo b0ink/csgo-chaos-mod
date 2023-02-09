@@ -1,6 +1,6 @@
 #pragma semicolon 1
 
-public void Chaos_SwapPlayerModels(effect_data effect){
+public void Chaos_SwapPlayerModels(EffectData effect){
 	effect.Title = "Swap Player Models";
 	effect.Duration = 30;
 	effect.AddFlag("playermodel");

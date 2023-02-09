@@ -3,7 +3,7 @@
 #define HIDEHUD_CROSSHAIR           (1 << 8)	// Hide crosshairs
 bool offsetCrosshairMaterials = true;
 
-public void Chaos_OffsetCrosshair(effect_data effect){
+public void Chaos_OffsetCrosshair(EffectData effect){
 	effect.Title = "Offset Crosshair";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_NoCrosshair");
