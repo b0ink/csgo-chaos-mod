@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "ChaosMod/OffsetCrosshair"
+	"$translucent" 1
+}

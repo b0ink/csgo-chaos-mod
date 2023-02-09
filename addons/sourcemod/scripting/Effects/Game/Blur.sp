@@ -15,19 +15,19 @@ public void Chaos_Blur(effect_data effect){
 bool blurMaterials = true;
 
 public void Chaos_Blur_OnMapStart(){
-	PrecacheDecal("Chaos/Blur_2.vmt", true);
+	PrecacheDecal("ChaosMod/Blur_2.vmt", true);
 	PrecacheDecal("nature/water_coast01_normal.vtf", true);
 	AddFileToDownloadsTable("materials/nature/water_coast01_normal.vtf");
-	AddFileToDownloadsTable("materials/Chaos/Blur_2.vmt");
-	if(!FileExists("materials/Chaos/Blur_2.vmt")) blurMaterials = false;
+	AddFileToDownloadsTable("materials/ChaosMod/Blur_2.vmt");
+	if(!FileExists("materials/ChaosMod/Blur_2.vmt")) blurMaterials = false;
 }
 
 public void Chaos_Blur_START(){
-	Add_Overlay("/Chaos/Blur_2.vmt");
+	Add_Overlay("/ChaosMod/Blur_2.vmt");
 }
 
 public void Chaos_Blur_RESET(bool EndChaos){
-	Remove_Overlay("/Chaos/Blur_2.vmt");
+	Remove_Overlay("/ChaosMod/Blur_2.vmt");
 }
 
 public bool Chaos_Blur_Conditions(bool EffectRunRandomly){

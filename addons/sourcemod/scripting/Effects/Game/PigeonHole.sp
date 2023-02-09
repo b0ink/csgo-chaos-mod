@@ -14,14 +14,14 @@ public void Chaos_PigeonHole_OnMapStart(){
 	char pathname[PLATFORM_MAX_PATH];
 	// Precache and download pg_1 - pg_7 both .vtf and .vmt
 	for(int i = 1; i <= 7; i++){
-		Format(pathname, sizeof(pathname), "Chaos/PigeonHole/pg_%i.vmt", i);
+		Format(pathname, sizeof(pathname), "ChaosMod/PigeonHole/pg_%i.vmt", i);
 		PrecacheDecal(pathname, true);
-		Format(pathname, sizeof(pathname), "Chaos/PigeonHole/pg_%i.vtf", i);
+		Format(pathname, sizeof(pathname), "ChaosMod/PigeonHole/pg_%i.vtf", i);
 		PrecacheDecal(pathname, true);
-		Format(pathname, sizeof(pathname), "materials/Chaos/PigeonHole/pg_%i.vtf", i);
+		Format(pathname, sizeof(pathname), "materials/ChaosMod/PigeonHole/pg_%i.vtf", i);
 		if(!FileExists(pathname)) pigeonholeMaterials = false;
 		AddFileToDownloadsTable(pathname);
-		Format(pathname, sizeof(pathname), "materials/Chaos/PigeonHole/pg_%i.vmt", i);
+		Format(pathname, sizeof(pathname), "materials/ChaosMod/PigeonHole/pg_%i.vmt", i);
 		if(!FileExists(pathname)) pigeonholeMaterials = false;
 		AddFileToDownloadsTable(pathname);
 	}
@@ -47,7 +47,7 @@ public Action Timer_SpawnNewPigeonHole(Handle timer){
 	while(randomPigeonHole == lastPigeonHoleIndex);
 	lastPigeonHoleIndex = randomPigeonHole;
 
-	Format(lastPigeonHole, sizeof(lastPigeonHole), "/Chaos/PigeonHole/pg_%i.vtf", randomPigeonHole);
+	Format(lastPigeonHole, sizeof(lastPigeonHole), "/ChaosMod/PigeonHole/pg_%i.vtf", randomPigeonHole);
 	Add_Overlay(lastPigeonHole);
 	return Plugin_Continue;
 }

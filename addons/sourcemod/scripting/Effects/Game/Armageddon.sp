@@ -23,10 +23,10 @@ public void Chaos_Armageddon(effect_data effect){
 }
 
 public void Chaos_Armageddon_OnMapStart(){
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/wasteland.raw");
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/wasteland2.raw");
-	if(!FileExists("materials/Chaos/ColorCorrection/wasteland.raw")) armageddonMaterials = false;
-	if(!FileExists("materials/Chaos/ColorCorrection/wasteland2.raw")) armageddonMaterials = false;
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/wasteland.raw");
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/wasteland2.raw");
+	if(!FileExists("materials/ChaosMod/ColorCorrection/wasteland.raw")) armageddonMaterials = false;
+	if(!FileExists("materials/ChaosMod/ColorCorrection/wasteland2.raw")) armageddonMaterials = false;
 }
 
 

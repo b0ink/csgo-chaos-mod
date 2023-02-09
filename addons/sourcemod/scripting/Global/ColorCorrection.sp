@@ -5,7 +5,7 @@
 	eg.
 
 	public void Chaos_EffectName_OnMapStart(){
-		AddFileToDownloadsTable("materials/Chaos/ColorCorrection/xxxxxx.raw");
+		AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/xxxxxx.raw");
 	}
 */
 
@@ -29,7 +29,7 @@ void CLEAR_CC(char[] file = ""){
 
 void CREATE_CC(char[] filename, char[] targetname = "", float fadeIn = 3.0, float fadeOut = 3.0){
 	char path[PLATFORM_MAX_PATH];
-	FormatEx(path, sizeof(path), "materials/Chaos/ColorCorrection/%s.raw", filename);
+	FormatEx(path, sizeof(path), "materials/ChaosMod/ColorCorrection/%s.raw", filename);
 	int ent = CreateEntityByName("color_correction");
 	if(ent != -1){
 		DispatchKeyValue(ent, "StartDisabled", "1");

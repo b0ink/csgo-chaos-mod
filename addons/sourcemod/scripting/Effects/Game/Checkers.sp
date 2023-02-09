@@ -19,34 +19,34 @@ public void Chaos_Checkers_INIT(){
 
 
 public void Chaos_Checkers_OnMapStart(){
-	PrecacheDecal("Chaos/Checkers_1.vmt", true);
-	PrecacheDecal("Chaos/Checkers_1.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/Checkers_1.vtf");
-	AddFileToDownloadsTable("materials/Chaos/Checkers_1.vmt");
+	PrecacheDecal("ChaosMod/Checkers_1.vmt", true);
+	PrecacheDecal("ChaosMod/Checkers_1.vtf", true);
+	AddFileToDownloadsTable("materials/ChaosMod/Checkers_1.vtf");
+	AddFileToDownloadsTable("materials/ChaosMod/Checkers_1.vmt");
 
-	if(!FileExists("materials/Chaos/Checkers_1.vmt")) checkersMaterials = false;
-	if(!FileExists("materials/Chaos/Checkers_1.vtf")) checkersMaterials = false;
+	if(!FileExists("materials/ChaosMod/Checkers_1.vmt")) checkersMaterials = false;
+	if(!FileExists("materials/ChaosMod/Checkers_1.vtf")) checkersMaterials = false;
 
-	PrecacheDecal("Chaos/Checkers_2.vmt", true);
-	PrecacheDecal("Chaos/Checkers_2.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/Checkers_2.vtf");
-	AddFileToDownloadsTable("materials/Chaos/Checkers_2.vmt");
+	PrecacheDecal("ChaosMod/Checkers_2.vmt", true);
+	PrecacheDecal("ChaosMod/Checkers_2.vtf", true);
+	AddFileToDownloadsTable("materials/ChaosMod/Checkers_2.vtf");
+	AddFileToDownloadsTable("materials/ChaosMod/Checkers_2.vmt");
 
-	if(!FileExists("materials/Chaos/Checkers_2.vmt")) checkersMaterials = false;
-	if(!FileExists("materials/Chaos/Checkers_2.vtf")) checkersMaterials = false;
+	if(!FileExists("materials/ChaosMod/Checkers_2.vmt")) checkersMaterials = false;
+	if(!FileExists("materials/ChaosMod/Checkers_2.vtf")) checkersMaterials = false;
 }
 
 
 public void Chaos_Checkers_START(){
-	Add_Overlay("/Chaos/Checkers_1.vtf");
+	Add_Overlay("/ChaosMod/Checkers_1.vtf");
 	Checkers = true;
 }
 
 
 public void Chaos_Checkers_RESET(bool EndChaos){
 	Checkers = false;
-	Remove_Overlay("/Chaos/Checkers_1.vtf");
-	Remove_Overlay("/Chaos/Checkers_2.vtf");
+	Remove_Overlay("/ChaosMod/Checkers_1.vtf");
+	Remove_Overlay("/ChaosMod/Checkers_2.vtf");
 }
 
 

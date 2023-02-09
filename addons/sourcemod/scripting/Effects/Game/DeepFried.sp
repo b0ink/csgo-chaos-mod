@@ -10,8 +10,8 @@ public void Chaos_DeepFried(effect_data effect){
 bool deepFriedMaterials = true;
 
 public void Chaos_DeepFried_OnMapStart(){
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/deepfried.raw");
-	if(!FileExists("materials/Chaos/ColorCorrection/deepfried.raw")) deepFriedMaterials = false;
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/deepfried.raw");
+	if(!FileExists("materials/ChaosMod/ColorCorrection/deepfried.raw")) deepFriedMaterials = false;
 }
 
 public void Chaos_DeepFried_START(){

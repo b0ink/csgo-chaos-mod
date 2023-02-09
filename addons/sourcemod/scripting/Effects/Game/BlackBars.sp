@@ -8,22 +8,22 @@ public void Chaos_BlackBars(effect_data effect){
 bool blackBarsMaterials = true;
 
 public void Chaos_BlackBars_OnMapStart(){
-	PrecacheDecal("Chaos/BlackBars.vmt", true);
-	PrecacheDecal("Chaos/BlackBars.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/BlackBars.vtf");
-	AddFileToDownloadsTable("materials/Chaos/BlackBars.vmt");
+	PrecacheDecal("ChaosMod/BlackBars.vmt", true);
+	PrecacheDecal("ChaosMod/BlackBars.vtf", true);
+	AddFileToDownloadsTable("materials/ChaosMod/BlackBars.vtf");
+	AddFileToDownloadsTable("materials/ChaosMod/BlackBars.vmt");
 
-	if(!FileExists("materials/Chaos/BlackBars.vtf")) blackBarsMaterials =  false;
-	if(!FileExists("materials/Chaos/BlackBars.vmt")) blackBarsMaterials = false;
+	if(!FileExists("materials/ChaosMod/BlackBars.vtf")) blackBarsMaterials =  false;
+	if(!FileExists("materials/ChaosMod/BlackBars.vmt")) blackBarsMaterials = false;
 }
 
 public void Chaos_BlackBars_START(){
-	Add_Overlay("/Chaos/BlackBars.vtf");
+	Add_Overlay("/ChaosMod/BlackBars.vtf");
 }
 
 
 public void Chaos_BlackBars_RESET(bool EndChaos){
-	Remove_Overlay("/Chaos/BlackBars.vtf");
+	Remove_Overlay("/ChaosMod/BlackBars.vtf");
 }
 
 public bool Chaos_BlackBars_Conditions(bool EffectRunRandomly){

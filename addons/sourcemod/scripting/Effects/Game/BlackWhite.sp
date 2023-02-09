@@ -10,8 +10,8 @@ public void Chaos_BlackWhite(effect_data effect){
 bool blackWhiteMaterials = true;
 
 public void Chaos_BlackWhite_OnMapStart(){
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/blackandwhite.raw");
-	if(!FileExists("materials/Chaos/ColorCorrection/blackandwhite.raw")) blackWhiteMaterials = false;
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/blackandwhite.raw");
+	if(!FileExists("materials/ChaosMod/ColorCorrection/blackandwhite.raw")) blackWhiteMaterials = false;
 }
 
 public void Chaos_BlackWhite_START(){

@@ -10,17 +10,17 @@ public void Chaos_LSD(effect_data effect){
 bool lsdMaterials = true;
 
 public void Chaos_LSD_OnMapStart(){
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_1.raw");
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_2.raw");
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_3.raw");
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_4.raw");
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/env_5.raw");
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/env_1.raw");
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/env_2.raw");
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/env_3.raw");
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/env_4.raw");
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/env_5.raw");
 
-	if(!FileExists("materials/Chaos/ColorCorrection/env_1.raw")) lsdMaterials = false;
-	if(!FileExists("materials/Chaos/ColorCorrection/env_2.raw")) lsdMaterials = false;
-	if(!FileExists("materials/Chaos/ColorCorrection/env_3.raw")) lsdMaterials = false;
-	if(!FileExists("materials/Chaos/ColorCorrection/env_4.raw")) lsdMaterials = false;
-	if(!FileExists("materials/Chaos/ColorCorrection/env_5.raw")) lsdMaterials = false;
+	if(!FileExists("materials/ChaosMod/ColorCorrection/env_1.raw")) lsdMaterials = false;
+	if(!FileExists("materials/ChaosMod/ColorCorrection/env_2.raw")) lsdMaterials = false;
+	if(!FileExists("materials/ChaosMod/ColorCorrection/env_3.raw")) lsdMaterials = false;
+	if(!FileExists("materials/ChaosMod/ColorCorrection/env_4.raw")) lsdMaterials = false;
+	if(!FileExists("materials/ChaosMod/ColorCorrection/env_5.raw")) lsdMaterials = false;
 
 }
 

@@ -12,17 +12,17 @@ public void Chaos_OffsetCrosshair(effect_data effect){
 bool offsetCrosshairMaterials = true;
 
 public void Chaos_OffsetCrosshair_OnMapStart(){
-	PrecacheDecal("Chaos/OffsetCrosshair.vmt", true);
-	PrecacheDecal("Chaos/OffsetCrosshair.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/OffsetCrosshair.vtf");
-	AddFileToDownloadsTable("materials/Chaos/OffsetCrosshair.vmt");
+	PrecacheDecal("ChaosMod/OffsetCrosshair.vmt", true);
+	PrecacheDecal("ChaosMod/OffsetCrosshair.vtf", true);
+	AddFileToDownloadsTable("materials/ChaosMod/OffsetCrosshair.vtf");
+	AddFileToDownloadsTable("materials/ChaosMod/OffsetCrosshair.vmt");
 
-	if(!FileExists("materials/Chaos/OffsetCrosshair.vmt")) offsetCrosshairMaterials = false;
-	if(!FileExists("materials/Chaos/OffsetCrosshair.vtf")) offsetCrosshairMaterials = false;
+	if(!FileExists("materials/ChaosMod/OffsetCrosshair.vmt")) offsetCrosshairMaterials = false;
+	if(!FileExists("materials/ChaosMod/OffsetCrosshair.vtf")) offsetCrosshairMaterials = false;
 }
 
 public void Chaos_OffsetCrosshair_START(){
-	Add_Overlay("/Chaos/OffsetCrosshair.vtf");
+	Add_Overlay("/ChaosMod/OffsetCrosshair.vtf");
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", HIDEHUD_CROSSHAIR);
 	}
@@ -33,7 +33,7 @@ public void Chaos_OffsetCrosshair_RESET(bool EndChaos){
 	LoopValidPlayers(i){
 		SetEntProp(i, Prop_Send, "m_iHideHUD", 0);
 	}
-	Remove_Overlay("/Chaos/OffsetCrosshair.vtf");
+	Remove_Overlay("/ChaosMod/OffsetCrosshair.vtf");
 }
 
 public void Chaos_OffsetCrosshair_OnPlayerSpawn(int client){

@@ -20,7 +20,7 @@ public void Chaos_Thunderstorm(effect_data effect){
 char ThunderstormExplosionSFX[] = "weapons/hegrenade/explode5.wav";
 
 public void Chaos_Thunderstorm_OnMapStart(){
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/thunderstorm.raw");
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/thunderstorm.raw");
 	PrecacheSound(ThunderstormExplosionSFX);
 }
 

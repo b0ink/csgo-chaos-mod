@@ -1,0 +1,14 @@
+"UnlitGeneric"
+{
+	"$basetexture" "ChaosMod/DVDScreensaver"
+	"$translucent" 1
+	"Proxies"
+	{
+		"AnimatedTexture"
+		{
+			"animatedTextureVar"	"$basetexture"
+			"animatedTextureFrameNumVar"	"$frame"
+			"animatedTextureFrameRate"		"10"
+		}
+	}
+}

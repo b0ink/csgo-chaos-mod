@@ -10,8 +10,8 @@ public void Chaos_Saturation(effect_data effect){
 bool saturationMaterials = true;
 
 public void Chaos_Saturation_OnMapStart(){
-	AddFileToDownloadsTable("materials/Chaos/ColorCorrection/saturation.raw");
-	if(!FileExists("materials/Chaos/ColorCorrection/saturation.raw")) saturationMaterials = false;
+	AddFileToDownloadsTable("materials/ChaosMod/ColorCorrection/saturation.raw");
+	if(!FileExists("materials/ChaosMod/ColorCorrection/saturation.raw")) saturationMaterials = false;
 }
 
 public void Chaos_Saturation_START(){

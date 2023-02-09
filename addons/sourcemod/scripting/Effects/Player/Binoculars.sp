@@ -8,13 +8,13 @@ public void Chaos_Binoculars(effect_data effect){
 bool binocularsMaterials = true;
 
 public void Chaos_Binoculars_OnMapStart(){
-	PrecacheDecal("Chaos/binoculars.vmt", true);
-	PrecacheDecal("Chaos/binoculars.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/binoculars.vtf");
-	AddFileToDownloadsTable("materials/Chaos/binoculars.vmt");
+	PrecacheDecal("ChaosMod/binoculars.vmt", true);
+	PrecacheDecal("ChaosMod/binoculars.vtf", true);
+	AddFileToDownloadsTable("materials/ChaosMod/binoculars.vtf");
+	AddFileToDownloadsTable("materials/ChaosMod/binoculars.vmt");
 	
-	if(!FileExists("materials/Chaos/binoculars.vtf")) binocularsMaterials = false;
-	if(!FileExists("materials/Chaos/binoculars.vmt")) binocularsMaterials = false;
+	if(!FileExists("materials/ChaosMod/binoculars.vtf")) binocularsMaterials = false;
+	if(!FileExists("materials/ChaosMod/binoculars.vmt")) binocularsMaterials = false;
 }
 
 int binocularsFOV;
@@ -25,7 +25,7 @@ public void Chaos_Binoculars_START(){
 		SetEntProp(i, Prop_Send, "m_iFOV", binocularsFOV);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", binocularsFOV);
 	}
-	Add_Overlay("/Chaos/binoculars.vtf");
+	Add_Overlay("/ChaosMod/binoculars.vtf");
 }
 
 
@@ -35,7 +35,7 @@ public void Chaos_Binoculars_RESET(int ResetType){
 		SetEntProp(i, Prop_Send, "m_iFOV", 0);
 		SetEntProp(i, Prop_Send, "m_iDefaultFOV", 90);
 	}
-	Remove_Overlay("/Chaos/binoculars.vtf");
+	Remove_Overlay("/ChaosMod/binoculars.vtf");
 }
 
 public void Chaos_Binoculars_OnPlayerSpawn(int client){

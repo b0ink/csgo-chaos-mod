@@ -8,22 +8,22 @@ public void Chaos_DVDScreensaver(effect_data effect){
 }
 
 public void Chaos_DVDScreensaver_OnMapStart(){
-	PrecacheDecal("Chaos/DVDScreensaver.vmt", true);
-	PrecacheDecal("Chaos/DVDScreensaver.vtf", true);
-	AddFileToDownloadsTable("materials/Chaos/DVDScreensaver.vtf");
-	AddFileToDownloadsTable("materials/Chaos/DVDScreensaver.vmt");
+	PrecacheDecal("ChaosMod/DVDScreensaver.vmt", true);
+	PrecacheDecal("ChaosMod/DVDScreensaver.vtf", true);
+	AddFileToDownloadsTable("materials/ChaosMod/DVDScreensaver.vtf");
+	AddFileToDownloadsTable("materials/ChaosMod/DVDScreensaver.vmt");
 
-	if(!FileExists("materials/Chaos/DVDScreensaver.vtf")) DVDScreensaverMaterials =  false;
-	if(!FileExists("materials/Chaos/DVDScreensaver.vmt")) DVDScreensaverMaterials = false;
+	if(!FileExists("materials/ChaosMod/DVDScreensaver.vtf")) DVDScreensaverMaterials =  false;
+	if(!FileExists("materials/ChaosMod/DVDScreensaver.vmt")) DVDScreensaverMaterials = false;
 }
 
 public void Chaos_DVDScreensaver_START(){
-	Add_Overlay("/Chaos/DVDScreensaver.vtf");
+	Add_Overlay("/ChaosMod/DVDScreensaver.vtf");
 }
 
 
 public void Chaos_DVDScreensaver_RESET(int ResetType){
-	Remove_Overlay("/Chaos/DVDScreensaver.vtf");
+	Remove_Overlay("/ChaosMod/DVDScreensaver.vtf");
 }
 
 public bool DVDScreensaver_Conditions(bool EffectRunRandomly){
