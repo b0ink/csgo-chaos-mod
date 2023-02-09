@@ -696,4 +696,8 @@
     {
         "en"    "DVD Screensaver"
     }
+    "Chaos_NearMiss"
+    {
+        "en"    "Near Miss"
+    }
 }
