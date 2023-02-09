@@ -1,6 +1,7 @@
 #include "Effects/Game/Armageddon.sp"
 #include "Effects/Game/AutoPlantC4.sp"
 #include "Effects/Game/BlackBars.sp"
+#include "Effects/Game/DVDScreensaver.sp"
 #include "Effects/Game/BlackWhite.sp"
 #include "Effects/Game/Blur.sp"
 #include "Effects/Game/BreakTime.sp"

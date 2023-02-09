@@ -63,7 +63,6 @@ void Update_Overlay(){
 	}else{
 		path = "";
 	}
-
 	LoopValidPlayers(i){
 		ClientCommand(i, "r_screenoverlay \"%s\"", path);
 	}

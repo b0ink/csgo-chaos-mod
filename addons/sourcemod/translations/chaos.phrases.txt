@@ -690,6 +690,6 @@
     }
 	"Chaos_HighPitch"
     {
-        "en"    "Low Pitch"
+        "en"    "High Pitch"
     }
 }
