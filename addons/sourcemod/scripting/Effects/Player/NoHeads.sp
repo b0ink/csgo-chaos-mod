@@ -6,8 +6,6 @@ public void Chaos_NoHeads(EffectData effect){
 	effect.AddFlag("playermodel");
 }
 
-char originalNoHeadModels[MAXPLAYERS+1][PLATFORM_MAX_PATH];
-
 char NoHead_T_Path[PLATFORM_MAX_PATH] = "models/player/custom_player/legacy/tm_leet_variantk_nohead.mdl";
 char NoHead_CT_Path[PLATFORM_MAX_PATH] = "models/player/custom_player/legacy/ctm_st6_nohead.mdl";
 
@@ -37,10 +35,7 @@ public void Chaos_NoHeads_START(){
 }
 
 void SetNoHeadModel(int client){
-	int team = GetClientTeam(client);
-	GetClientModel(client, originalNoHeadModels[client], PLATFORM_MAX_PATH);
-
-	if(team == CS_TEAM_T){
+	if(GetClientTeam(client) == CS_TEAM_T){
 		SetEntityModel(client, NoHead_T_Path);
 	}else{
 		SetEntityModel(client, NoHead_CT_Path);
@@ -50,11 +45,7 @@ void SetNoHeadModel(int client){
 
 public void Chaos_NoHeads_RESET(int ResetType){
 	if(ResetType & RESET_EXPIRED){
-		LoopAlivePlayers(i){
-			if(originalNoHeadModels[i][0] != '\0'){
-				SetEntityModel(i, originalNoHeadModels[i]);
-			}
-		}
+		RestorePlayerModels();
 	}
 }
 

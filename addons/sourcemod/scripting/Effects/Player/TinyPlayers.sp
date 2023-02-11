@@ -53,11 +53,6 @@ Address g_CSViewVectors;
 float g_fOldHullValues[sizeof( g_fNewHullValues )];
 bool FoundCSViewVectors = false;
 
-
-
-char defaultTinyModels[MAXPLAYERS+1][PLATFORM_MAX_PATH];
-
-
 char tinyPlayer_t[] = "models/player/custom_player/boink/tm_leet_variantb_tiny.mdl";
 char tinyPlayerPhy_t[] = "models/player/custom_player/boink/tm_leet_variantb_tiny.phy";
 char tinyPlayerVvd_t[] = "models/player/custom_player/boink/tm_leet_variantb_tiny.vvd";
@@ -140,7 +135,6 @@ public void Chaos_TinyPlayers_START(){
 }
 
 void SetTinyPlayer(int client){
-	GetEntPropString(client, Prop_Data, "m_ModelName", defaultTinyModels[client], PLATFORM_MAX_PATH);
 	if(GetClientTeam(client) == CS_TEAM_CT){
 		SetEntityModel(client, tinyPlayer_ct);
 	}else{
@@ -148,8 +142,8 @@ void SetTinyPlayer(int client){
 	}
 		
 
-	SDKUnhook(client, SDKHook_PostThink, PostThink);
-	SDKHook(client, SDKHook_PostThink, PostThink);
+	SDKUnhook(client, SDKHook_PostThink, TinyPlayers_PostThink);
+	SDKHook(client, SDKHook_PostThink, TinyPlayers_PostThink);
 }
 
 
@@ -161,14 +155,13 @@ public void Chaos_TinyPlayers_RESET(int ResetType){
 	ResetCvar("sv_jump_impulse", "301", "275");
 	
 	LoopValidPlayers(i){
-		SDKUnhook(i, SDKHook_PostThink, PostThink);
+		SDKUnhook(i, SDKHook_PostThink, TinyPlayers_PostThink);
 	}
+
+	RestorePlayerModels();
 	
-	LoopAlivePlayers(i){
-		if(ResetType & RESET_EXPIRED){
-			if(defaultTinyModels[i][0] != '\0'){
-				SetEntityModel(i, defaultTinyModels[i]);
-			}
+	if(ResetType & RESET_EXPIRED){
+		LoopAlivePlayers(i){
 			if(!HasMenuOpen(i)){
 				ClientCommand(i, "slot1");
 			}
@@ -184,7 +177,7 @@ public void Chaos_TinyPlayers_RESET(int ResetType){
 }
 
 
-public void PostThink(int client){
+public void TinyPlayers_PostThink(int client){
 	if(!TinyPlayers) return;
 
 	// if(!IsFakeClient(client)){

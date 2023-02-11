@@ -29,7 +29,7 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	if (GameRules_GetProp("m_bWarmupPeriod") == 1){
 		CreateTimer(1.0, Timer_SendSettingsReminder, client, TIMER_FLAG_NO_MAPCHANGE);
 	}
-
+	CreateTimer(0.18, Timer_SavePlayerModels, client, TIMER_FLAG_NO_MAPCHANGE);
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		// Only trigger playerspawn function if effect is active
 		if(Chaos_EffectData_Buffer.OnPlayerSpawn != INVALID_FUNCTION && Chaos_EffectData_Buffer.Timer != INVALID_HANDLE){
@@ -44,6 +44,11 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 	}
 	
 	return Plugin_Continue;
+}
+
+Action Timer_SavePlayerModels(Handle timer, int client){
+	SavePlayerModel(client);
+	return Plugin_Stop;
 }
 
 public Action Event_PlayerDeath(Event event, char[] name, bool dontBroadcast){

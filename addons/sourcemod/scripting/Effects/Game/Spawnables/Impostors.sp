@@ -17,16 +17,16 @@ public void Chaos_Impostors_RESET(int ResetType){
 	}
 }
 
-Handle OriginalPlayerModels = INVALID_HANDLE;
+Handle ImpostorModels = INVALID_HANDLE;
 
 void SpawnImpostors(){
-	OriginalPlayerModels = CreateArray(PLATFORM_MAX_PATH);
+	ImpostorModels = CreateArray(PLATFORM_MAX_PATH);
 	char modelName[PLATFORM_MAX_PATH];
 	LoopAlivePlayers(i){
 		GetEntPropString(i, Prop_Data, "m_ModelName", modelName, sizeof(modelName));
-		PushArrayString(OriginalPlayerModels, modelName);
+		PushArrayString(ImpostorModels, modelName);
 	}
-	if(GetArraySize(OriginalPlayerModels) == 0) return;
+	if(GetArraySize(ImpostorModels) == 0) return;
 
 	for(int i = 0; i < GetArraySize(g_MapCoordinates); i++){
 		int chance = GetRandomInt(0,100);
@@ -42,8 +42,8 @@ void SpawnImpostors(){
 			if(chicken != -1 && fakePlayer != -1){
 				DispatchKeyValue(chicken, "targetname", "Impostors");
 				char ImpostorModel[PLATFORM_MAX_PATH];
-				int randomSkin = GetRandomInt(0, GetArraySize(OriginalPlayerModels) - 1);
-				GetArrayString(OriginalPlayerModels, randomSkin, ImpostorModel, sizeof(ImpostorModel));
+				int randomSkin = GetRandomInt(0, GetArraySize(ImpostorModels) - 1);
+				GetArrayString(ImpostorModels, randomSkin, ImpostorModel, sizeof(ImpostorModel));
 
 				DispatchKeyValue(fakePlayer, "targetname", "fake_player");
 				DispatchKeyValue(fakePlayer, "disableshadows", "1");
@@ -112,7 +112,7 @@ void SpawnImpostors(){
 			}
 		}
 	}
-	delete OriginalPlayerModels;
+	delete ImpostorModels;
 }
 
 public bool Chaos_Impostors_Conditions(bool EffectRunRandomly){

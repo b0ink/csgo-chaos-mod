@@ -28,6 +28,34 @@
 // 	bool KnifeOnly;
 // }
 
+char OriginalPlayerModels[MAXPLAYERS+1][PLATFORM_MAX_PATH];
+
+void SavePlayerModel(int client){
+	if(ValidAndAlive(client)){
+		GetEntPropString(client, Prop_Data, "m_ModelName", OriginalPlayerModels[client], PLATFORM_MAX_PATH);
+	}
+}
+
+/**
+ * Restores all clients' player models they spawned with at round start.
+ * 
+ * @param client     Optional client to target individually, leave empty to restore all players.
+ */
+void RestorePlayerModels(int client = -1){
+	if(ValidAndAlive(client)){
+		if(OriginalPlayerModels[client][0] != '\0'){
+			SetEntityModel(client, OriginalPlayerModels[client]);
+		}
+		return;
+	}
+	
+	LoopAlivePlayers(i){
+		if(OriginalPlayerModels[i][0] != '\0'){
+			SetEntityModel(i, OriginalPlayerModels[i]);
+		}
+	}
+}
+
 int BlockGun_EffectCount = 0;
 public Action BlockAllGuns(int client, int weapon) {
 	char WeaponName[32];

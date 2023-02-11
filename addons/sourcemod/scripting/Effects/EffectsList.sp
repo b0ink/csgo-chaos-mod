@@ -35,7 +35,7 @@
 #include "Effects/Game/Saturation.sp"
 #include "Effects/Game/Snow.sp"
 #include "Effects/Game/Spawnables/BigChooks.sp"
-#include "Effects/Game/Spawnable/DoorStuck.sp"
+#include "Effects/Game/Spawnables/DoorStuck.sp"
 #include "Effects/Game/Spawnables/FencedOff.sp"
 #include "Effects/Game/Spawnables/Impostors.sp"
 #include "Effects/Game/Spawnables/LittleChooks.sp"

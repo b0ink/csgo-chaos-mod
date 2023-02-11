@@ -9,8 +9,6 @@ public void Chaos_SwapPlayerModels(EffectData effect){
 Handle SwapPlayerModel_T;
 Handle SwapPlayerModel_CT;
 
-char SwapPlayerModels_Original[MAXPLAYERS+1][PLATFORM_MAX_PATH];
-
 public void Chaos_SwapPlayerModels_INIT(){
 	SwapPlayerModel_T = CreateArray(PLATFORM_MAX_PATH);
 	SwapPlayerModel_CT = CreateArray(PLATFORM_MAX_PATH);
@@ -61,7 +59,6 @@ void SwapPlayerModels(int client = -1){
 		}
 		if(modelName[0] == '\0') continue;
 		if((ValidAndAlive(client) && i == client) || client == -1){
-			GetEntPropString(i,	Prop_Data, "m_ModelName", SwapPlayerModels_Original[i], PLATFORM_MAX_PATH);
 			SetEntityModel(i, modelName);
 		}
 	}
@@ -71,11 +68,7 @@ void SwapPlayerModels(int client = -1){
 
 public void Chaos_SwapPlayerModels_RESET(int ResetType){
 	if(ResetType & RESET_EXPIRED){
-		LoopAlivePlayers(i){
-			if(SwapPlayerModels_Original[i][0] != '\0'){
-				SetEntityModel(i, SwapPlayerModels_Original[i]);
-			}
-		}
+		RestorePlayerModels();
 	}
 }
 
