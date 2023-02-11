@@ -17,7 +17,7 @@ SM Teleport by "Spazman0".\
 [Player Compass](https://forums.alliedmods.net/showthread.php?p=1920200) by "Popoklopsi"\
 [Tear Gas](https://forums.alliedmods.net/showthread.php?p=923823) by "lackops7799"\
 [Throwing Knives](https://forums.alliedmods.net/showthread.php?t=269846) by "Bacardi"\
-[Damage Bar](https://github.com/Natanel-Shitrit/Damage-Bar) by "Natanel 'LuqS'"
+[Damage Bar](https://github.com/Natanel-Shitrit/Damage-Bar) by "Natanel 'LuqS'"\
 [Prop Shooter Technique](https://github.com/Rachnus/Propshooter-Sourcemod-CS-GO-/) by "Rachnus"
 
 Multiple ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".
