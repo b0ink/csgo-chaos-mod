@@ -13,7 +13,12 @@ SM Teleport by "Spazman0".\
 [LSD ColorCorrection](https://gamebanana.com/mods/80495) (.raw) files from "[SG] Paul!"\
 [Double Jump](https://forums.alliedmods.net/showthread.php?p=895212) by "Paegus/NcB_Save".\
 [Turrets](https://forums.alliedmods.net/showthread.php?t=312548) by "e54385991/xnet".\
-[Blur & No Head models](https://steamcommunity.com/id/defuj/) by "defuJ"
+[Blur & No Head models](https://steamcommunity.com/id/defuj/) by "defuJ"\
+[Player Compass](https://forums.alliedmods.net/showthread.php?p=1920200) by "Popoklopsi"\
+[Tear Gas](https://forums.alliedmods.net/showthread.php?p=923823) by "lackops7799"\
+[Throwing Knives](https://forums.alliedmods.net/showthread.php?t=269846) by "Bacardi"\
+[Damage Bar](https://github.com/Natanel-Shitrit/Damage-Bar) by "Natanel 'LuqS'"
+[Prop Shooter Technique](https://github.com/Rachnus/Propshooter-Sourcemod-CS-GO-/) by "Rachnus"
 
 Multiple ideas inspired from [Fun Rounds Plugin](https://forums.alliedmods.net/showthread.php?t=265885) by "boomix".
 
