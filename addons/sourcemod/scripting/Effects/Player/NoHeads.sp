@@ -3,6 +3,7 @@
 public void Chaos_NoHeads(EffectData effect){
 	effect.Title = "No Heads";
 	effect.Duration = 30;
+	effect.IncompatibleWith("Chaos_HeadshotOnly");
 	effect.AddFlag("playermodel");
 }
 
