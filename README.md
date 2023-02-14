@@ -135,7 +135,9 @@ Several effects rely on map-specific spawn points to spawn items and teleport pl
 ---
 
 <p align="center">
-<sub>Project started around the 8th of September, 2021.<b>Follow project development in the [CS:GO Chaos Mod Discord Server](http://discord.gg/388PbkK8DZ)</sub>
+<sub>Project started around the 8th of September, 2021.<br>Follow project development in the 
+	<a href="http://discord.gg/388PbkK8DZ" 
+	target="_blank">CS:GO Chaos Mod Discord Server</a>
 	<br>
 	<br>
 	<a href="https://www.paypal.com/donate/?hosted_button_id=D2RUGH8KTRXTJ" 
