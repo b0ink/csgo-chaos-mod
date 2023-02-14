@@ -2,13 +2,18 @@
 
 public void Chaos_Give100HP(EffectData effect){
 	effect.Title = "Give all players +100 HP";
-	effect.Duration = 30;
 	effect.HasNoDuration = true;
 }
 
 public void Chaos_Give100HP_START(){
 	LoopAlivePlayers(i){
-		int currenthealth = GetClientHealth(i);
-		SetEntityHealth(i, currenthealth + 100);
+		SetEntityHealth(i, GetClientHealth(i) + 100);
 	}
+}
+
+public bool Chaos_Give100HP_Conditions(bool EffectRunRandomly){
+	if(EffectRunRandomly){
+		if(GetRoundTime() < 15) return false;
+	}
+	return true;
 }
