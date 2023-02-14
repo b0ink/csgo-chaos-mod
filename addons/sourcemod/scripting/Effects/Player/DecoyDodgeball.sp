@@ -4,6 +4,8 @@ public void Chaos_DecoyDodgeball(EffectData effect){
 	effect.Title = "Decoy Dodgeball";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Thunderstorm");
+	effect.IncompatibleWith("Chaos_Boxing");
+	effect.IncompatibleWith("Chaos_OHKO");
 } 
 
 //hook
@@ -15,10 +17,10 @@ public Action Chaos_DecoyDodgeball_Hook_WeaponSwitch(int client, int weapon){
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
 	if(g_bDecoyDodgeball){
 		if(StrContains(WeaponName, "decoy") == -1 &&
-			StrContains(WeaponName, "c4") == -1 &&
-			StrContains(WeaponName, "flashbang") == -1){
-			//this works without forcing the weapon
-			// FakeClientCommand(client, "use weapon_decoy");
+			StrContains(WeaponName, "c4") == -1
+			&& StrContains(WeaponName, "flashbang") == -1
+			){
+			// RequestFrame(SwitchToDecoy, client);
 			return Plugin_Handled;
 		}else{
 			return Plugin_Continue;
@@ -27,6 +29,15 @@ public Action Chaos_DecoyDodgeball_Hook_WeaponSwitch(int client, int weapon){
 	return Plugin_Continue;
 }
 
+// public void SwitchToDecoy(int client){
+// 	return;
+// 	if(ValidAndAlive(client)){
+// 		if(!PlayerHasWeapon(client, "weapon_decoy")){
+// 			GivePlayerItem(client, "weapon_decoy");
+// 		}
+// 		FakeClientCommand(client, "use weapon_decoy");
+// 	}
+// }
 
 
 public void Chaos_DecoyDodgeball_OnEntityCreated(int ent, const char[] classname){
@@ -47,12 +58,12 @@ public void HookOnDecoySpawn(int iGrenade) {
 			RemoveEntity(nadeslot);
 		}
 		GivePlayerItem(client, "weapon_decoy");
+		FakeClientCommand(client, "use weapon_decoy");
 	}
 }
 
 
 public void Chaos_DecoyDodgeball_START(){
-	
 	LoopAlivePlayers(i){
 		SDKHook(i, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
 	}
@@ -62,7 +73,6 @@ public void Chaos_DecoyDodgeball_START(){
 		SetDecoyDodgeball(i);
 	}
 	g_DecoyDodgeball_CheckDecoyTimer = CreateTimer(5.0, Timer_CheckDecoys, _, TIMER_REPEAT);
-
 }
 
 void SetDecoyDodgeball(int client){
@@ -76,6 +86,7 @@ void SetDecoyDodgeball(int client){
 		FakeClientCommand(client, "use weapon_decoy");
 		SetEntityHealth(client, 1);	
 }
+
 
 public void Chaos_DecoyDodgeball_OnPlayerSpawn(int client){
 	SDKHook(client, SDKHook_WeaponSwitch, Chaos_DecoyDodgeball_Hook_WeaponSwitch);
@@ -104,22 +115,11 @@ public void Chaos_DecoyDodgeball_RESET(int ResetType){
 Action Timer_CheckDecoys(Handle timer){
 	if(g_bDecoyDodgeball){
 		LoopAlivePlayers(i){
-			bool hasDecoy = false;
-			int wepID = -1;
-			for(int slot = 0; slot < 7; slot++){
-				if((wepID = GetPlayerWeaponSlot(i, slot)) != -1){
-					char ClientWeaponName[64];
-					GetWeaponClassname(wepID, ClientWeaponName, 64);
-					if(IsValidEntity(wepID)){
-						if(StrContains(ClientWeaponName, "weapon_decoy") != -1){
-							hasDecoy = true;
-						}
-					} 
-				}
-			}
-			if(!hasDecoy){
+			if(!PlayerHasWeapon(i, "weapon_decoy")){
 				GivePlayerItem(i, "weapon_decoy");
 			}
+			FakeClientCommand(i, "use weapon_decoy");
+
 		}
 	}
 	return Plugin_Continue;

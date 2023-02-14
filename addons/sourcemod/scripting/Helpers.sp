@@ -355,6 +355,23 @@ void DoKnockback(int client, float amount){
 }
 
 
+bool PlayerHasWeapon(int client, char[] weaponName){
+	int size = GetEntPropArraySize(client, Prop_Send, "m_hMyWeapons");
+	char itemName[64];
+
+	for (int i; i < size; i++){
+		int item = GetEntPropEnt(client, Prop_Send, "m_hMyWeapons", i);
+		if (item == -1) continue;
+		
+		GetEntityClassname(item, itemName, sizeof(itemName));
+		if(StrEqual(weaponName, itemName, false)){
+			return true;
+		}
+	}
+	return false;
+}
+
+
 
 /**
  * Gets total rounds played in the current map
