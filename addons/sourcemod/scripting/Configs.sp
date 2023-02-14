@@ -176,6 +176,7 @@ void SaveBombPosition(){
 public Action Timer_SaveCoordinates(Handle timer){
 		
 	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return Plugin_Continue;
+	if(g_bPortalGuns || g_bActiveNoclip) return Plugin_Continue;
 
 	float client_vec[3];
 	float client_vel[3];
