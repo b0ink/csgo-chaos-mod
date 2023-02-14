@@ -14,7 +14,6 @@ public void Chaos_TeleportOnKill_START(){
 	TeleportOnKill = true;
 }
 
-
 public void Chaos_TeleportOnKill_RESET(int ResetType){
 	TeleportOnKill = false;
 }
@@ -25,7 +24,11 @@ public void Chaos_TeleportOnKill_Event_PlayerDeath(Event event, const char[] nam
 	
 	float location[3];
 	GetClientAbsOrigin(victim, location);
-	location[2] -= 64.0;
+	if(GetClientButtons(victim) & IN_DUCK){
+		location[2] -= 45.0;
+	}else{
+		location[2] -= 60.0;
+	}
 	
 	int attacker = GetClientOfUserId(event.GetInt("attacker"));
 	if(ValidAndAlive(attacker)){
