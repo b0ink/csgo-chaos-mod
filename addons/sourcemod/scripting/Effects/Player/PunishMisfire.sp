@@ -52,7 +52,7 @@ public void CheckFire(int client){
 	if(!ValidAndAlive(client)) return;
 	if(PlayerShot[client]){
 		int health = GetEntProp(client, Prop_Send, "m_iHealth");
-		health -= 15;
+		health -= 1;
 		if(GetRandomInt(0, 1) == 0){
 			ClientCommand(client, "playgamesound player/damage3.wav");
 		}else{
@@ -60,7 +60,7 @@ public void CheckFire(int client){
 		}
 		ClientCommand(client, "playgamesound player/pl_pain5.wav");
 		if(health <= 0){
-			SlapPlayer(client, 1, false);
+			ForcePlayerSuicide(client);
 		}else{
 			SetEntityHealth(client, health );
 		}
