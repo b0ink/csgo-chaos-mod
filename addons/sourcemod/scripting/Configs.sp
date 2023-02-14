@@ -117,7 +117,7 @@ public void OnConfigsExecuted(){
 
 	if(!ValidMapPoints()){
 		Log("No valid map points. Locations will be automatically saved");
-		ParseMapCoordinates("Chaos_TempLocations");
+		ParseMapCoordinates("Chaos_TempLocations2");
 		CreateTimer(2.5, Timer_SaveCoordinates, _, TIMER_REPEAT);
 	}
 
@@ -159,10 +159,10 @@ void SaveBombPosition(){
 	FormatEx(c4_loc_string, sizeof(c4_loc_string), "%f %f %f", c4_location[0], c4_location[1], c4_location[2]);
 
 	if(site == BOMBSITE_A){
-		UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, "bombA", c4_loc_string, .folderPath="data");
+		UpdateConfig(-1, "Chaos_TempLocations2", "Maps", g_sCurrentMapName, "bombA", c4_loc_string, .folderPath="data");
 		PushArrayArray(bombSiteA, c4_location);
 	}else if(site == BOMBSITE_B){
-		UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, "bombB", c4_loc_string, .folderPath="data");
+		UpdateConfig(-1, "Chaos_TempLocations2", "Maps", g_sCurrentMapName, "bombB", c4_loc_string, .folderPath="data");
 		PushArrayArray(bombSiteB, c4_location);
 	}
 
@@ -176,7 +176,7 @@ void SaveBombPosition(){
 public Action Timer_SaveCoordinates(Handle timer){
 		
 	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return Plugin_Continue;
-	if(g_bPortalGuns || g_bActiveNoclip) return Plugin_Continue;
+	if(g_bPortalGuns || TinyPlayers) return Plugin_Continue;
 
 	float client_vec[3];
 	float client_vel[3];
@@ -190,7 +190,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 		if(!(GetClientButtons(i) & IN_DUCK) && client_vel[2] == 0.0 && GetEntityMoveType(i) == MOVETYPE_WALK && GetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue") == 1.0) { //ensure player isnt mid jump or falling down
 			FormatEx(client_vec_string, sizeof(client_vec_string), "%f %f %f", client_vec[0], client_vec[1], client_vec[2]);
 			if(GetArraySize(g_MapCoordinates) == 0){
-				UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, client_vec_string, client_vec_string, .folderPath="data");
+				UpdateConfig(-1, "Chaos_TempLocations2", "Maps", g_sCurrentMapName, client_vec_string, client_vec_string, .folderPath="data");
 				PushArrayArray(g_MapCoordinates, client_vec);
 			}else{
 				float distanceToBeat = 99999.0;
@@ -202,7 +202,7 @@ public Action Timer_SaveCoordinates(Handle timer){
 					}
 				}
 				if(distanceToBeat > 250){
-					UpdateConfig(-1, "Chaos_TempLocations", "Maps", g_sCurrentMapName, client_vec_string, client_vec_string, .folderPath="data");
+					UpdateConfig(-1, "Chaos_TempLocations2", "Maps", g_sCurrentMapName, client_vec_string, client_vec_string, .folderPath="data");
 					PushArrayArray(g_MapCoordinates, client_vec);
 				}
 			}
