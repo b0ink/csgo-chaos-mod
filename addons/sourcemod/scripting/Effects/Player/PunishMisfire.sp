@@ -60,7 +60,7 @@ public void CheckFire(int client){
 		}
 		ClientCommand(client, "playgamesound player/pl_pain5.wav");
 		if(health <= 0){
-			SlapPlayer(client, 10, false);
+			SlapPlayer(client, 1, false);
 		}else{
 			SetEntityHealth(client, health );
 		}
