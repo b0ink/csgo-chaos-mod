@@ -40,9 +40,7 @@ void WEATHER_INIT(){
     PrecacheSound(THUNDER_2);
     PrecacheSound(THUNDER_3);
 
-
-
-    LIGHTNING_sprite = PrecacheModel(LIGHTNING_EFFECT);
+    LIGHTNING_sprite = PrecacheModel("materials/sprites/lgtning.vmt");
 
     Format(PrecipitationModel, sizeof(PrecipitationModel), "maps/%s.bsp", g_sCurrentMapName);
     PrecacheModel(PrecipitationModel, true);
