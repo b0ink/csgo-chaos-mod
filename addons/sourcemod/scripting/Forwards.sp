@@ -37,6 +37,12 @@ public void OnPluginEnd(){
 
 
 public void OnMapStart(){
+
+	/* Save models now mostly for plugin reloads */
+	LoopAlivePlayers(i){
+		SavePlayerModel(i);
+	}
+	
 	MetaEffectsHistory.Clear();
 	if(EffectsHistory != INVALID_HANDLE){
 		ClearArray(EffectsHistory);
