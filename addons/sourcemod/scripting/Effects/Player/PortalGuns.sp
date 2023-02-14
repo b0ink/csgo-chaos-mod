@@ -11,6 +11,10 @@ float g_PortalTeleports[MAXPLAYERS + 1][3];
 public void Chaos_PortalGuns(EffectData effect){
 	effect.Title = "Portal Guns";
 	effect.Duration = 30;
+	effect.IncompatibleWith("Chaos_KnifeFight");
+	effect.IncompatibleWith("Chaos_AlienKnifeFight");
+	effect.IncompatibleWith("Chaos_Boxing");
+	effect.IncompatibleWith("Chaos_DecoyDodgeball");
 }
 
 char BuzzSfx[] = "buttons/button18.wav";
