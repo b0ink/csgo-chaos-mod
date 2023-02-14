@@ -35,6 +35,7 @@ void Chaos_LooseTrigger_WeaponFire(Event event, const char[] name, bool dontBroa
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	char soundPath[PLATFORM_MAX_PATH];
 	Format(weaponName, 64, "%s", weaponName[7]);
+	PrintToChatAll(weaponName);
 	if(StrEqual(weaponName, "ak47")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/ak47/ak47_01.wav");
 	}else if(StrEqual(weaponName, "aug")){
@@ -43,7 +44,7 @@ void Chaos_LooseTrigger_WeaponFire(Event event, const char[] name, bool dontBroa
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/awp/awp_0%i.wav", LT_NumGen(1, 2));
 	}else if(StrEqual(weaponName, "bizon")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/bizon/bizon_0%i.wav", LT_NumGen(1, 2));
-	}else if(StrEqual(weaponName, "cz75")){
+	}else if(StrEqual(weaponName, "cz75a")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/cz75a/cz75_0%i.wav", LT_NumGen(1, 2, 3));
 	}else if(StrEqual(weaponName, "deagle")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/deagle/deagle_0%i.wav", LT_NumGen(1, 2));
@@ -71,7 +72,7 @@ void Chaos_LooseTrigger_WeaponFire(Event event, const char[] name, bool dontBroa
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/mac10/mac10_0%i.wav", LT_NumGen(1, 2, 3));
 	}else if(StrEqual(weaponName, "mag7")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/mag7/mag7_0%i.wav", LT_NumGen(1, 2));
-	}else if(StrEqual(weaponName, "mp5")){
+	}else if(StrEqual(weaponName, "mp5sd")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/mp5/mp5_01.wav");
 	}else if(StrEqual(weaponName, "mp7")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/mp7/mp7_0%i.wav", LT_NumGen(1, 2, 3, 4));
