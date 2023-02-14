@@ -4,20 +4,15 @@ public void Chaos_MoonGravity(EffectData effect){
 	effect.Title = "Low Gravity";
 	effect.Duration = 30;
 	effect.AddAlias("LowGravity");
+	effect.AddFlag("gravity");
 }
 
 public void Chaos_MoonGravity_START(){
-	LoopAlivePlayers(i){
-		SetEntityGravity(i, 0.3);
-	}
+	cvar("sv_gravity", "136");
 }
 
 public void Chaos_MoonGravity_RESET(int ResetType){
-	LoopAlivePlayers(i){
-		SetEntityGravity(i, 1.0);
+	if(ResetType & RESET_EXPIRED){
+		ResetCvar("sv_gravity", "800", "136");
 	}
-}
-
-public void Chaos_MoonGravity_OnPlayerSpawn(int client){
-	SetEntityGravity(client, 0.3);
 }
