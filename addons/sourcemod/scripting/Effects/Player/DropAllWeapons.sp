@@ -8,20 +8,34 @@ public void Chaos_DropAllWeapons(EffectData effect){
 }
 
 public void Chaos_DropAllWeapons_START(){
-	LoopAlivePlayers(i){
-		int weaponIndex;
-
-		// drop all nades
-		while((weaponIndex = GetPlayerWeaponSlot(i, CS_SLOT_GRENADE)) != -1){
-				CS_DropWeapon(i, weaponIndex, true, true);
+	LoopAlivePlayers(client){
+		float timer = 0.0;
+		
+		int size = GetEntPropArraySize(client, Prop_Send, "m_hMyWeapons");
+		for (int i; i < size; i++){
+			int item = GetEntPropEnt(client, Prop_Send, "m_hMyWeapons", i);
+			if (item == -1) continue;
+			DataPack pack = new DataPack();
+			pack.WriteCell(client);
+			pack.WriteCell(item);
+			CreateTimer(timer, Timer_DropWeaponIndex, pack);
+			timer += 0.1;
 		}
-
-		// drop weapons
-		for (int x = 0; x <= 6; x++){
-			if(x == CS_SLOT_KNIFE) continue;
-			if ((weaponIndex = GetPlayerWeaponSlot(i, x)) != -1){
-				CS_DropWeapon(i, weaponIndex, true, true);
-			}
-		} 
 	}
+}
+
+Action Timer_DropWeaponIndex(Handle timer, DataPack pack){
+	pack.Reset();
+	int client = pack.ReadCell();
+	int weapon = pack.ReadCell();
+	if(ValidAndAlive(client) && IsValidEntity(weapon)){
+		char weaponName[64];
+		GetEdictClassname(weapon, weaponName, 64);
+		if(StrContains(weaponName, "knife") == -1 && StrContains(weaponName, "knife") == -1){
+			CS_DropWeapon(client, weapon, true, true);
+			ClientCommand(client, "playgamesound \"weapons/knife/knife_slash2.wav\"");
+		}
+	}
+	delete pack;
+	return Plugin_Stop;
 }
