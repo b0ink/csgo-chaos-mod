@@ -27,13 +27,13 @@ void CLEAR_CC(char[] file = ""){
 	}
 }
 
-void CREATE_CC(char[] filename, char[] targetname = "", float fadeIn = 3.0, float fadeOut = 3.0){
+void CREATE_CC(char[] filename, char[] targetname = "", float fadeIn = 3.0, float fadeOut = 3.0, float maxweight = 1.0){
 	char path[PLATFORM_MAX_PATH];
 	FormatEx(path, sizeof(path), "materials/ChaosMod/ColorCorrection/%s.raw", filename);
 	int ent = CreateEntityByName("color_correction");
 	if(ent != -1){
 		DispatchKeyValue(ent, "StartDisabled", "1");
-		DispatchKeyValue(ent, "maxweight", "1.0");
+		DispatchKeyValueFloat(ent, "maxweight", maxweight);
 		DispatchKeyValue(ent, "maxfalloff", "-1.0");
 		DispatchKeyValue(ent, "minfalloff", "-1.0");
 		DispatchKeyValueFloat(ent, "fadeInDuration", fadeIn);

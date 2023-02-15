@@ -16,11 +16,11 @@ public void Chaos_IsThisMexico_OnMapStart(){
 }
 
 public void Chaos_IsThisMexico_START(){
-	CREATE_CC("mexico");
+	CREATE_CC("mexico", .maxweight=0.5);
 }
 
 public void Chaos_IsThisMexico_RESET(int ResetType){
-	CREATE_CC("mexico.raw");
+	CLEAR_CC("mexico.raw");
 }
 
 public bool Chaos_IsThisMexico_Conditions(bool EffectRunRandomly){
