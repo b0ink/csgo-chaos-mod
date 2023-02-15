@@ -111,7 +111,12 @@ Action Timer_LightningStrike(Handle timer) {
 	LoopAlivePlayers(i){
 		GetClientAbsOrigin(i, pos);
 		if (GetVectorDistance(pos, endpos) < 200.0){ // dealing damage to player if they are struck
-			SlapPlayer(i, 15, false); //TODO: if player has less than 15 health dont slap/ only go as far as 1hp instead of killing them?
+			int health = GetClientHealth(i);
+			if(health > 25){
+				SlapPlayer(i, 10, false);
+			}else{
+				SlapPlayer(i, 2, false);
+			}
 		}
 	}
 
