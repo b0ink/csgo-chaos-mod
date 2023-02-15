@@ -18,12 +18,12 @@ public void Chaos_BlindPlayers_RESET(int ResetType){
 	}
 }
 
-public Action Timer_DeactivateBlind(Handle timer){
-	LoopAlivePlayers(i){
-		PerformBlind(i, 0);
-	}
-	return Plugin_Continue;
-}
+// Action Timer_DeactivateBlind(Handle timer){
+// 	LoopAlivePlayers(i){
+// 		PerformBlind(i, 0);
+// 	}
+// 	return Plugin_Continue;
+// }
 
 public void Chaos_BlindPlayers_OnPlayerSpawn(int client){
 	PerformBlind(client, 255);

@@ -119,7 +119,7 @@ public void TeleportC4ToNewBombSite(){
 }
 
 
-public Action Timer_EnsureSpawnedAutoPlant(Handle timer){
+Action Timer_EnsureSpawnedAutoPlant(Handle timer){
 	if(g_PlantedSite == BOMBSITE_A){
 		AnnounceChaos(GetChaosTitle("Chaos_AutoPlantC4_A"), -1.0);
 	}else if(g_PlantedSite == BOMBSITE_B){

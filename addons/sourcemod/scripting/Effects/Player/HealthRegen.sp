@@ -15,7 +15,7 @@ public void Chaos_HealthRegen_RESET(int ResetType){
 	g_HealthRegen = false;
 }
 
-public Action Timer_GiveHealthRegen(Handle timer){
+Action Timer_GiveHealthRegen(Handle timer){
 	if(g_HealthRegen){
 		int currenthealth = -1;
 		LoopAlivePlayers(i){

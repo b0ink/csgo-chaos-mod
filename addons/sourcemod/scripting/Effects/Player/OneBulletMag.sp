@@ -41,7 +41,7 @@ public void Chaos_OneBulletMag_OnPlayerSpawn(int client){
 	CreateTimer(0.5, Timer_StripMags, client);
 }
 
-public Action Timer_StripMags(Handle timer, int client){
+Action Timer_StripMags(Handle timer, int client){
 	if(!ValidAndAlive(client)) return Plugin_Continue;
 	SetClipsTo1(client);
 	return Plugin_Continue;

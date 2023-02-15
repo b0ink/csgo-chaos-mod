@@ -47,7 +47,7 @@ public void Chaos_LSD_RESET(int ResetType){
 		g_Previous_LSD = -1;
 }
 
-public Action Timer_SpawnNewLSD(Handle Timer){
+Action Timer_SpawnNewLSD(Handle Timer){
 	g_LSD_Timer_Repeat = INVALID_HANDLE;
 
 	CLEAR_CC("env_1.raw");

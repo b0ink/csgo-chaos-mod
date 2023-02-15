@@ -22,7 +22,7 @@ public void Chaos_DiscoFog_RESET(int ResetType){
 	// Fog_OFF();
 }
 
-public Action Timer_NewFogColor(Handle timer){
+Action Timer_NewFogColor(Handle timer){
 	if(g_bDiscoFog){
 		char color[32];
 		FormatEx(color, sizeof(color), "%i %i %i", GetRandomInt(0,255), GetRandomInt(0,255), GetRandomInt(0,255));

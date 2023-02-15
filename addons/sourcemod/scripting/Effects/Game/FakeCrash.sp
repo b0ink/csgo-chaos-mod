@@ -19,7 +19,7 @@ public void Chaos_FakeCrash_START(){
 
 }
 
-public Action Timer_AnnounceFakeCrash(Handle timer){
+Action Timer_AnnounceFakeCrash(Handle timer){
 	AnnounceChaos(GetChaosTitle("Chaos_FakeCrash"), -1.0);
 	return Plugin_Continue;
 }

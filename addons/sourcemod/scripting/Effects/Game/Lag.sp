@@ -15,7 +15,7 @@ public void Chaos_Lag_START(){
 	CreateTimer(3.0, Timer_FakeLag);
 }
 
-public Action Timer_FakeLag(Handle timer){
+Action Timer_FakeLag(Handle timer){
 	if(!FakeLag) return Plugin_Continue;
 	ServerCommand("sv_cheats 1");
 

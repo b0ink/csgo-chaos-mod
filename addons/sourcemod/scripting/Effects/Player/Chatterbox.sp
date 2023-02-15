@@ -63,7 +63,7 @@ void SendCallout(int client){
 	
 }
 
-public Action Timer_SendChatterboxCallout(Handle timer){
+Action Timer_SendChatterboxCallout(Handle timer){
 	bool T_Sent = false;
 	bool CT_Sent = false;
 

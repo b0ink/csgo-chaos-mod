@@ -15,7 +15,7 @@ public void Chaos_DropPrimaryWeapon_START(){
 	CreateTimer(0.1, Timer_DropPrimary);
 }
 
-public Action Timer_DropPrimary(Handle timer){
+Action Timer_DropPrimary(Handle timer){
 	LoopAlivePlayers(i){
 		ClientCommand(i, "drop");
 	}

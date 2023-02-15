@@ -23,7 +23,7 @@ public void Chaos_Flying_OnPlayerSpawn(int client){
 	CreateTimer(0.5, Timer_EnableFlying, client);
 }
 
-public Action Timer_EnableFlying(Handle timer, int client){
+Action Timer_EnableFlying(Handle timer, int client){
 	SetEntityMoveType(client, MOVETYPE_NOCLIP);
 	return Plugin_Continue;
 }

@@ -63,7 +63,7 @@ public Action Event_PlayerDeath(Event event, char[] name, bool dontBroadcast){
 }
 
 int settingsReminder[MAXPLAYERS+1];
-public Action Timer_SendSettingsReminder(Handle timer, int client){
+Action Timer_SendSettingsReminder(Handle timer, int client){
 	if(IsValidClient(client) && settingsReminder[client] % 3 == 0){
 		if(CheckCommandAccess(client, "sm_slay", ADMFLAG_CHAT)){
 			CPrintToChat(client, "%s Use !chaos in chat to adjust your HUD, Sound levels, ConVars, and Effect settings", g_Prefix);
@@ -77,7 +77,7 @@ public Action Timer_SendSettingsReminder(Handle timer, int client){
 	return Plugin_Continue;
 }
 
-public Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
+Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
 	data.Reset();
 
 	Function func = data.ReadFunction();
@@ -106,7 +106,7 @@ public Action Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 }
 
 
-public Action Timer_SaveBombPosition(Handle timer){
+Action Timer_SaveBombPosition(Handle timer){
 	SaveBombPosition();
 	return Plugin_Continue;
 }
@@ -141,7 +141,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	return Plugin_Continue;
 }
 
-public Action Timer_CreateHostage(Handle timer){
+Action Timer_CreateHostage(Handle timer){
 	int iEntity = -1;
 	if((iEntity = FindEntityByClassname(iEntity, "func_hostage_rescue")) == -1) {
 		int iHostageRescueEnt = CreateEntityByName("func_hostage_rescue");
@@ -168,7 +168,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 void ResetChaos(int resetflags){
 	HUD_ROUNDEND();
 	StopTimer(g_NewEffect_Timer);
-	ResetRoundChaos(null, resetflags);
+	ResetRoundChaos(resetflags);
 	// CreateTimer(0.1, ResetRoundChaos, resetflags);
 }
 
@@ -185,7 +185,7 @@ public Action Event_RoundFreezeEnd(Event event, const char[] name, bool dontBroa
 	return Plugin_Continue;
 }
 
-public Action Timer_UpdateRoundTime(Handle timer){
+Action Timer_UpdateRoundTime(Handle timer){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	g_iRoundTime++;	
 	return Plugin_Continue;

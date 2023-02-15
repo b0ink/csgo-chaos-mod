@@ -20,7 +20,7 @@ public void Chaos_SwapPlayerModels_Event_RoundStart(Event event, char[] name, bo
 	CreateTimer(1.0, Timer_GetPlayerModels, .flags=TIMER_FLAG_NO_MAPCHANGE);
 }
 
-public Action Timer_GetPlayerModels(Handle timer){
+Action Timer_GetPlayerModels(Handle timer){
 	ClearArray(SwapPlayerModel_T);
 	ClearArray(SwapPlayerModel_CT);
 	char modelName[PLATFORM_MAX_PATH];

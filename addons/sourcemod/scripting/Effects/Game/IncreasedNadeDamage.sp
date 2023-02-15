@@ -32,7 +32,7 @@ public void Chaos_IncreasedNadeDamage_OnGrenadeSpawn(int grenade){
 }
 
 
-public Action Timer_ChangeGrenadeDamage(Handle timer, int grenade){
+Action Timer_ChangeGrenadeDamage(Handle timer, int grenade){
 	float flGrenadePower = GetEntPropFloat(grenade, Prop_Send, "m_flDamage");
 	float flGrenadeRadius = GetEntPropFloat(grenade, Prop_Send, "m_DmgRadius");
 	

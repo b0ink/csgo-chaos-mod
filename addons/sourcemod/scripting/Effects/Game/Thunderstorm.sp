@@ -77,7 +77,7 @@ void DisableThunderstorm(){
 	Thunderstorm = false;
 }
 
-public Action Timer_LightningStrike(Handle timer) {
+Action Timer_LightningStrike(Handle timer) {
 	if (!Thunderstorm) {
 		return Plugin_Stop;
 	}

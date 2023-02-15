@@ -257,12 +257,12 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	return Plugin_Continue;
 }
 
-public Action Timer_ResetPlaySound(Handle timer){
+Action Timer_ResetPlaySound(Handle timer){
 	g_bPlaySound_Debounce = false;
 	return Plugin_Continue;
 }
 
-public Action Timer_DelayNewInterval(Handle timer){
+ Action Timer_DelayNewInterval(Handle timer){
 	StopTimer(g_NewEffect_Timer);
 	g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
 	Timer_Display(null, g_ChaosEffectInterval);
@@ -270,7 +270,7 @@ public Action Timer_DelayNewInterval(Handle timer){
 }
 
 
-public Action ResetRoundChaos(Handle timer, int resetflags){
+void ResetRoundChaos(int resetflags){
 	RemoveChickens(false);
 	Fog_OFF();
 
@@ -283,7 +283,6 @@ public Action ResetRoundChaos(Handle timer, int resetflags){
 		}
 		effect.Reset(flags);
 	}
-	return Plugin_Continue;
 }
 
 

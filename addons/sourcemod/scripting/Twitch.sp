@@ -43,7 +43,7 @@ public Action Twitch_RoundStart(Event event, char[] name, bool dontBroadcast){
 }
 
 #if defined DEBUG_TWITCH_VOTES
-public Action Timer_FakeTwitchVotes(Handle timer){
+Action Timer_FakeTwitchVotes(Handle timer){
 	int rand = GetRandomInt(1, 4);
 	ServerCommand("save_chaos_vote %i", rand);
 	ServerCommand("save_chaos_vote %i", rand);
@@ -70,7 +70,7 @@ public Action Twitch_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	return Plugin_Continue;
 }
 
-public Action Timer_DelayTwitchPool(Handle timer){
+Action Timer_DelayTwitchPool(Handle timer){
 	if(g_cvChaosTwitchEnabled.BoolValue){
 		Twitch_PoolNewVotingEffects(); //* start votes at the start of the round
 	}

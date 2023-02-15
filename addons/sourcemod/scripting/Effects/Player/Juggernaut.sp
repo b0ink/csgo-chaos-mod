@@ -19,7 +19,7 @@ public void Chaos_Juggernaut_OnPlayerSpawn(int client){
 	CreateTimer(0.5, Timer_SetJuggernaut, client);
 }
 
-public Action Timer_SetJuggernaut(Handle timer, int client){
+Action Timer_SetJuggernaut(Handle timer, int client){
 	GivePlayerItem(client, "item_heavyassaultsuit");
 	return Plugin_Continue;
 }

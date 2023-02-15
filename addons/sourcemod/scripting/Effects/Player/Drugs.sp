@@ -90,7 +90,7 @@ void KillAllDrugs(){
 	}
 }
 
-public Action Timer_Drug(Handle timer, any client){
+Action Timer_Drug(Handle timer, any client){
 	if (!IsValidClient(client)){
 		KillDrugTimer(client);
 		return Plugin_Handled;

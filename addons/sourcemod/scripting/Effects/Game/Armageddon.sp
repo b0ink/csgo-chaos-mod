@@ -58,7 +58,7 @@ public void Chaos_Armageddon_START(){
 	
 }
 
-public Action Timer_ArmageddonEarthquake(Handle timer){
+Action Timer_ArmageddonEarthquake(Handle timer){
 	if(!Armageddon) return Plugin_Stop;
 	LoopAlivePlayers(i){
 		ScreenShake(i, GetRandomFloat(10.0, 25.0), 3.0);
@@ -124,12 +124,12 @@ Action Timer_FlashWastelandCC(Handle timer, bool SecondFlash = false){
 	return Plugin_Continue;
 }
 
-public Action Timer_DisableWastelandFlash(Handle timer){
+Action Timer_DisableWastelandFlash(Handle timer){
 	CLEAR_CC("wasteland2.raw");
 	return Plugin_Stop;
 }
 
-public Action Timer_SpawnArmageddonMolotovs(Handle timer){
+Action Timer_SpawnArmageddonMolotovs(Handle timer){
 	if(!Armageddon) return Plugin_Stop;
 
 	ShuffleMapSpawns();

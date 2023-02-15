@@ -30,7 +30,7 @@ public void Chaos_FakeTeleport_START(){
 	FakeTeleportTimer = CreateTimer(3.0, Timer_EndTeleport);
 }
 
-public Action Timer_EndTeleport(Handle timer){
+Action Timer_EndTeleport(Handle timer){
 	LoopAlivePlayers(i){
 		TeleportEntity(i, FakeTelport_loc[i], NULL_VECTOR, NULL_VECTOR);
 	}

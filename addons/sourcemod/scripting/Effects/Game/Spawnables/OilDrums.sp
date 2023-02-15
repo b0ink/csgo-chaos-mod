@@ -43,7 +43,7 @@ public void Chaos_OilDrums_START(){
 	CreateTimer(3.0, Timer_SpawnDrums, 15, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
 
-public Action Timer_SpawnDrums(Handle timer, int amount){
+Action Timer_SpawnDrums(Handle timer, int amount){
 	if(!OilDrums) return Plugin_Stop;
 	ShuffleMapSpawns();
 	float pos[3];

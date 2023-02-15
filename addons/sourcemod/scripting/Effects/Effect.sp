@@ -224,7 +224,7 @@ bool IsChaosEffectRunning(char[] effectName){
 }
 
 
-public Action Effect_Reset(Handle timer, int effect_id){
+Action Effect_Reset(Handle timer, int effect_id){
 	EffectData effect;
 	LoopAllEffects(effect, index){
 		if(effect.ID == effect_id){

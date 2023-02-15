@@ -48,7 +48,7 @@ public void Chaos_SleepyShooter_Event_OnWeaponFire(Event event, const char[] nam
 }
 
 
-public Action Timer_CheckBlindStatus(Handle timer){
+Action Timer_CheckBlindStatus(Handle timer){
 	if(g_SleepyShooter){
 		LoopAlivePlayers(i){
 			SleepShooter_LastShot[i]++;

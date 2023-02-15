@@ -28,7 +28,7 @@ public void Chaos_Meta_Mega_START(){
 	CreateTimer(2.1, Timer_CompleteMegaChaos);
 }
 
-public Action Timer_CompleteMegaChaos(Handle timer){
+Action Timer_CompleteMegaChaos(Handle timer){
 	// AnnounceChaos(GetChaosTitle("Chaos_Meta_Mega"), -1.0, true, true);
 	g_bMegaChaosIsActive = false;
 	return Plugin_Continue;

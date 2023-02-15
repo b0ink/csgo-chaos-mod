@@ -20,7 +20,7 @@ public void Chaos_RadioChatter_START(){
 	CreateTimer(0.3, Timer_RadioChatter, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 }
 
-public Action Timer_RadioChatter(Handle timer){
+Action Timer_RadioChatter(Handle timer){
 	if(!RadioChatter) return Plugin_Stop;
 
 	int random = GetURandomInt() % voiceOverList.Length;

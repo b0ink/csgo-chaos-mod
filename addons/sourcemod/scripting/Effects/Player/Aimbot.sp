@@ -306,7 +306,7 @@ public void Chaos_Aimbot_Event_PlayerBlind(Handle event, const char[] name, bool
 	}
 }
 
-public Action Timer_UnFlashed(Handle timer, int client){
+Action Timer_UnFlashed(Handle timer, int client){
 	g_bFlashed[client] = false;
 	return Plugin_Continue;
 }

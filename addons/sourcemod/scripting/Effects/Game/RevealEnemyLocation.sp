@@ -14,7 +14,7 @@ public void Chaos_RevealEnemyLocation_START(){
 	}
 }
 
-public Action Timer_ResetRadar(Handle timer){
+Action Timer_ResetRadar(Handle timer){
 	cvar("mp_radar_showall", "0");
 	return Plugin_Continue;
 }

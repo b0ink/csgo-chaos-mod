@@ -27,7 +27,7 @@ public void Chaos_Compass_RESET(int ResetType){
 }
 
 
-public Action Timer_UpdateCompass(Handle timer, any data){
+Action Timer_UpdateCompass(Handle timer, any data){
 	if(!PlayerCompass){
 		return Plugin_Stop;
 	}

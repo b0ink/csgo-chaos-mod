@@ -85,7 +85,7 @@ void RemoveChickens(bool removec4Chicken = false, char[] chickenName = ""){
 	}
 }  
 
-public Action Timer_ResetChickenDebounce(Handle timer){
+Action Timer_ResetChickenDebounce(Handle timer){
 	g_bRemovechicken_debounce = false;
 	return Plugin_Continue;
 }

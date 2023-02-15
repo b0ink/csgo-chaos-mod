@@ -19,7 +19,7 @@ public void Chaos_RainingMolotovs_RESET(int ResetType){
 	g_MolotovSpawn_Count = 100; // Stop spawning any more
 }
 
-public Action Timer_SpawnMolotov(Handle timer){
+Action Timer_SpawnMolotov(Handle timer){
 	if(g_MolotovSpawn_Count > 5){ 
 		g_MolotovSpawn_Count = 0;
 		return Plugin_Stop;

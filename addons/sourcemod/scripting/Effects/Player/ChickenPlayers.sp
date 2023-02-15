@@ -30,7 +30,7 @@ public void Chaos_ChickenPlayers_OnPlayerSpawn(int client){
 	CreateTimer(0.5, Timer_SetChickenModel, client);
 }
 
-public Action Timer_SetChickenModel(Handle timer, int client){
+Action Timer_SetChickenModel(Handle timer, int client){
 	if(IsValidClient(client) && IsPlayerAlive(client)){
 		SetChicken(client);
 	}

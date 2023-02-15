@@ -31,7 +31,7 @@ public void Chaos_Trails_RESET(int ResetType){
 }
 
 
-public Action Timer_CreateTrail(Handle timer){
+Action Timer_CreateTrail(Handle timer){
 	if(!Trails) return Plugin_Stop;
 
 	int color[4];

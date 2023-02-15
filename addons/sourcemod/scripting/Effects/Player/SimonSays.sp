@@ -106,7 +106,7 @@ void StartMessageTimer(){
 	g_SimonSays_Timer = CreateTimer(1.0, Timer_ShowAction, _, TIMER_REPEAT);
 }
 
-public Action Timer_ShowAction(Handle timer){
+Action Timer_ShowAction(Handle timer){
 	SimonSaysTime--;
 	char message[128];
 	if(SimonSaysTime > 11){

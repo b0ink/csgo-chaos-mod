@@ -36,7 +36,7 @@ public void Chaos_PigeonHole_START(){
 	PigeonHoleSpawnTimer = CreateTimer(5.0, Timer_SpawnNewPigeonHole, _, TIMER_REPEAT);
 }
 
-public Action Timer_SpawnNewPigeonHole(Handle timer){
+Action Timer_SpawnNewPigeonHole(Handle timer){
 	int randomPigeonHole = -1;
 	do{
 		randomPigeonHole = GetRandomInt(1, 7);

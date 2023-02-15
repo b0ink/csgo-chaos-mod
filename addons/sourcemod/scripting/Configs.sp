@@ -173,7 +173,7 @@ void SaveBombPosition(){
 
 }
 
-public Action Timer_SaveCoordinates(Handle timer){
+Action Timer_SaveCoordinates(Handle timer){
 		
 	if (GameRules_GetProp("m_bWarmupPeriod") == 1) return Plugin_Continue;
 	if(g_bPortalGuns || TinyPlayers) return Plugin_Continue;
