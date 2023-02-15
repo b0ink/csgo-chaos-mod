@@ -117,7 +117,9 @@ public void PerformTeleport(int target, float pos[3]){
 	GetClientEyePosition(target, partpos);
 	// partpos[2]-=20.0;	
 	pos[2]+=10.0;
-	TeleportEntity(target, pos, NULL_VECTOR, NULL_VECTOR);
+	partpos[2] -= 64.0;
+	LerpToPoint(target, partpos, pos, 0.075, false);
+	// TeleportEntity(target, pos, NULL_VECTOR, NULL_VECTOR);
 
 	int redColor[4] = {255, 75, 75, 255};
 	int blueColor[4] = {75, 75, 255, 255};

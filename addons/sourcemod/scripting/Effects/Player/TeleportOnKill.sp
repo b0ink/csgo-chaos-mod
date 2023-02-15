@@ -18,6 +18,7 @@ public void Chaos_TeleportOnKill_RESET(int ResetType){
 	TeleportOnKill = false;
 }
 
+
 public void Chaos_TeleportOnKill_Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast){
 	int victim = GetClientOfUserId(event.GetInt("userid"));
 	if(!TeleportOnKill || !IsValidClient(victim)) return;
@@ -32,6 +33,8 @@ public void Chaos_TeleportOnKill_Event_PlayerDeath(Event event, const char[] nam
 	
 	int attacker = GetClientOfUserId(event.GetInt("attacker"));
 	if(ValidAndAlive(attacker)){
-		TeleportEntity(attacker, location, NULL_VECTOR, NULL_VECTOR);
+		float pos[3];
+		GetClientAbsOrigin(attacker, pos);
+		LerpToPoint(attacker, pos, location, 0.1, true);
 	}
 }

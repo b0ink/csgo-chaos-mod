@@ -177,6 +177,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 
 public void OnGameFrame(){
 	if (!g_cvChaosEnabled.BoolValue) return;
+	LerpOnGameFrame();
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		if(Chaos_EffectData_Buffer.OnGameFrame != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnGameFrame);

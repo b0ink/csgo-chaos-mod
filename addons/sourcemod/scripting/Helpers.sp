@@ -444,3 +444,69 @@ bool IsValidClient(int client){
 stock bool ValidAndAlive(int client){
 	return (IsValidClient(client) && IsPlayerAlive(client) && (GetClientTeam(client) == CS_TEAM_CT || GetClientTeam(client) == CS_TEAM_T));
 }
+
+/**
+ * Calculate a coordinate along an axis between two points, based on a certain time before its final duration. 
+ * 
+ * For Example, after setting a start and end point, if time = 1.5, and duration = 3.0, this will return the center point between the two vectors.
+ * 
+ * @param start        Starting vector.
+ * @param end          Ending vector.
+ * @param time         How far into the duration should it calculate the point.
+ * @param duration     How long it should take to get from `start` to `end`
+ * @param buffer       Buffer to store the calculated point.
+ */
+void LerpVector(float start[3], float end[3], float time, float duration, float buffer[3]){
+	float t = time / duration;
+	float x = start[0] + (end[0] - start[0]) * t;
+	float y = start[1] + (end[1] - start[1]) * t;
+	float z = start[2] + (end[2] - start[2]) * t;
+	buffer[0] = x;
+	buffer[1] = y;
+	buffer[2] = z;
+}
+
+
+float LerpDuration[MAXPLAYERS+1];
+float LerpStartPos[MAXPLAYERS+1][3];
+float LerpEndPos[MAXPLAYERS+1][3];
+float TimeInLerp[MAXPLAYERS+1];
+bool  IsInLerp[MAXPLAYERS+1];
+
+void LerpToPoint(int client, float start[3], float end[3], float duration, bool PlaySoundEffect = true){
+	if(!ValidAndAlive(client)) return;
+
+	TimeInLerp[client] = 0.0;
+	LerpStartPos[client] = start;
+	LerpEndPos[client] = end;
+	IsInLerp[client] = true;
+	LerpDuration[client] = duration;
+
+	if(PlaySoundEffect){
+		ClientCommand(client, "playgamesound \"player/halloween/ghost_swish_c_02.wav\"");
+		ClientCommand(client, "playgamesound \"player/halloween/ghost_swish_c_02.wav\"");
+	}
+}
+
+void LerpOnGameFrame(){
+	LoopAlivePlayers(i){
+		if(!IsInLerp[i]) continue;
+		if(TimeInLerp[i] >= LerpDuration[i]){
+			if(!g_bActiveNoclip){ // niche check to see if Flying is active
+				SetEntityMoveType(i, MOVETYPE_WALK);
+			}else{
+				SetEntityMoveType(i, MOVETYPE_NOCLIP);
+			}
+			TeleportEntity(i, .origin=LerpEndPos[i]);
+			
+			IsInLerp[i] = false;
+			TimeInLerp[i] = 0.0;
+			continue;
+		}
+		SetEntityMoveType(i, MOVETYPE_NONE);
+		float pos[3];
+		LerpVector(LerpStartPos[i], LerpEndPos[i], TimeInLerp[i], LerpDuration[i], pos);
+		TeleportEntity(i, .origin=pos);
+		TimeInLerp[i] += GetTickInterval();
+	}
+}
