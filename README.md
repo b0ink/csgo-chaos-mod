@@ -5,6 +5,8 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 
 ##### Plugin is supported for both Competitive and Deathmatch configs.
 
+[Download Plugin](https://github.com/b0ink/csgo-chaos-mod/releases)
+
 # Screenshots
 <p align="center">
 	<img src="https://csgochaosmod.com/gallery/chaos_13.jpg" 	width="375" title="LSD">
