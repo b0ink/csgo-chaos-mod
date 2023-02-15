@@ -4,6 +4,7 @@ public void Chaos_RewindTenSeconds(EffectData effect){
 	effect.Title = "Rewind 10 Seconds";
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
+	effect.AddFlag("movement");
 }
 
 
@@ -36,14 +37,23 @@ public void Chaos_RewindTenSeconds_START(int ResetType){
 	g_Rewinding = true;
 	g_RewindTime = 0;
 
+	int seconds = 5;
+	
 	float tickrate = 1.0 / GetTickInterval();
+	char announceMsg[128];
 	if (RoundToZero(tickrate) == 128.0){
-		AnnounceChaos("Rewind 5 seconds", -1.0);
+		seconds = 5;
 	}else if(RoundToZero(tickrate) == 64.0){
-		AnnounceChaos("Rewind 10 seconds", -1.0);
-	}else{
-		AnnounceChaos("Rewind Movement", -1.0);
+		seconds = 10;
 	}
+
+	if(TranslationPhraseExists("Chaos_RewindTenSeconds_Custom") && IsTranslatedForLanguage("Chaos_RewindTenSeconds_Custom", LANG_SERVER)){
+			FormatEx(announceMsg, sizeof(announceMsg), "%T", "Chaos_RewindTenSeconds_Custom", LANG_SERVER, seconds);
+	}else{
+		FormatEx(announceMsg, sizeof(announceMsg), "%s", "Rewind %i Seconds", seconds);
+	}
+
+	AnnounceChaos(announceMsg, -1.0);
 }
 
 
@@ -56,7 +66,7 @@ public void Chaos_RewindTenSeconds_RESET(int ResetType){
 }
 
 public bool Chaos_RewindTenSeconds_Conditions(bool EffectRunRandomly){
-	if(GetRoundTime() <= 30 && EffectRunRandomly) return false;
+	if(GetRoundTime() <= 20 && EffectRunRandomly) return false;
 	return true;
 }
 

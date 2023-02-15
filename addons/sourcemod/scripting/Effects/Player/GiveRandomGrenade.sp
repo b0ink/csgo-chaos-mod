@@ -18,22 +18,25 @@ char grenades[][] = {
 };
 
 public void Chaos_GiveRandomGrenade_START(){
-	char grenadeAnnounce[64];
+	char grenadeAnnounce[128];
+	char grenadeType[64];
+	FormatEx(grenadeAnnounce, 64, "%s", GetChaosTitle("Chaos_GiveRandomGrenade_Custom"));
 	int rand = GetURandomInt() % 6;
 	switch(rand){
-		case 0: grenadeAnnounce = "HE Grenade";
-		case 1: grenadeAnnounce = "Molotov";
-		case 2: grenadeAnnounce = "Flashbang";
-		case 3: grenadeAnnounce = "Smoke Grenade";
-		case 4: grenadeAnnounce = "Decoy Gremade";
-		case 5: grenadeAnnounce = "Wallhack Grenade";
-		case 6: grenadeAnnounce = "Diversion Grenade";
+		case 0: grenadeType = "HE Grenade";
+		case 1: grenadeType = "Molotov";
+		case 2: grenadeType = "Flashbang";
+		case 3: grenadeType = "Smoke Grenade";
+		case 4: grenadeType = "Decoy Gremade";
+		case 5: grenadeType = "Wallhack Grenade";
+		case 6: grenadeType = "Diversion Grenade";
 	}
 
-	Format(grenadeAnnounce, 64, "Give all players a %s", grenadeAnnounce);
-	
+	Format(grenadeAnnounce, 64, "%s %s", grenadeAnnounce, grenadeType);
+
 	LoopValidPlayers(i){
 		GivePlayerItem(i, grenades[rand]);
 	}
+
 	AnnounceChaos(grenadeAnnounce, GetChaosTime("Chaos_GiveRandomGrenade"));
 }

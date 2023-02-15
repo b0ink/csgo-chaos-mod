@@ -38,6 +38,7 @@ Action Timer_EndTeleport(Handle timer){
 	char text[64];
 	FormatEx(text, 64, "%s  ", GetChaosTitle("Chaos_RandomTeleport"));
 	RemoveHudByName(text);
+	FakeTeleportTimer = INVALID_HANDLE;
 	return Plugin_Continue;
 }
 

@@ -1,7 +1,7 @@
 EffectData 	Chaos_EffectData_Buffer;
 
 public void OnPluginStart(){
-	LoadTranslations("chaos.phrases");
+	LoadTranslations("chaos.phrases.txt");
 	
 	CreateConVars();
 	RegisterCommands();

@@ -225,23 +225,25 @@ void DiscoFog(bool removeFog = false){
 	UpdateFog();
 }
 
-void Mexico(bool removeFog = false){
-	if(removeFog){
-		RemoveFog("Mexico");
-		return;
-	}
+/* Mexico replaced with ColorCorrection 15/02/23 */
 
-	FogData fog;
-	fog.effectName = "Mexico";
-	fog.SetDefault();
-	fog.color = "138 86 22";
-	fog.start = "0.0";
-	fog.end = "0.0";
-	fog.maxdensity = "0.75";
+// void Mexico(bool removeFog = false){
+// 	if(removeFog){
+// 		RemoveFog("Mexico");
+// 		return;
+// 	}
 
-	Fog_Stream.PushArray(fog, sizeof(fog));
-	UpdateFog();
-}
+// 	FogData fog;
+// 	fog.effectName = "Mexico";
+// 	fog.SetDefault();
+// 	fog.color = "138 86 22";
+// 	fog.start = "0.0";
+// 	fog.end = "0.0";
+// 	fog.maxdensity = "0.75";
+
+// 	Fog_Stream.PushArray(fog, sizeof(fog));
+// 	UpdateFog();
+// }
 
 void LightsOff(bool removeFog = false){
 	if(removeFog){

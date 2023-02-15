@@ -94,7 +94,7 @@
     }
     "Chaos_ChickenPlayers"
     {
-        "en"    "Make all players a chicken"
+        "en"    "Turn Players Into Chickens"
     }
     "Chaos_Compass"
     {
@@ -194,7 +194,7 @@
     }
     "Chaos_ExtendedFlash"
     {
-        "en"    "Extended Flashbang Effect"
+        "en"    "Extend Flashbang Effect"
     }
     "Chaos_ExtendedGrenades"
     {
@@ -238,11 +238,15 @@
     }
     "Chaos_Give100HP"
     {
-        "en"    "Give all players +100 HP"
+        "en"    "Give Players +100 HP"
     }
     "Chaos_GiveRandomGrenade"
     {
         "en"    "Give Random Grenade"
+    }
+    "Chaos_GiveRandomGrenade_Custom"
+    {
+        "en"    "Give Players A"
     }
     "Chaos_HeadshotOnly"
     {
@@ -250,7 +254,7 @@
     }
     "Chaos_HealAllPlayers"
     {
-        "en"    "Set all players health to 100"
+        "en"    "Set Players Health To 100"
     }
     "Chaos_HealthRegen"
     {
@@ -262,7 +266,7 @@
     }
     "Chaos_HighMouseSens"
     {
-        "en"    "High Mouse Sens"
+        "en"    "High Mouse Sensitivity"
     }
     "Chaos_HighPitch"
     {
@@ -278,7 +282,7 @@
     }
     "Chaos_IgniteAllPlayers"
     {
-        "en"    "Ignite All Players"
+        "en"    "Ignite Players"
     }
     "Chaos_Impostors"
     {
@@ -310,7 +314,7 @@
     }
     "Chaos_Invis"
     {
-        "en"    "Where did everyone go?"
+        "en"    "Where Did Everyone Go?"
     }
     "Chaos_IsThisMexico"
     {
@@ -514,11 +518,15 @@
     }
     "Chaos_RainingMolotovs"
     {
-        "en"    "Raining Fire"
+        "en"    "Raining Molotovs"
     }
     "Chaos_RandomInvisiblePlayer"
     {
         "en"    "Random Invisible Player"
+    }
+    "Chaos_RandomInvisiblePlayer_Custom"
+    {
+        "en"    "has been made invisible"
     }
     "Chaos_RandomSkybox"
     {
@@ -542,7 +550,7 @@
     }
     "Chaos_ResetSpawns"
     {
-        "en"    "Teleport all players back to spawn"
+        "en"    "Teleport players back to spawn"
     }
     "Chaos_RespawnDead_LastLocation"
     {
@@ -550,11 +558,11 @@
     }
     "Chaos_RespawnTheDead"
     {
-        "en"    "Resurrect dead players"
+        "en"    "Respawn dead players"
     }
     "Chaos_RespawnTheDead_Randomly"
     {
-        "en"    "Resurrect dead players in random locations"
+        "en"    "Respawn players in random locations"
     }
     "Chaos_RevealEnemyLocation"
     {
@@ -575,6 +583,10 @@
     "Chaos_RewindTenSeconds"
     {
         "en"    "Rewind 10 Seconds"
+    }
+    "Chaos_RewindTenSeconds_Custom"
+    {
+        "en"    "Rewind %i Seconds"
     }
     "Chaos_Saturation"
     {
