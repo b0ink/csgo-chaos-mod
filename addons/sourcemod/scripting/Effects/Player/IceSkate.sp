@@ -2,44 +2,25 @@
 
 public void Chaos_IceSkate(EffectData effect){
 	effect.Title = "Ice Skating";
-	effect.Duration = 30;
+	effect.Duration = 15;
+	effect.IncompatibleWith("Chaos_Autobhop");
+	effect.IncompatibleWith("Chaos_InsaneAirSpeed");
 }
 
 bool IceSkate = false;
-bool ForceJumpSkate[MAXPLAYERS+1];
 
 public void Chaos_IceSkate_START(){
 	cvar("sv_airaccelerate", "2000");
-	LoopAlivePlayers(i){
-		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 2.0);
-	}
+	CPrintToChatAll("%s Hold [Space] and strafe to Ice Skate!", g_Prefix);
+	PrintHintTextToAll("Hold [Space] and strafe to Ice Skate!");
 	IceSkate = true;
 }
 
 public void Chaos_IceSkate_RESET(int ResetType){
 	ResetCvar("sv_airaccelerate", "12", "2000");
-	if(ResetType & RESET_EXPIRED){
-		LoopAlivePlayers(i){
-			SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
-		}
-	}
 	IceSkate = false;
 }
 
-public void Chaos_IceSkate_OnPlayerSpawn(int client){
-	SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 2.0);
-}
-
-public void Chaos_IceSkate_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
-	if(IceSkate){
-		ForceJumpSkate[client] = !ForceJumpSkate[client];
-		if(ForceJumpSkate[client]){
-			buttons |= IN_JUMP;
-		}else{
-			buttons &= ~IN_JUMP;
-		}
-	}
-}
 
 public void Chaos_IceSkate_OnGameFrame(){
 	if(!IceSkate) return;
@@ -50,6 +31,7 @@ public void Chaos_IceSkate_OnGameFrame(){
 	float fSpeed[3];
 
 	LoopAlivePlayers(i){
+		if(!(GetClientButtons(i) & IN_JUMP)) continue;
 		GetClientAbsOrigin(i, fPosition);
 		TR_TraceRayFilter(fPosition, view_as<float>({90.0, 0.0, 0.0}), MASK_PLAYERSOLID, RayType_Infinite, TRFilter_NoPlayers, i);
 
