@@ -23,6 +23,7 @@ public Action Chaos_VampireHeal_Hook_OnTakeDamage(int victim, int &attacker, int
 
 public void Chaos_VampireHeal_START(){
 	LoopAlivePlayers(i){
+		PrintHintText(i, "By shooting your enemies, you can steal their health!");
 		SDKHook(i, SDKHook_OnTakeDamage, Chaos_VampireHeal_Hook_OnTakeDamage);
 	}
 	g_bVampireRound = true;
