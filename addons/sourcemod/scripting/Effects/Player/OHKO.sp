@@ -2,7 +2,7 @@
 
 public void Chaos_OHKO(EffectData effect){
 	effect.Title = "1 HP";
-	effect.Duration = 10;
+	effect.Duration = 5;
 	
 	effect.AddAlias("1 HP");
 	effect.AddAlias("Knockout");
@@ -14,6 +14,7 @@ public void Chaos_OHKO(EffectData effect){
 	effect.IncompatibleWith("Chaos_ExplodingBarrels");
 	effect.IncompatibleWith("Chaos_LavaFloor");
 	effect.IncompatibleWith("Chaos_IgniteAllPlayers");
+	effect.IncompatibleWith("Chaos_PunishMisfire");
 }
 
 public void Chaos_OHKO_START(){
