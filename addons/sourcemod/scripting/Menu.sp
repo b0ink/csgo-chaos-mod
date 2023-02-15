@@ -332,6 +332,7 @@ void ShowMenu_EditConvars(int client){
 		menu.AddItem("sm_chaos_voting_enabled", ItemTitle);
 	#endif
 
+	menu.AddItem("resetdefault", "Reset to Defaults");
 
 	menu.ExitButton = true;
 	menu.ExitBackButton = true; 
@@ -434,6 +435,8 @@ public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int par
 			if(StrEqual(info, "sm_chaos_enabled", false) || StrEqual(info, "sm_chaos_repeating", false)){
 				ToggleCvar(info);
 				ShowMenu_EditConvars(param1);
+			}else if(StrEqual(info, "resetdefault")){
+				ShowMenu_ConfirmResetDefaults(param1);
 			}else{
 				ShowMenu_ConvarIncrements(param1, info);
 			}
@@ -447,6 +450,41 @@ public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int par
 	}
 	return 0;
 }
+
+void ShowMenu_ConfirmResetDefaults(int client){
+	Menu menu = new Menu(ConfirmResetDefaults_Handler);
+
+	menu.SetTitle("Are you sure you want to reset all ConVars to default?");
+
+	menu.AddItem("No", "No");
+	menu.AddItem("Yes", "Yes");
+
+	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
+	menu.Display(client, 0);
+}
+
+public int ConfirmResetDefaults_Handler(Menu menu, MenuAction action, int param1, int param2){
+	if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		if(found){
+			if(StrEqual(info, "Yes")){
+				ResetConvarDefaults();
+			}else if(StrEqual(info, "No")){
+				ShowMenu_EditConvars(param1);
+			}
+		}
+	}else if (action == MenuAction_Cancel){
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_EditConvars(param1);
+		}
+	}else if (action == MenuAction_End){
+		delete menu;
+	}
+	return 0;
+}
+
 
 
 void ShowMenu_EditAllEffects(int client){

@@ -405,3 +405,19 @@ void Update_Convar_Config(){
 	file.WriteLine("}");
 	delete file;
 }
+
+void ResetConvarDefaults(){
+	g_cvChaosPrefix.SetString("[{lime}CHAOS{default}]");
+	g_cvChaosEnabled.BoolValue = true;
+	g_cvChaosEffectInterval.IntValue = 15;
+	g_cvChaosRepeating.IntValue = 1;
+	g_cvChaosOverrideDuration.IntValue = -1;
+	g_cvChaosTwitchEnabled.IntValue = 0;
+	g_cvChaosEffectTimer_Color.SetString("220 0 220 255");
+	g_cvChaosEffectList_Color.SetString("37 186 255 255");
+	g_cvChaosEffectTimer_Position.SetString("-1 0.06");
+	g_cvChaosEffectList_Position.SetString("0.01 0.42");
+	Update_Convar_Config();
+	UpdateCvars();
+	CPrintToChatAll("%s Convars have been reset to default", g_Prefix);
+}
