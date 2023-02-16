@@ -125,7 +125,8 @@ Action Timer_ShowAction(Handle timer){
 			
 			Format(message, sizeof(message), "%s\n(%i)", SimonActionText, SimonSaysTime);
 			DisplayCenterTextToAll(message);
-			PrintHintTextToAll(message);
+			//TODO: forgot to remove this from v0.4.1
+			// PrintHintTextToAll(message);
 		}else{
 			Simon_Active = false;
 			KillMessageTimer();

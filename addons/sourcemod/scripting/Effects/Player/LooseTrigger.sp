@@ -35,7 +35,6 @@ void Chaos_LooseTrigger_WeaponFire(Event event, const char[] name, bool dontBroa
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	char soundPath[PLATFORM_MAX_PATH];
 	Format(weaponName, 64, "%s", weaponName[7]);
-	PrintToChatAll(weaponName);
 	if(StrEqual(weaponName, "ak47")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/ak47/ak47_01.wav");
 	}else if(StrEqual(weaponName, "aug")){
