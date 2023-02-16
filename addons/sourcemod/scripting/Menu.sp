@@ -203,12 +203,19 @@ void ShowMenu_HudSettings(int client){
 	char EffectListInfo[32];
 	char EffectAnnouncement[32];
 	char UseHtmlHudInfo[32];
+	char UseTimerBarInfo[32];
 
 	FormatEx(TimerInfo, sizeof(TimerInfo), "Hide Timer: [%s]", HideTimer[client] ? "YES" : "NO");
 	FormatEx(EffectListInfo, sizeof(EffectListInfo), "Hide Effect List: [%s]", HideEffectList[client] ? "YES" : "NO");
 	FormatEx(EffectAnnouncement, sizeof(EffectAnnouncement), "Hide Announcement: [%s]", HideAnnouncement[client] ? "YES" : "NO");
 	FormatEx(UseHtmlHudInfo, sizeof(UseHtmlHudInfo), "Alternate Announcement: [%s]", UseHtmlHud[client] ? "YES" : "NO");
+	FormatEx(UseTimerBarInfo, sizeof(UseTimerBarInfo), "Visual Bar Timer: [%s]", UseTimerBar[client] ? "YES" : "NO");
 	menu.AddItem("toggle-timer", TimerInfo);
+	if(HideTimer[client]){
+		menu.AddItem("toggle-timerbar", UseTimerBarInfo, ITEMDRAW_DISABLED);
+	}else{
+		menu.AddItem("toggle-timerbar", UseTimerBarInfo);
+	}
 	menu.AddItem("toggle-effectlist", EffectListInfo);
 	menu.AddItem("toggle-effectannounce", EffectAnnouncement);
 	menu.AddItem("toggle-usehtmlhud", UseHtmlHudInfo);
@@ -234,6 +241,8 @@ public int HudSettings_Handler(Menu menu, MenuAction action, int param1, int par
 				HideAnnouncement[param1] = !HideAnnouncement[param1];
 			}else if(StrEqual(info, "toggle-usehtmlhud", false)){
 				UseHtmlHud[param1] = !UseHtmlHud[param1];
+			}else if(StrEqual(info, "toggle-timerbar", false)){
+				UseTimerBar[param1] = !UseTimerBar[param1];
 			}
 		}
 		ShowMenu_HudSettings(param1);

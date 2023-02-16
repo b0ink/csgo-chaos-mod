@@ -140,6 +140,7 @@ public void OnClientPutInServer(int client){
 	HideEffectList[client] = false;
 	HideAnnouncement[client] = false;
 	UseHtmlHud[client] = false;
+	UseTimerBar[client] = true;
 
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
 	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);

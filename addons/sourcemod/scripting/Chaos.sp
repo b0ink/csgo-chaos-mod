@@ -249,7 +249,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		}else{
 			g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
 			expectedTimeForNewEffect =  GetTime() + g_ChaosEffectInterval;
-			Timer_Display(null, g_ChaosEffectInterval);
+			// Timer_Display(null, g_ChaosEffectInterval);
+			CreateTimer(1.0, Timer_DelayNewInterval);
 		}
 
 		g_iTotalEffectsRanThisRound++;

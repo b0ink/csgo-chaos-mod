@@ -6,6 +6,7 @@ bool  HideTimer[MAXPLAYERS+1];
 bool  HideEffectList[MAXPLAYERS+1];
 bool  HideAnnouncement[MAXPLAYERS+1];
 
+bool  UseTimerBar[MAXPLAYERS+1] = {true, ...};
 bool  UseHtmlHud[MAXPLAYERS+1];
 
 ArrayList HudData;
@@ -169,35 +170,52 @@ void ClearEffectList(int client){
 
 
 
-
 void PrintTimer(int time){
 	if(time <= 3){
-		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
+		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.1, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
 		// if(time > 0) EmitSoundToClient(i, "ui/beep07.wav", _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
 	}else{
-		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.5,
+		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.1,
 			g_ChaosEffectTimer_Color[0],
 			g_ChaosEffectTimer_Color[1],
 			g_ChaosEffectTimer_Color[2],
 			g_ChaosEffectTimer_Color[3], 0, 1.0, 0.0, 0.0);
 	}
 
+	char text[128];
+	int interval = g_ChaosEffectInterval;
+	// //TODO: ratio works but only if its less than 30 -> either 5head fix it or just flash the bar to show its counting?
+
+	float blocksPerSecond = 1.0 / (interval / 30.0);
+
+	for(int i = 1; i <= 30; i++){
+		if(i <= time * blocksPerSecond && time > 0){
+			Format(text, 128, "%s▓", text);
+		}else{
+			Format(text, 128, "%s▒", text);
+		}
+	}
+
 	LoopValidPlayers(i){
 		if(IsFakeClient(i)) continue;
 		if(HideTimer[i]) continue;
 
-		if(time > 0){
+		if(time >= 0){
 			if(g_bDynamicChannelsEnabled){
-				ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
+				if(UseTimerBar[i]){
+					ShowHudText(i, GetDynamicChannel(3), text);	
+				}else{
+					ShowHudText(i, GetDynamicChannel(3), "New effect in:\n%i", time);	
+				}
 			}else{
 				ShowHudText(i, -1, "New effect in:\n%i", time);	
 			}
 		}else{
-			if(g_bDynamicChannelsEnabled){
-				ShowHudText(i, GetDynamicChannel(3), "");	
-			}else{
-				ShowHudText(i, -1, "");	
-			}
+			// if(g_bDynamicChannelsEnabled){
+			// 	// ShowHudText(i, GetDynamicChannel(3), "");	
+			// }else{
+			// 	ShowHudText(i, -1, "");	
+			// }
 		}
 	}
 }
