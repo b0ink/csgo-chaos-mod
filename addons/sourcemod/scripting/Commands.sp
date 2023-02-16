@@ -112,7 +112,7 @@ public Action Command_StartChaos(int client, int args){
 		//start the timer but dont spawn effect.
 		// CreateTimer(0.1, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 		StopTimer(g_NewEffect_Timer);
-		g_NewEffect_Timer = CreateTimer(15.0, ChooseEffect);
+		g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
 		Timer_Display(null, g_ChaosEffectInterval);
 		AnnounceChaos("Chaos is Enabled!", -2.0);
 	}else{
