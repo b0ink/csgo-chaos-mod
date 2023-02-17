@@ -38,6 +38,11 @@ public void Chaos_SimonSays_START(){
 	float duration = 10.0;
 	GenerateSimonOrder(duration);
 	StartMessageTimer();
+	
+	LoopAllClients(i){
+		SimonSaysPlayersToDamage[i] = false;
+	}
+	
 	Simon_Active = true;
 }
 
