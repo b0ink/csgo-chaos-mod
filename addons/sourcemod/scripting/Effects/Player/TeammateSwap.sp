@@ -1,62 +1,45 @@
 #pragma semicolon 1
 
-
-Handle TPos = INVALID_HANDLE;
-Handle CTPos = INVALID_HANDLE;
-Handle tIndex = INVALID_HANDLE;
-Handle ctIndex = INVALID_HANDLE;
-
 public void Chaos_TeammateSwap(EffectData effect){
 	effect.Title = "Teammate Swap";
 	effect.HasNoDuration = true;
 }
 
-public void Chaos_TeammateSwap_INIT(){
-	if(TPos == INVALID_HANDLE) TPos = CreateArray(3);
-	if(CTPos == INVALID_HANDLE) CTPos = CreateArray(3);
-	if(tIndex == INVALID_HANDLE) tIndex = CreateArray(1);
-	if(ctIndex == INVALID_HANDLE) ctIndex = CreateArray(1);
+void SwapTeammates(int team){
+	ArrayList players = new ArrayList();
+	ArrayList swappedPlayers = new ArrayList();
+
+	LoopAlivePlayers(i){
+		if(GetClientTeam(i) == team){
+			players.Push(i);
+			swappedPlayers.Push(i);
+		}
+	}
+
+	for(int i = 0; i < swappedPlayers.Length - 1; i++){
+		swappedPlayers.SwapAt(i, i+1);
+	}
+
+	for(int i = 0; i < swappedPlayers.Length; i++){
+		int client = players.Get(i);
+		int target = swappedPlayers.Get(i);
+		if(ValidAndAlive(client) && ValidAndAlive(target)){
+			float clientPos[3];
+			float targetPos[3];
+			GetClientAbsOrigin(client, clientPos);
+			GetClientAbsOrigin(target, targetPos);
+			LerpToPoint(client, clientPos, targetPos, 0.5);
+		}
+
+	}
 }
 
 public void Chaos_TeammateSwap_START(){
-	if(TPos == INVALID_HANDLE){
-		Chaos_TeammateSwap_INIT();
-	}
-	ClearArray(TPos);
-	ClearArray(CTPos);
-	ClearArray(tIndex);
-	ClearArray(ctIndex);
-
-	
-	float vec[3];
-	
-	for(int i = 1; i <= MaxClients; i++){
-		if(ValidAndAlive(i)){
-			GetClientAbsOrigin(i, vec);
-			if(GetClientTeam(i) == CS_TEAM_T) 	PushArrayArray(TPos, vec);
-			if(GetClientTeam(i) == CS_TEAM_CT) 	PushArrayArray(CTPos, vec);
-		}
-	}
-
-	for(int i = MaxClients; i > 0; i--){
-		if(ValidAndAlive(i)){
-			if(GetClientTeam(i) == CS_TEAM_T) 	PushArrayCell(tIndex, i);
-			if(GetClientTeam(i) == CS_TEAM_CT) 	PushArrayCell(ctIndex, i);
-		}
-	}
-
-	for(int i = 0; i < GetArraySize(ctIndex); i++){
-		GetArrayArray(CTPos, i, vec);
-		TeleportEntity(GetArrayCell(ctIndex, i), vec, NULL_VECTOR, NULL_VECTOR);
-	}
-
-	for(int i = 0; i < GetArraySize(tIndex); i++){
-		GetArrayArray(TPos, i, vec);
-		TeleportEntity(GetArrayCell(tIndex, i), vec, NULL_VECTOR, NULL_VECTOR);
-	}
+	SwapTeammates(CS_TEAM_T);
+	SwapTeammates(CS_TEAM_CT);
 }
 
 public bool Chaos_TeammateSwap_Conditions(bool EffectRunRandomly){
-	if(GetAliveCTCount() <= 1 && GetAliveTCount() <= 1) return false;
+	if(GetAliveCTCount() <= 1 || GetAliveTCount() <= 1) return false;
 	return true;
 }
