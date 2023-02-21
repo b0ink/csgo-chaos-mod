@@ -14,10 +14,10 @@ ArrayList	MetaEffectsHistory;
 	Here are the 5 events can trigger the _RESET() function of an effect.
 */
 #define RESET_COMMAND    		(1 << 0) /** Chaos was disabled via command or menu - resetting effects */
-#define RESET_EXPIRED    		(1 << 0) /** Effect timer has expired */
-#define RESET_ROUNDSTART        (1 << 1) /** Round start */
-#define RESET_ROUNDEND          (1 << 2) /** Round End */
-#define RESET_PLUGINEND         (1 << 3) /** Plugin was unloaded */
+#define RESET_EXPIRED    		(1 << 1) /** Effect timer has expired */
+#define RESET_ROUNDSTART        (1 << 2) /** Round start */
+#define RESET_ROUNDEND          (1 << 3) /** Round End */
+#define RESET_PLUGINEND         (1 << 4) /** Plugin was unloaded */
 
 enum struct EffectData{
 	char 		Title[64]; // 0th index for ease of sorting in configs.sp
