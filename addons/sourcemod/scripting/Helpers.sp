@@ -489,9 +489,16 @@ void LerpToPoint(int client, float start[3], float end[3], float duration, bool 
 }
 
 void LerpOnGameFrame(){
-	LoopAlivePlayers(i){
+	LoopValidPlayers(i){
 		if(!IsInLerp[i]) continue;
-		if(TimeInLerp[i] >= LerpDuration[i]){
+		
+		if(!IsPlayerAlive(i)){
+			IsInLerp[i] = false;
+			TimeInLerp[i] = 0.0;
+			continue;
+		}
+
+		if(TimeInLerp[i] >= LerpDuration[i] |){
 			if(!g_bActiveNoclip){ // niche check to see if Flying is active
 				SetEntityMoveType(i, MOVETYPE_WALK);
 			}else{
@@ -503,6 +510,8 @@ void LerpOnGameFrame(){
 			TimeInLerp[i] = 0.0;
 			continue;
 		}
+
+
 		SetEntityMoveType(i, MOVETYPE_NONE);
 		float pos[3];
 		LerpVector(LerpStartPos[i], LerpEndPos[i], TimeInLerp[i], LerpDuration[i], pos);
