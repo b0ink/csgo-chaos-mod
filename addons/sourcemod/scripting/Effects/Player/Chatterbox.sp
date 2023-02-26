@@ -21,7 +21,7 @@ public void Chaos_Chatterbox_START(){
 }
 
 int calloutCounter = 0;
-char callout_names[][] = {
+char callout_names[7][64] = {
 	"I'm at",
 	"Jeee I hope they don't come near",
 	"I'm hiding at",
@@ -30,6 +30,19 @@ char callout_names[][] = {
 	"Running past",
 	"I'm camping in",
 };
+
+public void Chaos_Chatterbox_OnMapStart(){
+	char phraseID[64];
+	char calloutPhrase[64];
+	for(int i = 0; i < sizeof(callout_names); i++){
+		Format(phraseID, 64, "Chaos_Chatterbox_Phrase%i", i+1);
+		if(TranslationPhraseExists(phraseID) && IsTranslatedForLanguage(phraseID, LANG_SERVER)){
+			Format(callout_names[i], 64, "%T", phraseID, LANG_SERVER);
+		}else{
+			continue;
+		}
+	}
+}
 
 void SendCallout(int client){
 	g_CalloutSent[client] = true;

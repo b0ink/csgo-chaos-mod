@@ -51,6 +51,11 @@ public void Chaos_SimonSays_RESET(int ResetType){
 	KillMessageTimer();
 }
 
+void GetSimonSaysTranslation(char[] phrase, char[] buffer){
+	if(TranslationPhraseExists(phrase) && IsTranslatedForLanguage(phrase, LANG_SERVER)){
+		Format(buffer, 64, "%T", phrase, LANG_SERVER, SimonSays ? "\n" : " ");
+	}
+}
 
 void GenerateSimonOrder(float duration){
 	int rand = GetRandomInt(0, view_as<int>(SIMONSAYS_COUNT) - 1);
@@ -61,14 +66,34 @@ void GenerateSimonOrder(float duration){
 		SimonSays = false;
 	}
 
-	if(currentAction == HOLD_LEFT) 		Format(SimonActionText, sizeof(SimonActionText), "Hold A Key.%s(Move Left)", SimonSays ? "\n" : " ");
-	if(currentAction == HOLD_RIGHT) 	Format(SimonActionText, sizeof(SimonActionText), "Hold D Key.%s(Move Right)", SimonSays ? "\n" : " ");
-	if(currentAction == HOLD_FORWARD) 	Format(SimonActionText, sizeof(SimonActionText), "Hold W Key.%s(Move Forward)", SimonSays ? "\n" : " ");
-	if(currentAction == HOLD_BACKWARD) 	Format(SimonActionText, sizeof(SimonActionText), "Hold S Key.%s(Move Backwards)", SimonSays ? "\n" : " ");
-	if(currentAction == HOLD_CROUCH) 	SimonActionText = "Hold Crouch";
+	if(currentAction == HOLD_LEFT){
+		Format(SimonActionText, 64, "Hold A Key.%s(Move Left)", SimonSays ? "\n" : " ");
+		GetSimonSaysTranslation("Chaos_SimonSays_HoldLeft", SimonActionText);
+	}
+	if(currentAction == HOLD_RIGHT){
+		Format(SimonActionText, 64, "Hold D Key.%s(Move Right)", SimonSays ? "\n" : " ");
+		GetSimonSaysTranslation("Chaos_SimonSays_HoldRight", SimonActionText);
+	}
+	if(currentAction == HOLD_FORWARD){
+		Format(SimonActionText, 64, "Hold W Key.%s(Move Forward)", SimonSays ? "\n" : " ");
+		GetSimonSaysTranslation("Chaos_SimonSays_HoldForward", SimonActionText);
+	}
+	if(currentAction == HOLD_BACKWARD){
+		Format(SimonActionText, 64, "Hold S Key.%s(Move Backwards)", SimonSays ? "\n" : " ");
+		GetSimonSaysTranslation("Chaos_SimonSays_HoldBackward", SimonActionText);
+	}
+	if(currentAction == HOLD_CROUCH){
+		SimonActionText = "Hold Crouch";
+		GetSimonSaysTranslation("Chaos_SimonSays_HoldCrouch", SimonActionText);
+	}
 
 	if(SimonSays){
-		Format(SimonActionText, sizeof(SimonActionText), "Simon Says %s", SimonActionText);
+		char simonName[64] = "Simon Says";
+		if(TranslationPhraseExists("Chaos_SimonSays") && IsTranslatedForLanguage("Chaos_SimonSays", LANG_SERVER)){
+				FormatEx(simonName, 64, "%T", "Chaos_SimonSays", LANG_SERVER);
+		}
+
+		Format(SimonActionText, 64, "%s %s", simonName, SimonActionText);
 	}
 
 	SimonSaysTime = RoundToFloor(duration) + 5;
@@ -117,6 +142,9 @@ Action Timer_ShowAction(Handle timer){
 	if(SimonSaysTime > 11){
 		int countdown = SimonSaysTime - 10;
 		FormatEx(message, sizeof(message), "Simon says starting in \n%i...", countdown);
+		if(TranslationPhraseExists("Chaos_SimonSays_Intro") && IsTranslatedForLanguage("Chaos_SimonSays_Intro", LANG_SERVER)){
+				FormatEx(message, 128, "%T", "Chaos_SimonSays_Intro", LANG_SERVER, countdown);
+		}
 		DisplayCenterTextToAll(message);
 	}else{
 		if(SimonSaysTime >= 0){
@@ -130,8 +158,6 @@ Action Timer_ShowAction(Handle timer){
 			
 			Format(message, sizeof(message), "%s\n(%i)", SimonActionText, SimonSaysTime);
 			DisplayCenterTextToAll(message);
-			//TODO: forgot to remove this from v0.4.1
-			// PrintHintTextToAll(message);
 		}else{
 			Simon_Active = false;
 			KillMessageTimer();

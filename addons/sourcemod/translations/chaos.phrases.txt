@@ -634,7 +634,7 @@
     }
     "Chaos_SimonSays_Intro"
     {
-        "en"    "Simon Says starting in %i..."
+        "en"    "Simon Says starting in \n%i..."
     }
     "Chaos_SimonSays_HoldLeft"
     {
