@@ -88,6 +88,34 @@
     {
         "en"    "Chatterbox"
     }
+    "Chaos_Chatterbox_Phrase1"
+    {
+        "en"    "I'm at"
+    }
+    "Chaos_Chatterbox_Phrase2"
+    {
+        "en"    "I hope they don't come near"
+    }
+    "Chaos_Chatterbox_Phrase3"
+    {
+        "en"    "I'm hiding at"
+    }
+    "Chaos_Chatterbox_Phrase4"
+    {
+        "en"    "Shhhh I'm walking past"
+    }
+    "Chaos_Chatterbox_Phrase5"
+    {
+        "en"    "I'm flanking from"
+    }
+    "Chaos_Chatterbox_Phrase6"
+    {
+        "en"    "Running past"
+    }
+    "Chaos_Chatterbox_Phrase7"
+    {
+        "en"    "I'm camping in"
+    }
     "Chaos_Checkers"
     {
         "en"    "Checkers"
@@ -603,6 +631,30 @@
     "Chaos_SimonSays"
     {
         "en"    "Simon Says"
+    }
+    "Chaos_SimonSays_Intro"
+    {
+        "en"    "Simon Says starting in %i..."
+    }
+    "Chaos_SimonSays_HoldLeft"
+    {
+        "en"    "Hold A Key.%s(Move Left)"
+    }
+    "Chaos_SimonSays_HoldRight"
+    {
+        "en"    "Hold D Key.%s(Move Right)"
+    }
+    "Chaos_SimonSays_HoldForward"
+    {
+        "en"    "Hold W Key.%s(Move Forward)"
+    }
+    "Chaos_SimonSays_HoldBackward"
+    {
+        "en"    "Hold S Key.%s(Move Backwards)"
+    }
+    "Chaos_SimonSays_HoldCrouch"
+    {
+        "en"    "Hold Crouch."
     }
     "Chaos_SlayRandomPlayer"
     {
