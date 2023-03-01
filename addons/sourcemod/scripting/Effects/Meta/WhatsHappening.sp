@@ -10,6 +10,12 @@ public void Chaos_Meta_WhatsHappening(EffectData effect){
 
 public void Chaos_Meta_WhatsHappening_START(){
 	Meta_WhatsHappening = true;
+	CreateTimer(0.1, Timer_MetaClearAnnouncement);
+}
+
+public Action Timer_MetaClearAnnouncement(Handle timer){
+	DisplayCenterTextToAll("What's happening !?");
+	return Plugin_Stop;
 }
 
 public void Chaos_Meta_WhatsHappening_RESET(int ResetType){
