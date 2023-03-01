@@ -103,9 +103,10 @@ void Chaos_LooseTrigger_WeaponFire(Event event, const char[] name, bool dontBroa
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/xm1014/xm1014-1.wav");
 	}else if(StrEqual(weaponName, "p90")){
 		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/p90/p90_0%i.wav", LT_NumGen(1, 2, 3));
+	}else if(StrEqual(weaponName, "m4a1_silencer")){
+		FormatEx(soundPath, PLATFORM_MAX_PATH, "weapons/m4a1/m4a1_silencer_01.wav");
 	}
-	
-	
+
 	ClientCommand(client, "playgamesound %s", soundPath);
 }
 
