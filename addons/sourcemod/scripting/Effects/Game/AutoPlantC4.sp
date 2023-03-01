@@ -120,14 +120,21 @@ public void TeleportC4ToNewBombSite(){
 
 
 Action Timer_EnsureSpawnedAutoPlant(Handle timer){
-	if(g_PlantedSite == BOMBSITE_A){
-		AnnounceChaos(GetChaosTitle("Chaos_AutoPlantC4_A"), -1.0);
-	}else if(g_PlantedSite == BOMBSITE_B){
-		AnnounceChaos(GetChaosTitle("Chaos_AutoPlantC4_B"), -1.0);
-	}else{
-		AnnounceChaos(GetChaosTitle("Chaos_AutoPlantC4"), -1.0);
-	}
-	return Plugin_Continue;
+    char announceMsg[128];
+    if(TranslationPhraseExists("Chaos_AutoPlantC4") && IsTranslatedForLanguage("Chaos_AutoPlantC4", LANG_SERVER)){
+        Format(announceMsg, 128, "%T", "Chaos_AutoPlantC4", LANG_SERVER);
+    }else{
+        Format(announceMsg, 128, "Auto Plant C4");
+    }
+
+    //TODO: if needed, add translation for "bombsite"
+    if(g_PlantedSite == BOMBSITE_A){
+        Format(announceMsg, 128, "%s: Bombsite A", announceMsg);
+    }else if(g_PlantedSite == BOMBSITE_B){
+        Format(announceMsg, 128, "%s: Bombsite B", announceMsg);
+    }
+
+    return Plugin_Continue;
 }
 
 

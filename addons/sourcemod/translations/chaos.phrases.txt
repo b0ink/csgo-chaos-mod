@@ -20,14 +20,6 @@
     {
         "en"    "Auto Plant C4"
     }
-    "Chaos_AutoPlantC4_A"
-    {
-        "en"    "Auto Plant C4 at Bombsite A"
-    }
-    "Chaos_AutoPlantC4_B"
-    {
-        "en"    "Auto Plant C4 at Bombsite B"
-    }
     "Chaos_Autobhop"
     {
         "en"    "Are you feeling funky?"
