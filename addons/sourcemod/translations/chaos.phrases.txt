@@ -64,6 +64,10 @@
     {
         "en"    "Break Time"
     }
+    "Chaos_Buffering"
+    {
+        "en"    "Buffering"
+    }
     "Chaos_Bumpmines"
     {
         "en"    "Bumpmines"

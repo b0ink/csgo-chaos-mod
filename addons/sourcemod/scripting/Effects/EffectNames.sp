@@ -15,6 +15,7 @@ char EffectNames[][] = {
 "Chaos_Blur",
 "Chaos_Boxing",
 "Chaos_BreakTime",
+"Chaos_Buffering",
 "Chaos_Bumpmines",
 "Chaos_BuyAnywhere",
 "Chaos_C4Chicken",

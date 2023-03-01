@@ -9,6 +9,7 @@ public void Chaos_OffsetCrosshair(EffectData effect){
 	effect.IncompatibleWith("Chaos_NoCrosshair");
 	effect.AddAlias("Overlay");
 	effect.AddFlag("r_screenoverlay");
+	effect.AddFlag("crosshair");
 }
 
 
