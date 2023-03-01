@@ -27,6 +27,10 @@ public void OnPluginStart(){
 	ParseChaosEffects();
 
 	TWITCH_INIT();
+	/* Save models now mostly for plugin reloads */
+	LoopAlivePlayers(i){
+		SavePlayerModel(i);
+	}
 }
 
 
@@ -37,10 +41,8 @@ public void OnPluginEnd(){
 
 
 public void OnMapStart(){
-
-	/* Save models now mostly for plugin reloads */
-	LoopAlivePlayers(i){
-		SavePlayerModel(i);
+	for(int i = 0; i <= MaxClients; i++){
+		OriginalPlayerModels[i] = "\0";
 	}
 	
 	MetaEffectsHistory.Clear();
