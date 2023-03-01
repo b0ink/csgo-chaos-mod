@@ -50,7 +50,7 @@ public void Chaos_RewindTenSeconds_START(int ResetType){
 	if(TranslationPhraseExists("Chaos_RewindTenSeconds_Custom") && IsTranslatedForLanguage("Chaos_RewindTenSeconds_Custom", LANG_SERVER)){
 			FormatEx(announceMsg, sizeof(announceMsg), "%T", "Chaos_RewindTenSeconds_Custom", LANG_SERVER, seconds);
 	}else{
-		FormatEx(announceMsg, sizeof(announceMsg), "%s", "Rewind %i Seconds", seconds);
+		FormatEx(announceMsg, sizeof(announceMsg), "Rewind %i Seconds", seconds);
 	}
 
 	AnnounceChaos(announceMsg, -1.0);
