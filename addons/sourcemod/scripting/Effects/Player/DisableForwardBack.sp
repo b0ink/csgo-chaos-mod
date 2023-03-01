@@ -12,11 +12,23 @@ public void Chaos_DisableForwardBack(EffectData effect){
 }
 
 public void Chaos_DisableForwardBack_START(){
+	LoopAlivePlayers(client){
+		SDKUnhook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
+		SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
+	}
 	g_bNoForwardBack++;
 }
 
 public void Chaos_DisableForwardBack_RESET(int ResetType){
+	LoopValidPlayers(client){
+		SDKUnhook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
+	}
 	if(g_bNoForwardBack > 0) g_bNoForwardBack--;
+}
+
+public void Chaos_DisableForwardBack_OnPlayerSpawn(int client){
+	SDKUnhook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
+	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
 }
 
 public void Chaos_DisableForwardBack_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){

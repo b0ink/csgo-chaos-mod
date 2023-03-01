@@ -143,9 +143,6 @@ public void OnClientPutInServer(int client){
 	HideAnnouncement[client] = false;
 	UseHtmlHud[client] = false;
 	UseTimerBar[client] = true;
-
-	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
-	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableForwardBack_Hook_PreThinkPost);
 }
 
 
@@ -158,6 +155,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		if(Chaos_EffectData_Buffer.OnPlayerRunCmd != INVALID_FUNCTION){
+			if(!Chaos_EffectData_Buffer.CanRunForward("OnPlayerRunCmd")) continue;
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnPlayerRunCmd);
 			Call_PushCell(client); 
 			Call_PushCellRef(buttons);
@@ -183,6 +181,7 @@ public void OnGameFrame(){
 	LerpOnGameFrame();
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		if(Chaos_EffectData_Buffer.OnGameFrame != INVALID_FUNCTION){
+			if(!Chaos_EffectData_Buffer.CanRunForward("OnGameFrame")) continue;
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnGameFrame);
 			Call_Finish();
 		}
@@ -193,6 +192,7 @@ public void OnGameFrame(){
 public void OnEntityCreated(int ent, const char[] classname){
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		if(Chaos_EffectData_Buffer.OnEntityCreated != INVALID_FUNCTION){
+			if(!Chaos_EffectData_Buffer.CanRunForward("OnEntityCreated")) continue;
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnEntityCreated);
 			Call_PushCell(ent); 
 			Call_PushString(classname);
@@ -205,6 +205,7 @@ public void OnEntityCreated(int ent, const char[] classname){
 public void OnEntityDestroyed(int ent){
 	LoopAllEffects(Chaos_EffectData_Buffer, index){
 		if(Chaos_EffectData_Buffer.OnEntityDestroyed != INVALID_FUNCTION){
+			if(!Chaos_EffectData_Buffer.CanRunForward("OnEntityDestroyed")) continue;
 			Call_StartFunction(GetMyHandle(), Chaos_EffectData_Buffer.OnEntityDestroyed);
 			Call_PushCell(ent); 
 			Call_Finish();

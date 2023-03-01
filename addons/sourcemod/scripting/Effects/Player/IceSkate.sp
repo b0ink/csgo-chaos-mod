@@ -7,24 +7,19 @@ public void Chaos_IceSkate(EffectData effect){
 	effect.IncompatibleWith("Chaos_InsaneAirSpeed");
 }
 
-bool IceSkate = false;
-
+//TODO: translations
 public void Chaos_IceSkate_START(){
 	cvar("sv_airaccelerate", "2000");
 	CPrintToChatAll("%s Hold [Space] and strafe to Ice Skate!", g_Prefix);
 	PrintHintTextToAll("Hold [Space] and strafe to Ice Skate!");
-	IceSkate = true;
 }
 
 public void Chaos_IceSkate_RESET(int ResetType){
 	ResetCvar("sv_airaccelerate", "12", "2000");
-	IceSkate = false;
 }
 
 
 public void Chaos_IceSkate_OnGameFrame(){
-	if(!IceSkate) return;
-
 	// trace down, see if there's 8 distance or less to ground
 	float fPosition[3];
 	float fGroundPosition[3];
@@ -35,6 +30,9 @@ public void Chaos_IceSkate_OnGameFrame(){
 		GetClientAbsOrigin(i, fPosition);
 		TR_TraceRayFilter(fPosition, view_as<float>({90.0, 0.0, 0.0}), MASK_PLAYERSOLID, RayType_Infinite, TRFilter_NoPlayers, i);
 
+		// Hint to give info on why players cant jump.
+		//TODO: allow players to spacebar jump, but holding for 0.2 seconds activates ice skating 
+		PrintHintText(i, "You are now ice skating. Strafe left and right to gain speed!");
 
 		if(TR_DidHit() && TR_GetEndPosition(fGroundPosition) && GetVectorDistance(fPosition, fGroundPosition) <= 25.0)
 		{

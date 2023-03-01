@@ -1,28 +1,17 @@
 #pragma semicolon 1
 
-bool g_bJumping = false;
 bool ForceJump[MAXPLAYERS+1];
 public void Chaos_Jumping(EffectData effect){
 	effect.Title = "Jump Jump!";
 	effect.Duration = 30;
 }
 
-public void Chaos_Jumping_START(){
-	g_bJumping = true;
-}
-
-public void Chaos_Jumping_RESET(int ResetType){
-	g_bJumping = false;
-}
-
 public void Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
-	if(g_bJumping){
-		ForceJump[client] = !ForceJump[client];
-		if(ForceJump[client]){
-			buttons |= IN_JUMP;
-		}else{
-			buttons &= ~IN_JUMP;
-		}
+	ForceJump[client] = !ForceJump[client];
+	if(ForceJump[client]){
+		buttons |= IN_JUMP;
+	}else{
+		buttons &= ~IN_JUMP;
 	}
 }
 

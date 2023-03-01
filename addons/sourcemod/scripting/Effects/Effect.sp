@@ -50,35 +50,43 @@ enum struct EffectData{
 
 	Function OnPlayerSpawn;
 
-	void Run(){
-		if(this.START != INVALID_FUNCTION){
-			Log("Playing effect: %s", this.FunctionName);
+	/*
+		As of 0.4.3, forwards will not be run automatically UNLESS the effect is active.
+		Use this.RunForwardWhileInactive("ForwardName");
+		eg.
+		this.RunForwardWhileInactive("OnPlayerRunCmd");
+		Will allow the forward to run while the effect isn't active
+	*/
 
+	Handle 	ForwardsToRunWhileInactive;
+
+	void Run(){
+		Log("Triggering effect: %s", this.FunctionName);
+
+		if(this.START != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), this.START);
 			Call_Finish();
-
-			float duration = this.GetDuration(); 
-			if(duration > 0) this.Timer = CreateTimer(duration, Effect_Reset, this.ID);
-			
-			if(!this.HasCustomAnnouncement){
-				AnnounceChaos(this.Title, this.GetDuration(), _, this.IsMetaEffect);
-			}
-			g_sLastPlayedEffect = this.FunctionName;
-			g_iTotalEffectsRunThisMap++;
-			ChaosEffects.SetArray(this.ID, this); // save timer
 		}
+		float duration = this.GetDuration(); 
+		if(duration > 0) this.Timer = CreateTimer(duration, Effect_Reset, this.ID);
+		
+		if(!this.HasCustomAnnouncement){
+			AnnounceChaos(this.Title, this.GetDuration(), _, this.IsMetaEffect);
+		}
+		g_sLastPlayedEffect = this.FunctionName;
+		g_iTotalEffectsRunThisMap++;
+		ChaosEffects.SetArray(this.ID, this); // save timer
 	}
 
 	void Reset(int ResetFlags){
+		StopTimer(this.Timer);
+		this.Timer = INVALID_HANDLE;
+		ChaosEffects.SetArray(this.ID, this);
+		
 		if(this.RESET != INVALID_FUNCTION){
-			StopTimer(this.Timer);
-			this.Timer = INVALID_HANDLE;
-			ChaosEffects.SetArray(this.ID, this);
-			
 			Call_StartFunction(GetMyHandle(), this.RESET);
 			Call_PushCell(ResetFlags);
 			Call_Finish();
-		
 		}
 	}
 
@@ -210,6 +218,20 @@ enum struct EffectData{
 			this.Aliases = CreateArray(255);
 		}
 		PushArrayString(this.Aliases, effectName);
+	}
+
+	void RunForwardWhileInactive(char[] forwardName){
+		if(this.ForwardsToRunWhileInactive == INVALID_HANDLE){
+			this.ForwardsToRunWhileInactive = CreateArray(255);
+		}
+		PushArrayString(this.ForwardsToRunWhileInactive, forwardName);
+	}
+	
+	bool CanRunForward(char[] name){
+		if(this.ForwardsToRunWhileInactive != INVALID_HANDLE && FindStringInArray(this.ForwardsToRunWhileInactive, name) != -1){
+			return true;
+		}
+		return (this.Timer != INVALID_HANDLE);
 	}
 }
 

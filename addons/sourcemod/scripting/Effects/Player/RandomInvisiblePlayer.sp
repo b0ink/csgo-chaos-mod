@@ -23,7 +23,12 @@ public void Chaos_RandomInvisiblePlayer_START(){
 	char chaosMsg[MAX_NAME_LENGTH];
 	FormatEx(chaosMsg, 	sizeof(chaosMsg), "%N", target);
 	Format(chaosMsg, 	sizeof(chaosMsg), "%s", Truncate(chaosMsg, 10));
-	Format(chaosMsg, 	sizeof(chaosMsg), "{orange}%s {default}%s", chaosMsg, GetChaosTitle("Chaos_RandomInvisiblePlayer_Custom"));
+	char suffix[64];
+	Format(suffix, 64, "%s",  GetChaosTitle("Chaos_RandomInvisiblePlayer_Custom"));
+	if(suffix[0] == '\0'){
+		Format(suffix, 64, "has been made invisible");
+	}
+	Format(chaosMsg, 	sizeof(chaosMsg), "{orange}%s {default}%s", chaosMsg, suffix);
 	
 	AnnounceChaos(chaosMsg, -1.0);
 }

@@ -47,8 +47,15 @@ public void ParseChaosEffects(){
 		effect.OnPlayerSpawn = GetFunctionByName(GetMyHandle(), function_name);
 
 
-		if(effect.START == INVALID_FUNCTION){
-			Log("Could not find start function for %s", EffectNames[i]);
+		if(
+			effect.START == INVALID_FUNCTION && 
+			effect.RESET == INVALID_FUNCTION && 
+			effect.OnPlayerRunCmd == INVALID_FUNCTION && 
+			effect.OnEntityCreated == INVALID_FUNCTION && 
+			effect.OnEntityDestroyed == INVALID_FUNCTION && 
+			effect.OnGameFrame == INVALID_FUNCTION
+		){
+			Log("Could not find any start/reset functions or any forwards  for %s. This effect will be ignored [DEBUG]", EffectNames[i]);
 			continue;
 		}
 		// if(start_func == INVALID_FUNCTION || reset_func == INVALID_FUNCTION) continue;

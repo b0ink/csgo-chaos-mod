@@ -5,6 +5,7 @@ public void Chaos_RewindTenSeconds(EffectData effect){
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.AddFlag("movement");
+	effect.RunForwardWhileInactive("OnGameFrame");
 }
 
 

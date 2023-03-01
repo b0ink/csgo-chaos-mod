@@ -13,10 +13,22 @@ public void Chaos_DisableStrafe(EffectData effect){
 
 public void Chaos_DisableStrafe_START(){
 	g_bNoStrafe++;
+	LoopAlivePlayers(client){
+		SDKUnhook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
+		SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
+	}
 }
 
 public void Chaos_DisableStrafe_RESET(int ResetType){
+	LoopValidPlayers(client){
+		SDKUnhook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
+	}
 	if(g_bNoStrafe > 0) g_bNoStrafe--;
+}
+
+public void Chaos_DisableStrafe_OnPlayerSpawn(int client){
+	SDKUnhook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
+	SDKHook(client, SDKHook_PreThinkPost, Chaos_DisableStrafe_Hook_PreThinkPost);
 }
 
 public void Chaos_DisableStrafe_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){

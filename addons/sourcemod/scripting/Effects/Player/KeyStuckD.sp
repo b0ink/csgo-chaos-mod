@@ -1,7 +1,5 @@
 #pragma semicolon 1
 
-bool DKeyStuck = false;
-
 public void Chaos_KeyStuckD(EffectData effect){
 	effect.Title = "Help my D key is stuck";
 	effect.Duration = 30;
@@ -10,17 +8,8 @@ public void Chaos_KeyStuckD(EffectData effect){
 	effect.IncompatibleWith("Chaos_KeyStuckA");
 }
 
-
-public void Chaos_KeyStuckD_START(){
-	DKeyStuck = true;
-}
-
 public void Chaos_KeyStuckD_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
-	if(DKeyStuck) fVel[1] = 400.0;
-}
-
-public void Chaos_KeyStuckD_RESET(int ResetType){
-	DKeyStuck = false;
+	fVel[1] = 400.0;
 }
 
 public bool Chaos_KeyStuckD_Conditions(bool EffectRunRandomly){
