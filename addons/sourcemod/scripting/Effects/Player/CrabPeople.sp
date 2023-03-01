@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 public void Chaos_CrabPeople(EffectData effect){
-	effect.Title = "Crab People";
+	effect.Title = "Crabs";
 	effect.Duration = 30;
 }
 
