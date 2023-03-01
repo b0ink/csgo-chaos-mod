@@ -498,7 +498,7 @@ void LerpOnGameFrame(){
 			continue;
 		}
 
-		if(TimeInLerp[i] >= LerpDuration[i] |){
+		if(TimeInLerp[i] >= LerpDuration[i]){
 			if(!g_bActiveNoclip){ // niche check to see if Flying is active
 				SetEntityMoveType(i, MOVETYPE_WALK);
 			}else{

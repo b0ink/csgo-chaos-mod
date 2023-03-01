@@ -33,7 +33,6 @@ char callout_names[7][64] = {
 
 public void Chaos_Chatterbox_OnMapStart(){
 	char phraseID[64];
-	char calloutPhrase[64];
 	for(int i = 0; i < sizeof(callout_names); i++){
 		Format(phraseID, 64, "Chaos_Chatterbox_Phrase%i", i+1);
 		if(TranslationPhraseExists(phraseID) && IsTranslatedForLanguage(phraseID, LANG_SERVER)){
