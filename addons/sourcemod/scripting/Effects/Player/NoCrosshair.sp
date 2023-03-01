@@ -5,6 +5,7 @@
 public void Chaos_NoCrosshair(EffectData effect){
 	effect.Title = "No Crosshair";
 	effect.Duration = 30;
+	effect.AddFlag("crosshair");
 }
 
 public void Chaos_NoCrosshair_START(){
