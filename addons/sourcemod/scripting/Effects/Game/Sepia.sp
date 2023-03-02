@@ -15,7 +15,7 @@ public void Chaos_Sepia_OnMapStart(){
 }
 
 public void Chaos_Sepia_START(){
-	CREATE_CC("sepia", .maxweight=0.75);
+	CREATE_CC("sepia", .maxweight=0.45);
 }
 
 public void Chaos_Sepia_RESET(int ResetType){
