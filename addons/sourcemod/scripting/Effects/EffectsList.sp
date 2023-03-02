@@ -177,3 +177,4 @@
 #include "Effects/Player/SwapEnemyWeapons.sp"
 #include "Effects/Player/ExpensiveAmmo.sp"
 #include "Effects/Game/Sepia.sp"
+#include "Effects/Game/Watermark.sp"
