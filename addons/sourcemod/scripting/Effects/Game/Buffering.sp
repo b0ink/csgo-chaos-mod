@@ -44,6 +44,6 @@ public void Chaos_Buffering_RESET(int ResetType){
 	}
 }
 
-public bool Buffering_Conditions(bool EffectRunRandomly){
+public bool Chaos_Buffering_Conditions(bool EffectRunRandomly){
 	return BufferingMaterials;
 }

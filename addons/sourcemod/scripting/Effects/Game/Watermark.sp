@@ -36,7 +36,7 @@ public void Chaos_Watermark_RESET(int ResetType){
 	}
 }
 
-public bool Watermark_Conditions(bool EffectRunRandomly){
+public bool Chaos_Watermark_Conditions(bool EffectRunRandomly){
 	if(g_iTotalEffectsRunThisMap < 20) return false;
 	return WatermarkMaterials;
 }

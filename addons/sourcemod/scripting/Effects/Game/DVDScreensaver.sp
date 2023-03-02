@@ -36,6 +36,6 @@ public void Chaos_DVDScreensaver_RESET(int ResetType){
 	}
 }
 
-public bool DVDScreensaver_Conditions(bool EffectRunRandomly){
+public bool Chaos_DVDScreensaver_Conditions(bool EffectRunRandomly){
 	return DVDScreensaverMaterials;
 }
