@@ -220,6 +220,8 @@ void PrintTimer(int time){
 	}
 }
 
+Handle ClearHTMLTimer = INVALID_HANDLE;
+
 void PrintHTML(char[] message){
 	Event newevent_message = CreateEvent("cs_win_panel_round");
 	char htmlMsg[1024];
@@ -233,10 +235,12 @@ void PrintHTML(char[] message){
 	}
 	newevent_message.Cancel(); 
 
-	CreateTimer(3.9, Timer_ClearHTML); // 3.9 to allow a safe 1 second buffer if the effect interval is 5.0 seconds
+	StopTimer(ClearHTMLTimer);
+	ClearHTMLTimer = CreateTimer(3.9, Timer_ClearHTML); // 3.9 to allow a safe 1 second buffer if the effect interval is 5.0 seconds
 }
 
 Action Timer_ClearHTML(Handle timer){
+	ClearHTMLTimer = INVALID_HANDLE;
 	Event newevent_message = CreateEvent("cs_win_panel_round");
 	newevent_message.SetString("funfact_token", "");
 	

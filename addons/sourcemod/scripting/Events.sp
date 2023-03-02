@@ -161,6 +161,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	ResetChaos(RESET_ROUNDEND);
 	g_bCanSpawnEffect = false;
 
+	StopTimer(ClearHTMLTimer);
 
 	return Plugin_Continue;
 }
