@@ -6,6 +6,10 @@ public void Chaos_DecoyDodgeball(EffectData effect){
 	effect.IncompatibleWith("Chaos_Thunderstorm");
 	effect.IncompatibleWith("Chaos_Boxing");
 	effect.IncompatibleWith("Chaos_OHKO");
+	effect.IncompatibleWith("Chaos_HealthRegen");
+	effect.IncompatibleWith("Chaos_Give100HP");
+	effect.IncompatibleWith("Chaos_HealAllPlayers");
+	effect.IncompatibleWith("Chaos_IgniteAllPlayers");
 } 
 
 //hook
