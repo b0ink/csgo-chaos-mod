@@ -176,3 +176,4 @@
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/SwapEnemyWeapons.sp"
 #include "Effects/Player/ExpensiveAmmo.sp"
+#include "Effects/Game/Sepia.sp"
