@@ -12,7 +12,11 @@ public void Chaos_ExpensiveAmmo_Event_WeaponFire(Event event, const char[] name,
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	if(!ValidAndAlive(client)) return;
 	if(ExpensiveAmmo){
-		SetClientMoney(client, -50);
+		if((GetEntProp(client, Prop_Send, "m_iAccount") - 50) > 0){
+			SetClientMoney(client, -50);
+		}else{
+			SetClientMoney(client, 0, true, true);
+		}
 	}
 }
 
