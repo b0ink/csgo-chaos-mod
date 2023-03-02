@@ -768,4 +768,20 @@
     {
         "en"    "Weapon Knockback"
     }
+    "Chaos_ExpensiveAmmo"
+    {
+        "en"    "Expensive Ammo"
+    }
+    "Chaos_SwapEnemyWeapons"
+    {
+        "en"    "Swap Weapons With Enemy Team"
+    }
+    "Chaos_Sepia"
+    {
+        "en"    "Sepia"
+    }
+    "Chaos_Watermark"
+    {
+        "en"    "Watermark"
+    }
 }
