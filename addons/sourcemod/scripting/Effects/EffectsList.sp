@@ -175,3 +175,4 @@
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/SwapEnemyWeapons.sp"
+#include "Effects/Player/ExpensiveAmmo.sp"
