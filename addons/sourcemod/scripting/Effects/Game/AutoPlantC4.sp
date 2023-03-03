@@ -40,11 +40,18 @@ public void Chaos_AutoPlantC4(EffectData effect){
 public void Chaos_AutoPlantC4_INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");
     HookEvent("bomb_planted", Chaos_AutoPlantC4_Event_BombPlanted);
+    HookEvent("round_end", Chaos_AutoPlantC4_Event_RoundEnd);
 }
 
 
 public void Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	g_bBombPlanted = true;
+}
+
+
+
+public void Chaos_AutoPlantC4_Event_RoundEnd(Handle event, char[] name, bool dontBroadcast){
+    AutoPlantRoundEnd();
 }
 
 
