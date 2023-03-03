@@ -1,5 +1,14 @@
 #pragma semicolon 1
 
+
+int playerModels[MAXPLAYERS+1] = {INVALID_ENT_REFERENCE,...};
+int playerModelsIndex[MAXPLAYERS+1] = {-1,...};
+
+#define EF_BONEMERGE                (1 << 0)
+#define EF_NOSHADOW                 (1 << 4)
+#define EF_NORECEIVESHADOW          (1 << 6)
+
+
 public void Chaos_ESP(EffectData effect){
     effect.Title = "Wall Hacks";
     effect.Duration = 30;
@@ -8,39 +17,58 @@ public void Chaos_ESP(EffectData effect){
     effect.AddAlias("Cheats");
 }
 
-int portal_colors[2][4];
+int esp_colors[2][4];
 public void Chaos_ESP_INIT(){
-	portal_colors[0][0] = 144;
-	portal_colors[0][1] = 120;
-	portal_colors[0][2] = 72;
+	esp_colors[0][0] = 144;
+	esp_colors[0][1] = 120;
+	esp_colors[0][2] = 72;
 
-	portal_colors[1][0] = 72;
-	portal_colors[1][1] = 96;
-	portal_colors[1][2] = 144;
+	esp_colors[1][0] = 72;
+	esp_colors[1][1] = 96;
+	esp_colors[1][2] = 144;
 }
 
-
+bool WallHacks = false;
 public void Chaos_ESP_START(){
-	cvar("sv_force_transmit_players", "1");
-	createAllGlows();
+    cvar("sv_force_transmit_players", "1");
+    createAllGlows();
+    WallHacks = true;
+    CreateTimer(1.0, Timer_CheckPlayerModels, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 }
+
+
+/* If player models change while wallhack effect is active, recreate outlines */
+Action Timer_CheckPlayerModels(Handle timer){
+    if(!WallHacks) return Plugin_Stop;
+    char modelName[PLATFORM_MAX_PATH];
+    LoopAlivePlayers(i){
+        GetEntPropString(i, Prop_Data, "m_ModelName", modelName, PLATFORM_MAX_PATH);
+        int skin = EntRefToEntIndex(playerModels[i]);
+        if(IsValidEntity(skin)){
+            char EspName[PLATFORM_MAX_PATH];
+            GetEntPropString(skin, Prop_Data, "m_ModelName", EspName, PLATFORM_MAX_PATH);
+            if(!StrEqual(modelName, EspName, false)){
+                PrintToChatAll("checking glows");
+                checkGlows();
+                break;
+            }
+        }
+
+    }
+    return Plugin_Continue;
+}
+
 
 public void Chaos_ESP_RESET(int ResetType){
-	ResetCvar("sv_force_transmit_players", "0", "1");
-	destroyAllGlows();
+    WallHacks = false;
+    ResetCvar("sv_force_transmit_players", "0", "1");
+    destroyAllGlows();
 }
 
 public void Chaos_ESP_OnPlayerSpawn(int client){
 	RemoveSkin(client);
 	AddGlow(client);
 }
-
-int playerModels[MAXPLAYERS+1] = {INVALID_ENT_REFERENCE,...};
-int playerModelsIndex[MAXPLAYERS+1] = {-1,...};
-
-#define EF_BONEMERGE                (1 << 0)
-#define EF_NOSHADOW                 (1 << 4)
-#define EF_NORECEIVESHADOW          (1 << 6)
 
 public void checkGlows(){
 	destroyAllGlows();
@@ -60,7 +88,7 @@ public void SetupGlow(int entity, int color[4]) {
     SetEntProp(entity, Prop_Send, "m_nGlowStyle", 0);
     SetEntPropFloat(entity, Prop_Send, "m_flGlowMaxDist", 10000.0);
 
-    // So now setup given glow portal_colors for the skin
+    // So now setup given glow esp_colors for the skin
     for(int i=0;i<3;i++) {
         SetEntData(entity, offset + i, color[i], _, true); 
     }
@@ -68,7 +96,7 @@ public void SetupGlow(int entity, int color[4]) {
 
 public void setGlowTeam(int skin, int team) {
     if(team >= 2) {
-        SetupGlow(skin, portal_colors[team-2]);
+        SetupGlow(skin, esp_colors[team-2]);
     }
 }
 
