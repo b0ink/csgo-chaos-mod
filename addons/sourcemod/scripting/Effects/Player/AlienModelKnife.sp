@@ -26,7 +26,7 @@ void MakeAlien(int client){
 	// SetEntProp(i, Prop_Send, "m_ScaleType", 5);
 	SetEntPropFloat(client, Prop_Send, "m_flStepSize", 18.0*0.55);
 	SetEntPropFloat(client, Prop_Send, "m_flLaggedMovementValue", 2.0);
-	FakeClientCommand(client, "use weapon_knife");
+	SwitchToKnife(client);
 }
 
 

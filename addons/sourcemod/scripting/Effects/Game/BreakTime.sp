@@ -18,7 +18,7 @@ public void Chaos_BreakTime_START(){
 	HookBlockAllGuns();
 
 	LoopAlivePlayers(i){
-		FakeClientCommand(i, "use weapon_knife");
+		SwitchToKnife(i);
 	}
 }
 
@@ -26,7 +26,7 @@ public void Chaos_BreakTime_OnPlayerSpawn(int client){
 	if(!BreakTime) return;
 
 	HookBlockAllGuns(client);
-	FakeClientCommand(client, "use weapon_knife");
+	SwitchToKnife(client);
 }
 
 

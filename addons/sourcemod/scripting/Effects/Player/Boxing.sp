@@ -72,8 +72,7 @@ public void Chaos_Boxing_RESET(int ResetType){
 			int knife = GetPlayerWeaponSlot(i, CS_SLOT_KNIFE);
 			if(!IsValidEntity(knife) || (GetEdictClassname(knife, classname, 64) && StrContains(classname, "knife") == -1)){
 				GivePlayerItem(i, "weapon_knife");
-				FakeClientCommand(i, "use weapon_knife");
-				ClientCommand(i, "slot2;slot1");
+				SwitchToPrimaryWeapon(i);
 			}
 		}
 	}

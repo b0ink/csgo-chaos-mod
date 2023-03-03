@@ -14,7 +14,7 @@ public void Chaos_Shields_START(){
 			EquipPlayerWeapon(i, entity);
 			SetEntPropEnt(i, Prop_Data, "m_hActiveWeapon" , entity);
 			if(StrContains(playerWeapon, "knife", false) != -1){
-				FakeClientCommand(i, "use weapon_knife");
+				SwitchToKnife(i);
 				InstantSwitch(i, -1);
 			}else{
 				FakeClientCommand(i, "use %s", playerWeapon);

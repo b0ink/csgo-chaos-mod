@@ -9,7 +9,7 @@ public void Chaos_DropPrimaryWeapon(EffectData effect){
 public void Chaos_DropPrimaryWeapon_START(){
 	LoopAlivePlayers(i){
 		if(!HasMenuOpen(i)){
-			ClientCommand(i, "slot2;slot1");
+			SwitchToPrimaryWeapon(i, .AttemptKnife=false);
 		}
 	}
 	CreateTimer(0.1, Timer_DropPrimary);

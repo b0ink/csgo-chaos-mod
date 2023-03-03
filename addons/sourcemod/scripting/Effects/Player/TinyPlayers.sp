@@ -160,11 +160,6 @@ public void Chaos_TinyPlayers_RESET(int ResetType){
 
 	if(ResetType & RESET_EXPIRED){
 		RestorePlayerModels();
-		LoopAlivePlayers(i){
-			if(!HasMenuOpen(i)){
-				ClientCommand(i, "slot1");
-			}
-		}
 	}
 
 

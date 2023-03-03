@@ -111,8 +111,8 @@ void UnhookBlockAllGuns(int ResetTypeFlags){
 	if(BlockGun_EffectCount == 0){
 		LoopAlivePlayers(i){
 			SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
-			if(!HasMenuOpen(i) && (ResetTypeFlags & RESET_EXPIRED)){
-				ClientCommand(i, "slot2;slot1");
+			if(ResetTypeFlags & RESET_EXPIRED){
+				SwitchToPrimaryWeapon(i);
 			}
 		}
 	}
@@ -170,3 +170,35 @@ public void UnhookPreventWeaponDrop(){
 		- everytime a new one is added or deleted, loop through effects from newest to oldest, if a variable is set to null, check the next effect
 		
 */
+
+
+//TODO: consider adding a SwitchToWeapon() helper that also ignores c4s
+
+void SwitchToPrimaryWeapon(int client, bool AttemptSecondaryWeapon = true, bool AttemptKnife = true){
+	if(ValidAndAlive(client)){
+		char classname[64];
+		int weapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		if(IsValidEntity(weapon) && GetEdictClassname(weapon, classname, 64)){
+			if(StrEqual(classname, "weapon_c4")){
+				return; // dont switch weapon when holding c4
+			}
+		}
+		weapon = GetPlayerWeaponSlot(client, CS_SLOT_PRIMARY);
+		if(!IsValidEntity(weapon) && AttemptSecondaryWeapon){
+			weapon = GetPlayerWeaponSlot(client, CS_SLOT_SECONDARY);
+		}
+		if(IsValidEntity(weapon)){
+			GetEdictClassname(weapon, classname, 64);
+			FakeClientCommand(client, "use %s", classname);
+		}else if(AttemptKnife){
+			FakeClientCommand(client, "use weapon_knife");
+		}
+	}
+}
+
+void SwitchToKnife(int client){
+	if(ValidAndAlive(client)){
+		FakeClientCommand(client, "use weapon_fists");
+		FakeClientCommand(client, "use weapon_knife");
+	}
+}

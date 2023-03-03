@@ -106,8 +106,7 @@ public void Chaos_DecoyDodgeball_RESET(int ResetType){
 		LoopAlivePlayers(i){
 			SetEntityHealth(i, 100);
 			if(!HasMenuOpen(i)){
-				ClientCommand(i, "slot2");
-				ClientCommand(i, "slot1");
+				SwitchToPrimaryWeapon(i);
 			}
 		}
 	}

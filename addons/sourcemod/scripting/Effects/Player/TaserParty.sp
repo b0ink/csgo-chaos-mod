@@ -77,7 +77,7 @@ public void Chaos_TaserParty_RESET(int ResetType){
 	if(ResetType & RESET_EXPIRED){
 		LoopAlivePlayers(i){
 			if(!HasMenuOpen(i)){
-				ClientCommand(i, "slot2;slot1");
+				SwitchToPrimaryWeapon(i);
 			}
 		}
 	}

@@ -39,8 +39,8 @@ public void Chaos_NoScopeOnly_START(){
 	LoopAlivePlayers(client){
 		// If already scoping, switch weapon to exit scope, perhaps theres a better way TODO this
 		if(GetEntProp(client, Prop_Send, "m_bIsScoped")){
-			FakeClientCommand(client, "use weapon_knife");
-			ClientCommand(client, "slot2;slot1");
+			SwitchToKnife(client);
+			SwitchToPrimaryWeapon(client);
 		}
 	}
 }

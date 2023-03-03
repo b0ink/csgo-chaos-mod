@@ -58,7 +58,7 @@ public void Chaos_SwapEnemyWeapons_START(){
 				EquipPlayerWeapon(target, weapon);
 			}
 		}
-		ClientCommand(target, "slot2;slot1");
+		SwitchToPrimaryWeapon(target);
 
 		for(int g = 0; g < targetWeapons.Length; g++){
 			int weapon = targetWeapons.Get(g);
@@ -66,7 +66,8 @@ public void Chaos_SwapEnemyWeapons_START(){
 				EquipPlayerWeapon(client, weapon);
 			}
 		}
-		ClientCommand(client, "slot2;slot1");
+		SwitchToPrimaryWeapon(client);
+
 
 		delete clientWeapons;
 		delete targetWeapons;

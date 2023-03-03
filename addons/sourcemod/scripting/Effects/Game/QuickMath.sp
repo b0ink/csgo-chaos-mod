@@ -37,7 +37,7 @@ public Action QuickMath_SayListener(int client, const char[] command, int argc){
 
 public void Chaos_QuickMath_START(){
 	LoopAlivePlayers(i){
-		ClientCommand(i, "slot3");
+		SwitchToKnife(i);
 		QuickMathSolved[i] = false;
 		PerformBlind(i, 255, 0);
 	}

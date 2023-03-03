@@ -34,7 +34,7 @@ public void Chaos_ThrowingKnives_START(){
 	ThrowingKnives = true;
 	HookBlockAllGuns();
 	LoopAlivePlayers(i){
-		FakeClientCommand(i, "use weapon_knife");
+		SwitchToKnife(i);
 		SDKUnhook(i, SDKHook_OnTakeDamage, ThrowingKnives_OnTakeDamage);
 		SDKHook(i, SDKHook_OnTakeDamage, ThrowingKnives_OnTakeDamage);
 	}
