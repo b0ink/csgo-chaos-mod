@@ -48,7 +48,6 @@ Action Timer_CheckPlayerModels(Handle timer){
             char EspName[PLATFORM_MAX_PATH];
             GetEntPropString(skin, Prop_Data, "m_ModelName", EspName, PLATFORM_MAX_PATH);
             if(!StrEqual(modelName, EspName, false)){
-                PrintToChatAll("checking glows");
                 checkGlows();
                 break;
             }
