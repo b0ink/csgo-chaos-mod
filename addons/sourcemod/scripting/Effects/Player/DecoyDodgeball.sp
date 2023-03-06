@@ -4,6 +4,7 @@ public void Chaos_DecoyDodgeball(EffectData effect){
 	effect.Title = "Decoy Dodgeball";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Thunderstorm");
+	effect.IncompatibleWith("Chaos_Armageddon");
 	effect.IncompatibleWith("Chaos_Boxing");
 	effect.IncompatibleWith("Chaos_OHKO");
 	effect.IncompatibleWith("Chaos_HealthRegen");
