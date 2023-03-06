@@ -24,8 +24,8 @@ stock void SetNoScope(int weapon){
 }
 
 public Action Chaos_NoScopeOnly_Hook_OnPreThink(int client){
-	int iWeapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-	SetNoScope(iWeapon);
+	int weapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+	SetNoScope(weapon);
 	return Plugin_Continue;
 }
 

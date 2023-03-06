@@ -6,7 +6,7 @@ public void Chaos_Jumping(EffectData effect){
 	effect.Duration = 30;
 }
 
-public void Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
+public void Chaos_Jumping_OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &iSubType, int &cmdnum, int &tickcount, int &seed, int mouse[2]){
 	ForceJump[client] = !ForceJump[client];
 	if(ForceJump[client]){
 		buttons |= IN_JUMP;

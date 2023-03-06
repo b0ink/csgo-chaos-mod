@@ -8,8 +8,8 @@ public void Chaos_KeyStuckS(EffectData effect){
 	effect.IncompatibleWith("Chaos_KeyStuckW");
 }
 
-public void Chaos_KeyStuckS_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
-	fVel[0] = -400.0;
+public void Chaos_KeyStuckS_OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &iSubType, int &cmdnum, int &tickcount, int &seed, int mouse[2]){
+	vel[0] = -400.0;
 }
 
 public bool Chaos_KeyStuckS_Conditions(bool EffectRunRandomly){

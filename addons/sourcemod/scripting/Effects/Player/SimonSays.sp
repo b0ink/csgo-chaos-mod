@@ -99,7 +99,7 @@ void GenerateSimonOrder(float duration){
 	SimonSaysTime = RoundToFloor(duration) + 5;
 }
 
-public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
+public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &iSubType, int &cmdnum, int &tickcount, int &seed, int mouse[2]){
 	if(SimonSaysTime >= 10) return;
 	if(!Simon_Active) return;
 	

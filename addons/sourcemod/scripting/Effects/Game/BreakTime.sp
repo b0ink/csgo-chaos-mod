@@ -35,10 +35,10 @@ public void Chaos_BreakTime_RESET(int ResetType){
 	UnhookBlockAllGuns(ResetType);
 }
 
-public void Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
+public void Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &subtype, int &cmdnum, int &tickcount, int &seed, int mouse[2]){
 	if(BreakTime){
-		fVel[0] = 0.0;
-		fVel[1] = 0.0;
+		vel[0] = 0.0;
+		vel[1] = 0.0;
 	}
 }
 

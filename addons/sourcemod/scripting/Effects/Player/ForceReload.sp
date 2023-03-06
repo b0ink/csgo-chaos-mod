@@ -26,7 +26,7 @@ public void Chaos_ForceReload_RESET(int ResetType){
 	}
 }
 
-public void Chaos_ForceReload_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
+public void Chaos_ForceReload_OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &iSubType, int &cmdnum, int &tickcount, int &seed, int mouse[2]){
 	if (g_bForce_Reload[client]) {
 		buttons |= IN_RELOAD;
 		g_bForce_Reload[client] = false;

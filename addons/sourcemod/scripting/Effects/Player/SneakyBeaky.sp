@@ -6,29 +6,29 @@ public void Chaos_SneakyBeaky(EffectData effect){
 	effect.AddFlag("movement");
 }
 
-public void Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &iImpulse, float fVel[3], float fAngles[3], int &iWeapon, int &iSubType, int &iCmdNum, int &iTickCount, int &iSeed, int mouse[2]){
+public void Chaos_SneakyBeaky_OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &iSubType, int &cmdnum, int &tickcount, int &seed, int mouse[2]){
 	if (IsPlayerAlive(client)){
 		if (buttons & IN_FORWARD ){
-			fVel[0] = 120.0;
+			vel[0] = 120.0;
 		}else if (buttons & IN_BACK){
-			fVel[0] = -120.0;
+			vel[0] = -120.0;
 		}else if (buttons & IN_MOVERIGHT){
-			fVel[1] = 120.0;
+			vel[1] = 120.0;
 		}else if(buttons & IN_MOVELEFT){
-			fVel[1] = -120.0;
+			vel[1] = -120.0;
 		}
 		if(buttons & IN_FORWARD && (buttons & IN_MOVERIGHT)){
-			fVel[0] = 80.0;
-			fVel[1] = 80.0;
+			vel[0] = 80.0;
+			vel[1] = 80.0;
 		}else if(buttons & IN_FORWARD && (buttons & IN_MOVELEFT)){
-			fVel[0] = 80.0;
-			fVel[1] = -80.0;
+			vel[0] = 80.0;
+			vel[1] = -80.0;
 		}else if(buttons & IN_BACK && (buttons & IN_MOVERIGHT)){
-			fVel[0] = -80.0;
-			fVel[1] = 80.0;
+			vel[0] = -80.0;
+			vel[1] = 80.0;
 		}else if(buttons & IN_BACK && (buttons & IN_MOVELEFT)){
-			fVel[0] = -80.0;
-			fVel[1] = -80.0;
+			vel[0] = -80.0;
+			vel[1] = -80.0;
 		}
 	}
 }
