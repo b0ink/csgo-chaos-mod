@@ -9,6 +9,7 @@ public void Chaos_Boxing(EffectData effect){
 	effect.IncompatibleWith("Chaos_KnifeFight");
 	effect.IncompatibleWith("Chaos_AlienKnifeFight");
 	effect.IncompatibleWith("Chaos_TaserParty");
+	effect.IncompatibleWith("Chaos_LooseTrigger");
 }
 
 
@@ -72,8 +73,8 @@ public void Chaos_Boxing_RESET(int ResetType){
 			int knife = GetPlayerWeaponSlot(i, CS_SLOT_KNIFE);
 			if(!IsValidEntity(knife) || (GetEdictClassname(knife, classname, 64) && StrContains(classname, "knife") == -1)){
 				GivePlayerItem(i, "weapon_knife");
-				SwitchToPrimaryWeapon(i);
 			}
+			SwitchToPrimaryWeapon(i);
 		}
 	}
 }
