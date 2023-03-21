@@ -134,7 +134,7 @@ enum struct EffectData{
 				}
 			}
 		}
-
+		//TODO: if meta effect "Effects only last 5 seconds" or "Effects last all round", then return 5.0, or 120.0 respectively
 
 		return duration;
 	}
