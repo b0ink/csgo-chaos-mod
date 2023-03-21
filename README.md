@@ -88,21 +88,19 @@ If set to `0.0`, only one effect will run at the start of the round.
 If set to `-1.0`, the plugin's default durations will be used.\
 Set to `0.0` for infinite duration (Effect lasts the entire round).
 
-`sm_chaos_voting_enabled` | `Default. 0` | `Min. 0` | `Max. 1`
-- Sets whether the chaos plugin can communicate with the Twitch Overlay app to allow voting for effects.\
-If set to `0`, effects will be spawned at random.\
-If set to `1`, 3 random effects will be displayed in the Twitch Overlay app and will spawn the most voted effect. (1 of the 3 effects will be spawned if there are no votes). 
 
-`sm_chaos_effect_timer_color` | `Default. "220 0 220 0"`
-- Set the RGBA values of the Effect Timer countdown. (Default is purple)
+`sm_chaos_timer_color` | `Default. 1`
+- Sets the color style of the countdown timer at the top of the screen. (Default is pink)
+- 0 = White. 1 = Pink. 2 = Green. 3 = Blue. 4 = Cyan. 5 = Yellow. 6 = Orange
 
-`sm_chaos_effect_list_color` | `Default. "37 186 255 0"`
-- Set the RGBA values of the Effect List on the side. (Default is blue)
+`sm_chaos_list_color` | `Default. 0`
+- Sets the color style of the effect list on the left side of the screen. (Default is white)
+- 0 = White. 1 = Pink. 2 = Green. 3 = Blue. 4 = Cyan. 5 = Yellow. 6 = Orange
 
-`sm_chaos_effect_timer_position` | `Default. "-1 0.06"`
+`sm_chaos_timer_position` | `Default. "-1 0.06"`
 - Sets the xy position of the effect timer. Ranges from 0 and 1. -1 is center.
 
-`sm_chaos_effect_list_position` | `Default. "0.01 0.42"`
+`sm_chaos_list_position` | `Default. "0.01 0.42"`
 - Sets the xy position of the effect list. Ranges from 0 and 1. -1 is center.
 
 Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`, or alternatively through the `!chaos->Settings` menu, which will automatically update the ConVar config.
