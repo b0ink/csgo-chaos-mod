@@ -12,17 +12,40 @@ ConVar 	g_cvChaosRepeating;
 ConVar 	g_cvChaosOverrideDuration;
 ConVar 	g_cvChaosTwitchEnabled;
 
-ConVar 	g_cvChaosEffectTimer_Color;
-int       g_ChaosEffectTimer_Color[4] = {200,0,220, 0};
 
-ConVar 	g_cvChaosEffectList_Color;
-int       g_ChaosEffectList_Color[4] = {37,186,255, 0};
 
 ConVar 	g_cvChaosEffectTimer_Position;
 float       g_ChaosEffectTimer_Position[2] = {-1.0, 0.06};
 
 ConVar 	g_cvChaosEffectList_Position;
 float       g_ChaosEffectList_Position[2] = {0.01, 0.42};
+
+ConVar g_cvChaosEffectTimer_ColorStyle;
+ConVar g_cvChaosEffectList_ColorStyle;
+
+/*! Ensure that the order of colors is not changed as the int value is stored to a convar */
+enum HudColorStyle {
+	COLOR_WHITE,
+	COLOR_PINK,
+	COLOR_GREEN,
+	COLOR_BLUE,
+	COLOR_CYAN,
+	COLOR_YELLOW,
+	COLOR_ORANGE,
+};
+
+void GetHudColor(HudColorStyle color, int buffer[3]){
+	switch(color){
+		case COLOR_WHITE: buffer = {255, 255, 255};
+		case COLOR_PINK: buffer = {230, 36, 209};
+		case COLOR_GREEN: buffer = {30, 228, 132};
+		case COLOR_BLUE: buffer = {37, 186, 255};
+		case COLOR_CYAN: buffer = {0, 255, 255};
+		case COLOR_YELLOW: buffer = {252, 227, 0};
+		case COLOR_ORANGE: buffer = {250, 115, 36};
+		default: buffer = {255, 255, 255};
+	}
+}
 
 
 // Stock ConVars
@@ -54,10 +77,11 @@ void CreateConVars(){
 	
 	g_cvChaosTwitchEnabled = 		CreateConVar("sm_chaos_voting_enabled", "0", "Enabling this will run a voting screen connected to the chaos twitch app", _, true, 0.0, true, 1.0);
 
-	g_cvChaosEffectTimer_Color = 	CreateConVar("sm_chaos_effect_timer_color", "220 0 220 0", "Set the RGBA values of the Effect Timer countdown. (Default is purple)", _, false, 0.0, false, 1.0);
-	g_cvChaosEffectList_Color = 	CreateConVar("sm_chaos_effect_list_color", "37 186 255 0", "Set the RGBA values of the Effect List on the side. (Default is blue)", _, false, 0.0, false, 1.0);
-	g_cvChaosEffectTimer_Position = CreateConVar("sm_chaos_effect_timer_position", "-1 0.06", "Sets the xy position of the effect timer. Ranges from 0 and 1. -1 is center.");
-	g_cvChaosEffectList_Position = 	CreateConVar("sm_chaos_effect_list_position", "0.01 0.42", "Sets the xy position of the effect list. Ranges from 0 and 1. -1 is center.");
+	g_cvChaosEffectTimer_ColorStyle = 	CreateConVar("sm_chaos_timer_color", "1", "Sets the color of the timer. 0=White 1=Pink 2=Green 3=Blue 4=Cyan 5=Yellow 6=Orange", _, true, 0.0, true, 6.0);
+	g_cvChaosEffectList_ColorStyle = 	CreateConVar("sm_chaos_list_color", "0", "Sets the color of the effect list. 0=White 1=Pink 2=Green 3=Blue 4=Cyan 5=Yellow 6=Orange", _, false, 0.0, false, 1.0);
+
+	g_cvChaosEffectTimer_Position = CreateConVar("sm_chaos_timer_position", "-1 0.06", "Sets the xy position of the effect timer. Ranges from 0 and 1. -1 is center.");
+	g_cvChaosEffectList_Position = 	CreateConVar("sm_chaos_list_position", "0.01 0.42", "Sets the xy position of the effect list. Ranges from 0 and 1. -1 is center.");
 
 
 	HookConVarChange(g_cvChaosPrefix, 				ConVarChanged);
@@ -66,13 +90,13 @@ void CreateConVars(){
 	HookConVarChange(g_cvChaosRepeating, 			ConVarChanged);
 	HookConVarChange(g_cvChaosOverrideDuration, 	ConVarChanged);
 
-	HookConVarChange(g_cvChaosEffectTimer_Color, 	ConVarChanged);
-	HookConVarChange(g_cvChaosEffectList_Color, 	ConVarChanged);
-
-	HookConVarChange(g_cvChaosTwitchEnabled, 		ConVarChanged);
+	HookConVarChange(g_cvChaosEffectTimer_ColorStyle, 	ConVarChanged);
+	HookConVarChange(g_cvChaosEffectList_ColorStyle, 	ConVarChanged);
 
 	HookConVarChange(g_cvChaosEffectTimer_Position, ConVarChanged);
 	HookConVarChange(g_cvChaosEffectList_Position, 	ConVarChanged);
+	
+	HookConVarChange(g_cvChaosTwitchEnabled, 		ConVarChanged);
 }
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
@@ -84,11 +108,8 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 		if(StringToInt(oldValue) == 1 && StringToInt(newValue) == 0){
 			StopTimer(g_NewEffect_Timer);
 		}
-	}else if(convar == g_cvChaosEffectTimer_Color){
-		ConvertColorStringToFloat(g_cvChaosEffectTimer_Color, g_ChaosEffectTimer_Color, {200, 0, 220, 0});
-	} else if(convar == g_cvChaosEffectList_Color){
-		ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
 	}
+
 	g_ChaosEffectInterval = g_cvChaosEffectInterval.IntValue;
 	g_cvChaosPrefix.GetString(g_Prefix, 64);
 	Format(g_Prefix, 64, "%s{default}", g_Prefix);
@@ -108,15 +129,6 @@ public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){
 
 	Update_Convar_Config();
 }
-
-
-// ConVar 	g_cvChaosPrefix
-
-// [CHAOS] Turrets
-// [CHAOS MOD] Ignite All Players
-
-// [CHAOS] Ignite All Players
-
 
 Handle g_SavedConvars = INVALID_HANDLE;
 
@@ -235,20 +247,18 @@ void UpdateCvars(){
 			convar_value = kv.GetNum("sm_chaos_voting_enabled", 1);
 			g_cvChaosTwitchEnabled.SetInt(convar_value);
 
-			char color[128];
-			kv.GetString("sm_chaos_effect_timer_color", color, 128);
-			g_cvChaosEffectTimer_Color.SetString(color);
-			kv.GetString("sm_chaos_effect_list_color", color, 128);
-			g_cvChaosEffectList_Color.SetString(color);
+			
+			int timerColor = kv.GetNum("sm_chaos_timer_color", 1);
+			int effectListColor = kv.GetNum("sm_chaos_list_color", 0);
 
-			ConvertColorStringToFloat(g_cvChaosEffectTimer_Color, g_ChaosEffectTimer_Color, {200, 0, 220, 0});
-			ConvertColorStringToFloat(g_cvChaosEffectList_Color, g_ChaosEffectList_Color, {37, 186, 255, 0});
+			g_cvChaosEffectTimer_ColorStyle.SetInt(timerColor);
+			g_cvChaosEffectList_ColorStyle.SetInt(effectListColor);
 
 
 			char pos[32];
-			kv.GetString("sm_chaos_effect_timer_position", pos, 32);
+			kv.GetString("sm_chaos_timer_position", pos, 32);
 			g_cvChaosEffectTimer_Position.SetString(pos);
-			kv.GetString("sm_chaos_effect_list_position", pos, 32);
+			kv.GetString("sm_chaos_list_position", pos, 32);
 			g_cvChaosEffectList_Position.SetString(pos);
 
 			kv.GetString("sm_chaos_prefix", g_Prefix, 32);
@@ -268,23 +278,23 @@ void UpdateCvars(){
 }
 
 
-void ConvertColorStringToFloat(ConVar convar, int buffer[4], int defaultColor[4]){
-		char color[128];
-		convar.GetString(color, 128);
-		char colorchunks[4][128];
-		int count = ExplodeString(color, " ", colorchunks, 4, 128);
-		if(count != 4 || color[0] == '\0'){ // if config wasn't set properly
-			Format(color, 128, "%i %i %i %i", defaultColor[0], defaultColor[1], defaultColor[2], defaultColor[3]);
-			convar.SetString(color);
-			Update_Convar_Config();
-			buffer = defaultColor;
-		}else{
-			buffer[0] = StringToInt(colorchunks[0]);
-			buffer[1] = StringToInt(colorchunks[1]);
-			buffer[2] = StringToInt(colorchunks[2]);
-			buffer[3] = StringToInt(colorchunks[3]);
-		}
-}
+// void ConvertColorStringToFloat(ConVar convar, int buffer[4], int defaultColor[4]){
+// 		char color[128];
+// 		convar.GetString(color, 128);
+// 		char colorchunks[4][128];
+// 		int count = ExplodeString(color, " ", colorchunks, 4, 128);
+// 		if(count != 4 || color[0] == '\0'){ // if config wasn't set properly
+// 			Format(color, 128, "%i %i %i %i", defaultColor[0], defaultColor[1], defaultColor[2], defaultColor[3]);
+// 			convar.SetString(color);
+// 			Update_Convar_Config();
+// 			buffer = defaultColor;
+// 		}else{
+// 			buffer[0] = StringToInt(colorchunks[0]);
+// 			buffer[1] = StringToInt(colorchunks[1]);
+// 			buffer[2] = StringToInt(colorchunks[2]);
+// 			buffer[3] = StringToInt(colorchunks[3]);
+// 		}
+// }
 
 void ConvertCoordStringToFloat(ConVar convar, float bufferPosition[2], float defaultPosition[2]){
 	char positionString[32];
@@ -360,21 +370,19 @@ void Update_Convar_Config(){
 	file.WriteLine("	\"sm_chaos_voting_enabled\"    \"%i\"", g_cvChaosTwitchEnabled.IntValue);
 	file.WriteLine("");
 	
-	char colorDetails[64];
-	g_cvChaosEffectTimer_Color.GetString(colorDetails, 64);
 
 	file.WriteLine("");
-	file.WriteLine("	// Sets the color (RGBA) of the countdown timer at the top of the screen.");
-	file.WriteLine("	// Default is \"200 0 220 0\"");
-	file.WriteLine("	\"sm_chaos_effect_timer_color\"    \"%s\"", colorDetails);
+	file.WriteLine("	// Sets the color style of the countdown timer at the top of the screen.");
+	file.WriteLine("	// Default is 1 (Purple)");
+	file.WriteLine("	// 0 = White. 1 = Pink. 2 = Green. 3 = Blue. 4 = Cyan. 5 = Yellow. 6 = Orange");
+	file.WriteLine("	\"sm_chaos_timer_color\"    \"%i\"", g_cvChaosEffectTimer_ColorStyle.IntValue);
 	file.WriteLine("");
 
-	g_cvChaosEffectList_Color.GetString(colorDetails, 64);
-
 	file.WriteLine("");
-	file.WriteLine("	// Sets the color (RGBA) of the effect list on the side of the screen.");
-	file.WriteLine("	// Default is \"37 186 255 0\"");
-	file.WriteLine("	\"sm_chaos_effect_list_color\"    \"%s\"", colorDetails);
+	file.WriteLine("	// Sets the color style of the effect list on the left side of the screen.");
+	file.WriteLine("	// Default is 0 (White)");
+	file.WriteLine("	// 0 = White. 1 = Pink. 2 = Green. 3 = Blue. 4 = Cyan. 5 = Yellow. 6 = Orange");
+	file.WriteLine("	\"sm_chaos_list_color\"    \"%i\"", g_cvChaosEffectList_ColorStyle.IntValue);
 	file.WriteLine("");
 
 
@@ -385,7 +393,7 @@ void Update_Convar_Config(){
 	file.WriteLine("	//Sets the \"x y\" position of the effect timer. Values between 0 and 1. Setting it to -1 will center it.");
 	file.WriteLine("	// Default is \"-1.0 0.06\"");
 	file.WriteLine("	// Use \"-1.0 0.085\" for Deathmatch UI (lowers it below the player icons)");
-	file.WriteLine("	\"sm_chaos_effect_timer_position\"    \"%s\"", posDetails);
+	file.WriteLine("	\"sm_chaos_timer_position\"    \"%s\"", posDetails);
 	file.WriteLine("");
 
 	g_cvChaosEffectList_Position.GetString(posDetails, 64);
@@ -394,7 +402,7 @@ void Update_Convar_Config(){
 	file.WriteLine("	// Sets the \"x y\" position of the effect list. Values between 0 and 1. Setting it to -1 will center it.");
 	file.WriteLine("	// Default is \"0.01 0.42\"");
 	file.WriteLine("	// Use \"0.01 0.44\" for Deathmatch UI (lowers it below the bonus weapon UI)");
-	file.WriteLine("	\"sm_chaos_effect_list_position\"    \"%s\"", posDetails);
+	file.WriteLine("	\"sm_chaos_list_position\"    \"%s\"", posDetails);
 	file.WriteLine("");
 
 	// file.WriteLine("	// Automatically adjust the length of all the effects based off sm_chaos_interval.");
@@ -413,8 +421,8 @@ void ResetConvarDefaults(){
 	g_cvChaosRepeating.IntValue = 1;
 	g_cvChaosOverrideDuration.IntValue = -1;
 	g_cvChaosTwitchEnabled.IntValue = 0;
-	g_cvChaosEffectTimer_Color.SetString("220 0 220 255");
-	g_cvChaosEffectList_Color.SetString("37 186 255 255");
+	g_cvChaosEffectTimer_ColorStyle.IntValue = 1;
+	g_cvChaosEffectList_ColorStyle.IntValue = 0;
 	g_cvChaosEffectTimer_Position.SetString("-1 0.06");
 	g_cvChaosEffectList_Position.SetString("0.01 0.42");
 	Update_Convar_Config();

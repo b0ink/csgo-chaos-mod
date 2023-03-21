@@ -125,11 +125,13 @@ void PrintEffects(){
 		if(HideEffectList[i]) continue;
 		//.37 y;
 		// SetHudTextParams(0.01, 0.42, 1.5, 37, 186, 255, 0, 0, 1.0, 0.0, 0.0);
+		int color[3];
+		GetHudColor(view_as<HudColorStyle>(g_cvChaosEffectList_ColorStyle.IntValue), color);
 		SetHudTextParams(g_ChaosEffectList_Position[0], g_ChaosEffectList_Position[1], 1.5, 
-			g_ChaosEffectList_Color[0],
-			g_ChaosEffectList_Color[1],
-			g_ChaosEffectList_Color[2],
-			g_ChaosEffectList_Color[3], 0, 1.0, 0.0, 0.0);
+			color[0],
+			color[1],
+			color[2],
+			255, 0, 1.0, 0.0, 0.0);
 
 		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(1), "%s", chunk);
@@ -140,7 +142,12 @@ void PrintEffects(){
 
 
 
-		SetHudTextParams(g_ChaosEffectList_Position[0], g_ChaosEffectList_Position[1], 1.5, 252, 227, 0, 0, 0, 1.0, 0.0, 0.0);
+		int metaColor[3] = {252, 227, 0};
+		if(view_as<HudColorStyle>(g_cvChaosEffectList_ColorStyle.IntValue) == COLOR_YELLOW){
+			GetHudColor(COLOR_CYAN, metaColor);
+		}
+		SetHudTextParams(g_ChaosEffectList_Position[0], g_ChaosEffectList_Position[1], 1.5, metaColor[0], metaColor[1], metaColor[2], 255, 0, 1.0, 0.0, 0.0);
+
 		if(g_bDynamicChannelsEnabled){
 			ShowHudText(i, GetDynamicChannel(2), "%s", chunk_meta);
 		}else{
@@ -175,11 +182,13 @@ void PrintTimer(int time){
 		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.1, 200, 0, 0, 0, 0, 1.0, 0.0, 0.0);
 		// if(time > 0) EmitSoundToClient(i, "ui/beep07.wav", _, _, SNDLEVEL_RAIDSIREN, _, 0.4);
 	}else{
+		int color[3];
+		GetHudColor(view_as<HudColorStyle>(g_cvChaosEffectTimer_ColorStyle.IntValue), color);
 		SetHudTextParams(g_ChaosEffectTimer_Position[0], g_ChaosEffectTimer_Position[1], 1.1,
-			g_ChaosEffectTimer_Color[0],
-			g_ChaosEffectTimer_Color[1],
-			g_ChaosEffectTimer_Color[2],
-			g_ChaosEffectTimer_Color[3], 0, 1.0, 0.0, 0.0);
+			color[0],
+			color[1],
+			color[2],
+			255, 0, 1.0, 0.0, 0.0);
 	}
 
 	char text[128];
