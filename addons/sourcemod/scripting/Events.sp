@@ -38,6 +38,7 @@ public Action Event_PlayerSpawn(Event event, char[] name, bool dontBroadcast){
 			DataPack data = new DataPack();
 			data.WriteFunction(Chaos_EffectData_Buffer.OnPlayerSpawn);
 			data.WriteCell(client);
+			data.WriteCell(Chaos_EffectData_Buffer.ID);
 
 			CreateTimer(0.2, Timer_TriggerOnPlayerSpawn, data);
 		}
@@ -82,8 +83,20 @@ Action Timer_TriggerOnPlayerSpawn(Handle timer, DataPack data){
 
 	Function func = data.ReadFunction();
 	int client = data.ReadCell();
+	int effectID = data.ReadCell();
 
-	if(ValidAndAlive(client)){
+	// Check to make sure that the effect didn't reset since the timer was called (in the last .18 seconds)
+	bool EffectIsActive = false;
+	EffectData effect;
+	LoopAllEffects(effect, index){
+		if(effect.ID == effectID){
+			if(effect.Timer != INVALID_HANDLE){
+				EffectIsActive = true;
+			}
+		}
+	}
+
+	if(EffectIsActive && ValidAndAlive(client)){
 		Call_StartFunction(GetMyHandle(), func);
 		Call_PushCell(client); 
 		Call_Finish();
