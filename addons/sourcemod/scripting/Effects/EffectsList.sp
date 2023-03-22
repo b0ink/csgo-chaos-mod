@@ -178,3 +178,4 @@
 #include "Effects/Player/Trails.sp"
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WeaponKnockback.sp"
+#include "Effects/Player/1v1.sp"
