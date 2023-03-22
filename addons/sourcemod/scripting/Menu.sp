@@ -155,8 +155,8 @@ void ShowMenu_Settings(int client){
 
 	Menu menu = new Menu(Settings_Handler);
 	menu.SetTitle("Chaos Settings");	
-	menu.AddItem("edit-effects", "Edit Effects", style); // "Select an effect you'd like to edit" (list of ALL effects);
 	menu.AddItem("edit-convars", "Edit ConVars", style);
+	menu.AddItem("edit-effects", "Edit Effects", style); // "Select an effect you'd like to edit" (list of ALL effects);
 	menu.AddItem("edit-effect-volume", "Adjust Bell SFX Volume");
 	menu.AddItem("edit-hud", "HUD");
 
@@ -331,15 +331,18 @@ void ShowMenu_EditConvars(int client){
 	menu.AddItem("sm_chaos_override_duration", ItemTitle);
 
 
-	#if defined TWITCH_ENABLED
-		float twitchEnabled = 0.0;
-		if(g_cvChaosTwitchEnabled.BoolValue){
-			twitchEnabled = 1.0;
-		}
+	// #if defined TWITCH_ENABLED
+	// 	float twitchEnabled = 0.0;
+	// 	if(g_cvChaosTwitchEnabled.BoolValue){
+	// 		twitchEnabled = 1.0;
+	// 	}
 
-		FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_voting_enabled: %s", twitchEnabled ? "YES" : "NO");
-		menu.AddItem("sm_chaos_voting_enabled", ItemTitle);
-	#endif
+	// 	FormatEx(ItemTitle, sizeof(ItemTitle), "sm_chaos_voting_enabled: %s", twitchEnabled ? "YES" : "NO");
+	// 	menu.AddItem("sm_chaos_voting_enabled", ItemTitle);
+	// #endif
+
+	menu.AddItem("timercolor", "Set Timer Color");
+	menu.AddItem("listcolor", "Set Effect List Color");
 
 	menu.AddItem("resetdefault", "Reset to Defaults");
 
@@ -436,6 +439,11 @@ void ToggleCvar(char[] cvar){
 	Update_Convar_Config();
 }
 
+enum HudElement {
+	HUD_EFFECTLIST,
+	HUD_TIMER
+};
+
 public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int param2){
 	if (action == MenuAction_Select){
 		char info[64];
@@ -446,6 +454,10 @@ public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int par
 				ShowMenu_EditConvars(param1);
 			}else if(StrEqual(info, "resetdefault")){
 				ShowMenu_ConfirmResetDefaults(param1);
+			}else if(StrEqual(info, "listcolor")){
+				ShowMenu_SetColorStyle(param1, HUD_EFFECTLIST);
+			}else if(StrEqual(info, "timercolor")){
+				ShowMenu_SetColorStyle(param1, HUD_TIMER);
 			}else{
 				ShowMenu_ConvarIncrements(param1, info);
 			}
@@ -459,6 +471,92 @@ public int EditConvars_Handler(Menu menu, MenuAction action, int param1, int par
 	}
 	return 0;
 }
+
+void ShowMenu_SetColorStyle(int client, HudElement hud){
+	Menu menu = new Menu(SetColorStyle_Handler);
+
+	char title[128];
+	char color[16];
+	char key[16];
+
+	int colorID = -1;
+	if(hud == HUD_EFFECTLIST){
+		colorID = g_cvChaosEffectList_ColorStyle.IntValue;
+		key = "list";
+		FormatEx(title, sizeof(title), "Set the color style of the Effect List\nCurrent Style: %i", g_cvChaosEffectList_ColorStyle.IntValue);
+	}else{
+		colorID = g_cvChaosEffectTimer_ColorStyle.IntValue;
+		key = "timer";
+		FormatEx(title, sizeof(title), "Set the color style of the Countdown Timer\nCurrent Style: %i", g_cvChaosEffectTimer_ColorStyle.IntValue);
+	}
+
+	switch(colorID){
+		case 0: color = "White";
+		case 1: color = "Pink";
+		case 2: color = "Green";
+		case 3: color = "Blue";
+		case 4: color = "Cyan";
+		case 5: color = "Yellow";
+		case 6: color = "Orange";
+	}
+	
+	Format(title, sizeof(title), "%s (%s)", title, color);
+	
+	menu.SetTitle(title);
+
+	char info[64];
+
+	Format(info, 64, "%s-0", key);
+	menu.AddItem(info, "White (0)", colorID==0?ITEMDRAW_DISABLED:ITEMDRAW_DEFAULT);
+	Format(info, 64, "%s-1", key);
+	menu.AddItem(info, "Pink (1)", colorID==1?ITEMDRAW_DISABLED:ITEMDRAW_DEFAULT);
+	Format(info, 64, "%s-2", key);
+	menu.AddItem(info, "Green (2)", colorID==2?ITEMDRAW_DISABLED:ITEMDRAW_DEFAULT);
+	Format(info, 64, "%s-3", key);
+	menu.AddItem(info, "Blue (3)", colorID==3?ITEMDRAW_DISABLED:ITEMDRAW_DEFAULT);
+	Format(info, 64, "%s-4", key);
+	menu.AddItem(info, "Cyan (4)", colorID==4?ITEMDRAW_DISABLED:ITEMDRAW_DEFAULT);
+	Format(info, 64, "%s-5", key);
+	menu.AddItem(info, "Yellow (5)", colorID==5?ITEMDRAW_DISABLED:ITEMDRAW_DEFAULT);
+	Format(info, 64, "%s-6", key);
+	menu.AddItem(info, "Orange (6)", colorID==6?ITEMDRAW_DISABLED:ITEMDRAW_DEFAULT);
+
+	menu.ExitButton = true;
+	menu.ExitBackButton = true; 
+	menu.Display(client, 0);
+}
+
+public int SetColorStyle_Handler(Menu menu, MenuAction action, int param1, int param2){
+	if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		if(found){
+			char details[2][64];
+			PrintToChatAll(info);
+			ExplodeString(info, "-", details, 2, 64);
+			int newColorID = StringToInt(details[1]);
+			PrintToChatAll("new color id is %i, changing the %s string %s", newColorID,  details[0], details[1]);
+			if(StrEqual(details[0], "list")){
+				g_cvChaosEffectList_ColorStyle.IntValue = newColorID;
+				ShowMenu_SetColorStyle(param1, HUD_EFFECTLIST);
+			}else if(StrEqual(details[0], "timer")){
+				g_cvChaosEffectTimer_ColorStyle.IntValue = newColorID;
+				ShowMenu_SetColorStyle(param1, HUD_TIMER);
+			}else{
+				PrintToChatAll("??");
+			}
+			
+		}
+	}else if (action == MenuAction_Cancel){
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_EditConvars(param1);
+		}
+	}else if (action == MenuAction_End){
+		delete menu;
+	}
+	return 0;
+}
+
 
 void ShowMenu_ConfirmResetDefaults(int client){
 	Menu menu = new Menu(ConfirmResetDefaults_Handler);
