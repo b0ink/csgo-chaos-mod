@@ -181,3 +181,4 @@
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/1v1.sp"
 #include "Effects/Player/SwitchToKnife.sp"
+#include "Effects/Player/SetHpToAmmo.sp"
