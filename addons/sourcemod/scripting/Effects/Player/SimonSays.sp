@@ -23,7 +23,9 @@ SimonAction currentAction;
 
 public void Chaos_SimonSays(EffectData effect){
 	effect.Title = "Simon Says";
-	effect.HasNoDuration = true;
+	effect.Duration = 15;
+	effect.OverrideDuration = true;
+
 	effect.IncompatibleWith("Chaos_Jumping");
 	effect.IncompatibleWith("Chaos_KeyStuckA");
 	effect.IncompatibleWith("Chaos_KeyStuckS");
@@ -32,10 +34,14 @@ public void Chaos_SimonSays(EffectData effect){
 	effect.IncompatibleWith("Chaos_BreakTime");
 	effect.IncompatibleWith("Chaos_DisableStrafe");
 	effect.IncompatibleWith("Chaos_DisableForwardBack");
+
+	effect.RunForwardWhileInactive("OnPlayerRunCmd");
 }
 
 public void Chaos_SimonSays_START(){
 	float duration = 10.0;
+	Simon_Active = true;
+
 	GenerateSimonOrder(duration);
 	StartMessageTimer();
 	
@@ -43,7 +49,6 @@ public void Chaos_SimonSays_START(){
 		SimonSaysPlayersToDamage[i] = false;
 	}
 	
-	Simon_Active = true;
 }
 
 public void Chaos_SimonSays_RESET(int ResetType){
