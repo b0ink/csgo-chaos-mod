@@ -1,5 +1,5 @@
 public void Chaos_SwitchToKnife(EffectData effect){
-	effect.Title = "Pull out knife";
+	effect.Title = "Pull Out Knife";
 	effect.HasNoDuration = true;
 }
 
