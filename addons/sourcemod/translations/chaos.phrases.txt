@@ -784,4 +784,24 @@
     {
         "en"    "Watermark"
     }
+    "Chaos_BiggerBlackBars"
+    {
+        "en"    "Bigger Black Bars"
+    }
+    "Chaos_1v1"
+    {
+        "en"    "1V1 Arena"
+    }
+    "Chaos_SwitchToKnife"
+    {
+        "en"    "Pull Out Knife"
+    }
+    "Chaos_SetHpToAmmo"
+    {
+        "en"    "Set Health To Ammo Count"
+    }
+    "Chaos_RainbowTimer"
+    {
+        "en"    "Rainbow Timer"
+    }
 }
