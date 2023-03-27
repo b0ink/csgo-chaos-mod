@@ -140,6 +140,8 @@ Action Timer_EnsureSpawnedAutoPlant(Handle timer){
     }else if(g_PlantedSite == BOMBSITE_B){
         Format(announceMsg, 128, "%s: Bombsite B", announceMsg);
     }
+    
+    AnnounceChaos(announceMsg, -1.0);
 
     return Plugin_Continue;
 }
