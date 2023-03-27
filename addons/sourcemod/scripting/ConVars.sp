@@ -35,6 +35,11 @@ enum HudColorStyle {
 };
 
 void GetHudColor(HudColorStyle color, int buffer[3]){
+	if(IsRainbowTimerEffectActive()){
+		GetRainbowTimerColor(buffer);
+		return;
+	}
+	
 	switch(color){
 		case COLOR_WHITE: buffer = {255, 255, 255};
 		case COLOR_PINK: buffer = {230, 36, 209};

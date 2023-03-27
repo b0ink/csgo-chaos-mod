@@ -1,5 +1,6 @@
 #include "Effects/Game/Armageddon.sp"
 #include "Effects/Game/AutoPlantC4.sp"
+#include "Effects/Game/RainbowTimer.sp"
 #include "Effects/Game/BlackBars.sp"
 #include "Effects/Game/BlackWhite.sp"
 #include "Effects/Game/Blur.sp"
