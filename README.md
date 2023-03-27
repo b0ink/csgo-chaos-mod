@@ -107,7 +107,7 @@ Chaos ConVars are controlled through `sourcemod/configs/Chaos/Chaos_Convars.cfg`
 
 
 ## Spawn Points
-Several effects rely on map-specific spawn points to spawn items and teleport players, here are a list of maps that currently have spawn points saved for and defined in [Chaos_Locations.cfg](addons/sourcemod/data/Chaos_Locations.cfg). **However,** if a map does not currently have any spawn points, the Chaos plugin will automatically [save markers](addons/sourcemod/scripting/Configs.sp#L176-L212) based on player positions as they move around the map. Most effects that depend on spawn points require a minimum set amount of spawns, and will automatically activate once enough spawn points are generated. This means the Chaos plugin should work on any custom maps.
+Several effects rely on map-specific spawn points to spawn items and teleport players, here are a list of maps that currently have spawn points saved for and defined in [Chaos_Locations.cfg](addons/sourcemod/data/Chaos/Chaos_Locations.cfg). **However,** if a map does not currently have any spawn points, the Chaos plugin will automatically [save markers](addons/sourcemod/scripting/Configs.sp#L176-L212) based on player positions as they move around the map. Most effects that depend on spawn points require a minimum set amount of spawns, and will automatically activate once enough spawn points are generated. This means the Chaos plugin should work on any custom maps.
 - Dust 2
 - Mirage
 - Inferno
