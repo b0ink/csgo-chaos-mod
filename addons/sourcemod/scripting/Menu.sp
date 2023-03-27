@@ -532,20 +532,17 @@ public int SetColorStyle_Handler(Menu menu, MenuAction action, int param1, int p
 		bool found = menu.GetItem(param2, info, sizeof(info));
 		if(found){
 			char details[2][64];
-			PrintToChatAll(info);
+			// PrintToChatAll(info);
 			ExplodeString(info, "-", details, 2, 64);
 			int newColorID = StringToInt(details[1]);
-			PrintToChatAll("new color id is %i, changing the %s string %s", newColorID,  details[0], details[1]);
+			// PrintToChatAll("new color id is %i, changing the %s string %s", newColorID,  details[0], details[1]);
 			if(StrEqual(details[0], "list")){
 				g_cvChaosEffectList_ColorStyle.IntValue = newColorID;
 				ShowMenu_SetColorStyle(param1, HUD_EFFECTLIST);
 			}else if(StrEqual(details[0], "timer")){
 				g_cvChaosEffectTimer_ColorStyle.IntValue = newColorID;
 				ShowMenu_SetColorStyle(param1, HUD_TIMER);
-			}else{
-				PrintToChatAll("??");
 			}
-			
 		}
 	}else if (action == MenuAction_Cancel){
 		if(param2 ==  MenuCancel_ExitBack){
