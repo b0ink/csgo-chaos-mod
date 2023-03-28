@@ -11,6 +11,8 @@ enum struct SpawnData1v1 {
 ArrayList _1v1Spawns;
 bool isIn1v1[MAXPLAYERS+1];
 
+int arenaPlayers[5][2]; // 5 arenas with 2 players each
+
 bool _1v1Active = false;
 
 public void Chaos_1v1(EffectData effect){
@@ -44,11 +46,20 @@ public void Chaos_1v1_Event_PlayerDeath(Event event, const char[] name, bool don
 			isIn1v1[victim] = false;
 			CreateTimer(0.5, Timer_1v1TeleportBack, attacker);
 		}
+	}else{
+		// Perhaps one of the players died from other causes, we need to find their opponent and respawn them
+		for(int i = 0; i < 5; i++){
+			if(arenaPlayers[i][0] == victim){
+				CreateTimer(0.5, Timer_1v1TeleportBack, arenaPlayers[i][1]);
+			}else if(arenaPlayers[i][1] == victim){
+				CreateTimer(0.5, Timer_1v1TeleportBack, arenaPlayers[i][0]);
+			}
+		}
 	}
 }
 
 public Action Timer_1v1TeleportBack(Handle timer, int client){
-	if(ValidAndAlive(client)){
+	if(ValidAndAlive(client) && isIn1v1[client]){
 		TeleportEntity(client, g_AllPositions[client]);
 		isIn1v1[client] = false;
 	}
@@ -124,10 +135,15 @@ public void Chaos_1v1_START(){
 		}
 	}
 	int spawnIndex = 0;
+	int arenaIndex = 0;
 	for(int i = 0; i < t.Length; i++){
 		int tPlr = t.Get(i);
 		int ctPlr = ct.Get(i);
 
+		arenaPlayers[arenaIndex][0] = tPlr;
+		arenaPlayers[arenaIndex][1] = ctPlr;
+		arenaIndex++;
+		
 		SpawnData1v1 tSpawn;
 		_1v1Spawns.GetArray(spawnIndex, tSpawn, sizeof(tSpawn));
 		spawnIndex++;
@@ -135,6 +151,7 @@ public void Chaos_1v1_START(){
 		SpawnData1v1 ctSpawn;
 		_1v1Spawns.GetArray(spawnIndex, ctSpawn, sizeof(ctSpawn));
 		spawnIndex++;
+
 
 		if(ValidAndAlive(tPlr) && ValidAndAlive(ctPlr)){
 			//TODO: maybe just use LookAtPoint native
