@@ -9,5 +9,6 @@ public void Chaos_DropCurrentWeapon(EffectData effect){
 public void Chaos_DropCurrentWeapon_START(){
 	LoopAlivePlayers(i){
 		ClientCommand(i, "drop");
+		ClientCommand(i, "playgamesound \"weapons/knife/knife_slash2.wav\"");
 	}
 }
