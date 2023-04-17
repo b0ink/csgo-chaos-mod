@@ -18,6 +18,7 @@ public void Chaos_DropPrimaryWeapon_START(){
 Action Timer_DropPrimary(Handle timer){
 	LoopAlivePlayers(i){
 		ClientCommand(i, "drop");
+		ClientCommand(i, "playgamesound \"weapons/knife/knife_slash2.wav\"");
 	}
 	return Plugin_Continue;
 }
