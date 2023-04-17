@@ -13,7 +13,7 @@ public void HookMainEvents(){
 	HookEvent("bomb_planted", 		Event_BombPlanted);
 	HookEvent("server_cvar", 		Event_Cvar, EventHookMode_Pre);
 	HookEvent("player_spawn", 		Event_PlayerSpawn);
-	HookEvent("player_death", 		Event_PlayerDeath);
+	// HookEvent("player_death", 		Event_PlayerDeath);
 	HookEvent("round_freeze_end", 	Event_RoundFreezeEnd);
 }
 
@@ -52,16 +52,16 @@ Action Timer_SavePlayerModels(Handle timer, int client){
 	return Plugin_Stop;
 }
 
-public Action Event_PlayerDeath(Event event, char[] name, bool dontBroadcast){
-	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
-	int client = GetClientOfUserId(event.GetInt("userid"));
+// public Action Event_PlayerDeath(Event event, char[] name, bool dontBroadcast){
+// 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
+// 	int client = GetClientOfUserId(event.GetInt("userid"));
 
-	if(IsValidClient(client)){
-		ClientCommand(client, "r_screenoverlay \"\"");
-	}
+// 	// if(IsValidClient(client)){
+// 	// 	ClientCommand(client, "r_screenoverlay \"\"");
+// 	// }
 	
-	return Plugin_Continue;
-}
+// 	return Plugin_Continue;
+// }
 
 int settingsReminder[MAXPLAYERS+1];
 Action Timer_SendSettingsReminder(Handle timer, int client){

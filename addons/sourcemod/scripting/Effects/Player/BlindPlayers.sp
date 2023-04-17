@@ -13,7 +13,7 @@ public void Chaos_BlindPlayers_START(){
 }
 
 public void Chaos_BlindPlayers_RESET(int ResetType){
-	LoopAlivePlayers(i){
+	LoopValidPlayers(i){
 		PerformBlind(i, 0);
 	}
 }
