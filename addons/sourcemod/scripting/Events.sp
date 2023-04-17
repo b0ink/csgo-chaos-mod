@@ -3,6 +3,7 @@
 Handle	g_iRoundTime_Timer = INVALID_HANDLE;
 bool 	g_bCanSpawnChickens = true;
 bool 	g_bCanSpawnEffect = true;
+bool	g_FreezeTime = false;
 
 
 
@@ -128,7 +129,7 @@ Action Timer_SaveBombPosition(Handle timer){
 
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
-
+	g_FreezeTime = true;
 	// Log("---ROUND STARTED---");
 
 	g_bCanSpawnEffect = true;
@@ -194,6 +195,7 @@ public Action Event_Cvar(Event event, const char[] name, bool dontBroadcast){
 
 public Action Event_RoundFreezeEnd(Event event, const char[] name, bool dontBroadcast){
 	StopTimer(g_iRoundTime_Timer);
+	g_FreezeTime = false;
 	g_iRoundTime = 0;
 	g_iRoundTime_Timer = CreateTimer(1.0, Timer_UpdateRoundTime, _, TIMER_REPEAT);
 	return Plugin_Continue;

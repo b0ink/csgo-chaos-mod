@@ -422,6 +422,10 @@ stock int EffectsSinceLastMeta(){
 	return g_iEffectsSinceMeta;
 }
 
+stock int IsInFreezeTime(){
+	return g_FreezeTime;
+}
+
 /*
 	This was used previously when i thought chickens were involved in a notorious crash involving with c4's and chicken.
 	The crash has long since been fixed (unrelated to either c4's or chickens).

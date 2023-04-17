@@ -193,6 +193,9 @@ void PrintTimer(int time){
 
 	char text[128];
 	int interval = g_ChaosEffectInterval;
+	if(IsInFreezeTime()){
+		interval = FindConVar("mp_freezetime").IntValue;
+	}
 	// //TODO: ratio works but only if its less than 30 -> either 5head fix it or just flash the bar to show its counting?
 
 	float blocksPerSecond = 1.0 / (interval / 30.0);
