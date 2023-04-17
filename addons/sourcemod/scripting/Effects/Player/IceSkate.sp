@@ -32,7 +32,7 @@ public void Chaos_IceSkate_OnGameFrame(){
 
 		// Hint to give info on why players cant jump.
 		//TODO: allow players to spacebar jump, but holding for 0.2 seconds activates ice skating 
-		PrintHintText(i, "You are now ice skating. Strafe left and right to gain speed!");
+		PrintHintText(i, "Hold [Space] You are now ice skating. Strafe left and right to gain speed!");
 
 		if(TR_DidHit() && TR_GetEndPosition(fGroundPosition) && GetVectorDistance(fPosition, fGroundPosition) <= 25.0)
 		{
