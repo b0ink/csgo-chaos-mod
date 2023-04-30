@@ -103,6 +103,7 @@ public Action Command_GetVotes(int client, int args){
 	Format(json, sizeof(json), "%s\"lastPlayedEffect\":\"%s\",", json, g_sLastPlayedEffect);
 	Format(json, sizeof(json), "%s\"twitchEnabled\":%s,", json, g_cvChaosTwitchEnabled.BoolValue ? "true" : "false");
 	Format(json, sizeof(json), "%s\"newEffectTime\":%i,", json, expectedTimeForNewEffect);
+	Format(json, sizeof(json), "%s\"newEffectTimeRelative\":%i,", json, expectedTimeForNewEffect - GetTime()); // will return how many seconds until next effect is pulled
 	Format(json, sizeof(json), "%s\"hideEffectList\":%s,", json, (GameRules_GetProp("m_bWarmupPeriod") == 1 || !CanSpawnNewEffect()) ? "true" : "false");
 	Format(json, sizeof(json), "%s\"effects\":[", json);
 	
