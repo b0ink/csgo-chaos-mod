@@ -5,6 +5,7 @@ public void Chaos_RandomInvisiblePlayer(EffectData effect){
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_Invis");
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_RandomInvisiblePlayer_START(){

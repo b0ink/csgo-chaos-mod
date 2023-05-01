@@ -1,8 +1,12 @@
 EffectData 	Chaos_EffectData_Buffer;
 
 public void OnPluginStart(){
+
 	LoadTranslations("chaos.phrases.txt");
-	
+	// PrintToChatAll("mission: %i", VSF.ScriptCoopMissionGetMissionNumber());
+	// PrintToChatAll("game type: %i", VSF.ScriptGetGameType());
+	// PrintToChatAll("game mode: %i", VSF.ScriptGetGameMode());
+	// PrintToChatAll("warmup: %i", VSF.ScriptIsWarmupPeriod());
 	CreateConVars();
 	RegisterCommands();
 
@@ -80,6 +84,7 @@ public void OnMapStart(){
 	COORD_INIT();
 	WEATHER_INIT();
 
+	ParseMissionData();
 	// Run_OnMapStart_Functions();
 
 	cvar("sv_fade_player_visibility_farz", "1");

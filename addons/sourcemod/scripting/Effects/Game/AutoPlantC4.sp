@@ -34,6 +34,7 @@ public void Chaos_AutoPlantC4(EffectData effect){
     effect.Title = "Auto Plant C4";
     effect.HasNoDuration = true;
     effect.HasCustomAnnouncement = true;
+    effect.BlockInCoopStrike = true;
     effect.AddAlias("Bomb");
 }
 

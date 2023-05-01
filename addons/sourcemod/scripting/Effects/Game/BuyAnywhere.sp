@@ -3,6 +3,7 @@
 public void Chaos_BuyAnywhere(EffectData effect){
 	effect.Title = "Buy Anyhere Enabled";
 	effect.Duration = 30;
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_BuyAnywhere_START(){

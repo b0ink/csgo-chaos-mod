@@ -6,6 +6,7 @@ public void Chaos_Juggernaut(EffectData effect){
 	effect.Title = "Juggernauts";
 	effect.Duration = 30;
 	effect.AddFlag("playermodel");
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_Juggernaut_START(){

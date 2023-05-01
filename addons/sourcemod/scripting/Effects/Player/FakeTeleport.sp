@@ -7,6 +7,7 @@ public void Chaos_FakeTeleport(EffectData effect){
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_EffectName");
+	effect.BlockInCoopStrike = true;
 }
 
 

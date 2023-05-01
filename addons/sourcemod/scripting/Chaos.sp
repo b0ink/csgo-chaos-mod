@@ -3,6 +3,7 @@
 #include <sdktools>
 #include <multicolors>
 #include <cstrike>
+// #include <vscriptfun>
 
 #undef REQUIRE_PLUGIN
 #include <DynamicChannels>
@@ -89,6 +90,7 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 #include "Twitch.sp"
 #include "Forwards.sp"
 
+#include "CoopMissions.sp"
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
@@ -143,6 +145,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 			}
 		}
 	}else{ // running random effect!
+		StopTimer(CheckCoopStrike_Timer);
 		EffectData effect;
 		PossibleChaosEffects.Sort(Sort_Random, Sort_String);
 
@@ -161,6 +164,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 					effect.Timer == INVALID_HANDLE &&
 					effect.IsCompatible() &&
 					!effect.IsMetaEffect &&
+					(IsCoopStrike() ? !effect.BlockInCoopStrike : true) && // If running in co-op strike, return true if the effect is not blocked, if not in co-op strike, return true
 					effect.CanRunEffect(true)
 				){
 					Random_Effect = effect.FunctionName;

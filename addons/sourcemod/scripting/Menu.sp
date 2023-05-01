@@ -90,7 +90,7 @@ void ShowMenu_Effects(int client, bool AllowRandom = false){
 	for(int i = 0; i < PossibleChaosEffects.Length; i++){ //should contain all 102 all time
 		PossibleChaosEffects.GetArray(i, effect, sizeof(effect));
 		Format(function_title, sizeof(function_title), "%s", GetChaosTitle(effect.FunctionName));
-		if(effect.CanRunEffect(false)){
+		if(effect.CanRunEffect(false) && (IsCoopStrike() ? !effect.BlockInCoopStrike : true)){
 			menu.AddItem(effect.FunctionName, function_title);
 		}else{
 			menu.AddItem(effect.FunctionName, function_title, ITEMDRAW_DISABLED);

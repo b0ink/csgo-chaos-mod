@@ -7,6 +7,7 @@ public void Chaos_RespawnDead_LastLocation(EffectData effect){
 	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;
 	effect.AddFlag("respawn");
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_RespawnDead_LastLocation_INIT(){

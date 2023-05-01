@@ -11,6 +11,7 @@ int GetC4ChickenEntity(){
 public void Chaos_C4Chicken(EffectData effect){
 	effect.Title = "C4 Chicken";
 	effect.HasNoDuration = true;
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_C4Chicken_INIT(){

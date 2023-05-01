@@ -804,4 +804,8 @@
     {
         "en"    "Rainbow Timer"
     }
+    "Chaos_SpawnEnemyWave"
+    {
+        "en"    "Spawn Enemy Wave"
+    }
 }

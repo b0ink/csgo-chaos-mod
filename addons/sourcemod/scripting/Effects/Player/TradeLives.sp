@@ -23,14 +23,22 @@ public void TradeLives_Event_PlayerDeath(Event event, const char[] name, bool do
 	if(!TradeLives) return;
 	int victim = GetClientOfUserId(event.GetInt("userid"));
 	int attacker = GetClientOfUserId(event.GetInt("attacker"));
-
 	if(IsValidClient(victim) && IsValidClient(attacker)){
 		int teamToRevive = GetClientTeam(victim) == CS_TEAM_CT ? CS_TEAM_T : CS_TEAM_CT;
-		LoopValidPlayers(i){
-			if(!IsPlayerAlive(i) && GetClientTeam(i) == teamToRevive){
-				CS_RespawnPlayer(i);
-				break;
+		if(IsCoopStrike()){
+			if(teamToRevive == CS_TEAM_CT){
+				ServerCommand("script \"ScriptCoopMissionRespawnDeadPlayers()\"");
+			}else{
+				return;
+			}
+		}else{
+			LoopValidPlayers(i){
+				if(!IsPlayerAlive(i) && GetClientTeam(i) == teamToRevive){
+					CS_RespawnPlayer(i);
+					break;
+				}
 			}
 		}
+
 	}
 }

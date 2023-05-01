@@ -102,6 +102,15 @@ void CreateConVars(){
 	HookConVarChange(g_cvChaosEffectList_Position, 	ConVarChanged);
 	
 	HookConVarChange(g_cvChaosTwitchEnabled, 		ConVarChanged);
+
+	HookConVarChange(g_cvGameMode, OnGameConvarChanged);
+	HookConVarChange(g_cvGameType, OnGameConvarChanged);
+}
+
+public void OnGameConvarChanged(ConVar convar, char[] oldValue, char[] newValue){
+	if(IsCoopStrike()){
+		ResetChaos((1 << 0)); // RESET_COMMAND
+	}
 }
 
 public void ConVarChanged(ConVar convar, char[] oldValue, char[] newValue){

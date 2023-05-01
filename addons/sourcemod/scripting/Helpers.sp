@@ -287,6 +287,13 @@ bool GameModeUsesC4(){
 	return false;
 }
 
+bool IsCoopStrike(){
+	if(g_cvGameMode.IntValue == 1 && g_cvGameType.IntValue == 4){
+		return true;
+	}
+	return false;
+}
+
 
 public void GiveAndSwitchWeapon(int client, char[] weaponName){
 	

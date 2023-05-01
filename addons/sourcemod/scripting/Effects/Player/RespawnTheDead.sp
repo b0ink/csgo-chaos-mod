@@ -5,12 +5,18 @@ public void Chaos_RespawnTheDead(EffectData effect){
 	effect.AddAlias("Respawn");
 	effect.HasNoDuration = true;
 	effect.AddFlag("respawn");
+	// effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_RespawnTheDead_START(){
-	LoopValidPlayers(i){
-		if(!IsPlayerAlive(i)){
-			CS_RespawnPlayer(i);
+	if(IsCoopStrike()){
+		// natively respawn co-op players
+		ServerCommand("script \"ScriptCoopMissionRespawnDeadPlayers()\"");
+	}else{
+		LoopValidPlayers(i){
+			if(!IsPlayerAlive(i)){
+				CS_RespawnPlayer(i);
+			}
 		}
 	}
 }

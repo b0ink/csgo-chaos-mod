@@ -124,6 +124,8 @@ public void Chaos_SimonSays_OnPlayerRunCmd(int client, int &buttons, int &impuls
 }
 
 void DamagePlayer(int client, int amount = 5){
+	if(IsFakeClient(client)) return;
+	
 	int original = GetClientHealth(client);
 	SetEntityHealth(client, original - amount);
 	if(GetRandomInt(0, 1) == 0){

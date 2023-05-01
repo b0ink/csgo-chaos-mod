@@ -1,7 +1,9 @@
 public void Chaos_ExtendC4Timer(EffectData effect){
 	effect.Title = "Extend C4 Timer";
 	effect.HasNoDuration = true;
+	effect.BlockInCoopStrike = true;
 }
+
 int bombExplosion = -1;
 public void Chaos_ExtendC4Timer_INIT(){
     bombExplosion = FindSendPropInfo("CPlantedC4", "m_flC4Blow");

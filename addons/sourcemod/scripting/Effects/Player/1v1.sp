@@ -18,6 +18,8 @@ bool	  _1v1Active = false;
 public void Chaos_1v1(EffectData effect) {
 	effect.Title = "1V1 Arena";
 	effect.Duration = 15;
+	effect.BlockInCoopStrike = true;
+
 	effect.AddFlag("respawn");
 	effect.IncompatibleWith("Chaos_PortalGuns");
 	effect.IncompatibleWith("Chaos_RandomTeleport");

@@ -4,6 +4,7 @@ public void Chaos_TeleportFewMetres(EffectData effect){
 	effect.Title = "Teleport Players A Few Metres";
 	effect.Duration = 30;
 	effect.HasNoDuration = true;
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_TeleportFewMetres_START(){

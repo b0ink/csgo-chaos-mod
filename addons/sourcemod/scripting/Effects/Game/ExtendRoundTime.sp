@@ -6,5 +6,9 @@ public void Chaos_ExtendRoundTime(EffectData effect){
 }
 
 public void Chaos_ExtendRoundTime_START(){
-    GameRules_SetProp("m_iRoundTime", GameRules_GetProp("m_iRoundTime", 4, 0) + 60, 4, 0, true);
+	if(IsCoopStrike()){
+	    GameRules_SetProp("m_iRoundTime", GameRules_GetProp("m_iRoundTime", 4, 0) + 300, 4, 0, true);
+	}else{
+	    GameRules_SetProp("m_iRoundTime", GameRules_GetProp("m_iRoundTime", 4, 0) + 60, 4, 0, true);
+	}
 }

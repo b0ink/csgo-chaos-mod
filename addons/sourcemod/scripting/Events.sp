@@ -127,6 +127,7 @@ Action Timer_SaveBombPosition(Handle timer){
 
 
 
+
 public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	g_FreezeTime = true;
@@ -140,22 +141,33 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 
 	g_iTotalEffectsRanThisRound = 0;
 
-	CreateTimer(5.0, Timer_CreateHostage);
-		
-	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
-	
-	// round_freeze_end is not used because of starting the timer countdown (value of mp_freezetime)
-	if (GameRules_GetProp("m_bWarmupPeriod") != 1){
-		int freezeTime = FindConVar("mp_freezetime").IntValue;
-		g_NewEffect_Timer = CreateTimer(float(freezeTime), ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
-		Timer_Display(null, freezeTime);
-		expectedTimeForNewEffect =  GetTime() + freezeTime;
+	if(!IsCoopStrike()){
+		CreateTimer(5.0, Timer_CreateHostage);
+		if (GameRules_GetProp("m_bWarmupPeriod") != 1){
+			// round_freeze_end is not used because of starting the timer countdown (value of mp_freezetime)
+			int freezeTime = FindConVar("mp_freezetime").IntValue;
+			StopTimer(g_NewEffect_Timer);
+			g_NewEffect_Timer = CreateTimer(float(freezeTime), ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
+			Timer_Display(null, freezeTime);
+			expectedTimeForNewEffect =  GetTime() + freezeTime;
 
-		CreateTimer(1.0, Timer_DelayMetaEffectSpawn, _, TIMER_FLAG_NO_MAPCHANGE);
+			CreateTimer(1.0, Timer_DelayMetaEffectSpawn, _, TIMER_FLAG_NO_MAPCHANGE);
+		}
+	}{
+		PatchKasbahMapSpawns();
+		WaitingCoopStrikeMissionTime = 0;
+		Timer_CheckCoopStrike(null);
+		StopTimer(CheckCoopStrike_Timer);
+		CheckCoopStrike_Timer = CreateTimer(1.0, Timer_CheckCoopStrike, _, TIMER_REPEAT);
+		// Timer to check every few seconds of mission spawns
 	}
+		
+	
+
 
 	return Plugin_Continue;
 }
+
 
 public Action Timer_DelayMetaEffectSpawn(Handle timer){
 	/* Trigger meta effect at the start of the round*/

@@ -30,6 +30,7 @@ enum struct EffectData{
 	bool		HasCustomAnnouncement;
 	bool		Enabled;
 	bool		IsMetaEffect;
+	bool		BlockInCoopStrike;
 
 	Handle		IncompatibleEffects;
 	Handle		IncompatibleFlags;
