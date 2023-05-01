@@ -119,7 +119,7 @@ public void Chaos_DecoyDodgeball_RESET(int ResetType){
 Action Timer_CheckDecoys(Handle timer){
 	if(g_bDecoyDodgeball){
 		LoopAlivePlayers(i){
-			if(!PlayerHasWeapon(i, "weapon_decoy")){
+			if(PlayerHasWeapon(i, "weapon_decoy") == -1){
 				GivePlayerItem(i, "weapon_decoy");
 			}
 			FakeClientCommand(i, "use weapon_decoy");

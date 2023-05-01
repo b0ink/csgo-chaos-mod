@@ -355,7 +355,7 @@ void DoKnockback(int client, float amount){
 }
 
 
-bool PlayerHasWeapon(int client, char[] weaponName){
+int PlayerHasWeapon(int client, char[] weaponName){
 	int size = GetEntPropArraySize(client, Prop_Send, "m_hMyWeapons");
 	char itemName[64];
 
@@ -365,10 +365,10 @@ bool PlayerHasWeapon(int client, char[] weaponName){
 		
 		GetEntityClassname(item, itemName, sizeof(itemName));
 		if(StrEqual(weaponName, itemName, false)){
-			return true;
+			return item;
 		}
 	}
-	return false;
+	return -1;
 }
 
 
