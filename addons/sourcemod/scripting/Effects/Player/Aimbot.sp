@@ -137,6 +137,15 @@ stock void LookAtClient(int iClient, int iTarget){
 	GetClientEyePosition(iTarget, fTargetPos);
 	GetClientEyeAngles(iTarget, fTargetAngles);
 	
+	int weapon = GetEntPropEnt(iClient, Prop_Send, "m_hActiveWeapon");
+	char classname[64];
+	if(IsValidEntity(weapon) && GetEdictClassname(weapon, classname, sizeof(classname))){
+		if(StrEqual(classname, "weapon_awp")){
+			// if player is holding an awp, aim for the chest instead of the head
+			fTargetPos[2] -= 15.0;
+		}
+	}
+
 	float fVecFinal[3];
 	AddInFrontOf(fTargetPos, fTargetAngles, 7.0, fVecFinal);
 	MakeVectorFromPoints(fClientPos, fVecFinal, fFinalPos);
