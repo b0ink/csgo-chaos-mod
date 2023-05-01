@@ -150,9 +150,17 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 		g_NewEffect_Timer = CreateTimer(float(freezeTime), ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
 		Timer_Display(null, freezeTime);
 		expectedTimeForNewEffect =  GetTime() + freezeTime;
+
+		CreateTimer(1.0, Timer_DelayMetaEffectSpawn, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
 
 	return Plugin_Continue;
+}
+
+public Action Timer_DelayMetaEffectSpawn(Handle timer){
+	/* Trigger meta effect at the start of the round*/
+	AttemptMetaEffectSpawn();
+	return Plugin_Stop;
 }
 
 Action Timer_CreateHostage(Handle timer){
@@ -184,7 +192,6 @@ void ResetChaos(int resetflags){
 	HUD_ROUNDEND();
 	StopTimer(g_NewEffect_Timer);
 	ResetRoundChaos(resetflags);
-	// CreateTimer(0.1, ResetRoundChaos, resetflags);
 }
 
 

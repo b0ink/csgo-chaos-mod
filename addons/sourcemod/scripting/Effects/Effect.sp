@@ -6,8 +6,8 @@ ArrayList 	PossibleChaosEffects;
 
 Handle 		EffectsHistory = INVALID_HANDLE;
 
-ArrayList 	PossibleMetaEffects;
-ArrayList	MetaEffectsHistory;
+// ArrayList 	PossibleMetaEffects;
+// ArrayList	MetaEffectsHistory;
 
 /*
 	Reset flags that are passed through to _RESET() functions
@@ -382,4 +382,41 @@ void PoolChaosEffects(char[] effectName = ""){
 	}
 
 	// Log("Size of pooled chaos effects: %i", PossibleChaosEffects.Length);
+}
+
+ArrayList 	MetaEffects;
+int			MetaEffectIndex;
+
+void AttemptMetaEffectSpawn(){
+	if(MetaEffectIndex >= MetaEffects.Length){
+		MetaEffectIndex = 0;
+		MetaEffects.Sort(Sort_Random, Sort_String); // rescramble 
+	}
+
+	/* Meta Effect Trigger */
+	if(((GetTotalRoundsPlayed() >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && EffectsSinceLastMeta() >= 20 && GetRoundTime() < 30)){
+		bool metaAlreadyRunning = false;
+
+		EffectData metaEffect;
+		LoopAllMetaEffects(metaEffect, index){
+			if(metaEffect.Timer != INVALID_HANDLE){
+				metaAlreadyRunning = true;
+			}
+		}
+
+		if(!metaAlreadyRunning) {
+			char metaFunctionName[128];
+			MetaEffects.GetString(MetaEffectIndex, metaFunctionName, sizeof(metaFunctionName));
+			GetEffectData(metaFunctionName, metaEffect);
+			
+			if(StrEqual(metaFunctionName, "Chaos_Meta_Mega")){
+				// its boring if the mega chaos spawns during freeze time, so a delay is used to spawn it at a random time in the round
+				StartMegaChaosDelay();
+			}else{
+				g_sForceCustomEffect = metaEffect.FunctionName;
+				MetaEffectIndex++;
+				ChooseEffect(null, true);
+			}
+		}
+	}
 }

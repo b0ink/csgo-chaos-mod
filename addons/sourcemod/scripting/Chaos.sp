@@ -56,7 +56,7 @@ int 	g_iTotalEffectsRunThisMap = 0;
 
 
 
-char	g_sPreviousMetaEffect[64] = "";
+// char	g_sPreviousMetaEffect[64] = "";
 char 	g_sSelectedChaosEffect[64] = "";
 char 	g_sForceCustomEffect[64] = ""; //overrides g_sSelectedChaosEffect
 char 	g_sLastPlayedEffect[64] = "";
@@ -125,13 +125,17 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		}
 	}
 
-
+	bool effectIsMeta = false;
 	if(g_sForceCustomEffect[0] != '\0'){ //run from menu, or from twitch list
 		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
 		EffectData effect;
 		LoopAllEffects(effect, index){
 			if(StrEqual(effect.FunctionName, g_sForceCustomEffect, false)){
 				effect.Run();
+				if(effect.IsMetaEffect){
+					effectIsMeta = true;
+					g_iEffectsSinceMeta = 0;
+				}
 				if(!MegaChaosIsActive() && twitchEffect){
 					g_iEffectsSinceMeta++;
 				}
@@ -190,53 +194,21 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(g_bPlaySound_Debounce == false){
 		//Prevent overlapping sounds
 		g_bPlaySound_Debounce = true;
-		LoopValidPlayers(i){
-			EmitSoundToClient(i, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, g_fBellVolume[i]);
-		}	
+		if(effectIsMeta){
+			LoopValidPlayers(i){
+				EmitSoundToClient(i, "buttons/button10.wav", _, _, SNDLEVEL_RAIDSIREN, _, g_fBellVolume[i]);
+			}
+		}else{
+			LoopValidPlayers(i){
+				EmitSoundToClient(i, "buttons/bell1.wav", _, _, SNDLEVEL_RAIDSIREN, _, g_fBellVolume[i]);
+			}
+		}
+	
 		CreateTimer(0.2, Timer_ResetPlaySound);
 	}
 
 	if(CustomRun) return Plugin_Continue;
 
-	/* Meta Effect Trigger */
-	//TODO: have a fixed array of meta effects and scramble them, go through all effects, then rescramble
-	if(!CustomRun &&  ((GetTotalRoundsPlayed() >= 5 || !GameModeUsesC4()) && (GetURandomInt() % 100) <= 40 && EffectsSinceLastMeta() >= 20 && GetRoundTime() < 30)){
-		g_iEffectsSinceMeta = 0;
-
-		EffectData metaEffect;
-		bool metaAlreadyRunning = false;
-		PossibleMetaEffects.Clear();
-
-		LoopAllMetaEffects(metaEffect, index){
-			if(metaEffect.CanRunEffect(true) && metaEffect.Enabled){
-				if(g_sPreviousMetaEffect[0] != '\0'){
-					if(StrEqual(metaEffect.FunctionName, g_sPreviousMetaEffect)){
-						continue;
-					}
-				}
-				PossibleMetaEffects.PushArray(metaEffect, sizeof(metaEffect));
-			}
-
-			if(metaEffect.Timer != INVALID_HANDLE){
-				metaAlreadyRunning = true;
-			}
-		}
-
-		if(!metaAlreadyRunning && PossibleMetaEffects.Length > 0) {
-			int random = GetURandomInt() % PossibleMetaEffects.Length;
-			PossibleMetaEffects.GetArray(random, metaEffect, sizeof(metaEffect));
-			g_sForceCustomEffect = metaEffect.FunctionName;
-			g_sPreviousMetaEffect = g_sForceCustomEffect;
-			MetaEffectsHistory.PushArray(metaEffect);
-			ChooseEffect(null, true);
-		}
-
-		// History too full, clear it to allow old ones to be spawned.
-		if(MetaEffectsHistory.Length > PossibleMetaEffects.Length - 1){
-			MetaEffectsHistory.Clear();
-		}
-
-	}
 
 
 	StopTimer(g_NewEffect_Timer);

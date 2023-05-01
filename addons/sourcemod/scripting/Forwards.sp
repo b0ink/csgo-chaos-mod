@@ -17,16 +17,18 @@ public void OnPluginStart(){
 	PossibleChaosEffects = new ArrayList(sizeof(EffectData));
 	EffectsHistory = CreateArray(64);
 
-	PossibleMetaEffects = new ArrayList(sizeof(EffectData));
-	MetaEffectsHistory = new ArrayList(sizeof(EffectData));
+	// PossibleMetaEffects = new ArrayList(sizeof(EffectData));
+	// MetaEffectsHistory = new ArrayList(sizeof(EffectData));
 
 	g_SavedConvars  = CreateArray(64);
 
 	ChaosEffects = new ArrayList(sizeof(EffectData));
+	MetaEffects = new ArrayList(128);
 
 	ParseChaosEffects();
 
 	TWITCH_INIT();
+
 	/* Save models now mostly for plugin reloads */
 	LoopAlivePlayers(i){
 		SavePlayerModel(i);
@@ -45,7 +47,7 @@ public void OnMapStart(){
 		OriginalPlayerModels[i] = "\0";
 	}
 	
-	MetaEffectsHistory.Clear();
+	// MetaEffectsHistory.Clear();
 	if(EffectsHistory != INVALID_HANDLE){
 		ClearArray(EffectsHistory);
 	}
@@ -58,6 +60,7 @@ public void OnMapStart(){
 	// Log("New Map/Plugin Restart - Map: %s", g_sCurrentMapName);
 	
 	PrecacheSound("buttons/bell1.wav");
+	PrecacheSound("buttons/button10.wav");
 	PrecacheSound("ui/beep07.wav");
 
 	//TODO: put all map spawn data into structs
@@ -98,7 +101,7 @@ Action Timer_Advertisement(Handle timer){
 	}
 	return Plugin_Continue;
 }
-
+ 
 
 public void OnMapEnd(){
 	if(!g_cvChaosEnabled.BoolValue) return;

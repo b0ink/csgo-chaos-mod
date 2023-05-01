@@ -4,7 +4,8 @@ Handle g_AutoCoord_Timer = INVALID_HANDLE;
 
 public void ParseChaosEffects(){
 	ChaosEffects.Clear();
-
+	MetaEffects.Clear();
+	
 	char function_name[64];
 	int count = 0;
 	for(int i = 0; i < sizeof(EffectNames); i++)
@@ -77,9 +78,12 @@ public void ParseChaosEffects(){
 		}
 
 		ChaosEffects.PushArray(effect);
-
+		if(effect.IsMetaEffect){
+			MetaEffects.PushString(effect.FunctionName);
+		}
 	}
-
+	
+	MetaEffects.Sort(Sort_Random, Sort_String);
 	ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
 
 	EffectData effect;
