@@ -18,7 +18,7 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 </p>
 
 # Game Modes
-With the ride range of diffrent effects, certain configs need to be used correctly for the plugin to register them, and disable any effects accordingly. (eg. disabling the "Auto Plant C4" effect on Deathmatch and Co-op Strike Maps)
+With the ride range of different effects, certain configs need to be used correctly for the plugin to register them, and disable any effects accordingly. (eg. disabling the "Auto Plant C4" effect on Deathmatch and Co-op Strike Maps)
 
 ### Competitive / Casual
 To run Chaos Mod designed for 5v5 Defusal/Hostage maps, start your server with `game_mode 1; game_type 0;`, or `game_mode 0` for casual.
@@ -32,7 +32,7 @@ To run Chaos Mod designed for Co-op Strike, start your server with `game_mode 1;
 - [Phoenix Facility](https://steamcommunity.com/sharedfiles/filedetails/?id=2487825820) (Note: There are two versions of the map `coop_kasbah`, but the one linked here contains the second mission, other variations on the workshop may contain only the first mission, as the second one was released 4 months later). Once you have completed the first mission, set `mp_coopmission_mission_number 2` and then `mp_restartgame 1`.
 - Other co-op maps should still work, and as long as you have `game_mode 1; game_type 4;` set, you can run `!startchaos` to activate the effect timer, where as the supported maps have spawn points registered to automatically start the timer when you load into the mission. "Unsupported" simply means custom spawn points have not yet been added, and effects that rely on the spawn points will not be triggered.
 
-Lastly, given the nature of Co-op Strike maps, you may encounter softlocks that will require you to restart with `mp_restargame 1`. Most effects that teleport players are disabled to prevent any softlocks.
+Lastly, given the nature of Co-op Strike maps, you may encounter softlocks that will require you to restart with `mp_restartgame 1`. Most effects that teleport players are disabled to prevent any softlocks.
 
 # Twitch & YouTube Chat Voting
 The voting app generates 4 random effects for your Twitch or YouTube live chat to choose from, the highest voted effect gets picked, or if proportional voting is enabled, each effect has a certain chance of being picked at random, eg. the more votes it has the higher the chance.
