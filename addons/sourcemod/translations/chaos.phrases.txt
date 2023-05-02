@@ -22,7 +22,7 @@
     }
     "Chaos_Autobhop"
     {
-        "en"    "Are you feeling funky?"
+        "en"    "Phoon"
     }
     "Chaos_Bankrupt"
     {
