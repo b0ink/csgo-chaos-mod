@@ -88,14 +88,25 @@ void Find_Fog(){
 		Fog_Stream.Clear();
 	}
 
+	int fogEnt = -1;
+	int fogCount = 0;
+	while ((fogEnt = FindEntityByClassname(fogEnt, "env_fog_controller")) != -1){
+		fogCount++;
+	}
+	
 	int ent = -1;
 	if(
-		StrEqual(g_sCurrentMapName, "cs_office", false) ||
-		StrEqual(g_sCurrentMapName, "de_vertigo", false) ||
-		StrEqual(g_sCurrentMapName, "de_cache", false)
+		fogCount > 1
+		// StrEqual(g_sCurrentMapName, "cs_office", false) ||
+		// StrEqual(g_sCurrentMapName, "de_vertigo", false) ||
+		// StrEqual(g_sCurrentMapName, "de_cache", false) ||
+		// StrEqual(g_sCurrentMapName, "coop_cementplant", false) ||
+		// StrEqual(g_sCurrentMapName, "coop_kasbah", false) 
 	){
 		int index = -1;
+		PrintToChatAll("test");
 		while ((index = FindEntityByClassname(index, "env_fog_controller")) != -1){
+			PrintToChatAll("found fog and deleting");
 			RemoveEntity(index);
 		}
 		ent = CreateEntityByName("env_fog_controller");
@@ -118,6 +129,7 @@ void Find_Fog(){
 		DispatchKeyValueFloat(g_iFog, "fogstart", mapFogStart);
 		DispatchKeyValueFloat(g_iFog, "fogend", mapFogEnd);
 		DispatchKeyValueFloat(g_iFog, "fogmaxdensity", mapFogDensity);
+		// DispatchKeyValueVector(g_iFog, "fogdir", view_as<float>({0.0,288.0,0.0})); //TODO
 		AcceptEntityInput(g_iFog, "TurnOff");
     }
 }
