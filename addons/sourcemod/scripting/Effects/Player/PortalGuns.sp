@@ -65,13 +65,29 @@ public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, 
 
 public void Chaos_PortalGuns_START(){
 	g_bPortalGuns = true;
+	LoopAllClients(i){
+		g_PortalTeleports[i] = view_as<float>({0.0, 0.0, 0.0});
+	}
 	SavePlayersLocations();
 }
 
 public void Chaos_PortalGuns_RESET(int ResetType){
 	g_bPortalGuns = false;
 	if(ResetType & RESET_EXPIRED){
-		TeleportPlayersToClosestLocation();
+		if(IsCoopStrike()){
+			float backup[3];
+			LoopAlivePlayers(i){
+				if(GetClientTeam(i) != CS_TEAM_CT) continue;
+				if(g_PortalTeleports[i][0] != 0.0 && g_PortalTeleports[i][1] != 0.0 &&  g_PortalTeleports[i][2] != 0.0){
+					backup = g_PortalTeleports[i];
+					TeleportEntity(i, g_PortalTeleports[i]);
+				}else{
+					TeleportEntity(i, backup);
+				}
+			}
+		}else{
+			TeleportPlayersToClosestLocation();
+		}
 	}
 
 }

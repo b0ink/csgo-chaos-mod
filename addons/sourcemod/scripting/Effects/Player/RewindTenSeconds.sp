@@ -6,6 +6,7 @@ public void Chaos_RewindTenSeconds(EffectData effect){
 	effect.HasCustomAnnouncement = true;
 	effect.AddFlag("movement");
 	effect.RunForwardWhileInactive("OnGameFrame");
+	effect.BlockInCoopStrike = true;
 }
 
 

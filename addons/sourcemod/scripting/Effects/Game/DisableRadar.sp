@@ -3,6 +3,7 @@
 public void Chaos_DisableRadar(EffectData effect){
 	effect.Title = "Disable Radar";
 	effect.Duration = 30;
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_DisableRadar_START(){

@@ -83,7 +83,6 @@ enum struct EffectData{
 		StopTimer(this.Timer);
 		this.Timer = INVALID_HANDLE;
 		ChaosEffects.SetArray(this.ID, this);
-		
 		if(this.RESET != INVALID_FUNCTION){
 			Call_StartFunction(GetMyHandle(), this.RESET);
 			Call_PushCell(ResetFlags);
@@ -252,7 +251,7 @@ Action Effect_Reset(Handle timer, int effect_id){
 	LoopAllEffects(effect, index){
 		if(effect.ID == effect_id){
 			effect.Reset(RESET_EXPIRED);
-			ChaosEffects.SetArray(index, effect);
+			// ChaosEffects.SetArray(index, effect);
 			break;
 		}
 	}

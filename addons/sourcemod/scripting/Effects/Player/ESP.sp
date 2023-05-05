@@ -14,6 +14,7 @@ public void Chaos_ESP(EffectData effect){
     effect.Duration = 30;
     
     effect.AddAlias("Wallhacks");
+    effect.AddAlias("Xray");
     effect.AddAlias("Cheats");
 }
 

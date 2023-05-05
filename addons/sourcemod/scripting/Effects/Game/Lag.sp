@@ -6,7 +6,7 @@
 
 public void Chaos_Lag(EffectData effect){
 	effect.Title = "Lag";
-	effect.Duration = 30;
+	effect.Duration = 15;
 }
 
 bool FakeLag = false;

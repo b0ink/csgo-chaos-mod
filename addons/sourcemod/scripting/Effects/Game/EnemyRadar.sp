@@ -3,6 +3,7 @@
 public void Chaos_EnemyRadar(EffectData effect){
 	effect.Title = "Enemy Radar";
 	effect.Duration = 30;
+	effect.BlockInCoopStrike = true;
 }
 public void Chaos_EnemyRadar_START(){
 	cvar("mp_radar_showall", "1");

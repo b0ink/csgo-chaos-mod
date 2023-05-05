@@ -36,6 +36,6 @@ public void Chaos_Juggernaut_RESET(int ResetType){
 				SetEntProp(i, Prop_Data, "m_ArmorValue", 100);
 			}
 		}
+		ResetCvar("mp_weapons_allow_heavyassaultsuit", "0", "1");
 	}
-	ResetCvar("mp_weapons_allow_heavyassaultsuit", "0", "1");
 }
