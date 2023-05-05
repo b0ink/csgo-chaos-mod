@@ -14,7 +14,7 @@ public void Chaos_TaserParty_INIT(){
 
 public void Chaos_TaserParty_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 	int client = GetClientOfUserId(event.GetInt("userid"));
-	if(TaserParty){
+	if(TaserParty && !IsCoopStrike()){
 		char weapon[64];
 		event.GetString("weapon", weapon, 64);
 		if(StrEqual(weapon, "weapon_taser")){
