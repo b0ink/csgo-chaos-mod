@@ -30,7 +30,7 @@ float map_vecOrigin[3];
 float map_minbounds[3];
 float map_maxbounds[3];
 
-void WEATHER_INIT(){
+void InitWeather(){
     PrecacheSound(SOUND_SUPERSLAY);
 
     PrecacheSound(THUNDERDISTANT_1);

@@ -275,7 +275,17 @@ void ParseOverrideEffects(){
 	Log("Parsed Chaos_Override.cfg Effects succesfully!");
 } 
 
-void COORD_INIT() {g_UnusedCoordinates = CreateArray(3); }
+void InitSpawns() {
+	g_UnusedCoordinates = CreateArray(3);
+	//TODO: put all map spawn data into structs
+	if(g_MapCoordinates != 	INVALID_HANDLE) ClearArray(g_MapCoordinates);
+	if(bombSiteA != 		INVALID_HANDLE) ClearArray(bombSiteA);
+	if(bombSiteB != 		INVALID_HANDLE) ClearArray(bombSiteB);
+
+	g_MapCoordinates = 		INVALID_HANDLE;
+	bombSiteA = 			INVALID_HANDLE;
+	bombSiteB = 			INVALID_HANDLE;
+}
 
 void ParseMapCoordinates(char[] config) {
 	char path[PLATFORM_MAX_PATH];

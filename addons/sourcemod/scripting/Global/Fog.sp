@@ -80,7 +80,7 @@ void UpdateFog(){
 		
 }
 
-void Find_Fog(){
+void InitFog(){
 
 	if(Fog_Stream == INVALID_HANDLE){
 		Fog_Stream = new ArrayList(sizeof(FogData));

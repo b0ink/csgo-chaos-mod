@@ -24,7 +24,7 @@ enum struct EffectHudData{
 
 
 int g_HudTime = -1;
-void HUD_INIT(){
+void InitHud(){
 	HudData = new ArrayList(sizeof(EffectHudData));
 }
 
