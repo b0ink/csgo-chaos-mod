@@ -30,6 +30,8 @@ To run Chaos Mod designed for Deathmatch, start your server with `game_mode 2; g
 To run Chaos Mod designed for Co-op Strike, start your server with `game_mode 1; game_type 4;`. Here are the current maps that have been configured to work with Chaos Mod:
 - [Phoenix Compound](https://steamcommunity.com/sharedfiles/filedetails/?id=1295494370)
 - [Phoenix Facility](https://steamcommunity.com/sharedfiles/filedetails/?id=2487825820) (Note: There are two versions of the map `coop_kasbah`, but the one linked here contains the second mission, other variations on the workshop may contain only the first mission, as the second one was released 4 months later). Once you have completed the first mission, set `mp_coopmission_mission_number 2` and then `mp_restartgame 1`.
+- [Autumn Harvest](https://steamcommunity.com/sharedfiles/filedetails/?id=2477564968) (Part 1)
+- [Cultivating Trouble](https://steamcommunity.com/sharedfiles/filedetails/?id=2477568092) (Part 2: Second mission of Autumn Harvest)
 - Other co-op maps should still work, and as long as you have `game_mode 1; game_type 4;` set, you can run `!startchaos` to activate the effect timer, where as the supported maps have spawn points registered to automatically start the timer when you load into the mission. "Unsupported" simply means custom spawn points have not yet been added, and effects that rely on the spawn points will not be triggered.
 
 Lastly, given the nature of Co-op Strike maps, you may encounter softlocks that will require you to restart with `mp_restartgame 1`. Most effects that teleport players are disabled to prevent any softlocks.
