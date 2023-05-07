@@ -35,6 +35,7 @@ void SpawnImpostors(){
 			GetArrayArray(g_MapCoordinates, i, vec);
 			
 			if(DistanceToClosestEntity(vec, "prop_exploding_barrel") < 50) continue;
+			if(IsCoopStrike() && DistanceToClosestPlayer(vec) > MAX_COOP_SPAWNDIST) continue;
 
 			int chicken = CreateEntityByName("chicken");
 			int fakePlayer = CreateEntityByName("prop_dynamic_override");

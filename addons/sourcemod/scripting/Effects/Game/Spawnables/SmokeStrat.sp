@@ -10,6 +10,7 @@ public void Chaos_SmokeStrat_START(){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec);
+			if(IsCoopStrike() && DistanceToClosestPlayer(vec) > MAX_COOP_SPAWNDIST) continue;
 			CreateParticle("explosion_smokegrenade_fallback", vec);
 		}
 	}

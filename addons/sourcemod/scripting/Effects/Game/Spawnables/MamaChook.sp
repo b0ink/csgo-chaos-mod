@@ -25,6 +25,7 @@ public void Chaos_MamaChook_RESET(int ResetType){
 }
 
 public bool Chaos_MamaChook_Conditions(){
+	if(IsCoopStrike()) return false;
 	if(!ValidMapPoints()) return false;
 	return true;
 }

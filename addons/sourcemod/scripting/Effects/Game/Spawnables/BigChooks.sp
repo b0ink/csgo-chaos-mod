@@ -16,6 +16,7 @@ public void Chaos_BigChooks_START(){
 			if(ent != -1){
 				float vec[3];
 				GetArrayArray(g_MapCoordinates, i, vec);
+				if(IsCoopStrike() && DistanceToClosestPlayer(vec) > MAX_COOP_SPAWNDIST) continue;
 				TeleportEntity(ent, vec, NULL_VECTOR, NULL_VECTOR);
 				float randomSize = GetRandomFloat(2.0, 15.0);
 				DispatchSpawn(ent);

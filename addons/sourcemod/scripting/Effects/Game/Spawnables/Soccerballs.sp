@@ -16,6 +16,7 @@ public void Chaos_Soccerballs_START(){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec);
+			if(IsCoopStrike() && DistanceToClosestPlayer(vec) > MAX_COOP_SPAWNDIST) continue;
 			if(DistanceToClosestPlayer(vec) > 50){
 				int ent = CreateEntityByName("prop_physics_multiplayer");
 				SetEntityModel(ent, "models/props/de_dust/hr_dust/dust_soccerball/dust_soccer_ball001.mdl");

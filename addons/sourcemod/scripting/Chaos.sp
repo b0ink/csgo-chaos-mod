@@ -78,6 +78,7 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 #include "Global/Players.sp"
 #include "Global/Spawns.sp"
 
+#define MAX_COOP_SPAWNDIST 500
 
 #include "Effects/EffectsList.sp"
 #include "Effects/EffectNames.sp"

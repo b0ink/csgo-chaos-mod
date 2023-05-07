@@ -55,6 +55,7 @@ public void Chaos_Turrets_START(){
 	float vec[3];
 	LoopAllMapSpawns(vec, index){
 		if(DistanceToClosestPlayer(vec) < 200) continue;
+		if(IsCoopStrike() && DistanceToClosestPlayer(vec) > MAX_COOP_SPAWNDIST) continue;
 
 		int dronegun = CreateEntityByName("dronegun");
 		if(!IsValidEntity(dronegun)) break;

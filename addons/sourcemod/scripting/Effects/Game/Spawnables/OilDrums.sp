@@ -48,6 +48,7 @@ Action Timer_SpawnDrums(Handle timer, int amount){
 	ShuffleMapSpawns();
 	float pos[3];
 	LoopAllMapSpawns(pos, index){
+		if(IsCoopStrike() && DistanceToClosestPlayer(pos) > MAX_COOP_SPAWNDIST) continue;
 		SpawnOilDrum(true, pos);
 		if(index > amount){
 			break;

@@ -10,6 +10,7 @@ public void Chaos_SpawnExplodingBarrels_START(){
 		if(GetRandomInt(0,100) <= 25){
 			float vec[3];
 			GetArrayArray(g_MapCoordinates, i, vec, sizeof(vec));
+			if(IsCoopStrike() && DistanceToClosestPlayer(vec) > MAX_COOP_SPAWNDIST) continue;
 			if(DistanceToClosestPlayer(vec) > 50 && DistanceToClosestEntity(vec, "planted_c4") > 50){ //* Won't spawn on planted c4s
 				int barrel = CreateEntityByName("prop_exploding_barrel");
 				DispatchKeyValue(barrel, "targetname", "ExplodingBarrel");
