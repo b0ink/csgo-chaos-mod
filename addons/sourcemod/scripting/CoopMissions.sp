@@ -146,14 +146,15 @@ int PlayersInMissionStartZone() {
 
 	for(int i = 0; i < MissionStartZones.Length; i++) {
 		MissionStartZones.GetArray(i, mission);
-		bool allPlayersInZone = true;
+		// activate timer when atleast one player is in the zone
+		bool playerInZone = false;
 		LoopAlivePlayers(client) {
 			if(GetClientTeam(client) != CS_TEAM_CT) continue;
-			if(!isInEnd(client, mission.start_1, mission.start_2)) {
-				allPlayersInZone = false;
+			if(isInEnd(client, mission.start_1, mission.start_2)) {
+				playerInZone = true;
 			}
 		}
-		if(allPlayersInZone) {
+		if(playerInZone) {
 			missionID = mission.missionID;
 			break;
 		}
