@@ -58,7 +58,7 @@ void InitWeather(){
 
 }
 
-void SPAWN_WEATHER(WEATHER_TYPE type, char[] targetname){
+int SPAWN_WEATHER(WEATHER_TYPE type, char[] targetname){
     int ent = CreateEntityByName("func_precipitation");
     char PrecipType[8];
     FormatEx(PrecipType, sizeof(PrecipType), "%i.0", view_as<int>(type));
@@ -75,4 +75,5 @@ void SPAWN_WEATHER(WEATHER_TYPE type, char[] targetname){
     SetEntPropVector(ent, Prop_Send, "m_vecMins", map_minbounds);
     SetEntPropVector(ent, Prop_Send, "m_vecMaxs", map_maxbounds);
     TeleportEntity(ent, map_vecOrigin, NULL_VECTOR, NULL_VECTOR);
+    return ent;
 }

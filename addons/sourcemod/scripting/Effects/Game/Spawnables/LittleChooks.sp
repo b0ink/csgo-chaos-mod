@@ -1,10 +1,13 @@
 #pragma semicolon 1
 
+ArrayList LittleChooks;
 public void Chaos_LittleChooks(EffectData effect){
 	effect.Title = "Lil' Chooks";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
 	effect.AddFlag("chicken");
+	
+	LittleChooks = new ArrayList();
 }
 
 public void Chaos_LittleChooks_START(){
@@ -21,6 +24,7 @@ public void Chaos_LittleChooks_START(){
 				float randomSize = GetRandomFloat(0.4, 0.9);
 				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", randomSize);
 				DispatchKeyValue(ent, "targetname", "LittleChooks");
+				LittleChooks.Push(EntIndexToEntRef(ent));
 			}
 		}
 	
@@ -28,7 +32,7 @@ public void Chaos_LittleChooks_START(){
 }
 
 public void Chaos_LittleChooks_RESET(int ResetType){
-	RemoveChickens(.chickenName="LittleChooks");
+	RemoveEntitiesInArray(LittleChooks);
 }
 
 public bool Chaos_LittleChooks_Conditions(bool EffectRunRandomly){

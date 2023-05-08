@@ -1,10 +1,13 @@
 #pragma semicolon 1
 
+ArrayList BigChooks;
+
 public void Chaos_BigChooks(EffectData effect){
 	effect.Title = "Big Chooks";
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
 	effect.AddFlag("chicken");
+	BigChooks = new ArrayList();
 }
 
 
@@ -22,6 +25,7 @@ public void Chaos_BigChooks_START(){
 				DispatchSpawn(ent);
 				SetEntPropFloat(ent, Prop_Data, "m_flModelScale", randomSize);
 				DispatchKeyValue(ent, "targetname", "BigChooks");
+				BigChooks.Push(EntIndexToEntRef(ent));
 			}
 		}
 	
@@ -29,7 +33,7 @@ public void Chaos_BigChooks_START(){
 }
 
 public void Chaos_BigChooks_RESET(int ResetType){
-	RemoveChickens(.chickenName="BigChooks");
+	RemoveEntitiesInArray(BigChooks);
 }
 
 public bool Chaos_BigChooks_Conditions(bool EffectRunRandomly){

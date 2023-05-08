@@ -214,7 +214,7 @@ public void SendBombPlanted(int client){
 }
 
 stock bool SafeRemoveWeapon(int client, int weapon){
-    if (!IsValidEntity(weapon) || !IsValidEdict(weapon) || !HasEntProp(weapon, Prop_Send, "m_hOwnerEntity")) return false;
+    if (!IsValidEntity(weapon) || weapon <= 0 || !IsValidEdict(weapon) || !HasEntProp(weapon, Prop_Send, "m_hOwnerEntity") ) return false;
 
     int ownerEntity = GetEntPropEnt(weapon, Prop_Send, "m_hOwnerEntity");
     if (ownerEntity != client) SetEntPropEnt(weapon, Prop_Send, "m_hOwnerEntity", client);

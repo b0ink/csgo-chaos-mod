@@ -7,6 +7,8 @@
 bool Thunderstorm = false;
 int thunder_count = 0;
 
+ArrayList ThunderstormEnts;
+
 public void Chaos_Thunderstorm(EffectData effect){
 	effect.Title = "Thunderstorm";
 	effect.Duration = 30;
@@ -14,6 +16,8 @@ public void Chaos_Thunderstorm(EffectData effect){
 	effect.IncompatibleWith("Chaos_OHKO");
 	effect.AddAlias("Weather");
 	effect.AddAlias("Visual");
+
+	ThunderstormEnts = new ArrayList();
 }
 
 
@@ -31,7 +35,9 @@ public void Chaos_Thunderstorm_START(){
 	Thunderstorm = true;
 	CreateTimer(0.1, Timer_LightningStrike); // starting lightning strikes
 	
-	SPAWN_WEATHER(RAIN, "Thunderstorm");
+	int ent = SPAWN_WEATHER(RAIN, "Thunderstorm");
+	ThunderstormEnts.Push(EntIndexToEntRef(ent));
+
 	CREATE_CC("thunderstorm");
 	DispatchKeyValue(0, "skyname", "sky_csgo_cloudy01"); // changing the skybot to rain (unrelated to rain entity)
 	MinimalFog();
@@ -50,22 +56,10 @@ public void Chaos_Thunderstorm_START(){
 }
 
 public void Chaos_Thunderstorm_RESET(int ResetType){
-	CLEAR_CC("thunderstorm.raw");
-	
 	Thunderstorm = false;
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "func_precipitation")){
-			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-			if(StrEqual(targetname, "Thunderstorm")){
-				RemoveEntity(ent);
-			}
-		}
-	}
+	CLEAR_CC("thunderstorm.raw");
+	RemoveEntitiesInArray(ThunderstormEnts);
 	MinimalFog(true);
-
-	// Fog_OFF();
 }
 
 /* Used in Chaos_Armageddon() */

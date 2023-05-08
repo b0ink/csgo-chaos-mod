@@ -1,8 +1,11 @@
 #pragma semicolon 1
 
+ArrayList soccerballs;
 public void Chaos_Soccerballs(EffectData effect){
 	effect.Title = "Soccerballs";
 	effect.Duration = 60;
+
+	soccerballs = new ArrayList();
 }
 
 public void Chaos_Soccerballs_OnMapStart(){
@@ -31,24 +34,14 @@ public void Chaos_Soccerballs_START(){
 				SetEntProp(ent, Prop_Data, "m_CollisionGroup", 5);
 				SetEntityMoveType(ent, MOVETYPE_VPHYSICS);
 				DispatchKeyValue(ent, "targetname", "Soccerball");
+				soccerballs.Push(EntIndexToEntRef(ent));
 			}
 		}
 	}
 }
 
 public void Chaos_Soccerballs_RESET(){
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "prop_physics_multiplayer") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
-			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-			if(StrEqual(targetname, "Soccerball", false)){
-				RemoveEntity(ent);
-			}else{
-				continue;
-			}	
-		}
-	}
+	RemoveEntitiesInArray(soccerballs);
 }
 
 public bool Chaos_Soccerballs_Conditions(bool EffectRunRandomly){

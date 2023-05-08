@@ -249,7 +249,6 @@ Action Timer_ResetPlaySound(Handle timer){
 
 
 void ResetRoundChaos(int resetflags){
-	RemoveChickens(false);
 	Fog_OFF();
 
 	EffectData effect;

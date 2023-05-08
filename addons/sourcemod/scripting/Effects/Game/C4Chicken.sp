@@ -30,7 +30,6 @@ public void Chaos_C4Chicken_START(){
 
 public void Chaos_C4Chicken_RESET(int ResetType){
 	g_bC4Chicken = false;
-	RemoveChickens();
 	g_iC4ChickenEnt = -1;
 }
 

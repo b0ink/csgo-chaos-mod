@@ -90,7 +90,7 @@ public Action MelonHit(int melon, int other){
 public Action Destroy_Prop(Handle timer, int entity){
 	int prop = EntRefToEntIndex(entity);
 		
-	if(IsValidEntity(prop)){
+	if(IsValidEntity(prop) && prop > 0){
 		RemoveEntity(prop);
 	}
 	SDKUnhook(prop, SDKHook_Touch, MelonHit);

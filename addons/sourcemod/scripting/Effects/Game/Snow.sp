@@ -1,30 +1,24 @@
 #pragma semicolon 1
 
+ArrayList SnowEnt;
 public void Chaos_Snow(EffectData effect){
 	effect.Title = "Snow";
 	effect.Duration = 45;
 	effect.AddFlag("fog");
 	effect.AddAlias("Visual");
+	SnowEnt = new ArrayList();
 }
 
 public void Chaos_Snow_START(){
-	SPAWN_WEATHER(SNOWFALL, "Snow");
-	SPAWN_WEATHER(SNOWFALL, "Snow");
-	SPAWN_WEATHER(SNOWFALL, "Snow");
+	SnowEnt.Push(EntIndexToEntRef(SPAWN_WEATHER(SNOWFALL, "Snow")));
+	SnowEnt.Push(EntIndexToEntRef(SPAWN_WEATHER(SNOWFALL, "Snow")));
+	SnowEnt.Push(EntIndexToEntRef(SPAWN_WEATHER(SNOWFALL, "Snow")));
 	MinimalFog();
 }
 
 public void Chaos_Snow_RESET(int ResetType){
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-		if(StrEqual(targetname, "Snow")){
-			RemoveEntity(ent);
-		}
-	}
+	RemoveEntitiesInArray(SnowEnt);
 	MinimalFog(true);
-	// Fog_OFF();
 }
 
 public bool Chaos_Snow_Conditions(bool EffectRunRandomly){

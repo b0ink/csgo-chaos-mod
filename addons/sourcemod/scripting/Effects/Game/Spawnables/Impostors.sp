@@ -1,10 +1,12 @@
 #pragma semicolon 1
 
+ArrayList Impostors;
 public void Chaos_Impostors(EffectData effect){
 	effect.Title = "Impostors";
 	effect.Duration = 60;
 	
 	effect.AddAlias("Clones");
+	Impostors = new ArrayList();
 }
 
 public void Chaos_Impostors_START(){
@@ -13,7 +15,7 @@ public void Chaos_Impostors_START(){
 
 public void Chaos_Impostors_RESET(int ResetType){
 	if(ResetType & RESET_EXPIRED){
-		RemoveChickens(.chickenName="Impostors");
+		RemoveEntitiesInArray(Impostors);
 	}
 }
 
@@ -52,7 +54,7 @@ void SpawnImpostors(){
 				
 				TeleportEntity(chicken, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(chicken);
-
+				Impostors.Push(EntIndexToEntRef(chicken));
 				/*
 					Thankyou backwards!
 					https://discord.com/channels/335290997317697536/335290997317697536/840636933478678538

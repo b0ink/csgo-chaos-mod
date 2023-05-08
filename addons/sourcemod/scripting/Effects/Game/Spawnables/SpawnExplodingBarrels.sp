@@ -1,8 +1,11 @@
 #pragma semicolon 1
 
+ArrayList barrels;
 public void Chaos_SpawnExplodingBarrels(EffectData effect){
 	effect.Title = "Exploding Barrels";
-	effect.Duration = 60;
+	effect.Duration = 10;
+
+	barrels = new ArrayList();
 }
 
 public void Chaos_SpawnExplodingBarrels_START(){
@@ -16,24 +19,14 @@ public void Chaos_SpawnExplodingBarrels_START(){
 				DispatchKeyValue(barrel, "targetname", "ExplodingBarrel");
 				TeleportEntity(barrel, vec, NULL_VECTOR, NULL_VECTOR);
 				DispatchSpawn(barrel);
+				barrels.Push(EntIndexToEntRef(barrel));
 			}
 		}
 	}
 }
 
 public void Chaos_SpawnExplodingBarrels_RESET(){
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "prop_exploding_barrel") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
-			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-			if(StrEqual(targetname, "ExplodingBarrel", false)){
-				RemoveEntity(ent);
-			}else{
-				continue;
-			}	
-		}
-	}
+	RemoveEntitiesInArray(barrels);
 }
 
 public bool Chaos_SpawnExplodingBarrels_Conditions(bool EffectRunRandomly){

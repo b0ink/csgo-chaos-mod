@@ -13,6 +13,8 @@
 
 bool armageddonMaterials = true;
 bool Armageddon = false;
+ArrayList ArmageddonEnts;
+
 public void Chaos_Armageddon(EffectData effect){
 	effect.Title = "Armageddon";
 	effect.Duration = 25;
@@ -20,6 +22,7 @@ public void Chaos_Armageddon(EffectData effect){
 	effect.IncompatibleWith("Chaos_OilDrums");
 	effect.AddFlag("fog");
 	
+	ArmageddonEnts = new ArrayList();
 }
 
 public void Chaos_Armageddon_OnMapStart(){
@@ -36,10 +39,10 @@ public void Chaos_Armageddon_START(){
 	EnableThunderstorm();
 	
 	CREATE_CC("wasteland");
-	SPAWN_WEATHER(RAIN, "Armageddon");
-	SPAWN_WEATHER(SNOWFALL, "Armageddon");
-	SPAWN_WEATHER(SNOW, "Armageddon");
-	SPAWN_WEATHER(ASH, "Armageddon");
+	ArmageddonEnts.Push(EntIndexToEntRef(SPAWN_WEATHER(RAIN, "Armageddon")));
+	ArmageddonEnts.Push(EntIndexToEntRef(SPAWN_WEATHER(SNOWFALL, "Armageddon")));
+	ArmageddonEnts.Push(EntIndexToEntRef(SPAWN_WEATHER(SNOW, "Armageddon")));
+	ArmageddonEnts.Push(EntIndexToEntRef(SPAWN_WEATHER(ASH, "Armageddon")));
 
 	ArmageddonFog();
 
@@ -82,17 +85,7 @@ public void Chaos_Armageddon_RESET(int ResetType){
 		}
 	}
 
-
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "func_precipitation")){
-			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-			if(StrEqual(targetname, "Armageddon")){
-				RemoveEntity(ent);
-			}
-		}
-	}
+	RemoveEntitiesInArray(ArmageddonEnts);
 }
 
 

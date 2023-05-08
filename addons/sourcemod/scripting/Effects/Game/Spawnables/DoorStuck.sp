@@ -1,8 +1,10 @@
 #pragma semicolon 1
 
+ArrayList DoorStuckEnt;
 public void Chaos_DoorStuck(EffectData effect){
 	effect.Title = "DOOR STUCK!";
 	effect.Duration = 10;	
+	DoorStuckEnt = new ArrayList();
 }
 
 char DoorStuckModel[] = "models/props/hr_massive/rural_door_1/rural_door_1.mdl";
@@ -19,18 +21,7 @@ public void Chaos_DoorStuck_START(){
 }
 
 public void Chaos_DoorStuck_RESET(int ResetType){
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "prop_door_rotating")){
-			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-			if(StrEqual(targetname, "DoorStuck", false)){
-				RemoveEntity(ent);
-			}else{
-				continue;
-			}
-		}
-	}
+	RemoveEntitiesInArray(DoorStuckEnt);
 }
 
 void SpawnDoor(int client){
@@ -64,7 +55,7 @@ void SpawnDoor(int client){
 	// +use closes door & breakable door
 	DispatchKeyValue(door, "spawnflags", "532480");
 	DispatchSpawn(door);
-	
+	DoorStuckEnt.Push(EntIndexToEntRef(door));
 	// brown wood colour
 	// SetEntityRenderMode(door, RENDER_TRANSALPHA);
 	// SetEntityRenderColor(door, 87, 43, 0, 255);

@@ -6,7 +6,7 @@ enum FENCE_TYPE {
 };
 
 ArrayList Fences;
-
+ArrayList FencesEnt; // track ents to remove on reset
 enum struct FenceData {
 	float location[3];
 	float rotation_y;
@@ -16,6 +16,7 @@ enum struct FenceData {
 public void Chaos_FencedOff(EffectData effect){
 	effect.Title = "Fenced Off";
 	effect.Duration = 60;
+	FencesEnt = new ArrayList();
 }
 
 public void Chaos_FencedOff_INIT(){
@@ -46,18 +47,7 @@ public void Chaos_FencedOff_START(){
 
 
 public void Chaos_FencedOff_RESET(){
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "prop_dynamic") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
-			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-			if(StrEqual(targetname, "FakeFence", false)){
-				RemoveEntity(ent);
-			}else{
-				continue;
-			}	
-		}
-	}
+	RemoveEntitiesInArray(FencesEnt);
 }
 
 void SpawnFence(FenceData fenceData){
@@ -68,6 +58,7 @@ void SpawnFence(FenceData fenceData){
 	if(!fenceData.wide){
 		TeleportEntity(fence, fenceData.location, rot, NULL_VECTOR);
 		DispatchSpawn(fence);
+		FencesEnt.Push(EntIndexToEntRef(fence));
 		return;
 	}
 

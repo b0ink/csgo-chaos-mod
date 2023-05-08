@@ -1,5 +1,3 @@
-
-
 public void OnPluginStart() {
 	LoadTranslations("chaos.phrases.txt");
 
@@ -58,7 +56,6 @@ public void OnMapStart() {
 	ParseMissionData();
 
 	/* Cleanup */
-	RemoveChickens();
 	CLEAR_CC();
 
 	StopTimer(g_NewEffect_Timer);

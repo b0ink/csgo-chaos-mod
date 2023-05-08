@@ -1,6 +1,7 @@
 #pragma semicolon 1
 
 //Credit: https://forums.alliedmods.net/showthread.php?t=312548
+ArrayList turrets;
 
 public void Chaos_Turrets(EffectData effect){
 	effect.Title = "Turrets";
@@ -8,6 +9,8 @@ public void Chaos_Turrets(EffectData effect){
 
 	effect.AddAlias("Droneguns");
 	effect.AddAlias("Drones");
+
+	turrets = new ArrayList();
 }
 
 int dronegun_collision;
@@ -63,25 +66,14 @@ public void Chaos_Turrets_START(){
 		DispatchKeyValue(dronegun, "targetname", "Turrets");
 		TeleportEntity(dronegun, vec, NULL_VECTOR, NULL_VECTOR);
 		DispatchSpawn(dronegun);
-
+		turrets.Push(EntIndexToEntRef(dronegun));
 
 		if(index > 50) break; // spawn 50
 	}
 }
 
 public void Chaos_Turrets_RESET(){
-	char classname[64];
-	char targetname[64];
-	LoopAllEntities(ent, GetMaxEntities(), classname){
-		if(StrEqual(classname, "dronegun") && GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == -1){
-			GetEntPropString(ent, Prop_Data, "m_iName", targetname, sizeof(targetname));
-			if(StrEqual(targetname, "Turrets", false)){
-				RemoveEntity(ent);
-			}else{
-				continue;
-			}	
-		}
-	}
+	RemoveEntitiesInArray(turrets);
 }
 
 public bool Chaos_Turrets_Conditions(bool EffectRunRandomly){
