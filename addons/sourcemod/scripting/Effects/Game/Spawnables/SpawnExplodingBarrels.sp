@@ -3,7 +3,7 @@
 ArrayList barrels;
 public void Chaos_SpawnExplodingBarrels(EffectData effect){
 	effect.Title = "Exploding Barrels";
-	effect.Duration = 10;
+	effect.Duration = 60;
 
 	barrels = new ArrayList();
 }
