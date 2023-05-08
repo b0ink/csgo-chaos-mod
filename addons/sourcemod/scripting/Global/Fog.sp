@@ -104,9 +104,7 @@ void InitFog(){
 		// StrEqual(g_sCurrentMapName, "coop_kasbah", false) 
 	){
 		int index = -1;
-		PrintToChatAll("test");
 		while ((index = FindEntityByClassname(index, "env_fog_controller")) != -1){
-			PrintToChatAll("found fog and deleting");
 			RemoveEntity(index);
 		}
 		ent = CreateEntityByName("env_fog_controller");
