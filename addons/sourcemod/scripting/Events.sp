@@ -190,7 +190,7 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	if(!g_cvChaosEnabled.BoolValue) return Plugin_Continue;
 	expectedTimeForNewEffect = -1;
 	
-	ClearFog();
+	CreateTimer(0.1, Timer_DelayFogClear, _, TIMER_FLAG_NO_MAPCHANGE);
 	
 	ResetChaos(RESET_ROUNDEND);
 	g_bCanSpawnEffect = false;
@@ -198,6 +198,11 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	StopTimer(ClearHTMLTimer);
 
 	return Plugin_Continue;
+}
+
+public Action Timer_DelayFogClear(Handle timer){
+	ClearFog();
+	return Plugin_Stop;
 }
 
 void ResetChaos(int resetflags){
