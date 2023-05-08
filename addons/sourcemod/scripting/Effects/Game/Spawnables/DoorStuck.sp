@@ -2,7 +2,7 @@
 
 public void Chaos_DoorStuck(EffectData effect){
 	effect.Title = "DOOR STUCK!";
-	effect.Duration = 30;	
+	effect.Duration = 10;	
 }
 
 char DoorStuckModel[] = "models/props/hr_massive/rural_door_1/rural_door_1.mdl";
