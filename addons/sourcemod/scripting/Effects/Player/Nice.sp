@@ -4,6 +4,7 @@ public void Chaos_Nice(EffectData effect){
 	effect.Title = "Nice";
 	// effect.Title = "Nice ( ͡° ͜ʖ ͡°)";
 	effect.HasNoDuration = true;
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_Nice_OnMapStart(){

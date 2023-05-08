@@ -3,6 +3,7 @@
 public void Chaos_RevealEnemyLocation(EffectData effect){
 	effect.Title = "Reveal Enemy Location";
 	effect.HasNoDuration = true;
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_RevealEnemyLocation_START(){

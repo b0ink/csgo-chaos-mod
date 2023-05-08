@@ -3,6 +3,7 @@
 public void Chaos_MoneyRain(EffectData effect){
 	effect.Title = "Make it Rain";
 	effect.HasNoDuration = true;
+	effect.BlockInCoopStrike = true;
 }
 
 
@@ -39,7 +40,6 @@ public void Chaos_MoneyRain_RESET(int ResetType){
 }
 
 public bool Chaos_MoneyRain_Conditions(bool EffectRunRandomly){
-	if(IsCoopStrike()) return false;
 	if(!ValidMapPoints()) return false;
 	if(GetArraySize(g_MapCoordinates) == 0) return false;
 	return true;

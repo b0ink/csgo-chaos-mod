@@ -4,6 +4,7 @@
 public void Chaos_Jackpot(EffectData effect){
 	effect.Title = "Jackpot";
 	effect.HasNoDuration = true;
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_Jackpot_OnMapStart(){

@@ -1,6 +1,7 @@
 public void Chaos_ExpensiveAmmo(EffectData effect){
 	effect.Title = "Expensive Ammo";
 	effect.Duration = 30;
+	effect.BlockInCoopStrike = true;
 }
 
 bool ExpensiveAmmo = false;

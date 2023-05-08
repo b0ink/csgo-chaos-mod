@@ -5,6 +5,7 @@ public void Chaos_MamaChook(EffectData effect){
 	effect.AddAlias("Chicken");
 	effect.Duration = 60;
 	effect.AddFlag("chicken");
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_MamaChook_START(){
@@ -25,7 +26,6 @@ public void Chaos_MamaChook_RESET(int ResetType){
 }
 
 public bool Chaos_MamaChook_Conditions(){
-	if(IsCoopStrike()) return false;
 	if(!ValidMapPoints()) return false;
 	return true;
 }
