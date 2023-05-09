@@ -6,9 +6,7 @@ public void Chaos_TaserParty(EffectData effect){
 	effect.Title = "Taser Party";
 	effect.Duration = 30;
 	effect.AddFlag("dropweapon"); // prevent drop weapon effects from running
-}
 
-public void Chaos_TaserParty_INIT(){
 	HookEvent("weapon_fire", Chaos_TaserParty_Event_OnWeaponFire);
 }
 

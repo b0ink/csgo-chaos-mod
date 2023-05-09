@@ -87,14 +87,7 @@ public void ParseChaosEffects(){
 	ChaosEffects.Sort(Sort_Ascending, Sort_String); // sort the effects alphabetically
 
 	EffectData effect;
-	char init_function[64];
 	LoopAllEffects(effect, index){
-		Format(init_function, sizeof(init_function), "%s_INIT", effect.FunctionName);
-		Function func = GetFunctionByName(GetMyHandle(), init_function);
-		if(func != INVALID_FUNCTION){
-			Call_StartFunction(GetMyHandle(), func);
-			Call_Finish();
-		}
 		effect.ID = index;
 		ChaosEffects.SetArray(index, effect);
 	}

@@ -6,9 +6,7 @@ public void Chaos_NoComms(EffectData effect){
 	effect.Title = "No Comms";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Chatterbox");
-}
 
-public void Chaos_NoComms_INIT(){
 	AddCommandListener(NoComms_SayListener, "say");
 	AddCommandListener(NoComms_SayListener, "say_team");
 	AddCommandListener(NoComms_SayListener, "player_ping");

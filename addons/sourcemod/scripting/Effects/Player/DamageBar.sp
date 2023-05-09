@@ -9,9 +9,7 @@ bool DamageBar = false;
 public void Chaos_DamageBar(EffectData effect){
 	effect.Title = "Damage Bar";
 	effect.Duration = 30;
-}
 
-public void Chaos_DamageBar_INIT(){
 	HookEvent("player_hurt", Chaos_DamageBar_Event_PlayerHurt);
 }
 

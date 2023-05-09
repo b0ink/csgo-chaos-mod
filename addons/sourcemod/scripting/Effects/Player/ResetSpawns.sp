@@ -7,9 +7,7 @@ public void Chaos_ResetSpawns(EffectData effect){
 	effect.Title = "Teleport all players back to spawn";
 	effect.AddAlias("Teleport");
 	effect.HasNoDuration = true;
-}
 
-public void Chaos_ResetSpawns_INIT(){
 	HookEvent("round_start", Chaos_ResetSpawns_Event_RoundStart);
 }
 

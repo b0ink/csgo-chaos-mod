@@ -5,6 +5,9 @@ bool g_bExplosiveBullets = false;
 public void Chaos_ExplosiveBullets(EffectData effect){
 	effect.Title = "Explosive Bullets";
 	effect.Duration = 30;
+
+	HookEvent("bullet_impact", 		Chaos_ExplosiveBullets_Event_BulletImpact);
+	AddTempEntHook("Shotgun Shot", 	Chaos_ExplosiveBullets_Hook_BulletShot);
 }
 
 char expolosiveBulletsDistortionFX[] = "explosion_child_distort01b";
@@ -21,12 +24,6 @@ public void Chaos_ExplosiveBullets_OnMapStart(){
 	PrecacheParticleEffect(expolosiveBulletsDirtFX);
 	PrecacheSound(expolosiveBulletsHeSFX);
 }
-
-public void Chaos_ExplosiveBullets_INIT(){
-	HookEvent("bullet_impact", 		Chaos_ExplosiveBullets_Event_BulletImpact);
-	AddTempEntHook("Shotgun Shot", 	Chaos_ExplosiveBullets_Hook_BulletShot);
-}
-
 
 public void Chaos_ExplosiveBullets_START(){
 	g_bExplosiveBullets = true;

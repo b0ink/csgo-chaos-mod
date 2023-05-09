@@ -15,13 +15,9 @@ public void Chaos_SleepyShooter(EffectData effect){
 	effect.AddAlias("Awake");
 
 	effect.IncompatibleWith("Chaos_BlindPlayers");
-}
 
-
-public void Chaos_SleepyShooter_INIT(){
 	HookEvent("weapon_fire", Chaos_SleepyShooter_Event_OnWeaponFire);
 }
-
 
 public void Chaos_SleepyShooter_START(){
 	g_SleepyShooter = true;

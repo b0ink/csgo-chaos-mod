@@ -6,12 +6,9 @@ public void Chaos_SlowFire(EffectData effect){
 	effect.Title = "Slow Weapon Fire";
 	effect.Duration = 30;
 	effect.AddFlag("firerate");
-}
 
-public void Chaos_SlowFire_INIT(){
 	HookEvent("weapon_fire", Chaos_SlowFire_WeaponFire);
 }
-
 
 public void Chaos_SlowFire_START(){
 	SlowFire = true;

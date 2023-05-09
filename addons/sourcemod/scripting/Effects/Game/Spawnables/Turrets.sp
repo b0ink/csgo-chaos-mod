@@ -1,6 +1,7 @@
 #pragma semicolon 1
 
 //Credit: https://forums.alliedmods.net/showthread.php?t=312548
+int dronegun_collision;
 ArrayList turrets;
 
 public void Chaos_Turrets(EffectData effect){
@@ -11,11 +12,6 @@ public void Chaos_Turrets(EffectData effect){
 	effect.AddAlias("Drones");
 
 	turrets = new ArrayList();
-}
-
-int dronegun_collision;
-
-public void Chaos_Turrets_INIT(){
 	dronegun_collision = FindSendPropInfo("CBaseEntity", "m_CollisionGroup");
 }
 

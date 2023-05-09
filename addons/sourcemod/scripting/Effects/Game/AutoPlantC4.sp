@@ -36,14 +36,11 @@ public void Chaos_AutoPlantC4(EffectData effect){
     effect.HasCustomAnnouncement = true;
     effect.BlockInCoopStrike = true;
     effect.AddAlias("Bomb");
-}
 
-public void Chaos_AutoPlantC4_INIT(){
     bombTicking = FindSendPropInfo("CPlantedC4", "m_bBombTicking");
     HookEvent("bomb_planted", Chaos_AutoPlantC4_Event_BombPlanted);
     HookEvent("round_end", Chaos_AutoPlantC4_Event_RoundEnd);
 }
-
 
 public void Chaos_AutoPlantC4_Event_BombPlanted(Handle event, char[] name, bool dontBroadcast){
 	g_bBombPlanted = true;

@@ -12,9 +12,7 @@ public void Chaos_Drugs(EffectData effect){
 	effect.Title = "Drugs";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Tilted");
-}
 
-public void Chaos_Drugs_INIT(){
 	g_FadeUserMsgId_drugs = GetUserMessageId("Fade");
 }
 

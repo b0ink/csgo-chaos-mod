@@ -7,19 +7,14 @@ public void Chaos_LowPitch(EffectData effect){
 	effect.Title = "Low Pitch";
 	effect.Duration = 30;
 	effect.AddFlag("pitch");
-}
 
-
-public void Chaos_LowPitch_INIT(){
 	AddNormalSoundHook(Chaos_LowPitch_NormalSoundHook);
 	AddAmbientSoundHook(Chaos_LowPitch_AmbientSoundHook);
 }
 
-
 public void Chaos_LowPitch_START(){
 	LowPitch = true;
 }
-
 
 public void Chaos_LowPitch_RESET(int ResetType){
 	LowPitch = false;

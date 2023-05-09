@@ -1,15 +1,13 @@
 #pragma semicolon 1
 
+Handle SwapPlayerModel_T;
+Handle SwapPlayerModel_CT;
+
 public void Chaos_SwapPlayerModels(EffectData effect){
 	effect.Title = "Swap Player Models";
 	effect.Duration = 30;
 	effect.AddFlag("playermodel");
-}
 
-Handle SwapPlayerModel_T;
-Handle SwapPlayerModel_CT;
-
-public void Chaos_SwapPlayerModels_INIT(){
 	SwapPlayerModel_T = CreateArray(PLATFORM_MAX_PATH);
 	SwapPlayerModel_CT = CreateArray(PLATFORM_MAX_PATH);
 	Timer_GetPlayerModels(null);

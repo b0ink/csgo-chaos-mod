@@ -11,13 +11,9 @@ public void Chaos_Checkers(EffectData effect){
 	effect.AddAlias("Overlay");
 	effect.AddAlias("Visual");
 	effect.AddFlag("r_screenoverlay");
-}
 
-
-public void Chaos_Checkers_INIT(){
 	HookEvent("weapon_fire", Chaos_Checkers_Event_WeaponFire);
 }
-
 
 public void Chaos_Checkers_OnMapStart(){
 	PrecacheDecal("ChaosMod/Checkers_1.vmt", true);

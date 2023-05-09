@@ -12,9 +12,7 @@ public void Chaos_PunishMisfire(EffectData effect){
 	// effect.Title = "Take Damage For Missed Shots";
 	effect.Title = "Don't miss or you lose HP";
 	effect.Duration = 30;
-}
 
-public void Chaos_PunishMisfire_INIT(){
 	HookEvent("player_hurt", PunishMisfire_Event_PlayerHurt);
 	HookEvent("weapon_fire", PunishMisfire_Event_WeaponFire);
 }

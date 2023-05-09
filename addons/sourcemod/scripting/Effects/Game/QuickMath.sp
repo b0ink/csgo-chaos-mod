@@ -13,9 +13,7 @@ public void Chaos_QuickMath(EffectData effect){
 	effect.Duration = 10;
 	effect.IncompatibleWith("Chaos_BlindPlayers");
 	effect.IncompatibleWith("Chaos_SleepyShooter");
-}
 
-public void Chaos_QuickMath_INIT(){
 	AddCommandListener(QuickMath_SayListener, "say");	
 	AddCommandListener(QuickMath_SayListener, "say_team");	
 }

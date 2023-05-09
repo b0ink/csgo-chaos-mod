@@ -6,9 +6,7 @@ public void Chaos_RapidFire(EffectData effect){
 	effect.Title = "Rapid Fire";
 	effect.Duration = 30;
 	effect.AddFlag("firerate");
-}
 
-public void Chaos_RapidFire_INIT(){
 	HookEvent("weapon_fire", Chaos_RapidFire_WeaponFire);
 }
 

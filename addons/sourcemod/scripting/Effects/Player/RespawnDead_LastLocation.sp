@@ -8,9 +8,7 @@ public void Chaos_RespawnDead_LastLocation(EffectData effect){
 	effect.HasNoDuration = true;
 	effect.AddFlag("respawn");
 	effect.BlockInCoopStrike = true;
-}
-
-public void Chaos_RespawnDead_LastLocation_INIT(){
+	
 	HookEvent("player_death", Chaos_RespawnDead_LastLocation_Event_PlayerDeath);
 }
 

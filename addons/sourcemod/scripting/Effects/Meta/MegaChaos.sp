@@ -12,9 +12,7 @@ public void Chaos_Meta_Mega(EffectData effect){
 	effect.HasNoDuration = true;
 	effect.HasCustomAnnouncement = true;
 	effect.IsMetaEffect = true;
-}
 
-public void Chaos_Meta_Mega_INIT(){
 	HookEvent("round_end", Chaos_Meta_Mega_Event_RoundEnd);
 }
 

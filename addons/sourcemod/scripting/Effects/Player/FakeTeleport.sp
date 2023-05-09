@@ -8,10 +8,7 @@ public void Chaos_FakeTeleport(EffectData effect){
 	effect.HasCustomAnnouncement = true;
 	effect.IncompatibleWith("Chaos_EffectName");
 	effect.BlockInCoopStrike = true;
-}
 
-
-public void Chaos_FakeTeleport_INIT(){
 	HookEvent("round_end", Chaos_FakeTeleport_Event_RoundEnd);
 }
 

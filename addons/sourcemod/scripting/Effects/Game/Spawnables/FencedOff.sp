@@ -5,8 +5,9 @@ enum FENCE_TYPE {
 	FENCE_THIN
 };
 
-ArrayList Fences;
-ArrayList FencesEnt; // track ents to remove on reset
+ArrayList FenceSpawns;
+ArrayList FencesEntities; // track ents to remove on reset
+
 enum struct FenceData {
 	float location[3];
 	float rotation_y;
@@ -16,11 +17,9 @@ enum struct FenceData {
 public void Chaos_FencedOff(EffectData effect){
 	effect.Title = "Fenced Off";
 	effect.Duration = 60;
-	FencesEnt = new ArrayList();
-}
 
-public void Chaos_FencedOff_INIT(){
-	Fences = new ArrayList(sizeof(FenceData));
+	FencesEntities = new ArrayList();
+	FenceSpawns = new ArrayList(sizeof(FenceData));
 }
 
 #define FENCEMODEL_A "models/props_c17/fence02a.mdl"
@@ -33,12 +32,12 @@ public void Chaos_FencedOff_OnMapStart(){
 }
 
 public void Chaos_FencedOff_START(){
-	Fences.Sort(Sort_Random, Sort_Float);
+	FenceSpawns.Sort(Sort_Random, Sort_Float);
 
 	FenceData fence;
 
-	for(int i = 0; i < Fences.Length; i++){
-		Fences.GetArray(i, fence, sizeof(fence));
+	for(int i = 0; i < FenceSpawns.Length; i++){
+		FenceSpawns.GetArray(i, fence, sizeof(fence));
 		if(i < 7){
 			SpawnFence(fence);
 		}
@@ -47,7 +46,7 @@ public void Chaos_FencedOff_START(){
 
 
 public void Chaos_FencedOff_RESET(){
-	RemoveEntitiesInArray(FencesEnt);
+	RemoveEntitiesInArray(FencesEntities);
 }
 
 void SpawnFence(FenceData fenceData){
@@ -58,12 +57,12 @@ void SpawnFence(FenceData fenceData){
 	if(!fenceData.wide){
 		TeleportEntity(fence, fenceData.location, rot, NULL_VECTOR);
 		DispatchSpawn(fence);
-		FencesEnt.Push(EntIndexToEntRef(fence));
+		FencesEntities.Push(EntIndexToEntRef(fence));
 		return;
 	}
 
 
-	// add small fences side by side, teleport all of them in a straight line, parent, then rotate
+	// add small FenceSpawns side by side, teleport all of them in a straight line, parent, then rotate
 
 	float newLocation[3];
 
@@ -105,7 +104,7 @@ int CreateFence(FENCE_TYPE type){
 
 
 void ParseFencesConfig(){
-	Fences.Clear();
+	FenceSpawns.Clear();
 	
 	char map[PLATFORM_MAX_PATH];
 	GetCurrentMap(map, sizeof(map));
@@ -138,7 +137,7 @@ void ParseFencesConfig(){
 				fence.wide = true;
 			}
 
-			Fences.PushArray(fence);
+			FenceSpawns.PushArray(fence);
 		}
 		
 	} while(kv.GotoNextKey(false));
@@ -147,6 +146,6 @@ void ParseFencesConfig(){
 }
 
 public bool Chaos_FencedOff_Conditions(bool EffectRunRandomly){
-	if(Fences.Length == 0) return false;
+	if(FenceSpawns.Length == 0) return false;
 	return true;
 }

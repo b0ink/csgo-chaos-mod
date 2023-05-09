@@ -7,9 +7,7 @@ public void Chaos_LooseTrigger(EffectData effect){
 	effect.Title = "Loose Trigger";
 	effect.Duration = 10;
 	effect.OverrideDuration = true; //TODO: add a min-max duration property, server owner should be able to reduce this to 5seconds instead of 10sec lock
-}
 
-public void Chaos_LooseTrigger_INIT(){
 	HookEvent("weapon_fire", Chaos_LooseTrigger_WeaponFire);
 }
 

@@ -1,13 +1,12 @@
 #pragma semicolon 1
 
+bool g_InfiniteAmmo = false;
+
 public void Chaos_InfiniteAmmo(EffectData effect){
 	effect.Title = "Infinite Ammo";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");
-}
 
-bool g_InfiniteAmmo = false;
-public void Chaos_InfiniteAmmo_INIT(){
 	HookEvent("weapon_fire", 		Chaos_InfiniteAmmo_Event_OnWeaponFire);
 }
 

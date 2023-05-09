@@ -6,12 +6,9 @@ int m_flNextSecondaryAttack = -1;
 public void Chaos_NoScopeOnly(EffectData effect){
 	effect.Title = "No Scopes Only";
 	effect.Duration = 30;
-}
 
-public void Chaos_NoScopeOnly_INIT(){
 	m_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack");
 }
-
 
 stock void SetNoScope(int weapon){
 	if (IsValidEdict(weapon) && g_bNoscopeOnly){

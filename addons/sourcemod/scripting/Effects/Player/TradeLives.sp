@@ -5,9 +5,7 @@ bool TradeLives = false;
 public void Chaos_TradeLives(EffectData effect){
 	effect.Title = "Respawn Teammate On Enemy Kill";
 	effect.Duration = 30;
-}
 
-public void Chaos_TradeLives_INIT(){
 	HookEvent("player_death", TradeLives_Event_PlayerDeath);
 }
 

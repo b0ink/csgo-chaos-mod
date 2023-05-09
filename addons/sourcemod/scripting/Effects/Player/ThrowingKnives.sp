@@ -14,14 +14,10 @@ public void Chaos_ThrowingKnives(EffectData effect){
 	effect.Title = "Throwing Knives";
 	effect.Duration = 30;
 	effect.IncompatibleWith("Chaos_Boxing");
-}
 
-
-public void Chaos_ThrowingKnives_INIT(){
 	HookEvent("weapon_fire", ThrowingKnives_Event_WeaponFire);
 	ThrownKnives = CreateArray();
 }
-
 
 public void Chaos_ThrowingKnives_OnPlayerSpawn(int client){
 	HookBlockAllGuns(client);

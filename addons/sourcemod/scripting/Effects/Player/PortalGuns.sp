@@ -8,6 +8,9 @@ int g_beamsprite;
 int g_halosprite;
 float g_PortalTeleports[MAXPLAYERS + 1][3];
 
+char BuzzSfx[] = "buttons/button18.wav";
+char PortalBlipSfx[] = "buttons/blip1.wav";
+
 public void Chaos_PortalGuns(EffectData effect){
 	effect.Title = "Portal Guns";
 	effect.Duration = 30;
@@ -15,20 +18,15 @@ public void Chaos_PortalGuns(EffectData effect){
 	effect.IncompatibleWith("Chaos_AlienKnifeFight");
 	effect.IncompatibleWith("Chaos_Boxing");
 	effect.IncompatibleWith("Chaos_DecoyDodgeball");
-}
 
-char BuzzSfx[] = "buttons/button18.wav";
-char PortalBlipSfx[] = "buttons/blip1.wav";
+	HookEvent("weapon_fire", 		Chaos_PortalGuns_Event_OnWeaponFire); //, EventHookMode_Post);
+}
 
 public void Chaos_PortalGuns_OnMapStart(){
 	g_beamsprite = PrecacheModel("materials/sprites/laserbeam.vmt");
 	g_halosprite = PrecacheModel("materials/sprites/halo.vmt");
 	PrecacheSound(BuzzSfx);
 	PrecacheSound(PortalBlipSfx);
-}
-
-public void Chaos_PortalGuns_INIT(){
-	HookEvent("weapon_fire", 		Chaos_PortalGuns_Event_OnWeaponFire); //, EventHookMode_Post);
 }
 
 public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){

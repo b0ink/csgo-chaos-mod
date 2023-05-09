@@ -8,9 +8,7 @@ bool TearGas = false;
 public void Chaos_TearGas(EffectData effect){
 	effect.Title = "Tear Gas";
 	effect.Duration = 45;
-}
 
-public void Chaos_TearGas_INIT(){
 	HookEvent("smokegrenade_detonate", TearGas_Event_SmokeDetonate);
 }
 

@@ -32,9 +32,7 @@ public void Chaos_1v1(EffectData effect) {
 	effect.IncompatibleWith("Chaos_FakeCrash");
 	effect.IncompatibleWith("Chaos_BreakTime");
 	effect.IncompatibleWith("Chaos_BlindPlayers");
-}
 
-public void Chaos_1v1_INIT() {
 	_1v1Spawns = new ArrayList(sizeof(SpawnData1v1));
 	HookEvent("player_death", Chaos_1v1_Event_PlayerDeath);
 }

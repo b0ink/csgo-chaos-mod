@@ -7,9 +7,7 @@ public void Chaos_OneBulletMag(EffectData effect){
 	effect.Title = "One Bullet Mags";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");
-}
 
-public void Chaos_OneBulletMag_INIT(){
 	g_iOffset_Clip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 	HookEvent("weapon_fire", 		Chaos_OneBulletMag_Event_OnWeaponFire);
 }

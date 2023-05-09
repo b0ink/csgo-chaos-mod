@@ -6,9 +6,7 @@ public void Chaos_OneBulletOneGun(EffectData effect){
 	effect.Title = "One Bullet One Gun";
 	effect.Duration = 30;
 	effect.AddFlag("ammo");
-}
 
-public void Chaos_OneBulletOneGun_INIT(){
 	OneBulletOneGun = false;
 	HookEvent("weapon_fire", 		Chaos_OneBulletOneGun_Event_OnWeaponFire);
 }

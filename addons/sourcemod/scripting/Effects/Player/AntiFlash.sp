@@ -5,9 +5,7 @@ bool AntiFlash = false;
 public void Chaos_AntiFlash(EffectData effect){
 	effect.Title = "Anti Flash";
 	effect.Duration = 30;
-}
 
-public void Chaos_AntiFlash_INIT(){
 	HookEvent("player_blind", AntiFlash_Event_PlayerBlind, EventHookMode_Pre);
 }
 

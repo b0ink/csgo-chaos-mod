@@ -1,15 +1,5 @@
 #pragma semicolon 1
 
-public void Chaos_RewindTenSeconds(EffectData effect){
-	effect.Title = "Rewind 10 Seconds";
-	effect.HasNoDuration = true;
-	effect.HasCustomAnnouncement = true;
-	effect.AddFlag("movement");
-	effect.RunForwardWhileInactive("OnGameFrame");
-	effect.BlockInCoopStrike = true;
-}
-
-
 bool g_bRewind_logging_enabled = true;
 bool g_Rewinding = false;
 int g_RewindTime = 0;
@@ -20,8 +10,14 @@ int g_RewindTime = 0;
 float g_RollbackPositions[MAXPLAYERS+1][g_RollbackFrames][3];
 float g_RollbackAngles[MAXPLAYERS+1][g_RollbackFrames][3];
 
+public void Chaos_RewindTenSeconds(EffectData effect){
+	effect.Title = "Rewind 10 Seconds";
+	effect.HasNoDuration = true;
+	effect.HasCustomAnnouncement = true;
+	effect.AddFlag("movement");
+	effect.RunForwardWhileInactive("OnGameFrame");
+	effect.BlockInCoopStrike = true;
 
-public void Chaos_RewindTenSeconds_INIT(){
 	HookEvent("round_start", Chaos_RewindTenSeconds_Event_RoundStart);
 }
 

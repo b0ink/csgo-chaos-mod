@@ -7,14 +7,10 @@ public void Chaos_HighPitch(EffectData effect){
 	effect.Title = "High Pitch";
 	effect.Duration = 30;
 	effect.AddFlag("pitch");
-}
 
-
-public void Chaos_HighPitch_INIT(){
 	AddNormalSoundHook(Chaos_HighPitch_NormalSoundHook);
 	AddAmbientSoundHook(Chaos_HighPitch_AmbientSoundHook);
 }
-
 
 public void Chaos_HighPitch_START(){
 	HighPitch = true;

@@ -4,9 +4,7 @@ bool ExtendedFlash = false;
 public void Chaos_ExtendedFlash(EffectData effect){
 	effect.Title = "Extended Flashbang Effect";
 	effect.Duration = 30;
-}
 
-public void Chaos_ExtendedFlash_INIT(){
 	HookEvent("player_blind", Chaos_ExtendedFlash_Event_PlayerBlind);
 }
 

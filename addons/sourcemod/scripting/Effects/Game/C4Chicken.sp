@@ -12,9 +12,7 @@ public void Chaos_C4Chicken(EffectData effect){
 	effect.Title = "C4 Chicken";
 	effect.HasNoDuration = true;
 	effect.BlockInCoopStrike = true;
-}
 
-public void Chaos_C4Chicken_INIT(){
 	HookEvent("bomb_planted", 		Chaos_C4Chicken_Event_BombPlanted);
 	HookEvent("round_start", 		Chaos_C4Chicken_Event_RoundStart);
 }

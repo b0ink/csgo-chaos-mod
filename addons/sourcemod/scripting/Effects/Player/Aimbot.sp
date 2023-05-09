@@ -6,6 +6,9 @@ public void Chaos_Aimbot(EffectData effect){
 	
 	effect.AddAlias("Hacks");
 	effect.AddAlias("Cheats");
+
+	HookEventEx("weapon_fire", 		Chaos_Aimbot_Event_WeaponFire, EventHookMode_Pre);
+	HookEventEx("player_blind", 	Chaos_Aimbot_Event_PlayerBlind, EventHookMode_Pre);
 }
 
 /* CREDIT: https://raw.githubusercontent.com/Franc1sco/aimbot/master/scripting/aimbot.sp */
@@ -19,11 +22,6 @@ bool g_bFlashed[MAXPLAYERS + 1] = {false, ...};
 int g_cvRecoilMode = 1;
 float g_cvFov = 360.0;
 // bool g_bCvFlashbang = true;
-
-public void Chaos_Aimbot_INIT(){
-	HookEventEx("weapon_fire", 		Chaos_Aimbot_Event_WeaponFire, EventHookMode_Pre);
-	HookEventEx("player_blind", 	Chaos_Aimbot_Event_PlayerBlind, EventHookMode_Pre);
-}
 
 public void Chaos_Aimbot_START(){
 	AimbotEnabled = true;
