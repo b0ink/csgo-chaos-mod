@@ -35,15 +35,14 @@ public void Chaos_EffectName(EffectData effect){
 	effect.HasCustomAnnouncement = true; 
 
 	effect.IsMetaEffect = true; // Marks the effect as a meta effect (rarely run)
-}
 
-public void Chaos_EffectName_INIT(){
 	/*
 	
-	Runs on plugin start. Use this to Hook Events. This will only run once like it does in OnPluginStart().
+	Since this runs only once during OnPluginStart, you can also use this to Hook Events.
 	eg. 
 		HookEvent("bullet_impact", Chaos_EffectName_Event_BulletImpact);
 	*/
+	
 }
 
 public void Chaos_EffectName_OnMapStart(){
