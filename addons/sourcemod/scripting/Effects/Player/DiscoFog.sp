@@ -26,9 +26,16 @@ Action Timer_NewFogColor(Handle timer){
 	if(g_bDiscoFog){
 		char color[32];
 		FormatEx(color, sizeof(color), "%i %i %i", GetRandomInt(0,255), GetRandomInt(0,255), GetRandomInt(0,255));
-		DispatchKeyValue(g_iFog, "fogcolor", color);
+		DispatchKeyValue(GetFogEnt(), "fogcolor", color);
 	}else{
 		StopTimer(g_DiscoFog_Timer_Repeat);
 	}
 	return Plugin_Continue;
+}
+
+public bool Chaos_DiscoFog_Conditions(bool EffectRunRandomly){
+	if(!IsValidEntity(GetFogEnt())){
+		return false;
+	}
+	return true;
 }

@@ -59,16 +59,21 @@ void RemoveFog(char[] effectName, bool allInstances = false){
 }
 
 void UpdateFog(){
+	int ent = GetFogEnt();
+
+	if(!IsValidEntity(ent)){
+		return;
+	}
 	FogData fog;
 	if(Fog_Stream.Length > 0){
 		Fog_Stream.GetArray(Fog_Stream.Length - 1, fog, sizeof(fog)); // Start from most recently added fog
-		if(fog.blend[0] != '\0') 		DispatchKeyValue(g_iFog, "fogblend", fog.blend);
-		if(fog.color[0] != '\0') 		DispatchKeyValue(g_iFog, "fogcolor", fog.color);
-		if(fog.color2[0] != '\0') 		DispatchKeyValue(g_iFog, "fogcolor2", fog.color2);
-		if(fog.start[0] != '\0') 		DispatchKeyValue(g_iFog, "fogstart", fog.start);
-		if(fog.end[0] != '\0') 			DispatchKeyValue(g_iFog, "fogend", fog.end);
-		if(fog.maxdensity[0] != '\0') 	DispatchKeyValue(g_iFog, "fogmaxdensity", fog.maxdensity);
-		if(fog.farz[0] != '\0') 		DispatchKeyValue(g_iFog, "farz", fog.farz);
+		if(fog.blend[0] != '\0') 		DispatchKeyValue(ent, "fogblend", fog.blend);
+		if(fog.color[0] != '\0') 		DispatchKeyValue(ent, "fogcolor", fog.color);
+		if(fog.color2[0] != '\0') 		DispatchKeyValue(ent, "fogcolor2", fog.color2);
+		if(fog.start[0] != '\0') 		DispatchKeyValue(ent, "fogstart", fog.start);
+		if(fog.end[0] != '\0') 			DispatchKeyValue(ent, "fogend", fog.end);
+		if(fog.maxdensity[0] != '\0') 	DispatchKeyValue(ent, "fogmaxdensity", fog.maxdensity);
+		if(fog.farz[0] != '\0') 		DispatchKeyValue(ent, "farz", fog.farz);
 		// DispatchKeyValueFloat(g_iFog, "fogstart", fog.start);
 		// DispatchKeyValueFloat(g_iFog, "fogend", fog.end);
 		// DispatchKeyValueFloat(g_iFog, "fogmaxdensity", fog.maxdensity);
@@ -118,27 +123,36 @@ void InitFog(){
 	}
 	
 	if (ent != -1) {
-		g_iFog = ent;
-		DispatchKeyValue(g_iFog, "Origin", "0 0 0");
-		DispatchKeyValue(g_iFog, "fogblend", "0");
-		DispatchKeyValue(g_iFog, "fogcolor", "255 255 255");
+		g_iFog = EntIndexToEntRef(ent);
+		DispatchKeyValue(ent, "Origin", "0 0 0");
+		DispatchKeyValue(ent, "fogblend", "0");
+		DispatchKeyValue(ent, "fogcolor", "255 255 255");
 		// DispatchKeyValue(g_iFog, "fogcolor", "255 0 0");
-		DispatchKeyValue(g_iFog, "fogcolor2", "0 0 0");
-		DispatchKeyValueFloat(g_iFog, "fogstart", mapFogStart);
-		DispatchKeyValueFloat(g_iFog, "fogend", mapFogEnd);
-		DispatchKeyValueFloat(g_iFog, "fogmaxdensity", mapFogDensity);
+		DispatchKeyValue(ent, "fogcolor2", "0 0 0");
+		DispatchKeyValueFloat(ent, "fogstart", mapFogStart);
+		DispatchKeyValueFloat(ent, "fogend", mapFogEnd);
+		DispatchKeyValueFloat(ent, "fogmaxdensity", mapFogDensity);
 		// DispatchKeyValueVector(g_iFog, "fogdir", view_as<float>({0.0,288.0,0.0})); //TODO
-		AcceptEntityInput(g_iFog, "TurnOff");
+		AcceptEntityInput(ent, "TurnOff");
     }
 }
 
+int GetFogEnt(){
+	return EntRefToEntIndex(g_iFog);
+}
 
 void Fog_ON(){
-	AcceptEntityInput(g_iFog, "TurnOn");
+	if(!IsValidEntity(GetFogEnt())){
+		return;
+	}
+	AcceptEntityInput(GetFogEnt(), "TurnOn");
 }
 
 void Fog_OFF(){
-	AcceptEntityInput(g_iFog, "TurnOff");
+	if(!IsValidEntity(GetFogEnt())){
+		return;
+	}
+	AcceptEntityInput(GetFogEnt(), "TurnOff");
 }
 
 void ExtremeWhiteFog(bool removeFog = false){
@@ -208,11 +222,17 @@ void ArmageddonFog(bool removeFog = false){
 }
 
 void ResetRenderDistance(){
-	DispatchKeyValueFloat(g_iFog, "farz", -1.0);
+	if(!IsValidEntity(GetFogEnt())){
+		return;
+	}
+	DispatchKeyValueFloat(GetFogEnt(), "farz", -1.0);
 }
 
 void LowRenderDistance(){
-	DispatchKeyValueFloat(g_iFog, "farz", 250.0);
+	if(!IsValidEntity(GetFogEnt())){
+		return;
+	}
+	DispatchKeyValueFloat(GetFogEnt(), "farz", 250.0);
 }
 
 void DiscoFog(bool removeFog = false){
