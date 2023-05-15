@@ -100,14 +100,14 @@ public void Aimbot_OnClientThink(int iClient){
 		// No Spread Addition
 		SetEntPropFloat(iActiveWeapon, Prop_Send, "m_fAccuracyPenalty", 0.0);
 		if (g_cvRecoilMode == 1){
-			SetEntPropVector(iClient, Prop_Send, "m_aimPunchAngle", NULL_VECTOR);
-			SetEntPropVector(iClient, Prop_Send, "m_aimPunchAngleVel", NULL_VECTOR);
-			SetEntPropVector(iClient, Prop_Send, "m_viewPunchAngle", NULL_VECTOR);
+			SetEntPropVector(iClient, Prop_Send, "m_aimPunchAngle", view_as<float>({0.0, 0.0, 0.0}));
+			SetEntPropVector(iClient, Prop_Send, "m_aimPunchAngleVel", view_as<float>({0.0, 0.0, 0.0}));
+			SetEntPropVector(iClient, Prop_Send, "m_viewPunchAngle", view_as<float>({0.0, 0.0, 0.0}));
 		}
 	}
 	else{
-		SetEntPropVector(iClient, Prop_Send, "m_vecPunchAngle", NULL_VECTOR);
-		SetEntPropVector(iClient, Prop_Send, "m_vecPunchAngleVel", NULL_VECTOR);
+		SetEntPropVector(iClient, Prop_Send, "m_vecPunchAngle", view_as<float>({0.0, 0.0, 0.0}));
+		SetEntPropVector(iClient, Prop_Send, "m_vecPunchAngleVel", view_as<float>({0.0, 0.0, 0.0}));
 	}
 }
 
