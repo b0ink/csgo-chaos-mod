@@ -160,11 +160,16 @@ enum struct EffectData{
 	bool IsCompatible(){
 		if(this.IncompatibleEffects != INVALID_HANDLE){
 			char effectName[128];
+			bool isIncompatible = false;
 			for(int i = 0; i < GetArraySize(this.IncompatibleEffects); i++){
 				GetArrayString(this.IncompatibleEffects, i, effectName, sizeof(effectName));
 				if(IsChaosEffectRunning(effectName)){
-					return false;
+					isIncompatible = true;
+					break;
 				}
+			}
+			if(isIncompatible){
+				return false;
 			}
 		}
 		
@@ -178,7 +183,8 @@ enum struct EffectData{
 				for(int i = 0; i < GetArraySize(liveEffect.IncompatibleEffects); i++){
 					GetArrayString(liveEffect.IncompatibleEffects, i, incompatibleEffect, sizeof(incompatibleEffect));
 					if(StrEqual(incompatibleEffect, this.FunctionName)){
-						return true;
+						IncompatibleEffectsRunning = true;
+						break;
 					}
 				}
 			}
