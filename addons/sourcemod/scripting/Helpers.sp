@@ -134,14 +134,16 @@ stock int GetAliveCTCount(){
 
 
 /**
- * Gets random alive player. Set team paramater to limit random player by team.
+ * Gets random player. Set team paramater to limit random player by team.
  * 
- * @param team     Param description
+ * @param team     Limit search to one team
+ * @param alive    Limit search to alive players only, false will include dead players
  * @return         Return description
  */
-int GetRandomAlivePlayer(int team = CS_TEAM_NONE){
+int GetRandomPlayer(int team = CS_TEAM_NONE, bool alive = false){
 	Handle players = CreateArray(4);
-	LoopAlivePlayers(i){
+	LoopValidPlayers(i){
+		if(!IsPlayerAlive(i) && alive) continue;
 		if(team != CS_TEAM_NONE){
 			if(GetClientTeam(i) == team){
 				PushArrayCell(players, i);
@@ -150,6 +152,12 @@ int GetRandomAlivePlayer(int team = CS_TEAM_NONE){
 			PushArrayCell(players, i);
 		}
 	}
+
+	if(GetArraySize(players) <= 0){
+		delete players;
+		return -1;
+	}
+
 	int random = GetRandomInt(0, GetArraySize(players) - 1);
 	int target = GetArrayCell(players, random);
 	delete players;

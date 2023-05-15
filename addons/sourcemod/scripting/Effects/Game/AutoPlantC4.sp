@@ -179,7 +179,11 @@ void AutoPlantC4(){
     if(IsValidClient(bomber)){
         SendBombPlanted(bomber);
     }else{
-        SendBombPlanted(GetRandomAlivePlayer(CS_TEAM_T));
+        int planter = GetRandomPlayer(CS_TEAM_T, true);
+        if(!IsValidClient(planter)){
+            planter = GetRandomPlayer(CS_TEAM_T, false);
+        }
+        SendBombPlanted(planter);
     }
 
     if (DispatchSpawn(bombEntity)){
@@ -204,7 +208,9 @@ public void AutoPlantRoundEnd(){
 public void SendBombPlanted(int client){
     Event event = CreateEvent("bomb_planted");
     if (event != null){
-        event.SetInt("userid", GetClientUserId(client));
+        if(IsValidClient(client)){
+            event.SetInt("userid", GetClientUserId(client));
+        }
         event.SetInt("site", bombsite);
         event.Fire();
     }
