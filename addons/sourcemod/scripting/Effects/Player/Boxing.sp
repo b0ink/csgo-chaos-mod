@@ -30,7 +30,8 @@ public void Chaos_Boxing_START(){
 void Boxing_GiveFists(int client){
 	int knife = GetPlayerWeaponSlot(client, CS_SLOT_KNIFE);
 	if(IsValidEntity(knife)){
-		RemovePlayerItem(client, knife);
+		// RemovePlayerItem(client, knife);
+		RemoveEntity(knife);
 	}
 
 	int fists = CreateEntityByName("weapon_fists");
