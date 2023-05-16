@@ -221,11 +221,15 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(g_cvChaosRepeating.BoolValue){
 		if(g_cvChaosTwitchEnabled.BoolValue){
 			Twitch_PoolNewVotingEffects(); // pull 4 effects, this WILL add them into the effect cooldown.
-			expectedTimeForNewEffect = GetTime() + g_ChaosEffectInterval + 2;
+			expectedTimeForNewEffect = GetTime() + g_ChaosEffectInterval + 2; // + 2;
+			//TODO: why + 2?
+			expectedTickForNewEffect = GetGameTickCount() + ((g_ChaosEffectInterval + 2) * RoundToZero(1.0 / GetTickInterval()));
+
 			CreateTimer(2.0, Timer_DelayNewInterval);
 		}else{
 			g_NewEffect_Timer = CreateTimer(float(g_ChaosEffectInterval), ChooseEffect);
 			expectedTimeForNewEffect =  GetTime() + g_ChaosEffectInterval;
+			expectedTickForNewEffect = GetGameTickCount() + (g_ChaosEffectInterval * RoundToZero(1.0 / GetTickInterval()));
 			// Timer_Display(null, g_ChaosEffectInterval);
 			CreateTimer(1.0, Timer_DelayNewInterval);
 		}

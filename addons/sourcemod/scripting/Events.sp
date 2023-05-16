@@ -150,7 +150,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 			g_NewEffect_Timer = CreateTimer(float(freezeTime), ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
 			Timer_Display(null, freezeTime);
 			expectedTimeForNewEffect =  GetTime() + freezeTime;
-
+			expectedTickForNewEffect = GetGameTickCount() + (freezeTime * RoundToZero(1.0 / GetTickInterval()));
 			CreateTimer(1.0, Timer_DelayMetaEffectSpawn, _, TIMER_FLAG_NO_MAPCHANGE);
 		}
 	}{

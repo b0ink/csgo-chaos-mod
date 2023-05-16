@@ -5,6 +5,7 @@ bool alternateIndex = false;
 bool EnableRandomEffectOption = true;
 
 int expectedTimeForNewEffect = 0;
+int expectedTickForNewEffect = 0;
 bool AppIsActive = false; // if the app does not rcon the server during a full round, the connvar will be disabled automatically.
 
 // #define DEBUG_TWITCH_VOTES true
@@ -102,8 +103,10 @@ public Action Command_GetVotes(int client, int args){
 	Format(json, sizeof(json), "{");
 	Format(json, sizeof(json), "%s\"lastPlayedEffect\":\"%s\",", json, g_sLastPlayedEffect);
 	Format(json, sizeof(json), "%s\"twitchEnabled\":%s,", json, g_cvChaosTwitchEnabled.BoolValue ? "true" : "false");
-	Format(json, sizeof(json), "%s\"newEffectTime\":%i,", json, expectedTimeForNewEffect);
-	Format(json, sizeof(json), "%s\"newEffectTimeRelative\":%i,", json, expectedTimeForNewEffect - GetTime()); // will return how many seconds until next effect is pulled
+	Format(json, sizeof(json), "%s\"newEffectTime\":%i,", json, expectedTimeForNewEffect); // still used to track when list of effects is changed
+	float millesconds = (expectedTickForNewEffect - GetGameTickCount()) / ((1.0 / GetTickInterval()) / 1000);
+	// PrintToChatAll("%i ms until next effect", RoundToZero(millesconds));
+	Format(json, sizeof(json), "%s\"newEffectTimeRelative\":%i,", json, RoundToZero(millesconds)); // will return how many millieseconds until next effect is pulled
 	Format(json, sizeof(json), "%s\"hideEffectList\":%s,", json, (GameRules_GetProp("m_bWarmupPeriod") == 1 || !CanSpawnNewEffect()) ? "true" : "false");
 	Format(json, sizeof(json), "%s\"effects\":[", json);
 	
