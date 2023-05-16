@@ -22,10 +22,3 @@ public void Chaos_TeleportOnDamage_Event_PlayerHurt(Event event, const char[] na
 		DoRandomTeleport(client);
 	}
 }
-
-public bool Chaos_TeleportOnDamage_Conditions(){
-	if(!ValidMapPoints()){
-		return false;
-	}
-	return true;
-}
