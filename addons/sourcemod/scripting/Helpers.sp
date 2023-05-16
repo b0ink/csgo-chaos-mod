@@ -569,3 +569,14 @@ void RemoveEntitiesInArray(ArrayList array){
 	}
 	array.Clear();
 }
+
+
+int GetBotCount(){
+	int botCount = 0;
+	LoopValidPlayers(client){
+		if(IsFakeClient(client) && !IsClientSourceTV(client)){
+			botCount++;
+		}
+	}
+	return botCount;
+}

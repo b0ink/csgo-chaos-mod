@@ -16,6 +16,7 @@ public void Chaos_ThrowingKnives(EffectData effect){
 	effect.IncompatibleWith("Chaos_Boxing");
 
 	HookEvent("weapon_fire", ThrowingKnives_Event_WeaponFire);
+	effect.BlockInCoopStrike = true;
 	ThrownKnives = CreateArray();
 }
 
@@ -238,11 +239,16 @@ public Action ThrowingKnives_OnTakeDamage(int victim, int &attacker, int &inflic
 }
 
 
-public void ThrowingKnives_OnEntityDestroyed(int entity){
+public void Chaos_ThrowingKnives_OnEntityDestroyed(int entity){
 	if(!IsValidEdict(entity)){
 		return;
 	}
 
 	int index = FindValueInArray(ThrownKnives, EntIndexToEntRef(entity));
 	if(index != -1) RemoveFromArray(ThrownKnives, index);
+}
+
+public bool Chaos_ThrowingKnives_Conditions(bool EffectRunRandomly){
+	if(GetBotCount() > 0) return false;
+	return true;
 }

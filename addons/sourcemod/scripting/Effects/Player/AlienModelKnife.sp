@@ -6,6 +6,7 @@ public void Chaos_AlienModelKnife(EffectData effect){
 	effect.IncompatibleWith("Chaos_KnifeFight");
 	effect.IncompatibleWith("Chaos_DecoyDodgeball");
 	effect.IncompatibleWith("Chaos_TaserParty");
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_AlienModelKnife_START(){
@@ -44,4 +45,9 @@ public void Chaos_AlienModelKnife_RESET(int ResetType){
 		SetEntPropFloat(i, Prop_Send, "m_flStepSize", 18.0);
 		SetEntPropFloat(i, Prop_Send, "m_flLaggedMovementValue", 1.0);
 	}
+}
+
+public bool Chaos_AlienModelKnife_Conditions(bool EffectRunRandomly){
+	if(GetBotCount() > 0) return false;
+	return true;
 }

@@ -10,6 +10,7 @@ public void Chaos_Boxing(EffectData effect){
 	effect.IncompatibleWith("Chaos_AlienKnifeFight");
 	effect.IncompatibleWith("Chaos_TaserParty");
 	effect.IncompatibleWith("Chaos_LooseTrigger");
+	effect.BlockInCoopStrike = true;
 }
 
 
@@ -89,4 +90,9 @@ Action Boxing_PlaySound(Handle timer){
 		EmitSoundToClient(i, BoxingBellSfx, _, _, SNDLEVEL_RAIDSIREN, _, 0.7);
 	}
 	return Plugin_Stop;
+}
+
+public bool Chaos_Boxing_Conditions(){
+	if(GetBotCount() > 0) return false;
+	return true;
 }

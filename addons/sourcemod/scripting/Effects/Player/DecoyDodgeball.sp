@@ -11,7 +11,8 @@ public void Chaos_DecoyDodgeball(EffectData effect){
 	effect.IncompatibleWith("Chaos_Give100HP");
 	effect.IncompatibleWith("Chaos_HealAllPlayers");
 	effect.IncompatibleWith("Chaos_IgniteAllPlayers");
-} 
+	effect.BlockInCoopStrike = true;
+}
 
 //hook
 //tood; buggy if you still have other nades?
@@ -127,4 +128,9 @@ Action Timer_CheckDecoys(Handle timer){
 		}
 	}
 	return Plugin_Continue;
+}
+
+public bool Chaos_DecoyDodgeball_Conditions(){
+	if(GetBotCount() > 0) return false;
+	return true;
 }

@@ -11,6 +11,7 @@ public void Chaos_BreakTime(EffectData effect){
 	effect.IncompatibleWith("Chaos_KeyStuckS");
 	effect.IncompatibleWith("Chaos_KeyStuckW");
 	effect.AddFlag("movement");
+	effect.BlockInCoopStrike = true;
 }
 
 public void Chaos_BreakTime_START(){
@@ -43,6 +44,9 @@ public void Chaos_BreakTime_OnPlayerRunCmd(int client, int &buttons, int &impuls
 }
 
 public bool Chaos_BreakTime_Conditions(bool EffectRunRandomly){
+	if(GetBotCount() > 0){
+		return false;
+	}
 	if(GetRoundTime() < 15 && EffectRunRandomly){
 		return false;
 	}
