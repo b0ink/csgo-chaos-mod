@@ -31,12 +31,14 @@ public void Chaos_PortalGuns_OnMapStart(){
 
 public void Chaos_PortalGuns_Event_OnWeaponFire(Event event, const char[] name, bool dontBroadcast){
 
-	if(g_bPortalGuns ){
-		//TODO: if player is further than the closest spawn point by x units, tp them back?
+	if(g_bPortalGuns){
+
+		int client = GetClientOfUserId(event.GetInt("userid"));
+		if(IsCoopStrike() && IsFakeClient(client)){
+			return; // dont tp bots in coop strike
+		}
 		char szWeaponName[32];
 		event.GetString("weapon", szWeaponName, sizeof(szWeaponName));
-		int client = GetClientOfUserId(event.GetInt("userid"));
-
 		/* Dont teleport player out of skybox */
 		if(IsLookingAtSkybox(client)){
 			EmitSoundToClient(client, BuzzSfx, _, _, SNDLEVEL_RAIDSIREN, _, 0.5);
