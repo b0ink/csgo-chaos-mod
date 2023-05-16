@@ -65,6 +65,9 @@ public void Chaos_PortalGuns_START(){
 	g_bPortalGuns = true;
 	LoopAllClients(i){
 		g_PortalTeleports[i] = view_as<float>({0.0, 0.0, 0.0});
+		if(ValidAndAlive(i)){
+			GetClientAbsOrigin(i, g_PortalTeleports[i]);
+		}
 	}
 	SavePlayersLocations();
 }
