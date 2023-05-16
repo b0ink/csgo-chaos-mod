@@ -3,6 +3,9 @@
 public void Chaos_AlienModelKnife(EffectData effect){
 	effect.Title = "Alien Knife Fight";
 	effect.Duration = 30;
+	effect.IncompatibleWith("Chaos_KnifeFight");
+	effect.IncompatibleWith("Chaos_DecoyDodgeball");
+	effect.IncompatibleWith("Chaos_TaserParty");
 }
 
 public void Chaos_AlienModelKnife_START(){
