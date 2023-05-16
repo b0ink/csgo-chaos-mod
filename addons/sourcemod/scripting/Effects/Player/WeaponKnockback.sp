@@ -6,6 +6,7 @@ public void Chaos_WeaponKnockback(EffectData effect){
 	effect.Title = "Weapon Knockback";
 	effect.Duration = 30;
 	effect.AddAlias("Push");
+	effect.BlockInCoopStrike = true;
 
 	HookEvent("weapon_fire", Chaos_WeaponKnockback_Event_OnWeaponFire);
 }
