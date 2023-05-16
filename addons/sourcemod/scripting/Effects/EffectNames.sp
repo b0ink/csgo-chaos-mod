@@ -186,4 +186,5 @@ char EffectNames[][] = {
 "Chaos_WeaponKnockback",
 "Chaos_SpawnEnemyWave",
 "Chaos_TeleportOnReload",
+"Chaos_TeleportOnDamage",
 };

@@ -184,4 +184,5 @@
 #include "Effects/Player/VampireHeal.sp"
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/TeleportOnReload.sp"
+#include "Effects/Player/TeleportOnDamage.sp"
 #include "Effects/Coop/SpawnEnemyWave.sp"
