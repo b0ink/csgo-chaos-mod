@@ -72,7 +72,18 @@ public Action BlockAllGuns(int client, int weapon) {
 		// StrContains(WeaponName, "diversion") == -1
 		){
 			FakeClientCommand(client, "use weapon_knife");
+			CreateTimer(0.1, Timer_CheckKnife, client);
 			return Plugin_Handled;
+	}
+	return Plugin_Continue;
+}
+
+public Action Timer_CheckKnife(Handle timer, int client){
+	if(!ValidAndAlive(client)) return Plugin_Continue;
+	char weapon[64];
+	GetClientWeapon(client, weapon, sizeof(weapon));
+	if(StrContains(weapon, "knife") == -1){
+		FakeClientCommand(client, "use weapon_knife");
 	}
 	return Plugin_Continue;
 }

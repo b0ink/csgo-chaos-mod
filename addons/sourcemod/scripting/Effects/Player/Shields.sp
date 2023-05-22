@@ -10,6 +10,8 @@ public void Chaos_Shields_START(){
 	LoopAlivePlayers(i){
 		GetClientWeapon(i, playerWeapon, sizeof(playerWeapon));
 		int entity = CreateEntityByName("weapon_shield");
+		// DispatchKeyValue(entity, "CanBePickedUp", "1");
+		SDKHook(entity, SDKHook_Touch, OnShieldTouch);
 		if (entity > 0) {
 			EquipPlayerWeapon(i, entity);
 			SetEntPropEnt(i, Prop_Data, "m_hActiveWeapon" , entity);
@@ -22,4 +24,16 @@ public void Chaos_Shields_START(){
 			}
 		}		
 	}
+}
+
+public Action OnShieldTouch(int entity, int other){
+	if(IsValidEntity(entity)){
+		if(ValidAndAlive(other)){
+			PrintToChatAll("%i %i", entity, other);
+			if(PlayerHasWeapon(other, "weapon_shield") == -1){
+				EquipPlayerWeapon(other, entity);
+			}
+		}
+	}
+	return Plugin_Handled;
 }

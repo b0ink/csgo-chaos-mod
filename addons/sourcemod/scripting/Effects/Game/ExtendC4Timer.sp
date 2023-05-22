@@ -17,7 +17,7 @@ public void Chaos_ExtendC4Timer_START(){
 	SetEntDataFloat(c4, bombExplosion, blowTime + 30.0);
 }
 
-public bool Chaos_ExtendC4Timer_Conditions(bool EffetRunRandomly){
+public bool Chaos_ExtendC4Timer_Conditions(bool EffectRunRandomly){
 	if(!g_bBombPlanted || bombExplosion == -1) return false;
 	return true;
 }

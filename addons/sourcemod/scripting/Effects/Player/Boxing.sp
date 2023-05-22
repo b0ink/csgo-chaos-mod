@@ -10,7 +10,6 @@ public void Chaos_Boxing(EffectData effect){
 	effect.IncompatibleWith("Chaos_AlienKnifeFight");
 	effect.IncompatibleWith("Chaos_TaserParty");
 	effect.IncompatibleWith("Chaos_LooseTrigger");
-	effect.BlockInCoopStrike = true;
 }
 
 
@@ -51,13 +50,22 @@ public Action Boxing_BlockGuns(int client, int weapon) {
 		StrContains(WeaponName, "fists") == -1 &&
 		StrContains(WeaponName, "c4") == -1
 		){
-			FakeClientCommand(client, "use weapon_fists");
+			CreateTimer(0.1, Timer_CheckFists, client);
 			return Plugin_Handled;
 	}
 
 	return Plugin_Continue;
 }
 
+public Action Timer_CheckFists(Handle timer, int client){
+	if(!ValidAndAlive(client)) return Plugin_Continue;
+	char weapon[64];
+	GetClientWeapon(client, weapon, sizeof(weapon));
+	if(!StrEqual(weapon, "weapon_fists")){
+		FakeClientCommand(client, "use weapon_fists");
+	}
+	return Plugin_Continue;
+}
 public void Chaos_Boxing_RESET(int ResetType){
 	LoopAllClients(i){
 		SDKUnhook(i, SDKHook_WeaponSwitch, Boxing_BlockGuns);
@@ -93,6 +101,5 @@ Action Boxing_PlaySound(Handle timer){
 }
 
 public bool Chaos_Boxing_Conditions(){
-	if(GetBotCount() > 0) return false;
 	return true;
 }

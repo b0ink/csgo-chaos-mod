@@ -191,12 +191,18 @@ public Action Event_RoundEnd(Event event, char[] name, bool dontBroadcast){
 	expectedTimeForNewEffect = -1;
 	
 	CreateTimer(0.1, Timer_DelayFogClear, _, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(0.2, Timer_DelayChaosReset, _, TIMER_FLAG_NO_MAPCHANGE);
 	
-	ResetChaos(RESET_ROUNDEND);
 	g_bCanSpawnEffect = false;
 
 	StopTimer(ClearHTMLTimer);
 
+	return Plugin_Continue;
+}
+
+
+public Action Timer_DelayChaosReset(Handle timer){
+	ResetChaos(RESET_ROUNDEND);
 	return Plugin_Continue;
 }
 

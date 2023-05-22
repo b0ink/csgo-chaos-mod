@@ -9,7 +9,7 @@ public void Chaos_TaserParty(EffectData effect){
 	effect.IncompatibleWith("Chaos_KnifeFight");
 	effect.IncompatibleWith("Chaos_AlienModelKnife");
 	effect.IncompatibleWith("Chaos_Boxing");
-	effect.BlockInCoopStrike = true;
+	// effect.BlockInCoopStrike = true;
 	
 	HookEvent("weapon_fire", Chaos_TaserParty_Event_OnWeaponFire);
 }
@@ -37,8 +37,9 @@ public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 			StrContains(WeaponName, "c4") == -1    
 			// StrContains(WeaponName, "grenade") == -1)
 		){
-			RequestFrame(Chaos_TaserParty_SwitchToTaser, client);
-			return Plugin_Continue;
+			CreateTimer(0.1, Chaos_TaserParty_CheckTaser, client);
+			// RequestFrame(Chaos_TaserParty_CheckTaser, client);
+			return Plugin_Handled;
 		}else{
 			return Plugin_Continue;
 		}
@@ -46,10 +47,19 @@ public Action Chaos_TaserParty_Hook_WeaponSwitch(int client, int weapon){
 	return Plugin_Continue;
 }
 
-public void Chaos_TaserParty_SwitchToTaser(int client){
-	if(!ValidAndAlive(client)) return;
-	FakeClientCommand(client, "use weapon_taser");
+public Action Chaos_TaserParty_CheckTaser(Handle timer, int client){
+	if(!ValidAndAlive(client)) return Plugin_Continue;
+	char weapon[64];
+	GetClientWeapon(client, weapon, sizeof(weapon));
+	if(!StrEqual(weapon, "weapon_taser")){
+		FakeClientCommand(client, "use weapon_taser");
+	}
+	return Plugin_Continue;
 }
+// public void Chaos_TaserParty_CheckTaser(int client){
+// 	if(!ValidAndAlive(client)) return;
+// 	FakeClientCommand(client, "use weapon_taser");
+// }
 
 
 public void Chaos_TaserParty_START(){
@@ -95,6 +105,6 @@ public void Chaos_TaserParty_RESET(int ResetType){
 }
 
 public bool Chaos_TaserParty_Conditions(){
-	if(GetBotCount() > 0) return false;
+	// if(GetBotCount() > 0) return false;
 	return true;
 }

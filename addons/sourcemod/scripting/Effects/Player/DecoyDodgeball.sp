@@ -11,7 +11,6 @@ public void Chaos_DecoyDodgeball(EffectData effect){
 	effect.IncompatibleWith("Chaos_Give100HP");
 	effect.IncompatibleWith("Chaos_HealAllPlayers");
 	effect.IncompatibleWith("Chaos_IgniteAllPlayers");
-	effect.BlockInCoopStrike = true;
 }
 
 //hook
@@ -22,15 +21,27 @@ public Action Chaos_DecoyDodgeball_Hook_WeaponSwitch(int client, int weapon){
 	char WeaponName[32];
 	GetEdictClassname(weapon, WeaponName, sizeof(WeaponName));
 	if(g_bDecoyDodgeball){
-		if(StrContains(WeaponName, "decoy") == -1 &&
-			StrContains(WeaponName, "c4") == -1
-			&& StrContains(WeaponName, "flashbang") == -1
-			){
-			// RequestFrame(SwitchToDecoy, client);
+		if(
+			StrContains(WeaponName, "decoy") == -1 &&
+			StrContains(WeaponName, "c4") == -1 &&
+			StrContains(WeaponName, "flashbang") == -1
+		){
+			CreateTimer(0.1, Chaos_DecoyDodgeball_CheckDecoy, client);
 			return Plugin_Handled;
 		}else{
 			return Plugin_Continue;
 		}
+	}
+	return Plugin_Continue;
+}
+
+
+public Action Chaos_DecoyDodgeball_CheckDecoy(Handle timer, int client){
+	if(!ValidAndAlive(client)) return Plugin_Continue;
+	char weapon[64];
+	GetClientWeapon(client, weapon, sizeof(weapon));
+	if(!StrEqual(weapon, "weapon_decoy")){
+		FakeClientCommand(client, "use weapon_decoy");
 	}
 	return Plugin_Continue;
 }

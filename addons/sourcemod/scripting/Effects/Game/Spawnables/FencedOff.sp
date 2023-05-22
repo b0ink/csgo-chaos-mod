@@ -54,10 +54,11 @@ void SpawnFence(FenceData fenceData){
 	float rot[3];
 	rot[1] = fenceData.rotation_y;
 
+	FencesEntities.Push(EntIndexToEntRef(fence));
+
 	if(!fenceData.wide){
 		TeleportEntity(fence, fenceData.location, rot, NULL_VECTOR);
 		DispatchSpawn(fence);
-		FencesEntities.Push(EntIndexToEntRef(fence));
 		return;
 	}
 
@@ -85,6 +86,8 @@ void SpawnFence(FenceData fenceData){
 	DispatchSpawn(fence);
 	DispatchSpawn(fence2);
 	DispatchSpawn(fence3);
+	FencesEntities.Push(EntIndexToEntRef(fence2));
+	FencesEntities.Push(EntIndexToEntRef(fence3));
 }
 
 int CreateFence(FENCE_TYPE type){
