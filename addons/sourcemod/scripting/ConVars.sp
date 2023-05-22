@@ -6,7 +6,7 @@ ConVar 	g_cvChaosPrefix;
 ConVar 	g_cvChaosEnabled;
 
 ConVar 	g_cvChaosEffectInterval;
-int		g_ChaosEffectInterval;
+int		g_ChaosEffectInterval = 15;
 
 ConVar 	g_cvChaosRepeating;
 ConVar 	g_cvChaosOverrideDuration;
@@ -242,52 +242,50 @@ void UpdateCvars(){
 	BuildPath(Path_SM, path, sizeof(path), "configs/Chaos/Chaos_Convars.cfg");
 	KeyValues kv = new KeyValues("Convars");
 
-	if(FileExists(path)){
-		if(kv.ImportFromFile(path)){
-			int convar_value = -1;
-			convar_value = kv.GetNum("sm_chaos_enabled", 1);
-			g_cvChaosEnabled.SetInt(convar_value);
+	if(FileExists(path) && kv.ImportFromFile(path)){
+		int convar_value = -1;
+		convar_value = kv.GetNum("sm_chaos_enabled", 1);
+		g_cvChaosEnabled.SetInt(convar_value);
 
-			convar_value = kv.GetNum("sm_chaos_interval", 999);
-			g_cvChaosEffectInterval.SetInt(convar_value);
-			g_ChaosEffectInterval = convar_value;
+		convar_value = kv.GetNum("sm_chaos_interval", 15);
+		g_cvChaosEffectInterval.SetInt(convar_value);
+		g_ChaosEffectInterval = convar_value;
 
-			convar_value = kv.GetNum("sm_chaos_override_duration", 1);
-			g_cvChaosOverrideDuration.SetInt(convar_value);
+		convar_value = kv.GetNum("sm_chaos_override_duration", 1);
+		g_cvChaosOverrideDuration.SetInt(convar_value);
 
-			convar_value = kv.GetNum("sm_chaos_repeating", 1);
-			g_cvChaosRepeating.SetInt(convar_value);
+		convar_value = kv.GetNum("sm_chaos_repeating", 1);
+		g_cvChaosRepeating.SetInt(convar_value);
 
-			convar_value = kv.GetNum("sm_chaos_voting_enabled", 1);
-			g_cvChaosTwitchEnabled.SetInt(convar_value);
+		convar_value = kv.GetNum("sm_chaos_voting_enabled", 1);
+		g_cvChaosTwitchEnabled.SetInt(convar_value);
 
-			
-			int timerColor = kv.GetNum("sm_chaos_timer_color", 1);
-			int effectListColor = kv.GetNum("sm_chaos_list_color", 0);
+		
+		int timerColor = kv.GetNum("sm_chaos_timer_color", 1);
+		int effectListColor = kv.GetNum("sm_chaos_list_color", 0);
 
-			g_cvChaosEffectTimer_ColorStyle.SetInt(timerColor);
-			g_cvChaosEffectList_ColorStyle.SetInt(effectListColor);
-
-
-			char pos[32];
-			kv.GetString("sm_chaos_timer_position", pos, 32);
-			g_cvChaosEffectTimer_Position.SetString(pos);
-			kv.GetString("sm_chaos_list_position", pos, 32);
-			g_cvChaosEffectList_Position.SetString(pos);
-
-			kv.GetString("sm_chaos_prefix", g_Prefix, 32);
-			g_cvChaosPrefix.SetString(g_Prefix);
-			Format(g_Prefix, 64, "%s{default}", g_Prefix);
+		g_cvChaosEffectTimer_ColorStyle.SetInt(timerColor);
+		g_cvChaosEffectList_ColorStyle.SetInt(effectListColor);
 
 
-			float hudpos[2];
-			hudpos[0] = -1.0;
-			hudpos[1] = 0.06;
-			ConvertCoordStringToFloat(g_cvChaosEffectTimer_Position, g_ChaosEffectTimer_Position, hudpos);
-			hudpos[0] = 0.01;
-			hudpos[1] = 0.42;
-			ConvertCoordStringToFloat(g_cvChaosEffectList_Position, g_ChaosEffectList_Position, hudpos);
-		}
+		char pos[32];
+		kv.GetString("sm_chaos_timer_position", pos, 32);
+		g_cvChaosEffectTimer_Position.SetString(pos);
+		kv.GetString("sm_chaos_list_position", pos, 32);
+		g_cvChaosEffectList_Position.SetString(pos);
+
+		kv.GetString("sm_chaos_prefix", g_Prefix, 32);
+		g_cvChaosPrefix.SetString(g_Prefix);
+		Format(g_Prefix, 64, "%s{default}", g_Prefix);
+
+
+		float hudpos[2];
+		hudpos[0] = -1.0;
+		hudpos[1] = 0.06;
+		ConvertCoordStringToFloat(g_cvChaosEffectTimer_Position, g_ChaosEffectTimer_Position, hudpos);
+		hudpos[0] = 0.01;
+		hudpos[1] = 0.42;
+		ConvertCoordStringToFloat(g_cvChaosEffectList_Position, g_ChaosEffectList_Position, hudpos);
 	}
 }
 
