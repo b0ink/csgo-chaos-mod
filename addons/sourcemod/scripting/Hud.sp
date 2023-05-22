@@ -9,6 +9,8 @@ bool  HideAnnouncement[MAXPLAYERS+1];
 bool  UseTimerBar[MAXPLAYERS+1] = {true, ...};
 bool  UseHtmlHud[MAXPLAYERS+1];
 
+Handle HudTimer = INVALID_HANDLE;
+
 ArrayList HudData;
 
 enum struct EffectHudData{
@@ -31,6 +33,11 @@ void InitHud(){
 
 void HUD_ROUNDEND(){
 	HudData.Clear();
+	StopTimer(HudTimer);
+	PrintEffects();
+	LoopValidPlayers(i){
+		ShowHudText(i, GetDynamicChannel(3), "");	
+	}
 }
 
 
@@ -279,9 +286,10 @@ Action Timer_DisplayEffects(Handle timer){
 
 
 Action Timer_Display(Handle timer = null, int time){
+	HudTimer = INVALID_HANDLE;
 	g_HudTime = time;
 	PrintTimer(time);
-	if(time > 0 && g_cvChaosEnabled.BoolValue && CanSpawnNewEffect()) CreateTimer(1.0, Timer_Display, time - 1);
+	if(time > 0 && g_cvChaosEnabled.BoolValue && CanSpawnNewEffect()) HudTimer = CreateTimer(1.0, Timer_Display, time - 1);
 	return Plugin_Continue;
 }
 
