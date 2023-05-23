@@ -1,4 +1,4 @@
-# Chaos Mod for CS:GO [185 EFFECTS] <sub> + YouTube & Twitch Voting</sub>
+# Chaos Mod for CS:GO [190 EFFECTS] <sub> + YouTube & Twitch Voting</sub>
 Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta), CS:GO Chaos Mod brings over a 175+ unique game-changing effects into your rounds such as **Portal Guns, Snow, Saturation, Auto bunnyhopping, Fog, Explosive Bullets, Simon Says, Low Render Distance**, and much, much more! The effects are randomised and every 15 seconds a new one is triggered, keeping both you and your opponents on your toes.
 
 ### The list of effects can be found [here](https://csgochaosmod.com/effects/).
