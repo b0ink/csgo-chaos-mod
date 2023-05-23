@@ -808,4 +808,20 @@
     {
         "en"    "Spawn Enemy Wave"
     }
+    "Chaos_TeleportOnReload"
+    {
+        "en"    "Teleport On Reload"
+    }
+    "Chaos_TeleportOnDamage"
+    {
+        "en"    "Teleport When You Take Damage"
+    }
+    "Chaos_FakeDefuse"
+    {
+        "en"    "Fake Defuse"
+    }
+    "Chaos_GiveArmor"
+    {
+        "en"    "Give Kevlar"
+    }
 }
