@@ -13,7 +13,7 @@
 #pragma semicolon 1
 
 #define PLUGIN_DESCRIPTION "Spawn from over 175+ random effects every 15 seconds to ensue chaos towards you and your enemies"
-#define PLUGIN_VERSION "0.4.5"
+#define PLUGIN_VERSION "0.5.0"
 
 #define TWITCH_ENABLED
 
