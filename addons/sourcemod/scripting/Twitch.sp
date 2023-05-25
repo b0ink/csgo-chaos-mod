@@ -160,6 +160,7 @@ void Twitch_PoolNewVotingEffects(){
 			effect.IsCompatible() &&
 			!IsEffectInVoteList(effect.FunctionName) &&
 			!effect.IsMetaEffect &&
+			(IsCoopStrike() ? !effect.BlockInCoopStrike : true) &&
 			effect.CanRunEffect(true)
 		){
 			// PushArrayString(VotingEffects, effect.Title);
