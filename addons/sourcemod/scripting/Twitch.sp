@@ -103,7 +103,7 @@ public Action Command_GetVotes(int client, int args){
 	Format(json, sizeof(json), "{");
 	Format(json, sizeof(json), "%s\"lastPlayedEffect\":\"%s\",", json, g_sLastPlayedEffect);
 	Format(json, sizeof(json), "%s\"twitchEnabled\":%s,", json, g_cvChaosTwitchEnabled.BoolValue ? "true" : "false");
-	Format(json, sizeof(json), "%s\"newEffectTime\":%i,", json, expectedTimeForNewEffect); // still used to track when list of effects is changed
+	Format(json, sizeof(json), "%s\"newEffectTime\":%i,", json, Twitch_Votes.Length == 0 ? -1 : expectedTimeForNewEffect); // still used to track when list of effects is changed
 	float millesconds = (expectedTickForNewEffect - GetGameTickCount()) / ((1.0 / GetTickInterval()) / 1000);
 	// PrintToChatAll("%i ms until next effect", RoundToZero(millesconds));
 	Format(json, sizeof(json), "%s\"newEffectTimeRelative\":%i,", json, RoundToZero(millesconds)); // will return how many millieseconds until next effect is pulled
