@@ -134,6 +134,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	// Log("---ROUND STARTED---");
 
 	g_bCanSpawnEffect = true;
+	g_iRoundTime = 0;
 	
 	ResetHud();
 	ResetChaos(RESET_ROUNDSTART);
