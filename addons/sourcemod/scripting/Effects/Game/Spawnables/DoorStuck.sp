@@ -14,7 +14,7 @@ public void Chaos_DoorStuck_OnMapStart(){
 }
 
 public void Chaos_DoorStuck_START(){
-	LoopAlivePlayers(i){
+	LoopValidPlayers(i){
 		ClientCommand(i, "playgamesound doors/wood_stop1.wav");
 		SpawnDoor(i);
 	}

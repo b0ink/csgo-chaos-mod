@@ -30,7 +30,7 @@ Action Timer_NearMissSound(Handle timer){
 
 	int random = GetURandomInt() % sizeof(NearMissSFX);
 
-	LoopAlivePlayers(i){
+	LoopValidPlayers(i){
 		ClientCommand(i, "playgamesound %s", NearMissSFX[random]);
 	}
 
