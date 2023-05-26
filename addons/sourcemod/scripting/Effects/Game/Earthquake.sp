@@ -7,7 +7,7 @@ public void Chaos_Earthquake(EffectData effect){
 
 float g_Earthquake_Duration = 7.0;
 public void Chaos_Earthquake_START(){
-	LoopAlivePlayers(i){
+	LoopValidPlayers(i){
 		ScreenShake(i, _, g_Earthquake_Duration);
 	}
 }
