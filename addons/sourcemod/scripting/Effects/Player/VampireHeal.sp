@@ -12,7 +12,6 @@ public Action Chaos_VampireHeal_Hook_OnTakeDamage(int victim, int &attacker, int
 			if(GetClientTeam(victim) != GetClientTeam(inflictor)){ //ensure opposite teams
 				int health = GetEntProp(inflictor, Prop_Send, "m_iHealth");
 				health = health + RoundFloat(damage);
-				if(health > 100) health = 100;
 				SetEntityHealth(inflictor, health);
 				return Plugin_Changed;
 			}
@@ -22,7 +21,7 @@ public Action Chaos_VampireHeal_Hook_OnTakeDamage(int victim, int &attacker, int
 }
 
 public void Chaos_VampireHeal_START(){
-	LoopAlivePlayers(i){
+	LoopValidPlayers(i){
 		PrintHintText(i, "By shooting your enemies, you can steal their health!");
 		SDKHook(i, SDKHook_OnTakeDamage, Chaos_VampireHeal_Hook_OnTakeDamage);
 	}
