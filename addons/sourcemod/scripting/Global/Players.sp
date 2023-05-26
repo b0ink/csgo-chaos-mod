@@ -120,7 +120,7 @@ void HookBlockAllGuns(int client = -1){
 void UnhookBlockAllGuns(int ResetTypeFlags){
 	if(BlockGun_EffectCount > 0) BlockGun_EffectCount--;
 	if(BlockGun_EffectCount == 0){
-		LoopAlivePlayers(i){
+		LoopValidPlayers(i){
 			SDKUnhook(i, SDKHook_WeaponSwitch, BlockAllGuns);
 			if(ResetTypeFlags & RESET_EXPIRED){
 				SwitchToPrimaryWeapon(i);
