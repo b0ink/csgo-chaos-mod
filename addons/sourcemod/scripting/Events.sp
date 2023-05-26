@@ -137,7 +137,7 @@ public Action Event_RoundStart(Event event, char[] name, bool dontBroadcast){
 	g_iRoundTime = 0;
 	
 	ResetHud();
-	ResetChaos(RESET_ROUNDSTART);
+	RequestFrame(ResetRoundChaos, RESET_ROUNDSTART);
 	CLEAR_CC();
 
 	g_iTotalEffectsRanThisRound = 0;
