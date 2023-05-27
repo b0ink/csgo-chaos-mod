@@ -59,8 +59,7 @@ public void Chaos_Checkers_Event_WeaponFire(Event event, const char[] name, bool
 	int client = GetClientOfUserId(event.GetInt("userid"));
 
 	checkersToggle[client] = 1 - checkersToggle[client];
-
-	ClientCommand(client, "r_screenoverlay \"/Chaos/Checkers_%i.vtf\"", checkersToggle[client]+1);
+	ClientCommand(client, "r_screenoverlay \"/ChaosMod/Checkers_%i.vtf\"", checkersToggle[client]+1);
 }
 
 
