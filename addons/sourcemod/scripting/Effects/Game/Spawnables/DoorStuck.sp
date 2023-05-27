@@ -25,6 +25,7 @@ public void Chaos_DoorStuck_RESET(int ResetType){
 }
 
 void SpawnDoor(int client){
+	if(!ValidAndAlive(client)) return;
 	int door = CreateEntityByName("prop_door_rotating");
 	SetEntityModel(door, DoorStuckModel);
 	DispatchKeyValue(door, "targetname", "DoorStuck");
