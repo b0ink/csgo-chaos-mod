@@ -118,7 +118,7 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				g_sForceCustomEffect = effect.FunctionName;
 				twitchEffect = true;
 				
-				if(!effect.CanRunEffect(true)){
+				if(!effect.CanRunEffect(false)){
 					g_sForceCustomEffect = "";
 				}
 			}else{
