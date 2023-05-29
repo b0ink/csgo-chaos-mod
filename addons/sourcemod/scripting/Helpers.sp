@@ -580,3 +580,7 @@ int GetBotCount(){
 	}
 	return botCount;
 }
+
+stock bool IsMatchPaused() {
+	return GameRules_GetProp("m_bMatchWaitingForResume") != 0;
+}

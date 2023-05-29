@@ -95,7 +95,11 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
-	if(!CanSpawnNewEffect()) return Plugin_Continue;
+	if(IsMatchPaused() && IsInFreezeTime()){
+		CreateTimer(1.0, Timer_WaitForMatchUnpause, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+		return Plugin_Continue;
+	}
+	if(!CanSpawnNewEffect() || GameRules_GetProp("m_bWarmupPeriod") == 1) return Plugin_Continue;
 	if(!g_cvChaosEnabled.BoolValue && !CustomRun) return Plugin_Continue;
 
 	char Random_Effect[64];
@@ -236,6 +240,17 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 		g_iTotalEffectsRanThisRound++;
 	}
 	return Plugin_Continue;
+}
+
+public Action Timer_WaitForMatchUnpause(Handle timer){
+	if(IsMatchPaused()) return Plugin_Continue;
+	if(!CanSpawnNewEffect()) return Plugin_Stop;
+	if(GameRules_GetProp("m_bWarmupPeriod") == 1) return Plugin_Stop;
+	
+	StopTimer(g_NewEffect_Timer);
+	g_NewEffect_Timer = CreateTimer(FindConVar("mp_freezetime").FloatValue, ChooseEffect, _, TIMER_FLAG_NO_MAPCHANGE);
+	Timer_Display(null, FindConVar("mp_freezetime").IntValue);
+	return Plugin_Stop;
 }
 
 Action Timer_ResetPlaySound(Handle timer){
