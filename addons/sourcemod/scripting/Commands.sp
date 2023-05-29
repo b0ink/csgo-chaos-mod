@@ -108,6 +108,11 @@ public Action Command_StartChaos(int client, int args) {
 		Update_Convar_Config();
 
 		g_sForceCustomEffect = "";
+		if (GameRules_GetProp("m_bWarmupPeriod") == 1){
+			CPrintToChat(client, "%s Chaos timer will start next round!", g_Prefix);
+			return Plugin_Handled;
+		}
+
 		// start the timer but dont spawn effect.
 		//  CreateTimer(0.1, ChooseEffect, true, TIMER_FLAG_NO_MAPCHANGE);
 		StopTimer(g_NewEffect_Timer);
