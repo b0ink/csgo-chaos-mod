@@ -190,4 +190,5 @@ char EffectNames[][] = {
 "Chaos_Watermark",
 "Chaos_WeaponKnockback",
 "Chaos_SyncedReload",
+"Chaos_SyncedFlash",
 };
