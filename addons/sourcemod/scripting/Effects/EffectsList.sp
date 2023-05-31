@@ -190,3 +190,4 @@
 #include "Effects/Player/WeaponKnockback.sp"
 #include "Effects/Player/SyncedReload.sp"
 #include "Effects/Player/SyncedFlash.sp"
+#include "Effects/Player/SyncedJumping.sp"
