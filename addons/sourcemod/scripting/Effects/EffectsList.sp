@@ -54,6 +54,7 @@
 #include "Effects/Game/Spawnables/SpawnExplodingBarrels.sp"
 #include "Effects/Game/Spawnables/SpawnFlashbangs.sp"
 #include "Effects/Game/Spawnables/Turrets.sp"
+#include "Effects/Game/Spawnables/ExplodingChickens.sp"
 #include "Effects/Game/Thunderstorm.sp"
 #include "Effects/Game/Watermark.sp"
 #include "Effects/Meta/DoubleTimerSpeed.sp"
