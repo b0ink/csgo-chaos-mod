@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 public void Chaos_SyncedJumping(EffectData effect) {
-	effect.Title = "Synced Jumping";
+	effect.Title = "Synced Team Jumping";
 	effect.Duration = 30;
 	
 	effect.IncompatibleWith("Chaos_Jumping");

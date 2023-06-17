@@ -1,7 +1,7 @@
 #pragma semicolon 1
 
 public void Chaos_SyncedReload(EffectData effect) {
-	effect.Title = "Synced Reloading";
+	effect.Title = "Synced Team Reloading";
 	effect.Duration = 30;
 	
 	effect.IncompatibleWith("Chaos_ForceReload");
