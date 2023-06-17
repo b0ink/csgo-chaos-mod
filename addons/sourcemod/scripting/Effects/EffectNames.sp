@@ -193,4 +193,5 @@ char EffectNames[][] = {
 "Chaos_SyncedFlash",
 "Chaos_SyncedJumping",
 "Chaos_ExplodingChickens",
+"Chaos_Bounty",
 };

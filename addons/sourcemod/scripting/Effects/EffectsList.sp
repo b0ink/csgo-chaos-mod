@@ -192,3 +192,4 @@
 #include "Effects/Player/SyncedReload.sp"
 #include "Effects/Player/SyncedFlash.sp"
 #include "Effects/Player/SyncedJumping.sp"
+#include "Effects/Game/Bounty.sp"
