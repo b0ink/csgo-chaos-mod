@@ -6,6 +6,8 @@ void RegisterCommands() {
 
 	RegConsoleCmd("sm_chaos", Command_MainMenu);
 	RegAdminCmd("sm_effect", Command_NewChaosEffect, ADMFLAG_GENERIC);
+	RegAdminCmd("sm_effectcue", Command_QueueNewEffect, ADMFLAG_GENERIC);
+
 	RegAdminCmd("sm_randomeffect", Command_TriggerRandomEffect, ADMFLAG_GENERIC);
 
 	RegAdminCmd("sm_startchaos", Command_StartChaos, ADMFLAG_GENERIC);
@@ -13,6 +15,22 @@ void RegisterCommands() {
 
 	RegAdminCmd("chaos_version", Command_Version, ADMFLAG_ROOT);
 	RegisterTwitchCommands();
+}
+
+public Action Command_QueueNewEffect(int client, int args){
+	if(args > 1){
+		ReplyToCommand(client, "Usage: sm_effectcue <Effect Name (optional)>");
+		return Plugin_Handled;
+	}
+	char Keyword[64];
+	if(args == 1){
+		GetCmdArg(1, Keyword, sizeof(Keyword));
+		PoolChaosEffects(Keyword);
+	}else{
+		PoolChaosEffects();
+	}
+	ShowMenu_Effects(client, false, CueEffect_Selection);
+	return Plugin_Handled;
 }
 
 public Action Command_Version(int client, int args) {
@@ -49,14 +67,14 @@ public Action Command_NewChaosEffect(int client, int args) {
 					if(PossibleChaosEffects.Length > 1) {
 						ReplyToCommand(client, "[Chaos] Multiple effects found under the term '%s'", effectName);
 					}
-					ShowMenu_Effects(client);
+					ShowMenu_Effects(client, _, Effect_Selection);
 				}
 			} else {
 				ReplyToCommand(client, "[Chaos] Please provide atleast 3 characters.");
 				return Plugin_Handled;
 			}
 		} else {
-			ShowMenu_Effects(client, true);
+			ShowMenu_Effects(client, true, Effect_Selection);
 		}
 	} else {
 		ReplyToCommand(client, "[Chaos] You can't spawn new effects right now, please wait until the round starts.");

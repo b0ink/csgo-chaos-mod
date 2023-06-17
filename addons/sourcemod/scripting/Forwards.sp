@@ -11,7 +11,8 @@ public void OnPluginStart() {
 	MetaEffects = new ArrayList(128);
 	PossibleChaosEffects = new ArrayList(sizeof(EffectData));
 	EffectsHistory = CreateArray(64);
-
+	EffectQueue = new ArrayList(64);
+	
 	ParseChaosEffects();
 
 	TWITCH_INIT();

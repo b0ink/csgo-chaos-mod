@@ -52,7 +52,7 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 		bool found = menu.GetItem(param2, info, sizeof(info));
 		if(found){
 			if(StrEqual(info, "new-effect", false)){
-				ShowMenu_Effects(param1, true);
+				ShowMenu_Effects(param1, true, Effect_Selection);
 			}else if(StrEqual(info, "toggle-chaos", false)){
 				ToggleChaos(param1);
 			}else if(StrEqual(info, "credits", false)){
@@ -73,12 +73,13 @@ public int Main_Handler(Menu menu, MenuAction action, int param1, int param2){
 	return 0;
 }
 
-void ShowMenu_Effects(int client, bool AllowRandom = false){
+void ShowMenu_Effects(int client, bool AllowRandom = false, MenuHandler callback){
 	if(!IsValidClient(client)) return;
 
 	ClearEffectList(client);
 
-	Menu menu = new Menu(Effect_Selection);
+	// Menu menu = new Menu(Effect_Selection);
+	Menu menu = new Menu(callback);
 	menu.SetTitle("Select Chaos Effect");
 
 	char function_title[64];
@@ -131,6 +132,24 @@ public int Effect_Selection(Menu menu, MenuAction action, int param1, int param2
 				ChooseEffect(null, true);
 			}
 
+		}
+	}else if (action == MenuAction_Cancel){
+		if(param2 ==  MenuCancel_ExitBack){
+			ShowMenu_Main(param1);
+		}
+	}else if (action == MenuAction_End){
+		delete menu;
+	}
+	return 0;
+}
+
+public int CueEffect_Selection(Menu menu, MenuAction action, int param1, int param2){
+	if (action == MenuAction_Select){
+		char info[64];
+		bool found = menu.GetItem(param2, info, sizeof(info));
+		if(found){
+			EffectQueue.PushString(info);
+			PrintToChat(param1, "[Chaos] %s has been added to the effect queue.", info);
 		}
 	}else if (action == MenuAction_Cancel){
 		if(param2 ==  MenuCancel_ExitBack){

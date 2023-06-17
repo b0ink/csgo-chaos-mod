@@ -68,6 +68,8 @@ bool 	g_bPlaySound_Debounce = false;
 
 Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 
+ArrayList EffectQueue;
+
 #include "ConVars.sp"
 #include "Effects/Effect.sp"
 
@@ -92,6 +94,7 @@ Handle 		g_NewEffect_Timer = INVALID_HANDLE;
 #include "Forwards.sp"
 
 #include "CoopMissions.sp"
+
 
 Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	if(!CustomRun) g_NewEffect_Timer = INVALID_HANDLE;
@@ -133,8 +136,8 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 	}
 
 	bool effectIsMeta = false;
-	if(g_sForceCustomEffect[0] != '\0'){ //run from menu, or from twitch list
-		// FormatEx(g_sSelectedChaosEffect, sizeof(g_sSelectedChaosEffect), "%s", g_sForceCustomEffect);
+	if(g_sForceCustomEffect[0] != '\0'){
+		/* Running effect from menu or selected twitch effect */
 		EffectData effect;
 		LoopAllEffects(effect, index){
 			if(StrEqual(effect.FunctionName, g_sForceCustomEffect, false)){
@@ -149,14 +152,32 @@ Action ChooseEffect(Handle timer = null, bool CustomRun = false){
 				break;
 			}
 		}
-	}else{ // running random effect!
+	}else{ 
+		/* Running random effect */
 		StopTimer(CheckCoopStrike_Timer);
 		EffectData effect;
+
+		/* Run any queued effects first */ 
+		if(EffectQueue.Length > 0){
+			char QueuedEffectName[64];
+			EffectQueue.GetString(0, QueuedEffectName, sizeof(QueuedEffectName));
+			if(GetEffectData(QueuedEffectName, effect)){
+				if(effect.CanRunEffect(false)){
+					effect.Run();
+					PushArrayString(EffectsHistory, effect.FunctionName);
+				}else{
+					PrintToConsoleAll("Could not run queued effect: %s", QueuedEffectName);
+				}
+			}
+			EffectQueue.Erase(0);
+		}
+
 		PossibleChaosEffects.Sort(Sort_Random, Sort_String);
 
 		int totalEffects = PossibleChaosEffects.Length;
-	
-		while(g_sLastPlayedEffect[0] == '\0'){ // no longer
+
+		/* effect.Run() will populate g_sLastPlayedEffect if succesfully run, meaning a random effect will be picked if no effect has been picked yet */
+		while(g_sLastPlayedEffect[0] == '\0'){
 			attempts++;
 			do{
 				// randomEffect = GetRandomInt(0, totalEffects - 1);
