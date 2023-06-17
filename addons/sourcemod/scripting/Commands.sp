@@ -6,15 +6,22 @@ void RegisterCommands() {
 
 	RegConsoleCmd("sm_chaos", Command_MainMenu);
 	RegAdminCmd("sm_effect", Command_NewChaosEffect, ADMFLAG_GENERIC);
-	RegAdminCmd("sm_effectcue", Command_QueueNewEffect, ADMFLAG_GENERIC);
-
 	RegAdminCmd("sm_randomeffect", Command_TriggerRandomEffect, ADMFLAG_GENERIC);
+
+	RegAdminCmd("sm_effectcue", Command_QueueNewEffect, ADMFLAG_GENERIC);
+	RegAdminCmd("sm_cleareffectcue", Command_ClearQueuedEffects, ADMFLAG_GENERIC);
 
 	RegAdminCmd("sm_startchaos", Command_StartChaos, ADMFLAG_GENERIC);
 	RegAdminCmd("sm_stopchaos", Command_StopChaos, ADMFLAG_GENERIC);
 
 	RegAdminCmd("chaos_version", Command_Version, ADMFLAG_ROOT);
 	RegisterTwitchCommands();
+}
+
+public Action Command_ClearQueuedEffects(int client, int args){
+	EffectQueue.Clear();
+	ReplyToCommand(client, "[Chaos] Queued effects have been cleared.");
+	return Plugin_Handled;
 }
 
 public Action Command_QueueNewEffect(int client, int args){
