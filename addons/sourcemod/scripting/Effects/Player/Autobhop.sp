@@ -10,10 +10,18 @@ public void Chaos_Autobhop(EffectData effect){
 	effect.AddAlias("Autohop");
 }
 
+public void Chaos_Autobhop_OnMapStart(){
+	AddFileToDownloadsTable("sound/ChaosMod/phoon.mp3");
+	PrecacheSound("ChaosMod/phoon.mp3", true);
+}
+
 public void Chaos_Autobhop_START(){
 	g_AutoBunnyhop++;
 	cvar("sv_airaccelerate", "1999");
 	PrintHintTextToAll("Hold space!");
+	LoopValidPlayers(i){
+		EmitSoundToClient(i, "ChaosMod/phoon.mp3", _, _, SNDLEVEL_RAIDSIREN, _, 0.3);
+	}
 }
 
 public void Chaos_Autobhop_RESET(int ResetType){
