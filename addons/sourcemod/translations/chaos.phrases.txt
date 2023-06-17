@@ -824,4 +824,20 @@
     {
         "en"    "Give Kevlar"
     }
+    "Chaos_SyncedReload"
+    {
+        "en"    "Synced Team Reloading"
+    }
+    "Chaos_SyncedFlash"
+    {
+        "en"    "Synced Team Flash"
+    }
+    "Chaos_SyncedJumping"
+    {
+        "en"    "Synced Team Jumping"
+    }
+    "Chaos_ExplodingChickens"
+    {
+        "en"    "Exploding Chickens"
+    }
 }
