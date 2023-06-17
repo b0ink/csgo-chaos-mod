@@ -18,7 +18,7 @@ Inspired by [GTA V Chaos Mod](https://www.gta5-mods.com/scripts/chaos-mod-v-beta
 </p>
 
 # Game Modes
-With the ride range of different effects, certain configs need to be used correctly for the plugin to register them, and disable any effects accordingly. (eg. disabling the "Auto Plant C4" effect on Deathmatch and Co-op Strike Maps)
+To make sure the plugin recognises and handles different effects correctly, it's important to use the right game mode configuration. For example, when playing Deathmatch or Co-op Strike Maps, it's necessary to disable the "Auto Plant C4" effect. This is because there are many effects available, and using the correct config will ensure that effects will work as intended, based on the game mode being played.
 
 ### Competitive / Casual
 To run Chaos Mod designed for 5v5 Defusal/Hostage maps, start your server with `game_mode 1; game_type 0;`, or `game_mode 0` for casual.
