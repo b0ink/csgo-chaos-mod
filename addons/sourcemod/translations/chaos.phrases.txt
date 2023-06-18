@@ -844,9 +844,9 @@
     {
         "en"    "Fling Players"
     }
-    "Chaos_Pink"
+    "Chaos_Magenta"
     {
-        "en"    "Pink"
+        "en"    "Magenta"
     }
     "Chaos_Negative"
     {
