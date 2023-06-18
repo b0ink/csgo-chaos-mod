@@ -193,3 +193,4 @@
 #include "Effects/Player/SyncedFlash.sp"
 #include "Effects/Player/SyncedJumping.sp"
 #include "Effects/Game/Bounty.sp"
+#include "Effects/Player/FlingPlayer.sp"

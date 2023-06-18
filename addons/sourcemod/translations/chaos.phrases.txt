@@ -840,4 +840,8 @@
     {
         "en"    "Exploding Chickens"
     }
+    "Chaos_FlingPlayer"
+    {
+        "en"    "Fling Players"
+    }
 }
