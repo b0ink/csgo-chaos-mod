@@ -19,11 +19,13 @@ public Action SpawnChickens(Handle timer) {
 	ShuffleMapSpawns();
 
 	float pos[3];
+	bool alternate = false;
 	LoopAllMapSpawns(pos, index) {
 		if(index > 30) break;
 		if(DistanceToClosestPlayer(pos) < 100 && DistanceToClosestPlayer(pos) > 1000) continue;
-		SpawnExplodingChicken(pos);
-		CreateTimer(GetRandomFloat(0.0, 1.5), Timer_DelayExplodingChicken, index);
+		// SpawnExplodingChicken(pos);
+		CreateTimer(alternate ? GetRandomFloat(0.0, 1.5) : 0.0, Timer_DelayExplodingChicken, index);
+		alternate = !alternate;
 	}
 	return Plugin_Stop;
 }
