@@ -852,4 +852,8 @@
     {
         "en"    "Negative"
     }
+    "Chaos_ExplodeOnDeath"
+    {
+        "en"    "Explode on Death"
+    }
 }

@@ -197,4 +197,5 @@ char EffectNames[][] = {
 "Chaos_FlingPlayer",
 "Chaos_Negative",
 "Chaos_Pink",
+"Chaos_ExplodeOnDeath",
 };

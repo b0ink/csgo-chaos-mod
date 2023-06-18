@@ -196,3 +196,4 @@
 #include "Effects/Game/Negative.sp"
 #include "Effects/Game/Pink.sp"
 #include "Effects/Player/FlingPlayer.sp"
+#include "Effects/Player/ExplodeOnDeath.sp"
