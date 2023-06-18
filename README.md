@@ -74,6 +74,9 @@ If you encounter any errors please check your sourcemod error log files as well 
 `sm_effect <Effect Name | Search Term>`
 - Brings up a menu of any effects containing the search term.
 
+`sm_effectcue <Effect Name | Search Term>`
+- Allows you to queue up effects to be triggered at the default effect interval. If the queue is empty, a random effect is picked as usual.
+
 `sm_randomeffect`
 - Instantly spawns a new effect, if allowed.
 
