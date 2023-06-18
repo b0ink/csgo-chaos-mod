@@ -856,4 +856,8 @@
     {
         "en"    "Explode on Death"
     }
+    "Chaos_DropWeaponOnMissedShot"
+    {
+        "en"    "Drop Weapon on Missed Shot"
+    }
 }
