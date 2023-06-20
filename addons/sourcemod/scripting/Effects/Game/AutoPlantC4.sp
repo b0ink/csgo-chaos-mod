@@ -146,7 +146,7 @@ void AutoPlantC4() {
 		float pos[3];
 		GetClientAbsOrigin(bomber, pos);
 		bombsite = GetNearestBombsite(pos);
-		PrintToChatAll("bombsite = %i", bombsite);
+		// PrintToChatAll("bombsite = %i", bombsite);
 	} else {
 		if((GetURandomInt() % 100) < 50) {
 			bombsite = BOMBSITE_A;
