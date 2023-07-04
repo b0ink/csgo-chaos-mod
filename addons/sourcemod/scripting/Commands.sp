@@ -32,7 +32,14 @@ public Action Command_QueueNewEffect(int client, int args){
 	char Keyword[64];
 	if(args == 1){
 		GetCmdArg(1, Keyword, sizeof(Keyword));
-		PoolChaosEffects(Keyword);
+		EffectData effect;
+		if(GetEffectData(Keyword, effect)){
+			EffectQueue.PushString(Keyword);
+			ReplyToCommand(client, "Added '%s' to effect queue", Keyword);
+			return Plugin_Handled;
+		}else{
+			PoolChaosEffects(Keyword);
+		}
 	}else{
 		PoolChaosEffects();
 	}
