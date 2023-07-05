@@ -25,7 +25,7 @@ public void Chaos_Autobhop_START(){
 }
 
 public void Chaos_Autobhop_RESET(int ResetType){
-	ResetCvar("sv_airaccelerate", "12", "1999");
+	if(ResetType & RESET_EXPIRED) ResetCvar("sv_airaccelerate", "12", "1999");
 	if(g_AutoBunnyhop > 0) g_AutoBunnyhop--;
 }
 

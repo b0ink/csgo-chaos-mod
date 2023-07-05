@@ -39,8 +39,8 @@ public void Chaos_Flying_RESET(int ResetType){
 			SetEntityMoveType(i, MOVETYPE_WALK);
 		}
 		TeleportPlayersToClosestLocation();
+		ResetCvar("sv_noclipspeed", "5", "2");
 	}
-	ResetCvar("sv_noclipspeed", "5", "2");
 	g_bActiveNoclip = false;	
 }
 

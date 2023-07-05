@@ -10,5 +10,7 @@ public void Chaos_EnemyRadar_START(){
 }
 
 public void Chaos_EnemyRadar_RESET(int ResetType){
-	ResetCvar("mp_radar_showall", "0", "1");
+	if(ResetType & RESET_EXPIRED){
+		ResetCvar("mp_radar_showall", "0", "1");
+	}
 }

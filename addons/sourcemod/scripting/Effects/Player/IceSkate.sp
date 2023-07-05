@@ -15,7 +15,7 @@ public void Chaos_IceSkate_START(){
 }
 
 public void Chaos_IceSkate_RESET(int ResetType){
-	ResetCvar("sv_airaccelerate", "12", "2000");
+	if(ResetType & RESET_EXPIRED) ResetCvar("sv_airaccelerate", "12", "2000");
 }
 
 

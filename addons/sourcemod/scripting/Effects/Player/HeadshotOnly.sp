@@ -10,5 +10,5 @@ public void Chaos_HeadshotOnly_START(){
 }
 
 public void Chaos_HeadshotOnly_RESET(int ResetType){
-	ResetCvar("mp_damage_headshot_only", "0", "1");
+	if(ResetType & RESET_EXPIRED) ResetCvar("mp_damage_headshot_only", "0", "1");
 }

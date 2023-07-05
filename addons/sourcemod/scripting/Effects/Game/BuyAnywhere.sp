@@ -12,6 +12,8 @@ public void Chaos_BuyAnywhere_START(){
 }
 
 public void Chaos_BuyAnywhere_RESET(int ResetType){
-	ResetCvar("mp_buy_anywhere", "0", "1");
-	ResetCvar("mp_buytime", "20", "999");
+	if(ResetType & RESET_EXPIRED){
+		ResetCvar("mp_buy_anywhere", "0", "1");
+		ResetCvar("mp_buytime", "20", "999");
+	}
 }

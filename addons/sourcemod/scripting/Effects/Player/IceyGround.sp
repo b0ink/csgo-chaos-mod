@@ -10,5 +10,5 @@ public void Chaos_IceyGround_START(){
 }
 
 public void Chaos_IceyGround_RESET(int ResetType){
-	ResetCvar("sv_friction", "5.2", "0");
+	if(ResetType & RESET_EXPIRED) ResetCvar("sv_friction", "5.2", "0");
 }

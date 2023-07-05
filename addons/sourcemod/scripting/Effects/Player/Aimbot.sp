@@ -43,16 +43,18 @@ public void Chaos_Aimbot_START(){
 
 public void Chaos_Aimbot_RESET(int ResetType){
 	AimbotEnabled = false;
-	
-	ResetCvar("weapon_accuracy_nospread", "0", "1");
-	ResetCvar("weapon_recoil_cooldown", "0.55", "0");
-	ResetCvar("weapon_recoil_decay1_exp", "3.5", "99999");
-	ResetCvar("weapon_recoil_decay2_exp", "8", "99999");
-	ResetCvar("weapon_recoil_decay2_lin", "18", "99999");
-	ResetCvar("weapon_recoil_scale", "2", "0");
-	ResetCvar("weapon_recoil_suppression_shots", "4", "500");
-	ResetCvar("weapon_recoil_variance", "0.55", "0");
-	ResetCvar("weapon_recoil_view_punch_extra", "0.055", "0");
+
+	if(ResetType & RESET_EXPIRED){
+		ResetCvar("weapon_accuracy_nospread", "0", "1");
+		ResetCvar("weapon_recoil_cooldown", "0.55", "0");
+		ResetCvar("weapon_recoil_decay1_exp", "3.5", "99999");
+		ResetCvar("weapon_recoil_decay2_exp", "8", "99999");
+		ResetCvar("weapon_recoil_decay2_lin", "18", "99999");
+		ResetCvar("weapon_recoil_scale", "2", "0");
+		ResetCvar("weapon_recoil_suppression_shots", "4", "500");
+		ResetCvar("weapon_recoil_variance", "0.55", "0");
+		ResetCvar("weapon_recoil_view_punch_extra", "0.055", "0");
+	}
 
 	LoopValidPlayers(i){
 		Aimbot_REMOVE_SDKHOOKS(i);

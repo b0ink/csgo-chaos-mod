@@ -36,7 +36,7 @@ void SpawnItemCash(float vec[3]){
 
 
 public void Chaos_MoneyRain_RESET(int ResetType){
-	ResetCvar("sv_dz_cash_bundle_size", "50", "500");
+	if(ResetType & RESET_EXPIRED) ResetCvar("sv_dz_cash_bundle_size", "50", "500");
 }
 
 public bool Chaos_MoneyRain_Conditions(bool EffectRunRandomly){

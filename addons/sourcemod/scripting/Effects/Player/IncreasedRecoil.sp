@@ -11,5 +11,5 @@ public void Chaos_IncreasedRecoil_START(){
 }
 
 public void Chaos_IncreasedRecoil_RESET(int ResetType){
-	ResetCvar("weapon_recoil_scale", "2", "10");
+	if(ResetType & RESET_EXPIRED) ResetCvar("weapon_recoil_scale", "2", "10");
 }

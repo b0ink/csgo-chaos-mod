@@ -11,5 +11,5 @@ public void Chaos_DisableRadar_START(){
 }
 
 public void Chaos_DisableRadar_RESET(int ResetType){
-	ResetCvar("sv_disable_radar", "0", "1");
+	if(ResetType & RESET_EXPIRED) ResetCvar("sv_disable_radar", "0", "1");
 }
