@@ -69,7 +69,12 @@ enum struct EffectData{
 			Call_Finish();
 		}
 		float duration = this.GetDuration(); 
-		if(duration > 0) this.Timer = CreateTimer(duration, Effect_Reset, this.ID);
+		if(duration > 0){
+			this.Timer = CreateTimer(duration, Effect_Reset, this.ID);
+		}else if(g_cvChaosOverrideDuration.IntValue == 0.0){
+			// Active timer is required for effect's that use forwards such as OnGameFrame, OnPlayerRunCmd, etc. to have the effect last all round - large time is used to allow for deathmatch/co-op strike gamemdoes
+			this.Timer = CreateTimer(3600.0, Effect_Reset, this.ID);
+		}
 		
 		if(!this.HasCustomAnnouncement){
 			AnnounceChaos(this.Title, this.GetDuration(), _, this.IsMetaEffect);
