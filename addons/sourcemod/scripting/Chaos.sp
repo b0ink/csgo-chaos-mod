@@ -3,7 +3,6 @@
 #include <sdktools>
 #include <multicolors>
 #include <cstrike>
-// #include <vscriptfun>
 
 #undef REQUIRE_PLUGIN
 #include <DynamicChannels>
@@ -13,7 +12,7 @@
 #pragma semicolon 1
 
 #define PLUGIN_DESCRIPTION "Spawn from over 175+ random effects every 15 seconds to ensue chaos towards you and your enemies"
-#define PLUGIN_VERSION "0.5.2"
+#define PLUGIN_VERSION "0.5.3"
 
 #define TWITCH_ENABLED
 
